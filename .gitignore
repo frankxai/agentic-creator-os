@@ -1,0 +1,40 @@
+# Agentic Creator OS .gitignore
+
+# Generated outputs (regenerate as needed)
+outputs/
+
+# Private instances (create your own)
+instances/*/skills-private/
+
+# Sensitive files
+*.env
+*.env.local
+.env.*
+secrets.json
+credentials.json
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Node (if we add tooling later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Backup files
+*.bak
+*.backup
