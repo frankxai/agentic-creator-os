@@ -1,0 +1,77 @@
+name: Meta Content Creation (Facebook/Instagram)
+slug: meta-content
+description: |
+  Create content for Facebook and Instagram including posts,
+  carousels, stories, and reels. Optimized for Meta's algorithm.
+triggers:
+  - "skill:content, create facebook post"
+  - "skill:content, create instagram post"
+  - "skill:content, meta content"
+  - "/meta-content"
+  - "create instagram content"
+agents:
+  - instagram-writer
+  - facebook-manager
+  - visual-creator
+tools:
+  - instagram-mcp
+  - facebook-mcp
+  - filesystem-mcp
+  - browser-mcp
+phases:
+  1:
+    name: Platform Selection
+    description: Choose platforms and content types
+    steps:
+      - Select primary platform (Instagram, Facebook, or both)
+      - Choose content format (post, carousel, story, reel)
+      - Define content goal and KPI
+      - Research platform-specific best practices
+      - Output: platform-strategy.json
+    
+  2:
+    name: Visual Planning
+    description: Plan visual elements
+    steps:
+      - Define visual style and branding
+      - Plan carousel slides if applicable
+      - Story frame sequence for stories
+      - Reel storyboard for video content
+      - Output: visual-plan.json
+    
+  3:
+    name: Caption Creation
+    description: Write engaging captions
+    steps:
+      - Write hook (first line critical)
+      - Add context and value
+      - Include CTA (clear action)
+      - Add relevant hashtags (up to 30 for Instagram)
+      - Output: caption-draft.md
+    
+  4:
+    name: Carousel/Content Development
+    description: Create multi-slide content
+    steps:
+      - Design carousel structure (5-10 slides)
+      - Write text for each slide
+      - Plan visual transitions
+      - Add closing slide with CTA
+      - Output: carousel-content.json
+    
+  5:
+    name: Publishing
+    description: Schedule and publish
+    steps:
+      - Create drafts in Meta Business Suite
+      - Add media assets
+      - Schedule for optimal engagement times
+      - Set up story replies and interactions
+      - Output: scheduled-content.json
+
+output_dir: outputs/meta-content
+version: "2.0.0"
+templates:
+  - instagram-educational-carousel-template.md
+  - tiktok-hook-template.md
+  - youtube-short-script-template.md

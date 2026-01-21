@@ -1,0 +1,76 @@
+name: Mirror/Paragraph Content Creation
+slug: mirror-content
+description: |
+  Create long-form essays and articles for decentralized publishing
+  platforms like Mirror.xyz and Paragraph. Optimized for crypto/web3 audience.
+triggers:
+  - "skill:content, create mirror article"
+  - "skill:content, publish to mirror"
+  - "skill:content, paragraph essay"
+  - "/mirror-content"
+  - "write an essay about"
+agents:
+  - mirror-writer
+  - essayist
+  - web3-specialist
+tools:
+  - mirror-mcp
+  - filesystem-mcp
+  - browser-mcp
+phases:
+  1:
+    name: Topic Selection
+    description: Choose and validate topic
+    steps:
+      - Identify web3-relevant topics
+      - Research trending discussions
+      - Validate audience interest
+      - Define unique thesis or angle
+      - Output: topic-analysis.json
+    
+  2:
+    name: Structure Planning
+    description: Plan essay structure
+    steps:
+      - Choose essay type (analysis, opinion, tutorial, research)
+      - Outline main arguments
+      - Plan narrative arc
+      - Define key takeaways
+      - Output: essay-outline.json
+    
+  3:
+    name: Drafting
+    description: Write long-form content
+    steps:
+      - Write compelling introduction with thesis
+      - Develop main arguments with evidence
+      - Include personal experiences and insights
+      - Address counterarguments
+      - Conclude with clear summary and CTA
+      - Output: essay-draft.md
+    
+  4:
+    name: NFT/Tokenization (Optional)
+    description: Design tokenization strategy
+    steps:
+      - Decide on NFT edition strategy
+      - Design cover art
+      - Write edition description
+      - Set pricing and supply
+      - Output: tokenization-plan.json
+    
+  5:
+    name: Publishing
+    description: Publish to Mirror/Paragraph
+    steps:
+      - Create draft on platform
+      - Add cover image and media
+      - Configure NFT edition if applicable
+      - Publish with crypto wallet
+      - Output: published-article.json
+
+output_dir: outputs/mirror-content
+version: "2.0.0"
+templates:
+  - blog/evergreen-authority.md
+  - blog/ultimate-guide.md

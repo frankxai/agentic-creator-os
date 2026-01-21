@@ -1,0 +1,32 @@
+name: Design Department
+description: |
+  Creative studio for branding and visual design. Creates logos,
+  UI/UX, social graphics, presentations, and marketing materials.
+  Professional design that elevates your brand.
+agents:
+  - design-lead
+  - branding-agent
+  - uiux-agent
+  - graphic-agent
+  - motion-agent
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - browser-mcp
+  - creator-mcp
+examples:
+  - "Create logo for my brand [name]"
+  - "Design landing page for my product"
+  - "Create Instagram post about [topic]"
+  - "Design pitch deck for my startup"
+  - "Create brand guidelines for [company]"
+  - "Make social media graphics for campaign"
+workflows:
+  - design/brand-creation.yaml
+  - design/social-campaign.yaml
+  - design/presentation.yaml
+  - design/landing-page.yaml
+configuration:
+  format: png
+  quality: high
+  include_source: true

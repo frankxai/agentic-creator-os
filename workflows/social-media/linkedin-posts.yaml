@@ -1,0 +1,589 @@
+name: LinkedIn Thought Leadership Posts
+department: marketing
+purpose: Create professional, value-driven LinkedIn content that establishes authority and drives B2B engagement
+
+description: |
+  Comprehensive workflow for creating high-impact LinkedIn posts that position you as an industry thought leader.
+  Optimized for LinkedIn's professional audience with storytelling, insights, and strategic engagement tactics.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze trending professional topics
+      - Research industry insights and data
+      - Study competitor thought leadership
+      - Identify audience pain points
+    
+  - role: writer
+    responsibilities:
+      - Craft compelling professional narratives
+      - Write value-driven content
+      - Structure posts for LinkedIn algorithm
+      - Create authentic, relatable stories
+    
+  - role: editor
+    responsibilities:
+      - Ensure professional tone and voice
+      - Optimize formatting for readability
+      - Validate claims and credentials
+      - Polish for executive-level quality
+    
+  - role: seo
+    responsibilities:
+      - Optimize for LinkedIn search
+      - Research professional keywords
+      - Suggest optimal posting times
+      - Analyze engagement patterns
+    
+  - role: publisher
+    responsibilities:
+      - Schedule post publication
+      - Monitor professional engagement
+      - Facilitate meaningful conversations
+      - Track B2B metrics
+
+steps:
+  - step: 1
+    name: Professional Topic Research
+    agent: researcher
+    input:
+      - industry_focus
+      - target_audience (executives|professionals|entrepreneurs)
+      - content_goal (authority|leads|engagement|hiring)
+    actions:
+      - research_industry_trends:
+          sources: [linkedin_trending, industry_reports, news]
+          focus: [challenges, innovations, best_practices]
+      - analyze_audience_pain_points:
+          method: linkedin_polls_comments_analysis
+          identify: [common_questions, frustrations, aspirations]
+      - study_thought_leaders:
+          analyze: [post_structure, engagement_tactics, content_themes]
+          benchmark: top_performers_in_niche
+      - gather_credible_data:
+          sources: [research_studies, case_studies, industry_stats]
+          priority: recent_and_relevant
+    output:
+      - research_brief:
+          trending_topics: []
+          audience_insights: {}
+          competitor_analysis: {}
+          data_points: []
+          recommended_angle: ""
+  
+  - step: 2
+    name: Content Strategy & Hook Development
+    agent: writer
+    input:
+      - research_brief
+      - personal_expertise
+      - brand_positioning
+    actions:
+      - select_content_format:
+          options:
+            - personal_story: "Vulnerability + lesson learned"
+            - industry_insight: "Data-driven analysis"
+            - how_to_guide: "Actionable framework"
+            - contrarian_view: "Challenge status quo"
+            - case_study: "Real results + methodology"
+            - list_post: "Curated insights"
+      - craft_opening_hook:
+          techniques:
+            - bold_statement: "After 10 years in X, I've learned Y is a myth"
+            - vulnerable_admission: "I made a $500k mistake. Here's what I learned"
+            - surprising_stat: "95% of companies fail at X. Here's why"
+            - question_hook: "Why do successful people do X differently?"
+            - story_opening: "Last week, a client asked me..."
+          length: 1-2_sentences
+          goal: stop_scroll_in_feed
+      - outline_value_proposition:
+          promise: what_reader_will_gain
+          proof: credentials_or_results
+          relevance: why_it_matters_now
+    output:
+      - content_strategy:
+          format: ""
+          hook_options: []
+          value_proposition: ""
+          target_length: 1300-2000_chars
+  
+  - step: 3
+    name: Post Body Writing
+    agent: writer
+    input:
+      - content_strategy
+      - research_brief
+    actions:
+      - write_opening_section:
+          hook: attention_grabbing_first_line
+          context: why_this_matters
+          credibility: establish_authority
+          length: 2-3_sentences
+      - develop_main_content:
+          structure_options:
+            story_arc:
+              - setup: "Where I started"
+              - conflict: "The challenge"
+              - action: "What I did"
+              - result: "The outcome"
+              - lesson: "Key takeaway"
+            framework_share:
+              - problem: "Common challenge"
+              - framework: "Your methodology"
+              - steps: "How to apply"
+              - results: "Expected outcomes"
+              - proof: "Real examples"
+            insight_post:
+              - observation: "What you noticed"
+              - analysis: "Why it matters"
+              - implications: "What it means"
+              - action: "What to do"
+              - future: "Where it's heading"
+          formatting:
+            - use_line_breaks: every_2-3_sentences
+            - add_emojis: sparingly_for_emphasis
+            - include_bullets: for_lists
+            - bold_key_points: important_takeaways
+      - craft_closing_section:
+          summary: recap_main_point
+          cta: encourage_engagement
+          question: prompt_discussion
+          length: 2-3_sentences
+    output:
+      - post_draft:
+          opening: ""
+          body: ""
+          closing: ""
+          total_length: 0
+          estimated_read_time: ""
+  
+  - step: 4
+    name: Professional Editing & Formatting
+    agent: editor
+    input:
+      - post_draft
+    actions:
+      - optimize_for_linkedin:
+          first_3_lines: critical_for_see_more
+          line_breaks: improve_scannability
+          paragraph_length: 2-3_sentences_max
+          emoji_usage: professional_and_minimal
+      - enhance_readability:
+          - simplify_language: executive_level_clarity
+          - remove_jargon: unless_industry_standard
+          - strengthen_verbs: active_voice
+          - tighten_prose: eliminate_fluff
+      - validate_professionalism:
+          - tone_check: authentic_yet_professional
+          - credential_verification: accurate_claims
+          - fact_checking: verify_statistics
+          - brand_alignment: consistent_voice
+      - format_for_engagement:
+          - hook_in_first_line: true
+          - white_space: generous_spacing
+          - visual_hierarchy: clear_structure
+          - cta_placement: end_of_post
+    output:
+      - edited_post:
+          content: ""
+          character_count: 0
+          readability_score: 0
+          engagement_potential: ""
+  
+  - step: 5
+    name: SEO & Hashtag Optimization
+    agent: seo
+    input:
+      - edited_post
+      - target_audience
+    actions:
+      - research_linkedin_hashtags:
+          strategy: mix_broad_and_niche
+          broad_hashtags:
+            followers: 100k+
+            count: 1-2
+            examples: [Leadership, Innovation, Marketing]
+          niche_hashtags:
+            followers: 10k-100k
+            count: 2-3
+            examples: [B2BSales, ProductManagement, RemoteWork]
+          total_limit: 3-5
+      - optimize_keywords:
+          placement: naturally_in_content
+          focus: [industry_terms, job_titles, skills]
+          density: organic_not_forced
+      - determine_posting_time:
+          analyze:
+            - audience_timezone: primary_locations
+            - engagement_patterns: when_professionals_active
+            - industry_norms: B2B_vs_B2C_timing
+          recommend:
+            - weekday_optimal: [Tuesday, Wednesday, Thursday]
+            - time_slots: [7-9am, 12-1pm, 5-6pm]
+      - add_seo_elements:
+          - profile_keywords: update_headline_about
+          - document_links: add_value_resources
+          - alt_text: image_descriptions
+    output:
+      - seo_package:
+          hashtags: []
+          keywords: []
+          optimal_posting_time: ""
+          expected_reach: 0
+  
+  - step: 6
+    name: Visual Asset Creation
+    agent: writer
+    input:
+      - edited_post
+      - brand_guidelines
+    actions:
+      - determine_visual_need:
+          post_types:
+            - text_only: high_value_insights
+            - single_image: data_visualization_or_quote
+            - carousel: multi_step_frameworks
+            - video: personal_stories_or_demos
+            - document: detailed_guides_or_reports
+      - create_visual_assets:
+          image_options:
+            - quote_card: key_insight_highlighted
+            - data_visualization: charts_graphs_infographics
+            - personal_photo: authentic_behind_scenes
+            - branded_graphic: professional_design
+          specifications:
+            - format: png_or_jpg
+            - dimensions: 1200x627
+            - branding: subtle_logo_placement
+            - text_overlay: minimal_and_readable
+      - optimize_for_engagement:
+          - eye_catching: professional_aesthetics
+          - on_brand: consistent_colors_fonts
+          - value_add: enhances_post_message
+          - mobile_friendly: readable_on_small_screens
+    output:
+      - visual_package:
+          asset_type: ""
+          files: []
+          alt_text: ""
+  
+  - step: 7
+    name: Final Review & Approval
+    agent: editor
+    input:
+      - edited_post
+      - seo_package
+      - visual_package
+    actions:
+      - comprehensive_quality_check:
+          - grammar_spelling: zero_tolerance_for_errors
+          - professional_tone: appropriate_for_audience
+          - value_delivery: clear_takeaways
+          - authenticity: genuine_and_relatable
+      - linkedin_best_practices:
+          - character_count: 1300-2000_optimal
+          - hashtag_count: 3-5_strategic
+          - first_3_lines: compelling_hook
+          - cta_included: clear_engagement_prompt
+      - generate_preview:
+          format: linkedin_post_mockup
+          include: [text, image, hashtags]
+      - create_engagement_plan:
+          - respond_to_comments: first_2_hours
+          - engage_with_commenters: visit_profiles_like_posts
+          - share_in_groups: relevant_communities
+          - notify_network: tag_relevant_people
+    output:
+      - approval_package:
+          post_content: ""
+          visual_assets: []
+          posting_schedule: ""
+          engagement_plan: {}
+  
+  - step: 8
+    name: Publication & Engagement Management
+    agent: publisher
+    input:
+      - approved_post
+      - posting_schedule
+      - engagement_plan
+    actions:
+      - publish_post:
+          platform: linkedin_api_or_native
+          timing: optimal_time
+          settings:
+            - visibility: public
+            - comments: enabled
+            - reshares: enabled
+            - notifications: all
+      - monitor_initial_engagement:
+          timeframe: first_2_hours
+          metrics: [impressions, reactions, comments, shares]
+          alerts: low_engagement_warning
+      - active_engagement:
+          - respond_to_comments: thoughtful_replies
+          - ask_follow_up_questions: deepen_conversation
+          - thank_sharers: acknowledge_amplification
+          - engage_with_engagers: visit_and_interact
+      - amplify_reach:
+          - share_in_groups: relevant_communities
+          - notify_connections: tag_interested_parties
+          - cross_promote: other_platforms_if_appropriate
+          - employee_advocacy: encourage_team_shares
+      - track_performance:
+          - real_time_metrics: hourly_first_day
+          - engagement_quality: comment_depth_analysis
+          - lead_generation: profile_visits_connection_requests
+          - conversion_tracking: link_clicks_actions
+    output:
+      - publication_report:
+          published_at: ""
+          post_url: ""
+          initial_metrics: {}
+          engagement_summary: {}
+          leads_generated: 0
+
+metrics:
+  engagement:
+    - impressions: "Total post views"
+    - engagement_rate: "(Reactions + Comments + Shares) / Impressions"
+    - reactions: "Likes, celebrates, loves, etc."
+    - comments: "Discussion depth and quality"
+    - shares: "Reshares and reposts"
+    - click_through_rate: "Link clicks / Impressions"
+  
+  reach:
+    - total_reach: "Unique professionals reached"
+    - follower_reach: "% of followers who saw post"
+    - viral_reach: "Non-followers reached"
+    - demographic_breakdown: "Job titles, industries, seniority"
+  
+  conversion:
+    - profile_visits: "Clicks to your profile"
+    - connection_requests: "New connection requests"
+    - message_inquiries: "Direct messages received"
+    - website_clicks: "External link clicks"
+    - lead_generation: "Qualified leads identified"
+  
+  quality:
+    - comment_quality: "Depth of discussions"
+    - share_quality: "Who's sharing (influence level)"
+    - dwell_time: "Time spent reading"
+    - save_rate: "Post saves for later"
+
+platform_config:
+  linkedin:
+    character_limit: 3000
+    optimal_length: 1300-2000
+    first_lines_visible: 3
+    hashtag_limit: 5
+    optimal_hashtags: 3-5
+    image_specs:
+      format: [jpg, png]
+      max_size: 10MB
+      dimensions: 1200x627
+      aspect_ratio: "1.91:1"
+    video_specs:
+      format: [mp4, mov]
+      max_size: 5GB
+      max_length: 10min
+      dimensions: 1920x1080
+      native_upload: preferred
+    document_specs:
+      format: [pdf]
+      max_size: 100MB
+      max_pages: 300
+      use_case: lead_magnets_guides
+    carousel_specs:
+      format: pdf_converted_to_carousel
+      max_slides: 20
+      dimensions: 1080x1080
+    posting_best_practices:
+      - optimal_days: [Tuesday, Wednesday, Thursday]
+      - optimal_times: [7-9am, 12-1pm, 5-6pm]
+      - avoid_weekends: lower_professional_engagement
+      - consistency: 2-3_posts_per_week
+      - engage_immediately: first_2_hours_critical
+    algorithm_optimization:
+      - dwell_time: longer_reads_favored
+      - early_engagement: first_hour_crucial
+      - comment_conversations: reply_depth_matters
+      - native_content: avoid_external_links_initially
+      - profile_completeness: affects_reach
+      - connection_engagement: engage_with_network_daily
+
+content_patterns:
+  personal_story:
+    structure:
+      - hook: "Vulnerable or surprising opening"
+      - context: "Set the scene"
+      - challenge: "What went wrong or was difficult"
+      - action: "What you did about it"
+      - result: "The outcome"
+      - lesson: "Key takeaway"
+      - application: "How others can apply this"
+      - cta: "Invite discussion"
+    example_hook: "I got fired from my dream job 5 years ago. Best thing that ever happened to me. Here's why:"
+    best_for: [authenticity, relatability, connection]
+  
+  industry_insight:
+    structure:
+      - hook: "Bold observation or data point"
+      - context: "Why this matters now"
+      - analysis: "Your unique perspective"
+      - implications: "What this means for industry"
+      - prediction: "Where things are heading"
+      - action: "What professionals should do"
+      - cta: "Ask for perspectives"
+    example_hook: "The way we hire is fundamentally broken. Here's the data that proves it:"
+    best_for: [thought_leadership, authority, discussion]
+  
+  how_to_framework:
+    structure:
+      - hook: "Promise specific outcome"
+      - credibility: "Why you're qualified to teach this"
+      - problem: "Common challenge addressed"
+      - framework: "Your methodology name"
+      - steps: "Detailed action items"
+      - examples: "Real applications"
+      - results: "Expected outcomes"
+      - cta: "Encourage implementation"
+    example_hook: "I've hired 200+ people in my career. Here's the exact framework I use to identify A-players:"
+    best_for: [value_delivery, saves, shares]
+  
+  contrarian_view:
+    structure:
+      - hook: "Challenge conventional wisdom"
+      - common_belief: "What everyone thinks"
+      - why_wrong: "Evidence against it"
+      - alternative: "Your better approach"
+      - proof: "Data and examples"
+      - nuance: "When conventional wisdom works"
+      - cta: "Invite debate"
+    example_hook: "Unpopular opinion: Work-life balance is a myth. Here's what you should aim for instead:"
+    best_for: [engagement, discussion, virality]
+  
+  case_study:
+    structure:
+      - hook: "Impressive result"
+      - background: "Client/company situation"
+      - challenge: "Specific problem"
+      - strategy: "Your approach"
+      - execution: "What was done"
+      - results: "Specific metrics"
+      - lessons: "Key insights"
+      - cta: "Offer similar help"
+    example_hook: "How we helped a struggling startup reach $10M ARR in 18 months:"
+    best_for: [credibility, lead_generation, authority]
+  
+  list_post:
+    structure:
+      - hook: "Number + benefit"
+      - intro: "Why this list matters"
+      - items: "Each with brief explanation"
+      - context: "How to apply"
+      - bonus: "Extra insight"
+      - summary: "Quick recap"
+      - cta: "Save and share"
+    example_hook: "7 leadership lessons I wish I learned 10 years earlier:"
+    best_for: [saves, shares, quick_value]
+
+engagement_tactics:
+  hook_formulas:
+    - "After X years in [industry], I've learned [surprising insight]"
+    - "I made a $X mistake. Here's what it taught me:"
+    - "Everyone does [common practice]. Here's why that's wrong:"
+    - "[Impressive result] in [timeframe]. Here's how:"
+    - "The [number] [things] that changed my [career/business/life]:"
+    - "[Controversial statement]. Let me explain:"
+  
+  cta_examples:
+    - "What's your experience with this? Share in the comments."
+    - "Disagree? I'd love to hear your perspective."
+    - "Which of these resonates most with you?"
+    - "What would you add to this list?"
+    - "Have you tried this approach? What were your results?"
+    - "Tag someone who needs to hear this."
+    - "Save this for later reference."
+    - "Repost to help your network."
+  
+  engagement_boosters:
+    - ask_genuine_questions: "Invite real discussion"
+    - share_vulnerability: "Authentic connection"
+    - provide_frameworks: "Actionable value"
+    - use_specific_numbers: "Credibility and interest"
+    - challenge_assumptions: "Spark debate"
+    - tell_stories: "Emotional connection"
+    - tag_relevant_people: "Expand reach"
+    - respond_thoughtfully: "Build relationships"
+
+quality_checklist:
+  before_posting:
+    - hook_stops_scroll: "First line compelling?"
+    - value_is_clear: "What will reader gain?"
+    - professionally_written: "Zero typos or errors?"
+    - authentic_voice: "Sounds like you?"
+    - appropriate_length: "1300-2000 characters?"
+    - visual_enhances: "Image adds value?"
+    - hashtags_strategic: "3-5 relevant tags?"
+    - cta_included: "Clear engagement prompt?"
+    - timing_optimal: "Best time for audience?"
+    - mobile_friendly: "Readable on phone?"
+  
+  after_posting:
+    - engage_immediately: "Respond to first comments"
+    - monitor_closely: "First 2 hours critical"
+    - amplify_strategically: "Share in groups"
+    - build_relationships: "Engage with engagers"
+    - track_metrics: "Monitor performance"
+    - document_learnings: "What worked?"
+
+success_criteria:
+  viral_post:
+    - impressions: ">50,000"
+    - engagement_rate: ">8%"
+    - comments: ">100"
+    - shares: ">50"
+    - profile_visits: ">500"
+    - connection_requests: ">20"
+  
+  high_performing_post:
+    - impressions: ">10,000"
+    - engagement_rate: ">5%"
+    - comments: ">30"
+    - shares: ">20"
+    - profile_visits: ">100"
+    - connection_requests: ">10"
+  
+  baseline_post:
+    - impressions: ">2,000"
+    - engagement_rate: ">2%"
+    - comments: ">10"
+    - shares: ">5"
+    - profile_visits: ">20"
+    - connection_requests: ">3"
+
+best_practices:
+  content_strategy:
+    - post_consistently: "2-3x per week minimum"
+    - mix_content_types: "Stories, insights, how-tos"
+    - be_authentic: "Real experiences resonate"
+    - provide_value: "Every post should teach or inspire"
+    - engage_genuinely: "Build real relationships"
+    - optimize_profile: "Complete and professional"
+  
+  writing_tips:
+    - write_like_you_talk: "Conversational but professional"
+    - use_short_sentences: "Easy to scan"
+    - break_up_text: "White space is your friend"
+    - bold_key_points: "Highlight important ideas"
+    - tell_stories: "More engaging than facts alone"
+    - be_specific: "Numbers and details add credibility"
+  
+  engagement_strategy:
+    - respond_to_all_comments: "Within first 2 hours"
+    - ask_follow_up_questions: "Deepen conversations"
+    - engage_with_your_network: "Daily activity"
+    - join_relevant_groups: "Participate actively"
+    - share_others_content: "Be generous"
+    - build_relationships: "Not just transactions"

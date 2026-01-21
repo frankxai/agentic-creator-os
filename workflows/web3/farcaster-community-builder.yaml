@@ -1,0 +1,128 @@
+name: farcaster-community-builder
+department: marketing
+version: 1.0.0
+purpose: Build and engage FarCaster community with Web3-native content strategies
+
+agents:
+  - name: FarCaster Expert
+    role: FarCaster-native content creation
+  - name: Web3 Storyteller
+    role: Blockchain and crypto storytelling
+  - name: Community Cultivator
+    role: Farcaster community engagement
+  - name: Trend Spotter
+    role: Identify on-chain trends and opportunities
+
+steps:
+  - name: FarCaster Strategy
+    input:
+      - Project goals
+      - Target community (builders, degens, normies)
+      - Value proposition
+    actions:
+      - Define FarCaster presence strategy
+      - Identify key channels and accounts
+      - Create content pillars (technical, community, announcements)
+      - Plan engagement strategy
+      - Set recast and reply protocols
+    output: FarCaster strategy document
+
+  - name: Channel Establishment
+    input:
+      - Strategy document
+      - Project identity
+    actions:
+      - Create pinned cast introduction
+      - Design channel cover and bio
+      - Create welcome sequence
+      - Establish posting cadence
+      - Set up channel rules
+    output: Channel setup package
+
+  - name: Content Creation - Technical
+    input:
+      - Technical topics
+      - Code repositories
+      - Protocol updates
+    actions:
+      - Explain technical concepts accessibly
+      - Share code snippets with context
+      - Announce protocol updates
+      - Create tutorials and threads
+    output: Technical content (casts and threads)
+
+  - name: Content Creation - Community
+    input:
+      - Community moments
+      - Milestones
+      - Community highlights
+    actions:
+      - Celebrate community wins
+      - Share milestone announcements
+      - Create AMAs and discussions
+      - Feature community members
+      - Host spaces and events
+    output: Community engagement content
+
+  - name: Content Creation - Market
+    input:
+      - Market trends
+      - On-chain activity
+      - Ecosystem updates
+    actions:
+      - Share market insights
+      - Analyze on-chain trends
+      - Cover ecosystem news
+      - Create educational content
+      - Discuss governance proposals
+    output: Market and ecosystem content
+
+  - name: Engagement Operations
+    input:
+      - Feed activity
+      - Channel mentions
+      - Trending topics
+    actions:
+      - Reply to relevant casts (value-first, not promotional)
+      - Recast high-quality content
+      - Engage with key accounts
+      - Participate in channel discussions
+      - Welcome new members
+    output: Engagement report and relationships built
+
+  - name: Growth Tactics
+    input:
+      - Current follower count
+      - Engagement metrics
+      - Content performance
+    actions:
+      - Identify accounts to follow
+      - Create shareable content moments
+      - Cross-promote with allies
+      - Host collaborative events
+      - Create referral incentives
+    output: Growth strategy and execution plan
+
+metrics:
+  - Follower growth rate
+  - Channel engagement rate
+  - Recast rate
+  - Reply quality score
+  - New member activation
+  - Sentiment analysis
+
+config:
+  content_pillars:
+    - technical_education
+    - community_building
+    - market_insights
+    - ecosystem_updates
+    - governance_discussion
+  posting_frequency:
+    casts_per_day: 3-8
+    threads_per_week: 2-5
+    recasts_daily: 5-15
+  engagement_ratio:
+    replies: 40%
+    recasts: 30%
+    original_casts: 30%

@@ -1,0 +1,115 @@
+name: viral-content-engine
+department: marketing
+version: 1.0.0
+purpose: Create content optimized for viral potential with proven psychological triggers and shareability factors
+
+agents:
+  - name: Viral Strategist
+    role: Identifies viral potential and optimizes for shares
+  - name: Hook Specialist
+    role: Creates attention-grabbing openings
+  - name: Emotion Engineer
+    role: Crafts emotional resonance
+  - name: Shareability Expert
+    role: Maximizes re-share potential
+
+steps:
+  - name: Viral Potential Analysis
+    input:
+      - Content topic or idea
+      - Target audience
+      - Platform selection
+    actions:
+      - Analyze current trends
+      - Identify emotional triggers
+      - Assess shareability factors
+      - Research similar viral content
+      - Determine unique angle
+    output: Viral potential score and strategy
+
+  - name: Hook Creation
+    input:
+      - Content topic
+      - Platform requirements
+      - Target emotion
+    actions:
+      - Create 5 hook variations
+      - Test different angles (controversy, curiosity, authority, social proof)
+      - A/B test hooks mentally
+      - Select top 3 hooks
+    output: 3 tested hooks with reasoning
+
+  - name: Content Structure
+    input:
+      - Selected hook
+      - Content type (story, list, how-to, opinion)
+      - Platform requirements
+    actions:
+      - Apply viral content structures
+      - Add curiosity gaps
+      - Include social proof
+      - Create memorable phrases
+      - Add share triggers
+    output: Structured content outline
+
+  - name: Emotional Enhancement
+    input:
+      - Content outline
+      - Desired emotional response
+    actions:
+      - Add emotional triggers (surprise, joy, anger, FOMO, inspiration)
+      - Include relatable moments
+      - Create quotable lines
+      - Add personal stories
+      - Build towards emotional climax
+    output: Emotionally enhanced content
+
+  - name: Share Trigger Integration
+    input:
+      - Enhanced content
+      - Target audience psychology
+    actions:
+      - Add "tag someone who..." moments
+      - Create "save for later" value
+      - Include "comment your thoughts" hooks
+      - Add humble brag opportunities
+      - Create "you need to know this" urgency
+    output: Content with integrated share triggers
+
+  - name: Platform Optimization
+    input:
+      - Final content
+      - Target platforms
+    actions:
+      - Optimize for each platform's algorithm
+      - Add platform-specific formatting
+      - Create platform-specific CTAs
+      - Generate hashtags and mentions
+      - Add optimal posting time
+    output: Platform-optimized viral content package
+
+metrics:
+  - Viral potential score (0-100)
+  - Share trigger count
+  - Emotional impact score
+  - Platform optimization score
+  - Projected reach
+
+config:
+  viral_triggers:
+    - curiosity_gaps
+    - strong_opinions
+    - personal_stories
+    - surprising_statistics
+    - controversial_takes
+    - practical_value
+    - emotional_resonance
+    - social_proof
+    - FOMO_creation
+    - relatability
+  share_ctas:
+    - "Tag someone who needs to see this"
+    - "Save this for later"
+    - "Comment your experience"
+    - "Share if you agree"
+    - "Send this to your..."

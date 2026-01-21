@@ -1,0 +1,708 @@
+name: YouTube Shorts Content Creation
+department: marketing
+purpose: Create engaging YouTube Shorts that drive views, subscribers, and channel growth through vertical short-form video content
+
+description: |
+  Comprehensive workflow for creating YouTube Shorts optimized for the platform's algorithm, audience retention,
+  and subscriber conversion. Focuses on hook-driven content that performs well in the Shorts feed.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze trending Shorts content
+      - Research viral video patterns
+      - Study audience preferences
+      - Identify content opportunities
+    
+  - role: writer
+    responsibilities:
+      - Craft compelling video scripts
+      - Write hook-driven narratives
+      - Create engaging dialogue
+      - Develop subscriber CTAs
+    
+  - role: editor
+    responsibilities:
+      - Optimize script pacing
+      - Ensure retention optimization
+      - Validate timing and flow
+      - Polish for maximum impact
+    
+  - role: seo
+    responsibilities:
+      - Research YouTube keywords
+      - Optimize titles and descriptions
+      - Suggest posting times
+      - Analyze performance patterns
+    
+  - role: publisher
+    responsibilities:
+      - Coordinate video production
+      - Schedule Shorts uploads
+      - Monitor performance
+      - Track growth metrics
+
+steps:
+  - step: 1
+    name: Shorts Trend Research & Analysis
+    agent: researcher
+    input:
+      - channel_niche
+      - target_audience
+      - content_goal (views|subscribers|watch_time|brand_awareness)
+    actions:
+      - research_trending_shorts:
+          sources: [shorts_feed, trending_page, competitor_channels]
+          analyze: [formats, hooks, topics, retention_patterns]
+      - identify_viral_patterns:
+          study: [thumbnail_styles, opening_hooks, pacing, payoffs]
+          benchmark: shorts_with_1M_plus_views
+      - analyze_niche_opportunities:
+          method: [keyword_research, gap_analysis, audience_questions]
+          identify: [underserved_topics, trending_questions, content_gaps]
+      - study_retention_patterns:
+          analyze: [where_viewers_drop_off, what_keeps_them_watching]
+          optimize_for: average_view_duration_and_completion
+      - research_competitor_shorts:
+          analyze: [successful_formats, thumbnail_strategies, title_formulas]
+          identify: differentiation_opportunities
+    output:
+      - research_brief:
+          trending_formats: []
+          viral_patterns: {}
+          niche_opportunities: []
+          retention_insights: {}
+          competitor_analysis: {}
+  
+  - step: 2
+    name: Script Concept & Hook Strategy
+    agent: writer
+    input:
+      - research_brief
+      - video_topic
+    actions:
+      - select_shorts_format:
+          options:
+            - quick_tip: "Fast educational value"
+            - before_after: "Transformation showcase"
+            - list_format: "Top X things about Y"
+            - story_time: "Engaging narrative"
+            - tutorial: "How-to in 60 seconds"
+            - reaction: "React to trending content"
+            - challenge: "Attempt or participate"
+            - comparison: "X vs Y breakdown"
+      - craft_opening_hook:
+          first_3_seconds_critical: true
+          techniques:
+            - question_hook: "Want to know how to [result]?"
+            - bold_claim: "This is the easiest way to [achieve goal]"
+            - pattern_interrupt: "Stop! You're doing this wrong"
+            - curiosity_gap: "The secret to [thing] is..."
+            - visual_hook: "Watch what happens when..."
+            - relatable_pain: "Struggling with [problem]? Watch this"
+            - number_hook: "3 ways to [achieve result]"
+          goal: stop_scroll_within_1_second
+      - plan_retention_strategy:
+          throughout_video:
+            - quick_pacing: no_dead_air
+            - visual_variety: change_every_3_seconds
+            - payoff_promises: "Wait till the end"
+            - loop_potential: seamless_restart
+            - value_delivery: constant_engagement
+      - outline_video_structure:
+          timing_breakdown:
+            - 0-3_seconds: hook_that_stops_scroll
+            - 3-10_seconds: deliver_on_promise
+            - 10-45_seconds: main_content_value
+            - 45-55_seconds: payoff_and_cta
+            - 55-60_seconds: subscribe_prompt
+          optimal_length: 30-60_seconds
+    output:
+      - script_concept:
+          format: ""
+          hook: ""
+          retention_strategy: {}
+          structure_outline: {}
+          target_length: 0
+  
+  - step: 3
+    name: Full Script Development
+    agent: writer
+    input:
+      - script_concept
+      - research_brief
+    actions:
+      - write_opening_hook:
+          first_second: visual_and_verbal_hook
+          first_3_seconds: complete_hook_delivery
+          examples:
+            - "Here's how to [result] in under 60 seconds"
+            - "I tried [thing] for [time]. Here's what happened"
+            - "The #1 mistake people make with [topic]"
+            - "Want to [achieve goal]? Do this"
+            - "This changed everything for me"
+      - develop_main_content:
+          pacing: fast_and_engaging
+          structure:
+            - setup: quick_context (3-5 seconds)
+            - content: main_value (20-40 seconds)
+            - payoff: satisfying_conclusion (10-15 seconds)
+          writing_style:
+            - conversational: natural_speech
+            - energetic: maintain_momentum
+            - clear: simple_language
+            - concise: every_word_counts
+          retention_tactics:
+            - pattern_changes: visual_variety_every_3s
+            - micro_payoffs: small_wins_throughout
+            - curiosity_loops: "But wait, there's more"
+            - watch_till_end: "The best part is coming"
+      - write_dialogue_script:
+          voiceover:
+            - natural_speech: conversational_tone
+            - emphasis_points: where_to_stress
+            - pacing_notes: fast_or_slow_sections
+            - energy_level: enthusiastic_calm_or_dramatic
+          on_screen_text:
+            - captions: full_dialogue_for_accessibility
+            - text_overlays: emphasize_key_points
+            - readable: large_bold_fonts
+            - timed: sync_with_speech
+      - add_subscriber_cta:
+          placement: end_of_video
+          options:
+            - direct_ask: "Subscribe for more tips like this"
+            - value_promise: "Follow for daily [content type]"
+            - series_tease: "Part 2 coming tomorrow - subscribe to see it"
+            - community_invite: "Join [number] others who subscribed"
+          visual_cue: subscribe_button_animation_or_arrow
+    output:
+      - full_script:
+          hook: ""
+          main_content: ""
+          dialogue: ""
+          on_screen_text: []
+          visual_cues: []
+          cta: ""
+          timing_notes: {}
+          total_duration: 0
+  
+  - step: 4
+    name: Script Optimization & Retention
+    agent: editor
+    input:
+      - full_script
+    actions:
+      - optimize_for_retention:
+          - hook_strength: first_3_seconds_compelling
+          - pacing_check: no_boring_moments
+          - visual_variety: change_every_3_seconds
+          - payoff_delivery: satisfying_conclusion
+          - loop_potential: seamless_restart
+      - refine_timing:
+          - read_aloud_test: natural_pace
+          - trim_fat: remove_unnecessary_words
+          - add_pauses: for_emphasis
+          - sync_visuals: match_action_to_words
+      - enhance_clarity:
+          - simplify_language: easy_to_understand
+          - strengthen_message: clear_takeaway
+          - improve_flow: smooth_transitions
+          - validate_value: worth_watching
+      - add_production_notes:
+          - camera_work: angles_and_movements
+          - lighting: setup_requirements
+          - props: items_needed
+          - location: where_to_film
+          - editing: cuts_transitions_effects
+          - graphics: text_overlays_animations
+      - validate_youtube_optimization:
+          - first_frame: thumbnail_worthy
+          - subscribe_cta: clear_and_visible
+          - watch_time: maximize_retention
+          - shareability: worth_sending_to_friends
+    output:
+      - optimized_script:
+          final_script: ""
+          timing_breakdown: {}
+          production_notes: {}
+          retention_score: 0
+          youtube_optimization: {}
+  
+  - step: 5
+    name: Title, Description & SEO
+    agent: seo
+    input:
+      - optimized_script
+      - target_keywords
+    actions:
+      - research_keywords:
+          sources: [youtube_search, google_trends, competitor_analysis]
+          identify: [high_volume_keywords, long_tail_phrases, trending_topics]
+          prioritize: search_volume_and_relevance
+      - write_compelling_title:
+          formula_options:
+            - how_to: "How to [achieve result] in [timeframe]"
+            - listicle: "[Number] Ways to [benefit]"
+            - question: "Can You [challenge]?"
+            - bold_claim: "The BEST Way to [do thing]"
+            - curiosity: "The Secret to [result]"
+            - before_after: "I Tried [thing] for [time]"
+          requirements:
+            - keyword_placement: front_loaded
+            - character_limit: 60_characters_optimal
+            - compelling: click_worthy
+            - accurate: no_clickbait
+            - caps_usage: strategic_emphasis
+      - write_video_description:
+          structure:
+            - first_line: hook_with_keyword (visible_in_search)
+            - main_description: expand_on_video_content
+            - timestamps: if_applicable
+            - links: channel_social_website
+            - hashtags: 3-5_relevant_tags
+            - cta: subscribe_or_watch_more
+          length: 200-300_words
+          keyword_density: natural_placement
+      - optimize_for_youtube_search:
+          - title_keywords: primary_keyword_first
+          - description_keywords: natural_integration
+          - hashtags: 3-5_strategic_tags
+          - category: appropriate_selection
+          - thumbnail_text: readable_keywords
+      - determine_posting_strategy:
+          analyze:
+            - audience_timezone: when_subscribers_active
+            - competition: less_crowded_times
+            - shorts_feed_patterns: peak_discovery_times
+          recommend:
+            - optimal_days: [Tuesday, Wednesday, Thursday, Saturday]
+            - optimal_times: [12-3pm, 6-9pm]
+            - consistency: daily_or_3-5x_per_week
+    output:
+      - seo_package:
+          title: ""
+          description: ""
+          keywords: []
+          hashtags: []
+          optimal_posting_time: ""
+          expected_performance: {}
+  
+  - step: 6
+    name: Thumbnail Strategy
+    agent: writer
+    input:
+      - optimized_script
+      - seo_package
+    actions:
+      - design_thumbnail_concept:
+          importance: critical_for_click_through
+          elements:
+            - main_visual: eye_catching_image
+            - text_overlay: 3-5_words_max
+            - facial_expression: emotion_or_reaction
+            - color_contrast: bright_and_bold
+            - branding: subtle_logo_or_style
+          best_practices:
+            - mobile_optimized: readable_on_small_screen
+            - high_contrast: stands_out_in_feed
+            - curiosity_inducing: makes_you_want_to_click
+            - accurate: represents_video_content
+            - consistent_style: brand_recognition
+      - create_thumbnail_variations:
+          test_options:
+            - version_a: text_focused
+            - version_b: image_focused
+            - version_c: face_focused
+          specifications:
+            - format: jpg_or_png
+            - dimensions: 1280x720
+            - aspect_ratio: "16:9"
+            - file_size: under_2MB
+            - resolution: high_quality
+      - optimize_first_frame:
+          shorts_specific: first_frame_is_thumbnail
+          requirements:
+            - eye_catching: stops_scroll
+            - clear: not_blurry
+            - on_brand: consistent_style
+            - text_readable: if_included
+            - compelling: encourages_watch
+    output:
+      - thumbnail_package:
+          thumbnail_concept: ""
+          variations: []
+          first_frame_optimization: {}
+  
+  - step: 7
+    name: Final Review & Production Brief
+    agent: editor
+    input:
+      - optimized_script
+      - seo_package
+      - thumbnail_package
+    actions:
+      - comprehensive_review:
+          - script_quality: engaging_and_clear
+          - seo_optimization: keywords_integrated
+          - thumbnail_effectiveness: click_worthy
+          - retention_potential: keeps_viewers_watching
+          - subscriber_conversion: clear_cta
+      - create_production_checklist:
+          pre_production:
+            - script_finalized: yes
+            - location_secured: yes
+            - props_gathered: yes
+            - equipment_ready: yes
+          production:
+            - lighting_setup: proper_illumination
+            - audio_quality: clear_sound
+            - camera_settings: vertical_1080x1920
+            - performance_energy: engaging_delivery
+          post_production:
+            - editing_tight: fast_pacing
+            - captions_added: accessibility
+            - graphics_included: text_overlays
+            - music_selected: if_appropriate
+            - thumbnail_created: eye_catching
+      - generate_upload_checklist:
+          - video_file: optimized_format
+          - title: seo_optimized
+          - description: keyword_rich
+          - thumbnail: eye_catching
+          - hashtags: strategic_tags
+          - category: appropriate
+          - visibility: public
+          - shorts_designation: enabled
+      - create_approval_package:
+          - final_script: complete_dialogue
+          - production_brief: filming_guide
+          - seo_elements: title_description_tags
+          - thumbnail: design_concept
+          - success_metrics: target_kpis
+    output:
+      - production_package:
+          final_script: ""
+          production_checklist: {}
+          upload_checklist: {}
+          seo_elements: {}
+          thumbnail: {}
+          estimated_performance: {}
+  
+  - step: 8
+    name: Upload & Performance Monitoring
+    agent: publisher
+    input:
+      - production_package
+      - completed_video
+    actions:
+      - video_quality_check:
+          - format: vertical_9_16
+          - resolution: 1080x1920_minimum
+          - audio: clear_and_balanced
+          - captions: accurate_and_synced
+          - pacing: engaging_throughout
+          - first_frame: thumbnail_worthy
+      - upload_to_youtube:
+          platform: youtube_studio
+          timing: optimal_posting_time
+          settings:
+            - title: seo_optimized
+            - description: keyword_rich
+            - thumbnail: custom_upload
+            - visibility: public
+            - category: appropriate
+            - tags: relevant_keywords
+            - shorts_designation: auto_or_manual
+            - comments: enabled
+            - age_restriction: if_needed
+      - optimize_post_upload:
+          - pin_comment: engage_viewers
+          - add_to_playlist: organize_content
+          - share_to_community: notify_subscribers
+          - cross_promote: other_platforms
+      - monitor_initial_performance:
+          timeframe: first_24_hours
+          metrics: [views, watch_time, ctr, retention]
+          alerts: viral_potential_indicators
+      - engage_with_audience:
+          - respond_to_comments: first_hour
+          - pin_best_comment: boost_engagement
+          - heart_comments: show_appreciation
+          - create_follow_up: if_requested
+      - track_performance:
+          - hourly_metrics: first_24_hours
+          - daily_metrics: first_week
+          - key_metrics:
+              - views: total_view_count
+              - watch_time: total_minutes_watched
+              - average_view_duration: retention_quality
+              - click_through_rate: thumbnail_effectiveness
+              - subscriber_conversion: new_subscribers
+              - engagement_rate: likes_comments_shares
+              - shorts_feed_performance: discovery_vs_browse
+    output:
+      - publication_report:
+          published_at: ""
+          video_url: ""
+          initial_metrics: {}
+          performance_analysis: {}
+          optimization_recommendations: {}
+
+metrics:
+  engagement:
+    - views: "Total video views"
+    - watch_time: "Total minutes watched"
+    - average_view_duration: "Mean watch time per view"
+    - retention_rate: "% of video watched on average"
+    - engagement_rate: "(Likes + Comments + Shares) / Views"
+    - likes: "Total likes"
+    - comments: "Total comments"
+    - shares: "Total shares"
+  
+  discovery:
+    - impressions: "Times thumbnail shown"
+    - click_through_rate: "Clicks / Impressions"
+    - shorts_feed_views: "Views from Shorts feed"
+    - browse_views: "Views from channel/search"
+    - suggested_views: "Views from suggestions"
+    - external_views: "Views from external sources"
+  
+  conversion:
+    - subscriber_conversion: "New subscribers from Short"
+    - channel_visits: "Clicks to channel page"
+    - playlist_adds: "Added to playlists"
+    - watch_next: "Viewers who watched another video"
+  
+  quality:
+    - retention_curve: "Where viewers drop off"
+    - rewatch_rate: "Multiple views per user"
+    - like_ratio: "Likes / Views percentage"
+    - comment_sentiment: "Positive/negative ratio"
+
+platform_config:
+  youtube_shorts:
+    video_specs:
+      format: mp4
+      aspect_ratio: "9:16 (vertical)"
+      resolution: 1080x1920
+      max_file_size: 256GB
+      max_length: 60_seconds
+      optimal_length: 30-60_seconds
+      frame_rate: 24fps_30fps_or_60fps
+    thumbnail_specs:
+      format: jpg_or_png
+      dimensions: 1280x720
+      aspect_ratio: "16:9"
+      max_file_size: 2MB
+      note: first_frame_used_in_shorts_feed
+    title_specs:
+      character_limit: 100
+      optimal_length: 60_characters
+      keyword_placement: front_loaded
+    description_specs:
+      character_limit: 5000
+      optimal_length: 200-300_words
+      hashtag_limit: unlimited_but_use_3-5
+    posting_best_practices:
+      - optimal_days: [Tuesday, Wednesday, Thursday, Saturday]
+      - optimal_times: [12-3pm, 6-9pm]
+      - consistency: daily_or_3-5x_per_week
+      - engage_immediately: first_hour_critical
+      - cross_promote: share_to_community_tab
+      - playlist_organization: group_related_shorts
+    algorithm_optimization:
+      - watch_time: most_important_metric
+      - average_view_duration: retention_quality
+      - click_through_rate: thumbnail_title_effectiveness
+      - engagement: likes_comments_shares
+      - subscriber_conversion: new_subscribers_from_short
+      - watch_next: viewers_watching_more_content
+      - consistency: regular_upload_schedule
+      - niche_focus: train_algorithm_on_topic
+
+content_patterns:
+  quick_tutorial:
+    structure:
+      - 0-3s: "Here's how to [achieve result]"
+      - 3-15s: "Step 1, Step 2, Step 3"
+      - 15-45s: "Demonstrate each step"
+      - 45-55s: "Final result"
+      - 55-60s: "Subscribe for more"
+    example_hook: "Learn [skill] in 60 seconds"
+    best_for: [educational_value, saves, subscribers]
+  
+  before_after_transformation:
+    structure:
+      - 0-3s: "I went from [before] to [after]"
+      - 3-10s: "Show before state"
+      - 10-40s: "What I did to change"
+      - 40-50s: "Show after state"
+      - 50-60s: "Subscribe to see more"
+    example_hook: "30 days of [thing] - the results shocked me"
+    best_for: [inspiration, credibility, subscribers]
+  
+  list_format:
+    structure:
+      - 0-3s: "[Number] ways to [achieve goal]"
+      - 3-45s: "Rapid-fire list items"
+      - 45-55s: "Bonus tip"
+      - 55-60s: "Subscribe for more tips"
+    example_hook: "5 secrets to [result] that actually work"
+    best_for: [quick_value, retention, shares]
+  
+  story_time:
+    structure:
+      - 0-3s: "This happened to me and I'm still shocked"
+      - 3-40s: "Tell engaging story"
+      - 40-55s: "Lesson or punchline"
+      - 55-60s: "Follow for more stories"
+    example_hook: "You won't believe what happened when..."
+    best_for: [engagement, retention, entertainment]
+  
+  comparison_breakdown:
+    structure:
+      - 0-3s: "[Thing A] vs [Thing B]"
+      - 3-40s: "Compare and contrast"
+      - 40-55s: "Which is better and why"
+      - 55-60s: "Subscribe for more comparisons"
+    example_hook: "The truth about [A] vs [B]"
+    best_for: [educational_value, decision_making, engagement]
+
+hook_formulas:
+  value_hooks:
+    - "Here's how to [result] in under 60 seconds"
+    - "The fastest way to [achieve goal]"
+    - "I learned this the hard way so you don't have to"
+    - "[Number] tips that will change how you [do thing]"
+    - "This is the only [thing] tutorial you need"
+  
+  curiosity_hooks:
+    - "The secret to [result] that nobody talks about"
+    - "I discovered this by accident and it changed everything"
+    - "This is why [common thing] doesn't work"
+    - "What [experts] don't tell you about [topic]"
+    - "The truth about [controversial topic]"
+  
+  story_hooks:
+    - "I tried [thing] for [timeframe] and here's what happened"
+    - "This happened to me yesterday and I'm still processing it"
+    - "The moment I realized [insight]"
+    - "Day 1 vs Day 30 of [challenge]"
+    - "I made a huge mistake with [thing]"
+  
+  question_hooks:
+    - "Want to know how to [achieve result]?"
+    - "Can you [challenge] in under 60 seconds?"
+    - "What if I told you [surprising fact]?"
+    - "Ever wondered why [phenomenon]?"
+    - "Ready to [achieve goal]?"
+
+engagement_tactics:
+  subscriber_conversion:
+    - direct_ask: "Subscribe for more content like this"
+    - value_promise: "I post daily tips on [topic]"
+    - series_tease: "Part 2 coming tomorrow - don't miss it"
+    - community_invite: "Join [number] subscribers"
+    - exclusive_content: "Subscribers get early access"
+  
+  comment_engagement:
+    - ask_question: "What would you add to this list?"
+    - controversial_take: "Disagree? Let me know why"
+    - poll_question: "Which method do you prefer?"
+    - request_feedback: "Did this help? Comment below"
+    - encourage_discussion: "Share your experience"
+  
+  watch_time_boosters:
+    - pattern_changes: visual_variety_every_3s
+    - micro_payoffs: small_wins_throughout
+    - curiosity_loops: "But wait, there's more"
+    - watch_till_end: "The best part is at the end"
+    - loop_potential: seamless_restart
+  
+  cross_promotion:
+    - watch_next: "Check out this video next"
+    - playlist_promotion: "Watch the full series"
+    - channel_promotion: "More on my channel"
+    - community_tab: "Share to community"
+    - other_platforms: "Find me on [platform]"
+
+quality_checklist:
+  before_filming:
+    - script_finalized: "Every word planned?"
+    - hook_compelling: "Stops scroll in 1 second?"
+    - value_clear: "What will viewer gain?"
+    - length_optimal: "30-60 seconds?"
+    - cta_included: "Subscribe prompt?"
+    - location_ready: "Where to film?"
+    - equipment_ready: "Camera, lights, mic?"
+    - props_gathered: "Everything needed?"
+  
+  before_uploading:
+    - video_quality: "1080x1920 vertical?"
+    - audio_quality: "Clear and balanced?"
+    - captions_added: "Accurate subtitles?"
+    - pacing_good: "Fast and engaging?"
+    - first_frame_strong: "Thumbnail worthy?"
+    - title_optimized: "Keywords included?"
+    - description_complete: "SEO optimized?"
+    - thumbnail_uploaded: "Custom thumbnail?"
+    - hashtags_added: "3-5 relevant tags?"
+  
+  after_uploading:
+    - pin_comment: "Engage viewers?"
+    - share_to_community: "Notify subscribers?"
+    - respond_to_comments: "First hour engagement?"
+    - monitor_metrics: "Track performance?"
+    - analyze_retention: "Where do people drop off?"
+    - document_learnings: "What worked?"
+
+success_criteria:
+  viral_short:
+    - views: ">1,000,000"
+    - average_view_duration: ">50%"
+    - click_through_rate: ">10%"
+    - subscriber_conversion: ">1%"
+    - engagement_rate: ">8%"
+    - shorts_feed_percentage: ">80%"
+  
+  high_performing_short:
+    - views: ">100,000"
+    - average_view_duration: ">40%"
+    - click_through_rate: ">8%"
+    - subscriber_conversion: ">0.5%"
+    - engagement_rate: ">5%"
+    - shorts_feed_percentage: ">60%"
+  
+  baseline_short:
+    - views: ">10,000"
+    - average_view_duration: ">30%"
+    - click_through_rate: ">5%"
+    - subscriber_conversion: ">0.2%"
+    - engagement_rate: ">3%"
+    - shorts_feed_percentage: ">40%"
+
+production_best_practices:
+  filming:
+    - vertical_format: always_9_16
+    - lighting: bright_and_even
+    - camera_stability: tripod_or_gimbal
+    - framing: rule_of_thirds
+    - background: clean_or_interesting
+    - audio: clear_external_mic_preferred
+  
+  editing:
+    - fast_pacing: quick_cuts
+    - visual_variety: change_every_3s
+    - captions: large_readable_fonts
+    - graphics: text_overlays_animations
+    - music: if_appropriate_not_overpowering
+    - color_grading: vibrant_and_appealing
+  
+  optimization:
+    - first_frame: eye_catching
+    - hook_immediate: grab_in_1_second
+    - value_quick: deliver_fast
+    - loop_potential: seamless_restart
+    - mobile_optimized: vertical_format
+    - sound_off_friendly: captions_essential

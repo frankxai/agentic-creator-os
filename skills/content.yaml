@@ -1,0 +1,49 @@
+name: Content Department
+description: |
+  Expert content creation team. Creates blog posts, social media,
+  newsletters, videos, and all content types. Optimizes for SEO
+  and manages multi-platform publishing.
+agents:
+  - content-lead
+  - writer
+  - editor
+  - publisher
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - browser-mcp
+  - website-mcp
+  - email-mcp
+examples:
+  - "Write a blog post about AI trends"
+  - "Create LinkedIn post about my product launch"
+  - "Send weekly newsletter with top articles"
+  - "Create YouTube video script about [topic]"
+  - "Optimize my blog post for SEO"
+slash_commands:
+  - /content-strategy
+  - /content-calendar
+  - /linkedin-content-article
+  - /linkedin-content
+  - /x-content
+  - /meta-content
+  - /farcaster-content
+  - /mirror-content
+workflows:
+  - content/blog-creation.yaml
+  - content/social-campaign.yaml
+  - content/newsletter.yaml
+  - content/video-production.yaml
+  - content-strategy/content-strategy.yaml
+  - content-calendar/content-calendar.yaml
+  - linkedin/linkedin-article.yaml
+  - linkedin/linkedin-post.yaml
+  - x/x-content.yaml
+  - meta/meta-content.yaml
+  - farcaster/farcaster-content.yaml
+  - mirror/mirror-content.yaml
+configuration:
+  default_tone: professional
+  default_length: medium
+  seo_optimization: true
+  publish_immediately: false

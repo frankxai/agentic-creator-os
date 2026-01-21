@@ -1,0 +1,123 @@
+name: crypto-market-commentary
+department: marketing
+version: 1.0.0
+purpose: Create timely crypto market news, analysis, and commentary with educational value and investment perspective
+
+agents:
+  - name: Market Analyst
+    role: Analyze market trends and data
+  - name: News Curator
+    role: Source and verify crypto news
+  - name: Technical Analyst
+    role: Chart and price analysis
+  - name: Sentiment Tracker
+    role: Monitor market sentiment
+
+steps:
+  - name: News Gathering
+    input:
+      - Market segments (DeFi, L1/L2, NFT, Metaverse, Regulation)
+      - Time period focus
+    actions:
+      - Monitor major news sources
+      - Track protocol announcements
+      - Follow regulatory developments
+      - Monitor social media trends
+      - Identify underreported stories
+    output: News briefing document
+
+  - name: Market Data Analysis
+    input:
+      - Price data (BTC, ETH, alts)
+      - On-chain metrics
+      - DeFi TVL changes
+      - NFT market activity
+    actions:
+      - Analyze price movements
+      - Review on-chain trends
+      - Track institutional flows
+      - Monitor options/futures data
+      - Compare to historical patterns
+    output: Market data analysis report
+
+  - name: Sentiment Assessment
+    input:
+      - Social media sentiment
+      - Fear & Greed Index
+      - News tone analysis
+    actions:
+      - Measure community sentiment
+      - Identify sentiment shifts
+      - Track influencer opinions
+      - Analyze news sentiment
+      - Correlate sentiment with price
+    output: Sentiment analysis report
+
+  - name: Content Creation - News
+    input:
+      - News briefing
+      - Editorial angle
+    actions:
+      - Write news summary (concise)
+      - Provide context and background
+      - Include multiple perspectives
+      - Add relevant data points
+      - Cite sources clearly
+    output: News article/post
+
+  - name: Content Creation - Analysis
+    input:
+      - Market analysis
+      - Sentiment data
+    actions:
+      - Identify key trends
+      - Explain market movements
+      - Provide technical perspective
+      - Offer balanced view (bull/bear)
+      - Include risk factors
+    output: Market analysis piece
+
+  - name: Content Creation - Opinion
+    input:
+      - Analysis report
+      - Expertise perspective
+    actions:
+      - Form considered opinion
+      - Back with evidence
+      - Acknowledge uncertainty
+      - Invite discussion
+      - Encourage DYOR
+    output: Opinion/editorial piece
+
+  - name: Multi-Format Distribution
+    input:
+      - All content created
+    actions:
+      - Create Twitter thread (news summary)
+      - Write LinkedIn article (detailed analysis)
+      - Design Instagram carousel (key points)
+      - Record audio/video commentary
+      - Create email newsletter version
+    output: Multi-platform content package
+
+metrics:
+  - Article engagement rate
+  - Read/listen/view completion
+  - Comment quality
+  - Share rate
+  - Sentiment accuracy
+  - Contrarian indicator performance
+
+config:
+  content_types:
+    - daily_newsletter: "Daily market roundup"
+    - weekly_analysis: "In-depth weekly review"
+    - breaking_news: "Major developments"
+    - deep_dive: "Educational explainer"
+    - market_outlook: "Forward-looking analysis"
+  disclaimer_requirement: "Always include: Not financial advice"
+  fact_checking:
+    verify_sources: true
+    check_prices: true
+    confirm_dates: true
+    multiple_sources_preferred: true

@@ -1,0 +1,760 @@
+name: Crypto News & Analysis
+description: Create timely crypto market news, analysis, and insights content
+version: 1.0.0
+category: web3
+tags:
+  - crypto
+  - news
+  - market-analysis
+  - blockchain
+  - trading
+
+inputs:
+  news_type:
+    type: enum
+    description: Type of crypto news content
+    options:
+      - breaking-news
+      - market-analysis
+      - price-movement
+      - protocol-update
+      - regulatory-news
+      - industry-trend
+      - weekly-recap
+      - market-outlook
+    required: true
+  
+  primary_topic:
+    type: string
+    description: Main topic or asset
+    required: true
+  
+  asset_type:
+    type: enum
+    description: Type of crypto asset
+    options:
+      - bitcoin
+      - ethereum
+      - altcoin
+      - defi-token
+      - nft
+      - stablecoin
+      - layer1
+      - layer2
+      - multiple
+    required: false
+  
+  time_sensitivity:
+    type: enum
+    description: How time-sensitive is the news
+    options:
+      - breaking
+      - urgent
+      - timely
+      - evergreen
+    default: timely
+  
+  analysis_depth:
+    type: enum
+    description: Depth of analysis
+    options:
+      - headline-only
+      - brief-summary
+      - detailed-analysis
+      - deep-dive
+    default: detailed-analysis
+  
+  include_price_data:
+    type: boolean
+    description: Include price charts and data
+    default: true
+  
+  price_context:
+    type: object
+    description: Price information
+    properties:
+      current_price: string
+      price_change_24h: string
+      price_change_7d: string
+      market_cap: string
+      volume_24h: string
+    required: false
+  
+  include_technical_analysis:
+    type: boolean
+    description: Include technical analysis
+    default: false
+  
+  include_onchain_data:
+    type: boolean
+    description: Include on-chain metrics
+    default: false
+  
+  target_audience:
+    type: enum
+    description: Target reader audience
+    options:
+      - general-public
+      - crypto-traders
+      - investors
+      - developers
+      - institutions
+    default: crypto-traders
+  
+  content_format:
+    type: enum
+    description: Content format
+    options:
+      - news-article
+      - twitter-thread
+      - newsletter
+      - market-report
+      - quick-update
+      - video-script
+    default: news-article
+  
+  tone:
+    type: enum
+    description: Content tone
+    options:
+      - objective
+      - analytical
+      - bullish
+      - bearish
+      - cautious
+      - excited
+    default: objective
+
+steps:
+  - id: gather_latest_information
+    name: Gather Latest Information
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{primary_topic}} crypto {{news_type}}"
+      depth: real_time
+      time_range: last_24_hours
+      
+      focus_areas:
+        - Latest developments
+        - Official announcements
+        - Market reactions
+        - Expert opinions
+        - Social sentiment
+        - Historical context
+        - Related events
+      
+      sources:
+        - Official project channels
+        - Crypto news outlets
+        - Social media
+        - Blockchain explorers
+        - Market data platforms
+        - Regulatory announcements
+    
+    outputs:
+      latest_info: research_results
+
+  - id: verify_news_sources
+    name: Verify News Sources
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      claims: "{{latest_info}}"
+      
+      verification_priority: high
+      
+      verify_against:
+        - Official announcements
+        - Blockchain data
+        - Multiple credible sources
+        - Primary sources
+      
+      check_for:
+        - Source credibility
+        - Information accuracy
+        - Timestamp verification
+        - Quote accuracy
+        - Statistical accuracy
+        - Rumor vs confirmed
+      
+      flag_unverified: true
+      require_multiple_sources: true
+    
+    outputs:
+      verified_info: fact_check_results
+
+  - id: gather_market_data
+    name: Gather Market Data
+    condition: "{{include_price_data}}"
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{primary_topic}} price market data"
+      data_type: quantitative
+      
+      metrics_needed:
+        - Current price
+        - 24h price change
+        - 7d price change
+        - Market cap
+        - Trading volume
+        - Price history
+        - Support/resistance levels
+        - Market dominance
+      
+      data_sources:
+        - CoinGecko
+        - CoinMarketCap
+        - Trading platforms
+        - Blockchain explorers
+    
+    outputs:
+      market_data: price_metrics
+
+  - id: analyze_onchain_metrics
+    name: Analyze On-Chain Metrics
+    condition: "{{include_onchain_data}}"
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{primary_topic}} on-chain metrics"
+      data_type: blockchain_analytics
+      
+      onchain_metrics:
+        - Active addresses
+        - Transaction volume
+        - Network activity
+        - Whale movements
+        - Exchange flows
+        - Token distribution
+        - Smart contract activity
+        - Gas usage
+      
+      analysis_focus:
+        - Unusual patterns
+        - Trend changes
+        - Significant movements
+        - Network health
+    
+    outputs:
+      onchain_analysis: blockchain_metrics
+
+  - id: analyze_market_sentiment
+    name: Analyze Market Sentiment
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{latest_info}}"
+      analysis_type: sentiment_analysis
+      
+      sentiment_sources:
+        - Social media discussions
+        - News article tone
+        - Community reactions
+        - Influencer opinions
+        - Trading sentiment
+      
+      sentiment_indicators:
+        - Fear and Greed Index
+        - Social volume
+        - Positive/negative ratio
+        - Trending topics
+        - Community mood
+    
+    outputs:
+      sentiment_analysis: sentiment_report
+
+  - id: provide_context_background
+    name: Provide Context and Background
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{primary_topic}} background context"
+      depth: contextual
+      
+      context_needed:
+        - Project/asset history
+        - Previous similar events
+        - Market cycle context
+        - Regulatory environment
+        - Competitive landscape
+        - Technical background
+      
+      purpose: help_readers_understand
+    
+    outputs:
+      background_context: context_information
+
+  - id: generate_news_content
+    name: Generate News Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{content_format}}"
+      topic: "{{primary_topic}}"
+      
+      context: |
+        News Type: {{news_type}}
+        Topic: {{primary_topic}}
+        Asset Type: {{asset_type}}
+        Time Sensitivity: {{time_sensitivity}}
+        Analysis Depth: {{analysis_depth}}
+        
+        Latest Information: {{verified_info}}
+        Market Data: {{market_data}}
+        On-Chain Analysis: {{onchain_analysis}}
+        Sentiment: {{sentiment_analysis}}
+        Background: {{background_context}}
+      
+      requirements:
+        - Lead with most important information
+        - Provide accurate facts and figures
+        - Include relevant context
+        - Explain significance
+        - Quote credible sources
+        - Include multiple perspectives
+        - Avoid sensationalism
+        - Be objective and balanced
+        - Use clear, accessible language
+        - Include actionable insights
+      
+      tone: "{{tone}}"
+      
+      news_structure:
+        breaking_news:
+          - Attention-grabbing headline
+          - Lead paragraph with key facts
+          - What happened
+          - Why it matters
+          - Market reaction
+          - Expert quotes
+          - What to watch next
+        
+        market_analysis:
+          - Executive summary
+          - Current market state
+          - Key drivers and catalysts
+          - Technical analysis
+          - On-chain insights
+          - Sentiment overview
+          - Outlook and implications
+          - Risk factors
+        
+        price_movement:
+          - Price action summary
+          - Percentage changes
+          - What triggered movement
+          - Technical levels
+          - Volume analysis
+          - Market context
+          - Trader perspectives
+          - Next key levels
+        
+        weekly_recap:
+          - Week overview
+          - Top stories
+          - Major price movements
+          - Key developments
+          - Regulatory updates
+          - Looking ahead
+          - Market themes
+    
+    outputs:
+      news_content: generated_content
+
+  - id: add_technical_analysis
+    name: Add Technical Analysis
+    condition: "{{include_technical_analysis}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{news_content}}"
+      transformation: add_technical_analysis
+      
+      technical_elements:
+        - Key support and resistance levels
+        - Chart patterns
+        - Moving averages
+        - RSI and momentum indicators
+        - Volume analysis
+        - Trend analysis
+        - Fibonacci levels
+        - Trading ranges
+      
+      analysis_style:
+        - Objective observation
+        - Multiple timeframes
+        - Risk/reward scenarios
+        - Invalidation levels
+        - No price predictions
+      
+      disclaimer: |
+        Technical analysis is not financial advice. Past performance doesn't guarantee future results.
+    
+    outputs:
+      content_with_ta: transformed_content
+
+  - id: add_expert_perspectives
+    name: Add Expert Perspectives
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_ta}}"
+      transformation: add_expert_quotes
+      
+      expert_types:
+        - Market analysts
+        - On-chain analysts
+        - Project founders
+        - Industry leaders
+        - Economists
+        - Technical experts
+      
+      quote_guidelines:
+        - Attribute properly
+        - Provide context
+        - Include diverse views
+        - Verify authenticity
+        - Link to source
+        - Balance perspectives
+    
+    outputs:
+      content_with_experts: transformed_content
+
+  - id: add_data_visualizations
+    name: Add Data Visualization Suggestions
+    condition: "{{include_price_data}}"
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: visual_guidelines
+      topic: "{{primary_topic}} data visualizations"
+      
+      chart_types:
+        - Price chart with key levels
+        - Volume histogram
+        - Market cap comparison
+        - On-chain metrics graphs
+        - Sentiment indicators
+        - Correlation charts
+        - Dominance charts
+        - Flow diagrams
+      
+      visualization_requirements:
+        - Clear labeling
+        - Time period indication
+        - Source attribution
+        - Key levels marked
+        - Color coding
+        - Trend lines
+        - Annotations for events
+      
+      data_sources:
+        - TradingView
+        - Glassnode
+        - CoinGecko
+        - Dune Analytics
+        - Nansen
+    
+    outputs:
+      visualization_guide: chart_specifications
+
+  - id: add_news_disclaimer
+    name: Add News Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_experts}}"
+      transformation: add_disclaimer
+      disclaimer_type: news_and_analysis
+      
+      disclaimer_text: |
+        📰 DISCLAIMER: This content is for informational purposes only and should not be considered 
+        financial, investment, or trading advice. Cryptocurrency markets are highly volatile and risky. 
+        Always conduct your own research and consult with qualified financial advisors before making 
+        investment decisions. Past performance is not indicative of future results.
+    
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_platform
+    name: Optimize for Platform
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: "{{content_format}}"
+      
+      optimization_goals:
+        - maximize_reach
+        - drive_engagement
+        - build_credibility
+        - encourage_sharing
+      
+      platform_specifics:
+        twitter:
+          - Thread format for analysis
+          - Lead with key insight
+          - Include chart images
+          - Tag relevant accounts
+          - Use crypto hashtags
+          - Add engagement hooks
+        
+        newsletter:
+          - Scannable format
+          - Section headers
+          - Bullet points
+          - Visual breaks
+          - Clear CTAs
+          - Links to sources
+        
+        news_article:
+          - SEO optimization
+          - Proper headline
+          - Subheadings
+          - Quote formatting
+          - Image placement
+          - Related articles
+    
+    outputs:
+      optimized_content: platform_content
+
+  - id: generate_crypto_hashtags
+    name: Generate Crypto Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: twitter
+      niche: crypto_news
+      count: 10
+      
+      include_categories:
+        - asset_specific
+        - crypto_general
+        - trading_related
+        - trending_topics
+      
+      examples:
+        - "#Crypto"
+        - "#Bitcoin"
+        - "#Ethereum"
+        - "#{{primary_topic}}"
+        - "#CryptoNews"
+        - "#Blockchain"
+        - "#DeFi"
+        - "#Web3"
+        - "#CryptoMarket"
+        - "#Altcoins"
+    
+    outputs:
+      crypto_hashtags: hashtag_list
+
+  - id: fact_check_all_claims
+    name: Comprehensive Fact-Check
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - price_data_accuracy
+        - statistical_claims
+        - quote_accuracy
+        - date_time_accuracy
+        - technical_facts
+        - regulatory_information
+        - project_details
+      
+      verification_standards: journalistic
+      
+      cross_reference:
+        - Official sources
+        - Blockchain data
+        - Market data providers
+        - Regulatory filings
+        - Project documentation
+      
+      flag_unverified: true
+      require_sources: true
+    
+    outputs:
+      final_fact_check: verification_results
+
+  - id: add_related_content
+    name: Add Related Content Links
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{optimized_content}}"
+      transformation: add_related_links
+      
+      related_content_types:
+        - Previous coverage
+        - Background articles
+        - Related projects
+        - Market analysis
+        - Educational resources
+        - Data sources
+      
+      link_format:
+        - Descriptive text
+        - Context for relevance
+        - Proper attribution
+        - Working URLs
+    
+    outputs:
+      content_with_links: transformed_content
+
+  - id: create_distribution_strategy
+    name: Create Distribution Strategy
+    mcp: marketing-mcp
+    tool: create_engagement_strategy
+    inputs:
+      content: "{{content_with_links}}"
+      campaign_type: news_distribution
+      time_sensitivity: "{{time_sensitivity}}"
+      
+      distribution_channels:
+        - Twitter/X
+        - Telegram
+        - Discord
+        - Reddit
+        - Newsletter
+        - Blog/Website
+        - LinkedIn
+      
+      timing_strategy:
+        breaking:
+          - Immediate publication
+          - Multiple platform push
+          - Real-time updates
+          - Follow-up threads
+        
+        timely:
+          - Optimal posting times
+          - Coordinated release
+          - Scheduled follow-ups
+          - Engagement monitoring
+        
+        evergreen:
+          - Strategic timing
+          - Periodic resharing
+          - Content recycling
+          - SEO optimization
+      
+      engagement_tactics:
+        - Ask for opinions
+        - Create polls
+        - Encourage discussion
+        - Respond to comments
+        - Share updates
+        - Cross-promote
+    
+    outputs:
+      distribution_strategy: strategy_document
+
+  - id: compile_news_package
+    name: Compile News Content Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_content: "{{content_with_links}}"
+        visualization_guide: "{{visualization_guide}}"
+        hashtags: "{{crypto_hashtags}}"
+        distribution_strategy: "{{distribution_strategy}}"
+        fact_check: "{{final_fact_check}}"
+        market_data: "{{market_data}}"
+        sentiment_analysis: "{{sentiment_analysis}}"
+        disclaimer: "Included in content"
+      
+      package_format: crypto_news_bundle
+      
+      metadata:
+        publication_time: timestamp
+        time_sensitivity: "{{time_sensitivity}}"
+        update_frequency: as_needed
+        sources: verified_list
+    
+    outputs:
+      final_package: complete_news_content
+
+outputs:
+  news_content_package:
+    description: Complete crypto news content package
+    value: "{{final_package}}"
+  
+  main_content:
+    description: Primary news content with disclaimer
+    value: "{{content_with_links}}"
+  
+  market_data:
+    description: Compiled market data and metrics
+    value: "{{market_data}}"
+  
+  sentiment_report:
+    description: Market sentiment analysis
+    value: "{{sentiment_analysis}}"
+  
+  visualizations:
+    description: Data visualization specifications
+    value: "{{visualization_guide}}"
+  
+  hashtags:
+    description: Crypto news hashtags
+    value: "{{crypto_hashtags}}"
+  
+  distribution_plan:
+    description: Content distribution strategy
+    value: "{{distribution_strategy}}"
+  
+  verification_report:
+    description: Comprehensive fact-check results
+    value: "{{final_fact_check}}"
+
+metadata:
+  best_practices:
+    - Verify all information from multiple sources
+    - Lead with most important information
+    - Provide context and background
+    - Be objective and balanced
+    - Avoid sensationalism and hype
+    - Update content as situation develops
+    - Cite sources properly
+    - Include diverse perspectives
+    - Explain technical concepts clearly
+    - Disclose any conflicts of interest
+  
+  journalistic_standards:
+    - Accuracy above speed
+    - Multiple source verification
+    - Proper attribution
+    - Fact over speculation
+    - Corrections when needed
+    - Transparent methodology
+    - Ethical reporting
+    - Audience respect
+  
+  compliance_notes:
+    - Not financial advice disclaimer required
+    - Disclose any sponsored content
+    - Follow securities regulations
+    - Avoid market manipulation
+    - Respect embargo agreements
+    - Protect source confidentiality
+  
+  crypto_news_terminology:
+    - FOMO: Fear Of Missing Out
+    - FUD: Fear, Uncertainty, Doubt
+    - DYOR: Do Your Own Research
+    - ATH: All-Time High
+    - ATL: All-Time Low
+    - Pump: Rapid price increase
+    - Dump: Rapid price decrease
+    - Whale: Large holder
+    - Bag: Holdings of a token
+    - Moon: Significant price increase
+    - Rekt: Significant losses
+    - HODL: Hold long-term

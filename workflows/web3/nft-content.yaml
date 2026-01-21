@@ -1,0 +1,412 @@
+name: NFT Content Creation
+description: Create engaging content for NFT collections, drops, and storytelling
+version: 1.0.0
+category: web3
+tags:
+  - nft
+  - web3
+  - blockchain
+  - digital-art
+  - collectibles
+
+inputs:
+  collection_name:
+    type: string
+    description: Name of the NFT collection
+    required: true
+  
+  collection_type:
+    type: enum
+    description: Type of NFT collection
+    options:
+      - pfp # Profile Picture
+      - generative-art
+      - 1-of-1
+      - photography
+      - music
+      - gaming
+      - utility
+      - membership
+    required: true
+  
+  blockchain:
+    type: enum
+    description: Blockchain network
+    options:
+      - ethereum
+      - polygon
+      - solana
+      - base
+      - arbitrum
+      - optimism
+      - avalanche
+      - tezos
+    default: ethereum
+  
+  mint_price:
+    type: string
+    description: Mint price (e.g., "0.08 ETH", "Free + Gas")
+    required: false
+  
+  supply:
+    type: number
+    description: Total supply of NFTs
+    required: false
+  
+  mint_date:
+    type: string
+    description: Mint date/time
+    required: false
+  
+  artist_creator:
+    type: string
+    description: Artist or creator name
+    required: false
+  
+  utility_benefits:
+    type: array
+    description: Utility and benefits for holders
+    items:
+      type: string
+    required: false
+  
+  story_angle:
+    type: enum
+    description: Content storytelling angle
+    options:
+      - collection-announcement
+      - artist-spotlight
+      - utility-focus
+      - community-building
+      - drop-countdown
+      - behind-the-scenes
+      - holder-benefits
+      - roadmap-reveal
+    default: collection-announcement
+  
+  content_format:
+    type: enum
+    description: Primary content format
+    options:
+      - twitter-thread
+      - blog-post
+      - discord-announcement
+      - medium-article
+      - instagram-carousel
+      - video-script
+    default: twitter-thread
+  
+  tone:
+    type: enum
+    description: Content tone
+    options:
+      - hype
+      - educational
+      - artistic
+      - community-focused
+      - exclusive
+      - playful
+    default: hype
+
+steps:
+  - id: research_collection
+    name: Research NFT Collection
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{collection_name}} NFT collection {{blockchain}}"
+      depth: detailed
+      focus_areas:
+        - Artist/creator background
+        - Collection uniqueness
+        - Utility and roadmap
+        - Community sentiment
+        - Market positioning
+    outputs:
+      collection_research: research_results
+
+  - id: verify_blockchain_facts
+    name: Verify Blockchain Information
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      claims:
+        - "{{blockchain}} blockchain specifications"
+        - "{{mint_price}} pricing accuracy"
+        - "NFT standard compatibility"
+      sources:
+        - official_docs
+        - blockchain_explorers
+        - verified_announcements
+    outputs:
+      verified_facts: fact_check_results
+
+  - id: generate_nft_content
+    name: Generate NFT Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{content_format}}"
+      topic: "{{collection_name}} NFT Collection"
+      context: |
+        Collection: {{collection_name}}
+        Type: {{collection_type}}
+        Blockchain: {{blockchain}}
+        Mint Price: {{mint_price}}
+        Supply: {{supply}}
+        Mint Date: {{mint_date}}
+        Artist: {{artist_creator}}
+        Utility: {{utility_benefits}}
+        Story Angle: {{story_angle}}
+        
+        Research: {{collection_research}}
+        Verified Facts: {{verified_facts}}
+      
+      requirements:
+        - Use Web3 and NFT terminology appropriately
+        - Highlight unique value proposition
+        - Include clear call-to-action
+        - Mention blockchain and technical details
+        - Emphasize community and utility
+        - Create FOMO without misleading claims
+        - Include relevant hashtags
+        - Add disclaimer if needed
+      
+      tone: "{{tone}}"
+      
+      style_guide:
+        - Use emojis strategically (💎, 🚀, 🎨, 🔥, ⚡)
+        - Include blockchain-specific terms (mint, gas, floor, utility)
+        - Emphasize scarcity and exclusivity
+        - Highlight artist/creator credibility
+        - Focus on community benefits
+        - Be transparent about risks
+    
+    outputs:
+      nft_content: generated_content
+
+  - id: add_compliance_disclaimer
+    name: Add Compliance Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{nft_content}}"
+      transformation: add_disclaimer
+      disclaimer_type: nft_investment
+      disclaimer_text: |
+        ⚠️ DISCLAIMER: This is not financial advice. NFTs are speculative digital assets. 
+        Do your own research (DYOR) before purchasing. Past performance doesn't guarantee future results.
+        Only invest what you can afford to lose.
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_platform
+    name: Optimize for Platform
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: "{{content_format}}"
+      optimization_goals:
+        - engagement
+        - shareability
+        - community_building
+      
+      platform_specifics:
+        twitter:
+          - Use thread format for longer stories
+          - Include visual hooks
+          - Tag relevant accounts
+          - Use trending NFT hashtags
+        discord:
+          - Use proper formatting
+          - Include role mentions
+          - Add reaction emojis
+          - Structure with headers
+        instagram:
+          - Carousel-friendly layout
+          - Visual-first approach
+          - Story highlights compatible
+    
+    outputs:
+      optimized_content: platform_content
+
+  - id: generate_hashtags
+    name: Generate NFT Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: "{{content_format}}"
+      niche: nft
+      count: 10
+      
+      include_categories:
+        - collection_specific
+        - blockchain_network
+        - nft_general
+        - community_tags
+        - trending_crypto
+      
+      examples:
+        - "#NFT"
+        - "#NFTs"
+        - "#NFTCommunity"
+        - "#{{blockchain}}NFT"
+        - "#{{collection_type}}"
+        - "#CryptoArt"
+        - "#Web3"
+        - "#DigitalArt"
+    
+    outputs:
+      nft_hashtags: hashtag_list
+
+  - id: create_visual_suggestions
+    name: Create Visual Content Suggestions
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: visual_guidelines
+      topic: "{{collection_name}} NFT visuals"
+      
+      requirements:
+        - Showcase NFT artwork/examples
+        - Include rarity traits
+        - Show utility/benefits visually
+        - Display team/artist
+        - Highlight community
+        - Add blockchain branding
+        - Include mint details graphic
+      
+      format_suggestions:
+        - Hero image with key NFT
+        - Trait rarity chart
+        - Roadmap infographic
+        - Team introduction cards
+        - Utility benefits diagram
+        - Countdown timer graphic
+    
+    outputs:
+      visual_suggestions: content_suggestions
+
+  - id: fact_check_claims
+    name: Fact-Check All Claims
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - technical_accuracy
+        - pricing_information
+        - date_time_accuracy
+        - utility_claims
+        - partnership_claims
+        - blockchain_specifications
+      
+      flag_unverified: true
+      require_sources: true
+    
+    outputs:
+      fact_check_report: verification_results
+
+  - id: community_engagement_plan
+    name: Create Community Engagement Plan
+    mcp: marketing-mcp
+    tool: create_engagement_strategy
+    inputs:
+      content: "{{optimized_content}}"
+      platform: "{{content_format}}"
+      
+      engagement_tactics:
+        - Respond to comments quickly
+        - Share holder testimonials
+        - Host Twitter Spaces/AMAs
+        - Create Discord events
+        - Reward community participation
+        - Share WIP and behind-the-scenes
+        - Highlight community members
+      
+      timing_strategy:
+        - Pre-mint hype building
+        - Mint day coordination
+        - Post-mint community nurturing
+        - Ongoing utility delivery
+    
+    outputs:
+      engagement_plan: strategy_document
+
+  - id: compile_final_package
+    name: Compile Final Content Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_content: "{{optimized_content}}"
+        hashtags: "{{nft_hashtags}}"
+        visual_suggestions: "{{visual_suggestions}}"
+        fact_check: "{{fact_check_report}}"
+        engagement_plan: "{{engagement_plan}}"
+        disclaimer: "Included in content"
+      
+      package_format: nft_content_bundle
+    
+    outputs:
+      final_package: complete_content
+
+outputs:
+  nft_content_package:
+    description: Complete NFT content package
+    value: "{{final_package}}"
+  
+  main_content:
+    description: Primary NFT content with disclaimer
+    value: "{{optimized_content}}"
+  
+  hashtags:
+    description: Optimized NFT hashtags
+    value: "{{nft_hashtags}}"
+  
+  visual_guidelines:
+    description: Visual content suggestions
+    value: "{{visual_suggestions}}"
+  
+  engagement_strategy:
+    description: Community engagement plan
+    value: "{{engagement_plan}}"
+  
+  verification_report:
+    description: Fact-check verification results
+    value: "{{fact_check_report}}"
+
+metadata:
+  best_practices:
+    - Always include DYOR (Do Your Own Research) messaging
+    - Be transparent about risks and speculative nature
+    - Verify all technical claims about blockchain
+    - Highlight genuine utility over hype
+    - Build community, not just sales
+    - Respect intellectual property
+    - Follow platform-specific NFT guidelines
+    - Avoid pump-and-dump language
+    - Disclose any affiliations or sponsorships
+  
+  compliance_notes:
+    - Not financial advice disclaimer required
+    - Verify regulatory compliance in target regions
+    - Avoid guarantees of returns or profits
+    - Disclose any paid promotions
+    - Follow SEC guidelines for digital assets
+    - Respect copyright and trademark laws
+  
+  web3_terminology:
+    - Mint: The process of creating/purchasing an NFT
+    - Gas: Transaction fees on blockchain
+    - Floor: Lowest listed price in collection
+    - Utility: Real-world benefits for holders
+    - Roadmap: Future plans for project
+    - Whitelist: Early access list
+    - Reveal: When NFT artwork is shown
+    - Burn: Permanently removing NFTs
+    - Staking: Locking NFTs for rewards
+    - Airdrop: Free distribution to holders

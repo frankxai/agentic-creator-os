@@ -1,0 +1,564 @@
+name: Facebook Community Engagement Posts
+department: marketing
+purpose: Create community-focused Facebook content that drives meaningful conversations, builds relationships, and fosters engaged communities
+
+description: |
+  Comprehensive workflow for creating Facebook posts optimized for community building and engagement.
+  Focuses on authentic connection, group dynamics, and Facebook's community-first algorithm.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze Facebook community trends
+      - Research group engagement patterns
+      - Study audience demographics
+      - Identify conversation starters
+    
+  - role: writer
+    responsibilities:
+      - Craft community-focused content
+      - Write conversational posts
+      - Create discussion prompts
+      - Develop relatable stories
+    
+  - role: editor
+    responsibilities:
+      - Ensure authentic tone
+      - Optimize for conversations
+      - Validate community guidelines
+      - Polish for clarity
+    
+  - role: seo
+    responsibilities:
+      - Optimize for Facebook search
+      - Research trending topics
+      - Suggest optimal posting times
+      - Analyze engagement patterns
+    
+  - role: publisher
+    responsibilities:
+      - Schedule posts strategically
+      - Monitor community discussions
+      - Facilitate conversations
+      - Track engagement metrics
+
+steps:
+  - step: 1
+    name: Community Research & Topic Selection
+    agent: researcher
+    input:
+      - community_focus
+      - target_audience_demographics
+      - content_goal (engagement|awareness|conversion|community_building)
+    actions:
+      - analyze_community_interests:
+          sources: [group_discussions, comment_analysis, polls]
+          identify: [hot_topics, pain_points, shared_interests]
+      - research_engagement_patterns:
+          analyze: [post_types, timing, content_themes]
+          benchmark: high_performing_posts
+      - study_audience_demographics:
+          factors: [age, location, interests, behaviors]
+          segment: primary_and_secondary_audiences
+      - identify_conversation_starters:
+          types: [questions, polls, fill_in_blank, this_or_that]
+          focus: relatable_and_relevant
+    output:
+      - research_brief:
+          community_insights: {}
+          trending_topics: []
+          audience_segments: {}
+          engagement_opportunities: []
+          recommended_format: ""
+  
+  - step: 2
+    name: Content Format Selection
+    agent: writer
+    input:
+      - research_brief
+      - engagement_goal
+    actions:
+      - select_post_format:
+          options:
+            - text_post: "Conversational, story-driven"
+            - photo_post: "Visual with engaging caption"
+            - video_post: "Native video for max reach"
+            - poll_post: "Interactive decision-making"
+            - link_post: "Share valuable resources"
+            - live_video: "Real-time community interaction"
+            - story_post: "Ephemeral, casual updates"
+            - event_post: "Community gatherings"
+      - determine_engagement_strategy:
+          tactics:
+            - ask_questions: "Open-ended for discussion"
+            - share_stories: "Relatable personal experiences"
+            - create_polls: "Easy participation"
+            - use_fill_in_blank: "Low-barrier engagement"
+            - share_user_content: "Community spotlight"
+            - host_challenges: "Encourage participation"
+      - plan_content_structure:
+          hook: attention_grabbing_opening
+          body: valuable_or_entertaining_content
+          engagement_prompt: clear_call_to_participate
+    output:
+      - content_strategy:
+          format: ""
+          engagement_tactic: ""
+          structure_outline: {}
+  
+  - step: 3
+    name: Post Writing & Story Development
+    agent: writer
+    input:
+      - content_strategy
+      - research_brief
+    actions:
+      - craft_opening_hook:
+          techniques:
+            - relatable_question: "Anyone else struggle with X?"
+            - personal_story: "This happened to me yesterday..."
+            - controversial_take: "Unpopular opinion: X is overrated"
+            - emotional_appeal: "This made me cry happy tears"
+            - curiosity_gap: "You won't believe what happened when..."
+            - community_callout: "Calling all [community members]!"
+          length: 1-2_sentences
+          goal: stop_scroll_encourage_read
+      - write_post_body:
+          style: conversational_and_authentic
+          structure:
+            - expand_hook: provide_context
+            - share_value: story_insight_or_information
+            - build_connection: relatable_vulnerable
+            - create_emotion: joy_inspiration_empathy
+          length: 100-300_words
+          formatting:
+            - short_paragraphs: 2-3_sentences
+            - line_breaks: improve_readability
+            - emojis: enhance_emotion_sparingly
+            - emphasis: caps_or_bold_for_key_points
+      - add_engagement_prompt:
+          types:
+            - direct_question: "What's your experience with this?"
+            - fill_in_blank: "My favorite X is ___"
+            - this_or_that: "Coffee or tea? ☕"
+            - tag_someone: "Tag a friend who needs to see this"
+            - share_story: "Tell me about a time when..."
+            - emoji_response: "React with ❤️ if you agree"
+          placement: end_of_post
+          clarity: specific_and_actionable
+    output:
+      - post_draft:
+          hook: ""
+          body: ""
+          engagement_prompt: ""
+          total_length: 0
+  
+  - step: 4
+    name: Visual Content Creation
+    agent: writer
+    input:
+      - post_draft
+      - content_format
+    actions:
+      - determine_visual_need:
+          text_only: high_engagement_questions_or_stories
+          with_image: enhance_message_or_add_context
+          with_video: demonstrate_or_entertain
+          with_poll: interactive_decision_making
+      - create_visual_assets:
+          photo_options:
+            - authentic_photos: real_life_moments
+            - memes: relatable_humor
+            - infographics: educational_value
+            - user_generated: community_content
+            - quote_graphics: inspirational_messages
+          video_options:
+            - talking_head: personal_connection
+            - behind_scenes: authentic_glimpse
+            - how_to: educational_value
+            - user_testimonials: social_proof
+            - live_video: real_time_interaction
+          specifications:
+            - image_format: jpg_or_png
+            - image_size: 1200x630_recommended
+            - video_format: mp4
+            - video_length: 1-3_minutes_optimal
+            - native_upload: preferred_for_reach
+      - optimize_for_mobile:
+          - readable_text: large_fonts
+          - clear_visuals: high_contrast
+          - quick_loading: optimized_file_size
+          - vertical_friendly: mobile_first
+    output:
+      - visual_package:
+          asset_type: ""
+          files: []
+          mobile_optimized: true
+  
+  - step: 5
+    name: Community Optimization
+    agent: editor
+    input:
+      - post_draft
+      - visual_package
+    actions:
+      - optimize_for_conversation:
+          - open_ended_questions: avoid_yes_no
+          - relatable_content: shared_experiences
+          - authentic_tone: genuine_not_salesy
+          - community_focused: about_them_not_you
+      - ensure_inclusivity:
+          - accessible_language: clear_and_simple
+          - diverse_representation: inclusive_examples
+          - respectful_tone: welcoming_to_all
+          - community_guidelines: aligned_with_rules
+      - enhance_engagement_potential:
+          - emotional_resonance: connect_on_feeling
+          - shareability: worth_tagging_friends
+          - comment_worthy: prompts_discussion
+          - reaction_worthy: evokes_response
+      - validate_authenticity:
+          - genuine_voice: sounds_like_real_person
+          - no_clickbait: honest_and_transparent
+          - value_first: helpful_not_promotional
+          - community_benefit: serves_audience
+    output:
+      - optimized_post:
+          content: ""
+          engagement_score: 0
+          authenticity_rating: 0
+  
+  - step: 6
+    name: Timing & Distribution Strategy
+    agent: seo
+    input:
+      - optimized_post
+      - target_audience
+    actions:
+      - determine_optimal_timing:
+          analyze:
+            - audience_activity: when_community_online
+            - time_zones: primary_locations
+            - day_of_week: weekday_vs_weekend
+            - competition: when_others_post_less
+          recommend:
+            - best_days: [Wednesday, Thursday, Friday]
+            - best_times: [1-3pm, 7-9pm]
+            - avoid: early_morning_late_night
+      - plan_distribution:
+          primary_post: main_page_or_profile
+          groups: relevant_community_groups
+          stories: ephemeral_amplification
+          cross_post: instagram_if_appropriate
+      - optimize_for_algorithm:
+          - meaningful_interactions: prioritize_comments
+          - native_content: avoid_external_links_initially
+          - video_preference: native_video_favored
+          - live_video_boost: highest_reach
+          - group_posts: higher_engagement_potential
+      - add_targeting_elements:
+          - location_tag: if_relevant
+          - feeling_activity: enhance_context
+          - tag_people: relevant_connections
+          - hashtags: minimal_1-3_max
+    output:
+      - distribution_plan:
+          posting_time: ""
+          distribution_channels: []
+          algorithm_optimization: {}
+          expected_reach: 0
+  
+  - step: 7
+    name: Final Review & Approval
+    agent: editor
+    input:
+      - optimized_post
+      - visual_package
+      - distribution_plan
+    actions:
+      - comprehensive_quality_check:
+          - grammar_spelling: error_free
+          - tone_appropriateness: community_friendly
+          - engagement_clarity: clear_participation_prompt
+          - visual_quality: professional_or_authentic
+      - community_guidelines_check:
+          - no_spam: valuable_content
+          - no_clickbait: honest_messaging
+          - respectful: inclusive_language
+          - compliant: platform_policies
+      - generate_preview:
+          format: facebook_post_mockup
+          include: [text, visual, engagement_prompt]
+      - create_moderation_plan:
+          - monitor_comments: first_2_hours
+          - respond_strategy: thoughtful_replies
+          - handle_negativity: professional_approach
+          - encourage_discussion: ask_follow_ups
+    output:
+      - approval_package:
+          post_content: ""
+          visual_assets: []
+          posting_schedule: ""
+          moderation_plan: {}
+  
+  - step: 8
+    name: Publication & Community Management
+    agent: publisher
+    input:
+      - approved_post
+      - distribution_plan
+      - moderation_plan
+    actions:
+      - publish_post:
+          platform: facebook_api_or_creator_studio
+          timing: optimal_time
+          settings:
+            - audience: public_or_targeted
+            - comments: enabled
+            - sharing: enabled
+            - notifications: all
+      - monitor_initial_engagement:
+          timeframe: first_2_hours
+          metrics: [reach, reactions, comments, shares]
+          alerts: engagement_opportunities
+      - active_community_management:
+          - respond_to_comments: within_30_minutes
+          - like_all_comments: show_appreciation
+          - ask_follow_up_questions: deepen_conversation
+          - highlight_best_comments: pin_or_reply
+          - address_concerns: professional_helpful
+          - encourage_discussion: facilitate_connections
+      - amplify_engagement:
+          - share_to_stories: with_engagement_sticker
+          - post_in_groups: relevant_communities
+          - notify_connections: tag_interested_people
+          - cross_promote: other_platforms_if_appropriate
+      - track_performance:
+          - real_time_metrics: hourly_first_day
+          - engagement_quality: comment_depth
+          - community_growth: new_followers_group_members
+          - conversation_depth: reply_threads
+          - sentiment_analysis: positive_negative_neutral
+    output:
+      - publication_report:
+          published_at: ""
+          post_url: ""
+          initial_metrics: {}
+          engagement_summary: {}
+          community_insights: {}
+
+metrics:
+  engagement:
+    - reach: "Total people who saw post"
+    - impressions: "Total times post was viewed"
+    - engagement_rate: "(Reactions + Comments + Shares) / Reach"
+    - reactions: "All reaction types"
+    - comments: "Total comments and replies"
+    - shares: "Public and private shares"
+    - clicks: "Link clicks or see more"
+  
+  community:
+    - comment_depth: "Average replies per comment thread"
+    - conversation_quality: "Meaningful vs. one-word responses"
+    - new_followers: "Page likes from post"
+    - group_joins: "New group members"
+    - tagged_friends: "How many people tagged others"
+    - saves: "Post saves for later"
+  
+  conversion:
+    - page_visits: "Clicks to page"
+    - website_clicks: "External link clicks"
+    - message_inquiries: "Direct messages"
+    - event_responses: "Event RSVPs"
+    - lead_generation: "Form submissions"
+  
+  quality:
+    - sentiment_score: "Positive/negative ratio"
+    - response_rate: "% of comments you replied to"
+    - community_participation: "Unique commenters"
+    - share_quality: "Who's sharing (influence)"
+
+platform_config:
+  facebook:
+    text_specs:
+      character_limit: 63206
+      optimal_length: 100-300_words
+      first_lines_visible: 2-3
+      line_breaks: improve_readability
+    image_specs:
+      format: [jpg, png]
+      recommended_size: 1200x630
+      aspect_ratio: "1.91:1"
+      max_file_size: 4MB
+    video_specs:
+      format: [mp4, mov]
+      max_size: 10GB
+      max_length: 240_minutes
+      recommended_length: 1-3_minutes
+      native_upload: strongly_preferred
+    live_video_specs:
+      max_duration: 8_hours
+      recommended_duration: 10-30_minutes
+      highest_reach: algorithm_favored
+    posting_best_practices:
+      - optimal_days: [Wednesday, Thursday, Friday]
+      - optimal_times: [1-3pm, 7-9pm]
+      - avoid_monday_morning: low_engagement
+      - consistency: 1-2_posts_per_day
+      - engage_immediately: first_hour_critical
+      - use_native_features: stories_live_video
+    algorithm_optimization:
+      - meaningful_interactions: comments_over_reactions
+      - native_content: avoid_external_links
+      - video_preference: especially_live_video
+      - group_posts: higher_organic_reach
+      - friend_tags: increases_distribution
+      - dwell_time: longer_engagement_favored
+      - recency: fresh_content_prioritized
+      - relationship_strength: engage_with_engagers
+
+content_patterns:
+  question_post:
+    structure:
+      - hook: "Attention-grabbing question"
+      - context: "Why you're asking"
+      - engagement_prompt: "Share your answer"
+    example: "What's the best advice you've ever received? I'll go first: [your answer]. Now your turn!"
+    best_for: [high_comments, community_building, easy_participation]
+  
+  story_post:
+    structure:
+      - hook: "Relatable opening"
+      - story: "Personal experience"
+      - lesson: "What you learned"
+      - question: "Has this happened to you?"
+    example: "Yesterday I made the biggest mistake at work... [story]. Anyone else ever done something like this?"
+    best_for: [authenticity, connection, relatability]
+  
+  poll_post:
+    structure:
+      - setup: "Context for decision"
+      - poll_options: "2-4 choices"
+      - engagement: "Comment why you chose that"
+    example: "Planning our next community event! What would you prefer? [Poll: Workshop / Networking / Social]. Comment why!"
+    best_for: [easy_engagement, decision_making, community_input]
+  
+  fill_in_blank:
+    structure:
+      - prompt: "Complete this sentence"
+      - example: "I'll start: [your answer]"
+      - encourage: "Your turn!"
+    example: "My morning routine isn't complete without ___. I'll start: coffee and a 10-minute walk. What about you?"
+    best_for: [high_participation, fun_engagement, community_bonding]
+  
+  user_spotlight:
+    structure:
+      - introduction: "Featuring community member"
+      - story: "Their achievement or contribution"
+      - appreciation: "Thank you message"
+      - encourage: "Show them some love"
+    example: "Community Spotlight: Meet Sarah! She's been an amazing contributor... [story]. Drop a ❤️ to show appreciation!"
+    best_for: [community_building, recognition, positive_culture]
+  
+  this_or_that:
+    structure:
+      - setup: "Choose between two options"
+      - options: "A or B with emojis"
+      - engage: "Defend your choice"
+    example: "Coffee ☕ or Tea 🍵? Comment your choice and why! (No judgment... okay maybe a little 😄)"
+    best_for: [quick_engagement, fun_debates, community_personality]
+
+engagement_tactics:
+  question_formulas:
+    - "What's your [superlative] [topic]?"
+    - "If you could [scenario], what would you [action]?"
+    - "What's one thing you wish you knew about [topic]?"
+    - "Hot take: [controversial opinion]. Agree or disagree?"
+    - "Fill in the blank: I can't live without ___"
+    - "This or that: [Option A] or [Option B]?"
+  
+  conversation_starters:
+    - share_unpopular_opinion: "Unpopular opinion: [take]. Change my mind!"
+    - ask_for_recommendations: "Need recommendations for [topic]. Go!"
+    - share_behind_scenes: "Here's what nobody tells you about [topic]..."
+    - celebrate_wins: "Small win today: [achievement]. What's yours?"
+    - ask_for_help: "Quick question for the community: [question]"
+    - share_failure: "I failed at [thing]. Here's what I learned..."
+  
+  engagement_boosters:
+    - respond_to_every_comment: "Shows you care"
+    - ask_follow_up_questions: "Deepens conversation"
+    - use_emojis_authentically: "Adds personality"
+    - tag_relevant_people: "Expands reach"
+    - pin_best_comment: "Highlights quality"
+    - go_live_occasionally: "Highest engagement"
+    - create_series: "Build anticipation"
+    - user_generated_content: "Community spotlight"
+
+quality_checklist:
+  before_posting:
+    - authentic_voice: "Sounds like real person?"
+    - engagement_prompt_clear: "Easy to participate?"
+    - value_provided: "Worth their time?"
+    - mobile_friendly: "Readable on phone?"
+    - visually_appealing: "Eye-catching?"
+    - community_appropriate: "Fits group culture?"
+    - no_spam: "Genuinely helpful?"
+    - timing_optimal: "Best time for audience?"
+    - grammar_perfect: "No typos?"
+    - inclusive_language: "Welcoming to all?"
+  
+  after_posting:
+    - respond_immediately: "First 30 minutes critical"
+    - engage_authentically: "Real conversations"
+    - monitor_sentiment: "Address concerns"
+    - encourage_discussion: "Ask follow-ups"
+    - appreciate_participation: "Thank commenters"
+    - document_insights: "What resonated?"
+
+success_criteria:
+  viral_post:
+    - reach: ">100,000"
+    - engagement_rate: ">10%"
+    - comments: ">500"
+    - shares: ">1,000"
+    - comment_depth: ">3 replies per thread"
+  
+  high_performing_post:
+    - reach: ">10,000"
+    - engagement_rate: ">5%"
+    - comments: ">100"
+    - shares: ">100"
+    - comment_depth: ">2 replies per thread"
+  
+  baseline_post:
+    - reach: ">1,000"
+    - engagement_rate: ">2%"
+    - comments: ">20"
+    - shares: ">10"
+    - comment_depth: ">1 reply per thread"
+
+community_building_strategies:
+  foster_belonging:
+    - use_inclusive_language: "We, us, our community"
+    - celebrate_members: "Regular spotlights"
+    - create_traditions: "Weekly themes or challenges"
+    - encourage_connections: "Tag someone who..."
+    - share_vulnerability: "Authentic stories"
+    - respond_personally: "Not generic replies"
+  
+  encourage_participation:
+    - lower_barriers: "Easy to engage"
+    - recognize_contributors: "Thank active members"
+    - ask_opinions: "Value their input"
+    - create_opportunities: "Challenges, contests"
+    - facilitate_introductions: "Welcome new members"
+    - build_anticipation: "Tease upcoming content"
+  
+  maintain_quality:
+    - set_clear_guidelines: "Community standards"
+    - moderate_consistently: "Fair enforcement"
+    - address_negativity: "Professional approach"
+    - encourage_positivity: "Supportive culture"
+    - lead_by_example: "Model behavior"
+    - evolve_with_community: "Listen and adapt"

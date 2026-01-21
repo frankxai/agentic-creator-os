@@ -1,0 +1,405 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-01-21",
+  "repository": "https://github.com/frankxai/agentic-creator-os",
+  "description": "Master skill registry for Agentic Creator OS",
+
+  "skills": {
+    "content-strategy": {
+      "version": "1.2.0",
+      "category": "creative",
+      "description": "Strategic content planning with calendar management and pillar mapping",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["content strategy", "content plan", "editorial calendar", "content pillar"],
+        "files": ["**/CONTENT_STRATEGY.md", "**/CONTENT_CALENDAR.md"],
+        "commands": ["/content-strategy", "/content-calendar"]
+      },
+      "exports": ["content_pillars", "calendar_schema", "publishing_workflow"]
+    },
+
+    "mcp-architecture": {
+      "version": "2.0.0",
+      "category": "technical",
+      "description": "Model Context Protocol server design patterns and best practices",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["mcp server", "model context protocol", "mcp tool", "mcp resource"],
+        "files": ["**/mcp-server*", "**/mcp.json"],
+        "commands": ["/mcp-architecture"]
+      },
+      "exports": ["server_patterns", "tool_schemas", "resource_patterns"]
+    },
+
+    "claude-sdk": {
+      "version": "1.5.0",
+      "category": "technical",
+      "description": "Claude Agent SDK patterns for building autonomous agents",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["claude sdk", "agent sdk", "anthropic sdk", "claude agent"],
+        "files": ["**/agent*.py", "**/agent*.ts"],
+        "commands": ["/claude-sdk"]
+      },
+      "exports": ["agent_patterns", "tool_use", "multi_turn"]
+    },
+
+    "langgraph-patterns": {
+      "version": "1.3.0",
+      "category": "technical",
+      "description": "LangGraph workflow patterns for agentic orchestration",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["langgraph", "langchain", "agent workflow", "state machine"],
+        "files": ["**/graph*.py", "**/workflow*.py"],
+        "commands": ["/langgraph-patterns"]
+      },
+      "exports": ["graph_patterns", "state_management", "multi_agent"]
+    },
+
+    "frankx-brand": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "FrankX brand guidelines, voice, and visual identity",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["frankx brand", "brand voice", "brand guidelines"],
+        "files": ["**/BRAND*.md", "**/brand/**"],
+        "commands": ["/frankx-brand"]
+      },
+      "exports": ["brand_voice", "color_palette", "typography"]
+    },
+
+    "suno-mastery": {
+      "version": "1.1.0",
+      "category": "creative",
+      "description": "Suno AI music generation with advanced prompt engineering",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["suno", "ai music", "music generation", "song creation"],
+        "files": ["**/suno*.md", "**/music/**"],
+        "commands": ["/suno-mastery", "/suno-prompt-architect"]
+      },
+      "exports": ["prompt_templates", "genre_guides", "frequency_mapping"]
+    },
+
+    "oci-services": {
+      "version": "1.0.0",
+      "category": "business",
+      "description": "Oracle Cloud Infrastructure services and architecture patterns",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["oci", "oracle cloud", "oci genai", "oracle ai"],
+        "files": ["**/oci*.md", "**/oracle/**"],
+        "commands": ["/oci-services"]
+      },
+      "exports": ["genai_patterns", "deployment_guides", "cost_optimization"]
+    },
+
+    "oracle-adk": {
+      "version": "1.0.0",
+      "category": "technical",
+      "description": "Oracle Agent Development Kit patterns and implementations",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["oci-services"],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["oracle adk", "agent development kit", "oracle agent"],
+        "files": ["**/adk*.py", "**/oracle_agent*"],
+        "commands": ["/oracle-adk"]
+      },
+      "exports": ["agent_templates", "tool_patterns", "deployment_configs"]
+    },
+
+    "7-pillars": {
+      "version": "1.0.0",
+      "category": "soulbook",
+      "description": "The 7 Pillars life transformation framework",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["7 pillars", "life pillars", "soulbook pillars", "transformation"],
+        "files": ["**/pillars/**", "**/soulbook/**"],
+        "commands": ["/soulbook"]
+      },
+      "exports": ["pillar_framework", "assessment_tools", "transformation_guides"]
+    },
+
+    "life-symphony": {
+      "version": "1.0.0",
+      "category": "soulbook",
+      "description": "Life Symphony orchestration and harmony framework",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["7-pillars"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["life symphony", "harmony", "life balance"],
+        "files": ["**/symphony/**"],
+        "commands": ["/life-symphony"]
+      },
+      "exports": ["harmony_assessment", "balance_tools"]
+    },
+
+    "golden-path": {
+      "version": "1.0.0",
+      "category": "soulbook",
+      "description": "Golden Path soul-aligned purpose discovery",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["7-pillars"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["golden path", "soul purpose", "life purpose"],
+        "files": ["**/golden-path/**"],
+        "commands": ["/golden-path"]
+      },
+      "exports": ["purpose_discovery", "path_planning"]
+    },
+
+    "workshop-building": {
+      "version": "1.0.0",
+      "category": "technical",
+      "description": "Interactive workshop creation and delivery patterns",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["content-strategy"],
+      "mcp": ["filesystem-mcp", "browser-mcp"],
+      "triggers": {
+        "keywords": ["workshop", "tutorial", "hands-on", "training"],
+        "files": ["**/workshops/**", "**/workshop*.md"],
+        "commands": ["/workshop-building"]
+      },
+      "exports": ["workshop_templates", "exercise_patterns", "delivery_guides"]
+    },
+
+    "security-auditor": {
+      "version": "1.0.0",
+      "category": "technical",
+      "description": "Security auditing and vulnerability assessment patterns",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["security", "audit", "vulnerability", "penetration"],
+        "files": ["**/security/**", "**/*.security.md"],
+        "commands": ["/security-audit"]
+      },
+      "exports": ["audit_checklists", "vulnerability_patterns", "remediation_guides"]
+    },
+
+    "daily-ops": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Daily operations and routine management workflows",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["content-strategy"],
+      "mcp": ["filesystem-mcp", "database-mcp"],
+      "triggers": {
+        "keywords": ["daily ops", "morning routine", "daily workflow"],
+        "files": ["**/daily/**", "**/routines/**"],
+        "commands": ["/daily-ops", "/frankx-daily-execution"]
+      },
+      "exports": ["routine_templates", "checklist_patterns"]
+    },
+
+    "publishing-factory": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "End-to-end content publishing pipeline with SEO and AEO",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["content-strategy", "frankx-brand"],
+      "mcp": ["filesystem-mcp", "browser-mcp"],
+      "triggers": {
+        "keywords": ["publish", "factory", "content pipeline", "seo"],
+        "files": ["**/publish/**", "**/factory/**"],
+        "commands": ["/factory", "/publish"]
+      },
+      "exports": ["publishing_workflow", "seo_checklist", "aeo_optimization"]
+    },
+
+    "creator-intelligence": {
+      "version": "1.0.0",
+      "category": "technical",
+      "description": "Personal Jarvis system for creator intelligence operations",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["content-strategy", "daily-ops"],
+      "mcp": ["filesystem-mcp", "database-mcp", "browser-mcp", "email-mcp"],
+      "triggers": {
+        "keywords": ["jarvis", "personal ai", "intelligence system", "creator os"],
+        "files": ["**/intelligence/**", "**/jarvis/**"],
+        "commands": ["/creator-intelligence-system", "/agentic-creator-os"]
+      },
+      "exports": ["system_architecture", "department_configs", "mcp_setup"]
+    },
+
+    "agentic-orchestration": {
+      "version": "1.0.0",
+      "category": "technical",
+      "description": "Multi-agent orchestration patterns and workflows",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["creator-intelligence"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["orchestration", "multi-agent", "agent coordination"],
+        "files": ["**/orchestration/**"],
+        "commands": ["/agentic-orchestration"]
+      },
+      "exports": ["orchestration_patterns", "handoff_protocols", "state_machines"]
+    }
+  },
+
+  "categories": {
+    "technical": [
+      "mcp-architecture",
+      "claude-sdk",
+      "langgraph-patterns",
+      "oracle-adk",
+      "workshop-building",
+      "security-auditor",
+      "creator-intelligence",
+      "agentic-orchestration"
+    ],
+    "creative": [
+      "content-strategy",
+      "frankx-brand",
+      "suno-mastery",
+      "daily-ops",
+      "publishing-factory"
+    ],
+    "business": [
+      "oci-services"
+    ],
+    "soulbook": [
+      "7-pillars",
+      "life-symphony",
+      "golden-path"
+    ]
+  },
+
+  "featured": [
+    "creator-intelligence",
+    "content-strategy",
+    "mcp-architecture",
+    "agentic-orchestration"
+  ],
+
+  "mcpServers": {
+    "filesystem-mcp": {
+      "description": "Local filesystem access for reading/writing project files",
+      "required": true,
+      "package": "@anthropic/mcp-filesystem"
+    },
+    "database-mcp": {
+      "description": "Database operations (SQLite, PostgreSQL, etc.)",
+      "required": false,
+      "package": "@frankx/mcp-database"
+    },
+    "browser-mcp": {
+      "description": "Browser automation for screenshots and testing",
+      "required": false,
+      "package": "@anthropic/mcp-browser"
+    },
+    "email-mcp": {
+      "description": "Email operations via Resend or SMTP",
+      "required": false,
+      "package": "@frankx/mcp-email"
+    },
+    "website-mcp": {
+      "description": "Website deployment and management",
+      "required": false,
+      "package": "@frankx/mcp-website"
+    },
+    "creator-mcp": {
+      "description": "Creator-specific operations (music, content, etc.)",
+      "required": false,
+      "package": "@frankx/mcp-creator"
+    }
+  },
+
+  "externalSources": {
+    "anthropic-cookbook": {
+      "repo": "anthropics/anthropic-cookbook",
+      "patterns": ["tool-use", "multi-turn", "function-calling"],
+      "enhances": ["claude-sdk", "mcp-architecture"]
+    },
+    "langgraph": {
+      "repo": "langchain-ai/langgraph",
+      "patterns": ["agent-workflows", "state-machines", "multi-agent"],
+      "enhances": ["langgraph-patterns", "agentic-orchestration"]
+    },
+    "mcp-servers": {
+      "repo": "modelcontextprotocol/servers",
+      "patterns": ["mcp-best-practices", "tool-schemas", "resource-patterns"],
+      "enhances": ["mcp-architecture"]
+    },
+    "vercel-ai": {
+      "repo": "vercel/ai",
+      "patterns": ["streaming", "edge-functions", "ui-components"],
+      "enhances": ["creator-intelligence"]
+    }
+  }
+}

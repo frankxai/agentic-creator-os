@@ -1,0 +1,159 @@
+name: web3-content-master
+department: marketing
+version: 1.0.0
+purpose: Master workflow that coordinates all Web3 content creation and distribution across platforms
+
+agents:
+  - name: Web3 Strategist
+    role: Overall Web3 content strategy
+  - name: Content Creator - NFT
+    role: NFT and collection content
+  - name: Content Creator - DeFi
+    role: DeFi and protocol content
+  - name: Content Creator - DAO
+    role: Governance and community content
+  - name: Content Creator - Utility
+    role: Use case and utility content
+  - name: Community Moderator
+    role: Web3 community engagement
+  - name: Analytics Tracker
+    role: Web3-specific metrics
+
+steps:
+  - name: Web3 Content Strategy
+    input:
+      - Project goals
+      - Target audience (builders, investors, users)
+      - Competitive landscape
+    actions:
+      - Define content pillars (NFT, DeFi, DAO, Utility)
+      - Set platform strategy (Twitter, LinkedIn, FarCaster, YouTube)
+      - Create content calendar
+      - Define voice and tone
+      - Set KPIs
+    output: Web3 content strategy document
+
+  - name: Content Planning
+    input:
+      - Strategy document
+      - Upcoming events (airdrops, launches, governance votes)
+      - Trend topics
+    actions:
+      - Plan monthly content themes
+      - Create weekly content calendar
+      - Align content with project milestones
+      - Plan reactive content for trends
+      - Schedule educational series
+    output: Content calendar and planning docs
+
+  - name: NFT Content Creation
+    input:
+      - Collection/fractional content needs
+      - Roadmap updates
+      - Community features
+    actions:
+      - Create collection announcement content
+      - Design roadmap updates
+      - Build holder benefit announcements
+      - Create reveal content
+      - Design anniversary/ milestone content
+    output: NFT content package
+
+  - name: DeFi Content Creation
+    input:
+      - Protocol updates
+      - Feature launches
+      - Educational needs
+    actions:
+      - Create feature announcement content
+      - Design tutorial content
+      - Build TVL/metrics highlights
+      - Create protocol comparison content
+      - Design security/education content
+    output: DeFi content package
+
+  - name: DAO Content Creation
+    input:
+      - Governance proposals
+      - Community updates
+      - Token utilities
+    actions:
+      - Create proposal explanations
+      - Design voting guide content
+      - Build community participation content
+      - Create delegate recruitment content
+      - Design governance education content
+    output: DAO content package
+
+  - name: Multi-Platform Distribution
+    input:
+      - All content packages
+    actions:
+      - Adapt for Twitter (threads, single posts)
+      - Adapt for LinkedIn (articles, posts)
+      - Adapt for FarCaster (casts, threads)
+      - Adapt for YouTube (videos, shorts)
+      - Adapt for newsletters
+    output: Multi-platform content distribution
+
+  - name: Community Engagement
+    input:
+      - All platforms
+      - Community feedback
+    actions:
+      - Respond to questions
+      - Address concerns
+      - Celebrate community members
+      - Facilitate discussions
+      - Gather feedback for improvement
+    output: Community engagement report
+
+  - name: Performance Analytics
+    input:
+      - Content performance data
+      - Community growth metrics
+      - Engagement rates
+    actions:
+      - Track content performance
+      - Analyze engagement patterns
+      - Measure community growth
+      - Calculate ROI of content types
+      - Generate improvement recommendations
+    output: Performance analytics report
+
+metrics:
+  - Content pieces created
+  - Platform reach
+  - Engagement rate
+  - Community growth
+  - Sentiment score
+  - Educational completion
+  - Conversion metrics
+
+config:
+  content_pillars:
+    - nft_collections
+    - defi_protocols
+    - dao_governance
+    - crypto_education
+    - web3_news
+    - community_features
+  platforms:
+    twitter:
+      content_types: ["threads", "single posts", "replies"]
+      frequency: "3-5 daily"
+    linkedin:
+      content_types: ["articles", "posts"]
+      frequency: "2-3 weekly"
+    farcaster:
+      content_types: ["casts", "threads", "channels"]
+      frequency: "5-10 daily"
+    youtube:
+      content_types: ["videos", "shorts"]
+      frequency: "1-2 weekly"
+  voice_tone:
+    - knowledgeable
+    - transparent
+    - community_first
+    - educational
+    - balanced (bull/bear)

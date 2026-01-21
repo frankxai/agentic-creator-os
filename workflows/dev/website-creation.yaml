@@ -1,0 +1,111 @@
+name: website-creation
+department: dev
+version: 1.0.0
+purpose: Create and deploy a production-ready website from scratch
+
+agents:
+  - name: Frontend Agent
+    role: Creates UI and pages
+  - name: Backend Agent
+    role: Sets up APIs and database
+  - name: DevOps Agent
+    role: Configures deployment
+  - name: QA Agent
+    role: Tests everything
+  - name: DevOps Agent
+    role: Deploys to production
+
+steps:
+  - name: Project Setup
+    input:
+      - Framework
+      - Project name
+      - Template
+    actions:
+      - Initialize git repository
+      - Create project with framework
+      - Set up TypeScript
+      - Configure Tailwind CSS
+      - Set up shadcn/ui
+      - Initialize testing framework
+    output: Project scaffolded and configured
+
+  - name: Core Pages
+    input:
+      - Page requirements
+      - Sitemap
+    actions:
+      - Create homepage
+      - Create about page
+      - Create contact page
+      - Create features or benefits page
+      - Set up navigation
+      - Configure routing
+    output: Core pages created
+
+  - name: Database and Backend
+    input:
+      - Data models
+      - API requirements
+    actions:
+      - Set up database schema
+      - Create CRUD API endpoints
+      - Add authentication if needed
+      - Set up environment variables
+      - Configure database connection
+    output: Backend ready
+
+  - name: SEO and Metadata
+    input:
+      - SEO keywords
+      - Metadata requirements
+    actions:
+      - Add meta tags
+      - Configure Open Graph
+      - Set up sitemaps
+      - Add robots.txt
+      - Configure canonical URLs
+      - Set up schema markup
+    output: SEO configured
+
+  - name: Testing
+    input:
+      - Test requirements
+      - Coverage target
+    actions:
+      - Write unit tests
+      - Create integration tests
+      - Set up E2E tests
+      - Verify responsive design
+      - Test accessibility
+      - Check performance
+    output: All tests passing
+
+  - name: Deployment
+    input:
+      - Platform
+      - Environment
+      - Domain
+    actions:
+      - Connect to hosting platform
+      - Configure environment variables
+      - Set up preview deployments
+      - Deploy to staging
+      - Run final tests
+      - Deploy to production
+      - Configure custom domain if provided
+    output: Live website
+
+metrics:
+  - Time to deploy
+  - Build time
+  - Test coverage
+  - Page load speed
+  - Deployment success rate
+
+config:
+  framework: nextjs
+  language: typescript
+  styling: tailwind
+  testing: vitest
+  deployment: vercel

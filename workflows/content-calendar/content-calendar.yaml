@@ -1,0 +1,72 @@
+name: Content Calendar Management
+slug: content-calendar
+description: |
+  Plan, organize, and manage content publishing schedule across all platforms.
+  Includes weekly planning, monthly themes, and cross-platform coordination.
+triggers:
+  - "skill:content, plan content calendar"
+  - "skill:content, schedule content"
+  - "skill:content, create weekly plan"
+  - "/content-calendar"
+  - "plan my content"
+agents:
+  - content-manager
+  - social-coordinator
+  - calendar-analyst
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - calendar-mcp
+phases:
+  1:
+    name: Calendar Audit
+    description: Review current calendar and past performance
+    steps:
+      - Export last 30 days of published content
+      - Analyze engagement metrics by day and time
+      - Identify top-performing content themes
+      - Review scheduled content for next 2 weeks
+      - Output: calendar-audit.json
+    
+  2:
+    name: Monthly Theme Definition
+    description: Set theme and focus for upcoming month
+    steps:
+      - Align with business goals and campaigns
+      - Define monthly theme and key messages
+      - Identify 3-4 content pillars to emphasize
+      - Set monthly content volume targets
+      - Output: monthly-theme.json
+    
+  3:
+    name: Weekly Planning
+    description: Create detailed weekly content plan
+    steps:
+      - Assign content types to each day (diversify)
+      - Schedule optimal posting times based on analytics
+      - Plan content pillars rotation across week
+      - Coordinate cross-platform content distribution
+      - Output: weekly-plan.json
+    
+  4:
+    name: Content Briefs
+    description: Create briefs for each scheduled content piece
+    steps:
+      - Write title/hook for each piece
+      - Define key message and CTA
+      - Assign format and estimated length
+      - Note any assets needed
+      - Output: content-briefs.json
+    
+  5:
+    name: Scheduling
+    description: Add all content to publishing queue
+    steps:
+      - Create drafts in each platform's scheduler
+      - Set publishing dates and times
+      - Add hashtags and mentions
+      - Configure tracking links and UTM parameters
+      - Output: scheduled-content.json
+
+output_dir: outputs/content-calendar
+version: "2.0.0"

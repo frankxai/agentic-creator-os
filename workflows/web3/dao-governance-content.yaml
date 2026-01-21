@@ -1,0 +1,128 @@
+name: dao-governance-content
+department: marketing
+version: 1.0.0
+purpose: Create comprehensive DAO governance content - proposals, voting education, and community participation
+
+agents:
+  - name: DAO Specialist
+    role: DAO operations and governance expertise
+  - name: Proposal Writer
+    role: Clear proposal drafting
+  - name: Community Educator
+    role: Governance education
+  - name: Tokenholder Engagement
+    role: Participation encouragement
+
+steps:
+  - name: Proposal Ideation
+    input:
+      - DAO objectives
+      - Community suggestions
+      - Budget availability
+      - Technical feasibility
+    actions:
+      - Collect community input and suggestions
+      - Research similar DAOs' approaches
+      - Identify high-impact opportunities
+      - Prioritize proposals by impact
+      - Create proposal backlog
+    output: Prioritized proposal backlog
+
+  - name: Proposal Development
+    input:
+      - Selected proposal topic
+      - DAO governance structure
+      - Budget parameters
+    actions:
+      - Write clear problem statement
+      - Define solution and implementation
+      - Create timeline and milestones
+      - Detail budget allocation
+      - Identify risks and mitigations
+      - Define success metrics
+    output: Draft proposal document
+
+  - name: Proposal Refinement
+    input:
+      - Draft proposal
+      - Stakeholder feedback
+      - Technical review
+    actions:
+      - Simplify complex language
+      - Add concrete examples
+      - Strengthen arguments
+      - Address potential concerns
+      - Create visual summary
+      - Get legal/compliance review
+    output: Final proposal ready for submission
+
+  - name: Community Education
+    input:
+      - Final proposal
+      - Target audience (new vs experienced tokenholders)
+    actions:
+      - Create executive summary (1-min read)
+      - Write detailed explanation (5-min read)
+      - Create visual diagrams
+      - Record video explanation
+      - Build FAQ document
+      - Create voting guide
+    output: Complete education package
+
+  - name: Voting Campaign
+    input:
+      - Education materials
+      - Voting timeline
+    actions:
+      - Announce proposal vote
+      - Create urgency around participation
+      - Host community discussion
+      - Address questions in real-time
+      - Encourage delegation
+      - Celebrate participation
+    output: Voting engagement report
+
+  - name: Post-Vote Communication
+    input:
+      - Vote results
+      - Implementation requirements
+    actions:
+      - Announce results clearly
+      - Explain next steps if passed
+      - Acknowledge feedback if failed
+      - Create implementation timeline
+      - Set up progress updates
+    output: Post-vote communication plan
+
+  - name: Ongoing Governance Content
+    input:
+      - DAO operations
+      - Tokenholder interests
+    actions:
+      - Create regular governance updates
+      - Explain treasury decisions
+      - Profile active community members
+      - Share governance best practices
+      - Encourage delegate participation
+    output: Monthly governance content calendar
+
+metrics:
+  - Proposal submission rate
+  - Community participation in voting
+  - Delegate participation rate
+  - Proposal pass rate
+  - Time to implementation
+  - Tokenholder satisfaction
+
+config:
+  proposal_types:
+    - treasury_allocation
+    - parameter_change
+    - partnership
+    - tokenomics
+    - governance_structure
+    - ecosystem_fund
+  voting_thresholds:
+    - quorum_requirement: "X% of circulating supply"
+    - supermajority: "Y% for parameter changes"
+    - delegated_voting: "Enabled/Disabled"

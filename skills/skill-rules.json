@@ -1,0 +1,166 @@
+{
+  "version": "1.0.0",
+  "description": "Auto-activation rules for Agentic Creator OS skills",
+  "skills": {
+    "content": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "high",
+      "description": "Content creation and marketing",
+      "promptTriggers": {
+        "keywords": [
+          "content",
+          "blog", "article", "post",
+          "social media", "twitter", "x", "linkedin", "instagram", "facebook",
+          "newsletter", "email",
+          "video", "script", "podcast",
+          "seo", "keyword",
+          "thread", "tweet",
+          "content strategy", "content calendar"
+        ],
+        "intentPatterns": [
+          "write.*post|create.*content|make.*content",
+          "draft.*blog|write.*article",
+          "skill:content"
+        ]
+      },
+      "fileTriggers": {
+        "pathPatterns": ["**/*.md", "**/content/**", "**/blog/**", "**/posts/**"]
+      }
+    },
+    "marketing": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Marketing and SEO",
+      "promptTriggers": {
+        "keywords": [
+          "marketing", "campaign", "advertising",
+          "seo", "analytics", "traffic",
+          "conversion", "audience",
+          "ads", "ppc", "social ads",
+          "content marketing"
+        ],
+        "intentPatterns": [
+          "seo.*audit|run.*audit|marketing.*plan"
+        ]
+      }
+    },
+    "dev": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Development and coding",
+      "promptTriggers": {
+        "keywords": [
+          "code", "develop", "build", "create website",
+          "react", "nextjs", "typescript", "javascript",
+          "api", "database", "backend", "frontend",
+          "deploy", "debug", "fix bug"
+        ]
+      }
+    },
+    "design": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Design and visual creation",
+      "promptTriggers": {
+        "keywords": [
+          "design", "visual", "graphic",
+          "logo", "branding", "template",
+          "ui", "ux", "interface",
+          "image", "art", "creative"
+        ]
+      }
+    },
+    "business": {
+      "type": "domain",
+      "enforcement": "suggest",
+      "priority": "medium",
+      "description": "Business and project management",
+      "promptTriggers": {
+        "keywords": [
+          "client", "customer", "crm", "invoice",
+          "project", "budget", "revenue", "finance",
+          "onboarding", "contract", "proposal"
+        ]
+      }
+    }
+  },
+  "agents": {
+    "content-writer": {
+      "type": "workflow",
+      "activation": "suggest",
+      "priority": "high",
+      "description": "Creates blog posts, articles, and long-form content",
+      "promptTriggers": {
+        "keywords": ["write blog", "write article", "create post", "draft content"]
+      }
+    },
+    "social-media-manager": {
+      "type": "workflow",
+      "activation": "suggest",
+      "priority": "high",
+      "description": "Manages social media content across platforms",
+      "promptTriggers": {
+        "keywords": [
+          "twitter thread", "linkedin post", "instagram",
+          "facebook post", "social media",
+          "x content", "tweet", "cast", "farcaster"
+        ],
+        "intentPatterns": [
+          "create.*twitter|create.*linkedin|post.*social",
+          "skill:content.*x|skill:content.*linkedin|skill:content.*social"
+        ]
+      }
+    },
+    "content-strategist": {
+      "type": "workflow",
+      "activation": "suggest",
+      "priority": "high",
+      "description": "Develops content strategy and planning",
+      "promptTriggers": {
+        "keywords": [
+          "content strategy", "content plan", "content calendar",
+          "content pillars", "audience analysis"
+        ],
+        "intentPatterns": [
+          "create.*strategy|develop.*plan|plan.*content"
+        ]
+      }
+    }
+  },
+  "defaultBehavior": {
+    "autoActivate": false,
+    "suggestSkills": true
+  },
+  "contextPatterns": {
+    "fileExtensions": {
+      ".md": ["content", "dev"],
+      ".tsx": ["dev"],
+      ".ts": ["dev"],
+      ".js": ["dev"],
+      ".sql": ["dev", "database"],
+      ".json": ["dev"],
+      ".html": ["dev", "marketing"],
+      ".css": ["dev", "design"],
+      ".svg": ["design"],
+      ".png": ["design"],
+      ".jpg": ["design"],
+      ".mdx": ["content", "dev"]
+    },
+    "directories": {
+      "content/": ["content"],
+      "blog/": ["content", "marketing"],
+      "marketing/": ["marketing"],
+      "design/": ["design"],
+      "src/": ["dev"],
+      "api/": ["dev"],
+      "pages/": ["dev"],
+      "components/": ["dev", "design"],
+      "lib/": ["dev"],
+      "workflows/": ["content"]
+    }
+  }
+}

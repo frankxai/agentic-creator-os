@@ -1,0 +1,32 @@
+name: Business Department
+description: |
+  Operations and business management team. Handles CRM, invoicing,
+  financial tracking, client onboarding, and legal documents.
+  Automates all business operations.
+agents:
+  - business-lead
+  - crm-agent
+  - finance-agent
+  - operations-agent
+  - legal-agent
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - email-mcp
+  - creator-mcp
+examples:
+  - "Add new client to CRM"
+  - "Create invoice for [client]"
+  - "How much did I earn last month?"
+  - "Onboard new client [name]"
+  - "Generate financial report for Q4"
+  - "Track expense: $500 for software"
+workflows:
+  - business/client-onboarding.yaml
+  - business/invoice-workflow.yaml
+  - business/financial-review.yaml
+  - business/lead-followup.yaml
+configuration:
+  invoice_terms: 30
+  currency: USD
+  reminder_days: [7, 3, 1]

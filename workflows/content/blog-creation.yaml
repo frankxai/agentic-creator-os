@@ -1,0 +1,107 @@
+name: blog-creation
+department: content
+version: 1.0.0
+purpose: Create a professional, SEO-optimized blog post from idea to publication
+
+agents:
+  - name: Researcher
+    role: Gathers information
+  - name: Writer
+    role: Creates initial draft
+  - name: Editor
+    role: Reviews and polishes
+  - name: SEO Specialist
+    role: Optimizes for search
+  - name: Publisher
+    role: Publishes to website
+
+steps:
+  - name: Research
+    input:
+      - Topic
+      - Target keywords
+      - Audience
+    actions:
+      - Search for current information on topic
+      - Identify key points and statistics
+      - Find competitor content for reference
+      - Gather source URLs for citations
+    output: Research brief with key points and sources
+
+  - name: Outline
+    input:
+      - Research brief
+      - Target length
+      - Structure
+    actions:
+      - Create article outline
+      - Define headings and subheadings
+      - Identify key sections
+      - Plan word count per section
+    output: Detailed outline with word counts
+
+  - name: Draft
+    input:
+      - Outline
+      - Tone
+      - Target audience
+    actions:
+      - Write introduction with hook
+      - Develop each section with depth
+      - Include examples and statistics
+      - Write compelling conclusion
+      - Add call-to-action
+    output: First draft (aim for target word count)
+
+  - name: Edit
+    input:
+      - First draft
+      - Style guide
+      - Brand voice
+    actions:
+      - Review for clarity and flow
+      - Improve sentence structure
+      - Fix grammar and spelling
+      - Ensure brand voice consistency
+      - Verify factual accuracy
+    output: Polished second draft
+
+  - name: SEO Optimization
+    input:
+      - Polished draft
+      - Target keywords
+    actions:
+      - Optimize title for SEO
+      - Add meta description
+      - Include keywords naturally
+      - Optimize headings structure
+      - Add internal and external links
+      - Improve readability score
+      - Add featured image suggestion
+    output: SEO-optimized final draft
+
+  - name: Publish
+    input:
+      - Final draft
+      - Publication settings
+    actions:
+      - Format for CMS
+      - Add featured image
+      - Set category and tags
+      - Schedule or publish
+      - Add to content calendar
+      - Notify relevant channels
+    output: Live published blog post
+
+metrics:
+  - Time to complete
+  - Word count achieved
+  - SEO score before and after
+  - Readability score
+  - Publishing status
+
+config:
+  default_length: 1500
+  seo_optimization: true
+  publish_immediately: false
+  research_depth: medium

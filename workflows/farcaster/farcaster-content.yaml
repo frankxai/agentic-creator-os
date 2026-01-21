@@ -1,0 +1,72 @@
+name: FarCaster Content Creation
+slug: farcaster-content
+description: |
+  Create casts and threads for FarCaster/Warpcast decentralized social.
+  Optimized for the web3 community and decentralized social dynamics.
+triggers:
+  - "skill:content, create farcaster cast"
+  - "skill:content, farcaster content"
+  - "skill:content, warpcast post"
+  - "/farcaster-content"
+  - "create a cast about"
+agents:
+  - farcaster-writer
+  - web3-specialist
+  - community-engager
+tools:
+  - farcaster-mcp
+  - filesystem-mcp
+phases:
+  1:
+    name: Channel Strategy
+    description: Select appropriate channels
+    steps:
+      - Identify relevant channels (/ai, /builders, /crypto, etc.)
+      - Research channel-specific norms
+      - Define engagement strategy
+      - Plan cast type (short cast, thread, poll)
+      - Output: channel-strategy.json
+    
+  2:
+    name: Content Creation
+    description: Write FarCaster-optimized content
+    steps:
+      - Write hook (attention-grabbing, no clickbait)
+      - Add substantive content (avoid twitter dumps)
+      - Include web3-native language and references
+      - Add relevant channel tags
+      - Output: cast-draft.md
+    
+  3:
+    name: Thread Development
+    description: Create multi-cast threads
+    steps:
+      - Structure thread for 2-10 casts
+      - Ensure each cast stands alone
+      - Add value in every cast
+      - End with clear CTA
+      - Output: thread-casts.json
+    
+  4:
+    name: Engagement Elements
+    description: Add engagement features
+    steps:
+      - Create polls if relevant
+      - Design frames for interactivity
+      - Plan replies and engagement strategy
+      - Output: engagement-elements.json
+    
+  5:
+    name: Publishing
+    description: Publish to FarCaster
+    steps:
+      - Create casts with channel tags
+      - Add polls/frames if designed
+      - Schedule or publish immediately
+      - Prepare engagement replies
+      - Output: published-casts.json
+
+output_dir: outputs/farcaster-content
+version: "2.0.0"
+templates:
+  - farcaster-cast-template.md

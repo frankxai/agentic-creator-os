@@ -1,0 +1,155 @@
+name: cross-platform-distribution
+department: marketing
+version: 1.0.0
+purpose: Distribute a single piece of content across all major social media platforms with platform-specific optimization
+
+agents:
+  - name: Content Analyst
+    role: Analyzes content and determines platform fit
+  - name: Platform Writer - Twitter
+    role: Adapts content for Twitter/X
+  - name: Platform Writer - LinkedIn
+    role: Adapts content for LinkedIn
+  - name: Platform Writer - Instagram
+    role: Adapts content for Instagram
+  - name: Platform Writer - Facebook
+    role: Adapts content for Facebook
+  - name: Platform Writer - TikTok
+    role: Adapts content for TikTok
+  - name: Platform Writer - YouTube
+    role: Adapts content for YouTube
+  - name: Platform Writer - FarCaster
+    role: Adapts content for FarCaster
+  - name: Scheduler
+    role: Schedules posts for optimal timing
+
+steps:
+  - name: Content Analysis
+    input:
+      - Original content (blog, video, podcast, etc.)
+      - Target audience demographics
+      - Campaign goals
+    actions:
+      - Analyze content structure and key points
+      - Identify quotable insights
+      - Extract visual opportunities
+      - Determine hashtag opportunities
+      - Research current trends
+    output: Content analysis brief with key talking points
+
+  - name: Platform Adaptation - Twitter
+    input:
+      - Key talking points
+      - Thread structure preference (numbered, narrative, list)
+      - Hashtag strategy
+    actions:
+      - Create attention hook
+      - Break content into 5-10 tweets
+      - Add compelling CTAs
+      - Suggest reply starters
+      - Generate hashtags
+    output: Twitter thread (5-10 tweets) with media suggestions
+
+  - name: Platform Adaptation - LinkedIn
+    input:
+      - Key talking points
+      - Professional tone requirements
+      - Long-form vs short-form preference
+    actions:
+      - Write professional introduction
+      - Expand key insights with examples
+      - Add industry context
+      - Create discussion questions
+      - Format with strategic whitespace
+      - Add relevant hashtags
+    output: LinkedIn post (800-1500 characters) with media
+
+  - name: Platform Adaptation - Instagram
+    input:
+      - Visual content availability
+      - Carousel vs single post preference
+    actions:
+      - Write hook (125 characters max)
+      - Create caption with story
+      - Generate 5-10 slide carousel outline
+      - Add swipe-able CTA
+      - Create hashtag sets (5-10 tags)
+    output: Instagram post + carousel outline with visuals
+
+  - name: Platform Adaptation - Facebook
+    input:
+      - Community focus requirements
+      - Engagement hook type
+    actions:
+      - Write conversational post
+      - Add question or poll
+      - Create share incentive
+      - Add relevant groups
+    output: Facebook post optimized for engagement
+
+  - name: Platform Adaptation - TikTok
+    input:
+      - Video content available
+      - Trending sound preference
+    actions:
+      - Create 3 hook variations (3 seconds each)
+      - Write script for 30-60 seconds
+      - Add text overlay suggestions
+      - Create call-to-action
+      - Suggest trending sounds
+    output: TikTok script (3 hooks, main script, CTA)
+
+  - name: Platform Adaptation - YouTube
+    input:
+      - Video length available
+      - Shorts vs long-form
+    actions:
+      - Create title variations
+      - Write description with timestamps
+      - Add chapters outline
+      - Generate tags
+      - Create end screen elements
+    output: YouTube metadata (title, description, tags, chapters)
+
+  - name: Platform Adaptation - FarCaster
+    input:
+      - Web3-native content relevance
+      - Channel selection
+    actions:
+      - Write cast (320 characters max)
+      - Add embedded media
+      - Suggest recast strategy
+      - Create thread if needed
+    output: FarCaster cast with recast plan
+
+  - name: Scheduling Optimization
+    input:
+      - All platform content
+      - Target audience time zones
+      - Historical engagement data
+    actions:
+      - Research optimal posting times
+      - Create posting schedule
+      - Generate content calendar
+      - Set up tracking links
+    output: Content calendar with posting schedule
+
+metrics:
+  - Content pieces created (8 platforms)
+  - Character counts per platform
+  - Hashtag usage
+  - Scheduled posts count
+  - Cross-platform engagement rate
+
+config:
+  platforms:
+    - twitter
+    - linkedin
+    - instagram
+    - facebook
+    - tiktok
+    - youtube
+    - farcaster
+  default_hashtag_count: 5
+  thread_max_tweets: 10
+  include_tracking: true

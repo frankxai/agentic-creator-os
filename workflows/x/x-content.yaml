@@ -1,0 +1,77 @@
+name: X/Twitter Content Creation
+slug: x-content
+description: |
+  Create tweets, threads, and engagement content for X/Twitter.
+  Optimized for viral reach, engagement, and community building.
+triggers:
+  - "skill:content, create tweet"
+  - "skill:content, write twitter thread"
+  - "skill:content, post on x"
+  - "/x-content"
+  - "create a twitter thread about"
+agents:
+  - twitter-writer
+  - viral-strategist
+  - community-manager
+tools:
+  - twitter-mcp
+  - filesystem-mcp
+  - browser-mcp
+phases:
+  1:
+    name: Tweet/Thread Planning
+    description: Plan content structure and format
+    steps:
+      - Define content goal (engagement, reach, conversions)
+      - Choose format: single tweet, thread, or poll
+      - Research trending topics and hashtags
+      - Plan hook and key messages
+      - Output: content-plan.json
+    
+  2:
+    name: Hook Creation
+    description: Write attention-grabbing opening
+    steps:
+      - Generate 3-5 hook options
+      - Test hooks against viral patterns
+      - Select best hook based on goal
+      - Output: hooks.json
+    
+  3:
+    name: Content Drafting
+    description: Write full content
+    steps:
+      - Write opening tweet with hook
+      - Draft supporting tweets (3-10 depending on thread length)
+      - Include tweets with images/gifs/videos
+      - Write conclusion with CTA
+      - Output: thread-draft.md
+    
+  4:
+    name: Optimization
+    description: Optimize for X algorithm
+    steps:
+      - Add relevant hashtags (1-2 per tweet)
+      - Include 1-2 engagement tweets (question/poll)
+      - Add mentions if relevant
+      - Optimize for 280 character limit
+      - Output: optimized-thread.md
+    
+  5:
+    name: Publishing
+    description: Schedule or publish
+    steps:
+      - Create thread in thread reader format
+      - Schedule tweets or publish immediately
+      - Add media if needed
+      - Prepare engagement replies
+      - Output: scheduled-content.json
+
+output_dir: outputs/x-content
+version: "2.0.0"
+templates:
+  - twitter-thread-template.md
+  - twitter-thread-expert.md
+  - twitter-thread-storytelling.md
+  - twitter-thread-howto.md
+  - twitter-thread-listicle.md

@@ -1,0 +1,61 @@
+{
+  "name": "Demo Project",
+  "slug": "demo-project",
+  "version": "1.0.0",
+  "brand": {
+    "name": "Demo Brand",
+    "voice": {
+      "tone": "friendly",
+      "personality": [
+        "approachable",
+        "knowledgeable",
+        "enthusiastic"
+      ],
+      "keywords": [
+        "tutorial",
+        "learn",
+        "easy",
+        "step-by-step"
+      ],
+      "avoidKeywords": [
+        "complicated",
+        "difficult",
+        "hard"
+      ]
+    },
+    "colors": {
+      "primary": "#10b981",
+      "secondary": "#f59e0b",
+      "accent": "#ef4444"
+    }
+  },
+  "directories": {
+    "workflows": "workflows",
+    "templates": "templates",
+    "skills": "skills",
+    "mcpServers": "mcp-servers"
+  },
+  "integrations": {
+    "opencode": true,
+    "claudeCode": true,
+    "gemini": false
+  },
+  "skills": {
+    "enabled": [
+      "content",
+      "marketing"
+    ],
+    "custom": []
+  },
+  "workflows": {
+    "enabled": [
+      "social-media"
+    ],
+    "custom": []
+  },
+  "evaluation": {
+    "enabled": true,
+    "strictMode": false,
+    "benchmarkAgainst": "industry-average"
+  }
+}

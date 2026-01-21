@@ -1,0 +1,76 @@
+name: LinkedIn Article Creation
+slug: linkedin-article
+description: |
+  Create long-form thought leadership articles for LinkedIn.
+  Optimized for professional engagement, SEO, and thought leadership.
+triggers:
+  - "skill:content, write linkedin article"
+  - "skill:content, create linkedin post"
+  - "skill:content, linkedin thought leadership"
+  - "/linkedin-content-article"
+  - "write a linkedin article about"
+agents:
+  - linkedin-writer
+  - editor
+  - seo-specialist
+tools:
+  - linkedin-mcp
+  - filesystem-mcp
+  - browser-mcp
+phases:
+  1:
+    name: Topic Research
+    description: Research and validate article topic
+    steps:
+      - Identify trending topics in industry
+      - Analyze competitor LinkedIn articles
+      - Validate audience interest and search volume
+      - Define unique angle and hook
+      - Output: topic-research.json
+    
+  2:
+    name: Structure Planning
+    description: Plan article structure and key points
+    steps:
+      - Choose article type (how-to, thought leadership, case study, etc.)
+      - Define main sections and subsections
+      - Plan introduction hook (first 2-3 lines critical)
+      - Outline key takeaways and actionable insights
+      - Output: article-outline.json
+    
+  3:
+    name: Drafting
+    description: Write the full article
+    steps:
+      - Write compelling hook (attention-grabbing first lines)
+      - Establish credibility and context
+      - Deliver core value with actionable insights
+      - Include personal stories and examples
+      - End with clear takeaways and CTA
+      - Output: article-draft.md
+    
+  4:
+    name: Optimization
+    description: Optimize for LinkedIn algorithm and engagement
+    steps:
+      - Add line breaks for readability (short paragraphs)
+      - Include relevant hashtags (3-5 targeted)
+      - Add bold text for key points
+      - Create custom thumbnail image suggestion
+      - Output: optimized-article.md
+    
+  5:
+    name: Publishing
+    description: Schedule or publish the article
+    steps:
+      - Create draft in LinkedIn
+      - Add featured image
+      - Write custom intro for distribution
+      - Schedule for optimal engagement time
+      - Output: published-article.json
+
+output_dir: outputs/linkedin-article
+version: "2.0.0"
+templates:
+  - linkedin-thought-leadership.md
+  - linkedin-career-lesson.md

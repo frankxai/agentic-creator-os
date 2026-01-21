@@ -1,0 +1,72 @@
+name: Content Strategy Development
+slug: content-strategy
+description: |
+  Develop comprehensive content strategy including audience analysis,
+  content pillars, competitive positioning, and strategic roadmap.
+triggers:
+  - "skill:content, create content strategy"
+  - "skill:content, develop content plan"
+  - "skill:content, strategy for [platform/topic]"
+  - "/content-strategy"
+  - "I need a content strategy"
+agents:
+  - content-strategist
+  - audience-analyst
+  - competitive-analyst
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - browser-mcp
+phases:
+  1:
+    name: Audience Analysis
+    description: Identify and analyze target audience segments
+    steps:
+      - Research current audience demographics and psychographics
+      - Identify pain points, desires, and content consumption patterns
+      - Map audience journey and content needs at each stage
+      - Create audience personas with content preferences
+      - Output: audience-personas.json
+    
+  2:
+    name: Content Pillars
+    description: Define core content themes and categories
+    steps:
+      - Identify 3-5 core themes aligned with brand voice
+      - Develop content pillar descriptions and guidelines
+      - Create topic clusters under each pillar
+      - Define pillar-specific formats and frequencies
+      - Output: content-pillars.json
+    
+  3:
+    name: Competitive Analysis
+    description: Analyze competitor content strategies
+    steps:
+      - Identify 5-10 key competitors
+      - Analyze their top-performing content
+      - Identify content gaps and opportunities
+      - Develop differentiation strategy
+      - Output: competitive-analysis.json
+    
+  4:
+    name: Strategic Roadmap
+    description: Create actionable content calendar and roadmap
+    steps:
+      - Define quarterly themes and campaigns
+      - Create monthly content pillars rotation
+      - Plan weekly content types and formats
+      - Set KPIs and success metrics
+      - Output: content-roadmap.json
+    
+  5:
+    name: Implementation Plan
+    description: Create execution guidelines and templates
+    steps:
+      - Assign content types to each pillar
+      - Create template library for each format
+      - Define workflow and approval process
+      - Set up tracking and reporting dashboards
+      - Output: implementation-guide.md
+
+output_dir: outputs/content-strategy
+version: "2.0.0"

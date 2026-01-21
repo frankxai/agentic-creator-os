@@ -1,265 +1,405 @@
 # Agentic Creator OS
+**The Operating System for Golden Age Creators**
 
-**Transform from overwhelmed creator to AI-empowered artist.**
+[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)]()
+[![Skills](https://img.shields.io/badge/skills-62-green.svg)]()
+[![Agents](https://img.shields.io/badge/agents-9-purple.svg)]()
+[![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 
-A configuration-based framework for building personalized AI agent systems. Define your voice once, use it everywhere—Claude Code, OpenCode, Cursor, and beyond.
+---
+
+## What Is Agentic Creator OS?
+
+Agentic Creator OS is a **superintelligent operating system for generative creators** - a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 62 specialized skills, 9 intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
+
+> **Philosophy**: Technology that amplifies creative expression, not replaces it.
+
+```
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                      AGENTIC CREATOR OS v3.0                                  │
+│                                                                               │
+│         ┌─────────────────────────────────────────────────────┐              │
+│         │              STARLIGHT ORCHESTRATOR                  │              │
+│         │         (Meta-Intelligence Coordinator)              │              │
+│         └───────────────────────┬─────────────────────────────┘              │
+│                                 │                                             │
+│    ┌────────────────────────────┼────────────────────────────┐               │
+│    │                            │                            │               │
+│    ▼                            ▼                            ▼               │
+│ ┌─────────┐               ┌─────────┐               ┌─────────┐             │
+│ │ SKILLS  │               │ AGENTS  │               │WORKFLOWS│             │
+│ │  (62)   │◄─────────────►│   (9)   │◄─────────────►│   (8)   │             │
+│ └────┬────┘               └────┬────┘               └────┬────┘             │
+│      │                         │                         │                   │
+│      └─────────────────────────┼─────────────────────────┘                   │
+│                                │                                             │
+│                        ┌───────┴───────┐                                     │
+│                        │  MCP SERVERS  │                                     │
+│                        │     (4+)      │                                     │
+│                        └───────────────┘                                     │
+│                                                                               │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
 ## Quick Start
 
+### For Users
+
 ```bash
-# Clone the framework
-git clone https://github.com/frankxai/agentic-creator-os.git
+# View system status
+cat agentic-creator-os/PRO_STATUS_DASHBOARD.md
+
+# See all available skills
+cat agentic-creator-os/SKILL_TREE.md
+
+# Check architecture
+cat agentic-creator-os/ARCHITECTURE.md
+```
+
+### For Developers
+
+```bash
+# Clone and setup
+git clone <repo>
 cd agentic-creator-os
+./install.sh
 
-# Create your instance
-cp -r templates/starter instances/your-name
-
-# Customize your voice
-edit instances/your-name/brand-voice.md
-
-# Generate configs for your CLI
-./scripts/generate-configs.sh your-name claude-code
+# Build MCP servers
+./build-servers.sh
 ```
 
 ---
 
-## What This Is
+## System Components
 
-Most AI tools treat every user the same. Generic responses. No memory of your style. No understanding of your workflow.
+### 1. Skills Layer (62 Skills)
 
-**Agentic Creator OS changes that.**
+Skills are specialized knowledge modules that enhance Claude's capabilities in specific domains.
 
-You define:
-- **Your voice**: How you sound, what words you use, your creative identity
-- **Your agents**: Specialized AI personas for different tasks
-- **Your skills**: Reusable knowledge modules
-- **Your workflows**: Standard procedures for recurring work
+| Category | Count | Examples |
+|----------|-------|----------|
+| **Technical** | 18 | TDD, systematic-debugging, mcp-architecture, react-nextjs-patterns |
+| **Creative** | 8 | frankx-brand, suno-ai-mastery, golden-age-book-writing |
+| **Soulbook** | 25 | 7 pillars, life-symphony, golden-path |
+| **Business** | 2 | oci-services-expert, product-management |
+| **Personal** | 4 | spartan-warrior, gym-training-expert |
+| **Projects** | 5 | daily-content-ops, frankx-daily-execution |
 
-The framework then generates appropriate configs for whichever AI CLI you use.
-
+**Key Innovation**: Progressive Disclosure Architecture
 ```
-YOUR CREATIVE VISION
-        │
-        ▼
-┌─────────────────────────┐
-│  AGENTIC CREATOR OS     │
-│  • Brand Voice          │
-│  • Agent Team           │
-│  • Skills Library       │
-│  • Workflows            │
-└─────────────────────────┘
-        │
-    ┌───┴───┐
-    ▼       ▼
-Claude  OpenCode  Cursor
-Code    CLI       AI
+Level 1: Metadata (~100 tokens) → "Is this relevant?"
+Level 2: Instructions (<5k tokens) → "How do I do this?"
+Level 3: Resources (on-demand) → "Give me the details"
 ```
 
+### 2. Agents Layer (9 Agents)
+
+Agents are specialized AI personas with distinct domains and weighted influence.
+
+**Specialist Agents:**
+| Agent | Domain | Weight |
+|-------|--------|--------|
+| Starlight Orchestrator | Meta-coordination | Coordinator |
+| Luminor Oracle | Strategy, foresight | 30% |
+| Creation Engine | Content, products | 25% |
+| Technical Translator | AI education | 25% |
+| Frequency Alchemist | Music, consciousness | 20% |
+
+**Department Teams:**
+- Content Department (Writer, Editor, Publisher)
+- Design Department (Visual, UX, Brand)
+- Dev Department (Frontend, Backend, DevOps)
+- Marketing Department (Growth, Ads, Analytics)
+- Business Department (Strategy, Sales, Ops)
+
+### 3. Workflows Layer (8 Pipelines)
+
+Orchestrated sequences that coordinate skills and agents for complex tasks.
+
+| Workflow | Purpose | Pattern |
+|----------|---------|---------|
+| Content Creation | Blog posts, articles | Pipeline |
+| Product Launch | Course/product release | Multi-stage |
+| Research to Article | Deep research → publication | Pipeline |
+| Social Distribution | Cross-platform posting | Parallel |
+| Newsletter | Weekly digest creation | Pipeline |
+| Code Review | Multi-agent code analysis | Parallel |
+| Book Writing | Chapter development | Iterative |
+| Daily Ops | Daily execution workflow | Scheduled |
+
+### 4. MCP Servers Layer
+
+External capabilities via Model Context Protocol.
+
+| Server | Purpose |
+|--------|---------|
+| Browser (Playwright) | Web automation, testing |
+| Creator (Social APIs) | Platform management |
+| Database | Content storage |
+| Email | Newsletter delivery |
+| Memory | Knowledge persistence |
+| Sequential Thinking | Complex reasoning |
+
 ---
 
-## Why This Exists
+## How It Works
 
-After building AI workflows for my own creative work—500+ songs with Suno, a 70+ page website, books, courses—I realized the real bottleneck wasn't the AI. It was configuring every tool separately, repeating context, losing consistency across platforms.
+### Skill Auto-Activation
 
-This framework is my solution: **define once, deploy everywhere**.
+Skills activate automatically based on context keywords:
+
+```
+User: "Help me write tests for this component"
+      ↓
+System detects: "tests", "component"
+      ↓
+Auto-loads: test-driven-development + react-nextjs-patterns
+      ↓
+Claude now has specialized testing knowledge
+```
+
+### Orchestration Patterns
+
+**Pattern 1: Pipeline**
+```
+Research → Plan → Create → Optimize → Publish
+```
+
+**Pattern 2: Parallel Dispatch**
+```
+                 ┌→ Security Analysis
+Request → Split ─┼→ Performance Analysis
+                 └→ Code Quality Analysis
+                     │
+                     ▼
+                 Synthesis
+```
+
+**Pattern 3: Weighted Synthesis**
+```
+Strategic Decision Needed:
+├── Luminor Oracle (30%): "Build for long-term scale"
+├── Creation Engine (25%): "Focus on user experience"
+├── Technical Translator (25%): "Keep it simple"
+└── Frequency Alchemist (20%): "Align with values"
+    │
+    ▼
+Starlight Orchestrator synthesizes: Final recommendation
+```
 
 ---
 
-## Key Features
-
-### One Source of Truth
-Your brand voice, agents, and skills live in markdown files. Edit once, regenerate configs for all your tools.
-
-### Multi-CLI Support
-Currently supports Claude Code, OpenCode (with oh-my-opencode), and Cursor. More adapters coming.
-
-### Creator-First Design
-Built for writers, musicians, course creators, and builders—not enterprise teams. Simple by default, powerful when needed.
-
-### Open and Extensible
-MIT licensed. Fork it, customize it, share your improvements.
-
----
-
-## Project Structure
+## Directory Structure
 
 ```
 agentic-creator-os/
-├── CREATOR-OS.md           # Framework overview
-├── ARCHITECTURE.md         # Technical deep dive
-├── README.md               # This file
+├── README.md               ← YOU ARE HERE
+├── CLAUDE.md               # AI context file
+├── ARCHITECTURE.md         # 7-pillar system design
+├── SKILL_TREE.md          # Visual skill map
+├── PRO_STATUS_DASHBOARD.md # System health
+├── AUDIENCE_PERSONAS.md    # Who we serve
+├── ORCHESTRATION_PATTERNS.md # How it coordinates
 │
-├── templates/              # Starting templates
-│   ├── starter/           # Minimal setup
-│   ├── brand-voice.md     # Voice definition template
-│   ├── agent-team.md      # Agent configuration template
-│   └── skill-template.md  # Skill creation template
+├── skills/                 # Agentic Creator skills
+│   └── content-strategy/   # Example comprehensive skill
+│       ├── SKILL.md       # Core skill file (<500 lines)
+│       └── resources/     # Extended content
 │
-├── instances/              # Your configurations
-│   └── frankx/            # Reference implementation
+├── templates/              # Creation templates
+│   ├── SKILL_TEMPLATE.md  # Master skill template
+│   ├── library/           # Content templates
+│   └── social-media/      # Platform templates
 │
-├── adapters/               # CLI-specific adapters
-│   ├── claude-code/
-│   ├── opencode/
-│   └── cursor/
+├── departments/            # Agent teams
+│   ├── content/           # Content creation team
+│   ├── design/            # Visual/UX team
+│   ├── dev/               # Development team
+│   ├── marketing/         # Growth team
+│   └── business/          # Strategy team
 │
-├── scripts/
-│   └── generate-configs.sh
+├── workflows/              # Orchestrated pipelines
+│   ├── content-creation/  # Blog post pipeline
+│   ├── product-launch/    # Launch sequence
+│   └── daily-ops/         # Daily execution
 │
-└── docs/                   # Additional documentation
+├── instances/              # Project configurations
+│   ├── frankx/            # FrankX configuration
+│   └── _template/         # Template for new projects
+│
+├── mcp-servers/            # MCP integrations
+│   ├── browser/           # Playwright automation
+│   ├── creator/           # Social APIs
+│   ├── database/          # Content storage
+│   └── email/             # Email delivery
+│
+├── adapters/               # Platform adapters
+│   └── opencode/          # OpenCode integration
+│
+├── scripts/                # Utility scripts
+├── drafts/                 # Work in progress
+└── outputs/                # Generated artifacts
 ```
 
 ---
 
-## The FrankX Instance
+## Usage Patterns
 
-The `instances/frankx/` folder shows a complete implementation:
-
-- **4 specialized agents**: Technical Translator, Frequency Alchemist, Creation Engine, Soul Strategist
-- **Detailed brand voice**: Cinematic, intimate, studio-rooted
-- **52 skills**: From Soulbook personal development to technical MCP architecture
-- **Real workflows**: Publishing, music production, website development
-
-Study it as a reference. Then build your own.
-
----
-
-## Getting Started
-
-### 1. Clone and Explore
+### Invoke a Skill
 
 ```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-
-# See the framework structure
-tree -L 2
-
-# Read the main docs
-cat CREATOR-OS.md
+/skill content-strategy      # Load content planning skill
+/skill test-driven-development  # Load TDD methodology
+/skill frankx-brand          # Load brand guidelines
 ```
 
-### 2. Create Your Instance
+### Activate an Agent
+
+```
+"Activate Technical Translator mode for creator education"
+"Channel Frequency Alchemist for music creation"
+"Engage Creation Engine for content development"
+```
+
+### Run a Workflow
+
+```
+/daily-content-ops           # Run daily content workflow
+/factory                     # Full publishing pipeline
+/research                    # Deep research workflow
+```
+
+### Check System Status
 
 ```bash
-# Copy the starter template
-cp -r templates/starter instances/my-brand
-
-# Or start from the FrankX reference
-cp -r instances/frankx instances/my-brand
+cat agentic-creator-os/PRO_STATUS_DASHBOARD.md
 ```
 
-### 3. Define Your Voice
+---
 
-Edit `instances/my-brand/brand-voice.md`:
+## The 7 Pillars of Architecture
 
-```markdown
-# My Brand Voice
+The system is built on 7 foundational pillars:
 
-## Identity
-Name: [Your name]
-Tagline: [What you do in one line]
+| # | Pillar | Purpose |
+|---|--------|---------|
+| 1 | **Skills** | Domain knowledge modules |
+| 2 | **Agents** | Specialized AI personas |
+| 3 | **Workflows** | Orchestrated processes |
+| 4 | **MCP Servers** | External tool integrations |
+| 5 | **Templates** | Reusable content patterns |
+| 6 | **Instances** | Project configurations |
+| 7 | **Intelligence** | Cross-cutting capabilities |
 
-## Voice Characteristics
-- [How you sound #1]
-- [How you sound #2]
+Each pillar is documented in detail in `ARCHITECTURE.md`.
 
-## Words to Use
-[Words that feel like you]
+---
 
-## Words to Avoid
-[Words that don't]
-```
+## Who This Serves
 
-### 4. Configure Your Agents
+### The AI-Curious Professional
+**Need**: Quick wins with AI without the learning curve
+**Solution**: Pre-built skills and workflows for immediate productivity
 
-Create agents in `instances/my-brand/agents/`:
+### The Overwhelmed Entrepreneur
+**Need**: AI that amplifies authentic voice, not generic output
+**Solution**: Brand-aware agents and content strategy frameworks
 
-```markdown
-# Agent: Writer
+### The Enterprise Visionary
+**Need**: Scalable AI architecture for teams
+**Solution**: Orchestration patterns and department structures
 
-## Role
-Content creation specialist
+See `AUDIENCE_PERSONAS.md` for detailed persona profiles.
 
-## Personality
-- Direct but warm
-- Uses stories to illustrate
-- Avoids fluff
+---
 
-## Activation
-"Activate Writer for [task]"
-```
+## Creating New Skills
 
-### 5. Generate Configs
+Use the master template to create new skills:
 
 ```bash
-# For Claude Code
-./scripts/generate-configs.sh my-brand claude-code
+# Copy template
+cp templates/SKILL_TEMPLATE.md skills/[category]/[skill-name]/SKILL.md
 
-# For OpenCode
-./scripts/generate-configs.sh my-brand opencode
-
-# For all platforms
-./scripts/generate-configs.sh my-brand all
+# Follow the structure:
+# - YAML frontmatter with triggers
+# - Purpose section
+# - When to Use section
+# - Core patterns with code examples
+# - FrankX application
+# - Anti-patterns
+# - Related skills
 ```
 
-### 6. Deploy and Create
+### Success Criteria
 
-Copy generated configs to your project:
+- [ ] Total file under 500 lines
+- [ ] YAML frontmatter with specific triggers
+- [ ] Complete, working code examples (no placeholders)
+- [ ] FrankX-specific application section
+- [ ] Anti-patterns documented
+- [ ] Related skills linked
 
-```bash
-cp outputs/claude-code/CLAUDE.md ~/my-project/
-cp outputs/opencode/oh-my-opencode.json ~/my-project/.opencode/
-```
-
-Now your AI tools know your voice.
-
----
-
-## Documentation
-
-- **[CREATOR-OS.md](CREATOR-OS.md)** - Complete framework overview
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical architecture and multi-CLI design
-- **[docs/concepts.md](docs/concepts.md)** - Core concepts explained
-- **[docs/skills-guide.md](docs/skills-guide.md)** - How to create skills
+See `templates/SKILL_TEMPLATE.md` for the full template.
 
 ---
 
-## Contributing
+## Metrics & Status
 
-This is an open framework. Contributions welcome:
+| Metric | Target | Current |
+|--------|--------|---------|
+| Total Skills | 70 | 62 (88%) |
+| Auto-activation Rate | 90% | 70% |
+| Agent Effectiveness | 95% | 94% |
+| Workflow Completion | 95% | 92% |
+| MCP Server Uptime | 99% | 100% |
 
-- **New adapters**: Add support for more AI tools
-- **Skill templates**: Share domain-specific skill packs
-- **Documentation**: Improve guides and examples
-- **Bug fixes**: Help make the scripts more robust
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## Community
-
-- **GitHub Discussions**: Ask questions, share your instances
-- **Issues**: Report bugs, request features
-- **Twitter/X**: [@FrankXAI](https://twitter.com/FrankXAI) for updates
+See `PRO_STATUS_DASHBOARD.md` for real-time metrics.
 
 ---
 
-## License
+## The FrankX Story
 
-MIT License. Use it, modify it, share it. Attribution appreciated but not required.
+This system was built by Frank, a musician-turned-technologist who bridged the gap between:
+- **Creative expression** and **technical systems**
+- **Oracle enterprise AI** and **indie creator tools**
+- **Consciousness evolution** and **practical productivity**
+
+After producing 500+ AI songs with Suno, building enterprise AI systems at Oracle, and struggling with generic AI outputs, Frank created Agentic Creator OS to solve the fundamental problem:
+
+> How do you use AI without losing your soul?
+
+The answer: **Technology that amplifies your unique expression, guided by intelligent agents that understand your voice, orchestrated through workflows that maintain quality at scale.**
 
 ---
 
-## Credits
+## License & Attribution
 
-Created by [FrankX](https://frankx.ai) as part of the creator transformation mission.
+Agentic Creator OS is part of the FrankX ecosystem.
 
-Built with love for creators who believe AI should serve their vision, not the other way around.
+**Built with:**
+- Claude Code by Anthropic
+- Model Context Protocol (MCP)
+- Community skill patterns from obra/superpowers
+- Progressive disclosure architecture from Anthropic best practices
 
 ---
 
-*"Transform from overwhelmed creator to AI-empowered artist."*
+## Quick Links
+
+| Document | Purpose |
+|----------|---------|
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Complete 7-pillar architecture |
+| [SKILL_TREE.md](SKILL_TREE.md) | Visual map of all 62 skills |
+| [PRO_STATUS_DASHBOARD.md](PRO_STATUS_DASHBOARD.md) | System health metrics |
+| [AUDIENCE_PERSONAS.md](AUDIENCE_PERSONAS.md) | Who we serve |
+| [ORCHESTRATION_PATTERNS.md](ORCHESTRATION_PATTERNS.md) | Coordination patterns |
+| [SKILL_TEMPLATE.md](templates/SKILL_TEMPLATE.md) | Create new skills |
+
+---
+
+*Agentic Creator OS - The Operating System for the Golden Age Creator*
+
+**Version 3.0.0** | **January 2026** | **62 Skills** | **9 Agents** | **8 Workflows**

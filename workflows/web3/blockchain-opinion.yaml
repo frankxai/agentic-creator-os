@@ -1,0 +1,776 @@
+name: Blockchain Opinion & Thought Leadership
+description: Create thought leadership content on crypto, blockchain, and Web3 topics
+version: 1.0.0
+category: web3
+tags:
+  - blockchain
+  - opinion
+  - thought-leadership
+  - web3
+  - analysis
+
+inputs:
+  opinion_topic:
+    type: string
+    description: Main opinion topic
+    required: true
+  
+  content_category:
+    type: enum
+    description: Category of opinion piece
+    options:
+      - industry-analysis
+      - technology-critique
+      - future-prediction
+      - regulatory-commentary
+      - protocol-review
+      - market-philosophy
+      - adoption-barriers
+      - innovation-spotlight
+      - controversy-response
+      - vision-piece
+    required: true
+  
+  perspective:
+    type: enum
+    description: Overall perspective
+    options:
+      - optimistic
+      - critical
+      - balanced
+      - contrarian
+      - visionary
+      - pragmatic
+    default: balanced
+  
+  target_audience:
+    type: enum
+    description: Primary audience
+    options:
+      - industry-professionals
+      - investors
+      - developers
+      - general-public
+      - policymakers
+      - entrepreneurs
+    default: industry-professionals
+  
+  content_format:
+    type: enum
+    description: Content format
+    options:
+      - long-form-article
+      - twitter-thread
+      - linkedin-post
+      - medium-article
+      - newsletter
+      - podcast-script
+      - video-essay-script
+    default: long-form-article
+  
+  argument_style:
+    type: enum
+    description: Argumentation style
+    options:
+      - data-driven
+      - philosophical
+      - narrative-based
+      - comparative
+      - provocative
+      - educational
+    default: data-driven
+  
+  include_predictions:
+    type: boolean
+    description: Include future predictions
+    default: false
+  
+  include_counterarguments:
+    type: boolean
+    description: Address counterarguments
+    default: true
+  
+  cite_sources:
+    type: boolean
+    description: Include citations and references
+    default: true
+  
+  personal_experience:
+    type: boolean
+    description: Include personal anecdotes
+    default: false
+  
+  tone:
+    type: enum
+    description: Content tone
+    options:
+      - authoritative
+      - conversational
+      - academic
+      - provocative
+      - inspirational
+      - analytical
+    default: authoritative
+
+steps:
+  - id: research_topic_deeply
+    name: Deep Research on Topic
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{opinion_topic}} blockchain crypto"
+      depth: comprehensive
+      
+      focus_areas:
+        - Current state of topic
+        - Historical context
+        - Key stakeholders
+        - Competing viewpoints
+        - Data and statistics
+        - Expert opinions
+        - Recent developments
+        - Future implications
+      
+      sources:
+        - Academic papers
+        - Industry reports
+        - Expert analyses
+        - Market data
+        - Technical documentation
+        - News coverage
+        - Community discussions
+    
+    outputs:
+      deep_research: research_results
+
+  - id: identify_key_arguments
+    name: Identify Key Arguments
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{deep_research}}"
+      analysis_type: argument_extraction
+      
+      extract:
+        - Main arguments for
+        - Main arguments against
+        - Common misconceptions
+        - Underappreciated points
+        - Controversial aspects
+        - Consensus views
+        - Emerging perspectives
+      
+      perspective: "{{perspective}}"
+    
+    outputs:
+      key_arguments: argument_analysis
+
+  - id: develop_unique_angle
+    name: Develop Unique Angle
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{key_arguments}}"
+      analysis_type: differentiation
+      
+      identify:
+        - Underexplored angles
+        - Contrarian viewpoints
+        - Novel connections
+        - Unique insights
+        - Fresh perspectives
+        - Thought-provoking questions
+      
+      differentiation_goal: stand_out_from_noise
+    
+    outputs:
+      unique_angle: differentiation_analysis
+
+  - id: structure_argument
+    name: Structure Argument
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: outline
+      topic: "{{opinion_topic}}"
+      
+      structure_approach: persuasive_argument
+      
+      argument_structure:
+        - Compelling hook
+        - Thesis statement
+        - Context and background
+        - Main argument points
+        - Supporting evidence
+        - Counterargument address
+        - Implications and consequences
+        - Call to action or conclusion
+      
+      persuasion_techniques:
+        - Logical reasoning
+        - Evidence-based claims
+        - Emotional resonance
+        - Credibility building
+        - Anticipate objections
+        - Provide solutions
+    
+    outputs:
+      argument_outline: structured_outline
+
+  - id: generate_opinion_content
+    name: Generate Opinion Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{content_format}}"
+      topic: "{{opinion_topic}}"
+      outline: "{{argument_outline}}"
+      
+      context: |
+        Topic: {{opinion_topic}}
+        Category: {{content_category}}
+        Perspective: {{perspective}}
+        Audience: {{target_audience}}
+        Argument Style: {{argument_style}}
+        Unique Angle: {{unique_angle}}
+        Research: {{deep_research}}
+        Key Arguments: {{key_arguments}}
+      
+      requirements:
+        - Strong opening hook
+        - Clear thesis statement
+        - Well-structured arguments
+        - Evidence-based claims
+        - Logical flow
+        - Compelling narrative
+        - Thought-provoking insights
+        - Actionable takeaways
+        - Memorable conclusion
+        - Professional yet engaging
+      
+      tone: "{{tone}}"
+      
+      writing_principles:
+        - Lead with strongest point
+        - Use concrete examples
+        - Tell stories when relevant
+        - Challenge assumptions
+        - Provide new perspectives
+        - Back claims with data
+        - Acknowledge complexity
+        - Avoid absolutism
+      
+      content_structure:
+        long_form_article:
+          - Attention-grabbing headline
+          - Compelling introduction
+          - Thesis statement
+          - Background context
+          - Main arguments (3-5 points)
+          - Evidence and examples
+          - Counterargument section
+          - Implications discussion
+          - Strong conclusion
+          - Call to action
+        
+        twitter_thread:
+          - Hook tweet
+          - Thesis tweet
+          - Argument tweets (numbered)
+          - Evidence tweets
+          - Counterpoint acknowledgment
+          - Conclusion tweet
+          - Engagement question
+        
+        linkedin_post:
+          - Professional hook
+          - Personal connection
+          - Key insights
+          - Industry implications
+          - Discussion prompt
+        
+        vision_piece:
+          - Current state
+          - Problems identified
+          - Vision for future
+          - Path to get there
+          - Call to builders
+    
+    outputs:
+      opinion_content: generated_content
+
+  - id: add_data_evidence
+    name: Add Data and Evidence
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{opinion_content}}"
+      transformation: add_evidence
+      
+      evidence_types:
+        - Statistical data
+        - Market metrics
+        - Research findings
+        - Case studies
+        - Historical examples
+        - Expert quotes
+        - On-chain data
+        - Adoption metrics
+      
+      evidence_presentation:
+        - Cite sources properly
+        - Provide context
+        - Explain significance
+        - Use visualizations
+        - Compare benchmarks
+        - Show trends
+      
+      data_sources:
+        - Industry reports
+        - Academic research
+        - Market data platforms
+        - Blockchain analytics
+        - Survey results
+    
+    outputs:
+      content_with_evidence: transformed_content
+
+  - id: address_counterarguments
+    name: Address Counterarguments
+    condition: "{{include_counterarguments}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_evidence}}"
+      transformation: add_counterarguments
+      
+      counterargument_approach:
+        - Acknowledge valid concerns
+        - Present opposing views fairly
+        - Respond with evidence
+        - Find common ground
+        - Strengthen main argument
+        - Show intellectual honesty
+      
+      counterargument_structure:
+        - "Some argue that..."
+        - "This perspective has merit because..."
+        - "However, consider that..."
+        - "The evidence suggests..."
+        - "A more nuanced view is..."
+      
+      strengthen_credibility: true
+    
+    outputs:
+      content_with_counter: transformed_content
+
+  - id: add_future_predictions
+    name: Add Future Predictions
+    condition: "{{include_predictions}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_counter}}"
+      transformation: add_predictions
+      
+      prediction_guidelines:
+        - Base on current trends
+        - Provide reasoning
+        - Acknowledge uncertainty
+        - Offer multiple scenarios
+        - Set timeframes
+        - Explain assumptions
+        - Avoid absolute certainty
+      
+      prediction_format: |
+        Based on [evidence/trends], I predict that [prediction] within [timeframe].
+        This assumes [key assumptions].
+        However, [alternative scenarios] could also occur if [conditions].
+      
+      prediction_disclaimer: |
+        These are informed predictions, not guarantees. The crypto space evolves rapidly.
+    
+    outputs:
+      content_with_predictions: transformed_content
+
+  - id: add_citations_references
+    name: Add Citations and References
+    condition: "{{cite_sources}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_predictions}}"
+      transformation: add_citations
+      
+      citation_style: inline_links
+      
+      citation_requirements:
+        - Link to primary sources
+        - Attribute quotes properly
+        - Reference data sources
+        - Link to studies
+        - Credit original ideas
+        - Provide access dates
+      
+      reference_section:
+        - Organized by category
+        - Full source information
+        - Working links
+        - Brief descriptions
+    
+    outputs:
+      content_with_citations: transformed_content
+
+  - id: add_personal_perspective
+    name: Add Personal Perspective
+    condition: "{{personal_experience}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_citations}}"
+      transformation: add_personal_anecdotes
+      
+      anecdote_guidelines:
+        - Relevant to argument
+        - Adds credibility
+        - Humanizes content
+        - Provides unique insight
+        - Not self-promotional
+        - Authentic and honest
+      
+      anecdote_placement:
+        - Introduction for connection
+        - Supporting main points
+        - Illustrating concepts
+        - Conclusion for impact
+    
+    outputs:
+      content_with_personal: transformed_content
+
+  - id: craft_compelling_headline
+    name: Craft Compelling Headline
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: headlines
+      topic: "{{opinion_topic}}"
+      content: "{{content_with_personal}}"
+      
+      headline_count: 10
+      
+      headline_styles:
+        - Provocative question
+        - Bold statement
+        - Contrarian take
+        - Numbered insight
+        - How/Why format
+        - Prediction format
+        - Challenge assumption
+        - Reveal insight
+      
+      headline_requirements:
+        - Attention-grabbing
+        - Accurate to content
+        - SEO-friendly
+        - Shareable
+        - Not clickbait
+        - Clear value proposition
+      
+      examples:
+        - "Why [Assumption] is Wrong About [Topic]"
+        - "The [Adjective] Truth About [Topic]"
+        - "[Number] Reasons [Topic] Will [Outcome]"
+        - "What Everyone Gets Wrong About [Topic]"
+        - "[Topic]: [Contrarian Statement]"
+    
+    outputs:
+      headline_options: headline_list
+
+  - id: add_opinion_disclaimer
+    name: Add Opinion Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_personal}}"
+      transformation: add_disclaimer
+      disclaimer_type: opinion_piece
+      
+      disclaimer_text: |
+        💭 OPINION: This article represents the author's personal views and analysis. It is not 
+        financial, investment, or legal advice. The crypto and blockchain space is rapidly evolving, 
+        and perspectives may change with new information. Always conduct your own research and consult 
+        with qualified professionals before making decisions.
+    
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_engagement
+    name: Optimize for Engagement
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: "{{content_format}}"
+      audience: "{{target_audience}}"
+      
+      optimization_goals:
+        - spark_discussion
+        - encourage_sharing
+        - build_authority
+        - drive_engagement
+      
+      engagement_elements:
+        - Thought-provoking questions
+        - Controversial but defensible takes
+        - Actionable insights
+        - Quotable statements
+        - Discussion prompts
+        - Call to action
+      
+      platform_optimization:
+        twitter:
+          - Thread hooks
+          - Quotable tweets
+          - Engagement questions
+          - Tag relevant accounts
+          - Use strategic hashtags
+        
+        linkedin:
+          - Professional framing
+          - Industry implications
+          - Career relevance
+          - Network engagement
+          - Comment prompts
+        
+        medium:
+          - SEO optimization
+          - Subheadings
+          - Pull quotes
+          - Related articles
+          - Publication tags
+    
+    outputs:
+      optimized_content: engagement_optimized_content
+
+  - id: generate_thought_leadership_hashtags
+    name: Generate Thought Leadership Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: twitter
+      niche: blockchain_thought_leadership
+      count: 8
+      
+      include_categories:
+        - topic_specific
+        - industry_general
+        - thought_leadership
+        - web3_community
+      
+      examples:
+        - "#{{opinion_topic}}"
+        - "#BlockchainThoughts"
+        - "#CryptoOpinion"
+        - "#Web3Future"
+        - "#BlockchainAnalysis"
+        - "#CryptoThoughtLeadership"
+        - "#DecentralizedFuture"
+    
+    outputs:
+      leadership_hashtags: hashtag_list
+
+  - id: create_discussion_prompts
+    name: Create Discussion Prompts
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: discussion_questions
+      topic: "{{opinion_topic}}"
+      content: "{{optimized_content}}"
+      
+      prompt_types:
+        - Open-ended questions
+        - Agree/disagree polls
+        - Experience sharing
+        - Prediction questions
+        - Devil's advocate
+        - Application scenarios
+      
+      prompt_goals:
+        - Encourage diverse perspectives
+        - Deepen discussion
+        - Challenge thinking
+        - Build community
+        - Generate insights
+      
+      examples:
+        - "What's your take on [key point]?"
+        - "Have you experienced [scenario]?"
+        - "Where do you see [topic] in 5 years?"
+        - "What am I missing in this analysis?"
+        - "How would you solve [problem]?"
+    
+    outputs:
+      discussion_prompts: question_list
+
+  - id: fact_check_opinion_piece
+    name: Fact-Check Opinion Piece
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - factual_claims
+        - statistical_accuracy
+        - quote_accuracy
+        - historical_facts
+        - technical_details
+        - source_credibility
+      
+      distinguish:
+        - Facts vs opinions
+        - Verified vs speculation
+        - Data vs interpretation
+      
+      cross_reference:
+        - Primary sources
+        - Official data
+        - Expert statements
+        - Academic research
+        - Industry reports
+      
+      flag_unverified: true
+      require_sources_for_facts: true
+    
+    outputs:
+      fact_check_report: verification_results
+
+  - id: create_social_snippets
+    name: Create Social Media Snippets
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: social_snippets
+      source_content: "{{optimized_content}}"
+      
+      snippet_types:
+        - Key quotes
+        - Main arguments
+        - Provocative statements
+        - Data highlights
+        - Conclusions
+        - Questions
+      
+      snippet_formats:
+        - Standalone tweets
+        - Quote cards
+        - Stat graphics
+        - Thread starters
+        - LinkedIn posts
+      
+      snippet_count: 10
+    
+    outputs:
+      social_snippets: snippet_collection
+
+  - id: compile_opinion_package
+    name: Compile Opinion Content Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_content: "{{optimized_content}}"
+        headline_options: "{{headline_options}}"
+        discussion_prompts: "{{discussion_prompts}}"
+        social_snippets: "{{social_snippets}}"
+        hashtags: "{{leadership_hashtags}}"
+        fact_check: "{{fact_check_report}}"
+        citations: "Included in content"
+        disclaimer: "Included in content"
+      
+      package_format: thought_leadership_bundle
+      
+      distribution_recommendations:
+        - Primary platform
+        - Cross-posting strategy
+        - Timing suggestions
+        - Engagement tactics
+        - Follow-up content ideas
+    
+    outputs:
+      final_package: complete_opinion_content
+
+outputs:
+  opinion_content_package:
+    description: Complete thought leadership content package
+    value: "{{final_package}}"
+  
+  main_content:
+    description: Primary opinion piece with disclaimer
+    value: "{{optimized_content}}"
+  
+  headlines:
+    description: Headline options
+    value: "{{headline_options}}"
+  
+  discussion_prompts:
+    description: Discussion questions
+    value: "{{discussion_prompts}}"
+  
+  social_snippets:
+    description: Social media snippets
+    value: "{{social_snippets}}"
+  
+  hashtags:
+    description: Thought leadership hashtags
+    value: "{{leadership_hashtags}}"
+  
+  verification_report:
+    description: Fact-check results
+    value: "{{fact_check_report}}"
+
+metadata:
+  best_practices:
+    - Have a clear, defensible thesis
+    - Back opinions with evidence
+    - Acknowledge complexity
+    - Address counterarguments
+    - Avoid absolutism
+    - Cite credible sources
+    - Be intellectually honest
+    - Provide unique insights
+    - Make it actionable
+    - Invite discussion
+  
+  thought_leadership_principles:
+    - Original thinking
+    - Evidence-based reasoning
+    - Nuanced perspectives
+    - Forward-looking
+    - Challenges status quo
+    - Builds on existing knowledge
+    - Contributes to discourse
+    - Demonstrates expertise
+  
+  compliance_notes:
+    - Opinion disclaimer required
+    - Distinguish fact from opinion
+    - Not financial advice
+    - Disclose conflicts of interest
+    - Cite sources properly
+    - Respect intellectual property
+    - Avoid defamation
+  
+  blockchain_opinion_terminology:
+    - Thesis: Main argument or position
+    - Contrarian: Against popular opinion
+    - Bullish: Optimistic outlook
+    - Bearish: Pessimistic outlook
+    - FUD: Fear, Uncertainty, Doubt
+    - Alpha: Valuable insight
+    - Signal: Meaningful information
+    - Noise: Irrelevant information
+    - Narrative: Prevailing story
+    - Paradigm Shift: Fundamental change

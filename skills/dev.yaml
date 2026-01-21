@@ -1,0 +1,33 @@
+name: Development Department
+description: |
+  Engineering and devops team. Creates websites, APIs, and applications.
+  Handles deployment, database management, and infrastructure.
+  Code, deploy, and scale with AI precision.
+agents:
+  - dev-lead
+  - frontend-agent
+  - backend-agent
+  - devops-agent
+  - qa-agent
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - browser-mcp
+  - website-mcp
+examples:
+  - "Create Next.js website for my podcast"
+  - "Deploy my e-commerce site to Vercel"
+  - "Create API endpoint for contact form"
+  - "Fix bug in my application"
+  - "Run tests for [project]"
+  - "Check health of my deployment"
+workflows:
+  - dev/website-creation.yaml
+  - dev/deployment.yaml
+  - dev/api-creation.yaml
+  - dev/database-operations.yaml
+configuration:
+  framework: nextjs
+  language: typescript
+  deployment: vercel
+  database: postgresql

@@ -1,0 +1,616 @@
+name: DAO Governance Content
+description: Create content for DAO proposals, voting, and community governance engagement
+version: 1.0.0
+category: web3
+tags:
+  - dao
+  - governance
+  - web3
+  - community
+  - voting
+
+inputs:
+  dao_name:
+    type: string
+    description: Name of the DAO
+    required: true
+  
+  content_type:
+    type: enum
+    description: Type of governance content
+    options:
+      - proposal-announcement
+      - voting-reminder
+      - proposal-analysis
+      - governance-update
+      - community-discussion
+      - voting-results
+      - delegate-pitch
+      - governance-explainer
+    required: true
+  
+  proposal_id:
+    type: string
+    description: Proposal ID or number
+    required: false
+  
+  proposal_title:
+    type: string
+    description: Title of the proposal
+    required: false
+  
+  proposal_summary:
+    type: string
+    description: Brief summary of the proposal
+    required: false
+  
+  voting_period:
+    type: object
+    description: Voting timeline
+    properties:
+      start_date: string
+      end_date: string
+      duration: string
+    required: false
+  
+  proposal_category:
+    type: enum
+    description: Category of proposal
+    options:
+      - treasury-allocation
+      - protocol-upgrade
+      - governance-change
+      - partnership
+      - grant-funding
+      - parameter-adjustment
+      - community-initiative
+      - emergency-action
+    required: false
+  
+  voting_options:
+    type: array
+    description: Available voting options
+    items:
+      type: string
+    default: ["For", "Against", "Abstain"]
+  
+  quorum_requirement:
+    type: string
+    description: Quorum needed for proposal to pass
+    required: false
+  
+  current_vote_status:
+    type: object
+    description: Current voting statistics
+    properties:
+      for_votes: string
+      against_votes: string
+      abstain_votes: string
+      participation_rate: string
+    required: false
+  
+  governance_platform:
+    type: enum
+    description: Governance platform used
+    options:
+      - snapshot
+      - tally
+      - commonwealth
+      - discourse
+      - on-chain
+      - custom
+    default: snapshot
+  
+  target_audience:
+    type: enum
+    description: Primary audience
+    options:
+      - token-holders
+      - delegates
+      - community-members
+      - potential-voters
+      - governance-participants
+    default: token-holders
+  
+  tone:
+    type: enum
+    description: Content tone
+    options:
+      - informative
+      - urgent
+      - analytical
+      - community-focused
+      - formal
+      - encouraging
+    default: informative
+
+steps:
+  - id: research_dao_context
+    name: Research DAO and Governance Context
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{dao_name}} DAO governance {{proposal_id}}"
+      depth: comprehensive
+      focus_areas:
+        - DAO structure and governance model
+        - Historical voting patterns
+        - Community sentiment
+        - Proposal background and context
+        - Key stakeholders and delegates
+        - Previous similar proposals
+    outputs:
+      dao_research: research_results
+
+  - id: analyze_proposal_impact
+    name: Analyze Proposal Impact
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{proposal_summary}}"
+      analysis_type: impact_assessment
+      
+      evaluation_criteria:
+        - Financial implications
+        - Technical feasibility
+        - Community benefit
+        - Risk assessment
+        - Alignment with DAO mission
+        - Precedent setting
+        - Implementation complexity
+      
+      context: "{{dao_research}}"
+    
+    outputs:
+      impact_analysis: analysis_results
+
+  - id: verify_governance_facts
+    name: Verify Governance Information
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      claims:
+        - "Proposal ID: {{proposal_id}}"
+        - "Voting period: {{voting_period}}"
+        - "Quorum requirement: {{quorum_requirement}}"
+        - "Current vote status: {{current_vote_status}}"
+        - "Governance platform: {{governance_platform}}"
+      
+      sources:
+        - official_dao_channels
+        - governance_platform
+        - blockchain_data
+        - verified_announcements
+      
+      require_verification: true
+    
+    outputs:
+      verified_facts: fact_check_results
+
+  - id: generate_governance_content
+    name: Generate Governance Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{content_type}}"
+      topic: "{{dao_name}} Governance: {{proposal_title}}"
+      
+      context: |
+        DAO: {{dao_name}}
+        Content Type: {{content_type}}
+        Proposal ID: {{proposal_id}}
+        Proposal: {{proposal_title}}
+        Summary: {{proposal_summary}}
+        Category: {{proposal_category}}
+        Voting Period: {{voting_period}}
+        Voting Options: {{voting_options}}
+        Quorum: {{quorum_requirement}}
+        Current Status: {{current_vote_status}}
+        Platform: {{governance_platform}}
+        
+        Research: {{dao_research}}
+        Impact Analysis: {{impact_analysis}}
+        Verified Facts: {{verified_facts}}
+      
+      requirements:
+        - Clear explanation of proposal
+        - Objective presentation of both sides
+        - Highlight key implications
+        - Include voting instructions
+        - Emphasize participation importance
+        - Use governance terminology correctly
+        - Provide context and background
+        - Include relevant links and resources
+        - Encourage informed decision-making
+        - Maintain neutrality (unless opinion piece)
+      
+      tone: "{{tone}}"
+      
+      structure:
+        proposal_announcement:
+          - Attention-grabbing headline
+          - Proposal overview
+          - Key details and timeline
+          - Why it matters
+          - How to participate
+          - Call to action
+        
+        voting_reminder:
+          - Urgency indicator
+          - Proposal recap
+          - Current voting status
+          - Time remaining
+          - Voting instructions
+          - Participation encouragement
+        
+        proposal_analysis:
+          - Executive summary
+          - Detailed breakdown
+          - Pros and cons
+          - Impact assessment
+          - Community perspectives
+          - Recommendation considerations
+        
+        voting_results:
+          - Outcome announcement
+          - Vote breakdown
+          - Participation statistics
+          - What happens next
+          - Community reaction
+          - Implementation timeline
+    
+    outputs:
+      governance_content: generated_content
+
+  - id: add_voting_instructions
+    name: Add Clear Voting Instructions
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{governance_content}}"
+      transformation: add_section
+      section_type: voting_guide
+      
+      voting_instructions:
+        platform: "{{governance_platform}}"
+        steps:
+          - Connect wallet to governance platform
+          - Navigate to proposal page
+          - Review proposal details
+          - Select voting option
+          - Sign transaction with wallet
+          - Confirm vote submission
+        
+        important_notes:
+          - Voting requires token holdings or delegation
+          - Gas fees may apply for on-chain voting
+          - Vote is final once submitted
+          - Voting power based on token balance at snapshot
+        
+        links:
+          governance_portal: "Link to {{governance_platform}}"
+          proposal_page: "Direct link to proposal"
+          voting_guide: "Detailed voting tutorial"
+    
+    outputs:
+      content_with_instructions: transformed_content
+
+  - id: create_balanced_perspective
+    name: Create Balanced Perspective Section
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: analysis
+      topic: "Arguments for and against {{proposal_title}}"
+      
+      requirements:
+        - Present both sides objectively
+        - Include community perspectives
+        - Highlight key concerns
+        - Address potential risks
+        - Acknowledge trade-offs
+        - Avoid bias
+        - Cite community discussions
+      
+      structure:
+        - Arguments in favor
+        - Arguments against
+        - Key considerations
+        - Community sentiment
+        - Expert opinions
+    
+    outputs:
+      balanced_perspective: analysis_content
+
+  - id: add_governance_disclaimer
+    name: Add Governance Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_instructions}}"
+      transformation: add_disclaimer
+      disclaimer_type: governance_participation
+      
+      disclaimer_text: |
+        📋 GOVERNANCE DISCLAIMER: This content is for informational purposes only and does not constitute 
+        voting advice. All DAO participants should conduct their own research and make independent decisions. 
+        Voting outcomes may have financial and operational implications. Participate responsibly and understand 
+        the proposal fully before voting.
+    
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_community
+    name: Optimize for Community Engagement
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: multi_platform
+      audience: "{{target_audience}}"
+      
+      optimization_goals:
+        - maximize_participation
+        - encourage_informed_voting
+        - build_community_discussion
+        - increase_awareness
+      
+      community_tactics:
+        - Use inclusive language
+        - Encourage discussion
+        - Tag relevant delegates
+        - Create discussion threads
+        - Share in multiple channels
+        - Time for maximum visibility
+        - Follow up with reminders
+      
+      platform_adaptations:
+        twitter:
+          - Thread format for complex proposals
+          - Visual voting status graphics
+          - Quote key points
+          - Tag DAO account
+        discord:
+          - Structured announcement format
+          - Role mentions for voters
+          - Embed proposal links
+          - Create discussion channel
+        forum:
+          - Detailed analysis format
+          - Encourage comments
+          - Link to governance platform
+          - Update with vote progress
+    
+    outputs:
+      optimized_content: community_content
+
+  - id: generate_governance_hashtags
+    name: Generate Governance Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: twitter
+      niche: dao_governance
+      count: 8
+      
+      include_categories:
+        - dao_specific
+        - governance_general
+        - web3_community
+        - voting_related
+      
+      examples:
+        - "#{{dao_name}}"
+        - "#DAOGovernance"
+        - "#Web3Governance"
+        - "#DecentralizedGovernance"
+        - "#CryptoGovernance"
+        - "#OnChainVoting"
+        - "#DAOVoting"
+        - "#CommunityGovernance"
+    
+    outputs:
+      governance_hashtags: hashtag_list
+
+  - id: create_visual_assets_guide
+    name: Create Visual Assets Guide
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: visual_guidelines
+      topic: "{{dao_name}} governance visuals"
+      
+      visual_requirements:
+        - Proposal summary infographic
+        - Voting timeline graphic
+        - Vote distribution chart
+        - Quorum progress bar
+        - Key points highlight
+        - Voting instructions diagram
+        - Results announcement graphic
+      
+      design_elements:
+        - DAO branding colors
+        - Clear typography
+        - Data visualization
+        - Icons for voting options
+        - Progress indicators
+        - Call-to-action buttons
+    
+    outputs:
+      visual_guide: design_specifications
+
+  - id: fact_check_all_claims
+    name: Comprehensive Fact-Check
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - proposal_details_accuracy
+        - voting_timeline_accuracy
+        - quorum_requirements
+        - vote_count_accuracy
+        - governance_process
+        - historical_context
+        - technical_specifications
+      
+      cross_reference:
+        - Official DAO documentation
+        - Governance platform data
+        - Blockchain records
+        - Community announcements
+      
+      flag_unverified: true
+      require_sources: true
+    
+    outputs:
+      comprehensive_fact_check: verification_results
+
+  - id: create_engagement_strategy
+    name: Create Community Engagement Strategy
+    mcp: marketing-mcp
+    tool: create_engagement_strategy
+    inputs:
+      content: "{{optimized_content}}"
+      campaign_type: governance_participation
+      
+      engagement_tactics:
+        pre_voting:
+          - Proposal announcement
+          - Educational content
+          - Community discussion
+          - Delegate outreach
+          - Q&A sessions
+        
+        during_voting:
+          - Regular status updates
+          - Participation reminders
+          - Address questions
+          - Share perspectives
+          - Highlight participation
+        
+        post_voting:
+          - Results announcement
+          - Thank participants
+          - Explain next steps
+          - Implementation updates
+          - Retrospective analysis
+      
+      channels:
+        - Twitter/X
+        - Discord
+        - Governance forum
+        - Telegram
+        - Newsletter
+        - Blog
+      
+      timing_strategy:
+        - Announce early for awareness
+        - Remind at voting milestones
+        - Final push before deadline
+        - Immediate results sharing
+    
+    outputs:
+      engagement_strategy: strategy_document
+
+  - id: compile_governance_package
+    name: Compile Governance Content Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_content: "{{optimized_content}}"
+        balanced_perspective: "{{balanced_perspective}}"
+        hashtags: "{{governance_hashtags}}"
+        visual_guide: "{{visual_guide}}"
+        engagement_strategy: "{{engagement_strategy}}"
+        fact_check: "{{comprehensive_fact_check}}"
+        voting_instructions: "Included in content"
+        disclaimer: "Included in content"
+      
+      package_format: dao_governance_bundle
+      
+      additional_resources:
+        - Link to proposal on governance platform
+        - DAO documentation
+        - Previous proposal history
+        - Delegate information
+        - Community discussion threads
+    
+    outputs:
+      final_package: complete_governance_content
+
+outputs:
+  governance_content_package:
+    description: Complete DAO governance content package
+    value: "{{final_package}}"
+  
+  main_content:
+    description: Primary governance content with instructions and disclaimer
+    value: "{{optimized_content}}"
+  
+  balanced_analysis:
+    description: Balanced perspective on proposal
+    value: "{{balanced_perspective}}"
+  
+  hashtags:
+    description: Governance-focused hashtags
+    value: "{{governance_hashtags}}"
+  
+  visual_guidelines:
+    description: Visual asset specifications
+    value: "{{visual_guide}}"
+  
+  engagement_plan:
+    description: Community engagement strategy
+    value: "{{engagement_strategy}}"
+  
+  verification_report:
+    description: Comprehensive fact-check results
+    value: "{{comprehensive_fact_check}}"
+
+metadata:
+  best_practices:
+    - Maintain objectivity and neutrality
+    - Present both sides of proposals fairly
+    - Encourage informed participation
+    - Provide clear voting instructions
+    - Verify all facts and figures
+    - Use inclusive language
+    - Respect diverse perspectives
+    - Promote healthy debate
+    - Follow DAO communication guidelines
+    - Update content as situation evolves
+  
+  governance_principles:
+    - Transparency in all communications
+    - Accessibility for all token holders
+    - Encourage broad participation
+    - Respect minority opinions
+    - Promote informed decision-making
+    - Build consensus where possible
+    - Document decisions clearly
+    - Follow established processes
+  
+  compliance_notes:
+    - Not voting advice disclaimer required
+    - Maintain objectivity in analysis
+    - Disclose any conflicts of interest
+    - Follow DAO communication policies
+    - Respect voting privacy
+    - Accurate representation of proposals
+  
+  dao_terminology:
+    - Proposal: Formal suggestion for DAO action
+    - Quorum: Minimum participation required
+    - Snapshot: Point-in-time token balance record
+    - Delegate: Representative who votes on behalf of others
+    - Governance Token: Token granting voting rights
+    - Treasury: DAO-controlled funds
+    - Multisig: Multi-signature wallet for security
+    - Timelock: Delay before proposal execution
+    - Veto: Power to reject proposals
+    - Forum: Discussion platform for proposals

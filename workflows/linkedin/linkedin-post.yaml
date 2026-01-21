@@ -1,0 +1,68 @@
+name: LinkedIn Post Creation
+slug: linkedin-post
+description: |
+  Create engaging short-form posts for LinkedIn.
+  Optimized for algorithm reach and professional engagement.
+triggers:
+  - "skill:content, create linkedin post"
+  - "skill:content, linkedin update"
+  - "skill:content, post on linkedin"
+  - "/linkedin-content"
+  - "create a linkedin post about"
+agents:
+  - linkedin-writer
+  - engagement-strategist
+tools:
+  - linkedin-mcp
+  - filesystem-mcp
+phases:
+  1:
+    name: Hook Creation
+    description: Write attention-grabbing opening
+    steps:
+      - Choose hook type (question, statement, data, story)
+      - Write first line to stop the scroll
+      - Validate hook against best practices
+      - Output: hook-options.json
+    
+  2:
+    name: Body Development
+    description: Expand hook into full post
+    steps:
+      - Deliver value in first 3 lines
+      - Use 1-2 line breaks between ideas
+      - Include personal experience or data
+      - End with clear conclusion or question
+      - Output: post-body.md
+    
+  3:
+    name: CTA & Hashtags
+    description: Add engagement elements
+    steps:
+      - Write clear call-to-action
+      - Select 3-5 relevant hashtags
+      - Add mention if applicable
+      - Output: post-with-cta.md
+    
+  4:
+    name: Variants
+    description: Create alternative versions
+    steps:
+      - Shorten to 3-line version
+      - Create question-focused variant
+      - Generate listicle version
+      - Output: post-variants.json
+    
+  5:
+    name: Publishing
+    description: Schedule or publish
+    steps:
+      - Select best variant based on goals
+      - Create draft in LinkedIn
+      - Schedule for optimal engagement
+      - Output: scheduled-post.json
+
+output_dir: outputs/linkedin-post
+version: "2.0.0"
+templates:
+  - linkedin-thought-leadership.md

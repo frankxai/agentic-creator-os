@@ -1,0 +1,386 @@
+#!/bin/bash
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ACOS Enhance - Pull cutting-edge patterns from external repositories
+# Part of Agentic Creator OS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+set -e
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+# Configuration
+ACOS_HOME="${ACOS_HOME:-$HOME/.claude/acos}"
+ENHANCE_CACHE="$ACOS_HOME/enhance-cache"
+PATTERNS_DIR="$ACOS_HOME/patterns"
+
+# External source repositories
+declare -A SOURCES=(
+    ["anthropic-cookbook"]="https://github.com/anthropics/anthropic-cookbook"
+    ["langgraph"]="https://github.com/langchain-ai/langgraph"
+    ["mcp-servers"]="https://github.com/modelcontextprotocol/servers"
+    ["vercel-ai"]="https://github.com/vercel/ai"
+    ["openai-swarm"]="https://github.com/openai/swarm"
+)
+
+# Pattern mappings (source -> skill enhancement targets)
+declare -A PATTERN_TARGETS=(
+    ["anthropic-cookbook/tool_use"]="mcp-architecture,claude-sdk"
+    ["anthropic-cookbook/multi_turn"]="agentic-orchestration,creator-intelligence"
+    ["anthropic-cookbook/prompt_caching"]="content-strategy"
+    ["langgraph/examples/agent_supervisor"]="agentic-orchestration"
+    ["langgraph/examples/multi_agent"]="agentic-orchestration"
+    ["mcp-servers/src"]="mcp-architecture"
+    ["vercel-ai/packages/ai/core"]="creator-intelligence"
+    ["openai-swarm/swarm"]="agentic-orchestration"
+)
+
+# Logging functions
+log() { echo -e "${CYAN}[ENHANCE]${NC} $1"; }
+success() { echo -e "${GREEN}[✓]${NC} $1"; }
+warn() { echo -e "${YELLOW}[!]${NC} $1"; }
+error() { echo -e "${RED}[✗]${NC} $1"; exit 1; }
+step() { echo -e "${MAGENTA}[→]${NC} $1"; }
+
+# Show banner
+show_banner() {
+    echo ""
+    echo -e "${MAGENTA}╔═══════════════════════════════════════════════════════════════════╗${NC}"
+    echo -e "${MAGENTA}║          ACOS ENHANCE - Pattern Enhancement System               ║${NC}"
+    echo -e "${MAGENTA}║          Pull cutting-edge patterns from the best repos          ║${NC}"
+    echo -e "${MAGENTA}╚═══════════════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+}
+
+# Show help
+show_help() {
+    echo "ACOS Enhance - Pull cutting-edge AI patterns from authoritative sources"
+    echo ""
+    echo "Usage: acos-enhance <command> [options]"
+    echo ""
+    echo "Commands:"
+    echo "  list-sources           List available source repositories"
+    echo "  list-patterns          List available patterns to pull"
+    echo "  fetch <source>         Fetch latest from a source repo"
+    echo "  fetch-all              Fetch from all source repos"
+    echo "  apply <pattern>        Apply a pattern to target skills"
+    echo "  enhance <skill>        Auto-enhance a skill with relevant patterns"
+    echo "  status                 Show enhancement status"
+    echo "  help                   Show this help message"
+    echo ""
+    echo "Options:"
+    echo "  --force               Force re-fetch even if cached"
+    echo "  --dry-run             Show what would be done"
+    echo ""
+    echo "Examples:"
+    echo "  acos-enhance list-sources"
+    echo "  acos-enhance fetch anthropic-cookbook"
+    echo "  acos-enhance enhance mcp-architecture"
+    echo "  acos-enhance apply anthropic-cookbook/tool_use"
+    echo ""
+    echo "Source Repositories:"
+    for source in "${!SOURCES[@]}"; do
+        echo "  - $source: ${SOURCES[$source]}"
+    done
+    echo ""
+}
+
+# Create directories
+init() {
+    mkdir -p "$ENHANCE_CACHE"
+    mkdir -p "$PATTERNS_DIR"
+}
+
+# List sources
+list_sources() {
+    log "Available source repositories:"
+    echo ""
+    for source in "${!SOURCES[@]}"; do
+        local url="${SOURCES[$source]}"
+        local cached=""
+        if [ -d "$ENHANCE_CACHE/$source" ]; then
+            cached=" ${GREEN}[cached]${NC}"
+        fi
+        echo -e "  ${CYAN}$source${NC}$cached"
+        echo "    URL: $url"
+        echo ""
+    done
+}
+
+# List patterns
+list_patterns() {
+    log "Available patterns to apply:"
+    echo ""
+    for pattern in "${!PATTERN_TARGETS[@]}"; do
+        local targets="${PATTERN_TARGETS[$pattern]}"
+        echo -e "  ${CYAN}$pattern${NC}"
+        echo "    Enhances: $targets"
+    done
+    echo ""
+}
+
+# Fetch a source repository
+fetch_source() {
+    local source="$1"
+    local force="${2:-false}"
+
+    if [ -z "$source" ]; then
+        error "Usage: acos-enhance fetch <source>"
+    fi
+
+    local url="${SOURCES[$source]}"
+    if [ -z "$url" ]; then
+        error "Unknown source: $source. Use 'acos-enhance list-sources' to see available sources."
+    fi
+
+    local cache_dir="$ENHANCE_CACHE/$source"
+
+    if [ -d "$cache_dir" ] && [ "$force" != "true" ]; then
+        log "Updating cached repository: $source"
+        cd "$cache_dir"
+        git pull --quiet 2>/dev/null || warn "Could not update - using cached version"
+        cd - > /dev/null
+    else
+        log "Cloning repository: $source"
+        rm -rf "$cache_dir"
+        git clone --depth 1 "$url" "$cache_dir" 2>/dev/null || {
+            error "Could not clone $source from $url"
+        }
+    fi
+
+    success "Fetched: $source"
+
+    # Show available patterns from this source
+    echo ""
+    log "Available patterns from $source:"
+    for pattern in "${!PATTERN_TARGETS[@]}"; do
+        if [[ "$pattern" == "$source/"* ]]; then
+            local path="${pattern#$source/}"
+            if [ -d "$cache_dir/$path" ] || [ -f "$cache_dir/$path" ]; then
+                echo "  ✓ $pattern"
+            else
+                echo "  - $pattern (not found in repo)"
+            fi
+        fi
+    done
+}
+
+# Fetch all sources
+fetch_all() {
+    log "Fetching all source repositories..."
+    echo ""
+
+    for source in "${!SOURCES[@]}"; do
+        step "Fetching $source..."
+        fetch_source "$source" false 2>/dev/null || warn "Failed to fetch $source"
+    done
+
+    success "All sources fetched!"
+}
+
+# Extract patterns from a source
+extract_patterns() {
+    local pattern="$1"
+    local source="${pattern%%/*}"
+    local path="${pattern#*/}"
+
+    local source_path="$ENHANCE_CACHE/$source/$path"
+    local output_dir="$PATTERNS_DIR/$pattern"
+
+    if [ ! -e "$source_path" ]; then
+        error "Pattern not found: $pattern. Run 'acos-enhance fetch $source' first."
+    fi
+
+    mkdir -p "$output_dir"
+
+    log "Extracting patterns from: $pattern"
+
+    # Copy relevant files
+    if [ -d "$source_path" ]; then
+        # Copy Python and TypeScript files
+        find "$source_path" -name "*.py" -o -name "*.ts" -o -name "*.md" | while read file; do
+            cp "$file" "$output_dir/" 2>/dev/null || true
+        done
+    else
+        cp "$source_path" "$output_dir/"
+    fi
+
+    # Create a summary of the patterns
+    cat > "$output_dir/PATTERNS.md" << EOF
+# Patterns from $pattern
+
+## Source
+Repository: ${SOURCES[$source]}
+Path: $path
+
+## Extracted Patterns
+
+$(ls -1 "$output_dir" | grep -v PATTERNS.md | head -20)
+
+## Usage
+
+These patterns enhance the following skills:
+- ${PATTERN_TARGETS[$pattern]//,/
+- }
+
+## Integration Notes
+
+Review the extracted files and integrate relevant patterns into your skills.
+
+EOF
+
+    success "Patterns extracted to: $output_dir"
+}
+
+# Enhance a skill with patterns
+enhance_skill() {
+    local skill="$1"
+
+    if [ -z "$skill" ]; then
+        error "Usage: acos-enhance enhance <skill>"
+    fi
+
+    log "Enhancing skill: $skill"
+    echo ""
+
+    local enhanced=0
+
+    for pattern in "${!PATTERN_TARGETS[@]}"; do
+        local targets="${PATTERN_TARGETS[$pattern]}"
+        if [[ "$targets" == *"$skill"* ]]; then
+            local source="${pattern%%/*}"
+
+            # Check if source is fetched
+            if [ ! -d "$ENHANCE_CACHE/$source" ]; then
+                step "Fetching required source: $source"
+                fetch_source "$source"
+            fi
+
+            step "Applying pattern: $pattern"
+            extract_patterns "$pattern"
+            enhanced=1
+        fi
+    done
+
+    if [ $enhanced -eq 0 ]; then
+        warn "No patterns found for skill: $skill"
+        echo "  Available skills with patterns:"
+        for pattern in "${!PATTERN_TARGETS[@]}"; do
+            echo "    - ${PATTERN_TARGETS[$pattern]//,/, }"
+        done | sort -u
+    else
+        echo ""
+        success "Skill enhanced: $skill"
+        echo ""
+        log "Review extracted patterns in: $PATTERNS_DIR"
+        log "Integrate relevant patterns into your skill files"
+    fi
+}
+
+# Apply a specific pattern
+apply_pattern() {
+    local pattern="$1"
+
+    if [ -z "$pattern" ]; then
+        error "Usage: acos-enhance apply <pattern>"
+    fi
+
+    local source="${pattern%%/*}"
+
+    # Ensure source is fetched
+    if [ ! -d "$ENHANCE_CACHE/$source" ]; then
+        log "Source not cached, fetching..."
+        fetch_source "$source"
+    fi
+
+    extract_patterns "$pattern"
+
+    echo ""
+    log "Pattern applied. Target skills:"
+    for target in ${PATTERN_TARGETS[$pattern]//,/ }; do
+        echo "  - $target"
+    done
+}
+
+# Show status
+show_status() {
+    log "Enhancement Status"
+    echo ""
+
+    echo "Cached Sources:"
+    for source in "${!SOURCES[@]}"; do
+        if [ -d "$ENHANCE_CACHE/$source" ]; then
+            local last_update=$(stat -c %Y "$ENHANCE_CACHE/$source" 2>/dev/null || stat -f %m "$ENHANCE_CACHE/$source" 2>/dev/null)
+            local date_str=$(date -d "@$last_update" 2>/dev/null || date -r "$last_update" 2>/dev/null || echo "unknown")
+            echo -e "  ${GREEN}✓${NC} $source (updated: $date_str)"
+        else
+            echo -e "  ${YELLOW}○${NC} $source (not cached)"
+        fi
+    done
+    echo ""
+
+    echo "Extracted Patterns:"
+    if [ -d "$PATTERNS_DIR" ] && [ "$(ls -A $PATTERNS_DIR 2>/dev/null)" ]; then
+        for pattern_dir in "$PATTERNS_DIR"/*/*; do
+            if [ -d "$pattern_dir" ]; then
+                local pattern="${pattern_dir#$PATTERNS_DIR/}"
+                local file_count=$(ls -1 "$pattern_dir" | wc -l)
+                echo "  - $pattern ($file_count files)"
+            fi
+        done
+    else
+        echo "  No patterns extracted yet"
+    fi
+    echo ""
+
+    log "Run 'acos-enhance fetch-all' to cache all sources"
+    log "Run 'acos-enhance enhance <skill>' to enhance a skill"
+}
+
+# Main entry point
+main() {
+    init
+
+    case "${1:-help}" in
+        list-sources)
+            list_sources
+            ;;
+        list-patterns)
+            list_patterns
+            ;;
+        fetch)
+            shift
+            fetch_source "$@"
+            ;;
+        fetch-all)
+            fetch_all
+            ;;
+        apply)
+            shift
+            apply_pattern "$@"
+            ;;
+        enhance)
+            shift
+            enhance_skill "$@"
+            ;;
+        status)
+            show_status
+            ;;
+        help|--help|-h)
+            show_banner
+            show_help
+            ;;
+        *)
+            error "Unknown command: $1. Use 'acos-enhance help' for usage."
+            ;;
+    esac
+}
+
+# Run
+main "$@"

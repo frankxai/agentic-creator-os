@@ -1,0 +1,102 @@
+name: seo-audit
+department: marketing
+version: 1.0.0
+purpose: Comprehensive website SEO audit with prioritized optimization plan
+
+agents:
+  - name: Technical SEO Agent
+    role: Crawls and analyzes
+  - name: On-Page SEO Agent
+    role: Optimizes content
+  - name: Analytics Agent
+    role: Sets up tracking
+  - name: Content Agent
+    role: Creates missing content
+
+steps:
+  - name: Technical Audit
+    input:
+      - Website URL
+      - Crawl depth
+    actions:
+      - Crawl all pages
+      - Identify technical issues
+      - Check page speed
+      - Analyze mobile-friendliness
+      - Verify SSL and security
+      - Check indexation status
+      - Identify redirect chains
+    output: Technical audit report
+
+  - name: On-Page Analysis
+    input:
+      - Target keywords per page
+    actions:
+      - Analyze title tags
+      - Review meta descriptions
+      - Check heading structure
+      - Evaluate content quality
+      - Analyze image optimization
+      - Check internal linking
+      - Identify duplicate content
+    output: On-page analysis report
+
+  - name: Keyword Research
+    input:
+      - Business topic
+      - Competitors
+    actions:
+      - Identify primary keywords
+      - Find long-tail opportunities
+      - Analyze keyword difficulty
+      - Research competitor keywords
+      - Find trending topics
+      - Prioritize by intent
+    output: Keyword research report
+
+  - name: Backlink Analysis
+    input:
+      - Competitor domains
+    actions:
+      - Analyze existing backlinks
+      - Identify backlink gaps
+      - Find link building opportunities
+      - Disavow toxic links
+      - Monitor new backlinks
+    output: Backlink strategy
+
+  - name: Priority Action Plan
+    input:
+      - All audit findings
+    actions:
+      - Prioritize issues by impact
+      - Estimate effort for each fix
+      - Create implementation timeline
+      - Assign tasks to agents
+      - Set up tracking
+    output: Action plan with timeline
+
+  - name: Implementation
+    input:
+      - Action plan
+      - Resources
+    actions:
+      - Fix technical issues
+      - Optimize on-page elements
+      - Create missing content
+      - Build new backlinks
+      - Configure tracking
+    output: Optimized website
+
+metrics:
+  - Technical issues found and fixed
+  - Keyword rankings before and after
+  - Organic traffic change
+  - Page speed improvement
+  - Conversion rate change
+
+config:
+  crawl_depth: full
+  include_competitors: true
+  track_rankings: true
+  priority_threshold: high

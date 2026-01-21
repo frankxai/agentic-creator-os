@@ -1,0 +1,69 @@
+{
+  "name": "Agentic Creator OS Template",
+  "slug": "agentic-creator-os-template",
+  "version": "2.0.0",
+  "brand": {
+    "name": "Agentic Creator OS",
+    "voice": {
+      "tone": "professional",
+      "personality": [
+        "innovative",
+        "helpful",
+        "reliable",
+        "cutting-edge"
+      ],
+      "keywords": [
+        "AI",
+        "automation",
+        "agentic",
+        "workflow",
+        "productivity"
+      ],
+      "avoidKeywords": [
+        "spammy",
+        "clickbait",
+        "overpromised"
+      ]
+    },
+    "colors": {
+      "primary": "#2563eb",
+      "secondary": "#7c3aed",
+      "accent": "#06b6d4"
+    }
+  },
+  "directories": {
+    "workflows": "workflows",
+    "templates": "templates",
+    "skills": "skills",
+    "mcpServers": "mcp-servers"
+  },
+  "integrations": {
+    "opencode": true,
+    "claudeCode": true,
+    "gemini": true
+  },
+  "skills": {
+    "enabled": [
+      "content",
+      "marketing",
+      "dev",
+      "evaluator"
+    ],
+    "custom": []
+  },
+  "workflows": {
+    "enabled": [
+      "social-media",
+      "web3",
+      "content",
+      "marketing",
+      "dev"
+    ],
+    "custom": []
+  },
+  "evaluation": {
+    "enabled": true,
+    "strictMode": false,
+    "benchmarkAgainst": "industry-average"
+  }
+}

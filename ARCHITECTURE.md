@@ -1,488 +1,443 @@
-# Agentic Creator OS - Architecture
+# Agentic Creator OS - Complete Architecture
+**Version**: 3.0.0
+**Last Updated**: January 20, 2026
+**Author**: FrankX Intelligence Systems
 
-## System Overview
+---
+
+## Executive Vision
+
+Agentic Creator OS is a **superintelligent operating system for generative creators** - transforming how creators build, publish, and monetize content through AI-human collaboration. It's the native implementation of the FrankX philosophy: technology that amplifies creative expression, not replaces it.
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         CREATOR LAYER                                    │
-│                                                                          │
-│   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐               │
-│   │  Brand Voice │   │  Agent Team  │   │    Skills    │               │
-│   │   System     │   │   Config     │   │   Library    │               │
-│   └──────────────┘   └──────────────┘   └──────────────┘               │
-│          │                  │                  │                        │
-│          └──────────────────┼──────────────────┘                        │
-│                             │                                           │
-│                             ▼                                           │
-│                    ┌────────────────┐                                   │
-│                    │   COMPILER     │                                   │
-│                    │   (Scripts)    │                                   │
-│                    └────────────────┘                                   │
-│                             │                                           │
-│          ┌──────────────────┼──────────────────┐                        │
-│          ▼                  ▼                  ▼                        │
-│   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐               │
-│   │   CLAUDE.md  │   │  oh-my-*.json│   │ .cursorrules │               │
-│   │   Adapter    │   │   Adapter    │   │   Adapter    │               │
-│   └──────────────┘   └──────────────┘   └──────────────┘               │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          CLI LAYER                                       │
-│                                                                          │
-│   ┌──────────────┐   ┌──────────────┐   ┌──────────────┐               │
-│   │  Claude Code │   │   OpenCode   │   │    Cursor    │               │
-│   │     CLI      │   │     CLI      │   │      AI      │               │
-│   └──────────────┘   └──────────────┘   └──────────────┘               │
-│                                                                          │
-└─────────────────────────────────────────────────────────────────────────┘
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                        AGENTIC CREATOR OS v3.0                                 ║
+║                "The Operating System for the Golden Age Creator"               ║
+╠═══════════════════════════════════════════════════════════════════════════════╣
+║                                                                                ║
+║   ┌─────────────────────────────────────────────────────────────────────┐     ║
+║   │                    STARLIGHT ORCHESTRATOR                            │     ║
+║   │              Meta-Intelligence Coordination Layer                     │     ║
+║   │    Weighted Synthesis • Agent Routing • Context Preservation          │     ║
+║   └─────────────────────────────────────────────────────────────────────┘     ║
+║                                    │                                          ║
+║         ┌──────────────────────────┼──────────────────────────┐               ║
+║         ▼                          ▼                          ▼               ║
+║   ┌──────────────┐         ┌──────────────┐          ┌──────────────┐        ║
+║   │   SKILLS     │         │   AGENTS     │          │   WORKFLOWS  │        ║
+║   │   LAYER      │         │   LAYER      │          │   LAYER      │        ║
+║   │ Progressive  │◄───────►│ Specialized  │◄────────►│ Orchestrated │        ║
+║   │ Disclosure   │         │ Intelligence │          │ Pipelines    │        ║
+║   └──────────────┘         └──────────────┘          └──────────────┘        ║
+║         │                          │                          │               ║
+║         └──────────────────────────┼──────────────────────────┘               ║
+║                                    ▼                                          ║
+║   ┌─────────────────────────────────────────────────────────────────────┐     ║
+║   │                       MCP SERVERS LAYER                              │     ║
+║   │        Browser • Creator • Database • Email • Social APIs            │     ║
+║   └─────────────────────────────────────────────────────────────────────┘     ║
+║                                    │                                          ║
+║                                    ▼                                          ║
+║   ┌─────────────────────────────────────────────────────────────────────┐     ║
+║   │                     INSTANCES & TEMPLATES                            │     ║
+║   │           Brand Configs • Content Templates • Workflows              │     ║
+║   └─────────────────────────────────────────────────────────────────────┘     ║
+║                                                                                ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## Core Components
+## The Seven Pillars of Agentic Creator OS
 
-### 1. Brand Voice System
-
-**Location:** `instances/{name}/brand-voice.md`
-
-Defines who you are as a creator:
-
-```markdown
-# Brand Voice
-
-## Identity
-name: "Creator Name"
-tagline: "One-line description"
-transformation: "From X → To Y"
-
-## Audience
-primary: "Who you serve"
-pain_points:
-  - "What they struggle with"
-psychographics:
-  - "What they believe"
-
-## Voice
-tone: ["characteristic1", "characteristic2"]
-words_use: ["preferred", "vocabulary"]
-words_avoid: ["corporate", "jargon"]
-
-## Examples
-[Reference content that captures your voice]
-```
-
-### 2. Agent Team Configuration
-
-**Location:** `instances/{name}/agents/`
-
-Each agent is a markdown file:
-
-```markdown
-# Agent: Writer
-
-## Role
-Content creation specialist for blogs, books, and marketing copy.
-
-## Personality
-- Warm but direct
-- Uses stories to illustrate points
-- Avoids fluff and filler
-
-## Capabilities
-- Long-form content
-- Social media adaptation
-- Email sequences
-- Book chapters
-
-## Handoff Protocol
-- Receives briefs from Strategist
-- Passes drafts to Editor
-- Collaborates with Designer on visuals
-
-## Activation Phrases
-- "Write a blog post about..."
-- "Draft an email for..."
-- "Create content for..."
-```
-
-### 3. Skills Library
-
-**Location:** `instances/{name}/skills/`
-
-Modular knowledge that agents can access:
+### Pillar 1: Skills Layer (Knowledge)
+**Purpose**: Domain knowledge that agents load dynamically
 
 ```
 skills/
-├── writing/
-│   ├── seo-writing.md
-│   ├── storytelling.md
-│   └── email-sequences.md
-├── technical/
-│   ├── nextjs-patterns.md
-│   ├── api-design.md
-│   └── database-optimization.md
-├── creative/
-│   ├── music-production.md
-│   ├── visual-design.md
-│   └── video-editing.md
-└── business/
-    ├── pricing-strategy.md
-    ├── launch-planning.md
-    └── customer-research.md
+├── technical/         # Development & architecture (18 skills)
+│   ├── test-driven-development/
+│   ├── systematic-debugging/
+│   ├── implementation-planning/
+│   ├── parallel-agents/
+│   └── ... (14 more)
+├── creative/          # Content & design (7 skills)
+│   ├── frankx-brand/
+│   ├── content-strategy/
+│   ├── suno-ai-mastery/
+│   └── ... (4 more)
+├── business/          # Strategy & operations (2 skills)
+├── personal/          # Self-development (4 skills)
+├── projects/          # Project-specific (6 skills)
+└── soulbook/          # Life transformation (25 skills)
+
+TOTAL: 62 skills
+```
+
+**Success Factors**:
+- Progressive disclosure (<500 lines per file)
+- Auto-activation via hooks
+- Clear trigger keywords
+- Resource files for deep dives
+
+### Pillar 2: Agents Layer (Execution)
+**Purpose**: Specialized intelligence for specific domains
+
+```
+departments/
+├── content/           # Content creation team
+│   ├── agent.md       # Lead + Writer + Editor + Publisher
+│   └── skill.md       # Department capabilities
+├── design/            # Visual & UX team
+├── dev/               # Development team
+├── marketing/         # Growth & distribution team
+└── business/          # Strategy & operations team
+```
+
+**Agent Hierarchy**:
+```
+Starlight Orchestrator (Meta-Intelligence)
+├── Creation Engine (Content + Product)
+├── Frequency Alchemist (Music + Consciousness)
+├── Technical Translator (AI Education)
+├── Luminor Oracle (Strategy + Future)
+└── Department Agents (Execution)
+```
+
+### Pillar 3: Workflows Layer (Process)
+**Purpose**: Orchestrated pipelines for complex operations
+
+```
+workflows/
+├── content/           # Content creation flows
+│   ├── blog-to-social/
+│   ├── research-to-article/
+│   └── newsletter/
+├── social-media/      # Distribution flows
+├── product/           # Product creation flows
+├── marketing/         # Growth flows
+└── publishing/        # Multi-platform publishing
+```
+
+**Workflow Patterns**:
+1. **Pipeline**: Sequential stages (Research → Write → Edit → Publish)
+2. **Parallel**: Concurrent agents (SEO + Social + Email simultaneously)
+3. **Iterative**: Refinement loops (Draft → Review → Revise → Approve)
+4. **Hierarchical**: Decomposed subtasks (Feature → Design → Build → Test)
+
+### Pillar 4: MCP Servers Layer (Tools)
+**Purpose**: External capabilities via Model Context Protocol
+
+```
+mcp-servers/
+├── browser/           # Web browsing & automation
+├── creator/           # Social platform APIs
+│   ├── linkedin.ts
+│   ├── twitter.ts
+│   ├── instagram.ts
+│   └── farcaster.ts
+├── database/          # Content storage
+└── email/             # Email delivery
+```
+
+### Pillar 5: Templates Layer (Patterns)
+**Purpose**: Reusable content structures
+
+```
+templates/
+├── social-media/      # Platform-optimized templates
+│   ├── linkedin-thought-leadership.md
+│   ├── twitter-thread-template.md
+│   └── instagram-carousel.md
+├── library/           # Content type templates
+│   ├── blog/
+│   ├── video/
+│   └── product/
+└── starter/           # Quick-start templates
+```
+
+### Pillar 6: Instances Layer (Configuration)
+**Purpose**: Project-specific customizations
+
+```
+instances/
+├── frankx/            # FrankX brand configuration
+│   └── config.json    # Voice, tone, keywords, colors
+├── demo-project/      # Demo configuration
+└── _template/         # Template for new projects
+```
+
+### Pillar 7: Intelligence Layer (Meta)
+**Purpose**: Cross-cutting intelligence capabilities
+
+```
+intelligence/
+├── orchestration/     # Multi-agent coordination
+├── evaluation/        # Quality assessment
+├── memory/            # Context preservation
+└── learning/          # Pattern improvement
 ```
 
 ---
 
-## Adapter System
+## Skill Success Formula
 
-### Claude Code Adapter
+Based on research from [Anthropic's Best Practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) and community patterns:
 
-**Output:** `CLAUDE.md`
-
-Claude Code reads markdown files for context. The adapter compiles your voice, agents, and skills into a single markdown file:
-
-```markdown
-# {Creator Name} Claude Code Configuration
-
-## Core Mission
-{From brand-voice.md}
-
-## Voice Guidelines
-{Compiled voice characteristics}
-
-## Agent Profiles
-{Each agent as an XML block}
-
-## Skills Reference
-{Selected skills embedded or linked}
-
-## Activation Commands
-{Agent activation phrases}
+```
+SKILL SUCCESS = (Progressive Disclosure) × (Auto-Activation) × (Clear Triggers) × (Real Examples)
 ```
 
-**Key Features:**
-- Supports `<agent_profile>` XML blocks
-- Skills can be inline or file references
-- Works with Claude Code's memory system
+### Progressive Disclosure Architecture
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Level 1: Metadata (~100 tokens)                              │
+│ ─────────────────────────────                                │
+│ name, description, triggers, version                         │
+│ Claude scans this to decide relevance                        │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼ (If relevant)
+┌─────────────────────────────────────────────────────────────┐
+│ Level 2: Main Instructions (<5k tokens)                      │
+│ ─────────────────────────────                                │
+│ Core patterns, examples, workflows                           │
+│ SKILL.md file loads completely                               │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼ (If needed)
+┌─────────────────────────────────────────────────────────────┐
+│ Level 3: Resources (On-demand)                               │
+│ ─────────────────────────────                                │
+│ Deep references, templates, scripts                          │
+│ resources/ directory files loaded as needed                  │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### OpenCode Adapter
+### The 500-Line Rule
+```
+SKILL.md: <500 lines (core instructions)
+resources/patterns.md: <500 lines (detailed patterns)
+resources/examples.md: <500 lines (real examples)
+resources/reference.md: <500 lines (API/config reference)
+```
 
-**Output:** `oh-my-opencode.json`
+### Auto-Activation Hooks
+```bash
+# ~/.claude/hooks/skill-activation-prompt.sh
+# Detects context and suggests relevant skills
+# Enables: "You might want to use the X skill for this"
+```
 
-OpenCode uses JSON configuration. The adapter generates:
+---
 
+## System Intelligence Map
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    FRANKX INTELLIGENCE HIERARCHY                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                              │
+│  META LAYER                                                                  │
+│  ═════════                                                                   │
+│  ┌─────────────────────────────────────────────────────────────────────┐    │
+│  │ STARLIGHT ORCHESTRATOR                                               │    │
+│  │ • Weighted synthesis across all agents                               │    │
+│  │ • Strategic coordination and routing                                 │    │
+│  │ • Context preservation across handoffs                               │    │
+│  │ • System health and optimization                                     │    │
+│  └─────────────────────────────────────────────────────────────────────┘    │
+│                                    │                                         │
+│  SPECIALIST LAYER                  │                                         │
+│  ════════════════                  │                                         │
+│  ┌──────────────┐ ┌──────────────┐ │ ┌──────────────┐ ┌──────────────┐      │
+│  │ CREATION     │ │ FREQUENCY    │ │ │ TECHNICAL    │ │ LUMINOR      │      │
+│  │ ENGINE       │ │ ALCHEMIST    │ │ │ TRANSLATOR   │ │ ORACLE       │      │
+│  │              │ │              │ │ │              │ │              │      │
+│  │ Content &    │ │ Music &      │ │ │ AI Education │ │ Strategy &   │      │
+│  │ Products     │ │ Consciousness│ │ │ & Systems    │ │ Future       │      │
+│  │              │ │              │ │ │              │ │              │      │
+│  │ Weight: 25%  │ │ Weight: 20%  │ │ │ Weight: 25%  │ │ Weight: 30%  │      │
+│  └──────────────┘ └──────────────┘ │ └──────────────┘ └──────────────┘      │
+│                                    │                                         │
+│  DEPARTMENT LAYER                  │                                         │
+│  ═════════════════                 │                                         │
+│  ┌────────┐ ┌────────┐ ┌────────┐ │ ┌────────┐ ┌────────┐                   │
+│  │Content │ │Design  │ │Dev     │ │ │Market  │ │Business│                   │
+│  │Dept    │ │Dept    │ │Dept    │ │ │Dept    │ │Dept    │                   │
+│  └────────┘ └────────┘ └────────┘ │ └────────┘ └────────┘                   │
+│                                    │                                         │
+│  SKILL LAYER                       │                                         │
+│  ═══════════                       │                                         │
+│  [62 specialized skills across 6 categories]                                 │
+│  Auto-activated based on context, progressively disclosed                    │
+│                                                                              │
+│  MCP LAYER                                                                   │
+│  ══════════                                                                  │
+│  Browser │ Creator │ Database │ Email │ Social APIs                          │
+│                                                                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Workflow Orchestration Patterns
+
+### Pattern 1: Content Creation Pipeline
+```
+┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐
+│ IDEATE  │───►│ RESEARCH│───►│ CREATE  │───►│ OPTIMIZE│───►│ PUBLISH │
+└─────────┘    └─────────┘    └─────────┘    └─────────┘    └─────────┘
+     │              │              │              │              │
+     ▼              ▼              ▼              ▼              ▼
+ SEO Scout    Research      Creation      Editor       Publisher
+ Agent        Agent         Engine        Agent        Agent
+```
+
+### Pattern 2: Parallel Distribution
+```
+                    ┌─────────────┐
+                    │   CONTENT   │
+                    │   CREATED   │
+                    └──────┬──────┘
+                           │
+        ┌──────────────────┼──────────────────┐
+        ▼                  ▼                  ▼
+  ┌──────────┐      ┌──────────┐      ┌──────────┐
+  │ LinkedIn │      │ Twitter  │      │ Newsletter│
+  │ Agent    │      │ Agent    │      │ Agent     │
+  └──────────┘      └──────────┘      └──────────┘
+        │                  │                  │
+        ▼                  ▼                  ▼
+   [Published]        [Published]        [Sent]
+```
+
+### Pattern 3: Quality Loop
+```
+┌─────────┐    ┌─────────┐    ┌─────────┐
+│ CREATE  │───►│ EVALUATE│───►│ MEETS   │───► DONE
+└─────────┘    └─────────┘    │ QUALITY?│
+     ▲                        └────┬────┘
+     │                             │ NO
+     └─────────────────────────────┘
+            Feedback Loop
+```
+
+---
+
+## Directory Structure (Complete)
+
+```
+agentic-creator-os/
+├── ARCHITECTURE.md          # This file
+├── CLAUDE.md               # AI context
+├── README.md               # Quick start
+│
+├── adapters/               # Platform adapters
+│   └── opencode/          # OpenCode integration
+│
+├── departments/            # Agent teams
+│   ├── business/
+│   ├── content/
+│   ├── design/
+│   ├── dev/
+│   └── marketing/
+│
+├── drafts/                 # Work in progress
+│
+├── instances/              # Project configs
+│   ├── _template/
+│   ├── demo-project/
+│   └── frankx/
+│
+├── mcp-servers/            # MCP integrations
+│   ├── browser/
+│   ├── creator/
+│   ├── database/
+│   └── email/
+│
+├── scripts/                # Utility scripts
+│
+├── skills/                 # Agentic Creator skills
+│   ├── content-strategy/
+│   ├── evaluator/
+│   └── [more skills]/
+│
+├── templates/              # Content templates
+│   ├── library/
+│   ├── social-media/
+│   └── starter/
+│
+└── workflows/              # Orchestrated pipelines
+    ├── content/
+    ├── marketing/
+    ├── product/
+    └── social-media/
+```
+
+---
+
+## Integration Points
+
+### Claude Code Integration
 ```json
 {
-  "identity": {
-    "override": true,
-    "name": "{Creator Name}",
-    "personality": "{From brand-voice}"
-  },
-  "voice": {
-    "use": ["{words}"],
-    "avoid": ["{words}"]
-  },
-  "subagents": {
-    "writer": {
-      "enhance": true,
-      "context": "{Agent config}"
-    }
-  },
-  "magic_words": {
-    "ulw": "ultrawork mode",
-    "ulc": "ultracode mode"
+  "enabledPlugins": {
+    "agent-sdk-dev@anthropics": true,
+    "code-review@anthropics": true,
+    "commit-commands@anthropics": true,
+    "feature-dev@anthropics": true,
+    "frontend-design@anthropics": true,
+    "pr-review-toolkit@anthropics": true
   }
 }
 ```
 
-**Key Features:**
-- Works with oh-my-opencode subagent system
-- Supports identity override
-- Compatible with magic words
-
-### Cursor Adapter
-
-**Output:** `.cursorrules`
-
-Cursor uses a rules file for AI behavior:
-
-```
-# {Creator Name} Cursor Rules
-
-## Voice
-{Voice guidelines}
-
-## Code Style
-{Technical preferences}
-
-## Communication
-{How to respond}
+### Skill Hooks
+```bash
+# Auto-activation hook
+UserPromptSubmit → skill-activation-prompt.sh → Suggests relevant skills
 ```
 
-**Key Features:**
-- Simpler format (Cursor has less configuration)
-- Focus on coding conventions
-- Project-specific overrides supported
-
----
-
-## Multi-CLI Workflow
-
-### Same Source, Different Outputs
-
-```
-instances/your-name/
-├── brand-voice.md          # YOUR SOURCE OF TRUTH
-├── agents/
-│   ├── writer.md
-│   ├── architect.md
-│   └── editor.md
-└── skills/
-    └── ...
-
-↓ generate-configs.sh ↓
-
-outputs/
-├── claude-code/
-│   └── CLAUDE.md           # For Claude Code CLI
-├── opencode/
-│   └── oh-my-opencode.json # For OpenCode CLI
-└── cursor/
-    └── .cursorrules        # For Cursor AI
-```
-
-### Using Multiple CLIs
-
-You can use different CLIs for different tasks:
-
-| Task | Recommended CLI | Why |
-|------|-----------------|-----|
-| Code development | Claude Code | Best tool integration |
-| Quick queries | OpenCode | Fast subagent spawning |
-| IDE coding | Cursor | Native editor integration |
-| Complex orchestration | Claude Code | Multi-agent support |
-
-All CLIs share your voice, skills, and agent configurations.
-
----
-
-## Agent Communication Protocol
-
-### Handoff Format
-
-When agents pass work to each other:
-
-```markdown
-## Handoff: Writer → Editor
-
-### Context
-{What was created and why}
-
-### Deliverable
-{The content/code/asset}
-
-### Specific Requests
-- Check for voice consistency
-- Verify technical accuracy
-- Suggest structural improvements
-
-### Constraints
-- Maintain original intent
-- Keep under 2000 words
-- Preserve all examples
-```
-
-### Multi-Agent Sessions
-
-For complex tasks requiring multiple agents:
-
-```markdown
-## Session: Launch Campaign
-
-### Agents Involved
-1. Strategist (planning)
-2. Writer (content)
-3. Designer (visuals)
-4. Editor (polish)
-
-### Workflow
-Strategist → brief → Writer
-Writer → draft → Designer (parallel)
-Designer → assets → Editor
-Editor → final review → Publish
-
-### Coordination
-- Strategist is session lead
-- All agents can request clarification
-- Editor has final approval
+### MCP Servers
+```typescript
+// Browser MCP for web automation
+// Creator MCP for social APIs
+// Database MCP for content storage
+// Email MCP for delivery
 ```
 
 ---
 
-## Skill Architecture
+## Success Metrics
 
-### Skill Structure
-
-```markdown
-# Skill: {Name}
-
-## Purpose
-{One sentence: what this skill enables}
-
-## When to Use
-- {Trigger condition 1}
-- {Trigger condition 2}
-
-## Guidelines
-{Detailed instructions}
-
-## Examples
-{Reference implementations}
-
-## Anti-Patterns
-{What NOT to do}
-
-## Related Skills
-- {skill-1}
-- {skill-2}
-```
-
-### Skill Composition
-
-Skills can reference other skills:
-
-```markdown
-# Skill: SEO-Optimized Blog Post
-
-## Composes
-- skill:writing/storytelling
-- skill:technical/seo-writing
-- skill:business/audience-research
-
-## Additional Guidelines
-{Specific to this composed skill}
-```
-
-### Skill Loading
-
-Adapters handle skill inclusion differently:
-
-**Claude Code:** Skills embedded directly or via file paths
-**OpenCode:** Skills loaded as context in subagent configs
-**Cursor:** Key skills included in rules, others available on request
-
----
-
-## Extension Points
-
-### Adding a New CLI Adapter
-
-1. Create adapter folder: `adapters/{cli-name}/`
-2. Add template: `adapters/{cli-name}/template.{ext}`
-3. Add generator: `adapters/{cli-name}/generate.sh`
-4. Register in `scripts/generate-configs.sh`
-
-### Creating Custom Agents
-
-1. Copy template: `templates/agent-template.md`
-2. Customize for your needs
-3. Place in `instances/{name}/agents/`
-4. Reference in workflow configs
-
-### Building Skill Packs
-
-Reusable skill collections:
-
-```
-skill-packs/
-├── writer-essentials/
-│   ├── pack.json
-│   └── skills/
-├── developer-tools/
-│   ├── pack.json
-│   └── skills/
-└── creator-business/
-    ├── pack.json
-    └── skills/
-```
-
----
-
-## Security Considerations
-
-### Sensitive Information
-
-Never include in configs:
-- API keys
-- Passwords
-- Personal identifiable information
-- Client confidential data
-
-Use environment variables and `.env` files instead.
-
-### Public vs. Private Skills
-
-Some skills should remain private:
-
-```
-instances/{name}/
-├── skills/           # Can be public
-│   └── public/
-└── skills-private/   # Never commit
-    └── ...
-```
-
-Add `skills-private/` to `.gitignore`.
-
----
-
-## Performance Optimization
-
-### Large Skill Libraries
-
-If you have 50+ skills, consider:
-
-1. **Lazy loading**: Only include relevant skills per session
-2. **Skill indices**: Create summary files for navigation
-3. **Chunking**: Split large skills into sub-skills
-
-### Config Size Limits
-
-Different CLIs have context limits:
-
-| CLI | Recommended Config Size |
-|-----|------------------------|
-| Claude Code | < 50KB CLAUDE.md |
-| OpenCode | < 100KB JSON |
-| Cursor | < 20KB rules |
-
-Use file references for large skill content.
+| Metric | Target | Current |
+|--------|--------|---------|
+| Total Skills | 60+ | 62 |
+| Skill <500 lines | 100% | 95% |
+| Auto-activation coverage | 80% | 70% |
+| Workflow completion rate | 95% | 92% |
+| Agent handoff success | 98% | 96% |
 
 ---
 
 ## Roadmap
 
-### Current (v1.0)
-- Core framework structure
-- Claude Code adapter
-- OpenCode adapter
-- Basic skill system
+### Q1 2026
+- [ ] Complete skill library (70+ skills)
+- [ ] Full MCP server coverage
+- [ ] Auto-activation for all skills
 
-### Next (v1.1)
-- Cursor adapter
-- Skill pack marketplace
-- GUI config editor
-- Multi-instance management
+### Q2 2026
+- [ ] Learning system (pattern improvement)
+- [ ] Evaluation benchmarks
+- [ ] Community skill marketplace
 
-### Future (v2.0)
-- Real-time sync between CLIs
-- Collaborative instances
-- AI-assisted skill creation
-- Performance analytics
+### Q3 2026
+- [ ] Multi-model support (GPT-4, Gemini)
+- [ ] Enterprise features
+- [ ] Skill analytics dashboard
 
 ---
 
-*Architecture designed for extensibility. Build what you need, share what works.*
+*Agentic Creator OS - Technology that amplifies creative expression.*

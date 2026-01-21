@@ -1,0 +1,773 @@
+name: Cross-Platform Content Distribution
+department: marketing
+purpose: Distribute and adapt one piece of content across multiple social media platforms with platform-specific optimizations
+
+description: |
+  Comprehensive workflow for taking a single content piece and strategically adapting it for maximum impact
+  across Twitter, LinkedIn, Instagram, Facebook, TikTok, and YouTube Shorts. Ensures consistent messaging
+  while respecting each platform's unique audience, format, and algorithm requirements.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze platform-specific best practices
+      - Research audience differences across platforms
+      - Identify optimal posting times per platform
+      - Study cross-platform performance patterns
+    
+  - role: writer
+    responsibilities:
+      - Adapt core message for each platform
+      - Rewrite content for platform-specific formats
+      - Maintain brand voice consistency
+      - Create platform-optimized CTAs
+    
+  - role: designer
+    responsibilities:
+      - Adapt visuals for each platform
+      - Resize and reformat assets
+      - Ensure brand consistency
+      - Optimize for mobile viewing
+    
+  - role: editor
+    responsibilities:
+      - Review all platform adaptations
+      - Ensure message consistency
+      - Validate platform compliance
+      - Polish for quality
+    
+  - role: seo
+    responsibilities:
+      - Optimize for each platform's search
+      - Research platform-specific keywords
+      - Suggest hashtag strategies
+      - Analyze cross-platform performance
+    
+  - role: publisher
+    responsibilities:
+      - Schedule posts across platforms
+      - Monitor multi-platform engagement
+      - Coordinate timing strategy
+      - Track unified metrics
+
+steps:
+  - step: 1
+    name: Core Content Analysis & Strategy
+    agent: researcher
+    input:
+      - source_content (article|video|image|idea)
+      - target_platforms (twitter|linkedin|instagram|facebook|tiktok|youtube)
+      - campaign_goal (awareness|engagement|conversion|traffic)
+    actions:
+      - analyze_source_content:
+          identify:
+            - core_message: main_takeaway
+            - key_points: 3-5_main_ideas
+            - value_proposition: what_audience_gains
+            - emotional_tone: inspire_educate_entertain
+            - target_audience: who_this_serves
+      - research_platform_requirements:
+          for_each_platform:
+            - format_specs: text_image_video_requirements
+            - optimal_length: platform_specific_limits
+            - audience_expectations: what_performs_well
+            - algorithm_preferences: what_gets_boosted
+            - engagement_patterns: when_and_how_users_interact
+      - develop_distribution_strategy:
+          sequencing:
+            - primary_platform: where_to_launch_first
+            - secondary_platforms: follow_up_timing
+            - staggered_release: avoid_simultaneous_posting
+          timing:
+            - optimal_windows: best_times_per_platform
+            - time_zone_considerations: global_audience
+            - day_of_week: platform_specific_patterns
+      - identify_adaptation_needs:
+          content_modifications:
+            - format_changes: text_to_video_image_to_carousel
+            - length_adjustments: expand_or_condense
+            - tone_shifts: professional_to_casual
+            - visual_requirements: platform_specific_assets
+    output:
+      - distribution_strategy:
+          core_message: ""
+          key_points: []
+          platform_requirements: {}
+          posting_sequence: []
+          adaptation_plan: {}
+  
+  - step: 2
+    name: Twitter Adaptation
+    agent: writer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_twitter:
+          format_decision:
+            - single_tweet: quick_insight_or_announcement
+            - thread: detailed_breakdown_or_story
+            - quote_tweet: add_commentary_to_link
+          write_content:
+            - hook: attention_grabbing_first_line
+            - body: concise_value_delivery
+            - cta: clear_engagement_prompt
+            - character_limit: 280_per_tweet
+          optimize_elements:
+            - hashtags: 2-3_strategic_tags
+            - mentions: tag_relevant_accounts
+            - media: image_video_or_gif
+            - link: shortened_url_if_needed
+      - create_thread_structure:
+          if_thread_format:
+            - tweet_1: hook_with_thread_indicator
+            - tweets_2_to_n-1: main_content_points
+            - tweet_n: cta_and_engagement
+            - optimal_length: 7-12_tweets
+    output:
+      - twitter_content:
+          format: single_or_thread
+          tweets: []
+          media_assets: []
+          hashtags: []
+          posting_time: ""
+  
+  - step: 3
+    name: LinkedIn Adaptation
+    agent: writer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_linkedin:
+          format_decision:
+            - text_post: thought_leadership_story
+            - image_post: visual_with_professional_caption
+            - document_post: detailed_guide_or_report
+            - video_post: professional_insights
+          write_content:
+            - hook: professional_opening_line
+            - body: value_driven_narrative
+            - context: why_this_matters_professionally
+            - cta: encourage_professional_discussion
+            - length: 1300-2000_characters
+          optimize_elements:
+            - hashtags: 3-5_professional_tags
+            - mentions: tag_companies_or_professionals
+            - formatting: line_breaks_and_white_space
+            - tone: authentic_yet_professional
+      - enhance_professional_angle:
+          - add_credibility: credentials_or_experience
+          - include_insights: industry_perspective
+          - provide_value: actionable_takeaways
+          - invite_discussion: thought_provoking_question
+    output:
+      - linkedin_content:
+          format: ""
+          post_text: ""
+          media_assets: []
+          hashtags: []
+          posting_time: ""
+  
+  - step: 4
+    name: Instagram Adaptation
+    agent: designer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_instagram:
+          format_decision:
+            - single_image: striking_visual_with_caption
+            - carousel: educational_multi_slide_post
+            - reel: short_form_video_content
+            - story: ephemeral_behind_scenes
+          create_visual_content:
+            - design_style: on_brand_and_eye_catching
+            - dimensions: 1080x1080_or_1080x1350
+            - text_overlays: minimal_and_readable
+            - color_palette: vibrant_and_cohesive
+          write_caption:
+            - hook: first_line_stops_scroll
+            - body: storytelling_or_educational
+            - cta: save_share_or_comment
+            - length: 125-150_words
+            - hashtags: 20-30_strategic_tags
+      - optimize_for_saves:
+          - educational_value: worth_referencing_later
+          - visual_appeal: aesthetically_pleasing
+          - actionable_content: practical_takeaways
+    output:
+      - instagram_content:
+          format: ""
+          visual_assets: []
+          caption: ""
+          hashtags: []
+          posting_time: ""
+  
+  - step: 5
+    name: Facebook Adaptation
+    agent: writer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_facebook:
+          format_decision:
+            - text_post: community_focused_story
+            - photo_post: visual_with_engaging_caption
+            - video_post: native_video_for_reach
+            - link_post: share_with_context
+          write_content:
+            - hook: relatable_opening
+            - body: conversational_and_authentic
+            - engagement_prompt: question_or_discussion_starter
+            - cta: encourage_community_interaction
+            - length: 100-300_words
+          optimize_elements:
+            - tone: friendly_and_approachable
+            - formatting: short_paragraphs_line_breaks
+            - visuals: eye_catching_images_or_video
+            - hashtags: 1-3_minimal_use
+      - enhance_community_angle:
+          - relatable_content: shared_experiences
+          - encourage_participation: easy_to_engage
+          - build_connection: authentic_voice
+    output:
+      - facebook_content:
+          format: ""
+          post_text: ""
+          media_assets: []
+          hashtags: []
+          posting_time: ""
+  
+  - step: 6
+    name: TikTok Adaptation
+    agent: writer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_tiktok:
+          format_decision:
+            - talking_head: direct_to_camera
+            - voiceover: b_roll_with_narration
+            - text_on_screen: visual_storytelling
+            - trend_participation: join_trending_format
+          write_script:
+            - hook: first_3_seconds_stop_scroll
+            - main_content: fast_paced_value_delivery
+            - payoff: satisfying_conclusion
+            - cta: follow_or_engage
+            - length: 15-45_seconds
+          optimize_elements:
+            - trending_sound: use_popular_audio
+            - captions: full_dialogue_text
+            - hashtags: 3-5_trending_and_niche
+            - effects: enhance_not_distract
+      - plan_production:
+          - filming_notes: vertical_format_requirements
+          - editing_notes: fast_cuts_and_transitions
+          - text_overlays: key_points_emphasized
+    output:
+      - tiktok_content:
+          script: ""
+          production_notes: {}
+          hashtags: []
+          trending_sound: ""
+          posting_time: ""
+  
+  - step: 7
+    name: YouTube Shorts Adaptation
+    agent: writer
+    input:
+      - distribution_strategy
+      - core_content
+    actions:
+      - adapt_for_youtube_shorts:
+          format_decision:
+            - quick_tutorial: how_to_in_60_seconds
+            - key_insight: main_takeaway_explained
+            - teaser: preview_of_longer_content
+            - standalone: complete_value_in_short
+          write_script:
+            - hook: compelling_first_3_seconds
+            - main_content: clear_value_delivery
+            - payoff: satisfying_conclusion
+            - cta: subscribe_for_more
+            - length: 30-60_seconds
+          optimize_elements:
+            - title: seo_optimized_60_chars
+            - description: keyword_rich_200_words
+            - hashtags: 3-5_relevant_tags
+            - thumbnail: eye_catching_first_frame
+      - plan_production:
+          - filming_notes: vertical_1080x1920
+          - editing_notes: fast_pacing_captions
+          - retention_tactics: keep_viewers_watching
+    output:
+      - youtube_shorts_content:
+          script: ""
+          title: ""
+          description: ""
+          production_notes: {}
+          hashtags: []
+          posting_time: ""
+  
+  - step: 8
+    name: Visual Asset Adaptation
+    agent: designer
+    input:
+      - all_platform_content
+      - source_visuals
+    actions:
+      - create_platform_specific_visuals:
+          twitter:
+            - format: 1200x675_landscape
+            - style: eye_catching_with_text
+            - purpose: stop_scroll_in_feed
+          linkedin:
+            - format: 1200x627_landscape
+            - style: professional_and_clean
+            - purpose: credibility_and_clarity
+          instagram:
+            - format: 1080x1080_square_or_1080x1350_portrait
+            - style: vibrant_and_on_brand
+            - purpose: aesthetic_appeal_and_saves
+          facebook:
+            - format: 1200x630_landscape
+            - style: friendly_and_approachable
+            - purpose: engagement_and_shares
+          tiktok:
+            - format: 1080x1920_vertical
+            - style: dynamic_and_trendy
+            - purpose: stop_scroll_immediately
+          youtube_shorts:
+            - format: 1080x1920_vertical
+            - style: clear_and_compelling
+            - purpose: click_through_and_retention
+      - ensure_brand_consistency:
+          across_all_platforms:
+            - color_palette: consistent_brand_colors
+            - typography: recognizable_fonts
+            - logo_placement: subtle_branding
+            - visual_style: cohesive_aesthetic
+      - optimize_for_mobile:
+          - text_size: readable_on_small_screens
+          - contrast: high_visibility
+          - file_size: fast_loading
+    output:
+      - visual_asset_package:
+          twitter_assets: []
+          linkedin_assets: []
+          instagram_assets: []
+          facebook_assets: []
+          tiktok_assets: []
+          youtube_assets: []
+  
+  - step: 9
+    name: SEO & Hashtag Optimization
+    agent: seo
+    input:
+      - all_platform_content
+      - core_message
+    actions:
+      - research_platform_specific_keywords:
+          twitter:
+            - trending_hashtags: current_conversations
+            - keyword_phrases: searchable_terms
+            - strategy: 2-3_strategic_tags
+          linkedin:
+            - professional_keywords: industry_terms
+            - job_title_keywords: target_audience
+            - strategy: 3-5_professional_tags
+          instagram:
+            - popular_hashtags: broad_reach
+            - niche_hashtags: targeted_audience
+            - strategy: 20-30_mixed_tags
+          facebook:
+            - minimal_hashtags: 1-3_only
+            - keyword_placement: in_post_text
+            - strategy: organic_keyword_integration
+          tiktok:
+            - trending_hashtags: viral_potential
+            - niche_hashtags: targeted_discovery
+            - strategy: 3-5_trending_and_niche
+          youtube_shorts:
+            - search_keywords: youtube_seo
+            - trending_topics: discovery_optimization
+            - strategy: title_description_tags
+      - optimize_discoverability:
+          - keyword_placement: natural_integration
+          - hashtag_research: volume_and_relevance
+          - trending_topics: timely_alignment
+          - search_optimization: platform_specific_seo
+    output:
+      - seo_package:
+          twitter_hashtags: []
+          linkedin_hashtags: []
+          instagram_hashtags: []
+          facebook_keywords: []
+          tiktok_hashtags: []
+          youtube_keywords: []
+  
+  - step: 10
+    name: Posting Schedule Coordination
+    agent: publisher
+    input:
+      - all_platform_content
+      - distribution_strategy
+    actions:
+      - determine_optimal_timing:
+          research_best_times:
+            - twitter: [9am, 12pm, 5pm]
+            - linkedin: [7-9am, 12-1pm, 5-6pm]
+            - instagram: [9am, 12pm, 7pm]
+            - facebook: [1-3pm, 7-9pm]
+            - tiktok: [7-9am, 12-1pm, 7-11pm]
+            - youtube_shorts: [12-3pm, 6-9pm]
+          consider_factors:
+            - audience_timezone: primary_locations
+            - platform_activity: peak_usage_times
+            - competition: less_crowded_windows
+            - campaign_goals: awareness_vs_engagement
+      - create_staggered_schedule:
+          strategy_options:
+            - simultaneous: all_at_once_for_campaign_launch
+            - staggered_same_day: spread_throughout_day
+            - multi_day: one_platform_per_day
+            - strategic_sequence: primary_then_secondary
+          recommended_approach:
+            - day_1: primary_platform_launch
+            - day_1_plus_2hrs: secondary_platforms
+            - day_2: remaining_platforms
+            - ongoing: monitor_and_adjust
+      - plan_cross_promotion:
+          - share_to_stories: instagram_facebook
+          - cross_link: mention_other_platforms
+          - repurpose_engagement: share_best_comments
+          - amplify_reach: employee_advocacy
+    output:
+      - posting_schedule:
+          twitter_time: ""
+          linkedin_time: ""
+          instagram_time: ""
+          facebook_time: ""
+          tiktok_time: ""
+          youtube_time: ""
+          sequence_strategy: ""
+  
+  - step: 11
+    name: Final Review & Quality Assurance
+    agent: editor
+    input:
+      - all_platform_content
+      - visual_asset_package
+      - seo_package
+      - posting_schedule
+    actions:
+      - comprehensive_review:
+          message_consistency:
+            - core_message: same_across_platforms
+            - brand_voice: consistent_tone
+            - value_proposition: clear_on_all
+          platform_optimization:
+            - format_compliance: meets_specs
+            - length_appropriate: platform_optimal
+            - tone_suitable: audience_aligned
+            - visuals_optimized: correct_dimensions
+          quality_check:
+            - grammar_spelling: error_free
+            - links_working: all_urls_tested
+            - hashtags_relevant: strategic_and_accurate
+            - ctas_clear: specific_actions
+      - create_approval_package:
+          for_each_platform:
+            - content_preview: text_and_visuals
+            - posting_time: scheduled_datetime
+            - success_metrics: target_kpis
+            - backup_plan: if_performance_low
+      - generate_master_checklist:
+          - all_content_finalized: yes
+          - all_visuals_created: yes
+          - all_hashtags_researched: yes
+          - posting_times_scheduled: yes
+          - monitoring_plan_ready: yes
+    output:
+      - approval_package:
+          twitter_preview: {}
+          linkedin_preview: {}
+          instagram_preview: {}
+          facebook_preview: {}
+          tiktok_preview: {}
+          youtube_preview: {}
+          master_schedule: {}
+          quality_score: 0
+  
+  - step: 12
+    name: Multi-Platform Publication & Monitoring
+    agent: publisher
+    input:
+      - approved_content_all_platforms
+      - posting_schedule
+    actions:
+      - publish_across_platforms:
+          use_tools:
+            - native_platforms: highest_quality
+            - scheduling_tools: buffer_hootsuite_later
+            - automation: zapier_or_custom_api
+          publish_sequence:
+            - primary_platform: manual_post_first
+            - secondary_platforms: scheduled_release
+            - monitor_each: initial_performance
+      - monitor_initial_engagement:
+          timeframe: first_2_hours_per_platform
+          track_metrics:
+            - impressions: reach_per_platform
+            - engagement: likes_comments_shares
+            - click_through: link_clicks
+            - conversions: goal_completions
+          alerts:
+            - high_performance: amplify_further
+            - low_performance: adjust_strategy
+            - negative_feedback: address_quickly
+      - active_engagement:
+          for_each_platform:
+            - respond_to_comments: first_hour
+            - like_quality_responses: show_appreciation
+            - answer_questions: provide_value
+            - encourage_discussion: ask_follow_ups
+      - cross_platform_amplification:
+          - share_top_performers: to_stories_or_feed
+          - repurpose_engagement: screenshot_best_comments
+          - cross_promote: mention_other_platforms
+          - employee_advocacy: team_shares
+      - track_unified_performance:
+          aggregate_metrics:
+            - total_reach: across_all_platforms
+            - total_engagement: combined_interactions
+            - platform_breakdown: which_performed_best
+            - audience_insights: demographics_per_platform
+            - conversion_tracking: goal_completions
+          analyze_patterns:
+            - best_performing_platform: highest_roi
+            - best_performing_format: what_worked
+            - optimal_timing: when_engagement_peaked
+            - audience_preferences: content_resonance
+    output:
+      - publication_report:
+          published_times: {}
+          initial_metrics_per_platform: {}
+          aggregate_performance: {}
+          top_performing_platform: ""
+          optimization_insights: {}
+          next_steps: []
+
+metrics:
+  aggregate_metrics:
+    - total_reach: "Combined reach across all platforms"
+    - total_impressions: "Total views across platforms"
+    - total_engagement: "Sum of all interactions"
+    - aggregate_engagement_rate: "Total engagement / Total reach"
+    - total_clicks: "All link clicks combined"
+    - total_conversions: "Goal completions across platforms"
+  
+  platform_comparison:
+    - reach_by_platform: "Which platform reached most people"
+    - engagement_by_platform: "Which platform had most interaction"
+    - conversion_by_platform: "Which platform drove most conversions"
+    - roi_by_platform: "Which platform had best return"
+  
+  content_performance:
+    - best_performing_format: "Which content type worked best"
+    - best_performing_platform: "Which platform exceeded expectations"
+    - optimal_posting_time: "When engagement was highest"
+    - message_resonance: "Which key point resonated most"
+  
+  audience_insights:
+    - demographics_by_platform: "Who engaged where"
+    - behavior_patterns: "How audiences interacted"
+    - content_preferences: "What content they preferred"
+    - cross_platform_overlap: "Same users on multiple platforms"
+
+platform_config:
+  cross_platform_specs:
+    twitter:
+      format: text_or_thread
+      character_limit: 280_per_tweet
+      image_size: 1200x675
+      video_length: 2_min_20_sec
+      hashtags: 2-3
+      optimal_time: [9am, 12pm, 5pm]
+    
+    linkedin:
+      format: text_image_document_video
+      character_limit: 3000
+      image_size: 1200x627
+      video_length: 10_minutes
+      hashtags: 3-5
+      optimal_time: [7-9am, 12-1pm, 5-6pm]
+    
+    instagram:
+      format: image_carousel_reel_story
+      caption_limit: 2200
+      image_size: 1080x1080_or_1080x1350
+      video_length: 90_seconds_reels
+      hashtags: 20-30
+      optimal_time: [9am, 12pm, 7pm]
+    
+    facebook:
+      format: text_photo_video_link
+      character_limit: 63206
+      image_size: 1200x630
+      video_length: 240_minutes
+      hashtags: 1-3
+      optimal_time: [1-3pm, 7-9pm]
+    
+    tiktok:
+      format: vertical_video
+      caption_limit: 2200
+      video_size: 1080x1920
+      video_length: 10_minutes
+      hashtags: 3-5
+      optimal_time: [7-9am, 12-1pm, 7-11pm]
+    
+    youtube_shorts:
+      format: vertical_video
+      title_limit: 100
+      video_size: 1080x1920
+      video_length: 60_seconds
+      hashtags: 3-5
+      optimal_time: [12-3pm, 6-9pm]
+
+adaptation_strategies:
+  content_repurposing:
+    blog_post_to_social:
+      - twitter: key_quotes_as_thread
+      - linkedin: professional_insights_post
+      - instagram: carousel_with_main_points
+      - facebook: story_based_summary
+      - tiktok: quick_tips_video
+      - youtube: tutorial_or_explainer
+    
+    video_to_social:
+      - twitter: key_clip_with_commentary
+      - linkedin: professional_takeaways
+      - instagram: reel_or_carousel_stills
+      - facebook: native_video_upload
+      - tiktok: vertical_edit_with_captions
+      - youtube: shorts_version
+    
+    podcast_to_social:
+      - twitter: quote_thread_with_link
+      - linkedin: key_insights_post
+      - instagram: audiogram_or_quote_cards
+      - facebook: discussion_prompt
+      - tiktok: animated_quote_video
+      - youtube: highlights_compilation
+  
+  tone_adaptation:
+    professional_to_casual:
+      - linkedin: formal_and_credible
+      - twitter: conversational_and_witty
+      - instagram: friendly_and_visual
+      - facebook: relatable_and_warm
+      - tiktok: fun_and_trendy
+      - youtube: informative_and_engaging
+  
+  length_adaptation:
+    long_form_to_short:
+      - identify_core_message: main_takeaway
+      - extract_key_points: 3-5_highlights
+      - create_hook: attention_grabber
+      - condense_value: essential_information
+      - add_cta: clear_next_step
+
+best_practices:
+  consistency:
+    - unified_message: same_core_across_platforms
+    - brand_voice: consistent_personality
+    - visual_identity: recognizable_style
+    - posting_schedule: regular_cadence
+  
+  platform_respect:
+    - native_formats: use_platform_features
+    - audience_expectations: meet_platform_norms
+    - algorithm_optimization: platform_specific_tactics
+    - community_guidelines: follow_rules
+  
+  engagement_strategy:
+    - respond_everywhere: monitor_all_platforms
+    - cross_promote_wisely: don't_spam
+    - amplify_winners: boost_top_performers
+    - learn_and_adapt: analyze_and_improve
+  
+  efficiency:
+    - batch_creation: create_all_at_once
+    - template_usage: consistent_formats
+    - scheduling_tools: automate_posting
+    - performance_tracking: unified_dashboard
+
+quality_checklist:
+  before_distribution:
+    - core_message_clear: "Same across all platforms?"
+    - platform_optimization: "Each adapted appropriately?"
+    - visual_consistency: "Brand aligned everywhere?"
+    - grammar_perfect: "No errors anywhere?"
+    - links_working: "All URLs tested?"
+    - hashtags_researched: "Strategic for each platform?"
+    - timing_optimal: "Best times scheduled?"
+    - monitoring_ready: "Tracking set up?"
+  
+  during_distribution:
+    - publish_sequence: "Following planned order?"
+    - quality_check: "Each post looks good?"
+    - engagement_ready: "Prepared to respond?"
+    - cross_promotion: "Amplifying strategically?"
+  
+  after_distribution:
+    - respond_everywhere: "Engaging on all platforms?"
+    - track_performance: "Monitoring metrics?"
+    - analyze_results: "What worked best?"
+    - document_learnings: "Insights captured?"
+    - optimize_next_time: "Improvements identified?"
+
+success_criteria:
+  high_performing_campaign:
+    - aggregate_reach: ">100,000"
+    - aggregate_engagement_rate: ">5%"
+    - platform_success: "3+ platforms exceed baseline"
+    - conversion_rate: ">2%"
+    - audience_growth: ">500 new followers total"
+  
+  baseline_campaign:
+    - aggregate_reach: ">20,000"
+    - aggregate_engagement_rate: ">3%"
+    - platform_success: "2+ platforms meet goals"
+    - conversion_rate: ">1%"
+    - audience_growth: ">100 new followers total"
+
+advanced_tactics:
+  platform_sequencing:
+    - lead_with_strength: "Start with best platform"
+    - build_momentum: "Use early wins to amplify"
+    - stagger_strategically: "Don't overwhelm audience"
+    - cross_reference: "Mention other platforms"
+  
+  content_variations:
+    - a_b_testing: "Test different hooks per platform"
+    - format_experiments: "Try various content types"
+    - timing_tests: "Optimize posting windows"
+    - audience_segmentation: "Target different demographics"
+  
+  amplification_strategies:
+    - employee_advocacy: "Team shares content"
+    - influencer_partnerships: "Collaborate for reach"
+    - paid_promotion: "Boost top performers"
+    - community_engagement: "Share in relevant groups"
+  
+  performance_optimization:
+    - real_time_adjustments: "Modify based on early data"
+    - platform_pivots: "Double down on winners"
+    - content_iteration: "Improve underperformers"
+    - audience_feedback: "Listen and adapt"

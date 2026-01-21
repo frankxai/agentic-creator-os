@@ -1,0 +1,707 @@
+name: DeFi Education Content
+description: Create educational content explaining DeFi concepts for beginners and intermediate users
+version: 1.0.0
+category: web3
+tags:
+  - defi
+  - education
+  - web3
+  - blockchain
+  - finance
+
+inputs:
+  topic:
+    type: string
+    description: DeFi topic to explain
+    required: true
+  
+  concept_category:
+    type: enum
+    description: Category of DeFi concept
+    options:
+      - lending-borrowing
+      - decentralized-exchanges
+      - yield-farming
+      - liquidity-pools
+      - staking
+      - derivatives
+      - stablecoins
+      - tokenomics
+      - smart-contracts
+      - bridges
+      - layer2-scaling
+      - governance
+    required: true
+  
+  audience_level:
+    type: enum
+    description: Target audience knowledge level
+    options:
+      - complete-beginner
+      - crypto-familiar
+      - intermediate
+      - advanced
+    default: complete-beginner
+  
+  content_format:
+    type: enum
+    description: Primary content format
+    options:
+      - explainer-article
+      - step-by-step-guide
+      - comparison-analysis
+      - infographic-script
+      - video-script
+      - twitter-thread
+      - faq
+      - case-study
+    default: explainer-article
+  
+  include_examples:
+    type: boolean
+    description: Include real-world protocol examples
+    default: true
+  
+  protocol_examples:
+    type: array
+    description: Specific protocols to reference
+    items:
+      type: string
+    required: false
+  
+  include_risks:
+    type: boolean
+    description: Include risk warnings and considerations
+    default: true
+  
+  include_math:
+    type: boolean
+    description: Include mathematical formulas and calculations
+    default: false
+  
+  visual_aids:
+    type: boolean
+    description: Include suggestions for visual aids
+    default: true
+  
+  tone:
+    type: enum
+    description: Content tone
+    options:
+      - educational
+      - conversational
+      - technical
+      - simplified
+      - enthusiastic
+    default: educational
+
+steps:
+  - id: research_defi_concept
+    name: Research DeFi Concept
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{topic}} DeFi {{concept_category}}"
+      depth: comprehensive
+      
+      focus_areas:
+        - Core concept explanation
+        - Technical mechanisms
+        - Real-world applications
+        - Major protocols and platforms
+        - Historical development
+        - Current trends
+        - Common misconceptions
+        - Risk factors
+      
+      sources:
+        - Official protocol documentation
+        - Educational resources
+        - Academic papers
+        - Industry reports
+        - Expert analyses
+    
+    outputs:
+      concept_research: research_results
+
+  - id: identify_prerequisites
+    name: Identify Knowledge Prerequisites
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{concept_research}}"
+      analysis_type: prerequisite_identification
+      
+      audience_level: "{{audience_level}}"
+      
+      determine:
+        - Required background knowledge
+        - Foundational concepts needed
+        - Technical terms to define
+        - Complexity level
+        - Learning curve
+    
+    outputs:
+      prerequisites: prerequisite_list
+
+  - id: create_learning_structure
+    name: Create Learning Structure
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: outline
+      topic: "{{topic}}"
+      
+      structure_approach: progressive_learning
+      
+      sections:
+        - Introduction and context
+        - Prerequisites review
+        - Core concept explanation
+        - How it works (technical)
+        - Real-world examples
+        - Benefits and use cases
+        - Risks and considerations
+        - Getting started guide
+        - Common questions
+        - Further learning resources
+      
+      audience_level: "{{audience_level}}"
+    
+    outputs:
+      learning_outline: content_outline
+
+  - id: generate_educational_content
+    name: Generate Educational Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{content_format}}"
+      topic: "{{topic}}"
+      outline: "{{learning_outline}}"
+      
+      context: |
+        Topic: {{topic}}
+        Category: {{concept_category}}
+        Audience Level: {{audience_level}}
+        Prerequisites: {{prerequisites}}
+        Research: {{concept_research}}
+      
+      requirements:
+        - Start with simple explanations
+        - Build complexity gradually
+        - Use analogies and metaphors
+        - Define all technical terms
+        - Include real-world examples
+        - Explain "why" not just "what"
+        - Address common misconceptions
+        - Make it engaging and accessible
+        - Use clear, concise language
+        - Break down complex ideas
+      
+      tone: "{{tone}}"
+      
+      teaching_principles:
+        - Explain like teaching a friend
+        - Use relatable analogies
+        - Provide context before details
+        - Repeat key concepts
+        - Check understanding with examples
+        - Connect to familiar concepts
+        - Avoid jargon overload
+        - Encourage questions
+      
+      content_structure:
+        explainer_article:
+          - Hook with relatable problem
+          - Simple definition
+          - Traditional finance comparison
+          - How it works step-by-step
+          - Visual explanation
+          - Real examples
+          - Benefits and risks
+          - Practical application
+          - Key takeaways
+        
+        step_by_step_guide:
+          - What you'll learn
+          - Prerequisites
+          - Step 1 with explanation
+          - Step 2 with explanation
+          - Continue steps
+          - Troubleshooting
+          - Best practices
+          - Next steps
+        
+        twitter_thread:
+          - Hook tweet
+          - Problem statement
+          - Solution introduction
+          - Key points (1 per tweet)
+          - Example
+          - Risks warning
+          - Call to action
+          - Resources thread
+    
+    outputs:
+      educational_content: generated_content
+
+  - id: add_protocol_examples
+    name: Add Real Protocol Examples
+    condition: "{{include_examples}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{educational_content}}"
+      transformation: add_examples
+      
+      example_protocols: "{{protocol_examples}}"
+      
+      example_structure:
+        - Protocol name and description
+        - How it implements the concept
+        - Key features
+        - User experience
+        - Statistics and metrics
+        - Link to protocol
+      
+      example_disclaimer: |
+        Examples are for educational purposes only. Not endorsements or recommendations.
+        Always DYOR before using any protocol.
+    
+    outputs:
+      content_with_examples: transformed_content
+
+  - id: add_risk_warnings
+    name: Add Comprehensive Risk Warnings
+    condition: "{{include_risks}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_examples}}"
+      transformation: add_risk_section
+      
+      risk_categories:
+        smart_contract_risk:
+          - Bugs and vulnerabilities
+          - Audit status importance
+          - Exploit history
+        
+        financial_risk:
+          - Impermanent loss
+          - Liquidation risk
+          - Market volatility
+          - Slippage
+        
+        protocol_risk:
+          - Centralization concerns
+          - Admin key risks
+          - Governance attacks
+        
+        user_risk:
+          - Wallet security
+          - Phishing attacks
+          - Transaction errors
+          - Gas fees
+        
+        regulatory_risk:
+          - Legal uncertainty
+          - Compliance requirements
+          - Geographic restrictions
+      
+      risk_presentation:
+        - Clear warnings
+        - Specific to concept
+        - Actionable mitigation
+        - Real incident examples
+        - Emphasize DYOR
+    
+    outputs:
+      content_with_risks: transformed_content
+
+  - id: simplify_technical_terms
+    name: Simplify Technical Terminology
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_risks}}"
+      transformation: simplify_language
+      
+      audience_level: "{{audience_level}}"
+      
+      simplification_rules:
+        - Define terms on first use
+        - Use analogies for complex concepts
+        - Replace jargon with plain language
+        - Add glossary for technical terms
+        - Use parenthetical explanations
+        - Break down acronyms
+      
+      defi_terms_to_explain:
+        - APY: Annual Percentage Yield
+        - TVL: Total Value Locked
+        - Liquidity: Available trading capital
+        - Slippage: Price difference during trade
+        - Gas: Transaction fees
+        - Smart Contract: Self-executing code
+        - Collateral: Assets locked as security
+        - Yield: Returns or earnings
+        - Pool: Shared liquidity reserve
+        - LP Token: Liquidity Provider Token
+    
+    outputs:
+      simplified_content: transformed_content
+
+  - id: add_visual_suggestions
+    name: Add Visual Aid Suggestions
+    condition: "{{visual_aids}}"
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: visual_guidelines
+      topic: "{{topic}} visual explanations"
+      
+      visual_types:
+        - Concept diagrams
+        - Process flowcharts
+        - Comparison tables
+        - Infographics
+        - Step-by-step illustrations
+        - Risk/reward charts
+        - Protocol architecture
+        - User journey maps
+      
+      visual_requirements:
+        - Simple and clear
+        - Progressive complexity
+        - Color-coded elements
+        - Labeled components
+        - Arrows showing flow
+        - Icons for concepts
+        - Before/after comparisons
+      
+      specific_suggestions:
+        lending_borrowing:
+          - Lender-borrower flow diagram
+          - Collateralization visual
+          - Interest rate comparison
+          - Liquidation threshold chart
+        
+        dex:
+          - AMM curve visualization
+          - Order book vs AMM comparison
+          - Liquidity pool diagram
+          - Swap process flowchart
+        
+        yield_farming:
+          - Yield strategy flowchart
+          - APY comparison table
+          - Risk/reward matrix
+          - Compound interest visualization
+    
+    outputs:
+      visual_suggestions: visual_guide
+
+  - id: add_practical_examples
+    name: Add Practical Calculation Examples
+    condition: "{{include_math}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{simplified_content}}"
+      transformation: add_calculations
+      
+      example_scenarios:
+        - Simple calculation with explanation
+        - Step-by-step breakdown
+        - Real numbers example
+        - What-if scenarios
+        - ROI calculations
+      
+      calculation_presentation:
+        - Start with simple numbers
+        - Show formula
+        - Walk through calculation
+        - Explain each variable
+        - Provide final result
+        - Discuss implications
+    
+    outputs:
+      content_with_math: transformed_content
+
+  - id: create_faq_section
+    name: Create FAQ Section
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: faq
+      topic: "{{topic}}"
+      
+      question_categories:
+        - Basic understanding
+        - Getting started
+        - Safety and security
+        - Costs and fees
+        - Troubleshooting
+        - Advanced concepts
+      
+      faq_style:
+        - Clear questions
+        - Concise answers
+        - Link to detailed sections
+        - Address common concerns
+        - Practical focus
+      
+      common_questions:
+        - "What is {{topic}}?"
+        - "How does {{topic}} work?"
+        - "Is {{topic}} safe?"
+        - "How do I get started with {{topic}}?"
+        - "What are the risks?"
+        - "How much does it cost?"
+        - "What do I need to know first?"
+        - "Can I lose money?"
+    
+    outputs:
+      faq_content: faq_section
+
+  - id: add_educational_disclaimer
+    name: Add Educational Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_math}}"
+      transformation: add_disclaimer
+      disclaimer_type: educational_content
+      
+      disclaimer_text: |
+        📚 EDUCATIONAL DISCLAIMER: This content is for educational and informational purposes only. 
+        It is not financial, investment, or legal advice. DeFi protocols involve significant risks including 
+        total loss of funds. Always do your own research (DYOR), understand the risks, and never invest 
+        more than you can afford to lose. Consult with qualified professionals before making financial decisions.
+    
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_learning
+    name: Optimize for Learning Retention
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: educational
+      
+      optimization_goals:
+        - maximize_comprehension
+        - improve_retention
+        - encourage_engagement
+        - build_confidence
+      
+      learning_optimization:
+        - Use spaced repetition of key concepts
+        - Include summary boxes
+        - Add "key takeaway" sections
+        - Use bold for important terms
+        - Include progress indicators
+        - Add "check your understanding" questions
+        - Provide next steps
+        - Link to related concepts
+      
+      engagement_elements:
+        - Relatable examples
+        - Interactive elements
+        - Thought-provoking questions
+        - Practical exercises
+        - Community discussion prompts
+    
+    outputs:
+      optimized_content: learning_optimized_content
+
+  - id: generate_educational_hashtags
+    name: Generate Educational Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: twitter
+      niche: defi_education
+      count: 10
+      
+      include_categories:
+        - defi_general
+        - education_focused
+        - concept_specific
+        - beginner_friendly
+      
+      examples:
+        - "#DeFi"
+        - "#DeFiEducation"
+        - "#LearnDeFi"
+        - "#CryptoEducation"
+        - "#DeFiExplained"
+        - "#Web3Education"
+        - "#DeFi101"
+        - "#{{concept_category}}"
+    
+    outputs:
+      educational_hashtags: hashtag_list
+
+  - id: create_learning_resources
+    name: Create Additional Learning Resources
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: resource_list
+      topic: "{{topic}} learning resources"
+      
+      resource_categories:
+        - Official documentation
+        - Video tutorials
+        - Interactive demos
+        - Community forums
+        - Educational platforms
+        - Podcasts and interviews
+        - Books and guides
+        - Practice environments
+      
+      resource_format:
+        - Resource name
+        - Type and format
+        - Difficulty level
+        - Brief description
+        - Link
+        - Why it's valuable
+    
+    outputs:
+      learning_resources: resource_list
+
+  - id: fact_check_educational_content
+    name: Fact-Check Educational Content
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - technical_accuracy
+        - protocol_information
+        - risk_statements
+        - statistical_claims
+        - historical_facts
+        - mechanism_explanations
+      
+      cross_reference:
+        - Official protocol documentation
+        - Academic sources
+        - Industry standards
+        - Expert reviews
+        - Blockchain data
+      
+      flag_unverified: true
+      require_sources: true
+      
+      accuracy_standards: high
+    
+    outputs:
+      fact_check_report: verification_results
+
+  - id: compile_educational_package
+    name: Compile Educational Content Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_content: "{{optimized_content}}"
+        faq: "{{faq_content}}"
+        visual_suggestions: "{{visual_suggestions}}"
+        learning_resources: "{{learning_resources}}"
+        hashtags: "{{educational_hashtags}}"
+        fact_check: "{{fact_check_report}}"
+        prerequisites: "{{prerequisites}}"
+        disclaimer: "Included in content"
+      
+      package_format: defi_education_bundle
+      
+      supplementary_materials:
+        - Glossary of terms
+        - Quick reference guide
+        - Practice exercises
+        - Further reading list
+        - Community links
+    
+    outputs:
+      final_package: complete_educational_content
+
+outputs:
+  educational_content_package:
+    description: Complete DeFi educational content package
+    value: "{{final_package}}"
+  
+  main_content:
+    description: Primary educational content with disclaimer
+    value: "{{optimized_content}}"
+  
+  faq:
+    description: Frequently asked questions
+    value: "{{faq_content}}"
+  
+  visual_guidelines:
+    description: Visual aid suggestions
+    value: "{{visual_suggestions}}"
+  
+  learning_resources:
+    description: Additional learning resources
+    value: "{{learning_resources}}"
+  
+  hashtags:
+    description: Educational hashtags
+    value: "{{educational_hashtags}}"
+  
+  verification_report:
+    description: Fact-check results
+    value: "{{fact_check_report}}"
+
+metadata:
+  best_practices:
+    - Start simple, build complexity gradually
+    - Use analogies to traditional finance
+    - Define all technical terms
+    - Include real-world examples
+    - Address risks honestly
+    - Encourage DYOR mindset
+    - Provide multiple learning formats
+    - Check understanding regularly
+    - Link to authoritative sources
+    - Update content as protocols evolve
+  
+  educational_principles:
+    - Meet learners where they are
+    - Build on existing knowledge
+    - Use multiple explanation methods
+    - Provide context before details
+    - Make it practical and applicable
+    - Encourage questions and exploration
+    - Acknowledge complexity honestly
+    - Celebrate small wins
+  
+  compliance_notes:
+    - Not financial advice disclaimer required
+    - Emphasize educational purpose
+    - Disclose any protocol affiliations
+    - Accurate risk representation
+    - No guarantees of returns
+    - Encourage professional consultation
+  
+  defi_terminology:
+    - DeFi: Decentralized Finance
+    - APY: Annual Percentage Yield
+    - TVL: Total Value Locked
+    - AMM: Automated Market Maker
+    - LP: Liquidity Provider
+    - Impermanent Loss: Temporary loss from price divergence
+    - Yield Farming: Earning returns by providing liquidity
+    - Staking: Locking tokens for rewards
+    - Collateral: Assets securing a loan
+    - Liquidation: Forced sale of collateral
+    - Slippage: Price change during transaction
+    - Gas: Transaction fees on blockchain

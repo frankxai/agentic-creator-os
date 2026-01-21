@@ -1,0 +1,22 @@
+{
+  "name": "@agentic-creator-os/evaluator-mcp",
+  "version": "1.0.0",
+  "description": "Quality evaluation and audit logging MCP server for Agentic Creator OS",
+  "main": "build/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' tsc",
+    "build:fast": "esbuild src/index.ts --bundle --outfile=build/index.js --format=esm --platform=node --target=node20",
+    "dev": "tsc -w",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "esbuild": "^0.19.0"
+  }
+}

@@ -1,0 +1,118 @@
+name: defi-education-content
+department: marketing
+version: 1.0.0
+purpose: Create accessible DeFi educational content that simplifies complex concepts for beginners and intermediate users
+
+agents:
+  - name: DeFi Educator
+    role: Simplify complex DeFi concepts
+  - name: Visual Explainer
+    role: Create analogies and visual explanations
+  - name: Safety Advocate
+    role: Emphasize risks and security best practices
+  - name: Practical Guide
+    role: Create actionable tutorials
+
+steps:
+  - name: Concept Analysis
+    input:
+      - Target DeFi concept
+      - Audience level (beginner/intermediate/advanced)
+      - Key learning objectives
+    actions:
+      - Break down concept into components
+      - Identify prerequisite knowledge
+      - Find real-world analogies
+      - Map concept to user journey
+      - Identify common misconceptions
+    output: Concept breakdown and learning path
+
+  - name: Content Structure
+    input:
+      - Concept breakdown
+      - Audience level
+    actions:
+      - Design content structure (explain → demonstrate → practice)
+      - Create chapter outline
+      - Plan visual aids and diagrams
+      - Design interactive elements
+      - Build in review checkpoints
+    output: Content outline and storyboard
+
+  - name: Content Creation
+    input:
+      - Content outline
+      - Concept details
+    actions:
+      - Write clear explanations (avoid jargon where possible)
+      - Create memorable analogies
+      - Add concrete examples
+      - Include historical context
+      - Reference reliable sources
+    output: Draft educational content
+
+  - name: Safety Integration
+    input:
+      - Draft content
+      - Concept risk factors
+    actions:
+      - Identify all risk points
+      - Add warning boxes for critical safety info
+      - Create "before you start" checklist
+      - Document common scams and how to avoid
+      - Explain smart contract risks
+      - Emphasize "do your own research" (DYOR)
+    output: Safety-enhanced content
+
+  - name: Practical Examples
+    input:
+      - Concept understanding
+      - Available tools/protocols
+    actions:
+      - Create step-by-step tutorials
+      - Design practice exercises
+      - Build troubleshooting guides
+      - Add screenshots and visual guides
+      - Create comparison tables
+    output: Practical tutorials and guides
+
+  - name: Format Adaptation
+    input:
+      - Complete educational content
+      - Target platforms
+    actions:
+      - Create long-form article
+      - Design Twitter/X thread (5-10 tweets)
+      - Create infographic outline
+      - Build video script
+      - Design quiz/checklist
+    output: Multi-format educational content package
+
+metrics:
+  - Concept clarity score
+  - Engagement rate
+  - Completion rate
+  - Knowledge check scores
+  - Safety compliance
+  - Sharing metrics
+
+config:
+  difficulty_levels:
+    beginner:
+      assume_knowledge: "Basic crypto understanding"
+      jargon_tolerance: "Minimal"
+      examples: "Real-world analogies"
+    intermediate:
+      assume_knowledge: "Basic DeFi usage"
+      jargon_tolerance: "Moderate"
+      examples: "Protocol comparisons"
+    advanced:
+      assume_knowledge: "Deep technical understanding"
+      jargon_tolerance: "High"
+      examples: "Technical deep dives"
+  safety_requirements:
+    include_risk_disclaimer: true
+    warn_about_scams: true
+    emphasize_dyor: true
+    explain_smart_contract_risks: true
+    recommend_small_test_transactions: true

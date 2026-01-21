@@ -1,0 +1,77 @@
+{
+  "name": "FrankX",
+  "slug": "frankx",
+  "version": "2.0.0",
+  "brand": {
+    "name": "FrankX",
+    "voice": {
+      "tone": "provocative",
+      "personality": [
+        "visionary",
+        "bold",
+        "transformative",
+        "unconventional"
+      ],
+      "keywords": [
+        "consciousness",
+        "transformation",
+        "golden age",
+        "AI-human partnership",
+        "paradigm shift"
+      ],
+      "avoidKeywords": [
+        "mainstream",
+        "conventional",
+        "status quo"
+      ]
+    },
+    "colors": {
+      "primary": "#8b5cf6",
+      "secondary": "#ec4899",
+      "accent": "#f59e0b"
+    }
+  },
+  "directories": {
+    "workflows": "workflows",
+    "templates": "templates",
+    "skills": "skills",
+    "mcpServers": "mcp-servers"
+  },
+  "integrations": {
+    "opencode": true,
+    "claudeCode": true,
+    "gemini": true
+  },
+  "skills": {
+    "enabled": [
+      "content",
+      "marketing",
+      "dev",
+      "evaluator"
+    ],
+    "custom": [
+      {
+        "name": "frankx-brand",
+        "file": "skills/frankx-brand.ts",
+        "triggers": [
+          "skill(frankx-brand)"
+        ]
+      }
+    ]
+  },
+  "workflows": {
+    "enabled": [
+      "social-media",
+      "web3",
+      "content",
+      "marketing",
+      "dev"
+    ],
+    "custom": []
+  },
+  "evaluation": {
+    "enabled": true,
+    "strictMode": true,
+    "benchmarkAgainst": "top-performers"
+  }
+}

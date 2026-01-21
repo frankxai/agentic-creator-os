@@ -1,0 +1,141 @@
+name: nft-collection-launch
+department: marketing
+version: 1.0.0
+purpose: Complete NFT collection launch workflow from announcement to community building
+
+agents:
+  - name: NFT Strategist
+    role: Collection positioning and launch strategy
+  - name: Storyteller
+    role: Narrative and lore creation
+  - name: Visual Director
+    role: Visual content coordination
+  - name: Community Builder
+    role: Whitelist and community management
+  - name: Launch Coordinator
+    role: Mint day execution
+
+steps:
+  - name: Collection Strategy
+    input:
+      - Collection concept
+      - Target audience (art collectors, degens, normies)
+      - Supply and pricing
+      - Utility features
+    actions:
+      - Define collection identity and positioning
+      - Create unique value proposition
+      - Design utility and benefits
+      - Set pricing strategy
+      - Plan release structure (Dutch auction, whitelist, public)
+    output: Collection strategy document
+
+  - name: Lore & Narrative Creation
+    input:
+      - Collection concept
+      - Art style and themes
+    actions:
+      - Create origin story and mythology
+      - Design character/rarity backgrounds
+      - Build world-building elements
+      - Create narrative hooks for community
+      - Develop holder benefits story
+    output: Collection lore document and backstory
+
+  - name: Teaser Campaign
+    input:
+      - Collection assets
+      - Timeline to launch
+    actions:
+      - Create countdown graphics
+      - Design reveal mechanics
+      - Build anticipation with hints
+      - Create FOMO elements
+      - Design early supporter rewards
+    output: Teaser content calendar (2-4 weeks pre-launch)
+
+  - name: Whitelist Campaign
+    input:
+      - Collection value proposition
+      - Community requirements
+    actions:
+      - Design whitelist criteria
+      - Create entry mechanisms (creative challenges, social tasks)
+      - Build exclusive content for WL members
+      - Design WL benefits clearly
+      - Create community guidelines
+    output: Whitelist campaign and entry system
+
+  - name: Community Building
+    input:
+      - Collection Discord/ Telegram/ FarCaster
+      - Whitelist members
+    actions:
+      - Create welcome experience for members
+      - Build community rituals and traditions
+      - Create exclusive holder-only areas
+      - Design member roles and progression
+      - Plan giveaways and events
+    output: Community engagement plan
+
+  - name: Mint Preparation
+    input:
+      - Launch date
+      - Technical setup (smart contract, website)
+    actions:
+      - Create mint website content
+      - Design transaction success experience
+      - Prepare reveal mechanics
+      - Create post-mint benefits announcement
+      - Plan secondary marketplace strategy
+    output: Mint day execution playbook
+
+  - name: Launch Execution
+    input:
+      - Mint live status
+      - Community activity
+    actions:
+      - Execute mint day plan
+      - Manage whitelist flow
+      - Handle public mint
+      - Celebrate first mints
+      - Address issues in real-time
+    output: Launch completion report
+
+  - name: Post-Launch Community
+    input:
+      - All minters
+      - Collection holders
+    actions:
+      - Welcome all holders
+      - Execute reveal
+      - Share collection stats
+      - Announce next steps
+      - Begin ongoing engagement
+    output: Post-launch community plan
+
+metrics:
+  - Whitelist applications received
+  - Whitelist conversion rate
+  - Mint sell-through rate
+  - Secondary marketplace volume
+  - Community engagement rate
+  - Holder retention at 30/60/90 days
+
+config:
+  launch_phases:
+    - phase: "Teaser"
+      duration: "2-4 weeks"
+      content: "Hints, countdown, speculation"
+    - phase: "Whitelist"
+      duration: "1-2 weeks"
+      content: "Applications, creative challenges"
+    - phase: "Whitelist Mint"
+      duration: "24-48 hours"
+      content: "Exclusive access"
+    - phase: "Public Mint"
+      duration: "24-72 hours"
+      content: "Open access"
+    - phase: "Reveal"
+      duration: "24 hours"
+      content: "Art reveal, celebration"

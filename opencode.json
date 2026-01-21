@@ -1,0 +1,41 @@
+{
+  "mcp": {
+    "agentic-creator-os": {
+      "type": "local",
+      "command": [
+        "node",
+        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/creator/build/index.js"
+      ]
+    },
+    "agentic-evaluator": {
+      "type": "local",
+      "command": [
+        "node",
+        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/evaluator/build/index.js"
+      ]
+    }
+  },
+  "skills": {
+    "content": {
+      "command": "skill:content",
+      "description": "Content creation skills for social media, blogs, emails, and more"
+    },
+    "marketing": {
+      "command": "skill:marketing",
+      "description": "Marketing workflows including cross-platform distribution and SEO audits"
+    },
+    "dev": {
+      "command": "skill:dev",
+      "description": "Development workflows for website creation and code generation"
+    },
+    "evaluator": {
+      "command": "skill:evaluator",
+      "description": "Quality evaluation and audit logging for content"
+    }
+  },
+  "audit": {
+    "enabled": true,
+    "path": "~/.claude/agentic-creator-os/audit",
+    "sources": ["opencode", "claude-code", "gemini", "custom"]
+  }
+}

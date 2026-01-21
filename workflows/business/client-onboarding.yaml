@@ -1,0 +1,105 @@
+name: client-onboarding
+department: business
+version: 1.0.0
+purpose: Systematically onboard new clients with all systems configured
+
+agents:
+  - name: CRM Agent
+    role: Creates client profile
+  - name: Finance Agent
+    role: Sets up billing
+  - name: Operations Agent
+    role: Creates project folder
+  - name: Email Agent
+    role: Sends welcome package
+  - name: Legal Agent
+    role: Manages contracts
+
+steps:
+  - name: CRM Setup
+    input:
+      - Client name
+      - Email
+      - Company
+      - Type
+    actions:
+      - Create client profile in CRM
+      - Add contact details
+      - Set client segment
+      - Create communication history
+      - Set follow-up schedule
+    output: Client added to CRM with full profile
+
+  - name: Project Setup
+    input:
+      - Client ID
+      - Project type
+      - Services
+    actions:
+      - Create project in project management
+      - Set up task templates
+      - Define milestones
+      - Set up team assignments
+      - Configure billing rates
+    output: Project configured and ready
+
+  - name: Financial Setup
+    input:
+      - Client ID
+      - Pricing structure
+      - Payment terms
+    actions:
+      - Create client in accounting
+      - Set up invoice template
+      - Configure payment terms
+      - Set up recurring invoices if applicable
+      - Add to accounts receivable
+    output: Financial profile configured
+
+  - name: Document Setup
+    input:
+      - Client ID
+      - Project type
+      - Services
+    actions:
+      - Generate service agreement
+      - Create NDA if needed
+      - Prepare welcome document
+      - Create project brief
+      - Archive signed contracts
+    output: Documents ready and filed
+
+  - name: Communication Setup
+    input:
+      - Client ID
+      - Communication preferences
+    actions:
+      - Add to email lists
+      - Set up Slack or Teams channel
+      - Configure notification preferences
+      - Schedule kickoff meeting
+      - Add to relevant Slack channels
+    output: Communication channels active
+
+  - name: Welcome Package
+    input:
+      - Client ID
+      - Project details
+    actions:
+      - Send welcome email
+      - Deliver welcome document
+      - Share team introductions
+      - Send calendar invite for kickoff
+      - Share project portal access
+    output: Client welcomed and oriented
+
+metrics:
+  - Onboarding completion time
+  - Documents signed
+  - Communication channels active
+  - Client satisfaction score
+
+config:
+  auto_schedule_kickoff: true
+  send_welcome_package: true
+  document_templates: standard

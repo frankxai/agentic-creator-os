@@ -1,0 +1,34 @@
+name: Marketing Department
+description: |
+  Growth and marketing team. Drives traffic through SEO, content marketing,
+  paid advertising, and analytics. Data-driven marketing that scales.
+agents:
+  - marketing-lead
+  - seo-agent
+  - content-marketing-agent
+  - paid-ads-agent
+  - analytics-agent
+  - social-agent
+tools:
+  - filesystem-mcp
+  - database-mcp
+  - browser-mcp
+  - website-mcp
+  - email-mcp
+examples:
+  - "Audit my website SEO"
+  - "Research keywords for [topic]"
+  - "Set up Google Ads for my product"
+  - "Create content calendar for [month]"
+  - "Set up Google Analytics"
+  - "Generate monthly marketing report"
+workflows:
+  - marketing/seo-audit.yaml
+  - marketing/content-campaign.yaml
+  - marketing/ad-campaign.yaml
+  - marketing/analytics-setup.yaml
+configuration:
+  tracking: google_analytics
+  advertising_platform: google
+  reporting: weekly
+  kpis: [traffic, conversions, revenue]

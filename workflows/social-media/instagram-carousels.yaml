@@ -1,0 +1,598 @@
+name: Instagram Carousel Posts
+department: marketing
+purpose: Create educational, visually stunning carousel posts that teach, inspire, and drive engagement on Instagram
+
+description: |
+  Comprehensive workflow for creating high-performing Instagram carousel posts that educate audiences
+  through visual storytelling. Optimized for Instagram's algorithm with swipe-worthy design and value-packed content.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze trending Instagram content
+      - Research visual design trends
+      - Study high-performing carousels
+      - Identify audience interests
+    
+  - role: writer
+    responsibilities:
+      - Craft compelling carousel copy
+      - Write educational slide content
+      - Create engaging captions
+      - Develop clear CTAs
+    
+  - role: designer
+    responsibilities:
+      - Design visually cohesive slides
+      - Create on-brand graphics
+      - Ensure mobile readability
+      - Optimize visual hierarchy
+    
+  - role: editor
+    responsibilities:
+      - Review content accuracy
+      - Ensure brand consistency
+      - Optimize slide flow
+      - Polish final carousel
+    
+  - role: seo
+    responsibilities:
+      - Research Instagram hashtags
+      - Optimize caption keywords
+      - Suggest posting times
+      - Analyze engagement patterns
+    
+  - role: publisher
+    responsibilities:
+      - Schedule carousel posts
+      - Monitor engagement
+      - Respond to comments
+      - Track performance metrics
+
+steps:
+  - step: 1
+    name: Content Topic Research
+    agent: researcher
+    input:
+      - niche_focus
+      - target_audience
+      - content_goal (educate|inspire|entertain|sell)
+    actions:
+      - research_trending_topics:
+          sources: [instagram_explore, trending_hashtags, competitor_analysis]
+          focus: [educational_content, how_to_guides, tips_and_tricks]
+      - analyze_high_performing_carousels:
+          metrics: [saves, shares, engagement_rate]
+          identify: [slide_count, design_style, content_structure]
+      - study_audience_interests:
+          method: [comment_analysis, poll_results, dm_questions]
+          identify: [pain_points, learning_goals, content_preferences]
+      - gather_educational_content:
+          sources: [expert_insights, research_data, case_studies]
+          format: [tips, steps, frameworks, checklists]
+    output:
+      - research_brief:
+          trending_topics: []
+          carousel_benchmarks: {}
+          audience_insights: {}
+          content_ideas: []
+          recommended_format: ""
+  
+  - step: 2
+    name: Carousel Structure Planning
+    agent: writer
+    input:
+      - research_brief
+      - carousel_topic
+    actions:
+      - determine_carousel_type:
+          options:
+            - educational_tips: "5-10 actionable tips"
+            - step_by_step: "How-to guide with steps"
+            - checklist: "Complete checklist format"
+            - before_after: "Transformation showcase"
+            - myth_busting: "Common misconceptions debunked"
+            - framework: "Strategic methodology"
+            - list_post: "Curated resources or ideas"
+      - plan_slide_count:
+          optimal_range: 6-10_slides
+          structure:
+            - slide_1: cover_with_hook
+            - slides_2_to_n-1: main_content
+            - slide_n: cta_and_engagement
+      - outline_content_flow:
+          - hook_slide: attention_grabbing_title
+          - intro_slide: context_and_promise
+          - content_slides: one_idea_per_slide
+          - summary_slide: recap_key_points
+          - cta_slide: clear_next_action
+      - write_slide_content:
+          guidelines:
+            - one_main_idea: per_slide
+            - concise_copy: 20-40_words_per_slide
+            - clear_hierarchy: headline_and_body
+            - actionable: practical_takeaways
+    output:
+      - carousel_outline:
+          type: ""
+          slide_count: 0
+          slide_content: []
+          flow_structure: ""
+  
+  - step: 3
+    name: Visual Design Creation
+    agent: designer
+    input:
+      - carousel_outline
+      - brand_guidelines
+    actions:
+      - select_design_style:
+          options:
+            - minimal_clean: "White background, simple typography"
+            - bold_colorful: "Vibrant colors, eye-catching"
+            - gradient_modern: "Gradient backgrounds, contemporary"
+            - photo_based: "High-quality images with text overlay"
+            - illustrated: "Custom illustrations or icons"
+            - dark_mode: "Dark backgrounds, light text"
+      - create_design_system:
+          elements:
+            - color_palette: 2-3_brand_colors
+            - typography: 2_fonts_max (headline + body)
+            - layout_grid: consistent_spacing
+            - visual_elements: icons_shapes_patterns
+          consistency:
+            - same_layout: across_all_slides
+            - cohesive_colors: brand_aligned
+            - unified_style: professional_polish
+      - design_individual_slides:
+          slide_1_cover:
+            - bold_headline: main_topic
+            - visual_hook: eye_catching_graphic
+            - branding: subtle_logo
+            - style: stop_scroll_worthy
+          content_slides:
+            - clear_hierarchy: headline_prominent
+            - readable_text: minimum_30pt_font
+            - visual_support: icons_or_images
+            - white_space: not_cluttered
+          final_slide:
+            - clear_cta: follow_save_share
+            - engagement_prompt: comment_question
+            - branding: logo_and_handle
+            - visual_consistency: matches_carousel
+      - optimize_for_mobile:
+          - text_size: readable_on_small_screens
+          - contrast: high_contrast_for_readability
+          - tap_targets: easy_to_swipe
+          - file_size: optimized_for_fast_loading
+    output:
+      - design_package:
+          style: ""
+          slide_designs: []
+          brand_consistency: true
+          mobile_optimized: true
+  
+  - step: 4
+    name: Caption Writing
+    agent: writer
+    input:
+      - carousel_outline
+      - design_package
+    actions:
+      - craft_caption_hook:
+          techniques:
+            - question: "Ever wondered why X happens?"
+            - bold_statement: "This changed everything for me"
+            - relatable_pain: "Struggling with X? You're not alone"
+            - promise: "Save this for when you need X"
+            - curiosity: "The secret to X that nobody talks about"
+          length: 1-2_sentences
+          goal: encourage_carousel_swipe
+      - write_caption_body:
+          structure:
+            - expand_on_hook: provide_context
+            - tease_carousel_value: what_they'll_learn
+            - add_personal_touch: story_or_insight
+            - include_cta: swipe_through_carousel
+          length: 100-150_words
+          tone: conversational_and_authentic
+      - add_engagement_elements:
+          - ask_question: "Which tip will you try first?"
+          - encourage_save: "Save this for later"
+          - prompt_share: "Tag someone who needs this"
+          - request_comment: "Drop a 💡 if this helped"
+      - include_cta:
+          options:
+            - follow: "Follow for more tips like this"
+            - save: "Save this for future reference"
+            - share: "Share with someone who needs this"
+            - comment: "Tell me your biggest challenge with X"
+            - link: "Link in bio for full guide"
+    output:
+      - caption_draft:
+          hook: ""
+          body: ""
+          cta: ""
+          total_length: 0
+  
+  - step: 5
+    name: Hashtag Research & SEO
+    agent: seo
+    input:
+      - carousel_topic
+      - target_audience
+      - caption_draft
+    actions:
+      - research_hashtags:
+          strategy: mix_sizes_for_reach
+          large_hashtags:
+            size: 500k-5M_posts
+            count: 3-5
+            purpose: broad_reach
+          medium_hashtags:
+            size: 100k-500k_posts
+            count: 5-10
+            purpose: targeted_audience
+          small_hashtags:
+            size: 10k-100k_posts
+            count: 5-10
+            purpose: niche_community
+          branded_hashtag:
+            custom: true
+            count: 1
+          total_limit: 20-30
+      - optimize_caption_keywords:
+          placement: naturally_in_caption
+          focus: [niche_terms, searchable_phrases]
+          avoid: keyword_stuffing
+      - determine_posting_time:
+          analyze:
+            - audience_timezone: primary_locations
+            - engagement_patterns: when_followers_active
+            - competitor_timing: industry_norms
+          recommend:
+            - optimal_days: [Tuesday, Wednesday, Thursday]
+            - optimal_times: [9am, 12pm, 7pm]
+      - add_alt_text:
+          purpose: accessibility_and_seo
+          content: describe_carousel_visuals
+          length: 100-125_characters
+    output:
+      - seo_package:
+          hashtags: []
+          keywords: []
+          optimal_posting_time: ""
+          alt_text: ""
+          expected_reach: 0
+  
+  - step: 6
+    name: Final Review & Quality Check
+    agent: editor
+    input:
+      - design_package
+      - caption_draft
+      - seo_package
+    actions:
+      - review_carousel_flow:
+          - slide_progression: logical_and_smooth
+          - content_clarity: easy_to_understand
+          - visual_consistency: cohesive_design
+          - value_delivery: educational_and_actionable
+      - check_technical_specs:
+          - image_format: jpg_or_png
+          - dimensions: 1080x1080_square
+          - file_size: under_8MB_per_slide
+          - slide_count: 6-10_optimal
+      - validate_caption:
+          - grammar_spelling: error_free
+          - tone_consistency: brand_voice
+          - cta_clarity: clear_action
+          - hashtag_relevance: on_topic
+      - ensure_accessibility:
+          - alt_text: descriptive_and_helpful
+          - text_contrast: readable_for_all
+          - font_size: minimum_30pt
+          - color_blind_friendly: test_palette
+      - generate_preview:
+          format: instagram_carousel_mockup
+          include: [all_slides, caption, hashtags]
+    output:
+      - approval_package:
+          carousel_slides: []
+          caption: ""
+          hashtags: []
+          posting_schedule: ""
+          quality_score: 0
+  
+  - step: 7
+    name: Publication & Engagement
+    agent: publisher
+    input:
+      - approved_carousel
+      - posting_schedule
+    actions:
+      - publish_carousel:
+          platform: instagram_api_or_creator_studio
+          timing: optimal_time
+          settings:
+            - location_tag: if_relevant
+            - collaborator_tag: if_applicable
+            - alt_text: included
+            - first_comment: hashtags_in_comment
+      - monitor_initial_performance:
+          timeframe: first_60_minutes
+          metrics: [reach, impressions, saves, shares, comments]
+          alerts: low_engagement_warning
+      - engage_with_audience:
+          - respond_to_comments: first_30_minutes
+          - like_quality_comments: show_appreciation
+          - answer_questions: provide_value
+          - encourage_discussion: ask_follow_ups
+      - amplify_reach:
+          - share_to_stories: with_swipe_up_or_link
+          - post_in_reels: repurpose_if_possible
+          - share_in_groups: relevant_communities
+          - cross_promote: other_platforms
+      - track_performance:
+          - hourly_metrics: first_24_hours
+          - save_rate: saves_per_impression
+          - share_rate: shares_per_impression
+          - engagement_rate: total_engagement_per_reach
+          - follower_growth: new_followers_from_post
+    output:
+      - publication_report:
+          published_at: ""
+          post_url: ""
+          initial_metrics: {}
+          engagement_summary: {}
+          top_performing_slides: []
+
+metrics:
+  engagement:
+    - impressions: "Total carousel views"
+    - reach: "Unique accounts reached"
+    - engagement_rate: "(Likes + Comments + Saves + Shares) / Reach"
+    - likes: "Total likes"
+    - comments: "Total comments"
+    - saves: "Bookmarks (high-value metric)"
+    - shares: "Sends to others"
+    - profile_visits: "Clicks to profile"
+  
+  carousel_specific:
+    - swipe_through_rate: "% who viewed all slides"
+    - average_slides_viewed: "Mean slides per viewer"
+    - slide_drop_off: "Where people stop swiping"
+    - save_rate: "Saves / Impressions (target >5%)"
+    - share_rate: "Shares / Impressions"
+  
+  conversion:
+    - link_clicks: "Bio link clicks"
+    - follower_growth: "New followers from carousel"
+    - website_traffic: "External link clicks"
+    - dm_inquiries: "Direct messages received"
+  
+  quality:
+    - comment_sentiment: "Positive/negative ratio"
+    - completion_rate: "% who viewed all slides"
+    - time_on_post: "Average viewing duration"
+    - repeat_viewers: "People who came back"
+
+platform_config:
+  instagram:
+    carousel_specs:
+      format: jpg_or_png
+      dimensions: 1080x1080
+      aspect_ratio: "1:1 (square)"
+      max_slides: 10
+      optimal_slides: 6-10
+      max_file_size: 8MB_per_image
+      color_mode: RGB
+    caption_specs:
+      character_limit: 2200
+      optimal_length: 125-150_words
+      hashtag_limit: 30
+      optimal_hashtags: 20-30
+      line_breaks: use_for_readability
+    posting_best_practices:
+      - optimal_days: [Tuesday, Wednesday, Thursday]
+      - optimal_times: [9am, 12pm, 7pm]
+      - avoid_sundays: lower_engagement
+      - consistency: 3-5_posts_per_week
+      - engage_immediately: first_hour_critical
+      - use_stories: amplify_carousel_reach
+    algorithm_optimization:
+      - saves_are_king: highest_ranking_signal
+      - shares_matter: strong_engagement_signal
+      - time_on_post: longer_viewing_favored
+      - completion_rate: swipe_through_all_slides
+      - early_engagement: first_60_min_crucial
+      - consistent_posting: regular_schedule_rewarded
+      - original_content: avoid_reposts
+      - native_features: use_instagram_tools
+
+content_patterns:
+  educational_tips:
+    structure:
+      - slide_1: "X Tips for Y (eye-catching cover)"
+      - slide_2: "Intro - Why these tips matter"
+      - slides_3_to_n-1: "One tip per slide with brief explanation"
+      - slide_n: "Recap + CTA (follow, save, share)"
+    example_title: "10 Instagram Growth Hacks That Actually Work in 2026"
+    best_for: [saves, shares, educational_value]
+  
+  step_by_step_guide:
+    structure:
+      - slide_1: "How to [achieve outcome] (promise result)"
+      - slide_2: "Why this works (build credibility)"
+      - slides_3_to_n-1: "Step 1, Step 2, Step 3... (clear instructions)"
+      - slide_n: "Your turn + CTA (encourage action)"
+    example_title: "How to Create Viral Reels in 5 Simple Steps"
+    best_for: [actionable_content, high_saves, tutorial_seekers]
+  
+  checklist_format:
+    structure:
+      - slide_1: "The Ultimate [Topic] Checklist"
+      - slide_2: "How to use this checklist"
+      - slides_3_to_n-1: "Checklist items with checkboxes"
+      - slide_n: "Save this + Share with friends"
+    example_title: "The Complete Content Creator Checklist"
+    best_for: [saves, practical_value, reference_material]
+  
+  before_after:
+    structure:
+      - slide_1: "The transformation (dramatic reveal)"
+      - slide_2: "Where I started (before state)"
+      - slides_3_to_n-2: "What I changed (methodology)"
+      - slide_n-1: "The results (after state)"
+      - slide_n: "You can do this too (CTA)"
+    example_title: "How I Grew from 0 to 100K Followers"
+    best_for: [inspiration, credibility, aspirational_content]
+  
+  myth_busting:
+    structure:
+      - slide_1: "X Myths About Y (controversial hook)"
+      - slide_2: "Why these myths persist"
+      - slides_3_to_n-1: "Myth vs. Reality (one per slide)"
+      - slide_n: "The truth + CTA"
+    example_title: "5 Instagram Myths That Are Killing Your Growth"
+    best_for: [engagement, discussion, thought_leadership]
+  
+  framework_share:
+    structure:
+      - slide_1: "The [Name] Framework (branded methodology)"
+      - slide_2: "Why you need this framework"
+      - slides_3_to_n-1: "Framework components (detailed breakdown)"
+      - slide_n: "Apply this today + CTA"
+    example_title: "The CONTENT Framework for Viral Posts"
+    best_for: [authority, saves, educational_value]
+
+design_best_practices:
+  typography:
+    - headline_font: bold_and_readable (60-80pt)
+    - body_font: clean_and_simple (30-40pt)
+    - font_pairing: max_2_fonts
+    - text_hierarchy: clear_visual_distinction
+    - line_spacing: generous_for_readability
+    - alignment: consistent_throughout
+  
+  color_strategy:
+    - brand_colors: 2-3_primary_colors
+    - contrast_ratio: minimum_4.5:1
+    - color_psychology: align_with_message
+    - consistency: same_palette_all_slides
+    - accessibility: color_blind_friendly
+    - backgrounds: not_too_busy
+  
+  layout_principles:
+    - grid_system: consistent_spacing
+    - white_space: generous_margins
+    - visual_hierarchy: important_elements_prominent
+    - balance: symmetrical_or_asymmetrical
+    - alignment: clean_and_organized
+    - focal_point: clear_visual_center
+  
+  visual_elements:
+    - icons: simple_and_recognizable
+    - shapes: geometric_for_structure
+    - patterns: subtle_backgrounds
+    - images: high_quality_only
+    - illustrations: custom_if_possible
+    - branding: subtle_logo_placement
+  
+  mobile_optimization:
+    - text_size: minimum_30pt
+    - tap_targets: easy_to_swipe
+    - contrast: high_for_outdoor_viewing
+    - file_size: optimized_for_speed
+    - readability: test_on_actual_device
+
+caption_formulas:
+  educational_hook:
+    - "Want to [achieve goal]? Here are X ways to do it:"
+    - "I spent X hours learning Y so you don't have to. Here's what works:"
+    - "The X things I wish I knew before starting Y:"
+    - "Stop doing X. Do this instead:"
+    - "Here's exactly how to [achieve outcome]:"
+  
+  value_proposition:
+    - "Save this for when you need [specific help]"
+    - "Swipe through for the complete guide to [topic]"
+    - "Everything you need to know about [topic] in one carousel"
+    - "The only [topic] guide you'll ever need"
+    - "Bookmark this and thank me later"
+  
+  engagement_prompts:
+    - "Which tip resonated most with you? Comment below!"
+    - "Tag someone who needs to see this"
+    - "Save this and try one tip today"
+    - "What would you add to this list?"
+    - "Drop a [emoji] if you found this helpful"
+    - "Share this with your [target audience]"
+
+quality_checklist:
+  before_posting:
+    - cover_slide_compelling: "Would I stop scrolling?"
+    - content_valuable: "Is this worth saving?"
+    - design_cohesive: "Visually consistent?"
+    - text_readable: "Easy to read on mobile?"
+    - flow_logical: "Smooth progression?"
+    - cta_clear: "What should viewer do?"
+    - caption_engaging: "Does it encourage swipes?"
+    - hashtags_relevant: "20-30 strategic tags?"
+    - alt_text_included: "Accessibility covered?"
+    - timing_optimal: "Best time for audience?"
+  
+  after_posting:
+    - engage_immediately: "Respond to first comments"
+    - share_to_stories: "Amplify reach"
+    - monitor_metrics: "Track performance"
+    - analyze_drop_off: "Which slide loses people?"
+    - document_learnings: "What worked?"
+    - repurpose_content: "Use in other formats?"
+
+success_criteria:
+  viral_carousel:
+    - reach: ">100,000"
+    - save_rate: ">10%"
+    - engagement_rate: ">8%"
+    - swipe_through_rate: ">60%"
+    - follower_growth: ">500"
+  
+  high_performing_carousel:
+    - reach: ">20,000"
+    - save_rate: ">5%"
+    - engagement_rate: ">5%"
+    - swipe_through_rate: ">50%"
+    - follower_growth: ">100"
+  
+  baseline_carousel:
+    - reach: ">5,000"
+    - save_rate: ">3%"
+    - engagement_rate: ">3%"
+    - swipe_through_rate: ">40%"
+    - follower_growth: ">25"
+
+advanced_tactics:
+  slide_optimization:
+    - hook_slide: most_important_for_stopping_scroll
+    - slide_2_critical: determines_if_they_keep_swiping
+    - one_idea_per_slide: don't_overwhelm
+    - visual_variety: mix_text_and_images
+    - surprise_element: unexpected_insight_mid_carousel
+    - strong_finish: memorable_final_slide
+  
+  engagement_hacks:
+    - ask_question_slide_2: encourage_comment_early
+    - controversial_take: spark_discussion
+    - interactive_element: poll_or_quiz_in_stories
+    - series_indicator: part_1_of_3_for_anticipation
+    - easter_egg: hidden_detail_for_close_viewers
+    - call_back: reference_previous_carousel
+  
+  repurposing_strategy:
+    - share_to_stories: with_stickers_and_engagement
+    - create_reel: animate_carousel_slides
+    - blog_post: expand_into_long_form
+    - email_newsletter: send_to_subscribers
+    - pinterest_pin: repurpose_for_pinterest
+    - twitter_thread: adapt_for_twitter

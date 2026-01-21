@@ -1,0 +1,754 @@
+name: Web3 Tutorial Content
+description: Create comprehensive how-to tutorials for blockchain and Web3 technologies
+version: 1.0.0
+category: web3
+tags:
+  - web3
+  - tutorial
+  - how-to
+  - blockchain
+  - education
+
+inputs:
+  tutorial_topic:
+    type: string
+    description: Main tutorial topic
+    required: true
+  
+  tutorial_type:
+    type: enum
+    description: Type of tutorial
+    options:
+      - wallet-setup
+      - dapp-interaction
+      - token-swap
+      - nft-minting
+      - staking-guide
+      - bridge-usage
+      - smart-contract-interaction
+      - security-setup
+      - development-guide
+      - troubleshooting
+    required: true
+  
+  target_blockchain:
+    type: enum
+    description: Primary blockchain platform
+    options:
+      - ethereum
+      - polygon
+      - solana
+      - base
+      - arbitrum
+      - optimism
+      - avalanche
+      - binance-smart-chain
+      - multi-chain
+    required: false
+  
+  difficulty_level:
+    type: enum
+    description: Tutorial difficulty level
+    options:
+      - beginner
+      - intermediate
+      - advanced
+    default: beginner
+  
+  user_experience_level:
+    type: enum
+    description: Assumed user experience
+    options:
+      - complete-newbie
+      - crypto-familiar
+      - experienced-user
+      - developer
+    default: complete-newbie
+  
+  tutorial_format:
+    type: enum
+    description: Tutorial format
+    options:
+      - step-by-step-guide
+      - video-script
+      - interactive-walkthrough
+      - quick-start
+      - comprehensive-guide
+      - troubleshooting-guide
+    default: step-by-step-guide
+  
+  include_screenshots:
+    type: boolean
+    description: Include screenshot descriptions
+    default: true
+  
+  include_code:
+    type: boolean
+    description: Include code examples
+    default: false
+  
+  include_troubleshooting:
+    type: boolean
+    description: Include troubleshooting section
+    default: true
+  
+  platform_specific:
+    type: array
+    description: Specific platforms or tools covered
+    items:
+      type: string
+    required: false
+  
+  estimated_time:
+    type: string
+    description: Estimated completion time
+    required: false
+  
+  prerequisites:
+    type: array
+    description: Required prerequisites
+    items:
+      type: string
+    required: false
+  
+  tone:
+    type: enum
+    description: Tutorial tone
+    options:
+      - friendly
+      - professional
+      - casual
+      - technical
+      - encouraging
+    default: friendly
+
+steps:
+  - id: research_tutorial_topic
+    name: Research Tutorial Topic
+    mcp: creator-mcp
+    tool: research_topic
+    inputs:
+      topic: "{{tutorial_topic}} {{tutorial_type}} {{target_blockchain}}"
+      depth: comprehensive
+      
+      focus_areas:
+        - Current best practices
+        - Common user issues
+        - Platform updates
+        - Security considerations
+        - Alternative methods
+        - Expert recommendations
+        - Community feedback
+      
+      sources:
+        - Official documentation
+        - Tutorial platforms
+        - Community forums
+        - Video tutorials
+        - Developer guides
+        - Support channels
+    
+    outputs:
+      tutorial_research: research_results
+
+  - id: identify_prerequisites
+    name: Identify Prerequisites
+    mcp: creator-mcp
+    tool: analyze_content
+    inputs:
+      content: "{{tutorial_research}}"
+      analysis_type: prerequisite_identification
+      
+      user_level: "{{user_experience_level}}"
+      
+      determine:
+        - Required knowledge
+        - Necessary tools
+        - Account requirements
+        - Software installations
+        - Wallet setup needs
+        - Funding requirements
+        - Time commitment
+    
+    outputs:
+      identified_prerequisites: prerequisite_list
+
+  - id: outline_tutorial_steps
+    name: Outline Tutorial Steps
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: outline
+      topic: "{{tutorial_topic}}"
+      
+      structure_approach: sequential_steps
+      
+      outline_sections:
+        - Introduction and overview
+        - What you'll learn
+        - Prerequisites checklist
+        - Tools and requirements
+        - Step-by-step instructions
+        - Verification steps
+        - Troubleshooting
+        - Best practices
+        - Next steps
+        - Additional resources
+      
+      step_breakdown:
+        - Each step clearly numbered
+        - One action per step
+        - Expected outcome stated
+        - Visual indicators needed
+        - Common mistakes noted
+    
+    outputs:
+      tutorial_outline: step_outline
+
+  - id: generate_tutorial_content
+    name: Generate Tutorial Content
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: "{{tutorial_format}}"
+      topic: "{{tutorial_topic}}"
+      outline: "{{tutorial_outline}}"
+      
+      context: |
+        Tutorial Topic: {{tutorial_topic}}
+        Tutorial Type: {{tutorial_type}}
+        Blockchain: {{target_blockchain}}
+        Difficulty: {{difficulty_level}}
+        User Level: {{user_experience_level}}
+        Estimated Time: {{estimated_time}}
+        Prerequisites: {{identified_prerequisites}}
+        Research: {{tutorial_research}}
+      
+      requirements:
+        - Crystal clear instructions
+        - One step at a time
+        - Explain every action
+        - Anticipate questions
+        - Include visual cues
+        - Highlight important warnings
+        - Provide context for each step
+        - Use simple language
+        - Number all steps
+        - Include success indicators
+      
+      tone: "{{tone}}"
+      
+      tutorial_principles:
+        - Assume no prior knowledge
+        - Explain technical terms
+        - Show, don't just tell
+        - Provide screenshots/visuals
+        - Include verification steps
+        - Address common mistakes
+        - Encourage at each step
+        - Make it achievable
+      
+      step_structure:
+        - Step number and title
+        - What you'll do
+        - Why you're doing it
+        - Detailed instructions
+        - Screenshot description
+        - Expected result
+        - Verification method
+        - Troubleshooting tip
+      
+      tutorial_sections:
+        introduction:
+          - What this tutorial covers
+          - Why it's useful
+          - What you'll achieve
+          - Time required
+          - Difficulty level
+        
+        prerequisites:
+          - Required items checklist
+          - Recommended preparation
+          - Links to setup guides
+          - Cost considerations
+        
+        main_steps:
+          - Sequential numbered steps
+          - Clear action items
+          - Visual guidance
+          - Progress indicators
+        
+        verification:
+          - How to confirm success
+          - What to check
+          - Expected outcomes
+        
+        troubleshooting:
+          - Common issues
+          - Solutions
+          - Where to get help
+    
+    outputs:
+      tutorial_content: generated_content
+
+  - id: add_screenshot_descriptions
+    name: Add Screenshot Descriptions
+    condition: "{{include_screenshots}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{tutorial_content}}"
+      transformation: add_visual_descriptions
+      
+      screenshot_guidelines:
+        - Describe what to look for
+        - Highlight key elements
+        - Indicate click locations
+        - Show expected states
+        - Mark important buttons
+        - Circle relevant areas
+        - Use arrows for flow
+        - Include before/after
+      
+      screenshot_locations:
+        - After each major step
+        - For complex interfaces
+        - For verification steps
+        - For error states
+        - For success confirmations
+      
+      description_format: |
+        [Screenshot: Description of what the image shows]
+        Key elements to notice:
+        - Element 1 location and purpose
+        - Element 2 location and purpose
+        - What to click/select
+    
+    outputs:
+      content_with_visuals: transformed_content
+
+  - id: add_code_examples
+    name: Add Code Examples
+    condition: "{{include_code}}"
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_visuals}}"
+      transformation: add_code_blocks
+      
+      code_guidelines:
+        - Syntax highlighted
+        - Well commented
+        - Copy-paste ready
+        - Explain each section
+        - Include imports
+        - Show full context
+        - Provide alternatives
+      
+      code_structure:
+        - Code block with language
+        - Line-by-line explanation
+        - Expected output
+        - Common errors
+        - Debugging tips
+      
+      code_best_practices:
+        - Use clear variable names
+        - Include error handling
+        - Add security checks
+        - Comment complex logic
+        - Follow conventions
+    
+    outputs:
+      content_with_code: transformed_content
+
+  - id: add_troubleshooting_section
+    name: Add Troubleshooting Section
+    condition: "{{include_troubleshooting}}"
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: troubleshooting_guide
+      topic: "{{tutorial_topic}} common issues"
+      
+      troubleshooting_structure:
+        - Problem description
+        - Possible causes
+        - Step-by-step solution
+        - Prevention tips
+        - When to seek help
+      
+      common_issues:
+        wallet_connection:
+          - Wallet not connecting
+          - Wrong network selected
+          - Insufficient gas
+          - Transaction pending
+        
+        transaction_errors:
+          - Transaction failed
+          - Out of gas
+          - Slippage too high
+          - Nonce too low
+        
+        interface_issues:
+          - Page not loading
+          - Buttons not working
+          - Balances not showing
+          - Approval needed
+        
+        security_concerns:
+          - Suspicious transaction
+          - Phishing warning
+          - Contract verification
+          - Scam detection
+      
+      help_resources:
+        - Official support
+        - Community forums
+        - Discord channels
+        - Documentation
+        - Video tutorials
+    
+    outputs:
+      troubleshooting_content: troubleshooting_guide
+
+  - id: add_security_warnings
+    name: Add Security Warnings
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_code}}"
+      transformation: add_security_warnings
+      
+      security_warnings:
+        critical:
+          - Never share private keys
+          - Verify contract addresses
+          - Check URLs carefully
+          - Use hardware wallets
+          - Enable 2FA
+        
+        important:
+          - Approve only what's needed
+          - Revoke unused approvals
+          - Test with small amounts
+          - Keep software updated
+          - Backup seed phrases
+        
+        best_practices:
+          - Use separate wallets
+          - Research before signing
+          - Verify transaction details
+          - Use official links only
+          - Stay informed on scams
+      
+      warning_placement:
+        - Before risky operations
+        - At transaction signing
+        - When entering sensitive data
+        - Before large transfers
+        - At tutorial start
+      
+      warning_format: |
+        ⚠️ SECURITY WARNING: [Specific warning]
+        Why this matters: [Explanation]
+        What to do: [Action steps]
+    
+    outputs:
+      content_with_security: transformed_content
+
+  - id: add_verification_checkpoints
+    name: Add Verification Checkpoints
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_security}}"
+      transformation: add_checkpoints
+      
+      checkpoint_types:
+        - Progress verification
+        - Success confirmation
+        - Error checking
+        - State validation
+        - Balance verification
+      
+      checkpoint_format: |
+        ✅ CHECKPOINT: [What to verify]
+        You should see: [Expected state]
+        If not: [What to check]
+        Continue when: [Condition met]
+      
+      checkpoint_placement:
+        - After each major step
+        - Before irreversible actions
+        - At completion
+        - After troubleshooting
+    
+    outputs:
+      content_with_checkpoints: transformed_content
+
+  - id: add_tutorial_disclaimer
+    name: Add Tutorial Disclaimer
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{content_with_checkpoints}}"
+      transformation: add_disclaimer
+      disclaimer_type: tutorial_guide
+      
+      disclaimer_text: |
+        📖 TUTORIAL DISCLAIMER: This tutorial is for educational purposes only. While we strive for 
+        accuracy, blockchain technology evolves rapidly and interfaces may change. Always verify 
+        information, use official sources, and never risk more than you can afford to lose. This is 
+        not financial advice. Proceed at your own risk and responsibility.
+    
+    outputs:
+      content_with_disclaimer: transformed_content
+
+  - id: optimize_for_learning
+    name: Optimize for Learning
+    mcp: marketing-mcp
+    tool: optimize_social_content
+    inputs:
+      content: "{{content_with_disclaimer}}"
+      platform: educational
+      
+      optimization_goals:
+        - maximize_clarity
+        - reduce_confusion
+        - build_confidence
+        - ensure_success
+      
+      learning_optimizations:
+        - Use consistent terminology
+        - Repeat key concepts
+        - Provide progress indicators
+        - Include encouragement
+        - Offer multiple explanations
+        - Add summary boxes
+        - Use visual hierarchy
+        - Break into digestible chunks
+      
+      accessibility_improvements:
+        - Clear headings
+        - Numbered lists
+        - Bullet points
+        - Bold key terms
+        - Highlight warnings
+        - Use white space
+        - Logical flow
+    
+    outputs:
+      optimized_content: learning_optimized_content
+
+  - id: create_quick_reference
+    name: Create Quick Reference Guide
+    mcp: creator-mcp
+    tool: generate_content
+    inputs:
+      content_type: quick_reference
+      topic: "{{tutorial_topic}} quick guide"
+      
+      reference_sections:
+        - Key steps summary
+        - Important links
+        - Common commands
+        - Troubleshooting quick fixes
+        - Security checklist
+        - Useful resources
+      
+      format: concise_bullets
+    
+    outputs:
+      quick_reference: reference_guide
+
+  - id: generate_tutorial_hashtags
+    name: Generate Tutorial Hashtags
+    mcp: marketing-mcp
+    tool: generate_hashtags
+    inputs:
+      content: "{{optimized_content}}"
+      platform: twitter
+      niche: web3_education
+      count: 10
+      
+      include_categories:
+        - tutorial_specific
+        - web3_general
+        - blockchain_platform
+        - education_focused
+      
+      examples:
+        - "#Web3Tutorial"
+        - "#{{tutorial_type}}"
+        - "#{{target_blockchain}}"
+        - "#LearnWeb3"
+        - "#CryptoTutorial"
+        - "#BlockchainGuide"
+        - "#DeFiGuide"
+        - "#Web3Education"
+    
+    outputs:
+      tutorial_hashtags: hashtag_list
+
+  - id: create_video_script_version
+    name: Create Video Script Version
+    mcp: creator-mcp
+    tool: transform_content
+    inputs:
+      content: "{{optimized_content}}"
+      transformation: convert_to_video_script
+      
+      script_elements:
+        - Intro hook
+        - What viewers will learn
+        - Screen recording cues
+        - Voiceover narration
+        - On-screen text suggestions
+        - Transition points
+        - Recap summary
+        - Call to action
+      
+      video_timing:
+        - Estimated duration
+        - Segment lengths
+        - Pause points
+        - Speed recommendations
+      
+      visual_cues:
+        - When to zoom
+        - What to highlight
+        - Cursor movements
+        - Screen switches
+    
+    outputs:
+      video_script: script_content
+
+  - id: fact_check_tutorial
+    name: Fact-Check Tutorial Content
+    mcp: creator-mcp
+    tool: fact_check
+    inputs:
+      content: "{{optimized_content}}"
+      
+      verify_categories:
+        - technical_accuracy
+        - interface_descriptions
+        - process_steps
+        - security_advice
+        - platform_information
+        - link_validity
+        - version_compatibility
+      
+      cross_reference:
+        - Official documentation
+        - Platform interfaces
+        - Community guides
+        - Expert reviews
+        - Recent updates
+      
+      flag_outdated: true
+      require_verification: true
+    
+    outputs:
+      fact_check_report: verification_results
+
+  - id: compile_tutorial_package
+    name: Compile Tutorial Package
+    mcp: creator-mcp
+    tool: compile_output
+    inputs:
+      components:
+        main_tutorial: "{{optimized_content}}"
+        troubleshooting: "{{troubleshooting_content}}"
+        quick_reference: "{{quick_reference}}"
+        video_script: "{{video_script}}"
+        hashtags: "{{tutorial_hashtags}}"
+        fact_check: "{{fact_check_report}}"
+        prerequisites: "{{identified_prerequisites}}"
+        disclaimer: "Included in content"
+      
+      package_format: web3_tutorial_bundle
+      
+      supplementary_materials:
+        - Printable checklist
+        - Resource links
+        - Community support links
+        - Update log
+        - Feedback form
+    
+    outputs:
+      final_package: complete_tutorial_content
+
+outputs:
+  tutorial_content_package:
+    description: Complete Web3 tutorial package
+    value: "{{final_package}}"
+  
+  main_tutorial:
+    description: Primary tutorial content with all sections
+    value: "{{optimized_content}}"
+  
+  troubleshooting_guide:
+    description: Troubleshooting section
+    value: "{{troubleshooting_content}}"
+  
+  quick_reference:
+    description: Quick reference guide
+    value: "{{quick_reference}}"
+  
+  video_script:
+    description: Video tutorial script
+    value: "{{video_script}}"
+  
+  hashtags:
+    description: Tutorial hashtags
+    value: "{{tutorial_hashtags}}"
+  
+  verification_report:
+    description: Fact-check results
+    value: "{{fact_check_report}}"
+
+metadata:
+  best_practices:
+    - Test every step yourself first
+    - Use current screenshots
+    - Anticipate user questions
+    - Provide multiple paths
+    - Include verification steps
+    - Address common errors
+    - Keep language simple
+    - Update regularly
+    - Link to official sources
+    - Encourage safe practices
+  
+  tutorial_principles:
+    - Clarity over brevity
+    - Show, don't just tell
+    - One step at a time
+    - Assume no prior knowledge
+    - Verify at checkpoints
+    - Provide context
+    - Encourage learning
+    - Build confidence
+  
+  compliance_notes:
+    - Educational purpose disclaimer
+    - Not financial advice
+    - Security warnings required
+    - Verify all information
+    - Update for platform changes
+    - Link to official resources
+  
+  web3_tutorial_terminology:
+    - Wallet: Digital account for crypto
+    - Gas: Transaction fee
+    - Approve: Grant permission to contract
+    - Sign: Authorize with private key
+    - Slippage: Acceptable price change
+    - Network: Blockchain being used
+    - Contract: Smart contract address
+    - Transaction: Blockchain operation
+    - Confirmation: Block verification
+    - Explorer: Blockchain viewer

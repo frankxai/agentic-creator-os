@@ -1,0 +1,135 @@
+name: social-media-command-center
+department: marketing
+version: 1.0.0
+purpose: Complete social media management - create, schedule, analyze, and optimize content across all platforms
+
+agents:
+  - name: Social Strategist
+    role: Develops content strategy and campaign planning
+  - name: Content Creator
+    role: Creates platform-specific content
+  - name: Community Manager
+    role: Engages with audience and responds
+  - name: Analytics Expert
+    role: Tracks metrics and optimizes performance
+  - name: Trend Researcher
+    role: Identifies trending topics and opportunities
+
+steps:
+  - name: Strategy Development
+    input:
+      - Business goals
+      - Target audience
+      - Content pillars
+      - Competitor analysis
+    actions:
+      - Define content pillars (3-5 main topics)
+      - Set posting frequency per platform
+      - Create hashtag strategy
+      - Define KPIs and success metrics
+      - Plan monthly content themes
+    output: Social media strategy document
+
+  - name: Content Calendar Creation
+    input:
+      - Strategy document
+      - Upcoming events/product launches
+      - Industry awareness days
+    actions:
+      - Plan 30-day content calendar
+      - Schedule posts per platform
+      - Balance content types (educational, promotional, engagement)
+      - Plan content batching
+    output: 30-day content calendar
+
+  - name: Daily Content Creation
+    input:
+      - Daily post slot from calendar
+      - Content pillar for the day
+      - Platform requirements
+    actions:
+      - Research topic and trending angles
+      - Create platform-specific variations
+      - Create visual assets requirements
+      - Write multiple hook options
+      - Add trackable links
+    output: Daily content package (all platforms)
+
+  - name: Engagement Management
+    input:
+      - Comments and mentions
+      - DM received
+      - Trending topics in niche
+    actions:
+      - Respond to comments (personalized, not generic)
+      - Engage with community posts
+      - Join relevant conversations
+      - Identify engagement opportunities
+      - Flag negative sentiment
+    output: Engagement report and response plan
+
+  - name: Performance Analysis
+    input:
+      - Post metrics from all platforms
+      - Engagement rates
+      - Follower growth
+      - Reach and impressions
+    actions:
+      - Aggregate metrics across platforms
+      - Identify top performing content
+      - Analyze optimal posting times
+      - Calculate engagement rates
+      - Compare to previous periods
+    output: Weekly performance report with insights
+
+  - name: Optimization Implementation
+    input:
+      - Performance report
+      - Best content analysis
+      - Audience feedback
+    actions:
+      - Adjust content strategy based on data
+      - Replicate successful formats
+      - Improve underperforming content types
+      - Update posting schedule based on timing data
+      - Refine hashtag strategy
+    output: Optimized strategy and next week's calendar
+
+metrics:
+  - Follower growth rate
+  - Engagement rate (likes, comments, shares)
+  - Reach and impressions
+  - Click-through rates
+  - Content performance score
+  - Community growth
+
+config:
+  platforms:
+    twitter:
+      posts_per_week: 5-10
+      optimal_length: 100-280 chars
+      best_times: "9am, 12pm, 3pm, 6pm"
+    linkedin:
+      posts_per_week: 3-5
+      optimal_length: 800-1500 chars
+      best_times: "7:30am, 10:30am, 12pm"
+    instagram:
+      posts_per_week: 4-7
+      optimal_length: "125 hook + 1500 caption"
+      best_times: "11am, 1pm, 7pm"
+    facebook:
+      posts_per_week: 5-10
+      optimal_length: 40-80 chars minimum
+      best_times: "9am, 1pm, 4pm"
+    tiktok:
+      posts_per_week: 3-7
+      optimal_length: "15-60 seconds"
+      best_times: "6-10pm"
+    youtube:
+      posts_per_week: 1-3
+      optimal_length: "8-15 min (long), 60 sec (shorts)"
+      best_times: "2-4pm, 7-9pm"
+    farcaster:
+      posts_per_week: 5-15
+      optimal_length: "320 chars per cast"
+      best_times: "Throughout day"

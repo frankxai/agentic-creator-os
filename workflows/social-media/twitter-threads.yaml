@@ -1,0 +1,433 @@
+name: Twitter Thread Creation
+department: marketing
+purpose: Create engaging multi-tweet threads for deep dives, storytelling, and thought leadership on Twitter/X
+
+description: |
+  Comprehensive workflow for creating viral-worthy Twitter threads that educate, engage, and convert.
+  Optimized for Twitter's algorithm with hooks, engagement patterns, and strategic CTAs.
+
+agents:
+  - role: researcher
+    responsibilities:
+      - Analyze trending topics and hashtags
+      - Research competitor threads and engagement patterns
+      - Gather data, statistics, and credible sources
+      - Identify viral thread structures
+    
+  - role: writer
+    responsibilities:
+      - Craft compelling thread hooks (first tweet)
+      - Write clear, concise tweets (280 char limit)
+      - Structure narrative flow across tweets
+      - Create engagement loops and cliffhangers
+    
+  - role: editor
+    responsibilities:
+      - Ensure consistent voice and tone
+      - Optimize for readability and scannability
+      - Check character counts and formatting
+      - Validate links and mentions
+    
+  - role: seo
+    responsibilities:
+      - Optimize hashtag strategy (2-3 max)
+      - Research keyword trends
+      - Suggest optimal posting times
+      - Analyze thread performance potential
+    
+  - role: publisher
+    responsibilities:
+      - Schedule thread publication
+      - Monitor initial engagement
+      - Respond to early comments
+      - Track performance metrics
+
+steps:
+  - step: 1
+    name: Topic Research & Thread Planning
+    agent: researcher
+    input:
+      - content_topic
+      - target_audience
+      - thread_goal (educate|inspire|convert|entertain)
+    actions:
+      - research_trending_topics:
+          platforms: [twitter, google_trends]
+          timeframe: last_7_days
+      - analyze_competitor_threads:
+          min_engagement: 1000
+          thread_length: 5-15
+      - gather_supporting_data:
+          sources: [research_papers, case_studies, statistics]
+      - identify_thread_structure:
+          patterns: [story, how-to, listicle, contrarian, case_study]
+    output:
+      - research_brief:
+          trending_topics: []
+          competitor_insights: []
+          data_points: []
+          recommended_structure: ""
+          optimal_posting_time: ""
+  
+  - step: 2
+    name: Thread Hook Creation
+    agent: writer
+    input:
+      - research_brief
+      - thread_structure
+    actions:
+      - craft_hook_tweet:
+          techniques:
+            - pattern_interrupt: "Most people think X, but..."
+            - curiosity_gap: "Here's what nobody tells you about..."
+            - bold_claim: "I made $X doing Y. Here's how..."
+            - story_opening: "3 years ago I was broke. Today..."
+            - question_hook: "Why do 90% of people fail at X?"
+          max_length: 280
+          include_thread_indicator: "🧵 A thread:"
+      - test_hook_variations:
+          count: 3
+          criteria: [curiosity, clarity, relevance]
+    output:
+      - hook_options:
+          - hook_text: ""
+            predicted_engagement: ""
+            reasoning: ""
+  
+  - step: 3
+    name: Thread Body Writing
+    agent: writer
+    input:
+      - selected_hook
+      - research_brief
+      - thread_length (5-15 tweets)
+    actions:
+      - structure_thread_flow:
+          introduction: tweet_1
+          body_points: tweets_2_to_n-2
+          conclusion: tweet_n-1
+          cta: tweet_n
+      - write_thread_tweets:
+          guidelines:
+            - one_idea_per_tweet: true
+            - use_line_breaks: true
+            - include_visuals: every_3_tweets
+            - create_engagement_loops: true
+            - add_cliffhangers: between_sections
+          formatting:
+            - bullet_points: "• Point one\n• Point two"
+            - numbered_lists: "1. First\n2. Second"
+            - emphasis: "**bold** or ALL CAPS sparingly"
+            - spacing: "Double line breaks for readability"
+      - add_engagement_elements:
+          - questions: "What's your experience with this?"
+          - calls_to_action: "Retweet if you found this helpful"
+          - social_proof: "This helped 10,000+ people"
+          - scarcity: "Only works if you start today"
+    output:
+      - thread_draft:
+          tweets: []
+          total_length: 0
+          estimated_read_time: ""
+  
+  - step: 4
+    name: Thread Optimization
+    agent: editor
+    input:
+      - thread_draft
+    actions:
+      - optimize_readability:
+          - check_character_counts: max_280_per_tweet
+          - improve_clarity: remove_jargon
+          - enhance_flow: smooth_transitions
+          - add_visual_breaks: line_spacing
+      - validate_thread_structure:
+          - hook_strength: score_1_10
+          - narrative_flow: coherent_progression
+          - engagement_potential: interaction_points
+          - cta_clarity: clear_next_step
+      - format_for_twitter:
+          - preserve_line_breaks: true
+          - optimize_hashtags: 2-3_max
+          - validate_mentions: username_format
+          - check_links: shortened_urls
+    output:
+      - optimized_thread:
+          tweets: []
+          improvements_made: []
+          readability_score: 0
+  
+  - step: 5
+    name: SEO & Hashtag Strategy
+    agent: seo
+    input:
+      - optimized_thread
+      - target_audience
+    actions:
+      - research_hashtags:
+          strategy: mix_popular_and_niche
+          popular_hashtags:
+            volume: 100k-1M
+            count: 1
+          niche_hashtags:
+            volume: 10k-100k
+            count: 1-2
+          branded_hashtag:
+            custom: true
+            count: 1
+      - optimize_posting_time:
+          analyze:
+            - audience_timezone: primary_location
+            - engagement_patterns: historical_data
+            - competitor_timing: best_performing
+          recommend:
+            - primary_time: ""
+            - backup_times: []
+      - add_seo_elements:
+          - keyword_placement: first_3_tweets
+          - alt_text: image_descriptions
+          - link_optimization: utm_parameters
+    output:
+      - seo_strategy:
+          hashtags: []
+          optimal_posting_time: ""
+          keywords: []
+          expected_reach: 0
+  
+  - step: 6
+    name: Final Review & Approval
+    agent: editor
+    input:
+      - optimized_thread
+      - seo_strategy
+    actions:
+      - final_quality_check:
+          - grammar_spelling: automated_check
+          - brand_voice: consistency_review
+          - fact_checking: verify_claims
+          - link_testing: all_urls_work
+      - generate_preview:
+          format: twitter_thread_mockup
+          include: [text, images, engagement_elements]
+      - create_approval_package:
+          - thread_content: full_text
+          - visual_assets: images_videos
+          - posting_schedule: date_time
+          - success_metrics: kpis
+    output:
+      - approval_package:
+          status: pending_approval
+          thread_preview: ""
+          estimated_performance: {}
+  
+  - step: 7
+    name: Publication & Monitoring
+    agent: publisher
+    input:
+      - approved_thread
+      - posting_schedule
+    actions:
+      - schedule_thread:
+          platform: twitter_api
+          timing: optimal_time
+          method: native_thread_or_scheduler
+      - monitor_initial_engagement:
+          timeframe: first_60_minutes
+          metrics: [impressions, likes, retweets, replies]
+          alerts: engagement_below_threshold
+      - engage_with_audience:
+          - respond_to_comments: first_30_minutes
+          - like_quality_replies: boost_engagement
+          - retweet_best_responses: amplify_reach
+      - track_performance:
+          - real_time_metrics: hourly_updates
+          - engagement_rate: calculate_percentage
+          - click_through_rate: track_link_clicks
+          - conversion_tracking: monitor_cta_actions
+    output:
+      - publication_report:
+          published_at: ""
+          thread_url: ""
+          initial_metrics: {}
+          engagement_status: ""
+
+metrics:
+  engagement:
+    - impressions: "Total views of thread"
+    - engagement_rate: "(Likes + RTs + Replies) / Impressions"
+    - retweets: "Thread shares"
+    - likes: "Thread favorites"
+    - replies: "Comments and discussions"
+    - bookmarks: "Saves for later"
+    - profile_visits: "Clicks to profile"
+    - link_clicks: "CTA click-through rate"
+  
+  reach:
+    - total_reach: "Unique accounts reached"
+    - viral_coefficient: "Retweets / Followers"
+    - hashtag_performance: "Hashtag impressions"
+    - mention_reach: "Reach from mentions"
+  
+  conversion:
+    - cta_clicks: "Call-to-action engagement"
+    - follower_growth: "New followers from thread"
+    - website_traffic: "Clicks to external links"
+    - lead_generation: "Email signups or conversions"
+  
+  quality:
+    - reply_sentiment: "Positive/negative ratio"
+    - thread_completion_rate: "% who read to end"
+    - save_rate: "Bookmarks / Impressions"
+    - share_quality: "Who's retweeting (influence)"
+
+platform_config:
+  twitter:
+    character_limit: 280
+    thread_max_length: 25
+    optimal_thread_length: 7-12
+    hashtag_limit: 3
+    image_specs:
+      format: [jpg, png, gif]
+      max_size: 5MB
+      dimensions: 1200x675
+      aspect_ratio: "16:9"
+    video_specs:
+      format: [mp4, mov]
+      max_size: 512MB
+      max_length: 140s
+      dimensions: 1280x720
+    posting_best_practices:
+      - post_during_peak_hours: [9am, 12pm, 5pm]
+      - use_line_breaks: improve_readability
+      - add_visuals: every_3_tweets
+      - engage_immediately: first_hour_critical
+      - pin_high_performers: profile_visibility
+    algorithm_optimization:
+      - early_engagement: first_30_min_crucial
+      - reply_to_own_thread: boost_visibility
+      - encourage_quote_tweets: amplify_reach
+      - use_twitter_spaces: cross_promote
+      - leverage_communities: niche_audiences
+
+content_patterns:
+  story_thread:
+    structure:
+      - hook: "Personal transformation story"
+      - setup: "Where you started"
+      - conflict: "Challenges faced"
+      - journey: "Steps taken"
+      - resolution: "Results achieved"
+      - lesson: "Key takeaways"
+      - cta: "How others can do it"
+    example_hook: "3 years ago I was $50k in debt. Today I run a 7-figure business. Here's the exact roadmap I followed:"
+  
+  how_to_thread:
+    structure:
+      - hook: "Promise specific outcome"
+      - context: "Why this matters"
+      - steps: "Numbered action items"
+      - tips: "Pro tips and shortcuts"
+      - mistakes: "What to avoid"
+      - results: "Expected outcomes"
+      - cta: "Next steps"
+    example_hook: "Want to 10x your productivity? Here are 7 systems I use to get more done in 4 hours than most do in 40:"
+  
+  listicle_thread:
+    structure:
+      - hook: "Number + benefit"
+      - intro: "Why this list matters"
+      - items: "Each tweet = one item"
+      - details: "Brief explanation per item"
+      - bonus: "Extra tip"
+      - summary: "Quick recap"
+      - cta: "Save for later"
+    example_hook: "10 AI tools that will make you irreplaceable at work (most people don't know #7):"
+  
+  contrarian_thread:
+    structure:
+      - hook: "Challenge common belief"
+      - setup: "What everyone thinks"
+      - pivot: "Why they're wrong"
+      - evidence: "Data and examples"
+      - alternative: "Better approach"
+      - proof: "Results and testimonials"
+      - cta: "Try it yourself"
+    example_hook: "Everyone says 'follow your passion.' That's terrible advice. Here's what actually works:"
+  
+  case_study_thread:
+    structure:
+      - hook: "Impressive result"
+      - background: "Starting situation"
+      - strategy: "What was done"
+      - execution: "How it was done"
+      - results: "Specific metrics"
+      - lessons: "Key insights"
+      - cta: "Apply to your situation"
+    example_hook: "How we grew from 0 to 100k followers in 6 months (with zero ad spend):"
+
+engagement_tactics:
+  hook_formulas:
+    - "I spent $X on Y so you don't have to. Here's what I learned:"
+    - "X years ago I knew nothing about Y. Here's everything I wish I knew:"
+    - "Everyone does X. Here's why that's wrong (and what to do instead):"
+    - "The $X mistake I made so you don't have to:"
+    - "X things I wish I knew before starting Y:"
+  
+  engagement_boosters:
+    - ask_questions: "What's your biggest challenge with X?"
+    - create_controversy: "Unpopular opinion: X is overrated"
+    - use_numbers: "Specific data beats vague claims"
+    - add_urgency: "This only works if you start now"
+    - social_proof: "10,000+ people used this"
+    - pattern_interrupt: "Stop doing X. Do Y instead."
+  
+  cta_examples:
+    - "Retweet this thread to help others"
+    - "Follow me @username for more content like this"
+    - "Bookmark this for later reference"
+    - "Reply with your biggest takeaway"
+    - "Click the link in my bio for the full guide"
+    - "Tag someone who needs to see this"
+
+quality_checklist:
+  before_posting:
+    - hook_is_compelling: "Would I stop scrolling?"
+    - value_is_clear: "What will reader gain?"
+    - flow_is_smooth: "Easy to follow?"
+    - length_is_optimal: "Not too long/short?"
+    - visuals_are_included: "Images every 3 tweets?"
+    - cta_is_clear: "What should reader do?"
+    - hashtags_are_relevant: "2-3 strategic tags?"
+    - timing_is_optimal: "Best time for audience?"
+    - links_are_working: "All URLs tested?"
+    - grammar_is_perfect: "No typos?"
+  
+  after_posting:
+    - engage_immediately: "Reply to comments in first hour"
+    - monitor_performance: "Track metrics in real-time"
+    - amplify_reach: "Share in communities"
+    - respond_to_feedback: "Address questions"
+    - analyze_results: "What worked/didn't work?"
+    - document_learnings: "Improve next thread"
+
+success_criteria:
+  viral_thread:
+    - engagement_rate: ">5%"
+    - retweets: ">100"
+    - impressions: ">10,000"
+    - replies: ">50"
+    - follower_growth: ">50"
+  
+  high_performing_thread:
+    - engagement_rate: ">3%"
+    - retweets: ">50"
+    - impressions: ">5,000"
+    - replies: ">25"
+    - follower_growth: ">25"
+  
+  baseline_thread:
+    - engagement_rate: ">1%"
+    - retweets: ">10"
+    - impressions: ">1,000"
+    - replies: ">10"
+    - follower_growth: ">10"
