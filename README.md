@@ -1,9 +1,9 @@
 # Agentic Creator OS
 **The Operating System for Golden Age Creators**
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue.svg)]()
-[![Skills](https://img.shields.io/badge/skills-62-green.svg)]()
-[![Agents](https://img.shields.io/badge/agents-9-purple.svg)]()
+[![Version](https://img.shields.io/badge/version-5.0.0-blue.svg)]()
+[![Skills](https://img.shields.io/badge/skills-70-green.svg)]()
+[![Agents](https://img.shields.io/badge/agents-10-purple.svg)]()
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 
 ---
@@ -402,4 +402,4 @@ Agentic Creator OS is part of the FrankX ecosystem.
 
 *Agentic Creator OS - The Operating System for the Golden Age Creator*
 
-**Version 3.0.0** | **January 2026** | **62 Skills** | **9 Agents** | **8 Workflows**
+**Version 5.0.0** | **January 2026** | **70 Skills** | **10 Agents** | **8 Workflows**

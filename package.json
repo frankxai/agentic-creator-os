@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
-  "version": "3.0.0",
-  "description": "The Operating System for Golden Age Creators - 62 skills, 9 agents, orchestrated workflows, and MCP integrations for Claude Code",
+  "version": "5.0.0",
+  "description": "The Operating System for Golden Age Creators - 70 skills, 10 agents, swarm orchestration, and MCP integrations for Claude Code",
   "author": "Frank Guzman <frank@frankx.ai>",
   "license": "MIT",
   "repository": {
