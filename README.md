@@ -14,32 +14,19 @@ Agentic Creator OS is a **superintelligent operating system for generative creat
 
 > **Philosophy**: Technology that amplifies creative expression, not replaces it.
 
-```
-┌──────────────────────────────────────────────────────────────────────────────┐
-│                      AGENTIC CREATOR OS v3.0                                  │
-│                                                                               │
-│         ┌─────────────────────────────────────────────────────┐              │
-│         │              STARLIGHT ORCHESTRATOR                  │              │
-│         │         (Meta-Intelligence Coordinator)              │              │
-│         └───────────────────────┬─────────────────────────────┘              │
-│                                 │                                             │
-│    ┌────────────────────────────┼────────────────────────────┐               │
-│    │                            │                            │               │
-│    ▼                            ▼                            ▼               │
-│ ┌─────────┐               ┌─────────┐               ┌─────────┐             │
-│ │ SKILLS  │               │ AGENTS  │               │WORKFLOWS│             │
-│ │  (62)   │◄─────────────►│   (9)   │◄─────────────►│   (8)   │             │
-│ └────┬────┘               └────┬────┘               └────┬────┘             │
-│      │                         │                         │                   │
-│      └─────────────────────────┼─────────────────────────┘                   │
-│                                │                                             │
-│                        ┌───────┴───────┐                                     │
-│                        │  MCP SERVERS  │                                     │
-│                        │     (4+)      │                                     │
-│                        └───────────────┘                                     │
-│                                                                               │
-└──────────────────────────────────────────────────────────────────────────────┘
-```
+![ACOS Architecture](docs/infographics/01-seven-pillars-architecture.png)
+
+### The 7 Pillars
+
+| Pillar | Count | Purpose |
+|--------|-------|---------|
+| **Skills** | 62 | Domain knowledge modules with progressive disclosure |
+| **Agents** | 40+ | Specialized AI personas for specific domains |
+| **Workflows** | 8 | Orchestrated pipelines for complex operations |
+| **MCP Servers** | 4+ | External tool integrations |
+| **Templates** | 20+ | Reusable content patterns |
+| **Instances** | ∞ | Project-specific configurations |
+| **Intelligence** | 1 | Starlight Orchestrator meta-coordinator |
 
 ---
 
@@ -162,32 +149,13 @@ Claude now has specialized testing knowledge
 
 ### Orchestration Patterns
 
-**Pattern 1: Pipeline**
-```
-Research → Plan → Create → Optimize → Publish
-```
+![Workflow Patterns](docs/infographics/05-workflow-patterns.png)
 
-**Pattern 2: Parallel Dispatch**
-```
-                 ┌→ Security Analysis
-Request → Split ─┼→ Performance Analysis
-                 └→ Code Quality Analysis
-                     │
-                     ▼
-                 Synthesis
-```
-
-**Pattern 3: Weighted Synthesis**
-```
-Strategic Decision Needed:
-├── Luminor Oracle (30%): "Build for long-term scale"
-├── Creation Engine (25%): "Focus on user experience"
-├── Technical Translator (25%): "Keep it simple"
-└── Frequency Alchemist (20%): "Align with values"
-    │
-    ▼
-Starlight Orchestrator synthesizes: Final recommendation
-```
+| Pattern | Description | Best For |
+|---------|-------------|----------|
+| **Pipeline** | Sequential stages: Research → Plan → Create → Optimize → Publish | Blog posts, newsletters |
+| **Parallel** | Concurrent agents with synthesis | Code review, multi-analysis |
+| **Weighted Synthesis** | Expert voting with percentage weights | Strategic decisions |
 
 ---
 
@@ -377,13 +345,36 @@ The answer: **Technology that amplifies your unique expression, guided by intell
 
 ## License & Attribution
 
-Agentic Creator OS is part of the FrankX ecosystem.
+Agentic Creator OS is part of the FrankX ecosystem. We believe in giving credit where it's due.
 
-**Built with:**
-- Claude Code by Anthropic
-- Model Context Protocol (MCP)
-- Community skill patterns from obra/superpowers
-- Progressive disclosure architecture from Anthropic best practices
+**Core Inspirations:**
+| Project | Author | What We Learned |
+|---------|--------|-----------------|
+| [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies, consensus |
+| [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, 108-agent patterns, modular skills |
+| [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient skill loading |
+| [awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | @travisvn | Community skill conventions and discovery |
+| [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | VoltAgent | 100+ subagent patterns |
+
+**Built on:**
+- [Claude Code](https://claude.ai/claude-code) by Anthropic
+- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for tool integrations
+- Community patterns from the growing Claude ecosystem
+
+👉 **See [CREDITS.md](CREDITS.md) for full acknowledgments**
+
+---
+
+## Visual Documentation
+
+Explore the system through our infographic gallery:
+
+| Concept | Infographic |
+|---------|-------------|
+| **Swarm Topologies** | ![Swarm](docs/infographics/03-swarm-topologies.png) |
+| **ACOS vs Traditional AI** | ![Comparison](docs/infographics/10-acos-vs-traditional.png) |
+
+📁 **[View all 10 infographics →](docs/infographics/)**
 
 ---
 
@@ -397,6 +388,8 @@ Agentic Creator OS is part of the FrankX ecosystem.
 | [AUDIENCE_PERSONAS.md](AUDIENCE_PERSONAS.md) | Who we serve |
 | [ORCHESTRATION_PATTERNS.md](ORCHESTRATION_PATTERNS.md) | Coordination patterns |
 | [SKILL_TEMPLATE.md](templates/SKILL_TEMPLATE.md) | Create new skills |
+| [CREDITS.md](CREDITS.md) | Acknowledgments & inspirations |
+| [Infographics](docs/infographics/) | Visual documentation gallery |
 
 ---
 
