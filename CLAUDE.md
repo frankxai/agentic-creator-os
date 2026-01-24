@@ -1,241 +1,149 @@
-# Agentic Creator OS - AI Context
-**Version**: 3.0.0
-**Last Updated**: January 20, 2026
+# Agentic Creator OS - Project Instructions
+
+> *"The operating system for generative creators. AI-powered productivity for those who create."*
 
 ---
 
-## What Is This?
+## What is ACOS?
 
-Agentic Creator OS is a **superintelligent operating system for generative creators**. It's the native implementation of the FrankX philosophy: technology that amplifies creative expression, not replaces it.
+**Agentic Creator OS** is a Claude Code-native productivity system for creators. When you open Claude Code in this directory, you get:
+
+- **14 Creator Commands** - `/author-team`, `/council`, `/generate-images`, etc.
+- **9 Slash Commands** - Full content strategy and social media workflows
+- **40 Specialized Agents** - Writers, editors, designers, strategists
+- **39 Skills** - Contextual capabilities that activate automatically
 
 ## Quick Start
 
 ```bash
-# View system architecture
-cat agentic-creator-os/ARCHITECTURE.md
+# Clone the repo
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
 
-# View skill tree
-cat agentic-creator-os/SKILL_TREE.md
+# Open Claude Code
+claude
 
-# Check system status
-cat agentic-creator-os/PRO_STATUS_DASHBOARD.md
-
-# See audience personas
-cat agentic-creator-os/AUDIENCE_PERSONAS.md
+# Try a command
+/author-team    # Activate writing team
+/council        # Convene superintelligent council
+/generate-images # Create images with AI
 ```
 
----
+## Available Commands
 
-## System Overview
+### Team Orchestration
+| Command | Description |
+|---------|-------------|
+| `/author-team` | Activate the Author Team for book writing |
+| `/council` | Convene the Superintelligent Council |
+| `/starlight-intelligence` | Strategic AI orchestration |
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    AGENTIC CREATOR OS v3.0                                   │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                              │
-│  ORCHESTRATION: Starlight Orchestrator (Meta-Intelligence)                   │
-│  ───────────────────────────────────────────────────────                     │
-│  • Weighted synthesis across agents                                          │
-│  • Strategic coordination                                                    │
-│  • Context preservation                                                      │
-│                                                                              │
-│  SKILLS: 62 Skills across 8 Domains                                          │
-│  ───────────────────────────────────                                         │
-│  • Technical (18) • Creative (8) • Business (2)                              │
-│  • Personal (4) • Projects (6) • Soulbook (25)                               │
-│                                                                              │
-│  AGENTS: 5 Specialist + Department Teams                                     │
-│  ─────────────────────────────────────────                                   │
-│  • Creation Engine, Frequency Alchemist                                      │
-│  • Technical Translator, Luminor Oracle                                      │
-│  • Content/Design/Dev/Marketing/Business Departments                         │
-│                                                                              │
-│  WORKFLOWS: Orchestrated Pipelines                                           │
-│  ─────────────────────────────────                                           │
-│  • Content creation, social distribution                                     │
-│  • Product launch, newsletter                                                │
-│                                                                              │
-│  MCP SERVERS: External Capabilities                                          │
-│  ─────────────────────────────────                                           │
-│  • Browser, Creator, Database, Email                                         │
-│                                                                              │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+### Content Generation
+| Command | Description |
+|---------|-------------|
+| `/generate-images` | Generate images via Nano Banana MCP |
+| `/generate-social` | Platform-optimized social media content |
+| `/classify-content` | Route content to appropriate destinations |
+| `/polish-content` | Polish content to publish-ready state |
+| `/review-content` | Review and approve generated content |
 
----
+### Development & Design
+| Command | Description |
+|---------|-------------|
+| `/automation-dev` | MCP servers, agents, workflow automation |
+| `/nextjs-deploy` | Next.js + Vercel deployment workflow |
+| `/ux-design` | UI/UX design workflows |
+| `/planning-with-files` | Manus-style file-based planning |
 
-## Key Documents
+### Product Creation
+| Command | Description |
+|---------|-------------|
+| `/products-creation` | Digital products, courses, templates |
+| `/mcp-status` | Check MCP server status |
 
-| Document | Purpose |
-|----------|---------|
-| `ARCHITECTURE.md` | Complete system architecture and 7 pillars |
-| `SKILL_TREE.md` | Visual map of all 62 skills with ratings |
-| `PRO_STATUS_DASHBOARD.md` | System health and metrics |
-| `AUDIENCE_PERSONAS.md` | Who we serve and how |
-| `ORCHESTRATION_PATTERNS.md` | How skills/agents/workflows coordinate |
-| `templates/SKILL_TEMPLATE.md` | Master template for creating skills |
+## Slash Commands (Content Strategy)
 
----
+Full prompt templates for content creation:
 
-## Directory Structure
+| Command | Description |
+|---------|-------------|
+| `/content-strategy` | Comprehensive content strategy development |
+| `/content-calendar` | Plan and manage content calendar |
+| `/linkedin-content` | Short LinkedIn posts |
+| `/linkedin-content-article` | Long-form LinkedIn articles |
+| `/x-content` | Twitter/X posts and threads |
+| `/meta-content` | Facebook/Instagram content |
+| `/farcaster-content` | Farcaster/Warpcast casts |
+| `/mirror-content` | Mirror/Paragraph essays |
+
+## Agents
+
+40 specialized agents including:
+
+**Writing & Editing**
+- `developmental-editor.md` - Story structure expert
+- `line-editor-voice-alchemist.md` - Prose polisher
+- `content-polisher.md` - Publish-ready refinement
+- `business-book-writer.md` - Business parables
+- `creator-book-writer.md` - Creator economy books
+
+**Strategy & Design**
+- `discussion-based-planning.md` - Strategic planning
+- `coaching-program-design.md` - Program design
+- `ui-ux-design-expert.md` - Interface design
+- `accessibility-auditor.md` - WCAG compliance
+
+**Production**
+- `music-production.md` - AI-powered music
+- `frequency-music-production.md` - Transformative soundscapes
+- `nano-banana-image-generation.md` - Image generation
+
+## Skills
+
+Skills activate automatically based on context. 39 skills covering:
+
+- Content creation and publishing
+- Development and deployment
+- Design and UX
+- Strategy and planning
+
+## Architecture
 
 ```
 agentic-creator-os/
-├── CLAUDE.md               ← YOU ARE HERE
-├── ARCHITECTURE.md         # System architecture
-├── SKILL_TREE.md          # Visual skill map
-├── PRO_STATUS_DASHBOARD.md # System status
-├── AUDIENCE_PERSONAS.md    # Audience research
-├── ORCHESTRATION_PATTERNS.md # Coordination patterns
-│
-├── departments/            # Agent teams
-│   ├── content/           # Content creation team
-│   ├── design/            # Visual/UX team
-│   ├── dev/               # Development team
-│   ├── marketing/         # Growth team
-│   └── business/          # Strategy team
-│
-├── instances/              # Project configs
-│   ├── frankx/            # FrankX configuration
-│   └── _template/         # Template for new projects
-│
-├── mcp-servers/            # MCP integrations
-│   ├── browser/           # Web automation
-│   ├── creator/           # Social APIs
-│   ├── database/          # Content storage
-│   └── email/             # Email delivery
-│
-├── skills/                 # Agentic Creator skills
-│   └── content-strategy/  # Content planning skill
-│
-├── templates/              # Content templates
-│   ├── SKILL_TEMPLATE.md  # Master skill template
-│   ├── library/           # Content type templates
-│   └── social-media/      # Platform templates
-│
-└── workflows/              # Orchestrated pipelines
+├── .claude/
+│   ├── commands/        # 14 creator commands
+│   ├── slash-commands/  # 9 content templates
+│   ├── agents/          # 40 specialized agents
+│   └── skills/          # 39 contextual skills
+├── content/             # Content outputs
+├── templates/           # Reusable templates
+├── workflows/           # Workflow definitions
+└── hub-generator/       # Personal hub builder
 ```
+
+## Related Projects
+
+- **[Arcanea](https://github.com/frankxai/arcanea)** - Fantasy universe + mythology commands
+- **[claude-code-config](https://github.com/frankxai/claude-code-config)** - User-level Claude config
+
+## The Creator Philosophy
+
+ACOS is built on these principles:
+
+1. **AI as Collaborator** - Not replacement, but amplification
+2. **Commands over Prompts** - Reusable workflows beat one-off prompts
+3. **Agents over Chat** - Specialized expertise beats general conversation
+4. **Files over Memory** - Persistent artifacts beat ephemeral threads
 
 ---
 
-## How Skills Work
+*Created by [FrankX](https://github.com/frankxai) - Generative Creator, AI Architect*
 
-### Progressive Disclosure
-```
-Level 1: Metadata (~100 tokens) → "Is this relevant?"
-Level 2: Instructions (<5k tokens) → "How do I do this?"
-Level 3: Resources (on-demand) → "Give me the details"
-```
+<claude-mem-context>
+# Recent Activity
 
-### Auto-Activation
-Skills activate automatically based on context keywords. You don't need to remember skill names - just describe what you want to do.
+<!-- This section is auto-generated by claude-mem. Edit content outside the tags. -->
 
-### The 500-Line Rule
-Each skill file stays under 500 lines. Detailed content goes in `resources/` subdirectory.
-
----
-
-## How Agents Work
-
-### Specialist Agents
-| Agent | Domain | Weight |
-|-------|--------|--------|
-| Luminor Oracle | Strategy, foresight | 30% |
-| Creation Engine | Content, products | 25% |
-| Technical Translator | AI education | 25% |
-| Frequency Alchemist | Music, consciousness | 20% |
-
-### Department Agents
-| Department | Lead | Team |
-|------------|------|------|
-| Content | Content Lead | Writer, Editor, Publisher |
-| Design | Design Lead | Visual, UX, Brand |
-| Dev | Dev Lead | Frontend, Backend, DevOps |
-| Marketing | Marketing Lead | Growth, Ads, Analytics |
-| Business | Business Lead | Strategy, Sales, Ops |
-
----
-
-## How Workflows Work
-
-### Pipeline Pattern
-```
-Research → Plan → Create → Optimize → Publish
-```
-
-### Parallel Pattern
-```
-                 ┌→ Blog
-Request → Split ─┼→ Social
-                 └→ Email
-                     │
-                     ▼
-                 Synthesis
-```
-
-### Quality Loop
-```
-Create → Evaluate → [Pass?] → Done
-            │
-            └── No → Revise → Evaluate
-```
-
----
-
-## For AI Agents
-
-When working in this system:
-
-1. **Check the instance** - Know which project (frankx, demo, etc.)
-2. **Respect brand voice** - Match the configured tone
-3. **Use relevant skills** - Let them auto-activate or invoke explicitly
-4. **Follow workflows** - Use established patterns
-5. **Preserve context** - Document decisions in handoffs
-
----
-
-## Quick Commands
-
-```bash
-# Content strategy
-/skill content-strategy
-
-# Create with brand voice
-/skill frankx-brand
-
-# Plan implementation
-/skill implementation-planning
-
-# Debug systematically
-/skill systematic-debugging
-
-# Build with TDD
-/skill test-driven-development
-```
-
----
-
-## Success Metrics
-
-| Metric | Target | Status |
-|--------|--------|--------|
-| Skills | 70 | 62 (88%) |
-| Auto-activation | 90% | 70% |
-| Agent effectiveness | 95% | 94% |
-| Workflow completion | 95% | 92% |
-
----
-
-## Philosophy
-
-> "Technology that amplifies creative expression, not replaces it."
-
-Agentic Creator OS exists to help creators:
-- Produce more without burning out
-- Maintain authentic voice at scale
-- Leverage AI as a creative partner
-- Build sustainable creative businesses
-
----
-
-*Agentic Creator OS - The Operating System for the Golden Age Creator*
+*No recent activity*
+</claude-mem-context>

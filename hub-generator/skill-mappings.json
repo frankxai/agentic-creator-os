@@ -1,0 +1,281 @@
+{
+  "_description": "Maps creator workflows to auto-selected skills",
+  "_version": "1.0.0",
+  "_updated": "2026-01-22",
+
+  "workflow_mappings": {
+    "blog_posts": {
+      "description": "Write blog posts / articles",
+      "primary_skills": [
+        "content-strategy",
+        "seo-optimization"
+      ],
+      "secondary_skills": [
+        "frankx-brand",
+        "research-methodology"
+      ],
+      "templates": [
+        "blog-post.md",
+        "article-outline.md"
+      ]
+    },
+
+    "social_media": {
+      "description": "Create social media content",
+      "primary_skills": [
+        "social-distribution",
+        "frankx-brand"
+      ],
+      "secondary_skills": [
+        "content-repurposing",
+        "visual-brand"
+      ],
+      "templates": [
+        "twitter-thread.md",
+        "linkedin-post.md",
+        "instagram-caption.md"
+      ]
+    },
+
+    "music_production": {
+      "description": "Produce music / audio",
+      "primary_skills": [
+        "suno-ai-mastery",
+        "frequency-alchemist"
+      ],
+      "secondary_skills": [
+        "audio-production",
+        "music-distribution"
+      ],
+      "templates": [
+        "song-prompt.md",
+        "album-concept.md"
+      ]
+    },
+
+    "products_courses": {
+      "description": "Build products / courses",
+      "primary_skills": [
+        "product-development",
+        "landing-pages"
+      ],
+      "secondary_skills": [
+        "course-design",
+        "pricing-strategy"
+      ],
+      "templates": [
+        "product-spec.md",
+        "course-outline.md",
+        "launch-plan.md"
+      ]
+    },
+
+    "research": {
+      "description": "Research topics",
+      "primary_skills": [
+        "research-methodology",
+        "source-validation"
+      ],
+      "secondary_skills": [
+        "synthesis-writing",
+        "knowledge-management"
+      ],
+      "templates": [
+        "research-brief.md",
+        "source-tracker.md"
+      ]
+    },
+
+    "newsletter": {
+      "description": "Manage a newsletter",
+      "primary_skills": [
+        "email-marketing",
+        "audience-building"
+      ],
+      "secondary_skills": [
+        "content-strategy",
+        "copywriting"
+      ],
+      "templates": [
+        "newsletter-issue.md",
+        "welcome-sequence.md"
+      ]
+    },
+
+    "video_podcast": {
+      "description": "Record videos / podcasts",
+      "primary_skills": [
+        "content-repurposing",
+        "script-writing"
+      ],
+      "secondary_skills": [
+        "video-production",
+        "podcast-production"
+      ],
+      "templates": [
+        "video-script.md",
+        "podcast-outline.md",
+        "show-notes.md"
+      ]
+    },
+
+    "coding": {
+      "description": "Code projects",
+      "primary_skills": [
+        "test-driven-development",
+        "code-review"
+      ],
+      "secondary_skills": [
+        "systematic-debugging",
+        "implementation-planning"
+      ],
+      "templates": [
+        "project-spec.md",
+        "pr-template.md"
+      ]
+    },
+
+    "design": {
+      "description": "Design visuals",
+      "primary_skills": [
+        "ui-ux-design",
+        "visual-brand"
+      ],
+      "secondary_skills": [
+        "figma-patterns",
+        "design-systems"
+      ],
+      "templates": [
+        "design-brief.md",
+        "style-guide.md"
+      ]
+    },
+
+    "consulting": {
+      "description": "Consult / coach clients",
+      "primary_skills": [
+        "coaching-frameworks",
+        "client-management"
+      ],
+      "secondary_skills": [
+        "proposal-writing",
+        "session-facilitation"
+      ],
+      "templates": [
+        "client-intake.md",
+        "session-notes.md",
+        "proposal.md"
+      ]
+    }
+  },
+
+  "tool_integrations": {
+    "publishing": {
+      "wordpress": {
+        "skills": ["wordpress-integration"],
+        "workflows": ["publish-to-wordpress"]
+      },
+      "ghost": {
+        "skills": ["ghost-integration"],
+        "workflows": ["publish-to-ghost"]
+      },
+      "substack": {
+        "skills": ["substack-integration"],
+        "workflows": ["publish-to-substack"]
+      }
+    },
+
+    "social": {
+      "twitter": {
+        "skills": ["twitter-strategy"],
+        "workflows": ["twitter-thread-creation"]
+      },
+      "linkedin": {
+        "skills": ["linkedin-strategy"],
+        "workflows": ["linkedin-post-creation"]
+      },
+      "youtube": {
+        "skills": ["youtube-strategy"],
+        "workflows": ["youtube-optimization"]
+      }
+    },
+
+    "development": {
+      "github": {
+        "skills": ["github-workflows"],
+        "workflows": ["pr-creation", "issue-management"]
+      },
+      "vercel": {
+        "skills": ["vercel-deployment"],
+        "workflows": ["deploy-to-vercel"]
+      }
+    },
+
+    "ai_creation": {
+      "claude": {
+        "skills": ["claude-prompting"],
+        "workflows": ["claude-assisted-writing"]
+      },
+      "suno": {
+        "skills": ["suno-ai-mastery"],
+        "workflows": ["suno-song-creation"]
+      },
+      "midjourney": {
+        "skills": ["midjourney-prompting"],
+        "workflows": ["image-generation"]
+      },
+      "elevenlabs": {
+        "skills": ["elevenlabs-voice"],
+        "workflows": ["voice-generation"]
+      }
+    }
+  },
+
+  "skill_metadata": {
+    "content-strategy": {
+      "path": ".claude-skills/creative/content-strategy",
+      "complexity": "medium",
+      "dependencies": []
+    },
+    "seo-optimization": {
+      "path": ".claude-skills/technical/seo-optimization",
+      "complexity": "medium",
+      "dependencies": ["content-strategy"]
+    },
+    "social-distribution": {
+      "path": ".claude-skills/creative/social-distribution",
+      "complexity": "low",
+      "dependencies": []
+    },
+    "frankx-brand": {
+      "path": ".claude-skills/creative/frankx-brand",
+      "complexity": "low",
+      "dependencies": []
+    },
+    "suno-ai-mastery": {
+      "path": ".claude-skills/creative/suno-ai-mastery",
+      "complexity": "medium",
+      "dependencies": []
+    },
+    "test-driven-development": {
+      "path": ".claude-skills/technical/test-driven-development",
+      "complexity": "high",
+      "dependencies": []
+    },
+    "implementation-planning": {
+      "path": ".claude-skills/technical/implementation-planning",
+      "complexity": "medium",
+      "dependencies": []
+    }
+  },
+
+  "default_skills": [
+    "content-strategy",
+    "frankx-brand"
+  ],
+
+  "default_templates": [
+    "blog-post.md",
+    "social-post.md"
+  ]
+}

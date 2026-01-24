@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Content Calendar Slash Command
+
+echo "============================================"
+echo "  CONTENT CALENDAR WORKFLOW"
+echo "============================================"
+echo ""
+echo "Plan and manage content publishing schedule:"
+echo ""
+echo "  1. Calendar Audit"
+echo "     → Review past performance and scheduled content"
+echo ""
+echo "  2. Monthly Theme"
+echo "     → Define focus for upcoming month"
+echo ""
+echo "  3. Weekly Planning"
+echo "     → Create detailed weekly content plan"
+echo ""
+echo "  4. Content Briefs"
+echo "     → Create briefs for each content piece"
+echo ""
+echo "  5. Scheduling"
+echo "     → Add content to publishing queue"
+echo ""
+echo "============================================"
+echo ""
+echo "Usage: skill:content, plan content calendar"

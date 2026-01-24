@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Content Strategy Development Slash Command
+# Triggers the content-strategy workflow
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ACOS_PATH="/mnt/c/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os"
+
+echo "Starting Content Strategy Development..."
+
+# Read user input (everything after the command)
+USER_INPUT="$*"
+
+# Navigate to ACOS directory
+cd "$ACOS_PATH"
+
+# Check if workflows directory exists
+if [ ! -d "workflows/content-strategy" ]; then
+  echo "Error: content-strategy workflow not found"
+  exit 1
+fi
+
+# Display workflow information
+echo "============================================"
+echo "  CONTENT STRATEGY WORKFLOW"
+echo "============================================"
+echo ""
+echo "This workflow will guide you through:"
+echo ""
+echo "  1. Audience Analysis"
+echo "     → Identify and analyze target audience segments"
+echo ""
+echo "  2. Content Pillars"
+echo "     → Define core content themes and categories"
+echo ""
+echo "  3. Competitive Analysis"
+echo "     → Analyze competitor content strategies"
+echo ""
+echo "  4. Strategic Roadmap"
+echo "     → Create actionable content calendar and roadmap"
+echo ""
+echo "  5. Implementation Plan"
+echo "     → Create execution guidelines and templates"
+echo ""
+echo "============================================"
+echo ""
+echo "To start the workflow, use:"
+echo "  skill:content, create content strategy"
+echo ""
+echo "Or provide more details:"
+echo "  $0 [target audience] [main topic] [platform]"
+echo ""
+echo "Example:"
+echo "  $0 'tech professionals' 'AI automation' 'LinkedIn'"
+echo ""
+
+# If user provided input, create a brief
+if [ -n "$USER_INPUT" ]; then
+  echo "Processing your request: $USER_INPUT"
+  echo ""
+  echo "Creating content strategy brief..."
+  echo ""
+  echo "Target Audience: $USER_INPUT"
+  echo "Topic: Content Strategy Development"
+  echo "Platform: All platforms"
+  echo ""
+  echo "Next step: Use 'skill:content, create content strategy for $USER_INPUT'"
+fi
+
+exit 0

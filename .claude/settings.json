@@ -1,0 +1,36 @@
+{
+  "mcpServers": {
+    "agentic-creator-os": {
+      "command": ["node", "mcp-servers/creator/build/index.js"],
+      "disabled": false
+    },
+    "agentic-evaluator": {
+      "command": ["node", "mcp-servers/evaluator/build/index.js"],
+      "disabled": false
+    },
+    "agentic-browser": {
+      "command": ["node", "mcp-servers/browser/build/index.js"],
+      "disabled": false
+    },
+    "agentic-filesystem": {
+      "command": ["node", "mcp-servers/filesystem/build/index.js"],
+      "disabled": false
+    },
+    "agentic-database": {
+      "command": ["node", "mcp-servers/database/build/index.js"],
+      "disabled": false
+    },
+    "agentic-website": {
+      "command": ["node", "mcp-servers/website/build/index.js"],
+      "disabled": false
+    },
+    "agentic-email": {
+      "command": ["node", "mcp-servers/email/build/index.js"],
+      "disabled": false
+    }
+  },
+  "skills": {
+    "autoActivate": false,
+    "suggestSkills": true
+  }
+}

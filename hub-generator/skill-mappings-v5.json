@@ -1,0 +1,345 @@
+{
+  "_description": "ACOS v5 - Maps creator workflows to skills, agents, and swarm configurations",
+  "_version": "5.0.0",
+  "_updated": "2026-01-22",
+  "_sources": [
+    "claude-flow (swarm orchestration)",
+    "wshobson/agents (plugin architecture)",
+    "VoltAgent/awesome-claude-code-subagents (100+ agents)"
+  ],
+
+  "model_routing": {
+    "tiers": {
+      "agent_booster": {
+        "latency": "<1ms",
+        "cost": 0,
+        "use_for": ["var-to-const", "add-types", "add-error-handling", "async-await", "add-logging", "remove-console"]
+      },
+      "haiku": {
+        "latency": "~500ms",
+        "cost": 0.0002,
+        "use_for": ["simple_drafts", "social_posts", "formatting", "quick_edits", "research_summaries"]
+      },
+      "sonnet": {
+        "latency": "2-3s",
+        "cost": 0.003,
+        "use_for": ["blog_posts", "product_copy", "code_review", "content_creation", "analysis"]
+      },
+      "opus": {
+        "latency": "3-5s",
+        "cost": 0.015,
+        "use_for": ["voice_calibration", "strategy", "complex_reasoning", "architecture", "nuanced_decisions"]
+      }
+    },
+    "task_to_model": {
+      "social_post": "haiku",
+      "blog_draft": "sonnet",
+      "blog_edit": "haiku",
+      "newsletter": "sonnet",
+      "landing_page": "sonnet",
+      "product_strategy": "opus",
+      "voice_check": "opus",
+      "seo_optimization": "haiku",
+      "code_transform": "agent_booster",
+      "code_review": "sonnet",
+      "music_prompt": "sonnet",
+      "research": "haiku"
+    }
+  },
+
+  "swarm_configurations": {
+    "content_creation": {
+      "topology": "hierarchical",
+      "maxAgents": 6,
+      "strategy": "specialized",
+      "agents": ["swarm-coordinator", "topic-researcher", "blog-writer", "editor", "seo-intelligence-scout", "voice-calibrator"]
+    },
+    "music_production": {
+      "topology": "hierarchical",
+      "maxAgents": 5,
+      "strategy": "specialized",
+      "agents": ["swarm-coordinator", "suno-prompt-architect", "lyrics-writer", "frequency-alchemist", "music-reviewer"]
+    },
+    "product_launch": {
+      "topology": "hierarchical",
+      "maxAgents": 8,
+      "strategy": "specialized",
+      "agents": ["swarm-coordinator", "copywriter", "landing-page-builder", "email-sequence-builder", "pricing-strategist", "seo-intelligence-scout", "voice-calibrator", "launch-coordinator"]
+    },
+    "research": {
+      "topology": "mesh",
+      "maxAgents": 4,
+      "strategy": "balanced",
+      "agents": ["topic-researcher", "competitor-analyst", "trend-forecaster", "synthesizer"]
+    },
+    "quick_content": {
+      "topology": "mesh",
+      "maxAgents": 2,
+      "strategy": "balanced",
+      "agents": ["blog-writer", "editor"]
+    }
+  },
+
+  "workflow_mappings": {
+    "blog_posts": {
+      "description": "Write blog posts / articles",
+      "swarm": "content_creation",
+      "model_tier": "sonnet",
+      "primary_skills": ["content-strategy", "seo-optimization", "voice-matching"],
+      "secondary_skills": ["hook-writing", "cta-design"],
+      "agents": ["blog-writer", "editor", "seo-intelligence-scout"],
+      "templates": ["blog-post.md", "article-outline.md"]
+    },
+
+    "social_media": {
+      "description": "Create social media content",
+      "swarm": "quick_content",
+      "model_tier": "haiku",
+      "primary_skills": ["social-distribution", "content-repurposing"],
+      "secondary_skills": ["hook-writing", "hashtag-strategy"],
+      "agents": ["social-content-creator", "editor"],
+      "templates": ["twitter-thread.md", "linkedin-post.md"]
+    },
+
+    "music_production": {
+      "description": "Produce music / audio",
+      "swarm": "music_production",
+      "model_tier": "sonnet",
+      "primary_skills": ["suno-prompting", "frequency-mapping", "song-structure"],
+      "secondary_skills": ["genre-blending", "lyrics-writing"],
+      "agents": ["suno-prompt-architect", "frequency-alchemist", "lyrics-writer"],
+      "templates": ["song-prompt.md", "album-concept.md"]
+    },
+
+    "products_courses": {
+      "description": "Build products / courses",
+      "swarm": "product_launch",
+      "model_tier": "sonnet",
+      "primary_skills": ["course-architecture", "landing-page-design", "pricing-strategy"],
+      "secondary_skills": ["launch-sequencing", "email-nurture"],
+      "agents": ["course-architect", "landing-page-builder", "pricing-strategist"],
+      "templates": ["product-spec.md", "course-outline.md", "launch-plan.md"]
+    },
+
+    "research": {
+      "description": "Research topics",
+      "swarm": "research",
+      "model_tier": "haiku",
+      "primary_skills": ["research-methodology", "source-validation", "synthesis"],
+      "secondary_skills": ["competitor-analysis", "trend-tracking"],
+      "agents": ["topic-researcher", "competitor-analyst", "synthesizer"],
+      "templates": ["research-brief.md", "source-tracker.md"]
+    },
+
+    "newsletter": {
+      "description": "Manage a newsletter",
+      "swarm": "content_creation",
+      "model_tier": "sonnet",
+      "primary_skills": ["email-copywriting", "audience-segmentation", "sequence-design"],
+      "secondary_skills": ["subject-line-testing", "cta-optimization"],
+      "agents": ["newsletter-composer", "editor", "email-sequence-builder"],
+      "templates": ["newsletter-issue.md", "welcome-sequence.md"]
+    },
+
+    "video_podcast": {
+      "description": "Record videos / podcasts",
+      "swarm": "content_creation",
+      "model_tier": "sonnet",
+      "primary_skills": ["script-writing", "content-repurposing", "show-notes"],
+      "secondary_skills": ["hook-writing", "timestamp-chapters"],
+      "agents": ["script-writer", "content-repurposer", "editor"],
+      "templates": ["video-script.md", "podcast-outline.md"]
+    },
+
+    "coding": {
+      "description": "Code projects",
+      "swarm": null,
+      "model_tier": "sonnet",
+      "primary_skills": ["test-driven-development", "code-review"],
+      "secondary_skills": ["debugging", "performance-optimization"],
+      "agents": ["code-reviewer", "debugger", "deployer"],
+      "templates": ["project-spec.md", "pr-template.md"]
+    }
+  },
+
+  "agent_library": {
+    "content": {
+      "blog-writer": {
+        "model": "sonnet",
+        "specialty": "Long-form content with narrative flow"
+      },
+      "newsletter-composer": {
+        "model": "sonnet",
+        "specialty": "Email-optimized content with high open rates"
+      },
+      "social-content-creator": {
+        "model": "haiku",
+        "specialty": "Platform-native social posts"
+      },
+      "copywriter": {
+        "model": "sonnet",
+        "specialty": "Conversion-focused copy"
+      },
+      "editor": {
+        "model": "haiku",
+        "specialty": "Polish, clarity, voice consistency"
+      },
+      "headline-master": {
+        "model": "haiku",
+        "specialty": "Attention-grabbing headlines"
+      }
+    },
+    "music": {
+      "suno-prompt-architect": {
+        "model": "sonnet",
+        "specialty": "Crafting prompts for Suno AI"
+      },
+      "frequency-alchemist": {
+        "model": "sonnet",
+        "specialty": "Hz-to-emotion mapping, vibrational design"
+      },
+      "lyrics-writer": {
+        "model": "sonnet",
+        "specialty": "Song lyrics with rhyme and meter"
+      },
+      "audio-mixer": {
+        "model": "haiku",
+        "specialty": "Mix suggestions and balance"
+      },
+      "music-distributor": {
+        "model": "haiku",
+        "specialty": "Platform distribution strategy"
+      }
+    },
+    "products": {
+      "course-architect": {
+        "model": "sonnet",
+        "specialty": "Learning path design"
+      },
+      "ebook-designer": {
+        "model": "sonnet",
+        "specialty": "Ebook structure and flow"
+      },
+      "landing-page-builder": {
+        "model": "sonnet",
+        "specialty": "High-converting landing pages"
+      },
+      "pricing-strategist": {
+        "model": "opus",
+        "specialty": "Value-based pricing decisions"
+      },
+      "launch-coordinator": {
+        "model": "sonnet",
+        "specialty": "Launch sequence orchestration"
+      }
+    },
+    "brand": {
+      "voice-calibrator": {
+        "model": "opus",
+        "specialty": "Analyzing and matching creator voice"
+      },
+      "brand-guardian": {
+        "model": "sonnet",
+        "specialty": "Enforcing brand consistency"
+      },
+      "visual-director": {
+        "model": "sonnet",
+        "specialty": "Visual brand direction"
+      },
+      "tone-matcher": {
+        "model": "haiku",
+        "specialty": "Quick tone adjustments"
+      }
+    },
+    "growth": {
+      "seo-intelligence-scout": {
+        "model": "haiku",
+        "specialty": "Keyword research, SERP analysis"
+      },
+      "email-sequence-builder": {
+        "model": "sonnet",
+        "specialty": "Nurture sequence design"
+      },
+      "funnel-architect": {
+        "model": "sonnet",
+        "specialty": "Conversion funnel design"
+      },
+      "analytics-interpreter": {
+        "model": "haiku",
+        "specialty": "Data analysis and insights"
+      }
+    },
+    "research": {
+      "topic-researcher": {
+        "model": "haiku",
+        "specialty": "Deep topic exploration"
+      },
+      "competitor-analyst": {
+        "model": "haiku",
+        "specialty": "Competitive intelligence"
+      },
+      "trend-forecaster": {
+        "model": "sonnet",
+        "specialty": "Emerging trend identification"
+      },
+      "audience-profiler": {
+        "model": "haiku",
+        "specialty": "Audience research and personas"
+      }
+    },
+    "orchestration": {
+      "swarm-coordinator": {
+        "model": "sonnet",
+        "specialty": "Multi-agent coordination, anti-drift"
+      },
+      "task-orchestrator": {
+        "model": "haiku",
+        "specialty": "Task routing and assignment"
+      },
+      "memory-manager": {
+        "model": "haiku",
+        "specialty": "Context management, STATE.md updates"
+      },
+      "context-guardian": {
+        "model": "sonnet",
+        "specialty": "Context quality monitoring"
+      }
+    }
+  },
+
+  "anti_drift_config": {
+    "default": {
+      "topology": "hierarchical",
+      "maxAgents": 8,
+      "strategy": "specialized",
+      "consensus": "raft"
+    },
+    "checkpoints": [
+      "after_research",
+      "after_first_draft",
+      "every_500_words",
+      "before_publish"
+    ],
+    "context_limits": {
+      "per_agent": 0.3,
+      "shared_memory": 0.2,
+      "total_session": 0.7,
+      "fresh_context_trigger": 0.7
+    }
+  },
+
+  "skill_progressive_disclosure": {
+    "content": {
+      "seo-optimization": ["keyword-research", "on-page-seo", "schema-markup", "internal-linking"],
+      "voice-matching": ["tone-analysis", "vocabulary-patterns", "sentence-rhythm", "signature-phrases"],
+      "hook-writing": ["question-hooks", "statement-hooks", "story-hooks", "curiosity-gaps"],
+      "cta-design": ["urgency-ctas", "value-ctas", "social-proof-ctas", "scarcity-ctas"]
+    },
+    "music": {
+      "suno-prompting": ["genre-tags", "instrument-specification", "mood-descriptors", "structure-tags"],
+      "frequency-mapping": ["432hz-patterns", "solfeggio-frequencies", "binaural-beats", "emotion-hz-mapping"],
+      "song-structure": ["verse-chorus-bridge", "aaba-form", "through-composed", "hook-placement"],
+      "genre-blending": ["fusion-techniques", "cross-genre-elements", "style-transitions", "hybrid-production"]
+    }
+  }
+}
