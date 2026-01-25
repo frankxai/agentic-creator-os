@@ -1,0 +1,97 @@
+{
+  "_description": "ACOS v6 Hooks - Automation, enforcement, and context management",
+  "_version": "6.0.0",
+  "_sources": [
+    "diet103/claude-code-infrastructure-showcase",
+    "ChrisWiles/claude-code-showcase",
+    "decider/claude-hooks",
+    "claude-flow v3 learning patterns"
+  ],
+  "_updated": "2026-01-25",
+
+  "hooks": {
+    "SessionStart": [
+      {
+        "name": "acos-context-loader",
+        "description": "Load ACOS context and skill rules on session start",
+        "type": "command",
+        "command": "echo '✅ ACOS v6.0 loaded | 25 commands | 40+ agents | 80+ skills | Auto-activation ON'",
+        "once": true
+      },
+      {
+        "name": "skill-rules-loader",
+        "description": "Signal that skill-rules.json is available for auto-activation",
+        "type": "command",
+        "command": "cat .claude/skill-rules.json | head -1 && echo 'Skill auto-activation rules loaded'",
+        "once": true
+      }
+    ],
+
+    "PreToolUse": [
+      {
+        "name": "brand-voice-check",
+        "description": "Check content for banned phrases before writing",
+        "type": "command",
+        "matcher": "Write|Edit",
+        "command": "echo 'Brand voice check: Avoid soul-aligned, consciousness evolution, awakening, overwhelmed-to-empowered'"
+      }
+    ],
+
+    "PostToolUse": [
+      {
+        "name": "context-quality-monitor",
+        "description": "Track context usage and warn at thresholds",
+        "type": "command",
+        "matcher": "Task",
+        "command": "echo 'Context checkpoint: Monitor drift. If quality degrading, spawn fresh context.'"
+      }
+    ],
+
+    "Notification": [
+      {
+        "name": "skill-suggestion",
+        "description": "Suggest relevant skills based on recent activity",
+        "type": "command",
+        "command": "echo 'SKILL SUGGESTIONS: Check skill-rules.json for auto-activation matches'"
+      }
+    ]
+  },
+
+  "enforcement_rules": {
+    "banned_phrases": [
+      "soul-aligned",
+      "consciousness evolution",
+      "awakening",
+      "overwhelmed to empowered",
+      "game-changing",
+      "revolutionary",
+      "synergy",
+      "leverage",
+      "utilize"
+    ],
+    "required_patterns": {
+      "blog_posts": ["TL;DR in first 100 words", "Question-based H2s", "FAQ section"],
+      "social_posts": ["Hook in first line", "CTA at end"],
+      "code_changes": ["No console.log in production", "Type annotations required"]
+    }
+  },
+
+  "context_engineering": {
+    "quality_curve": {
+      "peak": "0-30%",
+      "good": "30-50%",
+      "degrading": "50-70%",
+      "refresh_trigger": "70%"
+    },
+    "checkpoints": [
+      "after_research",
+      "after_first_draft",
+      "every_500_words",
+      "before_publish"
+    ],
+    "per_agent_budget": 0.3,
+    "shared_memory_budget": 0.2,
+    "total_session_limit": 0.7,
+    "anti_drift_strategy": "hierarchical_with_raft_consensus"
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "_description": "ACOS v6 Skill Auto-Activation Rules - Skills activate based on context without manual invocation",
+  "_version": "6.0.0",
+  "_pattern_source": "diet103/claude-code-infrastructure-showcase + ChrisWiles/claude-code-showcase",
+  "_updated": "2026-01-25",
+
+  "activation_rules": [
+    {
+      "skill": "suno-ai-mastery",
+      "triggers": {
+        "keywords": ["music", "suno", "track", "song", "lyrics", "melody", "beat", "frequency", "hz", "audio"],
+        "file_patterns": ["*.mp3", "*.wav", "music.json"],
+        "commands": ["/create-music"]
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "content-strategy",
+      "triggers": {
+        "keywords": ["blog", "article", "content", "post", "newsletter", "SEO", "publish", "write"],
+        "file_patterns": ["*.mdx", "*.md", "content/**"],
+        "commands": ["/article-creator", "/factory", "/publish"]
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "ui-ux-design-expert",
+      "triggers": {
+        "keywords": ["design", "UX", "UI", "interface", "component", "layout", "responsive", "accessibility"],
+        "file_patterns": ["*.tsx", "*.css", "components/**"],
+        "commands": ["/ux-design"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "nextjs-react-expert",
+      "triggers": {
+        "keywords": ["nextjs", "react", "component", "page", "route", "server component", "app router"],
+        "file_patterns": ["app/**/*.tsx", "components/**/*.tsx", "next.config.*"],
+        "commands": ["/nextjs-deploy", "/spec"]
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "mcp-architecture",
+      "triggers": {
+        "keywords": ["MCP", "model context protocol", "server", "tool integration", "mcp server"],
+        "file_patterns": ["mcp-servers/**", "*.mcp.*"],
+        "commands": ["/mcp-status", "/automation-dev"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "social-media-strategy",
+      "triggers": {
+        "keywords": ["social", "linkedin", "twitter", "instagram", "farcaster", "thread", "post"],
+        "file_patterns": ["social/**", "templates/social-media/**"],
+        "commands": ["/generate-social"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "planning-with-files",
+      "triggers": {
+        "keywords": ["plan", "task", "breakdown", "implement", "complex task", "multi-step"],
+        "file_patterns": ["task_plan.md", "findings.md", "progress.md"],
+        "commands": ["/planning-with-files", "/spec"]
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "product-management-expert",
+      "triggers": {
+        "keywords": ["product", "launch", "course", "pricing", "landing page", "funnel"],
+        "file_patterns": ["products/**", "data/products.json"],
+        "commands": ["/products-creation"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "excellence-book-writing",
+      "triggers": {
+        "keywords": ["book", "chapter", "manuscript", "novel", "writing", "narrative"],
+        "file_patterns": ["manuscripts/**", "chapters/**"],
+        "commands": ["/author-team"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "agentic-orchestration",
+      "triggers": {
+        "keywords": ["swarm", "multi-agent", "orchestrate", "coordinate", "parallel agents", "ultrawork"],
+        "file_patterns": ["workflows/**", "departments/**"],
+        "commands": ["/council", "/starlight-intelligence"]
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "claude-sdk",
+      "triggers": {
+        "keywords": ["agent sdk", "claude sdk", "anthropic sdk", "build agent", "agent development"],
+        "file_patterns": ["agents/**"],
+        "commands": ["/automation-dev"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "oci-services-expert",
+      "triggers": {
+        "keywords": ["oracle", "OCI", "cloud", "enterprise", "infrastructure", "kubernetes"],
+        "file_patterns": ["terraform/**", "*.tf"],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "security-auditor",
+      "triggers": {
+        "keywords": ["security", "vulnerability", "OWASP", "audit", "penetration", "CVE"],
+        "file_patterns": [".env*", "auth/**"],
+        "commands": []
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "opus-extended-thinking",
+      "triggers": {
+        "keywords": ["deep reasoning", "complex analysis", "extended thinking", "strategic", "architecture decision"],
+        "file_patterns": [],
+        "commands": ["/starlight-architect", "/council"]
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "web-design-expert",
+      "triggers": {
+        "keywords": ["website", "web design", "landing page", "hero section", "glassmorphic"],
+        "file_patterns": ["app/**/*.tsx", "styles/**"],
+        "commands": ["/ux-design"]
+      },
+      "priority": "medium"
+    },
+    {
+      "skill": "framer-expert",
+      "triggers": {
+        "keywords": ["framer", "animation", "motion", "prototype", "interactive"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "gym-training-expert",
+      "triggers": {
+        "keywords": ["workout", "training", "gym", "exercise", "hypertrophy", "fitness"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "health-nutrition-expert",
+      "triggers": {
+        "keywords": ["nutrition", "diet", "health", "supplements", "longevity", "metabolic"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "spartan-warrior",
+      "triggers": {
+        "keywords": ["discipline", "spartan", "warrior", "mental toughness", "resilience"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "video-production-workflow",
+      "triggers": {
+        "keywords": ["video", "podcast", "youtube", "recording", "script"],
+        "file_patterns": ["scripts/**"],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "langgraph-patterns",
+      "triggers": {
+        "keywords": ["langgraph", "langchain", "agent graph", "state machine", "workflow graph"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "openai-agentkit",
+      "triggers": {
+        "keywords": ["openai", "agentkit", "agents sdk", "openai agents"],
+        "file_patterns": [],
+        "commands": []
+      },
+      "priority": "low"
+    },
+    {
+      "skill": "cacos",
+      "triggers": {
+        "keywords": ["cacos", "agentic creator os", "activate system", "ultrawork", "ulw"],
+        "file_patterns": [],
+        "commands": ["/acos"]
+      },
+      "priority": "high"
+    }
+  ],
+
+  "activation_config": {
+    "max_concurrent_skills": 3,
+    "priority_order": ["high", "medium", "low"],
+    "keyword_match_threshold": 1,
+    "auto_load_brand_skill": true,
+    "brand_skill": "frankx-brand",
+    "always_active": ["cacos", "planning-with-files"]
+  }
+}

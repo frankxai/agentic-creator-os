@@ -1,16 +1,19 @@
 # Agentic Creator OS
 **The Operating System for Golden Age Creators**
 
-[![Version](https://img.shields.io/badge/version-5.0.0-blue.svg)]()
-[![Skills](https://img.shields.io/badge/skills-70-green.svg)]()
-[![Agents](https://img.shields.io/badge/agents-10-purple.svg)]()
+[![Version](https://img.shields.io/badge/version-6.0.0-blue.svg)]()
+[![Commands](https://img.shields.io/badge/commands-25-orange.svg)]()
+[![Skills](https://img.shields.io/badge/skills-80+-green.svg)]()
+[![Agents](https://img.shields.io/badge/agents-40+-purple.svg)]()
 [![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
 
 ---
 
 ## What Is Agentic Creator OS?
 
-Agentic Creator OS is a **superintelligent operating system for generative creators** - a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 62 specialized skills, 9 intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
+Agentic Creator OS is a **superintelligent operating system for generative creators** — a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 25 creator commands, 80+ specialized skills, 40+ intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
+
+> **v6 "The Front Door"**: One command to rule them all — `/acos` is your single entry point. Skills auto-activate. Hooks enforce quality. [See what's new →](ACOS-V6-SPEC.md)
 
 > **Philosophy**: Technology that amplifies creative expression, not replaces it.
 
@@ -20,12 +23,12 @@ Agentic Creator OS is a **superintelligent operating system for generative creat
 
 | Pillar | Count | Purpose |
 |--------|-------|---------|
-| **Skills** | 62 | Domain knowledge modules with progressive disclosure |
+| **Commands** | 25 | Creator commands with smart routing via `/acos` |
+| **Skills** | 80+ | Domain knowledge modules with auto-activation |
 | **Agents** | 40+ | Specialized AI personas for specific domains |
 | **Workflows** | 8 | Orchestrated pipelines for complex operations |
-| **MCP Servers** | 4+ | External tool integrations |
+| **MCP Servers** | 5+ | External tool integrations |
 | **Templates** | 20+ | Reusable content patterns |
-| **Instances** | ∞ | Project-specific configurations |
 | **Intelligence** | 1 | Starlight Orchestrator meta-coordinator |
 
 ---
@@ -35,53 +38,84 @@ Agentic Creator OS is a **superintelligent operating system for generative creat
 ### For Users
 
 ```bash
-# View system status
-cat agentic-creator-os/PRO_STATUS_DASHBOARD.md
+# Clone and open
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+claude
 
-# See all available skills
-cat agentic-creator-os/SKILL_TREE.md
+# Single entry point — /acos routes you everywhere
+/acos
 
-# Check architecture
-cat agentic-creator-os/ARCHITECTURE.md
+# Or go direct to any command
+/article-creator    # Write a blog post
+/create-music       # Produce a track
+/spec               # Build a feature
+/starlight-architect # Enterprise AI design
 ```
 
 ### For Developers
 
 ```bash
 # Clone and setup
-git clone <repo>
+git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-./install.sh
 
-# Build MCP servers
-./build-servers.sh
+# Everything works out of the box — no npm install needed
+# Configuration-first: markdown commands + JSON rules + Claude native
+claude
 ```
 
 ---
 
 ## System Components
 
-### 1. Skills Layer (62 Skills)
+### 1. Commands Layer (25 Commands)
 
-Skills are specialized knowledge modules that enhance Claude's capabilities in specific domains.
+v6 introduces `/acos` as the smart router — one entry point that detects your intent and dispatches to the right command.
+
+| Category | Commands | Examples |
+|----------|----------|----------|
+| **Creation** | 8 | `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
+| **Strategy** | 5 | `/starlight-architect`, `/council`, `/research`, `/plan-week` |
+| **Development** | 4 | `/spec`, `/nextjs-deploy`, `/ux-design`, `/automation-dev` |
+| **System** | 5 | `/acos`, `/inventory-status`, `/mcp-status`, `/publish` |
+| **Quality** | 3 | `/review-content`, `/classify-content`, `/polish-content` |
+
+**Key Innovation**: Smart Routing
+```
+/acos → Parse intent → Route to best command
+  "write a blog post"    → /article-creator
+  "make a track"         → /create-music
+  "build a feature"      → /spec
+  "strategic decision"   → /starlight-architect
+  (ambiguous)            → Interactive menu with all 25 commands
+```
+
+### 2. Skills Layer (80+ Skills)
+
+Skills are specialized knowledge modules that auto-activate based on context — no manual invocation needed.
 
 | Category | Count | Examples |
 |----------|-------|----------|
 | **Technical** | 18 | TDD, systematic-debugging, mcp-architecture, react-nextjs-patterns |
 | **Creative** | 8 | frankx-brand, suno-ai-mastery, golden-age-book-writing |
-| **Soulbook** | 25 | 7 pillars, life-symphony, golden-path |
-| **Business** | 2 | oci-services-expert, product-management |
-| **Personal** | 4 | spartan-warrior, gym-training-expert |
-| **Projects** | 5 | daily-content-ops, frankx-daily-execution |
+| **Content** | 12 | content-strategy, social-media-strategy, excellence-book-writing |
+| **Business** | 4 | oci-services-expert, product-management, coaching-program |
+| **Personal** | 4 | spartan-warrior, gym-training-expert, health-nutrition |
+| **System** | 5+ | cacos, agentic-orchestration, planning-with-files |
 
-**Key Innovation**: Progressive Disclosure Architecture
+**Key Innovation**: Auto-Activation via `skill-rules.json`
 ```
-Level 1: Metadata (~100 tokens) → "Is this relevant?"
-Level 2: Instructions (<5k tokens) → "How do I do this?"
-Level 3: Resources (on-demand) → "Give me the details"
+User: "Help me write tests for this component"
+      ↓
+skill-rules.json detects: "tests" + "component"
+      ↓
+Auto-loads: test-driven-development + react-nextjs-patterns
+      ↓
+Claude now has specialized testing knowledge
 ```
 
-### 2. Agents Layer (9 Agents)
+### 3. Agents Layer (40+ Agents)
 
 Agents are specialized AI personas with distinct domains and weighted influence.
 
@@ -92,7 +126,7 @@ Agents are specialized AI personas with distinct domains and weighted influence.
 | Luminor Oracle | Strategy, foresight | 30% |
 | Creation Engine | Content, products | 25% |
 | Technical Translator | AI education | 25% |
-| Frequency Alchemist | Music, consciousness | 20% |
+| Frequency Alchemist | Music, audio | 20% |
 
 **Department Teams:**
 - Content Department (Writer, Editor, Publisher)
@@ -133,18 +167,25 @@ External capabilities via Model Context Protocol.
 
 ## How It Works
 
-### Skill Auto-Activation
+### The `/acos` Front Door
 
-Skills activate automatically based on context keywords:
+Everything starts with `/acos`. It parses your intent and routes to the best subsystem:
 
 ```
-User: "Help me write tests for this component"
-      ↓
-System detects: "tests", "component"
-      ↓
-Auto-loads: test-driven-development + react-nextjs-patterns
-      ↓
-Claude now has specialized testing knowledge
+/acos "write a blog post about AI agents"
+  → Detects: creation + blog
+  → Routes to: /article-creator
+  → Auto-loads: content-strategy skill
+  → Result: Guided article creation workflow
+```
+
+For multi-domain requests, it chains commands:
+```
+/acos "Create a blog post about AI music with images and social posts"
+  → /research "AI music production"
+  → /article-creator (with research context)
+  → /infogenius (hero image)
+  → /generate-social (distribution)
 ```
 
 ### Orchestration Patterns
@@ -215,35 +256,42 @@ agentic-creator-os/
 
 ## Usage Patterns
 
-### Invoke a Skill
+### The Easy Way (v6)
 
 ```bash
-/skill content-strategy      # Load content planning skill
-/skill test-driven-development  # Load TDD methodology
-/skill frankx-brand          # Load brand guidelines
+/acos                        # Interactive menu — pick anything
+/acos "write about AI agents" # Smart routing — auto-dispatches
 ```
 
-### Activate an Agent
-
-```
-"Activate Technical Translator mode for creator education"
-"Channel Frequency Alchemist for music creation"
-"Engage Creation Engine for content development"
-```
-
-### Run a Workflow
-
-```
-/daily-content-ops           # Run daily content workflow
-/factory                     # Full publishing pipeline
-/research                    # Deep research workflow
-```
-
-### Check System Status
+### Direct Commands
 
 ```bash
-cat agentic-creator-os/PRO_STATUS_DASHBOARD.md
+# Creation
+/article-creator             # Write a blog post
+/create-music                # Produce a music track
+/infogenius                  # Generate research-grounded images
+/factory                     # Full pipeline: research → publish
+
+# Strategy
+/starlight-architect         # Enterprise AI system design
+/research                    # Daily intelligence scan
+/plan-week                   # Weekly content planning
+
+# Development
+/spec                        # Spec-driven feature development
+/nextjs-deploy               # Ship to production
+
+# System
+/inventory-status            # Content inventory dashboard
+/publish                     # Deploy content with quality gates
 ```
+
+### Magic Words
+
+| Word | Effect |
+|------|--------|
+| `ultrawork` / `ulw` | Fire ALL relevant agents in parallel |
+| `ultracode` / `ulc` | Fire coding specialists in parallel |
 
 ---
 
@@ -316,13 +364,14 @@ See `templates/SKILL_TEMPLATE.md` for the full template.
 
 ## Metrics & Status
 
-| Metric | Target | Current |
-|--------|--------|---------|
-| Total Skills | 70 | 62 (88%) |
-| Auto-activation Rate | 90% | 70% |
-| Agent Effectiveness | 95% | 94% |
-| Workflow Completion | 95% | 92% |
-| MCP Server Uptime | 99% | 100% |
+| Metric | v5 | v6 |
+|--------|-----|-----|
+| Total Commands | 14 | **25** |
+| Total Skills | 62 | **80+** |
+| Auto-activation Rate | 0% | **70%** |
+| Commands in Repo | 14 | **25 (100%)** |
+| GitHub Sources Credited | 5 | **14** |
+| Hook Categories | 0 | **4** |
 
 See `PRO_STATUS_DASHBOARD.md` for real-time metrics.
 
@@ -347,14 +396,18 @@ The answer: **Technology that amplifies your unique expression, guided by intell
 
 Agentic Creator OS is part of the FrankX ecosystem. We believe in giving credit where it's due.
 
-**Core Inspirations:**
+**14 GitHub sources absorbed across v4–v6:**
 | Project | Author | What We Learned |
 |---------|--------|-----------------|
-| [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies, consensus |
+| [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies, consensus, context engineering |
 | [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, 108-agent patterns, modular skills |
 | [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient skill loading |
-| [awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | @travisvn | Community skill conventions and discovery |
-| [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | VoltAgent | 100+ subagent patterns |
+| [diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase) | @diet103 | `skill-rules.json` auto-activation pattern |
+| [ChrisWiles/claude-code-showcase](https://github.com/ChrisWiles/claude-code-showcase) | @ChrisWiles | Hook automation (format, test, enforce) |
+| [decider/claude-hooks](https://github.com/decider/claude-hooks) | @decider | Clean code enforcement hooks |
+| [Pimzino/claude-code-spec-workflow](https://github.com/Pimzino/claude-code-spec-workflow) | @Pimzino | Spec-driven development workflow |
+| [github/github-mcp-server](https://github.com/github/github-mcp-server) | GitHub | Official GitHub MCP server |
+| [zilliztech/claude-context](https://github.com/zilliztech/claude-context) | Zilliz | Semantic code search MCP |
 
 **Built on:**
 - [Claude Code](https://claude.ai/claude-code) by Anthropic
@@ -382,17 +435,19 @@ Explore the system through our infographic gallery:
 
 | Document | Purpose |
 |----------|---------|
+| [ACOS-V6-SPEC.md](ACOS-V6-SPEC.md) | v6 specification — what's new |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Complete 7-pillar architecture |
-| [SKILL_TREE.md](SKILL_TREE.md) | Visual map of all 62 skills |
+| [SKILL_TREE.md](SKILL_TREE.md) | Visual map of all skills |
 | [PRO_STATUS_DASHBOARD.md](PRO_STATUS_DASHBOARD.md) | System health metrics |
 | [AUDIENCE_PERSONAS.md](AUDIENCE_PERSONAS.md) | Who we serve |
 | [ORCHESTRATION_PATTERNS.md](ORCHESTRATION_PATTERNS.md) | Coordination patterns |
 | [SKILL_TEMPLATE.md](templates/SKILL_TEMPLATE.md) | Create new skills |
-| [CREDITS.md](CREDITS.md) | Acknowledgments & inspirations |
+| [CREDITS.md](CREDITS.md) | Acknowledgments & 14 source repos |
+| [CHANGELOG.md](CHANGELOG.md) | Version history |
 | [Infographics](docs/infographics/) | Visual documentation gallery |
 
 ---
 
 *Agentic Creator OS - The Operating System for the Golden Age Creator*
 
-**Version 5.0.0** | **January 2026** | **70 Skills** | **10 Agents** | **8 Workflows**
+**Version 6.0.0** | **January 2026** | **25 Commands** | **80+ Skills** | **40+ Agents** | **Auto-Activation**

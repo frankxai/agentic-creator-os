@@ -30,6 +30,29 @@ Agentic Creator OS stands on the shoulders of giants. This project draws inspira
 | [**rahulvrane/awesome-claude-agents**](https://github.com/rahulvrane/awesome-claude-agents) | [@rahulvrane](https://github.com/rahulvrane) | Curated collection of Claude Code subagents with practical examples. |
 | [**alirezarezvani/claude-skills**](https://github.com/alirezarezvani/claude-skills) | [@alirezarezvani](https://github.com/alirezarezvani) | Real-world skill implementations including subagent commands. |
 
+### Auto-Activation & Hooks (v6)
+
+| Project | Author | Contribution |
+|---------|--------|--------------|
+| [**diet103/claude-code-infrastructure-showcase**](https://github.com/diet103/claude-code-infrastructure-showcase) | [@diet103](https://github.com/diet103) | `skill-rules.json` pattern for keyword-triggered skill auto-activation. The foundation for our 22-rule activation system. |
+| [**ChrisWiles/claude-code-showcase**](https://github.com/ChrisWiles/claude-code-showcase) | [@ChrisWiles](https://github.com/ChrisWiles) | Hook automation patterns (format, test, enforce). Inspired our 4-category hooks system. |
+| [**decider/claude-hooks**](https://github.com/decider/claude-hooks) | [@decider](https://github.com/decider) | Clean code enforcement hooks. Brand voice check and quality gate patterns. |
+
+### Configuration & Schema (v6)
+
+| Project | Author | Contribution |
+|---------|--------|--------------|
+| [**jeremylongshore/claude-code-plugins-plus-skills**](https://github.com/jeremylongshore/claude-code-plugins-plus-skills) | [@jeremylongshore](https://github.com/jeremylongshore) | 2026 schema validation, 739 skill patterns. Skill template updates and quality standards. |
+| [**quemsah/awesome-claude-plugins**](https://github.com/quemsah/awesome-claude-plugins) | [@quemsah](https://github.com/quemsah) | Plugin adoption metrics, n8n indexing. Plugin structure reference for our command library. |
+
+### MCP & Development Workflows (v6)
+
+| Project | Author | Contribution |
+|---------|--------|--------------|
+| [**zilliztech/claude-context**](https://github.com/zilliztech/claude-context) | Zilliz | Semantic code search MCP server. Recommended MCP integration for codebase intelligence. |
+| [**github/github-mcp-server**](https://github.com/github/github-mcp-server) | GitHub | Official GitHub MCP server for PR/issue management. Recommended for workflow automation. |
+| [**Pimzino/claude-code-spec-workflow**](https://github.com/Pimzino/claude-code-spec-workflow) | [@Pimzino](https://github.com/Pimzino) | Spec-driven development workflow. Inspired our `/spec` command (requirements → design → tasks → implement). |
+
 ### Documentation & Resources
 
 | Project | Author | Contribution |
@@ -69,6 +92,26 @@ Agentic Creator OS stands on the shoulders of giants. This project draws inspira
 - **Trigger Keywords**: YAML frontmatter with context-activated keywords
 - **Skill Templates**: Standardized structure with examples and anti-patterns
 - **Token Efficiency**: <100 tokens for relevance check, <5k for full load
+
+### From diet103/claude-code-infrastructure-showcase (v6)
+- **Skill Rules JSON**: Declarative auto-activation via keyword, file pattern, and command triggers
+- **Priority Ordering**: High/Medium/Low skill loading with max concurrent limits
+- **Always-Active Skills**: Designated skills that load regardless of context
+
+### From ChrisWiles/claude-code-showcase (v6)
+- **Hook Categories**: SessionStart, PreToolUse, PostToolUse, Notification lifecycle hooks
+- **Tool Matchers**: Regex-based matching for selective hook execution
+- **Once Hooks**: One-time initialization hooks that don't repeat
+
+### From Pimzino/claude-code-spec-workflow (v6)
+- **Spec-Driven Development**: Requirements → Design → Tasks → Implementation pipeline
+- **Quality Gates**: Structured validation before deployment
+
+### From claude-flow v3 (v6)
+- **Context Engineering**: Quality curve monitoring (peak → degrading → refresh)
+- **Per-Agent Budgets**: Context allocation per agent with shared memory pool
+- **Anti-Drift Strategy**: Hierarchical checkpoints with Raft consensus patterns
+- **Self-Learning Hooks**: Hooks that improve over time (concept, not fully implemented)
 
 ---
 
