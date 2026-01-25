@@ -1,5 +1,5 @@
 ---
-name: Consciousness Fiction Master
+name: Deep Fiction Master
 description: Genre master for purpose-driven and introspective fiction - leads deep narratives while coordinating with the Author Team
 mcpServers:
   - notion

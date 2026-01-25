@@ -162,7 +162,7 @@ With **Notion**, **Slack**, and **Nano-banana** access:
 - Twitter thread templates for generative creators
 - LinkedIn thought leadership posts
 - Instagram carousel templates
-- Newsletter sequence on consciousness + AI
+- Newsletter sequence on systems thinking + AI
 
 ### Product Development
 - "The Generative Creator Starter Kit" (Notion template)

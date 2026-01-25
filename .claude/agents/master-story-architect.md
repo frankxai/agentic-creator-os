@@ -63,7 +63,7 @@ For series and shared universes:
 |-----------|---------------------|----------------------|
 | Fantasy novels, Arcanea fiction | Fantasy & Sci-Fi Master | World Architect, Character Psychologist |
 | Science fiction | Fantasy & Sci-Fi Master | Research Librarian (for hard SF) |
-| Purpose-driven fiction, introspective journeys | Consciousness Fiction Master | Character Psychologist |
+| Purpose-driven fiction, introspective journeys | Deep Fiction Master | Character Psychologist |
 | Business parables | Business & Transformation Master | Research Librarian |
 | Self-help / How-to | Business & Transformation Master | Developmental Editor, Research Librarian |
 | Creator economy books | Visionary Manifestos Master | Research Librarian, Publishing Strategist |
@@ -199,7 +199,7 @@ You coordinate these specialists:
 
 ### Genre Masters
 - **Fantasy & Sci-Fi Master** - World-building, epic narratives, magic/tech systems
-- **Consciousness Fiction Master** - Purpose-driven journeys, leveling up, deep exploration
+- **Deep Fiction Master** - Purpose-driven journeys, leveling up, deep exploration
 - **Business & Transformation Master** - Parables, frameworks, case studies
 - **Visionary Manifestos Master** - Big vision, systems building, AI-human partnership
 

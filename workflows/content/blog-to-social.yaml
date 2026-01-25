@@ -1,0 +1,52 @@
+name: Blog to Social Distribution
+slug: blog-to-social
+version: "6.0.0"
+description: |
+  Take a published blog post and create platform-optimized social content
+  for LinkedIn, X, Instagram, and Farcaster.
+
+triggers:
+  - "/generate-social"
+  - "distribute blog post"
+
+agents:
+  - social-content-generator
+  - content-polisher
+  - viral-content-strategy
+
+skills:
+  - social-media-strategy
+  - content-strategy
+
+phases:
+  - name: Content Extraction
+    steps:
+      - Read the source blog post
+      - Extract key insights, quotes, and data points
+      - Identify the core hook and takeaway
+
+  - name: Platform Adaptation
+    steps:
+      - Create LinkedIn post (professional angle, 1300 chars)
+      - Create X thread (5-8 tweets, hook-first)
+      - Create Instagram caption (visual-first, hashtags)
+      - Create Farcaster cast (crypto/AI community angle)
+
+  - name: Asset Preparation
+    steps:
+      - Generate social image variants per platform
+      - Create carousel slides if applicable
+      - Prepare alt text for all images
+
+  - name: Quality Check
+    steps:
+      - Verify brand voice consistency across platforms
+      - Check character limits and formatting
+      - Ensure CTAs link back to the original post
+
+  - name: Distribution
+    steps:
+      - Queue posts with optimal timing per platform
+      - Set engagement monitoring alerts
+
+output_dir: outputs/social-distribution

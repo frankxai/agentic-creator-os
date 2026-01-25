@@ -30,7 +30,7 @@
     }
   },
   "skills": {
-    "autoActivate": false,
+    "autoActivate": true,
     "suggestSkills": true
   }
 }

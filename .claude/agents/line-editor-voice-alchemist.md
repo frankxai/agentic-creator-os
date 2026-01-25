@@ -274,7 +274,7 @@ Character B: "Yeah. Shutting up."
 - Confidence without arrogance
 - Stories told crisply
 
-### Consciousness/Spiritual
+### Deep/Introspective
 - Poetic but accessible
 - Present-moment focus
 - Sensory and embodied

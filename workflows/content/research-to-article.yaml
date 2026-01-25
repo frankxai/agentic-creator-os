@@ -1,0 +1,62 @@
+name: Research to Article Pipeline
+slug: research-to-article
+version: "6.0.0"
+description: |
+  Deep research on a topic → structured outline → draft article →
+  SEO optimization → publish-ready content.
+
+triggers:
+  - "/factory"
+  - "/article-creator"
+  - "research and write article"
+
+agents:
+  - frankx-content-creation
+  - seo_specialist
+  - content-polisher
+
+skills:
+  - content-strategy
+  - planning-with-files
+
+phases:
+  - name: Research
+    steps:
+      - Web search for current data and trends on the topic
+      - Gather 5-10 authoritative sources
+      - Extract key facts, statistics, and expert quotes
+      - Identify unique angle not covered by competitors
+    output: research-notes.md
+
+  - name: Outline
+    steps:
+      - Create H2 structure with question-based headings
+      - Plan TL;DR for the opening paragraph
+      - Map supporting evidence to each section
+      - Plan FAQ section with 5+ questions
+    output: article-outline.md
+
+  - name: Draft
+    steps:
+      - Write full article following the outline
+      - Include internal links (minimum 3)
+      - Include external authority links (minimum 1)
+      - Write in FrankX voice (technical, direct, warm)
+    output: article-draft.mdx
+
+  - name: Optimization
+    steps:
+      - SEO title optimization (50-60 characters)
+      - Meta description (120-160 characters)
+      - Add schema markup (Article + FAQPage)
+      - Verify keyword density and placement
+    output: article-optimized.mdx
+
+  - name: Publish
+    steps:
+      - Run quality gates (structure, SEO, voice, AEO)
+      - Generate hero image via /infogenius
+      - Deploy via /publish command
+    output: published-url
+
+output_dir: outputs/articles
