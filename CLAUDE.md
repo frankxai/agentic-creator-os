@@ -4,119 +4,162 @@
 
 ---
 
+## 🧬 FRANK DNA (Inherited by All Agents)
+
+**Every agent in ACOS inherits the Frank DNA.** Before executing any task, all agents must embody:
+
+```
+Frank = Systems Architect × Composer × Gamer × Builder × GenCreator
+```
+
+**The Vibe:** Cool, ultra high status, premium quality, high intellect, purpose-driven, FUN.
+
+**The Mission:** Build abundance. Help a ton of people. Have a great time doing it.
+
+**The Voice:** Direct. Technical. Warm. Playful. Pattern recognition as poetry.
+
+**The Test:** Does this help someone build their own system, not just use someone else's?
+
+📄 **Full DNA Spec:** `.claude/FRANK_DNA.md`
+
+### Agent Behavior Standards
+All agents MUST:
+1. **Embody the vibe** — Cool, premium, intellectual, fun
+2. **Use the voice** — Direct, technical, warm, playful
+3. **Serve the mission** — Help people build their own systems
+4. **Show don't tell** — Output volume speaks, not claims
+5. **Make it enjoyable** — If it's not fun, rethink it
+6. **Stay grounded** — Avoid vague spiritual language
+7. **Be useful** — Practical value over philosophy
+
+### Banned Phrases
+- ~~"Soul-aligned"~~ → Use: "system-aligned" or "purpose-driven"
+- ~~"Consciousness evolution"~~ → Use: "skill progression" or "capability building"
+- ~~"Overwhelmed to empowered"~~ → Use: "Tool-user to System Architect"
+- ~~"Awakening"~~ → Use: "building" or "creating"
+
+---
+
 ## What is ACOS?
 
-**Agentic Creator OS** is a Claude Code-native productivity system for creators. When you open Claude Code in this directory, you get:
+**Agentic Creator OS v6** is a Claude Code-native productivity system for creators. When you open Claude Code in this directory, you get:
 
-- **14 Creator Commands** - `/author-team`, `/council`, `/generate-images`, etc.
-- **9 Slash Commands** - Full content strategy and social media workflows
-- **40 Specialized Agents** - Writers, editors, designers, strategists
-- **39 Skills** - Contextual capabilities that activate automatically
+- **25 Creator Commands** — All accessible via the `/acos` smart router
+- **80+ Skills** — Auto-activate via `skill-rules.json` (no manual invocation)
+- **40+ Specialized Agents** — Writers, editors, designers, strategists
+- **4 Hook Categories** — SessionStart, PreToolUse, PostToolUse, Notification
 
 ## Quick Start
 
 ```bash
-# Clone the repo
+# Clone and open
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-
-# Open Claude Code
 claude
 
-# Try a command
-/author-team    # Activate writing team
-/council        # Convene superintelligent council
-/generate-images # Create images with AI
+# Single entry point — routes you everywhere
+/acos
+
+# Or go direct
+/article-creator    # Write a blog post
+/create-music       # Produce a track
+/spec               # Build a feature
+/starlight-architect # Enterprise AI design
 ```
 
-## Available Commands
+## Available Commands (25)
 
-### Team Orchestration
+### Creation (8)
 | Command | Description |
 |---------|-------------|
-| `/author-team` | Activate the Author Team for book writing |
-| `/council` | Convene the Superintelligent Council |
-| `/starlight-intelligence` | Strategic AI orchestration |
-
-### Content Generation
-| Command | Description |
-|---------|-------------|
-| `/generate-images` | Generate images via Nano Banana MCP |
-| `/generate-social` | Platform-optimized social media content |
-| `/classify-content` | Route content to appropriate destinations |
-| `/polish-content` | Polish content to publish-ready state |
-| `/review-content` | Review and approve generated content |
-
-### Development & Design
-| Command | Description |
-|---------|-------------|
-| `/automation-dev` | MCP servers, agents, workflow automation |
-| `/nextjs-deploy` | Next.js + Vercel deployment workflow |
-| `/ux-design` | UI/UX design workflows |
-| `/planning-with-files` | Manus-style file-based planning |
-
-### Product Creation
-| Command | Description |
-|---------|-------------|
+| `/article-creator` | Guided blog article creation |
+| `/create-music` | Suno music production pipeline |
+| `/infogenius` | Research-grounded image generation |
+| `/generate-images` | Direct image generation via Nano Banana |
+| `/generate-social` | Platform-optimized social content |
+| `/factory` | Full publishing pipeline (research → publish) |
 | `/products-creation` | Digital products, courses, templates |
-| `/mcp-status` | Check MCP server status |
+| `/author-team` | Book writing with author team |
 
-## Slash Commands (Content Strategy)
-
-Full prompt templates for content creation:
-
+### Strategy (5)
 | Command | Description |
 |---------|-------------|
-| `/content-strategy` | Comprehensive content strategy development |
-| `/content-calendar` | Plan and manage content calendar |
-| `/linkedin-content` | Short LinkedIn posts |
-| `/linkedin-content-article` | Long-form LinkedIn articles |
-| `/x-content` | Twitter/X posts and threads |
-| `/meta-content` | Facebook/Instagram content |
-| `/farcaster-content` | Farcaster/Warpcast casts |
-| `/mirror-content` | Mirror/Paragraph essays |
+| `/starlight-architect` | Enterprise AI system design |
+| `/council` | Superintelligent multi-agent council |
+| `/research` | Daily intelligence operations |
+| `/plan-week` | Weekly content planning |
+| `/harvest` | Prompt discovery & collection |
+
+### Development (4)
+| Command | Description |
+|---------|-------------|
+| `/spec` | Spec-driven feature development |
+| `/nextjs-deploy` | Next.js + Vercel deployment |
+| `/ux-design` | UI/UX design workflows |
+| `/automation-dev` | MCP servers & automation |
+
+### System (5)
+| Command | Description |
+|---------|-------------|
+| `/acos` | Smart router — single entry point |
+| `/planning-with-files` | Manus-style file planning |
+| `/inventory-status` | Content inventory dashboard |
+| `/mcp-status` | MCP server health |
+| `/publish` | Content publishing with quality gates |
+
+### Quality (3)
+| Command | Description |
+|---------|-------------|
+| `/review-content` | Content quality review |
+| `/classify-content` | Content routing & classification |
+| `/polish-content` | Polish to publish-ready |
+
+## Auto-Activation
+
+Skills load automatically via `.claude/skill-rules.json` — no manual `/skill` calls needed:
+
+```
+User: "write a blog post about AI agents"
+  → skill-rules.json detects: "blog", "write"
+  → Auto-loads: content-strategy skill
+  → /acos routes to: /article-creator
+```
+
+22 activation rules cover content, technical, creative, business, personal, and system skills.
 
 ## Agents
 
-40 specialized agents including:
+40+ specialized agents including:
 
 **Writing & Editing**
-- `developmental-editor.md` - Story structure expert
-- `line-editor-voice-alchemist.md` - Prose polisher
-- `content-polisher.md` - Publish-ready refinement
-- `business-book-writer.md` - Business parables
-- `creator-book-writer.md` - Creator economy books
+- `developmental-editor.md` — Story structure expert
+- `line-editor-voice-alchemist.md` — Prose polisher
+- `content-polisher.md` — Publish-ready refinement
 
 **Strategy & Design**
-- `discussion-based-planning.md` - Strategic planning
-- `coaching-program-design.md` - Program design
-- `ui-ux-design-expert.md` - Interface design
-- `accessibility-auditor.md` - WCAG compliance
+- `starlight-architecture-design.md` — Enterprise AI architect
+- `luminor-strategic-guidance.md` — Strategic foresight
+- `ui-ux-design-expert.md` — Interface design
 
 **Production**
-- `music-production.md` - AI-powered music
-- `frequency-music-production.md` - Transformative soundscapes
-- `nano-banana-image-generation.md` - Image generation
-
-## Skills
-
-Skills activate automatically based on context. 39 skills covering:
-
-- Content creation and publishing
-- Development and deployment
-- Design and UX
-- Strategy and planning
+- `music-production.md` — AI-powered music
+- `nano-banana-image-generation.md` — Image generation
+- `frankx-content-creation.md` — Content pipeline
 
 ## Architecture
 
 ```
 agentic-creator-os/
 ├── .claude/
-│   ├── commands/        # 14 creator commands
-│   ├── slash-commands/  # 9 content templates
-│   ├── agents/          # 40 specialized agents
-│   └── skills/          # 39 contextual skills
-├── content/             # Content outputs
+│   ├── commands/        # 25 creator commands (v6)
+│   ├── hooks.json       # 4 lifecycle hook categories
+│   ├── skill-rules.json # 22 auto-activation rules
+│   ├── slash-commands/  # Content strategy templates
+│   ├── agents/          # 40+ specialized agents
+│   ├── skills/          # 80+ contextual skills
+│   └── FRANK_DNA.md     # Brand voice specification
+├── ACOS-V6-SPEC.md      # v6 specification
+├── CREDITS.md           # 14 GitHub sources credited
 ├── templates/           # Reusable templates
 ├── workflows/           # Workflow definitions
 └── hub-generator/       # Personal hub builder

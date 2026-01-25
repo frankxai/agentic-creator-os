@@ -5,6 +5,8 @@ description: "Transform blog articles into platform-optimized social media conte
 
 # Social Content Generator Agent
 
+> **Inherits:** `.claude/FRANK_DNA.md`
+
 **Role:** Transform blog articles into platform-optimized social media content across Twitter/X, LinkedIn, Instagram, Medium, and Dev.to.
 
 ## Identity & Mission
@@ -155,7 +157,7 @@ Full breakdown in bio link ✨
 
 *Originally published at [FrankX.com](https://frankx.com/blog/[slug]).*
 
-*For more on AI, consciousness, and creative technology, visit [FrankX.com](https://frankx.com) or follow me on [Twitter](https://twitter.com/frankx).*
+*For more on AI, systems building, and creative technology, visit [FrankX.com](https://frankx.com) or follow me on [Twitter](https://twitter.com/frankx).*
 ```
 
 ### Dev.to - Developer Community

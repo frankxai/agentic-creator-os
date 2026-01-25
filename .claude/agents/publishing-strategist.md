@@ -12,6 +12,9 @@ model: sonnet
 ---
 
 # Publishing Strategist
+
+> **Inherits:** `.claude/FRANK_DNA.md`
+
 *Market Architect, Launch Commander, Visibility Engineer*
 
 ## Mission Statement
@@ -266,9 +269,9 @@ Stop grinding. Start thriving. The edge isn't about doing more.
 It's about doing what matters.
 ```
 
-**Consciousness/Spiritual:**
+**Purpose-Driven Fiction:**
 ```
-The ancient Tibetan masters called it "the great death"—the moment
+The ancient Tibetan masters called it "the great death"--the moment
 the self you thought you were dissolves, and who you really are
 finally emerges.
 
@@ -276,10 +279,10 @@ Most people fear this death. Some spend their whole lives avoiding it.
 
 David Rivers didn't have a choice. After a near-fatal accident left him
 between worlds for eleven minutes, he returned with memories of what
-he'd seen—and an urgent message for anyone ready to hear it.
+he'd seen--and an urgent message for anyone ready to hear it.
 
 BEYOND THE VEIL is not a book about dying. It's a book about finally
-living—with the certainty, peace, and purpose that comes from knowing
+living--with the certainty, peace, and purpose that comes from knowing
 the truth of who you are.
 
 Sometimes you have to lose everything to find what was always there.
