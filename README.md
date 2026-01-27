@@ -35,35 +35,46 @@ Agentic Creator OS is a **superintelligent operating system for generative creat
 
 ## Quick Start
 
-### For Users
+### Option 1: Full Install (Recommended)
 
 ```bash
-# Clone and open
+# Clone and install
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-claude
+./install.sh
 
-# Single entry point — /acos routes you everywhere
+# Open Claude Code and use
+claude
 /acos
-
-# Or go direct to any command
-/article-creator    # Write a blog post
-/create-music       # Produce a track
-/spec               # Build a feature
-/starlight-architect # Enterprise AI design
 ```
 
-### For Developers
+### Option 2: Manual Setup
 
 ```bash
-# Clone and setup
+# Clone
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 
-# Everything works out of the box — no npm install needed
-# Configuration-first: markdown commands + JSON rules + Claude native
+# Copy commands to user level (required for /commands to work)
+cp .claude/commands/*.md ~/.claude/commands/
+
+# Open Claude Code
 claude
+/acos
 ```
+
+### First Commands to Try
+
+```bash
+/acos                # Smart router — shows all 26 commands
+/article-creator     # Write a blog post
+/create-music        # Produce a track with Suno
+/infogenius          # Generate research-grounded images
+/spec                # Spec-driven feature development
+/starlight-architect # Enterprise AI system design
+```
+
+> **See [QUICKSTART.md](QUICKSTART.md) for detailed setup instructions**
 
 ---
 
@@ -435,6 +446,7 @@ Explore the system through our infographic gallery:
 
 | Document | Purpose |
 |----------|---------|
+| [QUICKSTART.md](QUICKSTART.md) | Get started in 5 minutes |
 | [ACOS-V6-SPEC.md](ACOS-V6-SPEC.md) | v6 specification — what's new |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Complete 7-pillar architecture |
 | [SKILL_TREE.md](SKILL_TREE.md) | Visual map of all skills |

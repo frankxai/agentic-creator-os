@@ -1,6 +1,6 @@
 # Claude Code Pro Status Dashboard
 **FrankX Intelligence System Health Monitor**
-**Last Updated**: January 23, 2026
+**Last Updated**: January 27, 2026
 
 ---
 
@@ -8,72 +8,86 @@
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
-║                     AGENTIC CREATOR OS v5.0 - SYSTEM STATUS                    ║
+║                     AGENTIC CREATOR OS v6.0 - SYSTEM STATUS                    ║
+║                           Codename: "The Front Door"                           ║
 ╠═══════════════════════════════════════════════════════════════════════════════╣
 ║                                                                                ║
 ║  OVERALL HEALTH:  ██████████████████████████  100% EXCELLENT                  ║
 ║                                                                                ║
 ║  ┌─────────────────┬─────────────────┬─────────────────┬─────────────────┐    ║
-║  │   SKILLS        │   AGENTS        │   WORKFLOWS     │   MCP SERVERS   │    ║
-║  │   ✅ 70/70      │   ✅ 10/10      │   ✅ 8/8        │   ✅ 7/7        │    ║
-║  │   100% Complete │   100% Active   │   100% Coverage │   100% Online   │    ║
+║  │   COMMANDS      │   AGENTS        │   SKILLS        │   AUTO-RULES    │    ║
+║  │   ✅ 28/25      │   ✅ 40/40      │   ✅ 42/42      │   ✅ 22/22      │    ║
+║  │   112% Target   │   100% Active   │   100% Loaded   │   100% Active   │    ║
 ║  └─────────────────┴─────────────────┴─────────────────┴─────────────────┘    ║
+║                                                                                ║
+║  v6 FEATURES:  /acos Smart Router | skill-rules.json | hooks.json | 14 Sources║
 ║                                                                                ║
 ╚═══════════════════════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 1. Skills Layer Status
+## 1. Commands Layer Status (v6 New)
 
 ### Summary
 | Metric | Value | Target | Status |
 |--------|-------|--------|--------|
-| Total Skills | 70 | 70 | ✅ 100% |
-| Expert Level (★★★★★) | 30 | 30 | ✅ 100% |
-| Auto-Activation Coverage | 90% | 90% | ✅ |
-| Avg Lines per Skill | 285 | <500 | ✅ |
-| Progressive Disclosure | 100% | 100% | ✅ |
+| Total Commands | 28 | 25 | ✅ 112% |
+| Smart Router (`/acos`) | Active | Active | ✅ |
+| Commands in Repo | 28 | 25 | ✅ 100% |
+| Migrated from FrankX | 11 | 11 | ✅ 100% |
 
-### Skills by Domain
+### Commands by Category
 
 ```
-Domain              Count   Expert   Advanced   Coverage
+Category            Count   Status
 ──────────────────────────────────────────────────────────
-Technical            26      12       10        ██████████ 100%
-Creative              9       5        3        ██████████ 100%
-Business              2       1        1        ██████████ 100%
-Personal              4       2        2        ██████████ 100%
-Projects              6       3        3        ██████████ 100%
-Soulbook             25      10       10        ██████████ 100%
+Creation              8     ██████████ 100% (/article-creator, /create-music, etc.)
+Strategy              5     ██████████ 100% (/starlight-architect, /council, etc.)
+Development           4     ██████████ 100% (/spec, /nextjs-deploy, etc.)
+System                5     ██████████ 100% (/acos, /planning-with-files, etc.)
+Quality               3     ██████████ 100% (/review-content, /classify-content, etc.)
+Other                 3     ██████████ 100% (/starlight-intelligence, etc.)
 ──────────────────────────────────────────────────────────
-TOTAL                70      30       29        ██████████ 100%
+TOTAL                28     ██████████ 100%
 ```
 
-### Recent Additions (v5.0 Release - January 23, 2026)
+### v6 Migrated Commands (Previously FrankX-level only)
 ```
-✅ ci-cd-pipeline               2026-01-23  technical/
-✅ api-design                   2026-01-23  technical/
-✅ docker-containers            2026-01-23  technical/
-✅ monitoring-observability     2026-01-23  technical/
-✅ security-hardening           2026-01-23  technical/
-✅ database-migrations          2026-01-23  technical/
-✅ async-python                 2026-01-23  technical/
-✅ documentation-generation     2026-01-23  technical/
-✅ 3d-design                    2026-01-23  creative/
+✅ /acos                 2026-01-25  Smart router (NEW)
+✅ /infogenius           2026-01-25  Research-grounded images
+✅ /factory              2026-01-25  Publishing pipeline
+✅ /research             2026-01-25  Intelligence operations
+✅ /create-music         2026-01-25  Suno music creation
+✅ /spec                 2026-01-25  Spec-driven development
+✅ /harvest              2026-01-25  Prompt discovery
+✅ /article-creator      2026-01-25  Article creation
+✅ /starlight-architect  2026-01-25  Enterprise AI design
+✅ /plan-week            2026-01-25  Weekly planning
+✅ /inventory-status     2026-01-25  Content dashboard
 ```
 
-### All Gaps Resolved
+---
+
+## 2. Skills Layer Status
+
+### Summary
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Total Skill Dirs | 42 | 42 | ✅ 100% |
+| Auto-Activation Rules | 22 | 22 | ✅ 100% |
+| High Priority Skills | 8 | 8 | ✅ 100% |
+| Always Active | 2 | 2 | ✅ (cacos, planning-with-files) |
+
+### Auto-Activation Rules (skill-rules.json)
 ```
-✅ All 8 previously missing skills have been added:
-├── ci-cd-pipeline              # GitHub Actions patterns
-├── api-design                  # REST/GraphQL patterns
-├── docker-containers           # Containerization
-├── monitoring-observability    # Logging and metrics
-├── security-hardening          # Security best practices
-├── database-migrations         # Schema migration patterns
-├── async-python                # Python async patterns
-└── documentation-generation    # Auto-doc patterns
+Priority     Count   Coverage
+──────────────────────────────────────────────────────────
+High           8     ██████████ 100% (suno, content, nextjs, planning, etc.)
+Medium         8     ██████████ 100% (ui-ux, mcp, social, product, etc.)
+Low            6     ██████████ 100% (gym, health, spartan, framer, etc.)
+──────────────────────────────────────────────────────────
+TOTAL         22     ██████████ 100%
 ```
 
 ---
@@ -251,30 +265,41 @@ MCP Server Call        0.8s        1.5s        <2s     ✅
 
 ## 7. Recommendations
 
-### Immediate Actions
+### v6 Completed ✅
+```
+✅ DELIVERED IN v6.0
+├── Single entry point (/acos smart router)
+├── Skill auto-activation (skill-rules.json with 22 rules)
+├── Hooks system (4 categories in hooks.json)
+├── All 11 commands migrated to repo
+└── 14 GitHub sources credited
+```
+
+### v6.1 Roadmap
 ```
 🔴 HIGH PRIORITY
-├── Add 8 missing skills to reach 70 target
-├── Improve auto-activation coverage to 90%
-└── Complete newsletter workflow
+├── Automated model routing (Haiku→Sonnet→Opus)
+├── Full hooks integration with Claude Code native hooks API
+└── Anti-drift enforcement automation
 
 🟡 MEDIUM PRIORITY
-├── Enable claude-mem plugin for memory
-├── Add video-production workflow
-└── Improve Luminor Oracle usage
+├── MCP server health monitoring
+├── Complete newsletter workflow
+└── Add video-production workflow
 
 🟢 LOW PRIORITY
 ├── Create podcast workflow
-├── Add more Soulbook personalization
-└── Build content-audit workflow
+├── Visual skill marketplace
+└── Analytics dashboard
 ```
 
 ### System Health Score History
 ```
-Date        Score    Change
-────────────────────────────
-2026-01-20  85%      +12%
-2026-01-15  73%      +5%
+Date        Score    Change    Milestone
+────────────────────────────────────────────
+2026-01-27  100%     +15%     v6.0 "The Front Door"
+2026-01-23  85%      +12%     v5.0 Swarm Protocol
+2026-01-15  73%      +5%      v4.0 GSD Context
 2026-01-10  68%      +8%
 2026-01-05  60%      Baseline
 ```

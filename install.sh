@@ -24,7 +24,8 @@ GITHUB_RAW="https://raw.githubusercontent.com/$GITHUB_REPO/main"
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 ACOS_HOME="${ACOS_HOME:-$CLAUDE_HOME/acos}"
-SKILLS_DIR="$ACOS_HOME/skills"
+# Skills, commands, and agents go directly into Claude Code's user directories
+SKILLS_DIR="$CLAUDE_HOME/skills"
 COMMANDS_DIR="$CLAUDE_HOME/commands"
 AGENTS_DIR="$CLAUDE_HOME/agents"
 
@@ -113,11 +114,11 @@ check_prerequisites() {
 create_directories() {
     log "Creating directory structure..."
 
+    # ACOS home for config/state files
     mkdir -p "$ACOS_HOME"
-    mkdir -p "$SKILLS_DIR/technical"
-    mkdir -p "$SKILLS_DIR/creative"
-    mkdir -p "$SKILLS_DIR/business"
-    mkdir -p "$SKILLS_DIR/soulbook"
+
+    # Claude Code user-level directories (where Claude Code actually reads from)
+    mkdir -p "$SKILLS_DIR"
     mkdir -p "$COMMANDS_DIR"
     mkdir -p "$AGENTS_DIR"
 
@@ -132,20 +133,20 @@ install_skills() {
 
     cd "$PROJECT_DIR"
 
-    # Install skill YAML files
+    # Install skill-rules.json (from .claude directory)
+    if [ -f ".claude/skill-rules.json" ]; then
+        cp ".claude/skill-rules.json" "$SKILLS_DIR/skill-rules.json"
+        success "Installed skill rules"
+    fi
+
+    # Install skill YAML files from root skills/ directory
     for skill in skills/*.yaml; do
         if [ -f "$skill" ]; then
             skill_name=$(basename "$skill" .yaml)
             cp "$skill" "$SKILLS_DIR/${skill_name}.yaml"
-            success "Installed skill: $skill_name"
+            success "Installed skill config: $skill_name"
         fi
     done
-
-    # Install skill rules
-    if [ -f "skills/skill-rules.json" ]; then
-        cp "skills/skill-rules.json" "$SKILLS_DIR/skill-rules.json"
-        success "Installed skill rules"
-    fi
 
     # Install registry
     if [ -f "skills/registry.json" ]; then
@@ -153,7 +154,22 @@ install_skills() {
         success "Installed skill registry"
     fi
 
-    # Install categorized skills (from nested directories if they exist)
+    # Install skills from .claude/skills/ (the main skill definitions)
+    if [ -d ".claude/skills" ]; then
+        for skill_dir in .claude/skills/*/; do
+            if [ -d "$skill_dir" ]; then
+                skill_name=$(basename "$skill_dir")
+                # Skip CLAUDE.md at root level
+                if [ "$skill_name" != "CLAUDE.md" ]; then
+                    mkdir -p "$SKILLS_DIR/$skill_name"
+                    cp -r "$skill_dir"* "$SKILLS_DIR/$skill_name/" 2>/dev/null || true
+                    success "Installed skill: $skill_name"
+                fi
+            fi
+        done
+    fi
+
+    # Also install categorized skills from root skills/ directory (if nested)
     for cat_dir in skills/*/; do
         if [ -d "$cat_dir" ]; then
             cat_name=$(basename "$cat_dir")
@@ -177,7 +193,18 @@ install_commands() {
 
     cd "$PROJECT_DIR"
 
-    # Check for commands directory
+    # Install commands from .claude/commands/ (the main commands)
+    if [ -d ".claude/commands" ]; then
+        for cmd in .claude/commands/*.md; do
+            if [ -f "$cmd" ]; then
+                cmd_name=$(basename "$cmd" .md)
+                cp "$cmd" "$COMMANDS_DIR/${cmd_name}.md"
+                success "Installed command: /$cmd_name"
+            fi
+        done
+    fi
+
+    # Also check for commands in root commands/ directory (if exists)
     if [ -d "commands" ]; then
         for cmd in commands/*.md; do
             if [ -f "$cmd" ]; then
@@ -187,25 +214,26 @@ install_commands() {
             fi
         done
     fi
-
-    # Also check for workflow commands
-    if [ -d "workflows" ]; then
-        for workflow in workflows/*.yaml workflows/*.md; do
-            if [ -f "$workflow" ]; then
-                workflow_name=$(basename "$workflow")
-                cp "$workflow" "$COMMANDS_DIR/${workflow_name}"
-                success "Installed workflow: $workflow_name"
-            fi
-        done
-    fi
 }
 
-# Install department agents
+# Install agents
 install_agents() {
-    log "Installing department agents..."
+    log "Installing agents..."
 
     cd "$PROJECT_DIR"
 
+    # Install agents from .claude/agents/ (main agent definitions)
+    if [ -d ".claude/agents" ]; then
+        for agent in .claude/agents/*.md .claude/agents/*.json; do
+            if [ -f "$agent" ]; then
+                agent_name=$(basename "$agent")
+                cp "$agent" "$AGENTS_DIR/${agent_name}"
+                success "Installed agent: ${agent_name%.*}"
+            fi
+        done
+    fi
+
+    # Also install department agents from departments/
     for dept in departments/*/; do
         if [ -d "$dept" ]; then
             dept_name=$(basename "$dept")
@@ -213,7 +241,7 @@ install_agents() {
             # Copy agent markdown
             if [ -f "${dept}agent.md" ]; then
                 cp "${dept}agent.md" "$AGENTS_DIR/${dept_name}-department.md"
-                success "Installed agent: $dept_name"
+                success "Installed department: $dept_name"
             fi
 
             # Copy department config
