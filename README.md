@@ -433,12 +433,43 @@ Agentic Creator OS is part of the FrankX ecosystem. We believe in giving credit 
 
 Explore the system through our infographic gallery:
 
-| Concept | Infographic |
-|---------|-------------|
-| **Swarm Topologies** | ![Swarm](docs/infographics/03-swarm-topologies.png) |
-| **ACOS vs Traditional AI** | ![Comparison](docs/infographics/10-acos-vs-traditional.png) |
+### System Architecture
+
+| # | Concept | Description |
+|---|---------|-------------|
+| 01 | ![7 Pillars](docs/infographics/01-seven-pillars-architecture.png) | **7 Pillars Architecture** - Foundational components: Skills, Agents, Workflows, MCP Servers, Templates, Instances, Intelligence |
+| 02 | ![Progressive Disclosure](docs/infographics/02-progressive-disclosure.png) | **Progressive Skill Disclosure** - Token-efficient loading: ~100 tokens metadata → <5k tokens full skill |
+| 09 | ![Full Architecture](docs/infographics/09-full-system-architecture.png) | **Full System Architecture** - Complete ACOS v6.0 overview with all components |
+
+### Orchestration & Coordination
+
+| # | Concept | Description |
+|---|---------|-------------|
+| 03 | ![Swarm Topologies](docs/infographics/03-swarm-topologies.png) | **Swarm Topologies** - Hierarchical, Mesh, and Specialized agent coordination patterns |
+| 05 | ![Workflow Patterns](docs/infographics/05-workflow-patterns.png) | **Workflow Patterns** - Pipeline, Parallel, and Weighted Synthesis orchestration |
+| 06 | ![Model Routing](docs/infographics/06-model-routing.png) | **Model Routing Tiers** - Intelligent selection: Haiku → Sonnet → Opus |
+
+### Agents & Skills
+
+| # | Concept | Description |
+|---|---------|-------------|
+| 04 | ![Agent Library](docs/infographics/04-agent-library.png) | **Agent Library** - 40+ specialized agents across Content, Music, Products, Brand, Growth, Research, Orchestration |
+| 07 | ![Creator Hub](docs/infographics/07-creator-hub-generator.png) | **Creator Hub Generator** - 4-step wizard: Identity → Workflows → Tools → Voice |
+
+### Quality & Context
+
+| # | Concept | Description |
+|---|---------|-------------|
+| 08 | ![Anti-Drift](docs/infographics/08-anti-drift-context.png) | **Anti-Drift Context Engineering** - Quality maintenance across long sessions |
+| 10 | ![ACOS vs Traditional](docs/infographics/10-acos-vs-traditional.png) | **ACOS vs Traditional AI** - Side-by-side comparison |
 
 📁 **[View all 10 infographics →](docs/infographics/)**
+
+### Technical Details
+- **Resolution**: 1376 × 768 (16:9)
+- **Format**: PNG
+- **Style**: 3D Isometric with claymorphism
+- **Generator**: Gemini Pro Image via Nano Banana MCP
 
 ---
 
