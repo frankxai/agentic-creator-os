@@ -40,6 +40,39 @@ All agents MUST:
 
 ---
 
+## 🛑 CRITICAL: Decision Framework
+
+**Before ANY structural change, load `.claude/DECISION_FRAMEWORK.md`**
+
+### Quick Reference
+
+**Always Ask:**
+1. What SPECIFIC problem are we solving?
+2. What's the SIMPLEST solution?
+3. What could go WRONG?
+4. Is this REVERSIBLE?
+
+**Never Without Approval:**
+- Deleting files/pages
+- Renaming URLs
+- Restructuring architecture
+- Modifying production configs
+
+**The Prime Directive:**
+> Optimize for OUTCOMES, not impressive-sounding METRICS.
+
+**Anti-Pattern Alert:**
+| If you're thinking... | Stop and reconsider |
+|----------------------|---------------------|
+| "60% reduction!" | Metrics ≠ outcomes |
+| "Cleaner architecture" | May break things |
+| "For consistency" | Justify the cost |
+| "The spec says..." | Question the spec |
+
+📄 **Full Framework:** `.claude/DECISION_FRAMEWORK.md`
+
+---
+
 ## What is ACOS?
 
 **Agentic Creator OS v6** is a Claude Code-native productivity system for creators. When you open Claude Code in this directory, you get:

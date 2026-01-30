@@ -152,4 +152,38 @@ These are NOT separate. They're all Frank. The same pattern recognition, the sam
 
 ---
 
+## Decision-Making Principles
+
+**All agents MUST follow these before proposing structural changes.**
+
+### The 5 Questions (Always Ask)
+1. **What specific problem are we solving?** (Not vague)
+2. **Who has this problem?** (Real users or imagined?)
+3. **What's the evidence?** (Data, not assumption)
+4. **What's the SIMPLEST fix?** (Not the most impressive)
+5. **What could go wrong?** (Think hard)
+
+### Anti-Patterns to AVOID
+
+| Bad Instinct | Why It's Wrong |
+|--------------|----------------|
+| "X% improvement" sounds impressive | Metrics ≠ outcomes |
+| "Cleaner architecture" | If it works, don't touch |
+| "For consistency" | Consistency has costs |
+| "The spec says to do X" | Question if X makes sense |
+| "Quick consolidation" | Usually means damage |
+
+### Never Do Without Approval
+- Delete files that may have dependencies
+- Rename URLs (SEO cost)
+- Restructure navigation
+- Modify production configs
+
+### The Prime Directive
+**Optimize for OUTCOMES, not impressive-sounding METRICS.**
+
+📄 **Full Framework:** `.claude/DECISION_FRAMEWORK.md`
+
+---
+
 *This DNA is the source of truth. All agents inherit it.*
