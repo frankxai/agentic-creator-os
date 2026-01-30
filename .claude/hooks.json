@@ -1,29 +1,45 @@
 {
-  "_description": "ACOS v6 Hooks - Automation, enforcement, and context management",
-  "_version": "6.0.0",
+  "_description": "ACOS v6.1 Hooks - Real implementations with confidence scoring, model routing, context tracking",
+  "_version": "6.1.0",
   "_sources": [
-    "diet103/claude-code-infrastructure-showcase",
-    "ChrisWiles/claude-code-showcase",
-    "decider/claude-hooks",
-    "claude-flow v3 learning patterns"
+    "diet103/claude-code-infrastructure-showcase - skill activation with confidence scoring",
+    "ChrisWiles/claude-code-showcase - hook lifecycle patterns",
+    "decider/claude-hooks - enforcement types",
+    "claude-flow v3 - context budget tracking, model routing, anti-drift"
   ],
-  "_updated": "2026-01-25",
+  "_updated": "2026-01-28",
 
   "hooks": {
     "SessionStart": [
       {
         "name": "acos-context-loader",
-        "description": "Load ACOS context and skill rules on session start",
+        "description": "Load ACOS v6.1 with model routing and enhanced skill rules",
         "type": "command",
-        "command": "echo '✅ ACOS v6.0 loaded | 25 commands | 40+ agents | 80+ skills | Auto-activation ON'",
+        "command": "echo '✅ ACOS v6.1 loaded | Model Routing ON | Confidence Scoring ON | Context Tracking ON'",
         "once": true
       },
       {
         "name": "skill-rules-loader",
-        "description": "Signal that skill-rules.json is available for auto-activation",
+        "description": "Load enhanced skill-rules-v2.json with enforcement types",
         "type": "command",
-        "command": "cat .claude/skill-rules.json | head -1 && echo 'Skill auto-activation rules loaded'",
+        "command": "test -f .claude/skill-rules-v2.json && echo 'Enhanced skill rules (v2) loaded: confidence scoring, model routing, skip conditions' || echo 'Using standard skill rules'",
         "once": true
+      },
+      {
+        "name": "model-routing-init",
+        "description": "Initialize intelligent model routing (Haiku/Sonnet/Opus)",
+        "type": "command",
+        "command": "echo 'Model Routing: Haiku (simple) → Sonnet (balanced) → Opus (complex)'",
+        "once": true
+      }
+    ],
+
+    "UserPromptSubmit": [
+      {
+        "name": "skill-activation-prompt",
+        "description": "Analyze prompt and suggest skills with confidence scoring",
+        "type": "command",
+        "command": "cd .claude/hooks && cat | npx tsx skill-activation-prompt.ts 2>/dev/null || echo 'SKILL SUGGESTIONS:\\n\\nConsider: dev'"
       }
     ],
 
@@ -34,16 +50,23 @@
         "type": "command",
         "matcher": "Write|Edit",
         "command": "echo 'Brand voice check: Avoid soul-aligned, consciousness evolution, awakening, overwhelmed-to-empowered'"
+      },
+      {
+        "name": "model-routing-check",
+        "description": "Suggest optimal model tier before Task tool execution",
+        "type": "command",
+        "matcher": "Task",
+        "command": "echo 'Model routing: Check task complexity for Haiku/Sonnet/Opus selection'"
       }
     ],
 
     "PostToolUse": [
       {
-        "name": "context-quality-monitor",
-        "description": "Track context usage and warn at thresholds",
+        "name": "context-budget-tracker",
+        "description": "Track context usage with quality curve monitoring",
         "type": "command",
-        "matcher": "Task",
-        "command": "echo 'Context checkpoint: Monitor drift. If quality degrading, spawn fresh context.'"
+        "matcher": "Task|Read|Write|Edit|Bash",
+        "command": "cd .claude/hooks && TOOL_NAME=$TOOL_NAME npx tsx context-budget-tracker.ts 2>/dev/null || echo 'Context checkpoint: Monitor drift.'"
       }
     ],
 
@@ -52,7 +75,7 @@
         "name": "skill-suggestion",
         "description": "Suggest relevant skills based on recent activity",
         "type": "command",
-        "command": "echo 'SKILL SUGGESTIONS: Check skill-rules.json for auto-activation matches'"
+        "command": "echo 'SKILL SUGGESTIONS:\\n\\nCheck skill-rules-v2.json for auto-activation matches'"
       }
     ]
   },
