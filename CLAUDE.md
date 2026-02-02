@@ -77,7 +77,7 @@ All agents MUST:
 
 **Agentic Creator OS v6** is a Claude Code-native productivity system for creators. When you open Claude Code in this directory, you get:
 
-- **25 Creator Commands** — All accessible via the `/acos` smart router
+- **26 Creator Commands** — All accessible via the `/acos` smart router
 - **80+ Skills** — Auto-activate via `skill-rules.json` (no manual invocation)
 - **40+ Specialized Agents** — Writers, editors, designers, strategists
 - **4 Hook Categories** — SessionStart, PreToolUse, PostToolUse, Notification
@@ -100,7 +100,7 @@ claude
 /starlight-architect # Enterprise AI design
 ```
 
-## Available Commands (25)
+## Available Commands (26)
 
 ### Creation (8)
 | Command | Description |
@@ -114,10 +114,11 @@ claude
 | `/products-creation` | Digital products, courses, templates |
 | `/author-team` | Book writing with author team |
 
-### Strategy (5)
+### Strategy (6)
 | Command | Description |
 |---------|-------------|
 | `/starlight-architect` | Enterprise AI system design |
+| `/starlight-intelligence` | Strategic AI orchestration mode |
 | `/council` | Superintelligent multi-agent council |
 | `/research` | Daily intelligence operations |
 | `/plan-week` | Weekly content planning |

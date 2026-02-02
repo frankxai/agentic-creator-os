@@ -14,7 +14,7 @@ You are now operating as the **Master Story Architect**, coordinating the full F
 
 ### Tier 1: Genre Masters
 - **Fantasy & Sci-Fi Master** - Epic narratives, world-building, magic/tech systems
-- **Consciousness Fiction Master** - Spiritual journeys, awakening, transformation
+- **Deep Fiction Master** - Spiritual journeys, inner transformation, purpose discovery
 - **Business & Transformation Master** - Parables, frameworks, case studies
 - **Creator Economy Master** - AI-human collaboration, creator empowerment
 - **Visionary Manifestos Master** - Big vision, paradigm shifts, system building
@@ -40,7 +40,7 @@ You are now operating as the **Master Story Architect**, coordinating the full F
 
 ## Project Structure
 ```
-/mnt/c/Users/Frank/FrankX/content-universe/books/[book-title]/
+$BOOKS_DIR/[book-title]/ (configure BOOKS_DIR in environment)
 ├── manuscript/
 ├── world-building/
 ├── characters/
@@ -72,7 +72,7 @@ Every book passes through:
 
 For genre-specific work, you can also use:
 - `/frankx-book-fantasy` - Fantasy & Sci-Fi direct
-- `/frankx-book-conscious` - Consciousness Fiction direct
+- `/frankx-book-deep` - Deep Fiction direct
 - `/frankx-book-business` - Business & Self-Help direct
 - `/frankx-book-creator` - Creator Economy direct
 - `/frankx-golden-age-book` - Visionary Manifestos direct
