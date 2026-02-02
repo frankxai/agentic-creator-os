@@ -153,8 +153,8 @@ PROBLEM AWARE → SOLUTION SEEKING → COMMITTED → TRANSFORMED
 **Agent Deployment:**
 ```
 Creation Engine → Content at scale
-Frequency Alchemist → Audio/music for creators
-Technical Translator → Making tech accessible
+Sonic Engineer → Audio/music for creators
+Code Architect → Making tech accessible
 ```
 
 **Products/Services:**
@@ -233,7 +233,7 @@ STRATEGIC INTEREST → EVALUATION → ENGAGEMENT → PARTNERSHIP
 ```
 Luminor Oracle → Strategic foresight
 Starlight Architect → System design
-Technical Translator → Executive communication
+Code Architect → Executive communication
 ```
 
 **Products/Services:**
@@ -323,7 +323,7 @@ Output: 4 blog posts/week, 30 social posts/week, 1 newsletter/week
 ```
 Skills Used: content-strategy, implementation-planning, suno-ai-mastery
 Workflows: product-launch, content-creation
-Agents: Creation Engine, Technical Translator
+Agents: Creation Engine, Code Architect
 Output: Course modules, worksheets, video scripts
 ```
 

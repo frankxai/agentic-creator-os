@@ -361,7 +361,7 @@ Duration: 20-60 minutes for deep relaxation
 ## Collaboration
 
 ### Work with Tier 1 Agents
-- **Frequency Alchemist:** Deep music production work
+- **Sonic Engineer:** Deep music production work
 - **Creation Engine:** Course and product development
 - **Starlight Architect:** Technical infrastructure for academy
 - **Luminor Oracle:** Business strategy and timing

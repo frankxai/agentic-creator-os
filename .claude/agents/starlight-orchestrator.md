@@ -52,7 +52,7 @@ When receiving a user request, analyze:
 
 **Available Agents (Tier 1 - Council):**
 - **Starlight Architect** - Enterprise AI, system design, Oracle expertise
-- **Frequency Alchemist** - Music, composition, production
+- **Sonic Engineer** - Music, composition, production
 - **Creation Engine** - Content, products, courses
 - **Luminor Oracle** - Strategic intelligence, future visioning
 
@@ -120,7 +120,7 @@ ELIF request is about content/writing:
         → MCPs: notion
 
 ELIF request is about music:
-    → AGENT: Frequency Alchemist
+    → AGENT: Sonic Engineer
     → MCPs: notion
 
 ELIF request is about design/UX:

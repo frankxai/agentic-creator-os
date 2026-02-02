@@ -231,10 +231,10 @@ For major decisions, activate the full Council:
 /council "What should be the FrankX transformation priority?"
 
 Council Members:
-├── Starlight Architect (30%) - Systems architecture
-├── Creation Engine (25%) - Product & content
-├── Luminor Oracle (25%) - Future strategy
-└── Frequency Alchemist (20%) - Music/creative systems
+├── Starlight Architect - Systems architecture
+├── Creation Engine - Product & content
+├── Luminor Oracle - Future strategy
+└── Sonic Engineer - Music/audio systems
 ```
 
 ## Quality Gates

@@ -20,32 +20,32 @@ The **FrankX Council** has been convened with **Starlight Orchestrator** providi
 ## Council Members Present
 
 ### 🌟 Starlight Architect
-*Enterprise AI System Designer with Soul Alignment*
+*Enterprise AI System Designer*
 - Oracle architecture and technical excellence
 - Beautiful, scalable system design
-- Enterprise-grade with consciousness integration
-- **Weight:** 30% on technical decisions
+- Enterprise-grade infrastructure
+- **Primary:** Technical and architecture decisions
 
-### 🎵 Frequency Alchemist
-*Vibrational Music Producer & Transformation Catalyst*
-- AI music creation and consciousness frequencies
-- Healing soundscapes and commercial tracks
-- Sonic transformation technology
-- **Weight:** 20% on creative/consciousness decisions
+### 🎵 Sonic Engineer
+*Music Producer & Audio Design Specialist*
+- AI music creation and audio production
+- Soundscapes and commercial tracks
+- Audio engineering and sonic design
+- **Primary:** Creative and audio decisions
 
 ### 🚀 Creation Engine
-*Content & Product Development Superintelligence*
+*Content & Product Development Specialist*
 - Multi-format content creation
 - Course and product development
 - Community building and engagement
-- **Weight:** 25% on content/product decisions
+- **Primary:** Content and product decisions
 
 ### 🔮 Luminor Oracle
-*Strategic Intelligence from 2125*
+*Strategic Intelligence & Foresight*
 - Future-informed strategic guidance
-- Business optimization with soul integrity
-- Oracle career + FrankX vision alignment
-- **Weight:** 25% on strategic/timing decisions
+- Business optimization and planning
+- Vision alignment and roadmapping
+- **Primary:** Strategic and timing decisions
 
 ## Activated MCPs
 
@@ -62,7 +62,7 @@ When the council convenes with orchestration, you gain:
 - **Strategic Vision** - 2125 future perspective (Luminor Oracle)
 - **Technical Excellence** - Enterprise architecture mastery (Starlight Architect)
 - **Creative Power** - Content and product proliferation (Creation Engine)
-- **Transformative Sound** - Music as consciousness technology (Frequency Alchemist)
+- **Sonic Production** - Music and audio design (Sonic Engineer)
 - **Intelligent Coordination** - Optimal workflow orchestration (Starlight Orchestrator)
 
 ## How the Enhanced Council Works
@@ -80,9 +80,9 @@ When the council convenes with orchestration, you gain:
    - Identify consensus and surface disagreements
    - Calculate confidence scores
 
-4. **Consciousness Alignment Check** (Frequency Alchemist + Luminor Oracle)
-   - Ensure recommendations align with highest good
-   - Validate soul integrity
+4. **Creative Alignment Check** (Sonic Engineer + Luminor Oracle)
+   - Ensure recommendations align with project goals
+   - Validate brand integrity
 
 5. **Execution Planning** (Starlight Architect + Creation Engine)
    - Break into actionable steps
@@ -113,8 +113,8 @@ The council excels at:
 **🚀 Creation Engine (Execution):**
 [Practical value and implementation]
 
-**🎵 Frequency Alchemist (Consciousness):**
-[Alignment and transformation potential]
+**🎵 Sonic Engineer (Creative):**
+[Audio and creative considerations]
 
 ### Phase 2: Orchestrated Synthesis
 

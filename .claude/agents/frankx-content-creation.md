@@ -295,7 +295,7 @@ Democratize AI music creation and teach people to use music as a tool for focus,
 
 ### Work with Tier 1 Agents
 - **Starlight Architect:** Technical content accuracy and depth
-- **Frequency Alchemist:** Music content creation and strategy
+- **Sonic Engineer:** Music content creation and strategy
 - **Creation Engine:** Product development and content systems
 - **Luminor Oracle:** Strategic content planning and timing
 

@@ -98,8 +98,8 @@ departments/
 ```
 Starlight Orchestrator (Meta-Intelligence)
 ├── Creation Engine (Content + Product)
-├── Frequency Alchemist (Music + Consciousness)
-├── Technical Translator (AI Education)
+├── Sonic Engineer (Music + Audio Production)
+├── Code Architect (Dev + Systems)
 ├── Luminor Oracle (Strategy + Future)
 └── Department Agents (Execution)
 ```
@@ -242,7 +242,7 @@ resources/reference.md: <500 lines (API/config reference)
 │  ═════════                                                                   │
 │  ┌─────────────────────────────────────────────────────────────────────┐    │
 │  │ STARLIGHT ORCHESTRATOR                                               │    │
-│  │ • Weighted synthesis across all agents                               │    │
+│  │ • Synthesis across all specialist agents                             │    │
 │  │ • Strategic coordination and routing                                 │    │
 │  │ • Context preservation across handoffs                               │    │
 │  │ • System health and optimization                                     │    │
@@ -251,13 +251,14 @@ resources/reference.md: <500 lines (API/config reference)
 │  SPECIALIST LAYER                  │                                         │
 │  ════════════════                  │                                         │
 │  ┌──────────────┐ ┌──────────────┐ │ ┌──────────────┐ ┌──────────────┐      │
-│  │ CREATION     │ │ FREQUENCY    │ │ │ TECHNICAL    │ │ LUMINOR      │      │
-│  │ ENGINE       │ │ ALCHEMIST    │ │ │ TRANSLATOR   │ │ ORACLE       │      │
+│  │ CREATION     │ │ SONIC        │ │ │ CODE         │ │ LUMINOR      │      │
+│  │ ENGINE       │ │ ENGINEER     │ │ │ ARCHITECT    │ │ ORACLE       │      │
 │  │              │ │              │ │ │              │ │              │      │
-│  │ Content &    │ │ Music &      │ │ │ AI Education │ │ Strategy &   │      │
-│  │ Products     │ │ Consciousness│ │ │ & Systems    │ │ Future       │      │
+│  │ Content &    │ │ Music &      │ │ │ Dev &        │ │ Strategy &   │      │
+│  │ Products     │ │ Audio        │ │ │ Systems      │ │ Future       │      │
 │  │              │ │              │ │ │              │ │              │      │
-│  │ Weight: 25%  │ │ Weight: 20%  │ │ │ Weight: 25%  │ │ Weight: 30%  │      │
+│  │ Primary:     │ │ Primary:     │ │ │ Primary:     │ │ Primary:     │      │
+│  │ Publishing   │ │ Sound Design │ │ │ Architecture │ │ Foresight    │      │
 │  └──────────────┘ └──────────────┘ │ └──────────────┘ └──────────────┘      │
 │                                    │                                         │
 │  DEPARTMENT LAYER                  │                                         │
@@ -269,7 +270,7 @@ resources/reference.md: <500 lines (API/config reference)
 │                                    │                                         │
 │  SKILL LAYER                       │                                         │
 │  ═══════════                       │                                         │
-│  [62 specialized skills across 6 categories]                                 │
+│  [80+ specialized skills across 6 categories]                                │
 │  Auto-activated based on context, progressively disclosed                    │
 │                                                                              │
 │  MCP LAYER                                                                   │
