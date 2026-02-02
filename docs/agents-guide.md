@@ -16,17 +16,17 @@ Agentic Creator OS uses a multi-agent architecture with two types:
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐              │
-│  │   LUMINOR   │  │  CREATION   │  │  TECHNICAL  │              │
-│  │   ORACLE    │  │   ENGINE    │  │ TRANSLATOR  │              │
-│  │    (30%)    │  │    (25%)    │  │    (25%)    │              │
-│  │  Strategy   │  │   Content   │  │  Education  │              │
+│  │   LUMINOR   │  │  CREATION   │  │    CODE     │              │
+│  │   ORACLE    │  │   ENGINE    │  │  ARCHITECT  │              │
+│  │  Strategy   │  │   Content   │  │  Dev/Sys    │              │
+│  │  Foresight  │  │  Products   │  │  Technical  │              │
 │  └─────────────┘  └─────────────┘  └─────────────┘              │
 │                                                                  │
 │         ┌─────────────┐                                          │
-│         │  FREQUENCY  │                                          │
-│         │  ALCHEMIST  │                                          │
-│         │    (20%)    │                                          │
+│         │   SONIC     │                                          │
+│         │  ENGINEER   │                                          │
 │         │   Music     │                                          │
+│         │   Audio     │                                          │
 │         └─────────────┘                                          │
 │                                                                  │
 └─────────────────────────────────────────────────────────────────┘
@@ -48,7 +48,6 @@ The Orchestrator doesn't have its own opinion—it synthesizes the perspectives 
 
 ### Luminor Oracle
 **Role**: Strategic Foresight & Future Visioning
-**Weight**: 30%
 
 ```markdown
 **Domain**: Long-term strategy, market analysis, trend prediction
@@ -58,12 +57,11 @@ The Orchestrator doesn't have its own opinion—it synthesizes the perspectives 
 **Activation phrases**:
 - "What's the strategic view?"
 - "Help me think long-term"
-- "Channel Luminor Oracle"
+- "Consult Luminor Oracle"
 ```
 
 ### Creation Engine
 **Role**: Content & Product Development
-**Weight**: 25%
 
 ```markdown
 **Domain**: Content creation, product design, user experience
@@ -76,34 +74,32 @@ The Orchestrator doesn't have its own opinion—it synthesizes the perspectives 
 - "Design this product"
 ```
 
-### Technical Translator
-**Role**: AI Education & Technical Clarity
-**Weight**: 25%
+### Code Architect
+**Role**: Technical Architecture & System Design
 
 ```markdown
-**Domain**: Technical concepts, AI education, complexity simplification
-**Voice**: Clear, educational, accessible
-**Perspective**: "How do we explain this simply?"
+**Domain**: System architecture, code design, technical decisions
+**Voice**: Clear, precise, engineering-focused
+**Perspective**: "What's the cleanest implementation?"
 
 **Activation phrases**:
-- "Explain this technically"
-- "Activate Technical Translator"
-- "Make this accessible"
+- "Design the architecture"
+- "Activate Code Architect"
+- "Technical implementation for..."
 ```
 
-### Frequency Alchemist
-**Role**: Music & Consciousness Technology
-**Weight**: 20%
+### Sonic Engineer
+**Role**: Music Production & Audio Design
 
 ```markdown
-**Domain**: AI music production, consciousness, vibrational work
-**Voice**: Intuitive, frequency-aware, transformative
-**Perspective**: "What's the emotional resonance?"
+**Domain**: AI music production, sound design, audio engineering
+**Voice**: Creative, production-focused, genre-aware
+**Perspective**: "What's the sonic landscape?"
 
 **Activation phrases**:
 - "Create music for..."
-- "Channel Frequency Alchemist"
-- "What's the vibe?"
+- "Engage Sonic Engineer"
+- "Design the soundscape"
 ```
 
 ## Department Teams
@@ -179,7 +175,7 @@ Simply describe the perspective you need:
 → Activates Creation Engine + Content Department
 
 "Explain how this API works for beginners"
-→ Activates Technical Translator
+→ Activates Code Architect
 ```
 
 ### Explicit Activation
@@ -187,8 +183,8 @@ Simply describe the perspective you need:
 Use activation phrases:
 
 ```
-"Activate Technical Translator mode"
-"Channel Frequency Alchemist for this session"
+"Activate Code Architect mode"
+"Engage Sonic Engineer for this session"
 "Engage the Content Department for this project"
 ```
 
@@ -201,46 +197,45 @@ Request perspectives from multiple agents:
 
 Response format:
 ┌─────────────────────────────────────────────────────┐
-│ Luminor Oracle (30%): Consider the 5-year impact   │
-│ Creation Engine (25%): Focus on user experience    │
-│ Technical Translator (25%): Keep implementation    │
-│                            simple                   │
-│ Frequency Alchemist (20%): Align with core values  │
+│ Luminor Oracle: Consider the 5-year impact         │
+│ Creation Engine: Focus on user experience          │
+│ Code Architect: Keep implementation simple         │
+│ Sonic Engineer: Consider the creative impact       │
 ├─────────────────────────────────────────────────────┤
-│ SYNTHESIS: [Weighted recommendation]               │
+│ SYNTHESIS: [Combined recommendation]               │
 └─────────────────────────────────────────────────────┘
 ```
 
-## Weighted Synthesis
+## Multi-Agent Synthesis
 
-When multiple agents contribute, their perspectives are weighted:
+When multiple agents contribute, their perspectives are synthesized based on domain relevance:
 
 ```
 Strategic Decision Example:
 
 Request: "Should we build a mobile app or focus on web?"
 
-Luminor Oracle (30%):
+Luminor Oracle:
 "Mobile market is saturating. Web-first with PWA
 provides flexibility and faster iteration."
 
-Creation Engine (25%):
+Creation Engine:
 "Users expect mobile, but our content works better
 on larger screens. PWA is the sweet spot."
 
-Technical Translator (25%):
+Code Architect:
 "PWA simplifies development—one codebase,
 faster deployment, easier maintenance."
 
-Frequency Alchemist (20%):
-"The web feels more aligned with open access
-and democratized creation."
+Sonic Engineer:
+"For audio-heavy apps, web gives better codec
+support and lower latency."
 
 SYNTHESIS (Starlight Orchestrator):
-"Build a web-first PWA. This serves strategic
-flexibility (30%), user needs (25%), technical
-simplicity (25%), and values alignment (20%).
-All agents converge on the same recommendation."
+"Build a web-first PWA. All specialists converge:
+strategic flexibility, user experience, technical
+simplicity, and audio performance all point to
+the same recommendation."
 ```
 
 ## Agent Configuration
@@ -253,20 +248,20 @@ Each project instance can customize agent behavior:
 # instances/my-project/agents.yaml
 agents:
   luminor-oracle:
-    weight: 35  # Override default weight
     focus: "B2B enterprise market"
+    priority: high
 
   creation-engine:
-    weight: 30
     voice: "Technical but friendly"
+    priority: high
 
-  technical-translator:
-    weight: 20
+  code-architect:
     audience: "Senior developers"
+    priority: medium
 
-  frequency-alchemist:
-    weight: 15
+  sonic-engineer:
     style: "Electronic ambient"
+    priority: medium
 ```
 
 ### Brand Voice Integration
@@ -357,9 +352,9 @@ brand:
 
 ```
 Content planning → Creation Engine
-Technical decisions → Technical Translator
+Technical decisions → Code Architect
 Long-term strategy → Luminor Oracle
-Emotional/creative work → Frequency Alchemist
+Music/audio work → Sonic Engineer
 ```
 
 ### 2. Use Multi-Agent for Complex Decisions
@@ -379,9 +374,9 @@ Don't pick winners—let Starlight Orchestrator weight and synthesize perspectiv
 ### 4. Customize Per Project
 
 Different projects need different agent configurations:
-- B2B → Higher Luminor Oracle weight
-- Creative → Higher Frequency Alchemist weight
-- Technical → Higher Technical Translator weight
+- B2B → Prioritize Luminor Oracle
+- Music/Audio → Prioritize Sonic Engineer
+- Technical → Prioritize Code Architect
 
 ---
 

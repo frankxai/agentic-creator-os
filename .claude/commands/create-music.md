@@ -147,4 +147,4 @@ Check `data/inventories/creation-pipeline.json` for:
 
 ---
 
-*Channel the Frequency Alchemist for music that moves people.*
+*Engage the Sonic Engineer for music that moves people.*

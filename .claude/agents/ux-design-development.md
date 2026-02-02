@@ -415,7 +415,7 @@ test('form is accessible', async ({ page }) => {
 ### Work with Tier 1 Agents
 - **Starlight Architect** - Design system technical implementation
 - **Creation Engine** - Product and course interface design
-- **Frequency Alchemist** - Music product visual identity
+- **Sonic Engineer** - Music product visual identity
 - **Luminor Oracle** - Strategic design prioritization
 
 ### Work with Project Teams

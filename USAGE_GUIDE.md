@@ -32,8 +32,8 @@ Skills auto-activate based on keywords, or invoke directly:
 ### 3. Activate an Agent
 
 ```
-"Activate Technical Translator mode for creator education"
-"Channel Frequency Alchemist for music creation"
+"Activate Code Architect mode for system design"
+"Engage Sonic Engineer for music creation"
 "Engage Creation Engine for content development"
 "Consult Luminor Oracle for strategic guidance"
 ```
@@ -134,16 +134,16 @@ Skills auto-activate based on keywords, or invoke directly:
 
 ## Specialist Agents
 
-### Weighted Synthesis System
+### Multi-Agent Synthesis System
 
-When multiple perspectives are needed, agents contribute based on their weight:
+When multiple perspectives are needed, specialist agents contribute based on their domain expertise:
 
-| Agent | Weight | Domain | Activation |
-|-------|--------|--------|------------|
-| **Luminor Oracle** | 30% | Strategy, foresight | "Consult Luminor" |
-| **Creation Engine** | 25% | Content, products | "Engage Creation Engine" |
-| **Technical Translator** | 25% | AI education | "Technical Translator mode" |
-| **Frequency Alchemist** | 20% | Music, consciousness | "Channel Frequency Alchemist" |
+| Agent | Domain | Role | Activation |
+|-------|--------|------|------------|
+| **Luminor Oracle** | Strategy, foresight | Long-term planning | "Consult Luminor" |
+| **Creation Engine** | Content, products | Publishing pipeline | "Engage Creation Engine" |
+| **Code Architect** | Dev, systems | Technical decisions | "Code Architect mode" |
+| **Sonic Engineer** | Music, audio | Sound design | "Engage Sonic Engineer" |
 
 **Starlight Orchestrator** synthesizes all perspectives into unified guidance.
 

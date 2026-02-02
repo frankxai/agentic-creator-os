@@ -203,7 +203,7 @@ Input → Analyze → [Type?]
 6. Final optimization
 
 **Skills used:** `research`, `content-strategy`
-**Agents:** Luminor Oracle, Technical Translator
+**Agents:** Luminor Oracle, Code Architect
 
 ### Social Distribution
 

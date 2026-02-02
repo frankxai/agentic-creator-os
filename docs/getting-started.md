@@ -142,8 +142,8 @@ Domain-specific knowledge modules that enhance Claude's capabilities. Each skill
 Specialized AI personas with distinct voices and expertise:
 - **Luminor Oracle**: Strategic foresight
 - **Creation Engine**: Content and products
-- **Technical Translator**: AI education
-- **Frequency Alchemist**: Music and consciousness
+- **Code Architect**: Dev and systems
+- **Sonic Engineer**: Music and audio
 
 ### Workflows
 Orchestrated sequences that coordinate skills and agents:

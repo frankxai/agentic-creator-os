@@ -251,4 +251,4 @@ Generated images can be:
 
 ---
 
-*Channel the Technical Translator for visuals that educate and inspire.*
+*Engage Code Architect for visuals that educate and inspire.*

@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.1] - 2026-02-02
+
+### Metrics Accuracy & Agent Naming Fix
+
+This release addresses documentation accuracy issues identified in the v6.0 release.
+
+### Changed
+
+**Agent Naming (More Functional)**
+- `Technical Translator` → `Code Architect` — Maps clearly to dev/systems domain
+- `Frequency Alchemist` → `Sonic Engineer` — Functional music/audio role name
+
+**Removed Hallucinated Metrics**
+- Removed arbitrary percentage weights (30%, 25%, 25%, 20%) from agent descriptions
+- These were placeholder values with no measurement system behind them
+- Replaced with domain-based descriptions (what agents actually do)
+
+**Cleaned Up Language**
+- Removed "consciousness" language that violated CLAUDE.md banned phrases
+- "Music + Consciousness" → "Music + Audio Production"
+- "consciousness technology" → "audio engineering"
+- "500+ AI songs" → "300+ AI songs" (actual verified count)
+- "losing your soul" → "losing your authentic voice" (grounded language)
+
+### Note on System Status
+
+ACOS is at the **architecture and design phase**. The agent hierarchy, orchestration patterns, and MCP foundation are defined conceptually. Real-time dashboards and live telemetry are not yet implemented. Documentation now clearly separates what's designed from what's measured.
+
+---
+
 ## [6.0.0] - 2026-01-25
 
 ### The Front Door Release
@@ -163,10 +193,10 @@ This release synthesizes patterns from 5 leading Claude Code repositories into a
 ### Agent System
 
 - **Starlight Orchestrator** - Meta-intelligence coordinator
-- **Luminor Oracle** (30%) - Strategy and foresight
-- **Creation Engine** (25%) - Content and products
-- **Technical Translator** (25%) - AI education
-- **Frequency Alchemist** (20%) - Music and consciousness
+- **Luminor Oracle** - Strategy and foresight
+- **Creation Engine** - Content and products
+- **Code Architect** - Dev and systems
+- **Sonic Engineer** - Music and audio
 
 ---
 

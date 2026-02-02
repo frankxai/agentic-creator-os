@@ -131,13 +131,13 @@ Claude now has specialized testing knowledge
 Agents are specialized AI personas with distinct domains and weighted influence.
 
 **Specialist Agents:**
-| Agent | Domain | Weight |
-|-------|--------|--------|
-| Starlight Orchestrator | Meta-coordination | Coordinator |
-| Luminor Oracle | Strategy, foresight | 30% |
-| Creation Engine | Content, products | 25% |
-| Technical Translator | AI education | 25% |
-| Frequency Alchemist | Music, audio | 20% |
+| Agent | Domain | Role |
+|-------|--------|------|
+| Starlight Orchestrator | Meta-coordination | Synthesizes specialist perspectives |
+| Luminor Oracle | Strategy, foresight | Long-term planning & market analysis |
+| Creation Engine | Content, products | Publishing & product development |
+| Code Architect | Dev, systems | Technical architecture & implementation |
+| Sonic Engineer | Music, audio | AI music production & audio design |
 
 **Department Teams:**
 - Content Department (Writer, Editor, Publisher)
@@ -393,11 +393,11 @@ See `PRO_STATUS_DASHBOARD.md` for real-time metrics.
 This system was built by Frank, a musician-turned-technologist who bridged the gap between:
 - **Creative expression** and **technical systems**
 - **Oracle enterprise AI** and **indie creator tools**
-- **Consciousness evolution** and **practical productivity**
+- **Personal growth** and **practical productivity**
 
-After producing 500+ AI songs with Suno, building enterprise AI systems at Oracle, and struggling with generic AI outputs, Frank created Agentic Creator OS to solve the fundamental problem:
+After producing 300+ AI songs with Suno, building enterprise AI systems at Oracle, and struggling with generic AI outputs, Frank created Agentic Creator OS to solve the fundamental problem:
 
-> How do you use AI without losing your soul?
+> How do you use AI without losing your authentic voice?
 
 The answer: **Technology that amplifies your unique expression, guided by intelligent agents that understand your voice, orchestrated through workflows that maintain quality at scale.**
 

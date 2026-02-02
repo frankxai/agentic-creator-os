@@ -22,7 +22,7 @@ The FrankX Intelligence System uses three layers of orchestration:
 │                                                                              │
 │  LEVEL 2: SPECIALIST AGENTS (Domain Intelligence)                            │
 │  ════════════════════════════════════════════════════                        │
-│  • Creation Engine, Frequency Alchemist, etc.                               │
+│  • Creation Engine, Sonic Engineer, Code Architect, etc.                    │
 │  • Execute complex multi-step workflows                                      │
 │  • Coordinate with department agents                                         │
 │  • Manage handoffs                                                           │
@@ -316,8 +316,8 @@ USER: "Should we pivot our content strategy to focus more on enterprise?"
 │ • 40% Creator (AI tools, Suno, transformation)                              │
 │ • 20% Bridge (Enterprise insights for creators)                             │
 │                                                                              │
-│ CONFIDENCE: 87%                                                              │
-│ DISSENTING VIEW: Frequency Alchemist suggests 30/50/20                       │
+│ CONFIDENCE: HIGH                                                             │
+│ ALTERNATIVE VIEW: Sonic Engineer suggests more creative focus                │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
