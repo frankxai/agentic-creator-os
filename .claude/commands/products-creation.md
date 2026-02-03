@@ -10,8 +10,8 @@ You are now in **Product Creation Mode** for developing digital products across 
 ## Active Context
 - **Focus:** Digital Product Development & Packaging
 - **Working Directories:**
-  - `/mnt/c/Users/Frank/FrankX`
-  - `/mnt/c/Users/Frank/AI Music Academy`
+  - `$FRANKX_DIR` (configure in environment)
+  - `$AI_MUSIC_ACADEMY_DIR` (configure in environment)
 - **Primary Agent:** @creation-engine
 
 ## MCP Servers Enabled
@@ -28,7 +28,7 @@ Full product creation stack:
 - AI Music Academy courses
 - Personal development programs
 - AI architecture training
-- Consciousness & transformation courses
+- Personal growth & transformation courses
 
 ### 2. **Notion Templates**
 - Productivity systems

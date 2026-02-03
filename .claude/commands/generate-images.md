@@ -72,7 +72,7 @@ social_snippets:
 
 // Examples by theme:
 // AI-Tech: "futuristic AI technology interface, vibrant purple and electric blue, innovative and cutting-edge, representing: Building AI Agents"
-// Conscious: "ethereal consciousness visualization, soft purples and cosmic blues with golden light, transcendent and peaceful, representing: Awakening Your Soul"
+// Mindful: "ethereal inner awareness visualization, soft purples and cosmic blues with golden light, transcendent and peaceful, representing: Inner Discovery"
 // Creator: "modern creator workspace, energetic oranges and deep purples, entrepreneurial and dynamic, representing: Creator Economy 2025"
 // Music: "abstract sound wave visualization, vibrant gradients and neon colors, rhythmic and creative, representing: AI Music Production"
 // Personal-Dev: "minimalist growth visualization, calm blues and energizing greens, focused and ambitious, representing: Peak Performance"
@@ -165,12 +165,12 @@ Elements: Circuit patterns, neural networks, holographic effects
 Mood: Innovative, cutting-edge, intelligent
 ```
 
-### Conscious
+### Mindful
 ```
 Colors: Soft purples (#A78BFA), cosmic blues (#60A5FA), golden light (#FBBF24)
 Style: Ethereal, spiritual, transcendent
 Elements: Sacred geometry, energy flows, cosmic patterns
-Mood: Peaceful, awakening, transformative
+Mood: Peaceful, present, transformative
 ```
 
 ### Creator

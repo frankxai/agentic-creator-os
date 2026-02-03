@@ -7,6 +7,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.2] - 2026-02-02
+
+### Complete Banned Phrase Cleanup & Documentation Fixes
+
+This release completes the cleanup of banned phrases and fixes documentation gaps.
+
+### Changed
+
+**Banned Phrase Cleanup (CLAUDE.md Compliance)**
+- Replaced all remaining instances of "soul-aligned" → "purpose-driven"
+- Replaced "consciousness" → "awareness", "intentional", or "purpose"
+- Replaced "awakening" → "discovery", "building", or "present"
+- Updated agent descriptions to use grounded, functional language
+
+**Agent Naming**
+- Renamed `conscious-fiction-writer.md` → `deep-fiction-writer.md`
+- "Consciousness Fiction Master" → "Deep Fiction Master"
+- Updated all references in author-team.md
+
+**Documentation**
+- Added `/starlight-intelligence` to CLAUDE.md command table (was missing)
+- Updated command count: 25 → 26
+- Updated ARCHITECTURE.md: v3.0.0 → v6.0.1, skills 62 → 80+
+- Added honest note about metrics being design targets
+
+**Configuration**
+- Removed duplicate skill-rules files (was 4, now 1)
+- Replaced hardcoded Windows paths with environment variable placeholders
+- Paths like `/mnt/c/Users/Frank/...` → `$FRANKX_DIR` etc.
+
+### Removed
+- `.claude/skill-rules-v2.json` (duplicate)
+- `.claude/skills/skill-rules.json` (duplicate)
+- `skills/skill-rules.json` (duplicate)
+
+---
+
 ## [6.0.1] - 2026-02-02
 
 ### Metrics Accuracy & Agent Naming Fix

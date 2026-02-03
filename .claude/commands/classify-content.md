@@ -78,8 +78,8 @@ Review all markdown files in the intake folder and for each one:
 - Technology thought leadership
 - **Publishing:** Blog, LinkedIn, Medium
 
-**Conscious**
-- Spirituality, consciousness evolution, transformation
+**Mindful**
+- Spirituality, inner growth, transformation
 - Meditation, energy, sacred wisdom
 - **Publishing:** Blog, Substack, Instagram
 
