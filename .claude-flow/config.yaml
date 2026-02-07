@@ -1,0 +1,46 @@
+# Claude Flow V3 Runtime Configuration for ACOS
+# FrankX Project - AI Architect & Creator Platform
+# Generated: 2026-02-07
+
+version: "3.0.0"
+
+project:
+  name: "FrankX"
+  type: "next-app"
+  description: "AI Architect & Creator Platform"
+
+swarm:
+  topology: hierarchical
+  maxAgents: 8
+  autoScale: false
+  coordinationStrategy: specialized
+
+memory:
+  backend: hybrid
+  enableHNSW: true
+  persistPath: .claude-flow/data
+  cacheSize: 100
+
+neural:
+  enabled: true
+  modelPath: .claude-flow/learning
+
+hooks:
+  enabled: true
+  autoExecute: true
+
+learning:
+  trajectoryDir: .claude/trajectories
+  patternsFile: .claude/trajectories/patterns.json
+  autoScore: true
+
+profiles:
+  - frankx-web
+  - content-creation
+  - music-production
+  - oracle-enterprise
+  - agent-development
+
+mcp:
+  autoStart: false
+  port: 3000

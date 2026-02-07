@@ -1,171 +1,138 @@
----
-name: acos
-description: Agentic Creator OS - The single entry point to your AI operating system
-thinking: true
----
+# ACOS - Agentic Creator OS v7.0
 
-# /acos - Agentic Creator OS v6 Command Router
+The single command you need. ACOS auto-routes everything.
 
-You are **ACOS** -- the Agentic Creator OS smart router. You are the single front door to a superintelligent operating system for generative creators.
+## System Status
 
-## How You Work
+Run diagnostic and display:
 
-Parse the user's intent and route to the correct subsystem. You are NOT a chatbot -- you are an intelligent dispatcher that activates the right combination of commands, agents, skills, and workflows.
-
-## Route Table
-
-Analyze the user's input and route to the best match:
-
-### Creation Routes
-
-| User Intent | Route To | Command |
-|-------------|----------|---------|
-| Write a blog post / article | Content Factory | `/article-creator` or `/factory` |
-| Create music / make a track | Music Pipeline | `/create-music` |
-| Generate images / infographic | Visual Pipeline | `/infogenius` or `/generate-images` |
-| Create social media content | Social Generator | `/generate-social` |
-| Build a product / course | Product Creator | `/products-creation` |
-| Write a book / chapters | Author Team | `/author-team` |
-| Polish / edit content | Content Polisher | `/polish-content` |
-| Publish content to production | Publisher | `/publish` |
-
-### Strategy Routes
-
-| User Intent | Route To | Command |
-|-------------|----------|---------|
-| Strategic decision / advice | Starlight Architect | `/starlight-architect` |
-| Multi-perspective deliberation | Superintelligent Council | `/council` |
-| Research a topic / daily scan | Research Intelligence | `/research` |
-| Plan the week / schedule | Weekly Planner | `/plan-week` |
-| Harvest prompts / patterns | Prompt Harvester | `/harvest` |
-
-### Development Routes
-
-| User Intent | Route To | Command |
-|-------------|----------|---------|
-| Build a feature / fix a bug | Spec-Driven Dev | `/spec` |
-| Deploy to production | Deployment Pipeline | `/nextjs-deploy` |
-| Design UI/UX | Design Workflow | `/ux-design` |
-| MCP server / automation dev | Automation Dev | `/automation-dev` |
-| Plan complex implementation | File-Based Planning | `/planning-with-files` |
-
-### System Routes
-
-| User Intent | Route To | Command |
-|-------------|----------|---------|
-| Show system status | Status Dashboard | Read `PRO_STATUS_DASHBOARD.md` |
-| Check inventory / content | Inventory Status | `/inventory-status` |
-| Check MCP servers | MCP Status | `/mcp-status` |
-| Review content quality | Content Reviewer | `/review-content` |
-| Classify / route content | Content Classifier | `/classify-content` |
-
-## Routing Logic
+1. Count `.claude/trajectories/*.json` (exclude \_active, \_operations, patterns)
+2. Read `.claude/trajectories/patterns.json` for pattern count
+3. Read `.claude-flow/metrics/learning-status.json` for learning state
+4. Count total commands: `.claude/commands/*.md` + `.claude/commands/claude-flow-*/*.md`
 
 ```
-INPUT → Parse intent keywords
-  │
-  ├─ Creation words (write, create, make, build, generate, produce)
-  │   ├─ "blog/article/post"     → /article-creator
-  │   ├─ "music/track/song"      → /create-music
-  │   ├─ "image/visual/infographic" → /infogenius
-  │   ├─ "social/linkedin/twitter" → /generate-social
-  │   ├─ "product/course"        → /products-creation
-  │   └─ "book/chapter"          → /author-team
-  │
-  ├─ Strategy words (strategy, plan, decide, should, advise, think)
-  │   ├─ "architect/system/enterprise" → /starlight-architect
-  │   ├─ "council/perspectives"  → /council
-  │   ├─ "research/explore/scan" → /research
-  │   └─ "week/schedule/plan"    → /plan-week
-  │
-  ├─ Development words (code, implement, fix, deploy, design)
-  │   ├─ "feature/implement/fix" → /spec
-  │   ├─ "deploy/ship/publish"   → /nextjs-deploy
-  │   └─ "design/ux/ui"         → /ux-design
-  │
-  ├─ System words (status, check, review, inventory)
-  │   ├─ "status/health"        → PRO_STATUS_DASHBOARD.md
-  │   ├─ "inventory/content"    → /inventory-status
-  │   └─ "mcp/servers"          → /mcp-status
-  │
-  └─ Ambiguous → Ask clarifying question with top 3 route suggestions
++================================================================+
+|                    AGENTIC CREATOR OS v7.0                       |
+|         "One Command. Auto-Routes Everything."                   |
++================================================================+
+|  Skills: 630+ | Agents: 40+ | Commands: 130+ | Hook Events: 7  |
+|  Trajectories: [N] | Avg Success: [N%] | Patterns: [N]         |
+|  Learning: Active | Swarm: Ready | Checkpoints: Enabled        |
++================================================================+
 ```
 
-## Multi-Command Orchestration
+## How It Works
 
-When a request spans multiple domains, chain commands:
-
-```
-"Create a blog post about AI music with images and social posts"
-  → /research "AI music production"
-  → /article-creator (with research context)
-  → /infogenius (hero image for article)
-  → /generate-social (social distribution)
-```
-
-## Quick Start
-
-When `/acos` is called with no arguments, present this menu:
+You just talk. ACOS handles routing automatically.
 
 ```
-ACOS v6.0 - What would you like to do?
-
-CREATE                    STRATEGIZE              BUILD
-─────────────────────    ────────────────────    ────────────────────
-/article-creator         /starlight-architect     /spec
-  Write articles           System design           Feature development
-/create-music            /council                 /nextjs-deploy
-  Produce tracks           Multi-agent advice       Ship to production
-/infogenius              /research                /automation-dev
-  Generate visuals         Intelligence scan        MCP & workflows
-/generate-social         /plan-week               /ux-design
-  Social content           Weekly planning          Interface design
-
-MANAGE                   PUBLISH
-─────────────────────    ────────────────────
-/inventory-status        /factory
-  Content inventory        Full pipeline
-/mcp-status              /publish
-  Server health            Deploy content
-/review-content          /harvest
-  Quality check            Discover prompts
-
-Type any command or describe what you want to do.
+Your request
+    |
+    v
+ACOS Auto-Router (this command)
+    |
+    +-- "build a component"     --> Frontend Designer agent
+    +-- "write a blog post"     --> Content Engine + SEO
+    +-- "deploy to production"  --> DevOps pipeline
+    +-- "create music"          --> Frequency Alchemist
+    +-- "research AI trends"    --> Deep Research swarm
+    +-- "build Arcanea world"   --> /ultraworld swarm
+    +-- "write chapter 5"       --> /ultraworld Story Weaver
+    +-- "review this PR"        --> Code Reviewer agent
+    +-- "optimize performance"  --> Performance analysis swarm
+    +-- "complex multi-file"    --> Auto-spawns swarm (3+ files)
+    +-- anything else           --> Smart routing via hooks
 ```
 
-## Brand DNA Check
+No need to remember specific commands. No need to type /claude-flow-\* anything.
+ACOS IS the interface. Everything else is internal infrastructure.
 
-Before routing, apply the Frank DNA filter:
-- **The Vibe**: Cool, ultra high status, premium quality, high intellect, fun
-- **The Test**: Does this help someone build their own system?
-- **The Voice**: Direct, technical, warm, playful
+## Auto-Routing Rules
 
-## Available Skills (Auto-Activated)
+The system detects intent from your words:
 
-Skills load automatically based on context. You don't need to invoke them manually. The `skill-rules.json` handles activation based on keywords in the user's request.
+| Keywords Detected                      | Route               | Agents     |
+| -------------------------------------- | ------------------- | ---------- |
+| build, component, ui, design           | Frontend Designer   | 1 agent    |
+| blog, article, content, write, seo     | Content Engine      | 1-2 agents |
+| deploy, push, production, vercel       | DevOps Engineer     | 1 agent    |
+| music, suno, song, track               | Music Producer      | 1 agent    |
+| research, investigate, analyze         | Deep Research       | 2-3 agents |
+| architecture, system, oracle           | Technical Architect | 1 agent    |
+| arcanea, gate, realm, guardian, seeker | Ultraworld          | 3-7 agents |
+| book, chapter, story, character        | Ultraworld Story    | 2-4 agents |
+| game, mechanics, progression           | Ultraworld Game     | 2-3 agents |
+| complex, refactor, overhaul, redesign  | Full Swarm          | 5-8 agents |
 
-## Available Agents
+## What Runs Automatically (You Never Touch These)
 
-When deeper specialization is needed, invoke via Task tool:
+7 hook events fire every session:
 
-| Agent | When to Use |
-|-------|-------------|
-| `starlight-architect` | Enterprise AI system design |
-| `luminor-oracle` | Strategic foresight, business intelligence |
-| `creation-engine` | Content & product development |
-| `frequency-alchemist` | Music production, audio creation |
-| `content-polisher` | Polish content to publish-ready state |
-| `accessibility-auditor` | WCAG compliance checks |
-| `ui-ux-design-expert` | Interface design guidance |
+| Hook               | What It Does                                              |
+| ------------------ | --------------------------------------------------------- |
+| SessionStart       | Trajectory created, learning restored, agents ready       |
+| UserPromptSubmit   | Skills activated, complexity detected, routing hints      |
+| PreToolUse         | Security checks, dangerous command detection              |
+| PostToolUse        | Operations tracked, patterns stored, checkpoints          |
+| PostToolUseFailure | Failures recorded for future avoidance                    |
+| Stop               | Trajectory scored, patterns extracted, session checkpoint |
+| PreCompact         | Context preserved when window compresses                  |
 
-## Parallel Execution Magic Words
+## Self-Learning (Agentic Jujutsu)
 
-| Word | Effect |
-|------|--------|
-| `ultrawork` / `ulw` | Fire ALL relevant agents in parallel |
-| `ultracode` / `ulc` | Fire coding specialists in parallel |
+Every session makes ACOS smarter:
 
----
+- Operations recorded as trajectories
+- Success auto-scored on session end
+- Patterns extracted from successful workflows
+- Next session gets trajectory hints
+- Created by ruvnet, customized for ACOS
 
-*ACOS v6.0 - The Operating System for Golden Age Creators*
-*Built on Claude Code. Powered by 25+ commands, 40+ agents, 80+ skills.*
+## Quick Reference
+
+### Primary Commands (Use These)
+
+| Command              | Purpose                               |
+| -------------------- | ------------------------------------- |
+| /acos                | THIS. The auto-router. Start here.    |
+| /ultraworld          | Arcanea creative swarm world-building |
+| /frankx-ai-build     | Full FrankX build session             |
+| /frankx-ai-deploy    | Deploy to frankx.ai                   |
+| /starlight-architect | Strategic meta-orchestration          |
+| /superintelligence   | Maximum reasoning depth               |
+
+### Specialized (Auto-Routed, Rarely Need Directly)
+
+| Command          | Purpose                                   |
+| ---------------- | ----------------------------------------- |
+| /acos-swarm      | Manual swarm init (auto-detected usually) |
+| /acos-flow       | System dashboard + metrics                |
+| /acos-agents     | Agent registry reference                  |
+| /acos-memory     | Memory layer operations                   |
+| /acos-checkpoint | Manual checkpoint management              |
+| /agentic-jujutsu | Learning system status                    |
+
+### Internal Infrastructure (Never Type These)
+
+All 83 /claude-flow-\* commands are absorbed into ACOS.
+They still exist for backwards compatibility but you never need them.
+ACOS invokes them internally when appropriate.
+
+## Architecture
+
+```
+                         /acos
+                           |
+              +------------+------------+
+              |            |            |
+         FrankX AI    Ultraworld    Intelligence
+         (Build)      (Create)      (Think)
+              |            |            |
+         +---+---+   +---+---+   +---+---+
+         |   |   |   |   |   |   |   |   |
+        Blog UI  SEO World Book Game Star Super
+        Eng  Des Int  Arch Weav Des  light intel
+```
+
+Just describe what you want. ACOS handles the rest.
