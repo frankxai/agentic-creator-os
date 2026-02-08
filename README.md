@@ -1,43 +1,23 @@
 # Agentic Creator OS
 **The Operating System for Generative Creators**
 
-![ACOS v7.0 Stats](docs/infographics/v7-stats-banner.png)
+![ACOS v7.0](docs/infographics/v7-hero-dev.png)
 
 ---
 
 ## What Is Agentic Creator OS?
 
-Agentic Creator OS is a **production-grade operating system for generative creators** — a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 130+ creator commands, 630+ specialized skills, 40+ intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
+A **production-grade operating system for generative creators** — built on Claude Code. One command (`/acos`) routes to 130+ commands, 630+ skills, and 40+ agents. Skills auto-activate. Hooks enforce quality. Everything composes.
 
-> **v7.0**: Single entry point (`/acos`), auto-activating skills, lifecycle hooks, Agentic Jujutsu learning, and the Visionary strategic layer.
+> **v7.0**: Smart routing, auto-activating skills, lifecycle hooks, Agentic Jujutsu learning, Visionary strategic layer.
 
-> **Philosophy**: Technology that amplifies creative output, not replaces it.
+### System Architecture
 
-![ACOS v7 Architecture](docs/infographics/v7-01-pillars-premium.png)
-
-### The 7 Pillars
-
-| Pillar | Count | Purpose |
-|--------|-------|---------|
-| **Commands** | 130+ | Creator commands with smart routing via `/acos` |
-| **Skills** | 630+ | Domain knowledge modules with auto-activation |
-| **Agents** | 40+ | Specialized AI personas for specific domains |
-| **Hooks** | 7 events | Lifecycle automation (SessionStart, PreToolUse, etc.) |
-| **MCP Servers** | 8+ | External tool integrations (Playwright, Nano Banana, etc.) |
-| **Templates** | 20+ | Reusable content patterns |
-| **Intelligence** | 1 | Starlight Orchestrator meta-coordinator |
-
-### Architecture
-
-![Full System Architecture](docs/infographics/v7-09-architecture-premium.png)
+![System Architecture](docs/infographics/v7-layers-dev.png)
 
 ### Agent Library
 
-![40+ Specialized Agents](docs/infographics/v7-04-agents-premium.png)
-
-### Command Routing
-
-![Intelligent Command Routing](docs/infographics/v7-05-routing-premium.png)
+![40+ Specialized Agents](docs/infographics/v7-agents-dev.png)
 
 ---
 
