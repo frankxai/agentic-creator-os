@@ -1,11 +1,7 @@
 # Agentic Creator OS
 **The Operating System for Generative Creators**
 
-![Version](https://img.shields.io/badge/version-7.0.0-AB47C7?style=for-the-badge&labelColor=0F172A)
-![Commands](https://img.shields.io/badge/commands-130+-43BFE3?style=for-the-badge&labelColor=0F172A)
-![Skills](https://img.shields.io/badge/skills-630+-10B981?style=for-the-badge&labelColor=0F172A)
-![Agents](https://img.shields.io/badge/agents-40+-F59E0B?style=for-the-badge&labelColor=0F172A)
-![Status](https://img.shields.io/badge/status-production-10B981?style=for-the-badge&labelColor=0F172A)
+![ACOS v7.0 Stats](docs/infographics/v7-stats-banner.png)
 
 ---
 
@@ -17,7 +13,7 @@ Agentic Creator OS is a **production-grade operating system for generative creat
 
 > **Philosophy**: Technology that amplifies creative output, not replaces it.
 
-![ACOS v7 Architecture](docs/infographics/v7-01-seven-pillars-architecture.png)
+![ACOS v7 Architecture](docs/infographics/v7-01-pillars-premium.png)
 
 ### The 7 Pillars
 
@@ -33,15 +29,15 @@ Agentic Creator OS is a **production-grade operating system for generative creat
 
 ### Architecture
 
-![Full System Architecture](docs/infographics/v7-09-full-system-architecture.png)
+![Full System Architecture](docs/infographics/v7-09-architecture-premium.png)
 
 ### Agent Library
 
-![40+ Specialized Agents](docs/infographics/v7-04-agent-library.png)
+![40+ Specialized Agents](docs/infographics/v7-04-agents-premium.png)
 
 ### Command Routing
 
-![Intelligent Command Routing](docs/infographics/v7-05-command-routing.png)
+![Intelligent Command Routing](docs/infographics/v7-05-routing-premium.png)
 
 ---
 
