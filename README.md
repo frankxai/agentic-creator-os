@@ -1,5 +1,5 @@
 # Agentic Creator OS
-**The Operating System for Golden Age Creators**
+**The Operating System for Generative Creators**
 
 ![Version](https://img.shields.io/badge/version-7.0.0-AB47C7?style=for-the-badge&labelColor=0F172A)
 ![Commands](https://img.shields.io/badge/commands-130+-43BFE3?style=for-the-badge&labelColor=0F172A)
@@ -11,25 +11,37 @@
 
 ## What Is Agentic Creator OS?
 
-Agentic Creator OS is a **superintelligent operating system for generative creators** — a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 25 creator commands, 80+ specialized skills, 40+ intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
+Agentic Creator OS is a **production-grade operating system for generative creators** — a complete intelligence layer that transforms how you work with AI. Built on Claude Code, it combines 130+ creator commands, 630+ specialized skills, 40+ intelligent agents, orchestrated workflows, and MCP integrations into one cohesive system.
 
-> **v6 "The Front Door"**: One command to rule them all — `/acos` is your single entry point. Skills auto-activate. Hooks enforce quality. [See what's new →](ACOS-V6-SPEC.md)
+> **v7.0**: Single entry point (`/acos`), auto-activating skills, lifecycle hooks, Agentic Jujutsu learning, and the Visionary strategic layer.
 
-> **Philosophy**: Technology that amplifies creative expression, not replaces it.
+> **Philosophy**: Technology that amplifies creative output, not replaces it.
 
-![ACOS Agent Architecture](docs/infographics/acos-hero.png)
+![ACOS v7 Architecture](docs/infographics/v7-01-seven-pillars-architecture.png)
 
 ### The 7 Pillars
 
 | Pillar | Count | Purpose |
 |--------|-------|---------|
-| **Commands** | 25 | Creator commands with smart routing via `/acos` |
-| **Skills** | 80+ | Domain knowledge modules with auto-activation |
+| **Commands** | 130+ | Creator commands with smart routing via `/acos` |
+| **Skills** | 630+ | Domain knowledge modules with auto-activation |
 | **Agents** | 40+ | Specialized AI personas for specific domains |
-| **Workflows** | 8 | Orchestrated pipelines for complex operations |
-| **MCP Servers** | 5+ | External tool integrations |
+| **Hooks** | 7 events | Lifecycle automation (SessionStart, PreToolUse, etc.) |
+| **MCP Servers** | 8+ | External tool integrations (Playwright, Nano Banana, etc.) |
 | **Templates** | 20+ | Reusable content patterns |
 | **Intelligence** | 1 | Starlight Orchestrator meta-coordinator |
+
+### Architecture
+
+![Full System Architecture](docs/infographics/v7-09-full-system-architecture.png)
+
+### Agent Library
+
+![40+ Specialized Agents](docs/infographics/v7-04-agent-library.png)
+
+### Command Routing
+
+![Intelligent Command Routing](docs/infographics/v7-05-command-routing.png)
 
 ---
 

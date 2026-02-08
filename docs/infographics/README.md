@@ -2,7 +2,17 @@
 
 Visual documentation for Agentic Creator OS. Generated with the `/infogenius` command using Gemini Pro Image.
 
-## Gallery
+## v7.0 Gallery (February 2026)
+
+| # | Infographic | Description |
+|---|-------------|-------------|
+| v7-01 | ![7 Pillars v7](v7-01-seven-pillars-architecture.png) | **7 Pillars Architecture v7** — Skills (630+), Agents (40+), Commands (130+), MCP Servers, Templates, Hooks (7 events), Intelligence |
+| v7-04 | ![Agent Library v7](v7-04-agent-library.png) | **Agent Library v7** — 40+ specialized agents: Music, Content, Products, Brand, Growth, Research, Orchestration, Strategy (Visionary) |
+| v7-05 | ![Command Routing](v7-05-command-routing.png) | **Intelligent Command Routing** — `/acos` smart router with intent detection across 6 command categories |
+| v7-09 | ![Full Architecture v7](v7-09-full-system-architecture.png) | **Full System Architecture v7** — Complete layered view: MCP Servers → Templates → Skills/Agents/Commands → Starlight Orchestrator |
+| hero | ![ACOS Hero](acos-hero.png) | **ACOS Hero Banner** — Glassmorphic hub-and-spoke agent architecture |
+
+## v5.0 Gallery (January 2026)
 
 | # | Infographic | Description |
 |---|-------------|-------------|
@@ -28,19 +38,19 @@ These infographics can be used in:
 
 ## Technical Details
 
-- **Resolution**: 1376 × 768 (16:9)
+- **Resolution**: 1376 x 768 (16:9)
 - **Format**: PNG
 - **Style**: 3D Isometric with claymorphism
 - **Generator**: Gemini 3 Pro Image via Nano Banana MCP
-- **Total Size**: ~6.5 MB
+- **Total Size**: ~10 MB (v5 + v7)
 
 ## Regeneration
 
-To regenerate these infographics:
+To regenerate infographics:
 ```bash
-/infogenius Generate 10 infographics for ACOS...
+/infogenius Generate infographics for ACOS v7...
 ```
 
 ---
 
-*Generated January 2026 with InfoGenius*
+*v5 Gallery: January 2026 | v7 Gallery: February 2026 — Generated with InfoGenius*
