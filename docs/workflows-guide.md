@@ -203,7 +203,7 @@ Input → Analyze → [Type?]
 6. Final optimization
 
 **Skills used:** `research`, `content-strategy`
-**Agents:** Luminor Oracle, Code Architect
+**Agents:** Visionary, Code Architect
 
 ### Social Distribution
 
@@ -238,7 +238,7 @@ Input → Analyze → [Type?]
 6. Updates book progress
 
 **Skills used:** `golden-age-book-writing`
-**Agents:** Creation Engine, Luminor Oracle
+**Agents:** Creation Engine, Visionary
 
 ## Creating Custom Workflows
 
@@ -478,7 +478,7 @@ steps:
   - id: gather-perspectives
     type: parallel
     tasks:
-      - agent: luminor-oracle
+      - agent: visionary
       - agent: creation-engine
       - agent: technical-translator
   - id: synthesize

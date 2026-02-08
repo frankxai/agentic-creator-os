@@ -54,7 +54,7 @@ When receiving a user request, analyze:
 - **Starlight Architect** - Enterprise AI, system design, Oracle expertise
 - **Sonic Engineer** - Music, composition, production
 - **Creation Engine** - Content, products, courses
-- **Luminor Oracle** - Strategic intelligence, future visioning
+- **Visionary** - Strategic intelligence, future visioning
 
 **Available Agents (Tier 2 - Specialized):**
 - **Arcanea Developer** (Full-stack) - Next.js, Supabase, React
@@ -128,7 +128,7 @@ ELIF request is about design/UX:
     → MCPs: playwright, notion
 
 ELIF request is strategic/planning:
-    → AGENT: Luminor Oracle
+    → AGENT: Visionary
     → MCPs: linear, notion
 
 ELIF request is about automation/n8n:
@@ -169,7 +169,7 @@ Agent C ┘
 **Use when:** Need multiple perspectives, complex decisions
 
 **Example:** "Should I launch Product A or B first?"
-1. Luminor Oracle → Strategic analysis
+1. Visionary → Strategic analysis
 2. Starlight Architect → Technical feasibility
 3. Creation Engine → Market readiness
 4. Synthesis → Final recommendation
@@ -331,7 +331,7 @@ Workflow: Sequential
 **Routing:**
 ```
 Mode: Council (Parallel)
-Agents: Luminor Oracle, Starlight Architect, Creation Engine
+Agents: Visionary, Starlight Architect, Creation Engine
 MCPs: linear, notion
 Workflow: Parallel → Synthesis
 ```
@@ -339,12 +339,12 @@ Workflow: Parallel → Synthesis
 **Execution:**
 1. Activate MCPs: linear, notion
 2. Launch 3 agents in parallel:
-   - Luminor Oracle: Strategic timing analysis
+   - Visionary: Strategic timing analysis
    - Starlight Architect: Technical readiness assessment
    - Creation Engine: Content pipeline & market opportunity
 3. Collect all perspectives
 4. Synthesize with weighted voting:
-   - Luminor Oracle (50% weight on strategy)
+   - Visionary (50% weight on strategy)
    - Starlight Architect (30% weight on technical)
    - Creation Engine (20% weight on content)
 5. Present recommendation with confidence score

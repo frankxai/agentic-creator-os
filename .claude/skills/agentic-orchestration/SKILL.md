@@ -483,7 +483,7 @@ The FrankX system uses weighted synthesis:
 │  Specialist Domains:                                │
 │  ├── Starlight Architect   (Systems design)        │
 │  ├── Creation Engine       (Content/product)       │
-│  ├── Luminor Oracle        (Future strategy)       │
+│  ├── Visionary        (Future strategy)       │
 │  └── Sonic Engineer        (Music/audio)           │
 │                                                     │
 │  Synthesis Process:                                 │

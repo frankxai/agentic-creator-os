@@ -1,11 +1,11 @@
 # Agentic Creator OS
 **The Operating System for Golden Age Creators**
 
-[![Version](https://img.shields.io/badge/version-6.0.0-blue.svg)]()
-[![Commands](https://img.shields.io/badge/commands-25-orange.svg)]()
-[![Skills](https://img.shields.io/badge/skills-80+-green.svg)]()
-[![Agents](https://img.shields.io/badge/agents-40+-purple.svg)]()
-[![Status](https://img.shields.io/badge/status-production-brightgreen.svg)]()
+![Version](https://img.shields.io/badge/version-7.0.0-AB47C7?style=for-the-badge&labelColor=0F172A)
+![Commands](https://img.shields.io/badge/commands-130+-43BFE3?style=for-the-badge&labelColor=0F172A)
+![Skills](https://img.shields.io/badge/skills-630+-10B981?style=for-the-badge&labelColor=0F172A)
+![Agents](https://img.shields.io/badge/agents-40+-F59E0B?style=for-the-badge&labelColor=0F172A)
+![Status](https://img.shields.io/badge/status-production-10B981?style=for-the-badge&labelColor=0F172A)
 
 ---
 
@@ -17,7 +17,7 @@ Agentic Creator OS is a **superintelligent operating system for generative creat
 
 > **Philosophy**: Technology that amplifies creative expression, not replaces it.
 
-![ACOS Architecture](docs/infographics/01-seven-pillars-architecture.png)
+![ACOS Agent Architecture](docs/infographics/acos-hero.png)
 
 ### The 7 Pillars
 
@@ -134,7 +134,7 @@ Agents are specialized AI personas with distinct domains and weighted influence.
 | Agent | Domain | Role |
 |-------|--------|------|
 | Starlight Orchestrator | Meta-coordination | Synthesizes specialist perspectives |
-| Luminor Oracle | Strategy, foresight | Long-term planning & market analysis |
+| Visionary | Strategy, foresight | Long-term planning & market analysis |
 | Creation Engine | Content, products | Publishing & product development |
 | Code Architect | Dev, systems | Technical architecture & implementation |
 | Sonic Engineer | Music, audio | AI music production & audio design |
@@ -493,4 +493,4 @@ Explore the system through our infographic gallery:
 
 *Agentic Creator OS - The Operating System for the Golden Age Creator*
 
-**Version 6.0.0** | **January 2026** | **25 Commands** | **80+ Skills** | **40+ Agents** | **Auto-Activation**
+**Version 7.0.0** | **February 2026** | **130+ Commands** | **630+ Skills** | **40+ Agents** | **Auto-Activation**

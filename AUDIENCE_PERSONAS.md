@@ -231,7 +231,7 @@ STRATEGIC INTEREST → EVALUATION → ENGAGEMENT → PARTNERSHIP
 
 **Agent Deployment:**
 ```
-Luminor Oracle → Strategic foresight
+Visionary → Strategic foresight
 Starlight Architect → System design
 Code Architect → Executive communication
 ```
@@ -331,7 +331,7 @@ Output: Course modules, worksheets, video scripts
 ```
 Skills Used: oci-services-expert, mcp-architecture, oracle-adk
 Workflows: research-to-article, custom implementations
-Agents: Starlight Architect, Luminor Oracle
+Agents: Starlight Architect, Visionary
 Output: Custom assessments, strategy decks, implementation plans
 ```
 

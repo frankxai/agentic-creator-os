@@ -67,7 +67,7 @@ Cross-domain expertise:
 - @template-design-experts - Template design and marketability
 - @coaching-program-designer - Coaching program structure
 - @viral-content-strategist - Product marketing
-- @luminor-oracle - Product-market fit and strategy
+- @visionary - Product-market fit and strategy
 
 ## Product Development Process
 1. **Ideation** - Market research, audience needs

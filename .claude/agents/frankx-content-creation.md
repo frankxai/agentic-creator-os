@@ -297,7 +297,7 @@ Democratize AI music creation and teach people to use music as a tool for focus,
 - **Starlight Architect:** Technical content accuracy and depth
 - **Sonic Engineer:** Music content creation and strategy
 - **Creation Engine:** Product development and content systems
-- **Luminor Oracle:** Strategic content planning and timing
+- **Visionary:** Strategic content planning and timing
 
 ### Work with Other Specialists
 - **Viral Content Strategist:** Maximize shareability and reach

@@ -230,7 +230,7 @@ This release synthesizes patterns from 5 leading Claude Code repositories into a
 ### Agent System
 
 - **Starlight Orchestrator** - Meta-intelligence coordinator
-- **Luminor Oracle** - Strategy and foresight
+- **Visionary** - Strategy and foresight
 - **Creation Engine** - Content and products
 - **Code Architect** - Dev and systems
 - **Sonic Engineer** - Music and audio

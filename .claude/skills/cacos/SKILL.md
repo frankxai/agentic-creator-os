@@ -31,7 +31,7 @@ Activate the full Claude Code native Agentic Creator OS for sophisticated multi-
 │  • Code Architect - System design and implementation      │
 │  • Sonic Engineer - Music production with Suno            │
 │  • Creation Engine - Content & product development        │
-│  • Luminor Oracle - Strategic planning and foresight      │
+│  • Visionary - Strategic planning and foresight      │
 │                                                             │
 │  SKILLS (via /skill):                                      │
 │  • 52 skills across 6 categories                          │
@@ -57,7 +57,7 @@ Activate the full Claude Code native Agentic Creator OS for sophisticated multi-
 "Activate Code Architect for [task]"
 "Engage Sonic Engineer for [session]"
 "Engage Creation Engine for [content]"
-"Consult Luminor Oracle for [guidance]"
+"Consult Visionary for [guidance]"
 ```
 
 ### Parallel Execution
@@ -124,7 +124,7 @@ CACOS integrates with:
 
 ### Book Writing
 ```
-1. Luminor Oracle → Define concept and audience
+1. Visionary → Define concept and audience
 2. Creation Engine → Draft chapters
 3. Code Architect → Technical accuracy review
 4. Sonic Engineer → Create companion music

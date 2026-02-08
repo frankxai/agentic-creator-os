@@ -167,7 +167,7 @@ cat PRO_STATUS_DASHBOARD.md
     "weights": {
       "creation-engine": 0.35,
       "technical-translator": 0.35,
-      "luminor-oracle": 0.30
+      "visionary": 0.30
     },
     "defaults": {
       "primary": "creation-engine",
@@ -233,7 +233,7 @@ Configure how agents contribute to weighted synthesis:
 {
   "agents": {
     "weights": {
-      "luminor-oracle": 0.30,
+      "visionary": 0.30,
       "creation-engine": 0.25,
       "technical-translator": 0.25,
       "frequency-alchemist": 0.20
@@ -242,12 +242,12 @@ Configure how agents contribute to weighted synthesis:
       "technical_questions": {
         "technical-translator": 0.50,
         "creation-engine": 0.30,
-        "luminor-oracle": 0.20
+        "visionary": 0.20
       },
       "creative_tasks": {
         "creation-engine": 0.40,
         "frequency-alchemist": 0.35,
-        "luminor-oracle": 0.25
+        "visionary": 0.25
       }
     }
   }

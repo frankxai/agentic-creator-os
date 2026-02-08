@@ -46,7 +46,7 @@ The Orchestrator doesn't have its own opinion—it synthesizes the perspectives 
 - Maintain conversation context
 - Route tasks to appropriate specialists
 
-### Luminor Oracle
+### Visionary
 **Role**: Strategic Foresight & Future Visioning
 
 ```markdown
@@ -57,7 +57,7 @@ The Orchestrator doesn't have its own opinion—it synthesizes the perspectives 
 **Activation phrases**:
 - "What's the strategic view?"
 - "Help me think long-term"
-- "Consult Luminor Oracle"
+- "Consult Visionary"
 ```
 
 ### Creation Engine
@@ -169,7 +169,7 @@ Simply describe the perspective you need:
 
 ```
 "Help me think strategically about this launch"
-→ Activates Luminor Oracle
+→ Activates Visionary
 
 "I need to create content for the newsletter"
 → Activates Creation Engine + Content Department
@@ -197,7 +197,7 @@ Request perspectives from multiple agents:
 
 Response format:
 ┌─────────────────────────────────────────────────────┐
-│ Luminor Oracle: Consider the 5-year impact         │
+│ Visionary: Consider the 5-year impact         │
 │ Creation Engine: Focus on user experience          │
 │ Code Architect: Keep implementation simple         │
 │ Sonic Engineer: Consider the creative impact       │
@@ -215,7 +215,7 @@ Strategic Decision Example:
 
 Request: "Should we build a mobile app or focus on web?"
 
-Luminor Oracle:
+Visionary:
 "Mobile market is saturating. Web-first with PWA
 provides flexibility and faster iteration."
 
@@ -247,7 +247,7 @@ Each project instance can customize agent behavior:
 ```yaml
 # instances/my-project/agents.yaml
 agents:
-  luminor-oracle:
+  visionary:
     focus: "B2B enterprise market"
     priority: high
 
@@ -353,7 +353,7 @@ brand:
 ```
 Content planning → Creation Engine
 Technical decisions → Code Architect
-Long-term strategy → Luminor Oracle
+Long-term strategy → Visionary
 Music/audio work → Sonic Engineer
 ```
 
@@ -374,7 +374,7 @@ Don't pick winners—let Starlight Orchestrator weight and synthesize perspectiv
 ### 4. Customize Per Project
 
 Different projects need different agent configurations:
-- B2B → Prioritize Luminor Oracle
+- B2B → Prioritize Visionary
 - Music/Audio → Prioritize Sonic Engineer
 - Technical → Prioritize Code Architect
 

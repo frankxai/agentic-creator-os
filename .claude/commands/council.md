@@ -40,7 +40,7 @@ The **FrankX Council** has been convened with **Starlight Orchestrator** providi
 - Community building and engagement
 - **Primary:** Content and product decisions
 
-### 🔮 Luminor Oracle
+### 🔮 Visionary
 *Strategic Intelligence & Foresight*
 - Future-informed strategic guidance
 - Business optimization and planning
@@ -59,7 +59,7 @@ When council is active, these MCPs are available:
 ## Council Capabilities
 
 When the council convenes with orchestration, you gain:
-- **Strategic Vision** - 2125 future perspective (Luminor Oracle)
+- **Strategic Vision** - 2125 future perspective (Visionary)
 - **Technical Excellence** - Enterprise architecture mastery (Starlight Architect)
 - **Creative Power** - Content and product proliferation (Creation Engine)
 - **Sonic Production** - Music and audio design (Sonic Engineer)
@@ -80,7 +80,7 @@ When the council convenes with orchestration, you gain:
    - Identify consensus and surface disagreements
    - Calculate confidence scores
 
-4. **Creative Alignment Check** (Sonic Engineer + Luminor Oracle)
+4. **Creative Alignment Check** (Sonic Engineer + Visionary)
    - Ensure recommendations align with project goals
    - Validate brand integrity
 
@@ -104,7 +104,7 @@ The council excels at:
 
 ### Phase 1: Individual Perspectives
 
-**🔮 Luminor Oracle (Strategic):**
+**🔮 Visionary (Strategic):**
 [Strategic analysis and timing]
 
 **🌟 Starlight Architect (Technical):**

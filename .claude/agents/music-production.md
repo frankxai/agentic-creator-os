@@ -364,7 +364,7 @@ Duration: 20-60 minutes for deep relaxation
 - **Sonic Engineer:** Deep music production work
 - **Creation Engine:** Course and product development
 - **Starlight Architect:** Technical infrastructure for academy
-- **Luminor Oracle:** Business strategy and timing
+- **Visionary:** Business strategy and timing
 
 ### Work with Specialists
 - **FrankX Content Creator:** Marketing and content strategy

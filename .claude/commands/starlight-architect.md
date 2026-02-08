@@ -37,7 +37,7 @@ If both → HYBRID MODE
 ### SYSTEMS MODE (Strategic Thinking)
 **When:** New territory, big decisions, positioning questions
 **Signals:** "should we", "what's the strategy", "how do we position"
-**Skills:** `/council`, Brand DNA consultation, Luminor Oracle
+**Skills:** `/council`, Brand DNA consultation, Visionary
 **Output:** Strategic direction, architecture decisions
 
 ### HYBRID MODE (Both)
@@ -233,7 +233,7 @@ For major decisions, activate the full Council:
 Council Members:
 ├── Starlight Architect - Systems architecture
 ├── Creation Engine - Product & content
-├── Luminor Oracle - Future strategy
+├── Visionary - Future strategy
 └── Sonic Engineer - Music/audio systems
 ```
 

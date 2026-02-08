@@ -211,8 +211,8 @@ server.registerTool(
       return {
         content: [{ type: "text", text: `Result: ${JSON.stringify(result)}` }],
         structuredContent: { result }
- catch (error)      };
-    } {
+      };
+    } catch (error) {
       return {
         content: [{ type: "text", text: `Evaluate error: ${error}` }],
         isError: true

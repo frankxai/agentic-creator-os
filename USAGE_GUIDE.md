@@ -35,7 +35,7 @@ Skills auto-activate based on keywords, or invoke directly:
 "Activate Code Architect mode for system design"
 "Engage Sonic Engineer for music creation"
 "Engage Creation Engine for content development"
-"Consult Luminor Oracle for strategic guidance"
+"Consult Visionary for strategic guidance"
 ```
 
 ---
@@ -140,7 +140,7 @@ When multiple perspectives are needed, specialist agents contribute based on the
 
 | Agent | Domain | Role | Activation |
 |-------|--------|------|------------|
-| **Luminor Oracle** | Strategy, foresight | Long-term planning | "Consult Luminor" |
+| **Visionary** | Strategy, foresight | Long-term planning | "Consult Luminor" |
 | **Creation Engine** | Content, products | Publishing pipeline | "Engage Creation Engine" |
 | **Code Architect** | Dev, systems | Technical decisions | "Code Architect mode" |
 | **Sonic Engineer** | Music, audio | Sound design | "Engage Sonic Engineer" |

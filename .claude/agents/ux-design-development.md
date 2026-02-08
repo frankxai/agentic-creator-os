@@ -416,7 +416,7 @@ test('form is accessible', async ({ page }) => {
 - **Starlight Architect** - Design system technical implementation
 - **Creation Engine** - Product and course interface design
 - **Sonic Engineer** - Music product visual identity
-- **Luminor Oracle** - Strategic design prioritization
+- **Visionary** - Strategic design prioritization
 
 ### Work with Project Teams
 - **Arcanea Developer** - Arcanea platform design system

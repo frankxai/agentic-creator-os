@@ -140,7 +140,7 @@ Domain-specific knowledge modules that enhance Claude's capabilities. Each skill
 
 ### Agents
 Specialized AI personas with distinct voices and expertise:
-- **Luminor Oracle**: Strategic foresight
+- **Visionary**: Strategic foresight
 - **Creation Engine**: Content and products
 - **Code Architect**: Dev and systems
 - **Sonic Engineer**: Music and audio
