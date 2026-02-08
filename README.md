@@ -1,7 +1,7 @@
 # Agentic Creator OS
 **The Operating System for Generative Creators**
 
-![ACOS v7.0](docs/infographics/v7-hero-dev.png)
+![ACOS v7.0](docs/infographics/v7-09-architecture-premium.png)
 
 ---
 
@@ -13,11 +13,11 @@ A **production-grade operating system for generative creators** — built on Cla
 
 ### System Architecture
 
-![System Architecture](docs/infographics/v7-layers-dev.png)
+![System Architecture](docs/infographics/v7-01-pillars-premium.png)
 
 ### Agent Library
 
-![40+ Specialized Agents](docs/infographics/v7-agents-dev.png)
+![40+ Specialized Agents](docs/infographics/v7-04-agents-premium.png)
 
 ---
 
