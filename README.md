@@ -1,484 +1,391 @@
-# Agentic Creator OS
-**The Operating System for Generative Creators**
+<p align="center">
+  <img src="https://github.com/frankxai/agentic-creator-os/releases/download/v8.0-assets/01-acos-hero.png" alt="Agentic Creator OS" width="100%">
+</p>
 
-![ACOS v7.0](docs/infographics/v7-09-architecture-premium.png)
+<p align="center">
+  <strong>The operating system for generative creators</strong>
+</p>
+
+<p align="center">
+  <a href="#architecture"><img src="https://img.shields.io/badge/Pillars-7_Foundational-7fffd4?style=flat-square&labelColor=0d1117" alt="Pillars"></a>
+  <a href="#commands"><img src="https://img.shields.io/badge/Commands-130+-ffd700?style=flat-square&labelColor=0d1117" alt="Commands"></a>
+  <a href="#agents"><img src="https://img.shields.io/badge/Agents-40+-9966ff?style=flat-square&labelColor=0d1117" alt="Agents"></a>
+  <a href="#skills"><img src="https://img.shields.io/badge/Skills-630+-78a6ff?style=flat-square&labelColor=0d1117" alt="Skills"></a>
+  <a href="#orchestration"><img src="https://img.shields.io/badge/Orchestration-Swarm_Enabled-ff6b6b?style=flat-square&labelColor=0d1117" alt="Orchestration"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-white?style=flat-square&labelColor=0d1117" alt="MIT"></a>
+</p>
 
 ---
 
-## What Is Agentic Creator OS?
+## The Problem
 
-A **production-grade operating system for generative creators** — built on Claude Code. One command (`/acos`) routes to 130+ commands, 630+ skills, and 40+ agents. Skills auto-activate. Hooks enforce quality. Everything composes.
+AI tools are powerful individually. But creators don't work in single-task mode. They research, write, design, code, publish, and market — often in a single session. Each task requires different context, different expertise, different quality standards.
 
-> **v7.0**: Smart routing, auto-activating skills, lifecycle hooks, Agentic Jujutsu learning, Visionary strategic layer.
+The current state: jump between tools, re-explain context, lose thread, repeat.
 
-### System Architecture
+## The ACOS Approach
 
-![System Architecture](docs/infographics/v7-01-pillars-premium.png)
+One command. One entry point. The system routes to the right agent, loads the right skills, applies the right quality gates, and remembers what it learned for next time.
 
-### Agent Library
+```bash
+/acos
+```
 
-![40+ Specialized Agents](docs/infographics/v7-04-agents-premium.png)
+ACOS is a **Claude Code-native operating system** that turns a single AI conversation into a coordinated workforce of 40+ specialized agents, each backed by domain-specific skills that auto-activate based on context. Built on the [Starlight Intelligence System](https://github.com/frankxai/Starlight-Intelligence-System) framework.
+
+---
+
+## Architecture
+
+<p align="center">
+  <img src="https://github.com/frankxai/agentic-creator-os/releases/download/v8.0-assets/02-smart-router.png" alt="Intelligent Command Routing" width="100%">
+</p>
+
+### The 7 Pillars
+
+| # | Pillar | Purpose | Scale |
+|---|--------|---------|-------|
+| 1 | **Skills** | Domain knowledge modules that auto-activate via `skill-rules.json` | 630+ |
+| 2 | **Agents** | Specialized AI personas with distinct domains and weighted influence | 40+ |
+| 3 | **Commands** | Slash commands with `/acos` as the single intelligent entry point | 130+ |
+| 4 | **MCP Servers** | External tool integrations via Model Context Protocol | 6 |
+| 5 | **Templates** | Reusable content patterns across 40+ formats | 40+ |
+| 6 | **Instances** | Per-project configurations that customize system behavior | Unlimited |
+| 7 | **Intelligence** | Cross-cutting capabilities: hooks, self-learning, context engineering | 7 events |
+
+### Intelligent Routing
+
+Every request flows through the `/acos` smart router:
+
+```
+User intent → Keyword analysis → Domain classification → Agent selection → Skill activation → Execution
+```
+
+The router classifies intent into 8 domains (code, content, music, design, strategy, automation, research, consultation), selects the optimal agent, and auto-activates relevant skills — all before execution begins.
+
+### Skill Auto-Activation
+
+Skills activate based on context, not manual invocation. The `skill-rules.json` maps 22 trigger patterns to skill modules:
+
+```json
+{
+  "trigger": "*.tsx",
+  "skill": "react-patterns",
+  "priority": "high"
+}
+```
+
+When a React file is in scope, React patterns load automatically. When a Supabase query appears, database patterns activate. The system adapts to what you're doing without being told.
+
+---
+
+## Agents
+
+ACOS uses a **3-level agent hierarchy** powered by the Starlight Intelligence System:
+
+```
+Level 3: STARLIGHT ORCHESTRATOR
+  Meta-intelligence — coordinates across all agents
+  Weighted synthesis for complex multi-domain decisions
+
+Level 2: SPECIALIST AGENTS
+  40+ domain experts: Creation Engine, Sonic Engineer,
+  Code Architect, Visionary, Design Director, etc.
+
+Level 1: SKILLS
+  630+ knowledge modules that auto-activate
+  and inform agent behavior
+```
+
+### Council Mode
+
+For decisions rated complexity 9-10, the Starlight Council convenes — all Tier 1 agents analyze independently, then perspectives are synthesized through weighted consensus:
+
+```bash
+/council "Should we migrate from REST to GraphQL for the creator API?"
+```
+
+The council runs parallel analysis across architecture, content impact, creative workflow implications, and strategic alignment — then delivers a synthesized recommendation with confidence scores.
+
+### Agent Catalog (Highlights)
+
+| Agent | Domain | Trigger |
+|-------|--------|---------|
+| **Starlight Orchestrator** | Meta-coordination | Complex multi-domain requests |
+| **Creation Engine** | Content & products | `/article-creator`, `/factory` |
+| **Sonic Engineer** | Music production | `/create-music` |
+| **Code Architect** | Development | Code tasks, architecture |
+| **Visionary** | Strategy & foresight | `/council`, strategic planning |
+| **Design Director** | Visual design | UI/UX, branding |
+| **Research Analyst** | Intelligence gathering | `/research` |
+| **InfoGenius** | Visual knowledge | `/infogenius` |
+
+See `.claude/agents/` for the full 40+ agent library.
+
+---
+
+## Orchestration
+
+<p align="center">
+  <img src="https://github.com/frankxai/agentic-creator-os/releases/download/v8.0-assets/03-swarm-orchestration.png" alt="Swarm Orchestration Topologies" width="100%">
+</p>
+
+### Swarm Topologies
+
+ACOS supports three swarm topologies via [claude-flow](https://github.com/ruvnet/claude-flow) integration:
+
+| Topology | Structure | Use Case |
+|----------|-----------|----------|
+| **Hierarchical** | Coordinator validates all outputs | Structured development, quality-gated workflows |
+| **Mesh** | Peer-to-peer agent coordination | Research, brainstorming, exploration |
+| **Star** | Central coordinator with satellites | Testing, validation, parallel analysis |
+
+### Magic Words
+
+Trigger multi-agent swarm execution with shorthand:
+
+| Command | Effect |
+|---------|--------|
+| `ultrawork` / `ulw` | Fire ALL relevant agents in parallel |
+| `ultracode` / `ulc` | Fire coding specialists in parallel |
+
+### Self-Learning (Agentic Jujutsu)
+
+The system learns from every session:
+
+```
+Session Start → Create trajectory record
+Session Active → Track operations and outcomes
+Session End → Extract patterns → Store learnings
+Future Sessions → Apply accumulated intelligence
+```
+
+After 3-5 sessions, the system recommends optimizations based on observed patterns. Built on [ruvnet/agentic-jujutsu](https://github.com/ruvnet/agentic-jujutsu) (v2.3.6, MIT).
+
+---
+
+## Commands
+
+### Core Commands (26 User-Facing)
+
+| Category | Commands |
+|----------|----------|
+| **Entry** | `/acos` — smart router to everything |
+| **Content** | `/article-creator`, `/factory`, `/publish`, `/review-content` |
+| **Music** | `/create-music` |
+| **Visual** | `/infogenius`, `/design-team`, `/design-review` |
+| **Development** | `/spec`, `/tdd`, `/debug`, `/refactor` |
+| **Strategy** | `/council`, `/starlight-intelligence`, `/research` |
+| **Operations** | `/inventory-status`, `/plan-week`, `/weekly-recap` |
+| **Automation** | `/harvest`, `/classify-content`, `/generate-social` |
+
+### Internal Commands (~100)
+
+Infrastructure commands for swarm coordination, GitHub automation, monitoring, and CI/CD — managed through claude-flow integration.
+
+---
+
+## Skills
+
+630+ skills organized by domain with progressive disclosure — metadata loads first (~100 tokens), full definition loads only when activated (<5K tokens):
+
+| Domain | Skills | Examples |
+|--------|--------|---------|
+| **Content** | Brand voice, SEO, social media | `frankx-brand`, `content-strategy` |
+| **Music** | Suno AI, prompt engineering, production | `suno-ai-mastery`, `suno-prompt-architect` |
+| **Development** | React, TypeScript, Supabase, MCP | `react-patterns`, `mcp-architecture` |
+| **AI/ML** | Prompt engineering, model routing, agents | `prompt-engineer`, `model-routing` |
+| **Design** | UI/UX, accessibility, visual systems | `frontend-design`, `ui-ux-design-expert` |
+| **Strategy** | Decision frameworks, orchestration | `agentic-orchestration`, `swarm-advanced` |
+| **Memory** | Cross-session persistence, learning | `agentdb-memory-patterns`, `reasoningbank` |
+
+### Creating Skills
+
+```bash
+cp templates/SKILL_TEMPLATE.md .claude/skills/[domain]/[name]/SKILL.md
+```
+
+Each skill follows a standard structure: YAML frontmatter with triggers, purpose, patterns with code examples, anti-patterns, and related skills. See `templates/SKILL_TEMPLATE.md`.
+
+---
+
+## The Starlight Connection
+
+<p align="center">
+  <img src="https://github.com/frankxai/agentic-creator-os/releases/download/v8.0-assets/04-creator-ecosystem.png" alt="The FrankX Ecosystem" width="100%">
+</p>
+
+ACOS is the **Claude Code implementation** of the [Starlight Intelligence System](https://github.com/frankxai/Starlight-Intelligence-System) — the universal, platform-agnostic framework for multi-agent orchestration.
+
+```
+Starlight Intelligence System (Framework)
+├── 5-layer cognitive architecture
+├── 7 council agents with emergent leadership
+├── 6 orchestration patterns
+├── 6 persistent memory vaults
+└── Platform adapters for 6 AI tools
+     │
+     └── ACOS (Claude Code Implementation)
+         ├── 130+ commands routed through /acos
+         ├── 40+ agents aligned to Starlight council
+         ├── 630+ auto-activating skills
+         ├── Swarm topologies via claude-flow
+         └── Self-learning via Agentic Jujutsu
+              │
+              └── Powers → Arcanea (Creative Universe)
+                  ├── 10 Guardian agents mapped to council
+                  ├── AI-native creative platform
+                  └── On-chain NFT infrastructure
+```
+
+ACOS is where Starlight's intelligence meets Claude Code's execution. The framework provides the architecture; ACOS provides the tools.
 
 ---
 
 ## Quick Start
 
-### Option 1: Full Install (Recommended)
+### Install
 
 ```bash
-# Clone and install
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh
-
-# Open Claude Code and use
-claude
-/acos
 ```
 
-### Option 2: Manual Setup
+### Or Manual Setup
 
 ```bash
-# Clone
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-
-# Copy commands to user level (required for /commands to work)
 cp .claude/commands/*.md ~/.claude/commands/
-
-# Open Claude Code
 claude
 /acos
 ```
 
-### First Commands to Try
+### First Commands
 
 ```bash
-/acos                # Smart router — shows all 26 commands
-/article-creator     # Write a blog post
-/create-music        # Produce a track with Suno
-/infogenius          # Generate research-grounded images
-/spec                # Spec-driven feature development
-/starlight-architect # Enterprise AI system design
+/acos                  # Smart router — see all 26 commands
+/article-creator       # Write a blog post with full pipeline
+/create-music          # Produce a track with Suno AI
+/infogenius            # Generate research-grounded visuals
+/council               # Convene the Starlight Council
+/spec                  # Start spec-driven development
 ```
-
-> **See [QUICKSTART.md](QUICKSTART.md) for detailed setup instructions**
 
 ---
 
-## System Components
-
-### 1. Commands Layer (25 Commands)
-
-v6 introduces `/acos` as the smart router — one entry point that detects your intent and dispatches to the right command.
-
-| Category | Commands | Examples |
-|----------|----------|----------|
-| **Creation** | 8 | `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
-| **Strategy** | 5 | `/starlight-architect`, `/council`, `/research`, `/plan-week` |
-| **Development** | 4 | `/spec`, `/nextjs-deploy`, `/ux-design`, `/automation-dev` |
-| **System** | 5 | `/acos`, `/inventory-status`, `/mcp-status`, `/publish` |
-| **Quality** | 3 | `/review-content`, `/classify-content`, `/polish-content` |
-
-**Key Innovation**: Smart Routing
-```
-/acos → Parse intent → Route to best command
-  "write a blog post"    → /article-creator
-  "make a track"         → /create-music
-  "build a feature"      → /spec
-  "strategic decision"   → /starlight-architect
-  (ambiguous)            → Interactive menu with all 25 commands
-```
-
-### 2. Skills Layer (80+ Skills)
-
-Skills are specialized knowledge modules that auto-activate based on context — no manual invocation needed.
-
-| Category | Count | Examples |
-|----------|-------|----------|
-| **Technical** | 18 | TDD, systematic-debugging, mcp-architecture, react-nextjs-patterns |
-| **Creative** | 8 | frankx-brand, suno-ai-mastery, golden-age-book-writing |
-| **Content** | 12 | content-strategy, social-media-strategy, excellence-book-writing |
-| **Business** | 4 | oci-services-expert, product-management, coaching-program |
-| **Personal** | 4 | spartan-warrior, gym-training-expert, health-nutrition |
-| **System** | 5+ | cacos, agentic-orchestration, planning-with-files |
-
-**Key Innovation**: Auto-Activation via `skill-rules.json`
-```
-User: "Help me write tests for this component"
-      ↓
-skill-rules.json detects: "tests" + "component"
-      ↓
-Auto-loads: test-driven-development + react-nextjs-patterns
-      ↓
-Claude now has specialized testing knowledge
-```
-
-### 3. Agents Layer (40+ Agents)
-
-Agents are specialized AI personas with distinct domains and weighted influence.
-
-**Specialist Agents:**
-| Agent | Domain | Role |
-|-------|--------|------|
-| Starlight Orchestrator | Meta-coordination | Synthesizes specialist perspectives |
-| Visionary | Strategy, foresight | Long-term planning & market analysis |
-| Creation Engine | Content, products | Publishing & product development |
-| Code Architect | Dev, systems | Technical architecture & implementation |
-| Sonic Engineer | Music, audio | AI music production & audio design |
-
-**Department Teams:**
-- Content Department (Writer, Editor, Publisher)
-- Design Department (Visual, UX, Brand)
-- Dev Department (Frontend, Backend, DevOps)
-- Marketing Department (Growth, Ads, Analytics)
-- Business Department (Strategy, Sales, Ops)
-
-### 3. Workflows Layer (8 Pipelines)
-
-Orchestrated sequences that coordinate skills and agents for complex tasks.
-
-| Workflow | Purpose | Pattern |
-|----------|---------|---------|
-| Content Creation | Blog posts, articles | Pipeline |
-| Product Launch | Course/product release | Multi-stage |
-| Research to Article | Deep research → publication | Pipeline |
-| Social Distribution | Cross-platform posting | Parallel |
-| Newsletter | Weekly digest creation | Pipeline |
-| Code Review | Multi-agent code analysis | Parallel |
-| Book Writing | Chapter development | Iterative |
-| Daily Ops | Daily execution workflow | Scheduled |
-
-### 4. MCP Servers Layer
-
-External capabilities via Model Context Protocol.
-
-| Server | Purpose |
-|--------|---------|
-| Browser (Playwright) | Web automation, testing |
-| Creator (Social APIs) | Platform management |
-| Database | Content storage |
-| Email | Newsletter delivery |
-| Memory | Knowledge persistence |
-| Sequential Thinking | Complex reasoning |
-
----
-
-## How It Works
-
-### The `/acos` Front Door
-
-Everything starts with `/acos`. It parses your intent and routes to the best subsystem:
-
-```
-/acos "write a blog post about AI agents"
-  → Detects: creation + blog
-  → Routes to: /article-creator
-  → Auto-loads: content-strategy skill
-  → Result: Guided article creation workflow
-```
-
-For multi-domain requests, it chains commands:
-```
-/acos "Create a blog post about AI music with images and social posts"
-  → /research "AI music production"
-  → /article-creator (with research context)
-  → /infogenius (hero image)
-  → /generate-social (distribution)
-```
-
-### Orchestration Patterns
-
-![Workflow Patterns](docs/infographics/05-workflow-patterns.png)
-
-| Pattern | Description | Best For |
-|---------|-------------|----------|
-| **Pipeline** | Sequential stages: Research → Plan → Create → Optimize → Publish | Blog posts, newsletters |
-| **Parallel** | Concurrent agents with synthesis | Code review, multi-analysis |
-| **Weighted Synthesis** | Expert voting with percentage weights | Strategic decisions |
-
----
-
-## Directory Structure
+## Project Structure
 
 ```
 agentic-creator-os/
-├── README.md               ← YOU ARE HERE
-├── CLAUDE.md               # AI context file
-├── ARCHITECTURE.md         # 7-pillar system design
-├── SKILL_TREE.md          # Visual skill map
-├── PRO_STATUS_DASHBOARD.md # System health
-├── AUDIENCE_PERSONAS.md    # Who we serve
-├── ORCHESTRATION_PATTERNS.md # How it coordinates
-│
-├── skills/                 # Agentic Creator skills
-│   └── content-strategy/   # Example comprehensive skill
-│       ├── SKILL.md       # Core skill file (<500 lines)
-│       └── resources/     # Extended content
-│
-├── templates/              # Creation templates
-│   ├── SKILL_TEMPLATE.md  # Master skill template
-│   ├── library/           # Content templates
-│   └── social-media/      # Platform templates
-│
-├── departments/            # Agent teams
-│   ├── content/           # Content creation team
-│   ├── design/            # Visual/UX team
-│   ├── dev/               # Development team
-│   ├── marketing/         # Growth team
-│   └── business/          # Strategy team
-│
-├── workflows/              # Orchestrated pipelines
-│   ├── content-creation/  # Blog post pipeline
-│   ├── product-launch/    # Launch sequence
-│   └── daily-ops/         # Daily execution
-│
-├── instances/              # Project configurations
-│   ├── frankx/            # FrankX configuration
-│   └── _template/         # Template for new projects
-│
-├── mcp-servers/            # MCP integrations
-│   ├── browser/           # Playwright automation
-│   ├── creator/           # Social APIs
-│   ├── database/          # Content storage
-│   └── email/             # Email delivery
-│
-├── adapters/               # Platform adapters
-│   └── opencode/          # OpenCode integration
-│
-├── scripts/                # Utility scripts
-├── drafts/                 # Work in progress
-└── outputs/                # Generated artifacts
+├── .claude/
+│   ├── agents/              # 40+ agent definitions
+│   │   ├── starlight-orchestrator.md
+│   │   ├── core/            # 5 core agents
+│   │   ├── consensus/       # 7 consensus agents
+│   │   ├── hive-mind/       # 5 hive-mind agents
+│   │   ├── swarm/           # 3 swarm coordinators
+│   │   └── templates/       # 9 agent templates
+│   ├── commands/            # 130+ slash commands
+│   │   ├── acos.md          # THE entry point
+│   │   └── ...
+│   ├── skills/              # 80+ SKILL.md files (630+ sub-skills)
+│   │   ├── skill-rules.json # 22 auto-activation rules
+│   │   └── ...
+│   └── hooks.json           # 7-event lifecycle hooks
+├── departments/             # 5 team structures
+│   ├── business/
+│   ├── content/
+│   ├── design/
+│   ├── dev/
+│   └── marketing/
+├── templates/               # 40+ content templates
+├── workflows/               # 37 YAML workflow pipelines
+├── mcp-servers/             # 4 MCP server implementations
+├── instances/               # Project-specific configs
+└── docs/infographics/       # Visual documentation
 ```
 
 ---
 
-## Usage Patterns
+## Configuration
 
-### The Easy Way (v6)
+### Lifecycle Hooks
+
+7 hook events enforce quality and enable automation:
+
+```json
+{
+  "hooks": [
+    { "event": "SessionStart", "action": "load-context" },
+    { "event": "UserPromptSubmit", "action": "classify-intent" },
+    { "event": "PreToolUse", "action": "validate-safety" },
+    { "event": "PostToolUse", "action": "record-trajectory" },
+    { "event": "PostToolUseFailure", "action": "error-recovery" },
+    { "event": "Stop", "action": "extract-patterns" },
+    { "event": "PreCompact", "action": "preserve-state" }
+  ]
+}
+```
+
+### Instances
+
+Customize ACOS for any project by creating an instance:
 
 ```bash
-/acos                        # Interactive menu — pick anything
-/acos "write about AI agents" # Smart routing — auto-dispatches
+cp -r instances/_template instances/my-project
 ```
 
-### Direct Commands
-
-```bash
-# Creation
-/article-creator             # Write a blog post
-/create-music                # Produce a music track
-/infogenius                  # Generate research-grounded images
-/factory                     # Full pipeline: research → publish
-
-# Strategy
-/starlight-architect         # Enterprise AI system design
-/research                    # Daily intelligence scan
-/plan-week                   # Weekly content planning
-
-# Development
-/spec                        # Spec-driven feature development
-/nextjs-deploy               # Ship to production
-
-# System
-/inventory-status            # Content inventory dashboard
-/publish                     # Deploy content with quality gates
-```
-
-### Magic Words
-
-| Word | Effect |
-|------|--------|
-| `ultrawork` / `ulw` | Fire ALL relevant agents in parallel |
-| `ultracode` / `ulc` | Fire coding specialists in parallel |
+Each instance overrides agent behavior, skill priorities, and workflow parameters for its specific context.
 
 ---
 
-## The 7 Pillars of Architecture
+## Design Principles
 
-The system is built on 7 foundational pillars:
-
-| # | Pillar | Purpose |
-|---|--------|---------|
-| 1 | **Skills** | Domain knowledge modules |
-| 2 | **Agents** | Specialized AI personas |
-| 3 | **Workflows** | Orchestrated processes |
-| 4 | **MCP Servers** | External tool integrations |
-| 5 | **Templates** | Reusable content patterns |
-| 6 | **Instances** | Project configurations |
-| 7 | **Intelligence** | Cross-cutting capabilities |
-
-Each pillar is documented in detail in `ARCHITECTURE.md`.
+1. **Configuration over Code** — Markdown commands + JSON rules + Claude's native abilities. Zero install friction.
+2. **Commands over Prompts** — Reusable workflows beat one-off prompts. Build once, use forever.
+3. **Agents over Chat** — Specialized expertise beats general conversation. Domain knowledge compounds.
+4. **Files over Memory** — Persistent artifacts beat ephemeral threads. Everything is git-trackable.
+5. **Progressive Disclosure** — Load only what you need. ~100 tokens metadata before 5K skill definition.
+6. **Open and Forkable** — MIT licensed. Every component replaceable. Clone, customize, own it.
 
 ---
 
-## Who This Serves
+## Attribution
 
-### The AI-Curious Professional
-**Need**: Quick wins with AI without the learning curve
-**Solution**: Pre-built skills and workflows for immediate productivity
+ACOS builds on the work of the Claude Code community. Full credits in [CREDITS.md](CREDITS.md).
 
-### The Overwhelmed Entrepreneur
-**Need**: AI that amplifies authentic voice, not generic output
-**Solution**: Brand-aware agents and content strategy frameworks
+Key sources:
 
-### The Enterprise Visionary
-**Need**: Scalable AI architecture for teams
-**Solution**: Orchestration patterns and department structures
+| Project | Author | Contribution |
+|---------|--------|-------------|
+| [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, consensus protocols |
+| [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, 108-agent patterns |
+| [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient loading |
+| [diet103/showcase](https://github.com/diet103/claude-code-infrastructure-showcase) | @diet103 | `skill-rules.json` auto-activation |
+| [ChrisWiles/showcase](https://github.com/ChrisWiles/claude-code-showcase) | @ChrisWiles | Hook automation patterns |
 
-See `AUDIENCE_PERSONAS.md` for detailed persona profiles.
-
----
-
-## Creating New Skills
-
-Use the master template to create new skills:
-
-```bash
-# Copy template
-cp templates/SKILL_TEMPLATE.md skills/[category]/[skill-name]/SKILL.md
-
-# Follow the structure:
-# - YAML frontmatter with triggers
-# - Purpose section
-# - When to Use section
-# - Core patterns with code examples
-# - FrankX application
-# - Anti-patterns
-# - Related skills
-```
-
-### Success Criteria
-
-- [ ] Total file under 500 lines
-- [ ] YAML frontmatter with specific triggers
-- [ ] Complete, working code examples (no placeholders)
-- [ ] FrankX-specific application section
-- [ ] Anti-patterns documented
-- [ ] Related skills linked
-
-See `templates/SKILL_TEMPLATE.md` for the full template.
+Built on [Claude Code](https://claude.ai/claude-code) by Anthropic and the [Model Context Protocol](https://modelcontextprotocol.io/).
 
 ---
 
-## Metrics & Status
+## Related Projects
 
-| Metric | v5 | v6 |
-|--------|-----|-----|
-| Total Commands | 14 | **25** |
-| Total Skills | 62 | **80+** |
-| Auto-activation Rate | 0% | **70%** |
-| Commands in Repo | 14 | **25 (100%)** |
-| GitHub Sources Credited | 5 | **14** |
-| Hook Categories | 0 | **4** |
-
-See `PRO_STATUS_DASHBOARD.md` for real-time metrics.
+- **[Starlight Intelligence System](https://github.com/frankxai/Starlight-Intelligence-System)** — The universal framework powering ACOS
+- **[Arcanea](https://github.com/frankxai/arcanea)** — AI-native creative platform built with ACOS
+- **[Arcanea On-Chain](https://github.com/frankxai/arcanea-onchain)** — Blockchain infrastructure for creator IP
 
 ---
 
-## The FrankX Story
+## License
 
-This system was built by Frank, a musician-turned-technologist who bridged the gap between:
-- **Creative expression** and **technical systems**
-- **Oracle enterprise AI** and **indie creator tools**
-- **Personal growth** and **practical productivity**
-
-After producing 300+ AI songs with Suno, building enterprise AI systems at Oracle, and struggling with generic AI outputs, Frank created Agentic Creator OS to solve the fundamental problem:
-
-> How do you use AI without losing your authentic voice?
-
-The answer: **Technology that amplifies your unique expression, guided by intelligent agents that understand your voice, orchestrated through workflows that maintain quality at scale.**
+MIT — Use it, fork it, build your own OS with it.
 
 ---
 
-## License & Attribution
-
-Agentic Creator OS is part of the FrankX ecosystem. We believe in giving credit where it's due.
-
-**14 GitHub sources absorbed across v4–v6:**
-| Project | Author | What We Learned |
-|---------|--------|-----------------|
-| [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies, consensus, context engineering |
-| [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, 108-agent patterns, modular skills |
-| [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient skill loading |
-| [diet103/claude-code-infrastructure-showcase](https://github.com/diet103/claude-code-infrastructure-showcase) | @diet103 | `skill-rules.json` auto-activation pattern |
-| [ChrisWiles/claude-code-showcase](https://github.com/ChrisWiles/claude-code-showcase) | @ChrisWiles | Hook automation (format, test, enforce) |
-| [decider/claude-hooks](https://github.com/decider/claude-hooks) | @decider | Clean code enforcement hooks |
-| [Pimzino/claude-code-spec-workflow](https://github.com/Pimzino/claude-code-spec-workflow) | @Pimzino | Spec-driven development workflow |
-| [github/github-mcp-server](https://github.com/github/github-mcp-server) | GitHub | Official GitHub MCP server |
-| [zilliztech/claude-context](https://github.com/zilliztech/claude-context) | Zilliz | Semantic code search MCP |
-
-**Built on:**
-- [Claude Code](https://claude.ai/claude-code) by Anthropic
-- [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) for tool integrations
-- Community patterns from the growing Claude ecosystem
-
-👉 **See [CREDITS.md](CREDITS.md) for full acknowledgments**
-
----
-
-## Visual Documentation
-
-Explore the system through our infographic gallery:
-
-### System Architecture
-
-| # | Concept | Description |
-|---|---------|-------------|
-| 01 | ![7 Pillars](docs/infographics/01-seven-pillars-architecture.png) | **7 Pillars Architecture** - Foundational components: Skills, Agents, Workflows, MCP Servers, Templates, Instances, Intelligence |
-| 02 | ![Progressive Disclosure](docs/infographics/02-progressive-disclosure.png) | **Progressive Skill Disclosure** - Token-efficient loading: ~100 tokens metadata → <5k tokens full skill |
-| 09 | ![Full Architecture](docs/infographics/09-full-system-architecture.png) | **Full System Architecture** - Complete ACOS v6.0 overview with all components |
-
-### Orchestration & Coordination
-
-| # | Concept | Description |
-|---|---------|-------------|
-| 03 | ![Swarm Topologies](docs/infographics/03-swarm-topologies.png) | **Swarm Topologies** - Hierarchical, Mesh, and Specialized agent coordination patterns |
-| 05 | ![Workflow Patterns](docs/infographics/05-workflow-patterns.png) | **Workflow Patterns** - Pipeline, Parallel, and Weighted Synthesis orchestration |
-| 06 | ![Model Routing](docs/infographics/06-model-routing.png) | **Model Routing Tiers** - Intelligent selection: Haiku → Sonnet → Opus |
-
-### Agents & Skills
-
-| # | Concept | Description |
-|---|---------|-------------|
-| 04 | ![Agent Library](docs/infographics/04-agent-library.png) | **Agent Library** - 40+ specialized agents across Content, Music, Products, Brand, Growth, Research, Orchestration |
-| 07 | ![Creator Hub](docs/infographics/07-creator-hub-generator.png) | **Creator Hub Generator** - 4-step wizard: Identity → Workflows → Tools → Voice |
-
-### Quality & Context
-
-| # | Concept | Description |
-|---|---------|-------------|
-| 08 | ![Anti-Drift](docs/infographics/08-anti-drift-context.png) | **Anti-Drift Context Engineering** - Quality maintenance across long sessions |
-| 10 | ![ACOS vs Traditional](docs/infographics/10-acos-vs-traditional.png) | **ACOS vs Traditional AI** - Side-by-side comparison |
-
-📁 **[View all 10 infographics →](docs/infographics/)**
-
-### Technical Details
-- **Resolution**: 1376 × 768 (16:9)
-- **Format**: PNG
-- **Style**: 3D Isometric with claymorphism
-- **Generator**: Gemini Pro Image via Nano Banana MCP
-
----
-
-## Quick Links
-
-| Document | Purpose |
-|----------|---------|
-| [QUICKSTART.md](QUICKSTART.md) | Get started in 5 minutes |
-| [ACOS-V6-SPEC.md](ACOS-V6-SPEC.md) | v6 specification — what's new |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Complete 7-pillar architecture |
-| [SKILL_TREE.md](SKILL_TREE.md) | Visual map of all skills |
-| [PRO_STATUS_DASHBOARD.md](PRO_STATUS_DASHBOARD.md) | System health metrics |
-| [AUDIENCE_PERSONAS.md](AUDIENCE_PERSONAS.md) | Who we serve |
-| [ORCHESTRATION_PATTERNS.md](ORCHESTRATION_PATTERNS.md) | Coordination patterns |
-| [SKILL_TEMPLATE.md](templates/SKILL_TEMPLATE.md) | Create new skills |
-| [CREDITS.md](CREDITS.md) | Acknowledgments & 14 source repos |
-| [CHANGELOG.md](CHANGELOG.md) | Version history |
-| [Infographics](docs/infographics/) | Visual documentation gallery |
-
----
-
-*Agentic Creator OS - The Operating System for the Golden Age Creator*
-
-**Version 7.0.0** | **February 2026** | **130+ Commands** | **630+ Skills** | **40+ Agents** | **Auto-Activation**
+<p align="center">
+  <strong>Agentic Creator OS v8.0</strong><br>
+  <em>The operating system for the age of generative creation.</em><br><br>
+  <a href="https://github.com/frankxai">Built by FrankX</a> | Powered by <a href="https://github.com/frankxai/Starlight-Intelligence-System">Starlight</a>
+</p>
