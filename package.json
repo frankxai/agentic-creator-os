@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
-  "version": "6.0.0",
-  "description": "The Operating System for Golden Age Creators - 94 skills, 40 agents, 25 commands, MCP integrations for Claude Code",
+  "version": "10.0.0",
+  "description": "The Operating System for AI-Powered Creators — 90+ skills, 50+ commands, 39 agents. Works with Claude Code, Cursor, Windsurf, Gemini.",
   "author": "Frank Guzman <frank@frankx.ai>",
   "license": "MIT",
   "repository": {
@@ -14,15 +14,17 @@
   },
   "keywords": [
     "claude-code",
+    "cursor",
+    "windsurf",
+    "gemini",
     "ai-agent",
     "creator-tools",
     "mcp",
     "anthropic",
-    "personal-ai",
-    "jarvis",
     "skills",
     "workflows",
-    "content-creation"
+    "content-creation",
+    "agentic-ai"
   ],
   "bin": {
     "acos": "./bin/acos-sync.sh",

@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# AGENTIC CREATOR OS - Installation Script
-# Build Your Own Jarvis | github.com/frankxai/agentic-creator-os
+# AGENTIC CREATOR OS v10 — Multi-Platform Installer
+# Works with: Claude Code, Cursor, Windsurf, Gemini Code Assist, any AI agent
+# github.com/frankxai/agentic-creator-os
 # ═══════════════════════════════════════════════════════════════════════════════
 
 set -e
@@ -13,494 +14,488 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
-NC='\033[0m' # No Color
+BOLD='\033[1m'
+NC='\033[0m'
 
 # Configuration
-VERSION="1.0.0"
+VERSION="10.0.0"
 GITHUB_REPO="frankxai/agentic-creator-os"
-GITHUB_RAW="https://raw.githubusercontent.com/$GITHUB_REPO/main"
 
 # Detect installation paths
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
-ACOS_HOME="${ACOS_HOME:-$CLAUDE_HOME/acos}"
-# Skills, commands, and agents go directly into Claude Code's user directories
-SKILLS_DIR="$CLAUDE_HOME/skills"
-COMMANDS_DIR="$CLAUDE_HOME/commands"
-AGENTS_DIR="$CLAUDE_HOME/agents"
 
-# Logging functions
-log() { echo -e "${CYAN}[ACOS]${NC} $1"; }
-success() { echo -e "${GREEN}[✓]${NC} $1"; }
-warn() { echo -e "${YELLOW}[!]${NC} $1"; }
-error() { echo -e "${RED}[✗]${NC} $1"; exit 1; }
-step() { echo -e "${MAGENTA}[→]${NC} $1"; }
+# Logging
+log()     { echo -e "${CYAN}[ACOS]${NC} $1"; }
+success() { echo -e "${GREEN}  [+]${NC} $1"; }
+warn()    { echo -e "${YELLOW}  [!]${NC} $1"; }
+error()   { echo -e "${RED}  [x]${NC} $1"; exit 1; }
+step()    { echo -e "${MAGENTA}  [>]${NC} $1"; }
 
-# Banner
+# ── Banner ────────────────────────────────────────────────────────────────────
 show_banner() {
     echo ""
-    echo -e "${CYAN}╔═══════════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║                                                                   ║${NC}"
-    echo -e "${CYAN}║     █████╗  ██████╗ ██████╗ ███████╗                              ║${NC}"
-    echo -e "${CYAN}║    ██╔══██╗██╔════╝██╔═══██╗██╔════╝                              ║${NC}"
-    echo -e "${CYAN}║    ███████║██║     ██║   ██║███████╗                              ║${NC}"
-    echo -e "${CYAN}║    ██╔══██║██║     ██║   ██║╚════██║                              ║${NC}"
-    echo -e "${CYAN}║    ██║  ██║╚██████╗╚██████╔╝███████║                              ║${NC}"
-    echo -e "${CYAN}║    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝                              ║${NC}"
-    echo -e "${CYAN}║                                                                   ║${NC}"
-    echo -e "${CYAN}║    AGENTIC CREATOR OS v${VERSION}                                       ║${NC}"
-    echo -e "${CYAN}║    Build Your Own Jarvis                                          ║${NC}"
-    echo -e "${CYAN}║    github.com/frankxai/agentic-creator-os                         ║${NC}"
-    echo -e "${CYAN}║                                                                   ║${NC}"
-    echo -e "${CYAN}╚═══════════════════════════════════════════════════════════════════╝${NC}"
-    echo ""
+    echo -e "${CYAN}${BOLD}"
+    echo "    ╔═══════════════════════════════════════════════════╗"
+    echo "    ║                                                   ║"
+    echo "    ║     █████╗  ██████╗ ██████╗ ███████╗              ║"
+    echo "    ║    ██╔══██╗██╔════╝██╔═══██╗██╔════╝              ║"
+    echo "    ║    ███████║██║     ██║   ██║███████╗              ║"
+    echo "    ║    ██╔══██║██║     ██║   ██║╚════██║              ║"
+    echo "    ║    ██║  ██║╚██████╗╚██████╔╝███████║              ║"
+    echo "    ║    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝              ║"
+    echo "    ║                                                   ║"
+    echo "    ║    v${VERSION} — Autonomous Intelligence              ║"
+    echo "    ║    Multi-Platform AI Agent Operating System        ║"
+    echo "    ║                                                   ║"
+    echo "    ╚═══════════════════════════════════════════════════╝"
+    echo -e "${NC}"
 }
 
-# Usage help
+# ── Help ──────────────────────────────────────────────────────────────────────
 show_help() {
     echo "Usage: ./install.sh [OPTIONS]"
     echo ""
-    echo "Options:"
-    echo "  --full          Full installation with all skills and MCP servers"
-    echo "  --minimal       Minimal installation (core skills only)"
-    echo "  --skills-only   Install skills without MCP servers"
-    echo "  --mcp-only      Install MCP servers only"
-    echo "  --sync          Sync with latest GitHub version"
-    echo "  --category=CAT  Install specific category (technical, creative, business, soulbook)"
-    echo "  --help          Show this help message"
+    echo "Platform Options:"
+    echo "  --platform=claude     Claude Code (full features: commands, skills, agents, hooks)"
+    echo "  --platform=cursor     Cursor (generates .cursorrules with embedded skills)"
+    echo "  --platform=windsurf   Windsurf (generates .windsurfrules)"
+    echo "  --platform=gemini     Gemini Code Assist (generates GEMINI.md)"
+    echo "  --platform=generic    Any AI agent (generates CONTEXT.md)"
+    echo "  --platform=all        Install for all detected platforms"
+    echo ""
+    echo "Install Modes:"
+    echo "  --full                Full installation (all skills + MCP servers)"
+    echo "  --minimal             Core skills only"
+    echo "  --skills-only         Skills without commands/agents"
+    echo "  --hooks-only          v10 safety hooks only (Claude Code)"
+    echo "  --mcp-only            MCP servers only"
+    echo ""
+    echo "Other:"
+    echo "  --target=DIR          Install to specific project directory"
+    echo "  --sync                Sync from GitHub"
+    echo "  --help                Show this help"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh                    # Standard installation"
-    echo "  ./install.sh --full             # Full installation with MCP"
-    echo "  ./install.sh --category=creative # Install creative skills only"
-    echo "  ./install.sh --sync             # Sync from GitHub"
+    echo "  ./install.sh                           # Auto-detect platform"
+    echo "  ./install.sh --platform=cursor         # Cursor-specific install"
+    echo "  ./install.sh --platform=claude --full   # Claude Code with MCP servers"
+    echo "  ./install.sh --platform=all            # All platforms"
     echo ""
 }
 
-# Check prerequisites
+# ── Platform Detection ────────────────────────────────────────────────────────
+detect_platforms() {
+    local platforms=""
+
+    # Claude Code
+    if command -v claude &>/dev/null || [ -d "$HOME/.claude" ]; then
+        platforms="claude"
+    fi
+
+    # Cursor
+    if [ -d "$HOME/.cursor" ] || command -v cursor &>/dev/null; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}cursor"
+    fi
+
+    # Windsurf / Codeium
+    if [ -d "$HOME/.codeium" ] || command -v windsurf &>/dev/null; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}windsurf"
+    fi
+
+    # Gemini
+    if [ -d "$HOME/.gemini" ] || command -v gemini &>/dev/null; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}gemini"
+    fi
+
+    # Fallback
+    if [ -z "$platforms" ]; then
+        platforms="generic"
+    fi
+
+    echo "$platforms"
+}
+
+# ── Prerequisites ─────────────────────────────────────────────────────────────
 check_prerequisites() {
     log "Checking prerequisites..."
 
-    local missing=""
-
-    # Check for Node.js
-    if ! command -v node &> /dev/null; then
-        missing="$missing node"
+    if ! command -v node &>/dev/null; then
+        warn "Node.js not found — MCP servers won't build (skills still work)"
     fi
 
-    # Check for npm
-    if ! command -v npm &> /dev/null; then
-        missing="$missing npm"
-    fi
-
-    # Check for curl (optional, for sync)
-    if ! command -v curl &> /dev/null; then
-        warn "curl not found - GitHub sync will be limited"
-    fi
-
-    # Check for jq (optional, for JSON processing)
-    if ! command -v jq &> /dev/null; then
-        warn "jq not found - some features will be limited"
-    fi
-
-    if [ -n "$missing" ]; then
-        error "Missing required tools:$missing. Please install them first."
-    fi
-
-    success "Prerequisites check passed"
+    success "Ready to install"
 }
 
-# Create directory structure
-create_directories() {
-    log "Creating directory structure..."
+# ── Claude Code Install ──────────────────────────────────────────────────────
+install_claude_code() {
+    local mode="${1:-standard}"
+    local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
 
-    # ACOS home for config/state files
-    mkdir -p "$ACOS_HOME"
+    log "Installing for Claude Code..."
 
-    # Claude Code user-level directories (where Claude Code actually reads from)
-    mkdir -p "$SKILLS_DIR"
-    mkdir -p "$COMMANDS_DIR"
-    mkdir -p "$AGENTS_DIR"
+    mkdir -p "$claude_home/skills" "$claude_home/commands" "$claude_home/agents" "$claude_home/acos"
 
-    success "Directories created"
-}
-
-# Install skills from local project
-install_skills() {
-    local category="${1:-all}"
-
-    log "Installing skills..."
-
-    cd "$PROJECT_DIR"
-
-    # Install skill-rules.json (from .claude directory)
-    if [ -f ".claude/skill-rules.json" ]; then
-        cp ".claude/skill-rules.json" "$SKILLS_DIR/skill-rules.json"
-        success "Installed skill rules"
-    fi
-
-    # Install skill YAML files from root skills/ directory
-    for skill in skills/*.yaml; do
-        if [ -f "$skill" ]; then
-            skill_name=$(basename "$skill" .yaml)
-            cp "$skill" "$SKILLS_DIR/${skill_name}.yaml"
-            success "Installed skill config: $skill_name"
-        fi
-    done
-
-    # Install registry
-    if [ -f "skills/registry.json" ]; then
-        cp "skills/registry.json" "$ACOS_HOME/registry.json"
-        success "Installed skill registry"
-    fi
-
-    # Install skills from .claude/skills/ (the main skill definitions)
-    if [ -d ".claude/skills" ]; then
-        for skill_dir in .claude/skills/*/; do
-            if [ -d "$skill_dir" ]; then
-                skill_name=$(basename "$skill_dir")
-                # Skip CLAUDE.md at root level
-                if [ "$skill_name" != "CLAUDE.md" ]; then
-                    mkdir -p "$SKILLS_DIR/$skill_name"
-                    cp -r "$skill_dir"* "$SKILLS_DIR/$skill_name/" 2>/dev/null || true
-                    success "Installed skill: $skill_name"
-                fi
-            fi
+    # Skills
+    if [ -d "$PROJECT_DIR/.claude/skills" ]; then
+        local skill_count=0
+        for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+            [ -d "$skill_dir" ] || continue
+            local name=$(basename "$skill_dir")
+            [ "$name" = "CLAUDE.md" ] && continue
+            mkdir -p "$claude_home/skills/$name"
+            cp -r "$skill_dir"* "$claude_home/skills/$name/" 2>/dev/null || true
+            skill_count=$((skill_count + 1))
         done
+        success "Installed $skill_count skills"
     fi
 
-    # Also install categorized skills from root skills/ directory (if nested)
-    for cat_dir in skills/*/; do
-        if [ -d "$cat_dir" ]; then
-            cat_name=$(basename "$cat_dir")
-            if [[ "$category" == "all" ]] || [[ "$category" == "$cat_name" ]]; then
-                for skill_dir in "$cat_dir"*/; do
-                    if [ -d "$skill_dir" ] && [ -f "$skill_dir/CLAUDE.md" ]; then
-                        skill_name=$(basename "$skill_dir")
-                        mkdir -p "$SKILLS_DIR/$cat_name/$skill_name"
-                        cp -r "$skill_dir"* "$SKILLS_DIR/$cat_name/$skill_name/" 2>/dev/null || true
-                        success "Installed: $cat_name/$skill_name"
-                    fi
-                done
-            fi
-        fi
-    done
+    # Skill rules (auto-activation)
+    if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
+        cp "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
+        success "Installed 22 auto-activation rules"
+    fi
+
+    # Commands (slash commands — Claude Code only)
+    if [ -d "$PROJECT_DIR/.claude/commands" ]; then
+        local cmd_count=0
+        for cmd in "$PROJECT_DIR/.claude/commands"/*.md; do
+            [ -f "$cmd" ] || continue
+            cp "$cmd" "$claude_home/commands/"
+            cmd_count=$((cmd_count + 1))
+        done
+        success "Installed $cmd_count slash commands"
+    fi
+
+    # Agents
+    if [ -d "$PROJECT_DIR/.claude/agents" ]; then
+        local agent_count=0
+        for agent in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
+            [ -f "$agent" ] || continue
+            cp "$agent" "$claude_home/agents/"
+            agent_count=$((agent_count + 1))
+        done
+        success "Installed $agent_count agents"
+    fi
+
+    # v10 Safety Hooks
+    if [ -d "$PROJECT_DIR/.claude/hooks" ]; then
+        mkdir -p "$claude_home/acos/hooks"
+        for hook in "$PROJECT_DIR/.claude/hooks"/*.sh; do
+            [ -f "$hook" ] || continue
+            cp "$hook" "$claude_home/acos/hooks/"
+            chmod +x "$claude_home/acos/hooks/$(basename "$hook")"
+        done
+        success "Installed v10 safety hooks (circuit-breaker, audit-trail, self-modify-gate)"
+    fi
+
+    # Hooks config
+    if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
+        cp "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
+        success "Installed hook lifecycle config"
+    fi
+
+    # Agent IAM
+    if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
+        cp "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
+        success "Installed Agent IAM (6 profiles)"
+    fi
+
+    # State file
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    cat > "$claude_home/acos/state.json" << STATEEOF
+{
+  "version": "$VERSION",
+  "platform": "claude-code",
+  "installedAt": "$timestamp",
+  "features": {
+    "commands": true,
+    "skills": true,
+    "agents": true,
+    "hooks": true,
+    "autoActivation": true,
+    "agentIAM": true,
+    "circuitBreaker": true,
+    "auditTrail": true,
+    "selfModifyGate": true
+  }
+}
+STATEEOF
+
+    success "Claude Code installation complete"
 }
 
-# Install commands (slash commands)
-install_commands() {
-    log "Installing commands..."
+# ── Generate Context File (for non-Claude platforms) ──────────────────────────
+generate_context_file() {
+    local platform="$1"
+    local target_dir="${2:-.}"
+    local output_file=""
 
-    cd "$PROJECT_DIR"
+    case "$platform" in
+        cursor)    output_file="$target_dir/.cursorrules" ;;
+        windsurf)  output_file="$target_dir/.windsurfrules" ;;
+        gemini)    output_file="$target_dir/GEMINI.md" ;;
+        generic)   output_file="$target_dir/CONTEXT.md" ;;
+        *)         output_file="$target_dir/ACOS-CONTEXT.md" ;;
+    esac
 
-    # Install commands from .claude/commands/ (the main commands)
-    if [ -d ".claude/commands" ]; then
-        for cmd in .claude/commands/*.md; do
-            if [ -f "$cmd" ]; then
-                cmd_name=$(basename "$cmd" .md)
-                cp "$cmd" "$COMMANDS_DIR/${cmd_name}.md"
-                success "Installed command: /$cmd_name"
-            fi
+    log "Generating context file for $platform..."
+
+    # Build the context file
+    {
+        echo "# Agentic Creator OS v${VERSION}"
+        echo ""
+        echo "You have the Agentic Creator OS installed. This gives you access to specialized"
+        echo "skills, agent personas, and workflows for content creation, development, strategy,"
+        echo "music production, and more."
+        echo ""
+        echo "## How to Use"
+        echo ""
+        echo "Just describe what you want to do. ACOS skills activate automatically based on context."
+        echo ""
+        echo "Examples:"
+        echo '- "Write a blog post about AI agents" → content-strategy + SEO skills activate'
+        echo '- "Build a React component" → react-patterns + TDD skills activate'
+        echo '- "Help me deploy to Vercel" → vercel-deployment + nextjs skills activate'
+        echo '- "Create a music track" → suno-ai-mastery skills activate'
+        echo ""
+        echo "## Available Workflows"
+        echo ""
+        echo "| Workflow | Description |"
+        echo "|----------|-------------|"
+        echo "| Article Creation | Research → outline → write → SEO → publish |"
+        echo "| Music Production | Genre selection → prompt → Suno generation → refinement |"
+        echo "| Feature Development | Spec → plan → implement → test → deploy |"
+        echo "| Content Distribution | Blog → social posts → newsletter → scheduling |"
+        echo "| Research Pipeline | Topic → sources → synthesis → report |"
+        echo "| Strategic Planning | Assessment → council → recommendations → action items |"
+        echo ""
+        echo "## Agent Personas"
+        echo ""
+        echo "When a task requires specialized expertise, adopt the relevant persona:"
+        echo ""
+
+        # Embed top agent descriptions
+        for agent_file in "$PROJECT_DIR/.claude/agents"/*.md; do
+            [ -f "$agent_file" ] || continue
+            local name=$(basename "$agent_file" .md)
+            # Skip CLAUDE.md and AGENT_PROTOCOL.md
+            [[ "$name" == "CLAUDE" || "$name" == "AGENT_PROTOCOL" ]] && continue
+            local title=$(head -5 "$agent_file" | grep -m1 "^#" | sed 's/^#\+\s*//' 2>/dev/null || echo "$name")
+            echo "- **$title** ($name)"
         done
-    fi
 
-    # Also check for commands in root commands/ directory (if exists)
-    if [ -d "commands" ]; then
-        for cmd in commands/*.md; do
-            if [ -f "$cmd" ]; then
-                cmd_name=$(basename "$cmd" .md)
-                cp "$cmd" "$COMMANDS_DIR/${cmd_name}.md"
-                success "Installed command: /$cmd_name"
-            fi
+        echo ""
+        echo "## Skill Categories"
+        echo ""
+        echo "| Category | Skills |"
+        echo "|----------|--------|"
+
+        # List skill categories
+        local categories=()
+        for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+            [ -d "$skill_dir" ] || continue
+            local sname=$(basename "$skill_dir")
+            [ "$sname" = "CLAUDE.md" ] && continue
+            echo "| $sname | See SKILL.md in skills/$sname/ |"
         done
-    fi
+
+        echo ""
+        echo "## Decision Framework"
+        echo ""
+        echo "Before any structural change:"
+        echo "1. What specific problem are we solving?"
+        echo "2. What's the simplest solution?"
+        echo "3. What could go wrong?"
+        echo "4. Is this reversible?"
+        echo ""
+        echo "## Brand Voice"
+        echo ""
+        echo "- Direct, technical, warm"
+        echo "- Lead with results, not claims"
+        echo "- No spiritual/guru language"
+        echo "- Show don't tell"
+        echo ""
+        echo "---"
+        echo "*ACOS v${VERSION} — Autonomous Intelligence*"
+
+    } > "$output_file"
+
+    success "Generated: $output_file ($(wc -l < "$output_file") lines)"
 }
 
-# Install agents
-install_agents() {
-    log "Installing agents..."
+# ── Install for specific platform ─────────────────────────────────────────────
+install_platform() {
+    local platform="$1"
+    local mode="${2:-standard}"
+    local target="${3:-.}"
 
-    cd "$PROJECT_DIR"
-
-    # Install agents from .claude/agents/ (main agent definitions)
-    if [ -d ".claude/agents" ]; then
-        for agent in .claude/agents/*.md .claude/agents/*.json; do
-            if [ -f "$agent" ]; then
-                agent_name=$(basename "$agent")
-                cp "$agent" "$AGENTS_DIR/${agent_name}"
-                success "Installed agent: ${agent_name%.*}"
-            fi
-        done
-    fi
-
-    # Also install department agents from departments/
-    for dept in departments/*/; do
-        if [ -d "$dept" ]; then
-            dept_name=$(basename "$dept")
-
-            # Copy agent markdown
-            if [ -f "${dept}agent.md" ]; then
-                cp "${dept}agent.md" "$AGENTS_DIR/${dept_name}-department.md"
-                success "Installed department: $dept_name"
-            fi
-
-            # Copy department config
-            if [ -f "${dept}config.yaml" ]; then
-                cp "${dept}config.yaml" "$AGENTS_DIR/${dept_name}-config.yaml"
-            fi
-        fi
-    done
+    case "$platform" in
+        claude|claude-code)
+            install_claude_code "$mode"
+            ;;
+        cursor)
+            generate_context_file "cursor" "$target"
+            success "Cursor: Open your project and .cursorrules will be loaded automatically"
+            ;;
+        windsurf)
+            generate_context_file "windsurf" "$target"
+            success "Windsurf: Open your project and .windsurfrules will be loaded automatically"
+            ;;
+        gemini)
+            generate_context_file "gemini" "$target"
+            success "Gemini: GEMINI.md will be read as project context"
+            ;;
+        generic)
+            generate_context_file "generic" "$target"
+            success "Generic: Point your AI agent at CONTEXT.md as system instructions"
+            ;;
+        *)
+            warn "Unknown platform: $platform. Using generic install."
+            generate_context_file "generic" "$target"
+            ;;
+    esac
 }
 
-# Build MCP servers
+# ── Build MCP Servers ─────────────────────────────────────────────────────────
 build_mcp_servers() {
     log "Building MCP servers..."
 
-    cd "$PROJECT_DIR"
-
-    if [ -d "mcp-servers" ]; then
-        for server_dir in mcp-servers/*/; do
-            if [ -d "$server_dir" ] && [ -f "$server_dir/package.json" ]; then
-                server_name=$(basename "$server_dir")
-                step "Building $server_name..."
-
-                cd "$server_dir"
-
-                # Install dependencies
-                npm install --quiet 2>/dev/null || warn "npm install failed for $server_name"
-
-                # Build if build script exists
-                if grep -q '"build"' package.json 2>/dev/null; then
-                    npm run build --quiet 2>/dev/null || warn "Build failed for $server_name"
-                fi
-
-                cd "$PROJECT_DIR"
-                success "Built: $server_name"
-            fi
-        done
-    else
+    if [ ! -d "$PROJECT_DIR/mcp-servers" ]; then
         warn "No mcp-servers directory found"
-    fi
-}
-
-# Generate MCP configuration
-generate_mcp_config() {
-    log "Generating MCP configuration..."
-
-    local config_file="$ACOS_HOME/mcp-config.json"
-
-    cat > "$config_file" << EOF
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "node",
-      "args": ["$PROJECT_DIR/mcp-servers/filesystem/build/index.js"],
-      "env": {
-        "FILESYSTEM_ALLOWED_DIRS": "$HOME"
-      }
-    },
-    "database": {
-      "command": "node",
-      "args": ["$PROJECT_DIR/mcp-servers/database/build/index.js"],
-      "env": {
-        "DB_PATH": "$ACOS_HOME/acos.db"
-      }
-    },
-    "browser": {
-      "command": "node",
-      "args": ["$PROJECT_DIR/mcp-servers/browser/build/index.js"]
-    }
-  }
-}
-EOF
-
-    success "MCP configuration generated: $config_file"
-}
-
-# Create state file
-create_state() {
-    log "Creating state file..."
-
-    local state_file="$ACOS_HOME/state.json"
-    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-    cat > "$state_file" << EOF
-{
-  "version": "$VERSION",
-  "installedAt": "$timestamp",
-  "lastSync": null,
-  "skills": {},
-  "config": {
-    "autoUpdate": false,
-    "channel": "stable"
-  }
-}
-EOF
-
-    success "State file created"
-}
-
-# Install CLI tools
-install_cli() {
-    log "Installing CLI tools..."
-
-    cd "$PROJECT_DIR"
-
-    # Make bin scripts executable
-    if [ -d "bin" ]; then
-        chmod +x bin/* 2>/dev/null || true
-
-        # Create symlinks in ACOS_HOME
-        for script in bin/*; do
-            if [ -f "$script" ]; then
-                script_name=$(basename "$script")
-                ln -sf "$PROJECT_DIR/$script" "$ACOS_HOME/$script_name" 2>/dev/null || true
-            fi
-        done
-
-        success "CLI tools installed"
-
-        echo ""
-        log "To use ACOS CLI globally, add to your shell profile:"
-        echo -e "  ${YELLOW}export PATH=\"\$PATH:$ACOS_HOME\"${NC}"
-    fi
-}
-
-# Sync from GitHub
-sync_from_github() {
-    log "Syncing from GitHub..."
-
-    if ! command -v curl &> /dev/null; then
-        error "curl is required for GitHub sync"
+        return
     fi
 
-    # Fetch latest registry
-    curl -fsSL "$GITHUB_RAW/skills/registry.json" -o "$ACOS_HOME/registry.json.tmp" 2>/dev/null || {
-        error "Could not fetch registry from GitHub"
-    }
-
-    mv "$ACOS_HOME/registry.json.tmp" "$ACOS_HOME/registry.json"
-    success "Registry synced from GitHub"
-
-    # Update state
-    if command -v jq &> /dev/null; then
-        local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-        jq ".lastSync = \"$timestamp\"" "$ACOS_HOME/state.json" > "$ACOS_HOME/state.json.tmp"
-        mv "$ACOS_HOME/state.json.tmp" "$ACOS_HOME/state.json"
-    fi
+    for server_dir in "$PROJECT_DIR/mcp-servers"/*/; do
+        [ -d "$server_dir" ] && [ -f "$server_dir/package.json" ] || continue
+        local name=$(basename "$server_dir")
+        step "Building $name..."
+        (cd "$server_dir" && npm install --quiet 2>/dev/null && npm run build --quiet 2>/dev/null) || warn "Build failed for $name"
+        success "Built: $name"
+    done
 }
 
-# Show installation summary
+# ── Summary ───────────────────────────────────────────────────────────────────
 show_summary() {
+    local platforms="$1"
+
     echo ""
-    echo -e "${GREEN}═══════════════════════════════════════════════════════════════════${NC}"
-    echo -e "${GREEN}                    Installation Complete!                          ${NC}"
-    echo -e "${GREEN}═══════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${GREEN}${BOLD}═══════════════════════════════════════════════════════════${NC}"
+    echo -e "${GREEN}${BOLD}  ACOS v${VERSION} — Installation Complete${NC}"
+    echo -e "${GREEN}${BOLD}═══════════════════════════════════════════════════════════${NC}"
     echo ""
-    echo -e "  ${CYAN}Installation Directory:${NC} $ACOS_HOME"
-    echo -e "  ${CYAN}Skills Directory:${NC}       $SKILLS_DIR"
-    echo -e "  ${CYAN}Commands Directory:${NC}     $COMMANDS_DIR"
-    echo -e "  ${CYAN}Agents Directory:${NC}       $AGENTS_DIR"
+    echo -e "  ${CYAN}Platforms:${NC}  $platforms"
+    echo -e "  ${CYAN}Source:${NC}     $PROJECT_DIR"
     echo ""
-    echo -e "  ${YELLOW}Next Steps:${NC}"
-    echo "  1. Add ACOS to your PATH (see above)"
-    echo "  2. Configure MCP servers in Claude Code settings"
-    echo "  3. Restart Claude Code to load skills"
-    echo ""
-    echo -e "  ${YELLOW}Quick Commands:${NC}"
-    echo "  acos-sync list          # List available skills"
-    echo "  acos-sync install <skill>   # Install a skill"
-    echo "  acos-sync sync          # Sync from GitHub"
-    echo ""
+
+    if [[ "$platforms" == *"claude"* ]]; then
+        echo -e "  ${YELLOW}Claude Code:${NC}"
+        echo "    1. Open your project: claude"
+        echo "    2. Type: /acos"
+        echo "    3. Or just describe what you want"
+        echo ""
+    fi
+
+    if [[ "$platforms" == *"cursor"* ]]; then
+        echo -e "  ${YELLOW}Cursor:${NC}"
+        echo "    1. Copy .cursorrules to your project root"
+        echo "    2. Open project in Cursor"
+        echo "    3. Skills activate automatically from context"
+        echo ""
+    fi
+
+    if [[ "$platforms" == *"windsurf"* ]]; then
+        echo -e "  ${YELLOW}Windsurf:${NC}"
+        echo "    1. Copy .windsurfrules to your project root"
+        echo "    2. Open project in Windsurf"
+        echo "    3. Skills activate from context"
+        echo ""
+    fi
+
+    if [[ "$platforms" == *"gemini"* ]]; then
+        echo -e "  ${YELLOW}Gemini Code Assist:${NC}"
+        echo "    1. Copy GEMINI.md to your project root"
+        echo "    2. Gemini reads it as project context"
+        echo ""
+    fi
+
     echo -e "  ${CYAN}Documentation:${NC} https://github.com/$GITHUB_REPO"
     echo ""
 }
 
-# Main installation
+# ── Main ──────────────────────────────────────────────────────────────────────
 main() {
+    local platform=""
     local mode="standard"
-    local category="all"
+    local target_dir="."
 
-    # Parse arguments
     while [[ $# -gt 0 ]]; do
         case $1 in
-            --full)
-                mode="full"
-                shift
-                ;;
-            --minimal)
-                mode="minimal"
-                shift
-                ;;
-            --skills-only)
-                mode="skills"
-                shift
-                ;;
-            --mcp-only)
-                mode="mcp"
-                shift
-                ;;
-            --sync)
-                mode="sync"
-                shift
-                ;;
-            --category=*)
-                category="${1#*=}"
-                shift
-                ;;
-            --help|-h)
-                show_help
-                exit 0
-                ;;
-            *)
-                warn "Unknown option: $1"
-                shift
-                ;;
+            --platform=*)  platform="${1#*=}"; shift ;;
+            --target=*)    target_dir="${1#*=}"; shift ;;
+            --full)        mode="full"; shift ;;
+            --minimal)     mode="minimal"; shift ;;
+            --skills-only) mode="skills"; shift ;;
+            --hooks-only)  mode="hooks"; shift ;;
+            --mcp-only)    mode="mcp"; shift ;;
+            --sync)        mode="sync"; shift ;;
+            --help|-h)     show_help; exit 0 ;;
+            *)             warn "Unknown option: $1"; shift ;;
         esac
     done
 
     show_banner
     check_prerequisites
-    create_directories
 
-    case $mode in
-        "full")
-            install_skills "$category"
-            install_commands
-            install_agents
-            build_mcp_servers
-            generate_mcp_config
-            install_cli
-            create_state
-            ;;
-        "minimal")
-            install_skills "technical"
-            install_commands
-            create_state
-            ;;
-        "skills")
-            install_skills "$category"
-            install_commands
-            create_state
-            ;;
+    # Auto-detect if no platform specified
+    if [ -z "$platform" ]; then
+        platform=$(detect_platforms)
+        log "Detected platform(s): $platform"
+    fi
+
+    # Handle special modes
+    case "$mode" in
         "mcp")
             build_mcp_servers
-            generate_mcp_config
+            echo ""
+            success "MCP servers built."
+            exit 0
             ;;
         "sync")
-            sync_from_github
-            ;;
-        *)
-            install_skills "$category"
-            install_commands
-            install_agents
-            install_cli
-            create_state
+            log "Syncing from GitHub..."
+            if command -v git &>/dev/null; then
+                (cd "$PROJECT_DIR" && git pull --rebase origin main 2>/dev/null) || warn "Git sync failed"
+                success "Synced from GitHub"
+            else
+                error "git is required for sync"
+            fi
+            exit 0
             ;;
     esac
 
-    show_summary
+    # Install for each platform
+    IFS=',' read -ra PLATFORMS <<< "$platform"
+    for p in "${PLATFORMS[@]}"; do
+        p=$(echo "$p" | xargs) # trim whitespace
+        if [ "$p" = "all" ]; then
+            local detected=$(detect_platforms)
+            IFS=',' read -ra ALL_PLATFORMS <<< "$detected"
+            for ap in "${ALL_PLATFORMS[@]}"; do
+                install_platform "$(echo "$ap" | xargs)" "$mode" "$target_dir"
+            done
+        else
+            install_platform "$p" "$mode" "$target_dir"
+        fi
+    done
+
+    # Build MCP servers if full mode
+    if [ "$mode" = "full" ]; then
+        build_mcp_servers
+    fi
+
+    show_summary "$platform"
 }
 
-# Run
 main "$@"

@@ -1,0 +1,78 @@
+{
+  "version": "10.0",
+  "description": "Agent IAM — per-profile tool and directory scopes. Customize paths for your project.",
+  "profiles": {
+    "content-writer": {
+      "description": "Blog articles, documentation, content creation",
+      "allowedTools": ["Read", "Edit", "Write", "Grep", "Glob", "WebSearch", "WebFetch"],
+      "deniedTools": ["Bash"],
+      "allowedPaths": ["content/**", "docs/**", "public/images/**"],
+      "deniedPaths": [".claude/**", "*.json", "*.config.*"],
+      "maxFileEdits": 15,
+      "canCreateFiles": true,
+      "canDeleteFiles": false
+    },
+    "frontend-engineer": {
+      "description": "UI components, styling, layouts",
+      "allowedTools": ["Read", "Edit", "Write", "Grep", "Glob", "Bash", "WebSearch"],
+      "deniedTools": [],
+      "allowedPaths": ["src/**", "app/**", "components/**", "lib/**", "public/**"],
+      "deniedPaths": [".claude/settings.json", ".env*"],
+      "maxFileEdits": 25,
+      "canCreateFiles": true,
+      "canDeleteFiles": false
+    },
+    "backend-engineer": {
+      "description": "APIs, database, server-side logic",
+      "allowedTools": ["Read", "Edit", "Write", "Grep", "Glob", "Bash"],
+      "deniedTools": [],
+      "allowedPaths": ["src/**", "api/**", "lib/**", "scripts/**"],
+      "deniedPaths": ["public/**", "content/**"],
+      "maxFileEdits": 20,
+      "canCreateFiles": true,
+      "canDeleteFiles": false
+    },
+    "devops-engineer": {
+      "description": "Deployment, CI/CD, build configuration",
+      "allowedTools": ["Read", "Edit", "Write", "Bash", "Grep", "Glob"],
+      "deniedTools": [],
+      "allowedPaths": ["*.config.*", "package.json", ".github/**", "scripts/**", "Dockerfile*"],
+      "deniedPaths": ["content/**"],
+      "maxFileEdits": 10,
+      "canCreateFiles": true,
+      "canDeleteFiles": true
+    },
+    "security-auditor": {
+      "description": "Security review, dependency audit — read-only",
+      "allowedTools": ["Read", "Grep", "Glob", "Bash", "WebSearch"],
+      "deniedTools": ["Edit", "Write"],
+      "allowedPaths": ["**"],
+      "deniedPaths": [],
+      "maxFileEdits": 0,
+      "canCreateFiles": false,
+      "canDeleteFiles": false
+    },
+    "system-architect": {
+      "description": "ACOS internals, hooks, configuration — requires gate approval",
+      "allowedTools": ["Read", "Edit", "Write", "Bash", "Grep", "Glob"],
+      "deniedTools": [],
+      "allowedPaths": [".claude/**"],
+      "deniedPaths": [],
+      "maxFileEdits": 30,
+      "canCreateFiles": true,
+      "canDeleteFiles": false,
+      "requiresGateApproval": true
+    }
+  },
+  "globalDeny": {
+    "paths": [".env*", "*.pem", "*.key", "*credentials*", "*secret*"],
+    "tools": [],
+    "description": "Secrets and credentials are globally denied to all profiles"
+  },
+  "escalation": {
+    "onDenied": "warn",
+    "logTo": ".claude-flow/audit.jsonl",
+    "maxViolations": 3,
+    "onMaxViolations": "circuit_break"
+  }
+}
