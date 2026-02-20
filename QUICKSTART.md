@@ -1,69 +1,84 @@
-# ACOS v6 Quick Start Guide
+# ACOS v10 Quick Start
 
-Get up and running with Agentic Creator OS in under 5 minutes.
+Get up and running in under 5 minutes.
 
 ---
 
 ## Prerequisites
 
-- [Claude Code](https://claude.ai/claude-code) installed
 - Git
-- Node.js 18+ (for MCP servers)
+- Node.js 18+ (only needed for MCP servers)
 
 ---
 
-## Installation
+## Install
 
-### Option 1: Full Install (Recommended)
+### Claude Code (Full Feature Set)
 
 ```bash
-# Clone the repo
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-
-# Run installer
 ./install.sh
 
-# Open Claude Code
+# Open any project with Claude Code
 claude
+/acos
 ```
 
-### Option 2: Manual Setup
+### Cursor
 
 ```bash
-# Clone the repo
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-
-# Copy commands to user level
-cp .claude/commands/*.md ~/.claude/commands/
-
-# Open Claude Code in the repo
-claude
+./install.sh --platform=cursor
 ```
+
+Generates `.cursorrules` with skills and agent definitions embedded.
+
+### Windsurf
+
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=windsurf
+```
+
+Generates `.windsurfrules` with skills and agent definitions embedded.
+
+### Gemini Code Assist
+
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=gemini
+```
+
+Generates `GEMINI.md` context file.
+
+### Any AI Coding Agent
+
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=generic
+```
+
+Generates `CONTEXT.md`. Point your agent at it as system prompt or project instructions.
 
 ---
 
-## First Commands to Try
-
-Once installed, open Claude Code and try:
+## First Commands (Claude Code)
 
 ```bash
-# The single entry point - shows all available commands
-/acos
-
-# Write a blog post
-/article-creator
-
-# Generate research-grounded images
-/infogenius
-
-# Build a feature with spec-driven development
-/spec
-
-# Enterprise AI system design
-/starlight-architect
+/acos                    # Smart router — shows all commands
+/article-creator         # Write a blog post
+/create-music            # Produce a track with Suno
+/spec                    # Spec-driven feature development
+/starlight-architect     # Enterprise AI system design
+/infogenius              # Research-grounded image generation
 ```
+
+On non-Claude platforms, just describe the task. Skills activate from context.
 
 ---
 
@@ -71,147 +86,67 @@ Once installed, open Claude Code and try:
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| Commands | 26 | Creator commands accessible via `/command` |
-| Skills | 81 | Auto-activated domain knowledge |
-| Agents | 40 | Specialized AI personas |
-| Workflows | 37 | YAML pipeline definitions |
-| MCP Servers | 7 | External tool integrations |
-| Templates | 40 | Content creation templates |
+| Commands | 35+ | Slash commands via `/acos` smart router |
+| Skills | 75+ | Auto-activating domain knowledge modules |
+| Agents | 38 | Specialized AI personas |
+| Workflows | 11 | YAML pipeline definitions |
+| Departments | 5 | Agent team configurations |
+| MCP Servers | 7 | Optional tool integrations |
 
 ---
 
-## Key Commands by Category
+## How Auto-Activation Works
 
-### Creation
-| Command | Purpose |
-|---------|---------|
-| `/article-creator` | Guided blog article creation |
-| `/create-music` | Suno music production |
-| `/infogenius` | Research-grounded image generation |
-| `/factory` | Full publishing pipeline |
+Skills load automatically based on `skill-rules.json` — 22 pattern rules:
 
-### Strategy
-| Command | Purpose |
-|---------|---------|
-| `/starlight-architect` | Enterprise AI system design |
-| `/research` | Daily intelligence operations |
-| `/plan-week` | Weekly content planning |
+```
+You: "write a blog post about AI agents"
+  -> Detects: "blog", "write"
+  -> Auto-loads: content-strategy skill
+  -> Routes to: /article-creator
+```
 
-### Development
-| Command | Purpose |
-|---------|---------|
-| `/spec` | Spec-driven feature development |
-| `/publish` | Deploy content with quality gates |
+No manual invocation needed. The system matches your intent to the right skills.
 
 ---
 
-## How It Works
+## v10 Safety Systems
 
-### Smart Routing with /acos
-
-`/acos` parses your intent and routes to the right command:
-
-```
-You: /acos write a blog post about AI agents
-  → Routes to /article-creator
-  → Auto-loads content-strategy skill
-  → Guided article creation workflow
-```
-
-### Skill Auto-Activation
-
-Skills load automatically based on YAML frontmatter triggers:
-
-```yaml
-# In SKILL.md
----
-name: content-strategy
-triggers: [blog, article, content, post, newsletter]
----
-```
-
-When you mention "blog" or "article", the content-strategy skill activates.
-
-### Magic Words
-
-| Word | Effect |
-|------|--------|
-| `ultrawork` | Fire all relevant agents in parallel |
-| `ultracode` | Fire coding specialists in parallel |
+| System | What It Does |
+|--------|-------------|
+| **Circuit Breaker** | Tracks failures per file. 3 = warn, 5 = restrict, 8 = block |
+| **Agent IAM** | 6 profiles with per-tool, per-directory scoping |
+| **Self-Modify Gate** | Snapshots config before changes, auto-reverts if score drops |
+| **Audit Trail** | Append-only JSONL logging of all actions |
 
 ---
 
-## Project Structure
+## Platform Feature Parity
 
-```
-agentic-creator-os/
-├── .claude/
-│   ├── commands/        # 26 slash commands
-│   ├── skills/          # 81 skill definitions
-│   ├── agents/          # 40 agent definitions
-│   ├── hooks.json       # Lifecycle hooks (reference)
-│   └── skill-rules.json # Auto-activation rules (reference)
-├── workflows/           # 37 YAML workflow pipelines
-├── departments/         # 5 team configurations
-├── templates/           # 40 content templates
-├── mcp-servers/         # 7 MCP server implementations
-├── install.sh           # Installation script
-└── ACOS-V6-SPEC.md      # Full v6 specification
-```
+| Feature | Claude Code | Cursor | Windsurf | Gemini | Generic |
+|---------|:-----------:|:------:|:--------:|:------:|:-------:|
+| Skills | Full | Embedded | Embedded | Embedded | Embedded |
+| Commands | Slash commands | Context-guided | Context-guided | Context-guided | Context-guided |
+| Agents | Full | Embedded | Embedded | Embedded | Embedded |
+| Hooks | Native | -- | -- | -- | -- |
+| Auto-activation | skill-rules.json | -- | -- | -- | -- |
+| Agent IAM | Native | -- | -- | -- | -- |
+
+Claude Code gets the richest integration. Other platforms get skills and agents embedded in their context files.
 
 ---
 
 ## Troubleshooting
 
-### Commands not working?
-
-Commands must be at user level (`~/.claude/commands/`) to work:
-
+**Commands not found?** Copy to user level:
 ```bash
-# Check if commands are installed
-ls ~/.claude/commands/
-
-# If empty, copy from repo
 cp .claude/commands/*.md ~/.claude/commands/
 ```
 
-### Skills not loading?
+**MCP servers?** These are optional. See `mcp-servers/README.md`.
 
-Skills auto-activate via YAML frontmatter. Check the skill file:
-
-```bash
-cat .claude/skills/content-strategy/SKILL.md | head -10
-```
-
-### MCP servers not connecting?
-
-Build and configure MCP servers:
-
-```bash
-# Build all servers
-./build-servers.sh
-
-# Add to your Claude Code MCP config
-# (Location varies by IDE)
-```
+**Need help?** [Open an issue](https://github.com/frankxai/agentic-creator-os/issues)
 
 ---
 
-## Next Steps
-
-1. **Explore commands**: Run `/acos` to see all options
-2. **Read the spec**: `cat ACOS-V6-SPEC.md`
-3. **Check architecture**: `cat ARCHITECTURE.md`
-4. **View skill tree**: `cat SKILL_TREE.md`
-
----
-
-## Getting Help
-
-- **Issues**: [GitHub Issues](https://github.com/frankxai/agentic-creator-os/issues)
-- **Docs**: See `ARCHITECTURE.md`, `ACOS-V6-SPEC.md`
-- **Credits**: See `CREDITS.md` for inspiration sources
-
----
-
-*ACOS v6.0 - The Operating System for Golden Age Creators*
+*ACOS v10.1 — The Operating System for AI-Powered Creators*

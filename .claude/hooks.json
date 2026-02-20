@@ -1,21 +1,20 @@
 {
-  "_description": "ACOS v6.1 Hooks - Real implementations with confidence scoring, model routing, context tracking",
-  "_version": "6.1.0",
+  "_description": "ACOS v10 Hooks — Skill activation, model routing, brand voice, context tracking",
+  "_version": "10.0.0",
   "_sources": [
-    "diet103/claude-code-infrastructure-showcase - skill activation with confidence scoring",
-    "ChrisWiles/claude-code-showcase - hook lifecycle patterns",
-    "decider/claude-hooks - enforcement types",
-    "claude-flow v3 - context budget tracking, model routing, anti-drift"
+    "diet103/claude-code-infrastructure-showcase — skill activation with confidence scoring",
+    "ChrisWiles/claude-code-showcase — hook lifecycle patterns",
+    "decider/claude-hooks — enforcement types"
   ],
-  "_updated": "2026-01-28",
+  "_updated": "2026-02-20",
 
   "hooks": {
     "SessionStart": [
       {
         "name": "acos-context-loader",
-        "description": "Load ACOS v6.1 with model routing and enhanced skill rules",
+        "description": "Load ACOS v10 with model routing and skill auto-activation",
         "type": "command",
-        "command": "echo '✅ ACOS v6.1 loaded | Model Routing ON | Confidence Scoring ON | Context Tracking ON'",
+        "command": "echo 'ACOS v10 loaded | Model Routing ON | Skill Auto-Activation ON | Safety Hooks ON'",
         "once": true
       },
       {

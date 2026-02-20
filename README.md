@@ -4,11 +4,11 @@
 
 **The Operating System for AI-Powered Creators**
 
-*One install. Any coding agent. 90+ skills, 50+ commands, 39 agents — auto-activating.*
+*One install. Any coding agent. 75+ skills, 35+ commands, 38 agents — auto-activating.*
 
 ![ACOS v10](docs/infographics/acos-hero.png)
 
-[![Version](https://img.shields.io/badge/version-10.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
+[![Version](https://img.shields.io/badge/version-10.1.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
 [![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
 
@@ -107,7 +107,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
                             |
               +-------------+-------------+
               |             |             |
-         Commands (50+)  Skills (90+)  Agents (39)
+         Commands (35+)  Skills (75+)  Agents (38)
               |             |             |
               +------+------+------+------+
                      |             |
@@ -126,7 +126,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 ## What's Included
 
-### Commands (50+)
+### Commands (35+)
 
 | Category | Count | Examples |
 |----------|-------|----------|
@@ -138,7 +138,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 > Commands are Claude Code slash commands. On other platforms, describe the task and ACOS skills guide the agent to the same workflows.
 
-### Skills (90+ Auto-Activating)
+### Skills (75+ Auto-Activating)
 
 Skills are domain knowledge modules that **activate automatically** based on what you're doing. No manual invocation needed.
 
@@ -160,7 +160,7 @@ skill-rules.json → 22 pattern rules
   "deploy" + "vercel"   → loads vercel-deployment + nextjs-best-practices
 ```
 
-### Agents (39 Specialized)
+### Agents (38 Specialized)
 
 | Domain | Agents | Examples |
 |--------|--------|----------|
@@ -264,9 +264,9 @@ The install script detects your platform and configures accordingly:
 ```
 agentic-creator-os/
 ├── .claude/
-│   ├── commands/           # 50+ slash commands
-│   ├── skills/             # 90+ auto-activating skills
-│   ├── agents/             # 39 specialized agents
+│   ├── commands/           # 35+ slash commands
+│   ├── skills/             # 75+ auto-activating skills
+│   ├── agents/             # 38 specialized agents
 │   ├── hooks/              # v10 safety hooks
 │   │   ├── circuit-breaker.sh
 │   │   ├── audit-trail.sh
@@ -311,9 +311,9 @@ Starlight Intelligence System (Framework)
 ├── 6 orchestration patterns
 └── Platform adapters
      └── ACOS (Claude Code + Multi-Platform)
-         ├── 50+ commands routed through /acos
-         ├── 39 agents aligned to Starlight council
-         ├── 90+ auto-activating skills
+         ├── 35+ commands routed through /acos
+         ├── 38 agents aligned to Starlight council
+         ├── 75+ auto-activating skills
          ├── v10 safety systems (IAM, circuit breaker, audit)
          └── Self-learning via trajectory patterns
 ```
@@ -335,7 +335,8 @@ Starlight Intelligence System (Framework)
 
 | Version | Date | Highlights |
 |---------|------|------------|
-| **v10.0** | Feb 2026 | Autonomous Intelligence — 5 safety systems, multi-platform, Agent IAM |
+| **v10.1** | Feb 2026 | Deep clean — removed claude-flow artifacts, honest metrics, clean repo |
+| v10.0 | Feb 2026 | Autonomous Intelligence — 5 safety systems, multi-platform, Agent IAM |
 | v8.0 | Feb 2026 | Starlight integration, GitHub release assets, swarm orchestration |
 | v7.0 | Feb 2026 | Visionary agent, premium infographics, expanded commands |
 | v6.0 | Jan 2026 | Smart router (/acos), auto-activation, hooks |
@@ -378,9 +379,9 @@ MIT — Use it, fork it, build your own OS with it.
 
 <div align="center">
 
-**Agentic Creator OS v10.0** — Autonomous Intelligence
+**Agentic Creator OS v10.1** — Autonomous Intelligence
 
-*90+ Skills | 50+ Commands | 39 Agents | Multi-Platform | Self-Learning*
+*75+ Skills | 35+ Commands | 38 Agents | Multi-Platform | Self-Learning*
 
 [GitHub](https://github.com/frankxai/agentic-creator-os) | [Website](https://frankx.ai/products/agentic-creator-os) | [Issues](https://github.com/frankxai/agentic-creator-os/issues)
 
