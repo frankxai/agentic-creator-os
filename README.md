@@ -295,7 +295,7 @@ agentic-creator-os/
 ├── docs/infographics/      # Visual documentation
 ├── install.sh              # Multi-platform installer
 ├── CLAUDE.md               # Claude Code context
-└── package.json            # v10.0.0
+└── package.json            # v10.1.0
 ```
 
 ---

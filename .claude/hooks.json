@@ -1,6 +1,6 @@
 {
   "_description": "ACOS v10 Hooks — Skill activation, model routing, brand voice, context tracking",
-  "_version": "10.0.0",
+  "_version": "10.1.0",
   "_sources": [
     "diet103/claude-code-infrastructure-showcase — skill activation with confidence scoring",
     "ChrisWiles/claude-code-showcase — hook lifecycle patterns",
