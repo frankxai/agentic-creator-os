@@ -1,175 +1,290 @@
 ---
 name: hook
-description: Generate high-retention content hooks using tri-modal engineering (Visual + Audio + Text) with wisdom-based principles. Use when creating video intros, social content openings, article hooks, or any content requiring attention capture. Emphasizes first principles, research-backed psychology, and integrity-based curiosity over manipulation tactics.
+description: Generate high-retention content hooks using tri-modal engineering (Visual + Audio + Text) across 10 dimensions — from research-backed wisdom to frontier science to comedic timing. State-of-art 2026 hook psychology for creators who respect their audience's intelligence. Use when creating video intros, social content, article hooks, or any attention capture.
 ---
 
-# Hook Engineering
+# Hook Engineering v2.0
 
-Generate compelling content hooks that respect intelligence while capturing attention. This skill uses tri-modal engineering (Visual + Audio + Text) combined with wisdom-based principles.
+Generate compelling content hooks across **10 dimensions** using tri-modal engineering (Visual + Audio + Text). State-of-art 2026 approaches combining cognitive science, narrative theory, and platform psychology.
 
 ---
 
-## Core Philosophy: Wisdom Over Manipulation
+## Core Philosophy
 
-**FrankX Hooks are built on integrity:**
+**Intelligence Over Manipulation:**
 
-| AVOID (Manipulation) | EMBRACE (Wisdom) |
-|----------------------|------------------|
-| "Stop doing X" | "Research shows..." |
-| "You won't believe..." | "The pattern behind..." |
-| "This mistake is killing..." | "What masters understand..." |
-| Fear, shame, FOMO | Curiosity, insight, value |
-| Clickbait promises | First principles revelation |
+| AVOID | EMBRACE |
+|-------|---------|
+| Fear, shame, FOMO | Curiosity, wonder, adventure |
+| "Stop doing X" | "The frontier where..." |
+| Empty clickbait | Earned intrigue |
+| Manufactured urgency | Genuine discovery |
 
-**The Test:** Would you be proud to show this hook to someone you respect?
+**The Test:** Does this hook invite exploration or exploit anxiety?
 
 ---
 
 ## The Tri-Modal Framework
 
-Every hook synchronizes three attention channels in the first 3 seconds:
+Every hook synchronizes three attention channels:
 
 ```
 HOOK = [VISUAL] × [AUDIO] × [TEXT]
+         ↓           ↓          ↓
+    Pattern      Emotional   Curiosity
+    Interrupt    Resonance   Architecture
 ```
 
-### Visual Hook (Pattern Interruption)
-Breaks scrolling rhythm through motion, contrast, or anomaly.
-
-**Techniques:**
-- Sudden zoom (tight close-up on unexpected detail)
-- Contrast shift (bright → dark, motion → stillness)
-- Spatial anomaly (unusual framing, breaking the fourth wall)
-- Object focus (single element demands attention)
-
-### Audio Hook (Emotional Resonance)
-Sets mood instantly or uses auditory cue to snap attention.
-
-**Techniques:**
-- Sound-silence contrast (sharp sound → 0.5s silence)
-- Voice tone shift (whisper, authority, wonder)
-- Environmental audio (establishes context instantly)
-- Music drop (energy shift in first beat)
-
-### Text Hook (Curiosity Gap)
-Introduces insight, pattern, or revelation that requires continuing to resolve.
-
-**Wisdom-Based Formulas:**
-- "The [principle/pattern] that [experts/research] reveals..."
-- "[Field] shows us [counterintuitive insight]..."
-- "What [respected source] understood about [topic]..."
-- "The first principle behind [phenomenon]..."
-- "[Number] [findings/patterns] that [transform/explain] [outcome]..."
+**2026 Enhancement:** Add **cognitive load balancing** — ensure one channel leads while others support, never three competing elements.
 
 ---
 
-## Hook Categories
+## 10 Hook Dimensions
 
-### 1. Research-Backed (Science)
-Ground hooks in published research, studies, or expert consensus.
+### FOUNDATION TIER (Credibility)
 
-**Formula:** "[Study/Research] discovered that [surprising finding]..."
+#### 1. Research-Backed (Science)
+Ground hooks in published research, data patterns, or expert consensus.
 
-**Examples:**
-- "MIT researchers found that [insight]..."
-- "After studying 10,000 [subjects], the pattern was clear..."
-- "The neuroscience behind [behavior] reveals..."
-
-### 2. First Principles (Pattern Recognition)
-Reveal the underlying structure that explains surface phenomena.
-
-**Formula:** "The [fundamental principle] behind [observable thing]..."
+**Formula:** `[Institution/Researcher] [discovered/found] [surprising finding]`
 
 **Examples:**
-- "Every successful [X] shares this same architecture..."
-- "Strip away the noise, and [topic] reduces to [principle]..."
-- "The building block that [experts] start with..."
+- "MIT's AI lab found the pattern that predicts creative breakthroughs."
+- "After analyzing 50,000 decisions, one cognitive bias appeared in 94%."
+- "Neuroscience just explained why your best ideas come in the shower."
 
-### 3. Wisdom Transfer (Masters & Mentors)
-Share insights from respected sources, historical figures, or proven practitioners.
+**Best For:** Educational content, professional audiences, building authority.
 
-**Formula:** "What [respected source] understood about [topic]..."
+---
+
+#### 2. First Principles (Pattern Recognition)
+Reveal the underlying architecture that explains surface phenomena.
+
+**Formula:** `The [fundamental structure] behind [observable thing]`
 
 **Examples:**
-- "The approach that [expert] uses for [challenge]..."
-- "After 30 years of [practice], [master] discovered..."
-- "The question that [thinker] asked that changed [field]..."
+- "Every viral idea shares this same architecture."
+- "Strip away the noise: mastery reduces to one feedback loop."
+- "The physics of compound growth most people never visualize."
 
-### 4. Counter-Intuitive Insight (Reframes)
+**Best For:** Systems thinkers, strategic content, those tired of surface advice.
+
+---
+
+#### 3. Wisdom Transfer (Masters & Mentors)
+Share insights from proven practitioners with earned credibility.
+
+**Formula:** `What [expert] understood about [topic] that [most miss]`
+
+**Examples:**
+- "What chess grandmasters know about decision-making under pressure."
+- "The counterintuitive advice every experienced founder eventually gives."
+- "After 10,000 hours, here's what actually matters."
+
+**Best For:** Mentorship content, trust-building, experience-based audiences.
+
+---
+
+### EXPANSION TIER (Engagement)
+
+#### 4. Counter-Intuitive (Reframes)
 Present a perspective shift that makes the familiar strange.
 
-**Formula:** "[Common belief] misses [deeper truth]..."
+**Formula:** `[Common belief] misses [deeper truth]`
 
 **Examples:**
-- "The opposite of [conventional wisdom] is actually true..."
-- "What everyone overlooks about [topic]..."
-- "The hidden variable in [equation everyone knows]..."
+- "The most productive people don't use productivity systems."
+- "Motivation is actually the enemy of consistency."
+- "Why your biggest strength is probably your biggest blindspot."
 
-### 5. Transformation Story (Journey)
+**Best For:** Thought leadership, viral potential, challenging audiences.
+
+---
+
+#### 5. Transformation (Journey)
 Open with the pivot point of a meaningful change.
 
-**Formula:** "[Moment of insight] that shifted [outcome]..."
+**Formula:** `The [moment/catalyst] that [shifted everything]`
 
 **Examples:**
-- "The single conversation that changed how I [approach]..."
-- "Three words from [mentor] that restructured my [system]..."
-- "The failure that revealed [principle]..."
+- "The three-word question that restructured my entire approach."
+- "What I unlearned after a decade in the industry."
+- "The day I stopped optimizing and started building."
+
+**Best For:** Personal brand, trust-building, deeper engagement.
+
+---
+
+#### 6. Adventure (Exploration Call)
+Invite the audience into an unfolding journey or discovery.
+
+**Formula:** `[Action verb] into [unexplored territory] where [intriguing possibility]`
+
+**Examples:**
+- "Let's trace the path where ancient wisdom meets machine learning."
+- "Follow this thread into the mathematics of beauty."
+- "Venture with me into the architecture of extraordinary teams."
+
+**Best For:** Documentaries, long-form, audience who loves the journey.
+
+**Emotional Core:** Wonder, anticipation, shared discovery.
+
+---
+
+#### 7. Humor (Pattern Disruption)
+Use comedic timing, absurdity, or wit to create memorable hooks.
+
+**Formula:** `[Setup expectation] → [Subvert with truth/absurdity]`
+
+**Examples:**
+- "I asked GPT-5 for life advice. It told me to touch grass. Fair."
+- "The productivity hack that changed my life: lowering my standards."
+- "Scientists discovered why we procrastinate. We're still processing the findings."
+
+**Best For:** Relatability, virality, humanizing expertise.
+
+**Comedic Techniques:**
+- **Subverted expectations** — Setup leads one way, punchline pivots
+- **Self-deprecation** — Humanizes the creator
+- **Absurdist precision** — Specific details make absurdity land
+- **Callback potential** — Humor that rewards attention
+
+---
+
+### FRONTIER TIER (Vision)
+
+#### 8. Visionary (Future Architecture)
+Paint a compelling picture of emerging possibilities.
+
+**Formula:** `[Emerging pattern] is reshaping [domain] — here's [the architecture]`
+
+**Examples:**
+- "The infrastructure being built right now will define the next decade."
+- "What the next generation of creators will take for granted."
+- "The shift happening beneath the surface of every industry."
+
+**Best For:** Thought leadership, forward-thinking audiences, inspiration.
+
+**Visionary Techniques:**
+- **Pattern extrapolation** — Connect dots others haven't
+- **Inevitability framing** — "Not if, but when and how"
+- **Agency invitation** — Position audience as builders, not spectators
+
+---
+
+#### 9. Frontier Science (Quantum / Space / Deep Systems)
+Hook with cutting-edge science that reveals fundamental truths.
+
+**Formula:** `[Scientific frontier] reveals [unexpected insight about reality/ourselves]`
+
+**Examples:**
+- "Quantum mechanics suggests your decisions create parallel versions of you."
+- "What black holes teach us about information and memory."
+- "The mathematics of emergence: how simple rules create infinite complexity."
+- "Cosmology's answer to why anything exists at all."
+- "The observer effect isn't just physics — it's psychology."
+
+**Best For:** Intellectually curious audiences, wonder-seekers, deep thinkers.
+
+**Science Domains:**
+- **Quantum mechanics** — Observer effects, superposition, entanglement
+- **Cosmology** — Origins, scale, cosmic perspective
+- **Complexity theory** — Emergence, self-organization, networks
+- **Neuroscience** — Consciousness, perception, decision-making
+- **Information theory** — Entropy, computation, reality as information
+
+**Integrity Note:** Ground in actual science, not pseudoscience. Link to real research.
+
+---
+
+#### 10. Exploration (Unknown Territories)
+Invite deep dives into uncharted conceptual or physical spaces.
+
+**Formula:** `Beyond [known boundary] lies [territory worth exploring]`
+
+**Examples:**
+- "Past the edge of the observable universe, physics gets weird."
+- "Below the surface of expertise lies the territory of intuition."
+- "Inside the gap between stimulus and response is everything."
+- "What lies in the space between knowing and understanding."
+
+**Best For:** Philosophical content, depth-seekers, contemplative audiences.
+
+**Exploration Techniques:**
+- **Liminal spaces** — Thresholds, transitions, in-between states
+- **Scale shifts** — Zoom in or out to reveal hidden patterns
+- **Boundary questioning** — Challenge assumed limits
+
+---
+
+## 2026 State-of-Art Techniques
+
+### Cognitive Load Optimization
+Modern hooks balance three loads:
+1. **Intrinsic** — Complexity of the idea itself
+2. **Extraneous** — Noise from presentation
+3. **Germane** — Productive processing toward understanding
+
+**Principle:** Reduce extraneous, match intrinsic to audience, maximize germane.
+
+### Attention Wavelength Matching
+Different platforms have different attention "frequencies":
+- **TikTok:** 0.5-2s hook window, high energy required
+- **YouTube:** 3-10s hook window, can build
+- **LinkedIn:** 1-2 sentence hook, professional framing
+- **Twitter/X:** Single line hook, thread promise
+- **Podcast:** Voice modulation in first 15s
+
+### Dopamine Architecture
+2026 understanding: Dopamine isn't about pleasure, it's about **anticipated reward**.
+
+**Application:** Hooks should create anticipation of insight, not just promise it.
+
+### Pattern Interrupt Calculus
+The brain filters ~99% of input. To break through:
+1. **Novelty** — Something unexpected
+2. **Relevance** — Connected to existing mental models
+3. **Tension** — Gap between current and desired state
+
+**Best hooks hit all three.**
 
 ---
 
 ## Output Format
 
-When generating hooks, produce two concepts using this structure:
+When generating hooks, produce concepts using this structure:
 
+```
 ### Concept [Number]: [Working Title]
-**Category:** [Research | First Principles | Wisdom | Counter-Intuitive | Transformation]
-**Target Emotion:** [Curiosity | Recognition | Wonder | Insight | Validation]
+**Dimension:** [Research | First Principles | Wisdom | Counter-Intuitive |
+               Transformation | Adventure | Humor | Visionary | Frontier Science | Exploration]
+**Target Emotion:** [Curiosity | Recognition | Wonder | Insight | Validation |
+                    Amusement | Anticipation | Awe]
 
-- **Visual Hook:** [Precise visual direction - camera movement, subject, lighting, pacing]
-- **Audio Hook:** [Soundscape description - SFX, music, voice tone, silence beats]
-- **Text Hook:** [Exact on-screen text or spoken line, under 12 words]
+- **Visual Hook:** [Precise direction]
+- **Audio Hook:** [Soundscape description]
+- **Text Hook:** [Exact words, under 12]
 
-**Why It Works:** [1-2 sentences on the psychology/principle behind effectiveness]
-
----
-
-## Platform Adaptations
-
-### Short-Form Video (TikTok, Reels, Shorts)
-- Visual: First frame must be the hook (thumbnail extraction)
-- Audio: Sound-on assumed, but text must work sound-off
-- Text: Large, readable, 3-7 words max
-- Pacing: 0.5-1.5 seconds to hook
-
-### Long-Form Video (YouTube)
-- Visual: Can build slightly (2-3 seconds)
-- Audio: Music bed acceptable
-- Text: Can be more complex (8-15 words)
-- Pacing: First 10 seconds critical, but 3-5 second hook window
-
-### Written Content (Articles, Threads)
-- Text-only hooks translate from the TEXT component
-- Opening line = hook, first paragraph = expansion
-- Pattern: Hook → Context → Promise → Deliver
-
-### Podcast/Audio
-- Audio hook + text hook (spoken) only
-- Voice modulation critical
-- Silence is powerful
+**Why It Works:** [Psychology/principle]
+**Platform Fit:** [Best platforms]
+```
 
 ---
 
-## Quality Checklist
+## Quick Reference: Dimension Selection
 
-Before finalizing a hook:
-
-- [ ] **Integrity Test** — Would you show this to someone you respect?
-- [ ] **Value Test** — Does it promise something genuinely useful?
-- [ ] **Specificity Test** — Is there a concrete insight, not vague intrigue?
-- [ ] **Tri-Modal Sync** — Do visual, audio, text complement (not compete)?
-- [ ] **Wisdom Category** — Does it fit Research, First Principles, Wisdom, Counter-Intuitive, or Transformation?
-- [ ] **No Manipulation** — Free of fear, shame, FOMO, clickbait?
-- [ ] **Actionable Directions** — Can a creator/editor execute this?
+| If the topic involves... | Use Dimension |
+|-------------------------|---------------|
+| Data, studies, research | Research-Backed |
+| Systems, architecture, fundamentals | First Principles |
+| Expert insight, experience | Wisdom Transfer |
+| Challenging common belief | Counter-Intuitive |
+| Personal journey, pivot | Transformation |
+| Unfolding discovery | Adventure |
+| Relatable absurdity | Humor |
+| Future trends, emergence | Visionary |
+| Physics, cosmos, deep science | Frontier Science |
+| Unknown territories, depth | Exploration |
 
 ---
 
@@ -178,65 +293,34 @@ Before finalizing a hook:
 | Pattern | Problem | Alternative |
 |---------|---------|-------------|
 | "Stop doing X" | Shame-based | "Consider instead..." |
-| "You're doing it wrong" | Accusatory | "The approach that works..." |
-| "This will shock you" | Empty promise | State the actual insight |
-| "Don't make this mistake" | Fear-based | "The pattern that succeeds..." |
-| "Number 7 will blow your mind" | Manufactured curiosity | Earned curiosity through value |
-| Artificial urgency | Manipulation | Genuine relevance |
+| "You won't believe" | Empty promise | State the insight |
+| Fear/anxiety triggers | Manipulation | Wonder/curiosity |
+| Fake urgency | Exploitation | Genuine relevance |
+| Vague mysticism | Pseudo-depth | Grounded exploration |
 
 ---
 
-## Example Hooks by Topic
+## Quality Checklist
 
-### Topic: Productivity Systems
-
-**Concept 1: The Architecture Revelation**
-**Category:** First Principles
-**Target Emotion:** Recognition
-
-- **Visual:** Slow zoom out from cluttered desk to reveal simple notebook beside it
-- **Audio:** Chaotic typing sounds fade to silence, then single pen click
-- **Text:** "Every productivity system reduces to one principle."
-
-**Why It Works:** Pattern recognition satisfies the mind; the contrast visual reinforces simplicity message.
-
----
-
-### Topic: Learning New Skills
-
-**Concept 2: The 10,000 Hour Reframe**
-**Category:** Research-Backed
-**Target Emotion:** Curiosity
-
-- **Visual:** Close-up of hands practicing (instrument/keyboard), speed ramps to normal
-- **Audio:** Muffled practice sounds sharpen into clarity
-- **Text:** "The research that disproved 10,000 hours."
-
-**Why It Works:** Challenges familiar belief with credible source; promises useful insight.
+- [ ] **Integrity** — Invites exploration, not exploits anxiety?
+- [ ] **Value** — Genuine insight promised?
+- [ ] **Specificity** — Concrete, not vague?
+- [ ] **Dimension Fit** — Right category for content?
+- [ ] **Tri-Modal Sync** — Channels complement, not compete?
+- [ ] **Platform Match** — Optimized for target platform?
+- [ ] **Actionable** — Creator can execute this?
 
 ---
 
 ## References
 
-For deeper hook psychology and examples:
-- See `hooks/index.md` for published hooks library
-- See `hooks/templates/` for category-specific formulas
-- See `hooks/examples/` for real posts with their hooks
-- External: frankx.ai/hooks (public hooks resource)
+- `hooks/templates/` — 10 dimension-specific templates
+- `hooks/examples/` — Production-ready hooks
+- `hooks/prompts/` — Reusable Claude prompts
+- External: frankx.ai/hooks
 
 ---
 
-## Workflow
-
-1. **Receive topic** from user
-2. **Identify best category** (Research, First Principles, Wisdom, Counter-Intuitive, Transformation)
-3. **Generate 2 hook concepts** using tri-modal framework
-4. **Apply quality checklist**
-5. **Output formatted hooks** with execution directions
-6. **Optionally save** to hooks/ knowledge base for future reference
-
----
-
-**Skill Version:** 1.0.0
-**Created:** February 2026
-**Philosophy:** Wisdom over manipulation. Curiosity through value.
+**Skill Version:** 2.0.0
+**Updated:** February 2026
+**Philosophy:** Intelligence over manipulation. Wonder over anxiety. Exploration over exploitation.

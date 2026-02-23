@@ -1,84 +1,89 @@
 ---
 name: hook
-description: Generate high-retention content hooks using tri-modal engineering (Visual + Audio + Text) with wisdom-based principles. Use when creating video intros, social content openings, article hooks, or any content requiring attention capture.
+description: Generate high-retention content hooks using tri-modal engineering (Visual + Audio + Text) across 10 dimensions — from research to frontier science to humor. State-of-art 2026 hook psychology for creators who respect their audience's intelligence.
 ---
 
-# /hook — Wisdom-Based Hook Generator
+# /hook — 10-Dimension Hook Generator v2.0
 
-Generate compelling content hooks that respect intelligence while capturing attention.
+Generate compelling content hooks across **10 dimensions** using tri-modal engineering. State-of-art 2026 approaches combining cognitive science, narrative theory, and platform psychology.
 
 ## Quick Start
 
 ```
 /hook [topic]
+/hook [topic] for [platform]
+/hook [topic] using [dimension]
 ```
 
-**Example:**
+**Examples:**
 ```
-/hook productivity systems for creators
+/hook AI agents for creators
+/hook productivity burnout for TikTok
+/hook quantum physics using frontier-science
 ```
 
 ## What You Get
 
 Two hook concepts, each with:
-- **Category** (Research, First Principles, Wisdom, Counter-Intuitive, Transformation)
-- **Target Emotion** (Curiosity, Recognition, Wonder, Insight, Validation)
-- **Tri-Modal Breakdown:**
-  - Visual Hook (camera/staging direction)
-  - Audio Hook (sound/voice direction)
-  - Text Hook (exact words, under 12)
-- **Why It Works** (psychology explanation)
+- **Dimension** (10 options across 3 tiers)
+- **Target Emotion** (Curiosity, Wonder, Awe, Amusement, etc.)
+- **Tri-Modal Breakdown:** Visual + Audio + Text
+- **Why It Works** (psychology/principle)
+- **Platform Fit** (recommended platforms)
+
+## 10 Hook Dimensions
+
+### Foundation Tier (Credibility)
+| Dimension | When to Use |
+|-----------|-------------|
+| **Research** | Data, studies, proven findings |
+| **First Principles** | Systems, architecture, fundamentals |
+| **Wisdom** | Expert insights, earned experience |
+
+### Expansion Tier (Engagement)
+| Dimension | When to Use |
+|-----------|-------------|
+| **Counter-Intuitive** | Challenging assumptions |
+| **Transformation** | Personal journey, pivots |
+| **Adventure** | Shared discovery, exploration |
+| **Humor** | Relatable absurdity, wit |
+
+### Frontier Tier (Vision)
+| Dimension | When to Use |
+|-----------|-------------|
+| **Visionary** | Future trends, emerging tech |
+| **Frontier Science** | Quantum, cosmos, emergence |
+| **Exploration** | Depth, unknown territories |
 
 ## Philosophy
 
 | AVOID | EMBRACE |
 |-------|---------|
-| "Stop doing X" | "Research shows..." |
-| "You won't believe..." | "The pattern behind..." |
-| Fear, shame, FOMO | Curiosity, insight, value |
+| Fear, shame, FOMO | Curiosity, wonder, adventure |
+| "Stop doing X" | "The frontier where..." |
+| Empty clickbait | Earned intrigue |
+| Manufactured urgency | Genuine discovery |
 
-**The Test:** Would you be proud to show this hook to someone you respect?
-
-## Hook Categories
-
-1. **Research** — Ground in studies/data ("MIT found that...")
-2. **First Principles** — Reveal patterns ("Every X shares this architecture...")
-3. **Wisdom** — Transfer from masters ("What [expert] understood...")
-4. **Counter-Intuitive** — Challenge beliefs ("The opposite is actually...")
-5. **Transformation** — Pivot point stories ("The moment that changed...")
+**The Test:** Does this hook invite exploration or exploit anxiety?
 
 ## Platform Options
 
-Specify platform for optimized output:
-```
-/hook [topic] for [platform]
-```
+TikTok, YouTube, LinkedIn, Twitter/X, Instagram, Podcast, Article, Substack, Conference
 
-Platforms: TikTok, YouTube, LinkedIn, Twitter/X, Instagram, Podcast, Article
+## 2026 State-of-Art Features
+
+- **Cognitive Load Balancing** — One channel leads, others support
+- **Attention Wavelength Matching** — Platform-specific timing
+- **Dopamine Architecture** — Anticipation of insight, not just promise
+- **Pattern Interrupt Calculus** — Novelty × Relevance × Tension
 
 ## Resources
 
-- **Templates:** `hooks/templates/` — Category-specific formulas
-- **Examples:** `hooks/examples/seed-hooks.md` — 10 production-ready hooks
+- **Templates:** `hooks/templates/` — 10 dimension-specific formulas
+- **Examples:** `hooks/examples/seed-hooks.md` — 20 production-ready hooks
 - **Prompts:** `hooks/prompts/hook-generator.md` — Reusable Claude prompts
 - **Public Library:** frankx.ai/hooks
 
-## Workflow
-
-1. Provide topic (and optional platform)
-2. Agent selects best category
-3. Generates 2 hook concepts with full breakdown
-4. Quality check against integrity standards
-5. Output formatted hooks ready for production
-
-## Quality Standards
-
-Every hook must pass:
-- [ ] **Integrity** — No manipulation tactics
-- [ ] **Value** — Genuine insight promised
-- [ ] **Specificity** — Concrete, not vague
-- [ ] **Actionable** — Creator can execute this
-
 ---
 
-*Skill Version: 1.0.0 | See `.claude/skills/hook/SKILL.md` for full documentation*
+*Skill Version: 2.0.0 | See `.claude/skills/hook/SKILL.md` for full documentation*

@@ -1,6 +1,6 @@
-# FrankX Hooks Library
+# FrankX Hooks Library v2.0
 
-> Wisdom-based content hooks that respect intelligence while capturing attention.
+> 10-dimensional hook engineering that respects intelligence while capturing attention.
 
 **Public Resource:** [frankx.ai/hooks](https://frankx.ai/hooks)
 
@@ -8,60 +8,110 @@
 
 ## Philosophy
 
-Hooks built on **integrity, not manipulation**:
+**Intelligence over manipulation. Wonder over anxiety. Exploration over exploitation.**
 
 - Research-backed psychology over empty clickbait
-- First principles revelation over fear tactics
+- Adventure and wonder over fear tactics
 - Genuine curiosity over manufactured urgency
-- Value-forward openings over shame-based triggers
+- Humor and humanity over shame-based triggers
 
-**The Test:** Would you be proud to show this hook to someone you respect?
+**The Test:** Does this hook invite exploration or exploit anxiety?
 
 ---
 
-## Hook Categories
+## 10 Hook Dimensions
 
-| Category | Core Principle | Example Trigger |
-|----------|---------------|-----------------|
+### Foundation Tier (Credibility)
+| Dimension | Core Principle | Example Trigger |
+|-----------|---------------|-----------------|
 | **Research** | Ground in studies/data | "MIT found that..." |
 | **First Principles** | Reveal underlying patterns | "Every X shares this architecture..." |
 | **Wisdom** | Transfer from masters | "What [expert] understood..." |
+
+### Expansion Tier (Engagement)
+| Dimension | Core Principle | Example Trigger |
+|-----------|---------------|-----------------|
 | **Counter-Intuitive** | Reframe the familiar | "The opposite is actually true..." |
 | **Transformation** | Pivot point stories | "The moment that changed..." |
+| **Adventure** | Shared exploration | "Let's trace where..." |
+| **Humor** | Pattern disruption | "My system: panic, repeat..." |
+
+### Frontier Tier (Vision)
+| Dimension | Core Principle | Example Trigger |
+|-----------|---------------|-----------------|
+| **Visionary** | Future architecture | "The infrastructure being built..." |
+| **Frontier Science** | Quantum/cosmos/emergence | "The observer effect isn't just physics..." |
+| **Exploration** | Unknown territories | "Inside the gap between..."  |
 
 ---
 
 ## Published Hooks Index
 
-### Research-Backed
-| ID | Hook | Category | Platform | Post Link |
-|----|------|----------|----------|-----------|
-| R001 | "After analyzing 1,000 creators, one pattern emerged." | Research | Twitter/X | — |
-| R002 | "Neuroscience explains why this works every time." | Research | YouTube | — |
+### Foundation Tier
 
-### First Principles
-| ID | Hook | Category | Platform | Post Link |
-|----|------|----------|----------|-----------|
-| FP001 | "Every productivity system reduces to one principle." | First Principles | Twitter/X | — |
-| FP002 | "Strip away the noise. Here's what remains." | First Principles | LinkedIn | — |
+#### Research-Backed
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| R001 | "Cal Newport's research: Deep work produces 4x output." | YouTube, LinkedIn | — |
+| R002 | "After studying 1,000 creators, one pattern appeared in 94%." | Twitter/X, TikTok | — |
 
-### Wisdom Transfer
-| ID | Hook | Category | Platform | Post Link |
-|----|------|----------|----------|-----------|
-| W001 | "What 30-year veterans know that beginners miss." | Wisdom | YouTube | — |
-| W002 | "The question great mentors always ask first." | Wisdom | Twitter/X | — |
+#### First Principles
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| FP001 | "Every productivity system reduces to one principle." | Twitter/X, LinkedIn | — |
+| FP002 | "Every viral post shares this same architecture." | YouTube, Substack | — |
 
-### Counter-Intuitive
-| ID | Hook | Category | Platform | Post Link |
-|----|------|----------|----------|-----------|
-| CI001 | "The research that disproved 10,000 hours." | Counter-Intuitive | TikTok | — |
-| CI002 | "Why more options lead to worse decisions." | Counter-Intuitive | Reels | — |
+#### Wisdom Transfer
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| W001 | "What 30-year veterans know that beginners never ask." | LinkedIn, Podcast | — |
+| W002 | "Three words from my mentor I think about every day." | Twitter/X, Email | — |
 
-### Transformation
-| ID | Hook | Category | Platform | Post Link |
-|----|------|----------|----------|-----------|
-| T001 | "Three words that restructured my entire approach." | Transformation | Twitter/X | — |
-| T002 | "The failure that revealed everything." | Transformation | LinkedIn | — |
+### Expansion Tier
+
+#### Counter-Intuitive
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| CI001 | "The research that disproved 10,000 hours." | TikTok, Shorts | — |
+| CI002 | "Working less produced more. Here's the math." | LinkedIn, Twitter/X | — |
+
+#### Transformation
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| T001 | "The day I deleted 47 productivity tools." | LinkedIn, YouTube | — |
+| T002 | "The failure that taught me more than 10 years of success." | Twitter/X, Podcast | — |
+
+#### Adventure
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| A001 | "Let's trace where ancient wisdom meets machine learning." | YouTube, Podcast | — |
+| A002 | "Here's the map to the territory between knowing and mastery." | Substack, YouTube | — |
+
+#### Humor
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| H001 | "My productivity system: panic, hyperfocus, collapse, repeat." | TikTok, Twitter/X | — |
+| H002 | "The productivity hack that changed my life: lowering my standards." | Twitter/X, Instagram | — |
+
+### Frontier Tier
+
+#### Visionary
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| V001 | "The tools being built today will seem obvious in five years." | LinkedIn, YouTube | — |
+| V002 | "The future of [X] is being built. Here's the blueprint." | Twitter/X, Conferences | — |
+
+#### Frontier Science
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| FS001 | "The observer effect isn't just physics — it's psychology." | YouTube, Podcast | — |
+| FS002 | "How simple rules create infinite complexity: emergence." | YouTube, Long-form | — |
+
+#### Exploration
+| ID | Hook | Platform | Post Link |
+|----|------|----------|-----------|
+| E001 | "Inside the gap between stimulus and response is everything." | Podcast, Essay | — |
+| E002 | "Three layers into any expertise, you hit the same bedrock." | Substack, YouTube | — |
 
 ---
 
@@ -69,20 +119,23 @@ Hooks built on **integrity, not manipulation**:
 
 ```
 hooks/
-├── index.md              # This file - registry of all hooks
-├── templates/            # Hook formulas by category
-│   ├── research.md       # Research-backed templates
-│   ├── first-principles.md
-│   ├── wisdom.md
-│   ├── counter-intuitive.md
-│   └── transformation.md
-├── examples/             # Full hook breakdowns with posts
-│   ├── productivity/
-│   ├── ai-tools/
-│   ├── creator-economy/
-│   └── systems-thinking/
-└── prompts/              # Reusable Claude prompts
-    └── hook-generator.md # Main hook generation prompt
+├── index.md                    # This file - registry of all hooks
+├── FRANKX_HOOKS_PAGE_DESIGN.md # frankx.ai/hooks page spec
+├── templates/                  # Hook formulas by dimension (10 files)
+│   ├── research.md             # Research-backed templates
+│   ├── first-principles.md     # Pattern recognition templates
+│   ├── wisdom.md               # Wisdom transfer templates
+│   ├── counter-intuitive.md    # Reframe templates
+│   ├── transformation.md       # Journey/pivot templates
+│   ├── adventure.md            # Exploration call templates
+│   ├── humor.md                # Comedic timing templates
+│   ├── visionary.md            # Future architecture templates
+│   ├── frontier-science.md     # Quantum/cosmos/emergence templates
+│   └── exploration.md          # Unknown territory templates
+├── examples/                   # Full hook breakdowns
+│   └── seed-hooks.md           # 20 production-ready hooks
+└── prompts/                    # Reusable Claude prompts
+    └── hook-generator.md       # Main hook generation prompt
 ```
 
 ---
