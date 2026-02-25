@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
-  "version": "10.1.0",
-  "description": "The Operating System for AI-Powered Creators — 75+ skills, 35+ commands, 38 agents. Works with Claude Code, Cursor, Windsurf, Gemini.",
+  "version": "11.0.0",
+  "description": "The Operating System for AI-Powered Creators — 90+ skills, 65+ commands, 38 agents, 8 plugins. Works with Claude Code, Cursor, Windsurf, Gemini.",
   "author": "Frank Guzman <frank@frankx.ai>",
   "license": "MIT",
   "repository": {

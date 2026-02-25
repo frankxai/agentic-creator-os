@@ -1,0 +1,34 @@
+{
+  "$schema": "skill-profile-v1",
+  "name": "Agent & Automation Development",
+  "description": "Building AI agents, MCP servers, and automation tools",
+  "version": "1.0.0",
+  "priority_skills": [
+    "ai-agents-architect",
+    "autonomous-agents",
+    "autonomous-agent-patterns",
+    "agent-memory-systems",
+    "mcp-builder",
+    "mcp-2025-patterns",
+    "mcp-architecture",
+    "langgraph-patterns",
+    "prompt-engineering-patterns"
+  ],
+  "secondary_skills": [
+    "langchain-architecture",
+    "openai-agentkit",
+    "claude-sdk",
+    "typescript-pro",
+    "python-pro"
+  ],
+  "excluded_skills": [
+    "shopify-*",
+    "wordpress-*",
+    "flutter-*"
+  ],
+  "triggers": {
+    "keywords": ["agent", "mcp", "automation", "orchestration", "workflow"],
+    "file_patterns": [".claude/**/*", "agents/**/*", "mcp-servers/**/*"],
+    "commands": ["/automation-dev", "/council"]
+  }
+}

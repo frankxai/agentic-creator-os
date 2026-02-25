@@ -1,0 +1,32 @@
+{
+  "$schema": "skill-profile-v1",
+  "name": "Content Creation Pipeline",
+  "description": "Optimized for blog articles, SEO, and publishing",
+  "version": "1.0.0",
+  "priority_skills": [
+    "seo-content-writer",
+    "seo-keyword-strategist",
+    "seo-meta-optimizer",
+    "schema-markup",
+    "frankx-brand",
+    "content-creator",
+    "copywriting"
+  ],
+  "secondary_skills": [
+    "seo-fundamentals",
+    "seo-structure-architect",
+    "programmatic-seo",
+    "social-content"
+  ],
+  "excluded_skills": [
+    "penetration-*",
+    "security-*",
+    "kubernetes-*",
+    "terraform-*"
+  ],
+  "triggers": {
+    "file_patterns": ["content/blog/**/*.mdx", "content/guides/**/*.mdx"],
+    "keywords": ["article", "blog", "seo", "publish", "content"],
+    "commands": ["/frankx-ai-blog", "/factory", "/publish"]
+  }
+}
