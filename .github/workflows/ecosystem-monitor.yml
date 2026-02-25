@@ -1,0 +1,106 @@
+name: Ecosystem Monitor
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: |
+          type -p gh >/dev/null 2>&1 && exit 0
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          sudo apt update && sudo apt install gh -y
+
+      - name: Collect ecosystem stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 << 'PYEOF'
+          import subprocess, json, datetime
+
+          ECOSYSTEM = [
+              "agentic-creator-os",
+              "agentic-creator-skills",
+              "frankx.ai-vercel-website",
+              "FrankX",
+              "arcanea",
+              "Starlight-Intelligence-System",
+              "production-agent-patterns",
+              "ai-architect-academy",
+              "claude-skills-library",
+              "vibe-os",
+              "mcp-doctor",
+              "arcanea-code",
+              "arcanea-flow",
+              "claude-codex-gemini-opencode-settings",
+          ]
+
+          report = []
+          report.append("# ACOS Ecosystem Intelligence Report")
+          report.append(f"**Generated**: {datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}")
+          report.append("")
+          report.append("| Repo | Stars | Forks | Issues | Last Push |")
+          report.append("|------|-------|-------|--------|-----------|")
+
+          total_stars = 0
+          total_forks = 0
+
+          for repo in ECOSYSTEM:
+              try:
+                  result = subprocess.run(
+                      ['gh', 'api', f'repos/frankxai/{repo}',
+                       '--jq', '{s:.stargazers_count,f:.forks_count,i:.open_issues_count,p:.pushed_at}'],
+                      capture_output=True, text=True, timeout=15
+                  )
+                  info = json.loads(result.stdout)
+                  s, f, i = info.get('s',0), info.get('f',0), info.get('i',0)
+                  p = info.get('p','?')[:10]
+                  total_stars += s
+                  total_forks += f
+                  report.append(f"| {repo} | {s} | {f} | {i} | {p} |")
+              except:
+                  report.append(f"| {repo} | ? | ? | ? | error |")
+
+          report.append(f"| **TOTAL** | **{total_stars}** | **{total_forks}** | | |")
+          report.append("")
+
+          # Account-wide summary
+          result = subprocess.run(
+              ['gh', 'repo', 'list', 'frankxai', '--limit', '200',
+               '--json', 'name,isArchived,stargazerCount'],
+              capture_output=True, text=True
+          )
+          all_repos = json.loads(result.stdout) if result.stdout else []
+          active = [r for r in all_repos if not r.get('isArchived')]
+          all_stars = sum(r.get('stargazerCount', 0) for r in active)
+
+          report.append("## Account Summary")
+          report.append(f"- Active repos: {len(active)}")
+          report.append(f"- Archived: {len(all_repos) - len(active)}")
+          report.append(f"- Total stars: {all_stars}")
+
+          import os
+          os.makedirs('docs', exist_ok=True)
+          with open('docs/ecosystem-report.md', 'w') as f:
+              f.write('\n'.join(report))
+          print('\n'.join(report))
+          PYEOF
+
+      - name: Commit report
+        run: |
+          git config user.name "ACOS Bot"
+          git config user.email "acos@frankx.ai"
+          git add docs/ecosystem-report.md
+          git diff --staged --quiet || git commit -m "chore(docs): weekly ecosystem report [skip ci]"
+          git push

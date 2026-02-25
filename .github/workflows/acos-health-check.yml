@@ -1,0 +1,87 @@
+name: ACOS Health Check
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.claude/skills/**'
+      - '.claude/commands/**'
+      - '.claude/agents/**'
+      - '.claude/hooks/**'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count assets
+        id: count
+        run: |
+          SKILLS=$(find .claude/skills -name "SKILL.md" 2>/dev/null | wc -l)
+          COMMANDS=$(find .claude/commands -name "*.md" 2>/dev/null | wc -l)
+          AGENTS=$(find .claude/agents -name "*.md" 2>/dev/null | wc -l)
+          HOOKS=$(find .claude/hooks \( -name "*.sh" -o -name "*.js" -o -name "*.ts" \) 2>/dev/null | wc -l)
+          echo "skills=$SKILLS" >> "$GITHUB_OUTPUT"
+          echo "commands=$COMMANDS" >> "$GITHUB_OUTPUT"
+          echo "agents=$AGENTS" >> "$GITHUB_OUTPUT"
+          echo "hooks=$HOOKS" >> "$GITHUB_OUTPUT"
+          echo "Skills: $SKILLS | Commands: $COMMANDS | Agents: $AGENTS | Hooks: $HOOKS"
+
+      - name: Validate skills
+        run: |
+          ERRORS=0
+          find .claude/skills -name "SKILL.md" | while read -r skill; do
+            NAME=$(dirname "$skill" | xargs basename)
+            if [ ! -s "$skill" ]; then
+              echo "ERROR: $NAME — empty SKILL.md"
+              ERRORS=$((ERRORS + 1))
+            fi
+            WORDS=$(wc -w < "$skill")
+            if [ "$WORDS" -lt 50 ]; then
+              echo "WARN: $NAME — $WORDS words (stub)"
+            fi
+          done
+
+      - name: Check hook syntax
+        run: |
+          find .claude/hooks -name "*.sh" 2>/dev/null | while read -r hook; do
+            NAME=$(basename "$hook")
+            if bash -n "$hook" 2>/dev/null; then
+              echo "OK: $NAME"
+            else
+              echo "ERROR: $NAME — syntax error"
+            fi
+          done
+
+      - name: Cross-reference check
+        run: |
+          if [ -f ".claude/skills/skill-rules.json" ]; then
+            python3 << 'PYEOF'
+          import json, os
+          rules = json.load(open('.claude/skills/skill-rules.json'))
+          categories = rules.get('categories', {})
+          missing = 0
+          for cat, data in categories.items():
+              for s in data.get('skills', []):
+                  path = os.path.join('.claude/skills', s, 'SKILL.md')
+                  if not os.path.exists(path):
+                      print(f'WARN: skill-rules references "{s}" but not found')
+                      missing += 1
+          print(f'Cross-ref check: {missing} missing references')
+          PYEOF
+          fi
+
+      - name: Generate health badge data
+        if: always()
+        env:
+          SKILLS: ${{ steps.count.outputs.skills }}
+          COMMANDS: ${{ steps.count.outputs.commands }}
+          AGENTS: ${{ steps.count.outputs.agents }}
+          HOOKS: ${{ steps.count.outputs.hooks }}
+        run: |
+          TOTAL=$((SKILLS + COMMANDS + AGENTS + HOOKS))
+          echo "ACOS v11 Health: $TOTAL total assets ($SKILLS skills, $COMMANDS commands, $AGENTS agents, $HOOKS hooks)"

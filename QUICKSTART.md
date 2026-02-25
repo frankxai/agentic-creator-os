@@ -1,152 +1,89 @@
-# ACOS v10 Quick Start
+# ACOS Quick Start
 
-Get up and running in under 5 minutes.
-
----
-
-## Prerequisites
-
-- Git
-- Node.js 18+ (only needed for MCP servers)
-
----
+Get 90+ skills, 65+ commands, and 38 agents auto-activating in under 2 minutes.
 
 ## Install
 
-### Claude Code (Full Feature Set)
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git ~/.acos
+cd ~/.acos && ./install.sh
+```
+
+Open any project with Claude Code:
 
 ```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh
-
-# Open any project with Claude Code
+cd your-project
 claude
-/acos
 ```
 
-### Cursor
+ACOS detects what you're working on and loads the right skills automatically.
+
+## How It Works
+
+```
+You type: "write a blog post about AI agents"
+
+ACOS detects:  content + blog keywords
+Auto-loads:    content-strategy, seo-fundamentals skills
+Routes to:     /article-creator command
+You get:       Guided article with SEO, schema markup, social distribution
+```
+
+No manual configuration. No skill memorization. Context-driven activation.
+
+## What You Get
+
+| Category | Count | Examples |
+|----------|-------|---------|
+| **Skills** | 90+ | article-creator, suno-mastery, react-patterns, seo-strategy |
+| **Commands** | 65+ | /ultrawork, /design-gods, /product-team-launch, /deepresearch |
+| **Agents** | 38 | Brand Architect, Music Producer, QA Engineer, Design Swarm |
+| **Hooks** | 15 | Quality gate, circuit breaker, skill activation, audit trail |
+
+## Try These First
+
+```
+/acos              # Check ACOS status and loaded skills
+/ultrawork         # Launch multi-agent swarm mode
+/design-gods       # Design system audit and build
+/deepresearch      # Deep research with web + codebase analysis
+```
+
+## Add Plugins
 
 ```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=cursor
+claude plugin marketplace add frankxai/agentic-creator-skills
+
+claude plugin install core              # Creator productivity
+claude plugin install content-engine    # Content creation + newsletter
+claude plugin install design-excellence # Design system governance
+claude plugin install music-lab         # AI music production
+claude plugin install brand-architect   # Brand voice + guidelines
+claude plugin install product-launcher  # Product launch pipeline
+claude plugin install intelligence      # Intelligence scoring
+claude plugin install visual-studio     # Visual creation council
 ```
 
-Generates `.cursorrules` with skills and agent definitions embedded.
+## Multi-Platform
 
-### Windsurf
+| Platform | Command |
+|----------|---------|
+| Claude Code | `./install.sh` |
+| Cursor | `./install.sh --platform=cursor` |
+| Windsurf | `./install.sh --platform=windsurf` |
+| Gemini | `./install.sh --platform=gemini` |
 
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=windsurf
-```
-
-Generates `.windsurfrules` with skills and agent definitions embedded.
-
-### Gemini Code Assist
-
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=gemini
-```
-
-Generates `GEMINI.md` context file.
-
-### Any AI Coding Agent
-
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=generic
-```
-
-Generates `CONTEXT.md`. Point your agent at it as system prompt or project instructions.
-
----
-
-## First Commands (Claude Code)
-
-```bash
-/acos                    # Smart router — shows all commands
-/article-creator         # Write a blog post
-/create-music            # Produce a track with Suno
-/spec                    # Spec-driven feature development
-/starlight-architect     # Enterprise AI system design
-/infogenius              # Research-grounded image generation
-```
-
-On non-Claude platforms, just describe the task. Skills activate from context.
-
----
-
-## What's Included
-
-| Component | Count | Description |
-|-----------|-------|-------------|
-| Commands | 35+ | Slash commands via `/acos` smart router |
-| Skills | 75+ | Auto-activating domain knowledge modules |
-| Agents | 38 | Specialized AI personas |
-| Workflows | 11 | YAML pipeline definitions |
-| Departments | 5 | Agent team configurations |
-| MCP Servers | 7 | Optional tool integrations |
-
----
-
-## How Auto-Activation Works
-
-Skills load automatically based on `skill-rules.json` — 22 pattern rules:
+## Architecture
 
 ```
-You: "write a blog post about AI agents"
-  -> Detects: "blog", "write"
-  -> Auto-loads: content-strategy skill
-  -> Routes to: /article-creator
+~/.acos/.claude/
+├── skills/        # 90+ domain skills (auto-activate)
+├── commands/      # 65+ workflow commands
+├── agents/        # 38 specialist agents
+└── hooks/         # 15 lifecycle hooks
 ```
 
-No manual invocation needed. The system matches your intent to the right skills.
+## Links
 
----
-
-## v10 Safety Systems
-
-| System | What It Does |
-|--------|-------------|
-| **Circuit Breaker** | Tracks failures per file. 3 = warn, 5 = restrict, 8 = block |
-| **Agent IAM** | 6 profiles with per-tool, per-directory scoping |
-| **Self-Modify Gate** | Snapshots config before changes, auto-reverts if score drops |
-| **Audit Trail** | Append-only JSONL logging of all actions |
-
----
-
-## Platform Feature Parity
-
-| Feature | Claude Code | Cursor | Windsurf | Gemini | Generic |
-|---------|:-----------:|:------:|:--------:|:------:|:-------:|
-| Skills | Full | Embedded | Embedded | Embedded | Embedded |
-| Commands | Slash commands | Context-guided | Context-guided | Context-guided | Context-guided |
-| Agents | Full | Embedded | Embedded | Embedded | Embedded |
-| Hooks | Native | -- | -- | -- | -- |
-| Auto-activation | skill-rules.json | -- | -- | -- | -- |
-| Agent IAM | Native | -- | -- | -- | -- |
-
-Claude Code gets the richest integration. Other platforms get skills and agents embedded in their context files.
-
----
-
-## Troubleshooting
-
-**Commands not found?** Copy to user level:
-```bash
-cp .claude/commands/*.md ~/.claude/commands/
-```
-
-**MCP servers?** These are optional. See `mcp-servers/README.md`.
-
-**Need help?** [Open an issue](https://github.com/frankxai/agentic-creator-os/issues)
-
----
-
-*ACOS v10.1 — The Operating System for AI-Powered Creators*
+- [Plugin Marketplace](https://github.com/frankxai/agentic-creator-skills)
+- [FrankX.AI](https://frankx.ai)
