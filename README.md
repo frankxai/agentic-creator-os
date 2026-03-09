@@ -6,7 +6,7 @@
 
 *One install. Any coding agent. 90+ skills, 65+ commands, 38 agents — auto-activating.*
 
-![ACOS v11](docs/infographics/acos-hero.png)
+![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
 [![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
@@ -16,7 +16,7 @@
 
 ---
 
-## What Is ACOS?
+## What Is the Agentic Creator OS?
 
 A **production-grade skill and agent system** for AI coding assistants. It ships skills (domain knowledge), commands (reusable workflows), agents (specialized personas), and safety hooks — configured to auto-activate based on what you're working on.
 
@@ -24,11 +24,28 @@ Works with **Claude Code, Cursor, Windsurf, Gemini Code Assist**, and any AI cod
 
 ```
 You: "write a blog post about AI agents"
-  → ACOS detects: creation + blog
+  → Agentic Creator OS detects: creation + blog
   → Auto-loads: content-strategy skill
   → Routes to: /article-creator workflow
   → Result: Guided article with SEO, images, social distribution
 ```
+
+### System Architecture
+
+<div align="center">
+
+![Agentic Creator OS — Layered Architecture](docs/infographics/acos-architecture.png)
+
+</div>
+
+The Agentic Creator OS is structured in four layers, each auto-activating based on context:
+
+| Layer | What It Does | Count |
+|-------|-------------|-------|
+| **Skills** | Domain knowledge modules that load automatically | 75+ |
+| **Commands** | Reusable workflows triggered via slash commands | 35+ |
+| **Agents** | Specialized personas with distinct expertise | 38 |
+| **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 5 |
 
 ---
 
@@ -77,6 +94,85 @@ cd agentic-creator-os
 Generates a `CONTEXT.md` file. Point your agent at it as a system prompt or project instructions file.
 
 > **See [QUICKSTART.md](QUICKSTART.md) for detailed setup per platform**
+
+---
+
+## Core Concepts
+
+The Agentic Creator OS is built around six foundational concepts. Understanding these unlocks the full system.
+
+### Skills — Auto-Activating Domain Knowledge
+
+Skills are markdown files containing deep domain expertise. They **activate automatically** when the Agentic Creator OS detects relevant context in your work.
+
+```
+You start writing a blog post
+  → skill-rules.json matches: "blog" + "write"
+  → Auto-loads: content-strategy + seo-content-writer + schema-markup
+  → Your AI agent now has SEO expertise, content structure, and metadata knowledge
+```
+
+| Skill Category | Examples | Trigger Patterns |
+|---------------|----------|-----------------|
+| **Technical** | TDD, React patterns, TypeScript, debugging | `test`, `component`, `error` |
+| **Creative** | Brand voice, music mastery, book writing | `blog`, `music`, `create` |
+| **Infrastructure** | Oracle Cloud, Kubernetes, Terraform | `deploy`, `cloud`, `infra` |
+| **Business** | Product management, financial modeling | `product`, `strategy`, `pricing` |
+
+### Commands — Reusable Slash Workflows
+
+Commands are multi-step workflows triggered by a single slash command. Each command orchestrates skills, agents, and tools in sequence.
+
+| Command | What It Does | Steps |
+|---------|-------------|-------|
+| `/article-creator` | Full blog pipeline | Research → Outline → Draft → SEO → Images → Social |
+| `/factory` | Mass content production | Batch input → Parallel agents → Quality gate → Export |
+| `/spec` | Feature specification | Requirements → Design → Task breakdown → Validation |
+| `/infogenius` | Visual intelligence | Topic → Research → 4K image generation → Metadata |
+| `/create-music` | Music production | Genre → Prompt engineering → Generation → Metadata |
+| `/council` | Strategic decisions | Multi-agent deliberation → Weighted synthesis → Verdict |
+
+### Agents — Specialized AI Personas
+
+Each agent has distinct expertise, voice, and tool access. The Agentic Creator OS routes to the best agent based on task type.
+
+| Agent | Specialty | When It Activates |
+|-------|----------|------------------|
+| **Developmental Editor** | Story structure, pacing, narrative architecture | Book/long-form writing |
+| **Music Producer** | Suno prompts, genre production, audio engineering | Music creation |
+| **Technical Architect** | System design, Oracle Cloud, enterprise patterns | Architecture tasks |
+| **UI/UX Expert** | Design systems, accessibility, Figma integration | Frontend work |
+| **SEO Intelligence** | Keywords, citations, structured data | Content optimization |
+| **Starlight Orchestrator** | Multi-agent coordination, strategic decisions | Complex workflows |
+
+### Smart Router — Intent-Based Routing
+
+The `/acos` command analyzes your request and routes to the optimal subsystem:
+
+```
+/acos "create an infographic about machine learning"
+  ├── Intent detected: visual + educational
+  ├── Agent selected: Visual Creator
+  ├── Skills loaded: infogenius, design-excellence
+  ├── Command chain: /research → /infogenius
+  └── Output: 4K infographic with research-grounded content
+```
+
+### Safety Hooks — Autonomous Protection
+
+Five systems that run automatically to keep the Agentic Creator OS reliable:
+
+| Hook | What It Prevents |
+|------|-----------------|
+| **Circuit Breaker** | Stops the agent from brute-forcing broken approaches (3→warn, 5→restrict, 8→block) |
+| **Audit Trail** | Append-only JSONL log of every operation — tamper-proof ground truth |
+| **Agent IAM** | Role-based scoping — a content writer can't modify build configs |
+| **Self-Modify Gate** | Snapshots state before config changes, auto-reverts if intelligence drops |
+| **Quality Gate** | Blocks edits to secrets files, warns on production file modifications |
+
+### Self-Learning — Gets Smarter Every Session
+
+The Agentic Creator OS tracks tool sequences and outcomes across sessions, then injects successful patterns as context for similar future tasks. No external API — pure local intelligence.
 
 ---
 
@@ -189,6 +285,12 @@ skill-rules.json → 22 pattern rules
 
 ### The `/acos` Smart Router
 
+<div align="center">
+
+![Agentic Creator OS — Smart Router](docs/infographics/acos-smart-router.png)
+
+</div>
+
 Everything starts with `/acos`. It parses intent and routes to the best subsystem:
 
 ```
@@ -218,7 +320,21 @@ For multi-domain requests, it chains commands:
 
 ### Self-Learning
 
-The system learns from every session:
+<div align="center">
+
+![Agentic Creator OS — Self-Learning Cycle](docs/infographics/acos-self-learning.png)
+
+</div>
+
+The Agentic Creator OS learns from every session through a four-stage cycle:
+
+| Stage | What Happens |
+|-------|-------------|
+| **1. Session Start** | Creates a trajectory record for the current session |
+| **2. Track Operations** | Monitors tool sequences, file changes, and outcomes |
+| **3. Extract Patterns** | Identifies successful workflows and tool combinations |
+| **4. Apply Intelligence** | Injects learned patterns as context for future sessions |
+
 ```
 Session Start → Create trajectory record
 Session Active → Track operations and outcomes
@@ -406,10 +522,12 @@ MIT — Use it, fork it, build your own OS with it.
 
 <div align="center">
 
-**Agentic Creator OS v11.0** — Plugin Ecosystem
+**Agentic Creator OS v11.0** — The Operating System for AI-Powered Creators
 
 *90+ Skills | 65+ Commands | 38 Agents | 8 Plugins | Multi-Platform | Self-Learning*
 
-[GitHub](https://github.com/frankxai/agentic-creator-os) | [Website](https://frankx.ai/products/agentic-creator-os) | [Issues](https://github.com/frankxai/agentic-creator-os/issues)
+Built by [FrankX](https://frankx.ai) — AI Architect & Creator
+
+[GitHub](https://github.com/frankxai/agentic-creator-os) | [Website](https://frankx.ai/acos) | [Issues](https://github.com/frankxai/agentic-creator-os/issues)
 
 </div>
