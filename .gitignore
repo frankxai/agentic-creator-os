@@ -40,3 +40,6 @@ temp/
 
 # Package lock (use npm ci)
 package-lock.json
+
+# Claude Flow runtime state
+.claude-flow/
