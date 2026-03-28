@@ -152,6 +152,53 @@ Snapshots config before changes. If intelligence score drops >5 points: auto-rev
 ### Audit Trail
 Append-only JSONL logging of all significant actions.
 
+## gstack — Engineering Sprint System (by Garry Tan)
+
+Use `/browse` from gstack for all web browsing. Never use `mcp__claude-in-chrome__*` tools.
+
+### Engineering Sprint Skills (Think → Plan → Build → Review → Test → Ship → Reflect)
+
+| Phase | Command | Specialist Role |
+|-------|---------|----------------|
+| **Think** | `/office-hours` | YC Office Hours — reframes product before code |
+| **Plan** | `/plan-ceo-review` | CEO scope review (4 modes) |
+| **Plan** | `/plan-eng-review` | Eng manager: architecture, data flow, tests |
+| **Plan** | `/plan-design-review` | Designer: rates dimensions 0-10, AI slop detection |
+| **Plan** | `/design-consultation` | Design system from scratch |
+| **Plan** | `/autoplan` | Runs CEO → design → eng review automatically |
+| **Review** | `/review` | Staff engineer PR review, auto-fixes |
+| **Review** | `/investigate` | Root-cause debugging (Iron Law: no fix without investigation) |
+| **Review** | `/design-review` | Design audit + fix loop with atomic commits |
+| **Test** | `/qa` | Real browser QA: find bugs, fix, re-verify |
+| **Test** | `/qa-only` | Browser QA report only (no code changes) |
+| **Security** | `/cso` | OWASP Top 10 + STRIDE threat model |
+| **Ship** | `/ship` | Tests → review → PR in one command |
+| **Deploy** | `/land-and-deploy` | Merge → CI → deploy → verify production |
+| **Monitor** | `/canary` | Post-deploy monitoring loop |
+| **Monitor** | `/benchmark` | Performance regression detection |
+| **Reflect** | `/retro` | Weekly retro with per-person stats |
+| **Docs** | `/document-release` | Update docs to match what shipped |
+
+### Power Tools
+
+| Command | What |
+|---------|------|
+| `/browse` | Real Chromium, ~100ms/command, persistent sessions |
+| `/setup-browser-cookies` | Import cookies from Chrome/Arc/Brave/Edge |
+| `/careful` | Warn before destructive commands |
+| `/freeze` | Lock edits to one directory |
+| `/guard` | `/careful` + `/freeze` combined |
+| `/unfreeze` | Remove edit restrictions |
+| `/codex` | Second opinion from OpenAI Codex |
+| `/setup-deploy` | One-time deploy config |
+| `/gstack-upgrade` | Self-update gstack |
+
+### When to Use gstack vs ACOS
+
+- **Building software** → Use gstack sprint: `/office-hours` → `/review` → `/qa` → `/ship`
+- **Creating content** → Use ACOS: `/article-creator` → `/factory` → `/publish`
+- **Both** → Start with `/office-hours` for product thinking, build with gstack, publish with ACOS
+
 ## Decision Framework
 
 Before ANY structural change:

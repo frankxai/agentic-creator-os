@@ -211,6 +211,15 @@
         "commands": ["/acos"]
       },
       "priority": "high"
+    },
+    {
+      "skill": "gstack",
+      "triggers": {
+        "keywords": ["sprint", "ship", "QA", "review PR", "code review", "browse", "debug", "investigate", "canary", "benchmark", "office hours", "retro", "deploy"],
+        "file_patterns": [],
+        "commands": ["/office-hours", "/plan-ceo-review", "/plan-eng-review", "/plan-design-review", "/review", "/qa", "/qa-only", "/ship", "/land-and-deploy", "/canary", "/benchmark", "/browse", "/cso", "/investigate", "/retro", "/autoplan", "/design-review", "/design-consultation", "/codex", "/careful", "/freeze", "/guard", "/unfreeze", "/setup-browser-cookies", "/setup-deploy", "/document-release", "/gstack-upgrade"]
+      },
+      "priority": "high"
     }
   ],
 
