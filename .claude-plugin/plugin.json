@@ -1,0 +1,82 @@
+{
+  "name": "agentic-creator-os",
+  "version": "11.0.0",
+  "description": "ACOS — The Operating System for AI-Powered Creators. Layer-modeled skills, commands, agents, and hooks for content / video / music / visual / brand workflows. Composes a creator-meta substrate with creator-specific implementations.",
+  "author": {
+    "name": "Frank Riemer",
+    "email": "frank@frankx.ai",
+    "url": "https://frankx.ai"
+  },
+  "homepage": "https://frankx.ai/products/agentic-creator-os",
+  "repository": "https://github.com/frankxai/agentic-creator-os",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "cursor",
+    "windsurf",
+    "gemini",
+    "creator-os",
+    "ai-agent",
+    "skills",
+    "workflows",
+    "content-creation",
+    "agentic-ai",
+    "mcp",
+    "anthropic"
+  ],
+  "categories": [
+    "creator-tools",
+    "content",
+    "video",
+    "music",
+    "visual",
+    "brand"
+  ],
+  "platforms": [
+    "claude-code",
+    "opencode",
+    "cursor",
+    "windsurf",
+    "gemini-cli"
+  ],
+  "engines": {
+    "claude-code": ">=2.0.0"
+  },
+  "compose": {
+    "extends": [
+      "creator-meta"
+    ],
+    "absorbs": [
+      "knowledge-work-plugins/creator",
+      "superpowers (proven techniques)",
+      "oh-my-opencode (lifecycle hooks)",
+      "claude-flow (swarm topologies)"
+    ]
+  },
+  "stats": {
+    "skills": 10,
+    "commands": 0,
+    "agents": 0,
+    "hooks": 0,
+    "verified": "2026-05-03",
+    "note": "Aspirational targets in docs/ACOS_V11_MASTER_PLAN.md (90+ skills / 65+ commands / 38 agents). Manifest reflects current shipped state, not aspiration."
+  },
+  "intelligence": {
+    "version": "v11.0.0",
+    "targetScore": 98,
+    "currentScore": "see /acos-score",
+    "components": {
+      "skill_activation_accuracy": 0.25,
+      "pattern_extraction_quality": 0.25,
+      "memory_utilization": 0.20,
+      "hook_reliability": 0.15,
+      "self_modify_safety": 0.15
+    }
+  },
+  "principles": [
+    "Progressive disclosure — SKILL.md lean, references/ for depth",
+    "Connector agnosticism — skills reference ~~categories not vendor names",
+    "Commands as workflows — markdown, no code",
+    "Layer model — every artifact has one canonical location"
+  ]
+}
