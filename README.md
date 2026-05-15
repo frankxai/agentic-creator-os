@@ -40,12 +40,39 @@ You: "write a blog post about AI agents"
 
 The Agentic Creator OS is structured in four layers, each auto-activating based on context:
 
+```mermaid
+flowchart LR
+  Intent["User intent"] --> Router["/acos smart router"]
+  Router --> Skills["Auto-activating skills"]
+  Router --> Commands["Slash workflows"]
+  Router --> Agents["Specialized agents"]
+  Skills --> Hooks["Safety hooks"]
+  Commands --> Hooks
+  Agents --> Hooks
+  Hooks --> Output["Audited creator output"]
+  Output --> Learning["Trajectory learning"]
+  Learning --> Router
+```
+
 | Layer | What It Does | Count |
 |-------|-------------|-------|
 | **Skills** | Domain knowledge modules that load automatically | 75+ |
 | **Commands** | Reusable workflows triggered via slash commands | 35+ |
 | **Agents** | Specialized personas with distinct expertise | 38 |
 | **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 5 |
+
+## Harness Role
+
+ACOS is the execution layer inside the wider FrankX agent harness:
+
+| System | Role |
+| --- | --- |
+| **Starlight / SIS** | Memory, MCP tools, cross-agent substrate |
+| **ACOS** | Skills, commands, agents, safety hooks |
+| **FrankX harness** | Repo manifests, prompt symmetry, push safety |
+| **Arcanea** | Creative methodology and agent-world substrate |
+
+This separation matters: ACOS makes agents capable; the harness makes them governed.
 
 ---
 
