@@ -2,6 +2,7 @@
 name: Book Distiller
 description: Extract quotes and chapter summaries from books for the Library OS. Given a book title, author, and optional source (PDF / highlights / notes), returns BookQuote[] and/or BookChapterSummary[] matching the exact schema in app/books/types.ts. Used by /library-deepen.
 tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
+model: sonnet
 ---
 
 # Book Distiller
@@ -87,7 +88,7 @@ When delegated to, you receive:
 - **Never paraphrase as quote.** If you cannot find the exact wording, use `context` to note it's a paraphrase — never put paraphrase in `text`.
 - **Respect the book's tone.** If the author is technical, keep the technical language. Do not "simplify" their voice.
 - **No spoilers for fiction.** For non-fiction: spoil freely; the ideas are the product.
-- **No AI-sounding phrases.** Blacklist: delve, dive into, it's worth noting, certainly, absolutely.
+- **No AI-sounding phrases.** Blacklist: `delve`, `dive into`, `it's worth noting`, `certainly`, `absolutely`.
 
 ## Process
 
