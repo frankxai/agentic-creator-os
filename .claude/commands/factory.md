@@ -40,10 +40,10 @@ When `/factory [topic]` is called:
 7. Save draft to: content/blog/[slug].mdx
 ```
 
-### Phase 3: Polish (10 min)
+### Phase 3: Polish + Gate (10 min)
 
 ```bash
-# Quality gates
+# Quality gates — MANDATORY before Phase 4 publish
 1. SEO Check:
    - Title: 50-60 characters
    - Description: 120-160 characters
@@ -58,6 +58,21 @@ When `/factory [topic]` is called:
 3. AEO Check:
    - TL;DR in first 100 words
    - FAQ section exists
+
+4. @integrity-guard (THE GATE — added 2026-05-20):
+   Dispatch the agent against content/blog/[slug].mdx.
+   It runs 5 sub-gates in parallel:
+   - Brand voice (banned phrases + AI-Architect-not-AI-Systems + Arcanea-leak)
+   - AI-slop detection (em-dash density, "not just X, it's Y" patterns)
+   - Claim audit (every numeric/comparative claim has source)
+   - Schema validation (required JSON-LD types present + valid)
+   - Conversion + linking (≥3 internal links + ≥1 CTA to gravity surface)
+
+   Verdict gate:
+   - PASS → continue to Phase 4 publish
+   - WARN → operator review required before publish (show findings)
+   - FAIL → block publish, fix before continuing
+
    - Clear definitions for technical terms
    - datePublished and dateModified
 

@@ -29,6 +29,24 @@ Before publishing:
 - [ ] FAQ section present (for AI citation)
 - [ ] Internal links verified
 
+## Quality Gate (MANDATORY — added 2026-05-20)
+
+Before flipping `draft: false`, dispatch `@integrity-guard <file>`. The agent runs
+5 sub-gates in parallel and returns PASS / WARN / FAIL:
+
+- Gate 1: Brand voice (banned phrases, AI-Architect-not-AI-Systems, Arcanea-leak)
+- Gate 2: AI-slop detection
+- Gate 3: Claim audit (every numeric claim has source)
+- Gate 4: Schema + meta (JSON-LD types valid, OG image ≥ 1200×630, canonical set)
+- Gate 5: Conversion + linking (≥ 3 internal links, ≥ 1 CTA to gravity surface)
+
+Verdict rules:
+- PASS → proceed to Implementation
+- WARN → operator review required, ship-with-corrections allowed
+- FAIL → block publish, fix the failing gate first
+
+No bypass. The gate is what separates the site from generic LLM output.
+
 ## Implementation
 
 ```bash
