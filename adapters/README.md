@@ -10,18 +10,21 @@ ACOS adapts to different AI coding platforms. Each adapter generates the appropr
 | **Cursor** | `.cursorrules` | Generated context file |
 | **Windsurf** | `.windsurfrules` | Generated context file |
 | **Gemini Code Assist** | `GEMINI.md` | Generated context file |
+| **Codex CLI** | `AGENTS.md` | Generated repository instructions |
+| **Antigravity** | `.antigravity/instructions.md` | Generated workspace instructions |
+| **OpenCode** | `AGENTS.md` + `opencode.json` | Generated context + native config |
 | **Generic** | `CONTEXT.md` | Generated context file |
 
 ## Feature Parity
 
-| Feature | Claude Code | Cursor | Windsurf | Gemini | Generic |
-|---------|:-----------:|:------:|:--------:|:------:|:-------:|
-| Skills (knowledge) | Full | Embedded | Embedded | Embedded | Embedded |
-| Commands (workflows) | Slash commands | Context-guided | Context-guided | Context-guided | Context-guided |
-| Agents (personas) | Full | Embedded | Embedded | Embedded | Embedded |
-| Hooks (safety) | Native | — | — | — | — |
-| Auto-activation | `skill-rules.json` | — | — | — | — |
-| Agent IAM | Native | — | — | — | — |
+| Feature | Claude Code | Cursor | Windsurf | Gemini | Codex | Antigravity | OpenCode | Generic |
+|---------|:-----------:|:------:|:--------:|:------:|:-----:|:-----------:|:--------:|:-------:|
+| Skills (knowledge) | Full | Embedded | Embedded | Embedded | Embedded | Embedded | Embedded | Embedded |
+| Commands (workflows) | Slash commands | Context-guided | Context-guided | Context-guided | Context-guided | Context-guided | Context-guided | Context-guided |
+| Agents (personas) | Full | Embedded | Embedded | Embedded | Embedded | Embedded | Embedded | Embedded |
+| Hooks (safety) | Native | — | — | — | — | — | Config-guided | — |
+| Auto-activation | `skill-rules.json` | — | — | — | — | — | — | — |
+| Agent IAM | Native | — | — | — | — | — | — | — |
 
 **Claude Code** gets the richest integration because it natively supports slash commands, lifecycle hooks, and auto-activation rules. Other platforms receive skills and agent definitions embedded in their context files, which the AI reads at session start.
 

@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild src/index.ts --bundle --outfile=build/index.js --format=esm --platform=node --target=node20 --packages=external",
     "dev": "tsc -w",
     "start": "node build/index.js"
   },

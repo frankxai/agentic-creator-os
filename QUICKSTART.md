@@ -72,6 +72,9 @@ claude plugin install visual-studio     # Visual creation council
 | Cursor | `./install.sh --platform=cursor` |
 | Windsurf | `./install.sh --platform=windsurf` |
 | Gemini | `./install.sh --platform=gemini` |
+| Codex | `./install.sh --platform=codex` |
+| Antigravity | `./install.sh --platform=antigravity` |
+| OpenCode | `./install.sh --platform=opencode` |
 
 ## Architecture
 

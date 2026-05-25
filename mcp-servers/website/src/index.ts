@@ -44,8 +44,8 @@ server.registerTool(
           "@radix-ui/react-slot": "^1.0.0",
           "class-variance-authority": "^0.7.0",
           clsx: "^2.0.0",
-          tailwind-merge: "^2.0.0",
-          lucide-react: "^0.294.0"
+          "tailwind-merge": "^2.0.0",
+          "lucide-react": "^0.294.0"
         },
         devDependencies: {
           "@types/node": "^20.0.0",

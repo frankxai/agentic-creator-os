@@ -1,4 +1,4 @@
-# Agentic Creator OS v10 — Project Instructions
+# Agentic Creator OS v11 — Project Instructions
 
 > The operating system for AI-powered creators. Multi-platform, self-learning, safety-first.
 
@@ -57,12 +57,12 @@ Instead of blanket word bans, apply these principles:
 
 ## What is ACOS?
 
-**Agentic Creator OS v10** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
+**Agentic Creator OS v11** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
 
-- **35+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
-- **75+ Skills** — Auto-activate via `skill-rules.json` based on task context
+- **65+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
+- **90+ Skills** — Auto-activate via `skill-rules.json` based on task context
 - **38 Specialized Agents** — Writers, editors, designers, strategists, engineers
-- **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
+- **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM. v11 keeps these safety systems as the operating baseline while adding plugin ecosystem and absorbed skills.
 
 ## Quick Start
 
@@ -77,6 +77,17 @@ Instead of blanket word bans, apply these principles:
 ```
 
 On non-Claude platforms, just describe what you want. Skills activate from context.
+
+### Codex / Gemini / Antigravity / OpenCode
+
+Generate the native instruction surface for each runtime:
+
+```bash
+./install.sh --platform=codex        # AGENTS.md
+./install.sh --platform=gemini       # GEMINI.md
+./install.sh --platform=antigravity  # .antigravity/instructions.md
+./install.sh --platform=opencode     # AGENTS.md + opencode.json
+```
 
 ## Available Commands (35+)
 
@@ -217,5 +228,5 @@ Before ANY structural change:
 
 ---
 
-*ACOS v10.1 — Autonomous Intelligence*
+*ACOS v11.0 — Autonomous Intelligence + Plugin Ecosystem*
 *Created by [FrankX](https://github.com/frankxai)*

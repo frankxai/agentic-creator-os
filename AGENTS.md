@@ -1,6 +1,6 @@
 # agentic-creator-os — Agent Instructions
 
-Read `CLAUDE.md` first. It defines ACOS v10, Frank DNA, safety hooks, commands, skills, and agent standards.
+Read `CLAUDE.md` first. It still carries the v10 safety-system lineage, while package metadata and README identify the current package as ACOS v11. Frank DNA, safety hooks, commands, skills, and agent standards remain load-bearing.
 
 ## Repo Role
 
@@ -21,11 +21,10 @@ npm run build:all
 npm run install:all
 ```
 
-The registry currently lists `pnpm test`, but `package.json` does not define a test script. If adding tests, add the script deliberately and document the runner.
+The harness health command is `npm run verify`; it runs `npm run harness:check` and then builds every MCP workspace. If adding tests, wire them into `verify` deliberately and document the runner.
 
 ## Safety
 
 - Never weaken safety hooks, circuit breakers, audit trails, or self-modify gates without an explicit operator decision.
 - Treat ACOS as a shared substrate. Backward compatibility matters.
 - If changing public package behavior, update docs and versioning intentionally.
-

@@ -10,7 +10,7 @@
 
 [![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
+[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini%20%7C%20Codex%20%7C%20Antigravity%20%7C%20OpenCode-purple?style=for-the-badge)](#multi-platform-install)
 
 </div>
 
@@ -20,7 +20,7 @@
 
 A **production-grade skill and agent system** for AI coding assistants. It ships skills (domain knowledge), commands (reusable workflows), agents (specialized personas), and safety hooks — configured to auto-activate based on what you're working on.
 
-Works with **Claude Code, Cursor, Windsurf, Gemini Code Assist**, and any AI coding agent that reads markdown context files.
+Works with **Claude Code, Cursor, Windsurf, Gemini Code Assist, Codex, Antigravity, OpenCode**, and any AI coding agent that reads markdown context files.
 
 ```
 You: "write a blog post about AI agents"
@@ -100,15 +100,18 @@ cd agentic-creator-os
 
 This generates a `.cursorrules` or `.windsurfrules` file with all skills embedded.
 
-### Gemini Code Assist
+### Gemini Code Assist / Codex / Antigravity / OpenCode
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh --platform=gemini
+./install.sh --platform=codex
+./install.sh --platform=antigravity
+./install.sh --platform=opencode
 ```
 
-This generates a `GEMINI.md` context file for Gemini to read on session start.
+These generate the native instruction surfaces each agent expects: `GEMINI.md`, `AGENTS.md`, `.antigravity/instructions.md`, and `opencode.json`.
 
 ### Any AI Coding Agent
 
@@ -438,7 +441,7 @@ agentic-creator-os/
 ├── docs/infographics/      # Visual documentation
 ├── install.sh              # Multi-platform installer
 ├── CLAUDE.md               # Claude Code context
-└── package.json            # v10.1.0
+└── package.json            # v11.0.0
 ```
 
 ---
@@ -449,8 +452,8 @@ ACOS is the **Claude Code implementation** of the [Starlight Intelligence System
 
 ```
 Starlight Intelligence System (Framework)
-├── 5-layer cognitive architecture
-├── 7 council agents with emergent leadership
+├── 10 intelligence systems
+├── 47-agent registry with emergent leadership
 ├── 6 orchestration patterns
 └── Platform adapters
      └── ACOS (Claude Code + Multi-Platform)

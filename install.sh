@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# AGENTIC CREATOR OS v10 — Multi-Platform Installer
-# Works with: Claude Code, Cursor, Windsurf, Gemini Code Assist, any AI agent
+# AGENTIC CREATOR OS v11 — Multi-Platform Installer
+# Works with: Claude Code, Cursor, Windsurf, Gemini Code Assist, Codex, Antigravity, OpenCode, any AI agent
 # github.com/frankxai/agentic-creator-os
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -18,7 +18,7 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 # Configuration
-VERSION="10.1.0"
+VERSION="11.0.0"
 GITHUB_REPO="frankxai/agentic-creator-os"
 
 # Detect installation paths
@@ -60,8 +60,11 @@ show_help() {
     echo "  --platform=cursor     Cursor (generates .cursorrules with embedded skills)"
     echo "  --platform=windsurf   Windsurf (generates .windsurfrules)"
     echo "  --platform=gemini     Gemini Code Assist (generates GEMINI.md)"
+    echo "  --platform=codex      Codex CLI (generates AGENTS.md)"
+    echo "  --platform=antigravity Antigravity (generates .antigravity/instructions.md)"
+    echo "  --platform=opencode   OpenCode (generates AGENTS.md + opencode.json)"
     echo "  --platform=generic    Any AI agent (generates CONTEXT.md)"
-    echo "  --platform=all        Install for all detected platforms"
+    echo "  --platform=all        Generate all portable platform context files"
     echo ""
     echo "Install Modes:"
     echo "  --full                Full installation (all skills + MCP servers)"
@@ -79,7 +82,7 @@ show_help() {
     echo "  ./install.sh                           # Auto-detect platform"
     echo "  ./install.sh --platform=cursor         # Cursor-specific install"
     echo "  ./install.sh --platform=claude --full   # Claude Code with MCP servers"
-    echo "  ./install.sh --platform=all            # All platforms"
+    echo "  ./install.sh --platform=all            # All portable platforms"
     echo ""
 }
 
@@ -108,6 +111,24 @@ detect_platforms() {
     if [ -d "$HOME/.gemini" ] || command -v gemini &>/dev/null; then
         [ -n "$platforms" ] && platforms="$platforms,"
         platforms="${platforms}gemini"
+    fi
+
+    # Codex
+    if command -v codex &>/dev/null || [ -d "$HOME/.codex" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}codex"
+    fi
+
+    # Antigravity
+    if [ -d "$HOME/.antigravity" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}antigravity"
+    fi
+
+    # OpenCode
+    if command -v opencode &>/dev/null; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}opencode"
     fi
 
     # Fallback
@@ -237,6 +258,12 @@ generate_context_file() {
         cursor)    output_file="$target_dir/.cursorrules" ;;
         windsurf)  output_file="$target_dir/.windsurfrules" ;;
         gemini)    output_file="$target_dir/GEMINI.md" ;;
+        codex)     output_file="$target_dir/AGENTS.md" ;;
+        antigravity)
+            mkdir -p "$target_dir/.antigravity"
+            output_file="$target_dir/.antigravity/instructions.md"
+            ;;
+        opencode)  output_file="$target_dir/AGENTS.md" ;;
         generic)   output_file="$target_dir/CONTEXT.md" ;;
         *)         output_file="$target_dir/ACOS-CONTEXT.md" ;;
     esac
@@ -326,6 +353,53 @@ generate_context_file() {
     success "Generated: $output_file ($(wc -l < "$output_file") lines)"
 }
 
+generate_opencode_config() {
+    local target_dir="$1"
+    local creator_server="$PROJECT_DIR/mcp-servers/creator/build/index.js"
+    local evaluator_server="$PROJECT_DIR/mcp-servers/evaluator/build/index.js"
+
+    creator_server=$(printf '%s' "$creator_server" | sed 's#\\#/#g')
+    evaluator_server=$(printf '%s' "$evaluator_server" | sed 's#\\#/#g')
+
+    cat > "$target_dir/opencode.json" <<EOF
+{
+  "mcp": {
+    "agentic-creator-os": {
+      "type": "local",
+      "command": ["node", "$creator_server"]
+    },
+    "agentic-evaluator": {
+      "type": "local",
+      "command": ["node", "$evaluator_server"]
+    }
+  },
+  "skills": {
+    "content": {
+      "command": "skill:content",
+      "description": "Content creation skills for social media, blogs, emails, and more"
+    },
+    "marketing": {
+      "command": "skill:marketing",
+      "description": "Marketing workflows including cross-platform distribution and SEO audits"
+    },
+    "dev": {
+      "command": "skill:dev",
+      "description": "Development workflows for website creation and code generation"
+    },
+    "evaluator": {
+      "command": "skill:evaluator",
+      "description": "Quality evaluation and audit logging for content"
+    }
+  },
+  "audit": {
+    "enabled": true,
+    "path": ".claude/agentic-creator-os/audit",
+    "sources": ["opencode", "claude-code", "gemini", "custom"]
+  }
+}
+EOF
+}
+
 # ── Install for specific platform ─────────────────────────────────────────────
 install_platform() {
     local platform="$1"
@@ -347,6 +421,19 @@ install_platform() {
         gemini)
             generate_context_file "gemini" "$target"
             success "Gemini: GEMINI.md will be read as project context"
+            ;;
+        codex)
+            generate_context_file "codex" "$target"
+            success "Codex: AGENTS.md will be read as repository instructions"
+            ;;
+        antigravity)
+            generate_context_file "antigravity" "$target"
+            success "Antigravity: .antigravity/instructions.md will be read as workspace instructions"
+            ;;
+        opencode)
+            generate_context_file "opencode" "$target"
+            generate_opencode_config "$target"
+            success "OpenCode: AGENTS.md and opencode.json context installed"
             ;;
         generic)
             generate_context_file "generic" "$target"
@@ -372,8 +459,11 @@ build_mcp_servers() {
         [ -d "$server_dir" ] && [ -f "$server_dir/package.json" ] || continue
         local name=$(basename "$server_dir")
         step "Building $name..."
-        (cd "$server_dir" && npm install --quiet 2>/dev/null && npm run build --quiet 2>/dev/null) || warn "Build failed for $name"
-        success "Built: $name"
+        if (cd "$server_dir" && npm install --quiet 2>/dev/null && npm run build --quiet 2>/dev/null); then
+            success "Built: $name"
+        else
+            warn "Build failed for $name"
+        fi
     done
 }
 
@@ -449,6 +539,18 @@ main() {
     show_banner
     check_prerequisites
 
+    if [[ "$target_dir" =~ ^[A-Za-z]:/ ]] && [ ! -d "$target_dir" ]; then
+        drive_letter=$(printf '%s' "${target_dir:0:1}" | tr '[:upper:]' '[:lower:]')
+        translated="/mnt/$drive_letter/${target_dir:3}"
+        if [ -d "$translated" ]; then
+            target_dir="$translated"
+        fi
+    fi
+
+    if [[ "$target_dir" =~ ^[A-Za-z]:[^/] ]]; then
+        error "Target path looks like a mangled Windows path: $target_dir. Use C:/path or /mnt/c/path."
+    fi
+
     # Auto-detect if no platform specified
     if [ -z "$platform" ]; then
         platform=$(detect_platforms)
@@ -480,8 +582,8 @@ main() {
     for p in "${PLATFORMS[@]}"; do
         p=$(echo "$p" | xargs) # trim whitespace
         if [ "$p" = "all" ]; then
-            local detected=$(detect_platforms)
-            IFS=',' read -ra ALL_PLATFORMS <<< "$detected"
+            local supported="cursor,windsurf,gemini,codex,antigravity,opencode,generic"
+            IFS=',' read -ra ALL_PLATFORMS <<< "$supported"
             for ap in "${ALL_PLATFORMS[@]}"; do
                 install_platform "$(echo "$ap" | xargs)" "$mode" "$target_dir"
             done

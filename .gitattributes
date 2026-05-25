@@ -1,0 +1,2 @@
+*.sh text eol=lf
+install.sh text eol=lf
