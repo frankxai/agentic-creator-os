@@ -309,6 +309,25 @@
         "commands": ["/agentic-orchestration"]
       },
       "exports": ["orchestration_patterns", "handoff_protocols", "state_machines"]
+    },
+
+    "agentic-builder-lab": {
+      "version": "0.1.0",
+      "category": "projects",
+      "description": "Convert a single build session into MDX build-log entry, LinkedIn draft, demo brief, Mermaid diagram, and a reusable prompt for the /agentic-builder-lab and /build pages on frankx.ai.",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["log a build", "build session log", "agentic-builder-lab", "build log"],
+        "files": ["**/content/builds/**", "**/drafts/linkedin/**", "**/drafts/demos/**", "**/drafts/diagrams/**"],
+        "commands": ["/build-log", "/agentic-builder-lab"]
+      },
+      "exports": ["mdx_build_log", "linkedin_draft", "demo_brief", "mermaid_diagram", "prompt_pack_entry"],
+      "voice_override": "resources/voice-spec.md"
     }
   },
 
@@ -337,6 +356,9 @@
       "7-pillars",
       "life-symphony",
       "golden-path"
+    ],
+    "projects": [
+      "agentic-builder-lab"
     ]
   },
 
