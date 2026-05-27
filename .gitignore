@@ -38,7 +38,8 @@ tmp/
 temp/
 *.tmp
 
-# Package lock (use npm ci)
+# Package lock — npm lockfile not tracked because project uses pnpm
+# pnpm-lock.yaml IS tracked (required for `pnpm install --frozen-lockfile` in CI)
 package-lock.json
 
 # Claude Flow runtime state
