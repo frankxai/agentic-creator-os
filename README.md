@@ -4,13 +4,13 @@
 
 **The Operating System for AI-Powered Creators**
 
-*One install. Any coding agent. 90+ skills, 65+ commands, 38 agents — auto-activating.*
+*One install. Any coding agent. 90+ skills, 150+ commands, 100+ agents — auto-activating.*
 
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
 [![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
+[![Platforms](https://img.shields.io/badge/platforms-Claude%20Code%20%7C%20OpenCode-purple?style=for-the-badge)](#multi-platform-install)
 
 </div>
 
@@ -414,16 +414,14 @@ agentic-creator-os/
 │   │   ├── circuit-breaker.sh
 │   │   ├── audit-trail.sh
 │   │   ├── self-modify-gate.sh
-│   │   └── quality-gate.sh
+│   │   └── quality-gate.js (in hooks/, not .claude/hooks/)
 │   ├── agent-iam.json      # Role-based access control
-│   ├── skill-rules.json    # 22 auto-activation rules
+│   ├── skill-rules.json    # 24 auto-activation rules
 │   └── hooks.json          # Hook lifecycle config
 │
 ├── adapters/               # Platform adapters
-│   ├── cursor/             # .cursorrules generator
-│   ├── windsurf/           # .windsurfrules generator
-│   ├── gemini/             # GEMINI.md generator
-│   └── generic/            # CONTEXT.md generator
+│   └── opencode/           # OpenCode adapter (shipped)
+│   # Cursor / Windsurf / Gemini / generic adapters planned, not yet shipped
 │
 ├── departments/            # Agent team definitions
 │   ├── content/
@@ -474,9 +472,9 @@ Starlight Intelligence System (Framework)
 
 ---
 
-## Plugin Marketplace
+## Plugin Marketplace (separate repo)
 
-Extend ACOS with installable domain plugins from **[agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills)**:
+The plugin marketplace lives in a separate repository — **[agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills)** — not bundled with ACOS. Install plugins from there via Claude Code's marketplace:
 
 | Plugin | Purpose |
 |--------|---------|

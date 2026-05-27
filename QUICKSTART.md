@@ -37,15 +37,15 @@ No manual configuration. No skill memorization. Context-driven activation.
 |----------|-------|---------|
 | **Skills** | 90+ | article-creator, suno-mastery, react-patterns, seo-strategy |
 | **Commands** | 65+ | /ultrawork, /design-gods, /product-team-launch, /deepresearch |
-| **Agents** | 38 | Brand Architect, Music Producer, QA Engineer, Design Swarm |
+| **Agents** | 100+ (5 dept leads + ~137 in `.claude/agents/`) | Brand Architect, Music Producer, QA Engineer, Design Swarm |
 | **Hooks** | 15 | Quality gate, circuit breaker, skill activation, audit trail |
 
 ## Try These First
 
 ```
 /acos              # Check ACOS status and loaded skills
-/ultrawork         # Launch multi-agent swarm mode
-/design-gods       # Design system audit and build
+/ultraworld        # Launch multi-agent swarm mode (Arcanean world-building)
+/factory           # Full publishing pipeline (article → social → publish)
 /deepresearch      # Deep research with web + codebase analysis
 ```
 

@@ -1,6 +1,8 @@
 # Agentic Creator OS - Usage Guide
 
-**Complete guide to using ACOS v5 for content creation, development, and creative workflows.**
+> ⚠️ **This guide is stale (last updated at v5.0).** Current ACOS is v11.0.0. Counts and command names below may not match reality. Authoritative sources: `README.md`, `CLAUDE.md`, `.claude/commands/`, `.claude/skill-rules.json`. Rewrite pending.
+
+**Guide to using ACOS for content creation, development, and creative workflows.**
 
 ---
 
