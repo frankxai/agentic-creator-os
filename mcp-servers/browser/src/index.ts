@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import { chromium } from "playwright";
+import { writeFile as fsWriteFile } from "node:fs/promises";
 
 let browser: any = null;
 let page: any = null;
@@ -171,7 +172,7 @@ server.registerTool(
       const screenshot = await page.screenshot({ type: "png" });
       
       if (path) {
-        await require("fs/promises").writeFile(path, screenshot);
+        await fsWriteFile(path, screenshot);
         return {
           content: [{ type: "text", text: `Screenshot saved to ${path}` }],
           structuredContent: { path }
@@ -201,7 +202,7 @@ server.registerTool(
       script: z.string().describe("JavaScript code to execute")
     },
     annotations: {
-      readOnlyHint: true
+      readOnlyHint: false
     }
   },
   async ({ script }) => {

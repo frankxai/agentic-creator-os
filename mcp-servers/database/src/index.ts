@@ -81,12 +81,12 @@ server.registerTool(
   "query",
   {
     title: "Execute SQL Query",
-    description: "Execute a read-only SQL query",
+    description: "Execute a SQL query (accepts arbitrary SQL — caller must constrain to SELECT statements for read-only safety)",
     inputSchema: {
-      sql: z.string().describe("SQL query to execute")
+      sql: z.string().describe("SQL query to execute (any SQL accepted — read-only enforcement is the caller's responsibility)")
     },
     annotations: {
-      readOnlyHint: true
+      readOnlyHint: false
     }
   },
   async ({ sql }) => {

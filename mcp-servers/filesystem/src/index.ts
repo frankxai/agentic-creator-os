@@ -11,20 +11,31 @@ const server = new McpServer({
 
 let allowedDirectories: string[] = [];
 
-async function validatePath(inputPath: string): Promise<string> {
-  const normalized = path.normalize(inputPath);
-  const resolved = await fs.realpath(normalized);
-  
+function checkAllowed(resolved: string, inputPath: string): string {
   const isAllowed = allowedDirectories.some(allowed => {
     const relative = path.relative(allowed, resolved);
     return !relative.startsWith("..") && !path.isAbsolute(relative);
   });
-  
+
   if (!isAllowed) {
     throw new Error(`Path ${inputPath} is not allowed`);
   }
-  
+
   return resolved;
+}
+
+async function validatePath(inputPath: string): Promise<string> {
+  const normalized = path.normalize(inputPath);
+  const resolved = await fs.realpath(normalized);
+  return checkAllowed(resolved, inputPath);
+}
+
+async function validatePathForWrite(inputPath: string): Promise<string> {
+  const normalized = path.normalize(path.resolve(inputPath));
+  const parent = path.dirname(normalized);
+  const realParent = await fs.realpath(parent);
+  const resolved = path.join(realParent, path.basename(normalized));
+  return checkAllowed(resolved, inputPath);
 }
 
 server.registerTool(
@@ -72,7 +83,7 @@ server.registerTool(
   },
   async ({ path: filePath, content }) => {
     try {
-      const validPath = await validatePath(filePath);
+      const validPath = await validatePathForWrite(filePath);
       await fs.writeFile(validPath, content, "utf-8");
       return {
         content: [{ type: "text", text: `Successfully wrote to ${filePath}` }],
