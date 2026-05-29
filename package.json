@@ -60,9 +60,10 @@
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
     "manifest": "node scripts/acos-manifest.mjs sync",
     "lint": "node scripts/acos-manifest.mjs lint",
-    "typecheck": "npm run build:all",
+    "typecheck": "node scripts/acos-manifest.mjs typecheck",
     "smoke": "node scripts/acos-manifest.mjs smoke",
-    "check": "npm run lint && npm run typecheck && npm run smoke"
+    "check": "npm run lint && npm run typecheck && npm run smoke",
+    "typecheck:mcp": "npm run build:all"
   },
   "publishConfig": {
     "access": "public"

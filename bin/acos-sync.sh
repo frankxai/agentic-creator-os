@@ -310,7 +310,11 @@ main() {
                 warn "No manifest found at $MANIFEST_FILE"
             fi
             echo "Install state: $LOCAL_STATE"
-            [ -f "$LOCAL_STATE" ] && sed -n '1,80p' "$LOCAL_STATE"
+            if [ -f "$LOCAL_STATE" ]; then
+                sed -n '1,80p' "$LOCAL_STATE"
+            else
+                echo "Not installed for this CLAUDE_HOME yet."
+            fi
             ;;
         help|--help|-h)
             show_help

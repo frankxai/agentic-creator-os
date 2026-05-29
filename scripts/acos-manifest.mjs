@@ -135,7 +135,8 @@ const syncPackage = (manifest) => {
     ...pkg.scripts,
     manifest: 'node scripts/acos-manifest.mjs sync',
     lint: 'node scripts/acos-manifest.mjs lint',
-    typecheck: 'npm run build:all',
+    typecheck: 'node scripts/acos-manifest.mjs typecheck',
+    'typecheck:mcp': 'npm run build:all',
     smoke: 'node scripts/acos-manifest.mjs smoke',
     check: 'npm run lint && npm run typecheck && npm run smoke'
   };
@@ -291,11 +292,31 @@ const smoke = () => {
   console.log('ACOS smoke passed: npm tarball and skills-only installer are aligned.');
 };
 
+const typecheck = () => {
+  execFileSync(process.execPath, ['--check', rel('scripts/acos-manifest.mjs')], { cwd: root, stdio: 'pipe' });
+  execFileSync('bash', ['-n', rel('install.sh')], { cwd: root, stdio: 'pipe' });
+  execFileSync('bash', ['-n', rel('bin/acos-sync.sh')], { cwd: root, stdio: 'pipe' });
+
+  const manifest = readJson('acos.manifest.json');
+  const packageJson = readJson('package.json');
+  assert(typeof manifest.version === 'string' && manifest.version === packageJson.version, 'manifest.version must match package.json version.');
+  assert(Array.isArray(manifest.inventory.skills), 'manifest.inventory.skills must be an array.');
+  assert(Array.isArray(manifest.inventory.commands), 'manifest.inventory.commands must be an array.');
+  assert(Array.isArray(manifest.inventory.agentDefinitions), 'manifest.inventory.agentDefinitions must be an array.');
+  assert(typeof manifest.stats.skills === 'number' && manifest.stats.skills === manifest.inventory.skills.length, 'manifest skill count must match inventory.');
+  assert(typeof manifest.stats.commands === 'number' && manifest.stats.commands === manifest.inventory.commands.length, 'manifest command count must match inventory.');
+  assert(typeof manifest.stats.agents === 'number' && manifest.stats.agents === manifest.inventory.agentDefinitions.length, 'manifest agent count must match inventory.');
+  assert(packageJson.scripts['typecheck:mcp'] === 'npm run build:all', 'package.json must preserve the full MCP workspace typecheck script.');
+
+  console.log(`ACOS typecheck passed: manifest contract and installer CLI syntax are valid.`);
+};
+
 const command = process.argv[2] ?? 'lint';
 
 try {
   if (command === 'sync') sync();
   else if (command === 'lint') lint();
+  else if (command === 'typecheck') typecheck();
   else if (command === 'smoke') smoke();
   else throw new Error(`Unknown command: ${command}`);
 } catch (error) {
