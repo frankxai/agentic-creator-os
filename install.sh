@@ -110,6 +110,12 @@ detect_platforms() {
         platforms="${platforms}gemini"
     fi
 
+    # Antigravity
+    if [ -d "$HOME/.gemini/antigravity" ] || [ -d "/c/Users/$(whoami)/.gemini/antigravity" ] || command -v antigravity &>/dev/null; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}antigravity"
+    fi
+
     # Fallback
     if [ -z "$platforms" ]; then
         platforms="generic"
@@ -326,6 +332,81 @@ generate_context_file() {
     success "Generated: $output_file ($(wc -l < "$output_file") lines)"
 }
 
+# ── Antigravity Install ──────────────────────────────────────────────────────
+install_antigravity() {
+    local target="${1:-.}"
+    log "Installing for Antigravity..."
+
+    # Ensure target .antigravity directory exists
+    mkdir -p "$target/.antigravity"
+
+    # Create dynamic registry cache if registry script exists
+    if [ -f "$PROJECT_DIR/bin/acos-agy-registry.mjs" ]; then
+        step "Generating Dynamic Agent Registry cache..."
+        node "$PROJECT_DIR/bin/acos-agy-registry.mjs" --list >/dev/null 2>&1 || true
+        if [ -f "$PROJECT_DIR/.antigravity/agents-registry.json" ]; then
+            cp "$PROJECT_DIR/.antigravity/agents-registry.json" "$target/.antigravity/" 2>/dev/null || true
+        fi
+    fi
+
+    # Write instructions.md
+    cat > "$target/.antigravity/instructions.md" << 'INSEOF'
+# Antigravity-Native ACOS Operating Instructions
+
+This document defines the federation and coordination standards for the **Antigravity (Gemini)** AI agent operating in this workspace. Follow these instructions to dynamically load, define, and run any of ACOS's 99+ specialized agents.
+
+---
+
+## 1. Dynamic Agent Discovery & Registration
+
+You have a registry scanner and cache at:
+- Parser Cache: [agents-registry.json](file:///./.antigravity/agents-registry.json)
+- Command: `acos-agy <agent-name>`
+
+### The Registration Protocol
+
+When a task requires a specialized ACOS agent:
+1. **Fetch Agent Specs:** Run `acos-agy <agent-name>` to retrieve the dynamic JSON configuration.
+2. **Define Subagent:** Invoke the `define_subagent` tool with the parsed values:
+   - `name`: Parsed `name`
+   - `description`: Parsed `description`
+   - `system_prompt`: Parsed `system_prompt` (pre-compiled with voice guidelines)
+   - `enable_write_tools`: Parsed `enable_write_tools`
+   - `enable_mcp_tools`: Parsed `enable_mcp_tools`
+   - `enable_subagent_tools`: Parsed `enable_subagent_tools`
+3. **Execute Task:** Invoke the subagent using `invoke_subagent` with the exact payload and file paths.
+
+---
+
+## 2. Intent → Agent Trigger Mapping
+
+Use the following lookup table to resolve which specialist agent to define and invoke:
+
+| Task Domain | Keyword / Trigger | Dispatched ACOS Agent |
+|---|---|---|
+| **Quality & Gate** | "publish", "deploy", "is this on-brand", "integrity check", "audit" | `integrity-guard` |
+| **SEO & Citations** | "seo", "rankings", "keywords", "structured data" | `seo-specialist` |
+| **Research Hub** | "research", "arxiv", "fetch sources", "literature search" | `research-orchestrator` |
+| **Banned Research** | "autoresearch brief", " Karpathy digit" | `autoresearcher` |
+| **Music Production** | "suno", "music", "lyrics", "master track" | `music-producer` |
+| **Visual / Design** | "generate image", "infographic", "visual system", "cover" | `visual-creation-council` |
+| **UI Components** | "landing page ui", "React component", "responsive style" | `visual-v0-generate` |
+| **Workshop OS** | "prep workshop", "debrief", "amplify attendee" | `workshop-orchestrator` |
+| **Prompt Engineering** | "optimize prompt", "evaluate prompt", "psychometrics" | `prompt-conductor` |
+
+---
+
+## 3. Multi-Agent Swarm Orchestration
+
+For complex, multi-step creative or engineering pipelines, coordinate a parallel or sequential swarm of dynamic subagents following the standard communications laid out in `AGENT_PROTOCOL.md` and `AGENTS.md`.
+
+---
+*Federalized, permissionless, and blazingly fast. Let the swarm build.*
+INSEOF
+
+    success "Antigravity dynamic subagent rules installed successfully!"
+}
+
 # ── Install for specific platform ─────────────────────────────────────────────
 install_platform() {
     local platform="$1"
@@ -335,6 +416,9 @@ install_platform() {
     case "$platform" in
         claude|claude-code)
             install_claude_code "$mode"
+            ;;
+        antigravity)
+            install_antigravity "$target"
             ;;
         cursor)
             generate_context_file "cursor" "$target"
@@ -418,6 +502,14 @@ show_summary() {
         echo -e "  ${YELLOW}Gemini Code Assist:${NC}"
         echo "    1. Copy GEMINI.md to your project root"
         echo "    2. Gemini reads it as project context"
+        echo ""
+    fi
+
+    if [[ "$platforms" == *"antigravity"* ]]; then
+        echo -e "  ${YELLOW}Antigravity:${NC}"
+        echo "    1. Custom subagent federation instructions installed under .antigravity/"
+        echo "    2. Dynamic register command globally exposed: acos-agy <agent-name>"
+        echo "    3. Swarms and specialized subagents are ready to orchestrate"
         echo ""
     fi
 

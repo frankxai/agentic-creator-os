@@ -29,7 +29,8 @@
   "bin": {
     "acos": "./bin/acos-sync.sh",
     "acos-sync": "./bin/acos-sync.sh",
-    "acos-enhance": "./bin/acos-enhance"
+    "acos-enhance": "./bin/acos-enhance",
+    "acos-agy": "./bin/acos-agy-registry.mjs"
   },
   "files": [
     "bin/",
