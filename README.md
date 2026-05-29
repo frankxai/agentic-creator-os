@@ -4,7 +4,7 @@
 
 **The Operating System for AI-Powered Creators**
 
-*One install. Any coding agent. 90+ skills, 65+ commands, 38 agents — auto-activating.*
+*One install. Any coding agent. 95 skills, 164 commands, 66 agents — auto-activating.*
 
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
@@ -56,10 +56,10 @@ flowchart LR
 
 | Layer | What It Does | Count |
 |-------|-------------|-------|
-| **Skills** | Domain knowledge modules that load automatically | 75+ |
-| **Commands** | Reusable workflows triggered via slash commands | 35+ |
-| **Agents** | Specialized personas with distinct expertise | 38 |
-| **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 5 |
+| **Skills** | Domain knowledge modules that load automatically | 95 |
+| **Commands** | Reusable workflows triggered via slash commands | 164 |
+| **Agents** | Specialized personas with distinct expertise | 66 |
+| **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 9 |
 
 ## Harness Role
 
@@ -230,7 +230,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
                             |
               +-------------+-------------+
               |             |             |
-         Commands (35+)  Skills (75+)  Agents (38)
+         Commands (164)  Skills (95)  Agents (66)
               |             |             |
               +------+------+------+------+
                      |             |
@@ -249,7 +249,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 ## What's Included
 
-### Commands (35+)
+### Commands (164)
 
 | Category | Count | Examples |
 |----------|-------|----------|
@@ -261,7 +261,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 > Commands are Claude Code slash commands. On other platforms, describe the task and ACOS skills guide the agent to the same workflows.
 
-### Skills (75+ Auto-Activating)
+### Skills (95 Auto-Activating)
 
 Skills are domain knowledge modules that **activate automatically** based on what you're doing. No manual invocation needed.
 
@@ -277,13 +277,13 @@ Skills are domain knowledge modules that **activate automatically** based on wha
 
 **How Auto-Activation Works:**
 ```
-skill-rules.json → 22 pattern rules
+skill-rules.json -> 24 pattern rules
   "tests" + "component" → loads test-driven-development + react-patterns
   "blog" + "write"      → loads content-strategy + seo-content-writer
   "deploy" + "vercel"   → loads vercel-deployment + nextjs-best-practices
 ```
 
-### Agents (38 Specialized)
+### Agents (66 Specialized)
 
 | Domain | Agents | Examples |
 |--------|--------|----------|
@@ -407,16 +407,16 @@ The install script detects your platform and configures accordingly:
 ```
 agentic-creator-os/
 ├── .claude/
-│   ├── commands/           # 35+ slash commands
-│   ├── skills/             # 75+ auto-activating skills
-│   ├── agents/             # 38 specialized agents
-│   ├── hooks/              # v10 safety hooks
+│   ├── commands/           # 164 slash commands
+│   ├── skills/             # 95 auto-activating skills
+│   ├── agents/             # 66 specialized agents
+│   ├── hooks/              # 9 safety hook scripts
 │   │   ├── circuit-breaker.sh
 │   │   ├── audit-trail.sh
 │   │   ├── self-modify-gate.sh
 │   │   └── quality-gate.sh
 │   ├── agent-iam.json      # Role-based access control
-│   ├── skill-rules.json    # 22 auto-activation rules
+│   ├── skill-rules.json    # 24 auto-activation rules
 │   └── hooks.json          # Hook lifecycle config
 │
 ├── adapters/               # Platform adapters
@@ -438,7 +438,7 @@ agentic-creator-os/
 ├── docs/infographics/      # Visual documentation
 ├── install.sh              # Multi-platform installer
 ├── CLAUDE.md               # Claude Code context
-└── package.json            # v10.1.0
+└── package.json            # v11.0.0
 ```
 
 ---
@@ -454,9 +454,9 @@ Starlight Intelligence System (Framework)
 ├── 6 orchestration patterns
 └── Platform adapters
      └── ACOS (Claude Code + Multi-Platform)
-         ├── 35+ commands routed through /acos
-         ├── 38 agents aligned to Starlight council
-         ├── 75+ auto-activating skills
+         ├── 164 commands routed through /acos
+         ├── 66 agents aligned to Starlight council
+         ├── 95 auto-activating skills
          ├── v10 safety systems (IAM, circuit breaker, audit)
          └── Self-learning via trajectory patterns
 ```
@@ -549,9 +549,9 @@ MIT — Use it, fork it, build your own OS with it.
 
 <div align="center">
 
-**Agentic Creator OS v11.0** — The Operating System for AI-Powered Creators
+**Agentic Creator OS v11.0.0** — The Operating System for AI-Powered Creators
 
-*90+ Skills | 65+ Commands | 38 Agents | 8 Plugins | Multi-Platform | Self-Learning*
+*95 Skills | 164 Commands | 66 Agents | 9 Hook Scripts | Multi-Platform | Self-Learning*
 
 Built by [FrankX](https://frankx.ai) — AI Architect & Creator
 

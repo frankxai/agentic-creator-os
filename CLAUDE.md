@@ -59,9 +59,9 @@ Instead of blanket word bans, apply these principles:
 
 **Agentic Creator OS v10** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
 
-- **35+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
-- **75+ Skills** — Auto-activate via `skill-rules.json` based on task context
-- **38 Specialized Agents** — Writers, editors, designers, strategists, engineers
+- **164 Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
+- **95 Skills** — Auto-activate via `skill-rules.json` based on task context
+- **66 Specialized Agents** — Writers, editors, designers, strategists, engineers
 - **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
 
 ## Quick Start
@@ -78,7 +78,7 @@ Instead of blanket word bans, apply these principles:
 
 On non-Claude platforms, just describe what you want. Skills activate from context.
 
-## Available Commands (35+)
+## Available Commands (164)
 
 ### Creation (9)
 | Command | Description |
@@ -129,7 +129,7 @@ On non-Claude platforms, just describe what you want. Skills activate from conte
 
 ## Auto-Activation
 
-Skills load automatically via `.claude/skill-rules.json` — 22 pattern rules:
+Skills load automatically via `.claude/skill-rules.json` — 24 pattern rules:
 
 ```
 User: "write a blog post about AI agents"
@@ -217,5 +217,5 @@ Before ANY structural change:
 
 ---
 
-*ACOS v10.1 — Autonomous Intelligence*
+*ACOS v11.0.0 — Autonomous Intelligence*
 *Created by [FrankX](https://github.com/frankxai)*

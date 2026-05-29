@@ -51,23 +51,6 @@ acos status
 
 # List available skills
 acos list skills
-
-# Test a skill
-acos test content-strategy
-```
-
-### Configure Your Instance
-
-Create your project configuration:
-
-```bash
-# Initialize a new instance
-acos init my-project
-
-# This creates:
-# - instances/my-project/CLAUDE.md
-# - instances/my-project/brand-voice.md
-# - instances/my-project/agents/
 ```
 
 ## First Steps
@@ -80,7 +63,7 @@ Open Claude Code and try:
 What skills are available?
 ```
 
-Claude will list the 62+ skills organized by category:
+Claude can use the 95 packaged skills organized by category:
 - **Technical**: TDD, debugging, MCP architecture
 - **Creative**: Brand voice, content strategy, music production
 - **Business**: OCI services, product management
@@ -117,13 +100,12 @@ After installation, you'll have:
 ```
 agentic-creator-os/
 ├── CLAUDE.md               # AI context (read this!)
-├── skills/                 # All skill files
-│   ├── technical/         # Technical skills
-│   ├── creative/          # Creative skills
-│   ├── business/          # Business skills
-│   └── personal/          # Personal development
-├── departments/            # Agent team configurations
-├── workflows/              # Orchestrated pipelines
+├── .claude/skills/        # 95 packaged skill modules
+│   ├── content-strategy/  # Content planning skill
+│   ├── gstack/            # Engineering workflow skill
+│   └── ...                # Additional skills from acos.manifest.json
+├── .claude/agents/        # 66 agent definitions
+├── .claude/commands/      # 164 slash-command workflows
 ├── templates/              # Content templates
 ├── instances/              # Project configurations
 └── mcp-servers/            # MCP server implementations
@@ -199,12 +181,12 @@ Configure MCP servers in Claude Code settings:
 ### Skills Not Loading
 
 1. Check CLAUDE.md exists in project root
-2. Verify skill files have correct frontmatter
-3. Ensure skill registry is up to date: `acos sync`
+2. Verify `.claude/skills/<skill>/SKILL.md` exists
+3. Re-run the packaged installer: `acos install --platform=claude`
 
 ### MCP Servers Not Connecting
 
-1. Check server is running: `acos mcp status`
+1. Build MCP workspaces: `npm run build:all`
 2. Verify port configuration
 3. Check Claude Code MCP settings
 

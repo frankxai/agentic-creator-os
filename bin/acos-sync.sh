@@ -1,5 +1,5 @@
 #!/bin/bash
-# ACOS Sync - Sync skills between local and GitHub
+# ACOS CLI - install the packaged runtime and keep legacy skill sync available
 # Part of Agentic Creator OS
 
 set -e
@@ -14,9 +14,13 @@ NC='\033[0m' # No Color
 # Configuration
 GITHUB_REPO="frankxai/agentic-creator-os"
 GITHUB_RAW="https://raw.githubusercontent.com/$GITHUB_REPO/main"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PACKAGE_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+INSTALLER="$PACKAGE_ROOT/install.sh"
+MANIFEST_FILE="$PACKAGE_ROOT/acos.manifest.json"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 ACOS_HOME="${ACOS_HOME:-$CLAUDE_HOME/acos}"
-SKILLS_DIR="$ACOS_HOME/skills"
+SKILLS_DIR="$ACOS_HOME/legacy-skills"
 COMMANDS_DIR="$CLAUDE_HOME/commands"
 REGISTRY_FILE="$ACOS_HOME/registry.json"
 LOCAL_STATE="$ACOS_HOME/state.json"
@@ -34,18 +38,32 @@ error() { echo -e "${RED}[✗]${NC} $1"; exit 1; }
 show_banner() {
     echo ""
     echo -e "${CYAN}╔═══════════════════════════════════════════════════════╗${NC}"
-    echo -e "${CYAN}║     AGENTIC CREATOR OS - Skill Sync System            ║${NC}"
+    echo -e "${CYAN}║     AGENTIC CREATOR OS - Product CLI                  ║${NC}"
     echo -e "${CYAN}║     github.com/frankxai/agentic-creator-os            ║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════════════════════════╝${NC}"
     echo ""
+}
+
+json_field() {
+    local field="$1"
+    [ -f "$MANIFEST_FILE" ] || return 1
+    command -v node &> /dev/null || return 1
+    node -e "
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
+let value = data;
+for (const key of process.argv[2].split('.')) value = value?.[key];
+if (value === undefined || value === null) process.exit(1);
+process.stdout.write(String(value));
+" "$MANIFEST_FILE" "$field"
 }
 
 # Check prerequisites
 check_prerequisites() {
     log "Checking prerequisites..."
 
-    if ! command -v curl &> /dev/null; then
-        error "curl is required but not installed"
+    if [ "${1:-}" = "legacy-sync" ] && ! command -v curl &> /dev/null; then
+        error "curl is required for legacy sync commands"
     fi
 
     if ! command -v git &> /dev/null; then
@@ -57,6 +75,14 @@ check_prerequisites() {
     fi
 
     success "Prerequisites check passed"
+}
+
+# Install packaged ACOS runtime
+install_product() {
+    if [ ! -x "$INSTALLER" ]; then
+        error "Installer not found or not executable: $INSTALLER"
+    fi
+    "$INSTALLER" "$@"
 }
 
 # Fetch remote registry
@@ -77,7 +103,13 @@ list_skills() {
     log "Available skills:"
     echo ""
 
-    if [ -f "$REGISTRY_FILE" ]; then
+    if [ -f "$MANIFEST_FILE" ] && command -v node &> /dev/null; then
+        node -e "
+const fs = require('fs');
+const manifest = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
+for (const skill of manifest.inventory.skills) console.log('  ' + skill);
+" "$MANIFEST_FILE"
+    elif [ -f "$REGISTRY_FILE" ]; then
         # Parse with jq if available, else basic grep
         if command -v jq &> /dev/null; then
             jq -r '.skills | to_entries[] | "  \(.key) (v\(.value.version)) - \(.value.description)"' "$REGISTRY_FILE"
@@ -98,6 +130,7 @@ install_skill() {
         error "Usage: acos-sync install <skill-name>"
     fi
 
+    warn "Legacy sync installs registry skills into $SKILLS_DIR. Use 'acos install' for the packaged .claude runtime."
     log "Installing skill: $skill_name"
 
     # Determine category from registry
@@ -160,6 +193,7 @@ update_local_state() {
 
 # Sync all skills
 sync_all() {
+    warn "Legacy sync uses the old registry. Use 'acos install' for the packaged .claude runtime."
     log "Syncing all skills from GitHub..."
 
     fetch_registry || true
@@ -205,56 +239,78 @@ push_changes() {
 
 # Show help
 show_help() {
-    echo "ACOS Sync - Agentic Creator OS Skill Synchronization"
+    echo "ACOS - Agentic Creator OS product CLI"
     echo ""
-    echo "Usage: acos-sync <command> [options]"
+    echo "Usage: acos <command> [options]"
     echo ""
     echo "Commands:"
-    echo "  list              List available skills"
-    echo "  install <skill>   Install a specific skill"
-    echo "  remove <skill>    Remove an installed skill"
-    echo "  sync              Sync all skills from GitHub"
-    echo "  pull              Pull latest updates"
-    echo "  push              Push local changes (contributors)"
-    echo "  status            Show sync status"
+    echo "  install [options] Install the packaged .claude runtime"
+    echo "  status            Show installed/runtime status"
+    echo "  list [skills]     List packaged skills"
+    echo "  sync              Legacy: sync registry skills from GitHub"
+    echo "  pull              Legacy: pull registry metadata"
+    echo "  push              Legacy: contributor placeholder"
     echo "  help              Show this help message"
     echo ""
-    echo "Options:"
-    echo "  --category=<cat>  Filter by category (technical, creative, business, soulbook)"
-    echo "  --force           Force overwrite local changes"
-    echo "  --dry-run         Show what would be done"
+    echo "Installer options are passed through to install.sh:"
+    echo "  --platform=claude|cursor|windsurf|gemini|generic|all"
+    echo "  --full | --minimal | --skills-only | --hooks-only | --mcp-only"
     echo ""
     echo "Examples:"
-    echo "  acos-sync list"
-    echo "  acos-sync install content-strategy"
-    echo "  acos-sync sync --category=technical"
+    echo "  acos install --platform=claude"
+    echo "  acos install --platform=cursor --target=."
+    echo "  acos status"
+    echo "  acos list skills"
     echo ""
 }
 
 # Main entry point
 main() {
     show_banner
-    check_prerequisites
+    local command="${1:-help}"
 
-    case "${1:-help}" in
+    case "$command" in
+        install)
+            shift
+            check_prerequisites
+            install_product "$@"
+            ;;
         list)
+            check_prerequisites
             list_skills
             ;;
-        install)
+        install-skill)
+            check_prerequisites legacy-sync
             install_skill "$2"
             ;;
         sync)
+            check_prerequisites legacy-sync
             sync_all
             ;;
         pull)
+            check_prerequisites legacy-sync
             pull_updates
             ;;
         push)
+            check_prerequisites
             push_changes
             ;;
         status)
-            log "Local state: $LOCAL_STATE"
-            [ -f "$LOCAL_STATE" ] && cat "$LOCAL_STATE"
+            check_prerequisites
+            log "Package root: $PACKAGE_ROOT"
+            if [ -f "$MANIFEST_FILE" ]; then
+                echo "Version: $(json_field version 2>/dev/null || echo unknown)"
+                echo "Runtime: $(json_field source.runtime 2>/dev/null || echo .claude)"
+                echo "Skills: $(json_field stats.skills 2>/dev/null || echo unknown)"
+                echo "Commands: $(json_field stats.commands 2>/dev/null || echo unknown)"
+                echo "Agents: $(json_field stats.agents 2>/dev/null || echo unknown)"
+                echo "Hook scripts: $(json_field stats.hookScripts 2>/dev/null || echo unknown)"
+                echo "Activation rules: $(json_field stats.activationRules 2>/dev/null || echo unknown)"
+            else
+                warn "No manifest found at $MANIFEST_FILE"
+            fi
+            echo "Install state: $LOCAL_STATE"
+            [ -f "$LOCAL_STATE" ] && sed -n '1,80p' "$LOCAL_STATE"
             ;;
         help|--help|-h)
             show_help

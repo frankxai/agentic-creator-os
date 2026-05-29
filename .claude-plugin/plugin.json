@@ -54,12 +54,14 @@
     ]
   },
   "stats": {
-    "skills": 10,
-    "commands": 0,
-    "agents": 0,
-    "hooks": 0,
-    "verified": "2026-05-03",
-    "note": "Aspirational targets in docs/ACOS_V11_MASTER_PLAN.md (90+ skills / 65+ commands / 38 agents). Manifest reflects current shipped state, not aspiration."
+    "skills": 95,
+    "commands": 164,
+    "agents": 66,
+    "hooks": 9,
+    "activationRules": 24,
+    "iamProfiles": 6,
+    "source": "acos.manifest.json",
+    "note": "Manifest reflects the packaged .claude runtime surface."
   },
   "intelligence": {
     "version": "v11.0.0",
@@ -68,7 +70,7 @@
     "components": {
       "skill_activation_accuracy": 0.25,
       "pattern_extraction_quality": 0.25,
-      "memory_utilization": 0.20,
+      "memory_utilization": 0.2,
       "hook_reliability": 0.15,
       "self_modify_safety": 0.15
     }

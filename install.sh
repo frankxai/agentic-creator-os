@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# AGENTIC CREATOR OS v10 — Multi-Platform Installer
+# AGENTIC CREATOR OS — Multi-Platform Installer
 # Works with: Claude Code, Cursor, Windsurf, Gemini Code Assist, any AI agent
 # github.com/frankxai/agentic-creator-os
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -18,11 +18,33 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 # Configuration
-VERSION="10.1.0"
 GITHUB_REPO="frankxai/agentic-creator-os"
 
 # Detect installation paths
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MANIFEST_FILE="$PROJECT_DIR/acos.manifest.json"
+PACKAGE_FILE="$PROJECT_DIR/package.json"
+
+read_json_field() {
+    local file="$1"
+    local field="$2"
+    [ -f "$file" ] || return 1
+    command -v node &>/dev/null || return 1
+    node -e "
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync(process.argv[1], 'utf8'));
+let value = data;
+for (const key of process.argv[2].split('.')) value = value?.[key];
+if (value === undefined || value === null) process.exit(1);
+process.stdout.write(String(value));
+" "$file" "$field"
+}
+
+manifest_stat() {
+    read_json_field "$MANIFEST_FILE" "stats.$1" 2>/dev/null || true
+}
+
+VERSION="$(read_json_field "$PACKAGE_FILE" "version" 2>/dev/null || read_json_field "$MANIFEST_FILE" "version" 2>/dev/null || echo "11.0.0")"
 
 # Logging
 log()     { echo -e "${CYAN}[ACOS]${NC} $1"; }
@@ -133,44 +155,90 @@ check_prerequisites() {
 install_claude_code() {
     local mode="${1:-standard}"
     local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
+    local install_skills=true
+    local install_commands=true
+    local install_agents=true
+    local install_hooks=true
+    local install_rules=true
+    local install_iam=true
+    local skill_filter="all"
 
     log "Installing for Claude Code..."
 
     mkdir -p "$claude_home/skills" "$claude_home/commands" "$claude_home/agents" "$claude_home/acos"
 
+    local source_root="$(cd "$PROJECT_DIR" && pwd -P)"
+    local claude_root="$(cd "$claude_home" && pwd -P)"
+    if [ "${ACOS_ALLOW_SELF_TARGET:-}" != "1" ]; then
+        case "$source_root/" in
+            "$claude_root/skills/"*|"$claude_root/commands/"*|"$claude_root/agents/"*)
+                error "Refusing to install from inside $claude_root runtime directories. Move ACOS elsewhere or set ACOS_ALLOW_SELF_TARGET=1."
+                ;;
+        esac
+    fi
+
+    case "$mode" in
+        skills)
+            install_commands=false
+            install_agents=false
+            install_hooks=false
+            install_iam=false
+            ;;
+        hooks)
+            install_skills=false
+            install_commands=false
+            install_agents=false
+            install_rules=false
+            ;;
+        minimal)
+            install_commands=false
+            install_agents=false
+            install_hooks=false
+            install_iam=false
+            skill_filter="minimal"
+            ;;
+    esac
+
     # Skills
-    if [ -d "$PROJECT_DIR/.claude/skills" ]; then
+    if [ "$install_skills" = true ] && [ -d "$PROJECT_DIR/.claude/skills" ]; then
         local skill_count=0
+        local minimal_skills="acos-meta planning-with-files safety-guard verification-loop verification-quality model-routing memory-guardian"
         for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
             [ -d "$skill_dir" ] || continue
             local name=$(basename "$skill_dir")
             [ "$name" = "CLAUDE.md" ] && continue
+            if [ "$skill_filter" = "minimal" ] && [[ " $minimal_skills " != *" $name "* ]]; then
+                continue
+            fi
             mkdir -p "$claude_home/skills/$name"
-            cp -r "$skill_dir"* "$claude_home/skills/$name/" 2>/dev/null || true
+            cp -R "$skill_dir"/. "$claude_home/skills/$name/" 2>/dev/null || true
             skill_count=$((skill_count + 1))
         done
         success "Installed $skill_count skills"
     fi
 
     # Skill rules (auto-activation)
-    if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
+    if [ "$install_rules" = true ] && [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
         cp "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
-        success "Installed 22 auto-activation rules"
+        local rule_count="$(manifest_stat activationRules)"
+        success "Installed ${rule_count:-auto-activation} rules"
     fi
 
     # Commands (slash commands — Claude Code only)
-    if [ -d "$PROJECT_DIR/.claude/commands" ]; then
+    if [ "$install_commands" = true ] && [ -d "$PROJECT_DIR/.claude/commands" ]; then
         local cmd_count=0
-        for cmd in "$PROJECT_DIR/.claude/commands"/*.md; do
+        while IFS= read -r -d '' cmd; do
             [ -f "$cmd" ] || continue
-            cp "$cmd" "$claude_home/commands/"
+            local rel_cmd="${cmd#$PROJECT_DIR/.claude/commands/}"
+            mkdir -p "$claude_home/commands/$(dirname "$rel_cmd")"
+            cp "$cmd" "$claude_home/commands/$rel_cmd"
             cmd_count=$((cmd_count + 1))
-        done
+        done < <(find "$PROJECT_DIR/.claude/commands" -type f -name "*.md" -print0)
         success "Installed $cmd_count slash commands"
     fi
 
     # Agents
-    if [ -d "$PROJECT_DIR/.claude/agents" ]; then
+    if [ "$install_agents" = true ] && [ -d "$PROJECT_DIR/.claude/agents" ]; then
         local agent_count=0
         for agent in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
             [ -f "$agent" ] || continue
@@ -181,7 +249,7 @@ install_claude_code() {
     fi
 
     # v10 Safety Hooks
-    if [ -d "$PROJECT_DIR/.claude/hooks" ]; then
+    if [ "$install_hooks" = true ] && [ -d "$PROJECT_DIR/.claude/hooks" ]; then
         mkdir -p "$claude_home/acos/hooks"
         for hook in "$PROJECT_DIR/.claude/hooks"/*.sh; do
             [ -f "$hook" ] || continue
@@ -192,15 +260,23 @@ install_claude_code() {
     fi
 
     # Hooks config
-    if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
+    if [ "$install_hooks" = true ] && [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
         cp "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
         success "Installed hook lifecycle config"
     fi
 
+    # Hook helpers
+    if [ "$install_hooks" = true ] && [ -d "$PROJECT_DIR/.claude/helpers" ]; then
+        mkdir -p "$claude_home/acos/helpers"
+        cp -R "$PROJECT_DIR/.claude/helpers"/. "$claude_home/acos/helpers/"
+        success "Installed hook helper scripts"
+    fi
+
     # Agent IAM
-    if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
+    if [ "$install_iam" = true ] && [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
         cp "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
-        success "Installed Agent IAM (6 profiles)"
+        local iam_count="$(manifest_stat iamProfiles)"
+        success "Installed Agent IAM (${iam_count:-configured} profiles)"
     fi
 
     # State file
@@ -210,16 +286,17 @@ install_claude_code() {
   "version": "$VERSION",
   "platform": "claude-code",
   "installedAt": "$timestamp",
+  "mode": "$mode",
   "features": {
-    "commands": true,
-    "skills": true,
-    "agents": true,
-    "hooks": true,
-    "autoActivation": true,
-    "agentIAM": true,
-    "circuitBreaker": true,
-    "auditTrail": true,
-    "selfModifyGate": true
+    "commands": $install_commands,
+    "skills": $install_skills,
+    "agents": $install_agents,
+    "hooks": $install_hooks,
+    "autoActivation": $install_rules,
+    "agentIAM": $install_iam,
+    "circuitBreaker": $install_hooks,
+    "auditTrail": $install_hooks,
+    "selfModifyGate": $install_hooks
   }
 }
 STATEEOF

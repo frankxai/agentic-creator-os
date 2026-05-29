@@ -58,9 +58,9 @@ acos help
 
 | Concept | Purpose | Count |
 |---------|---------|-------|
-| **Skills** | Domain knowledge modules | 62 |
-| **Agents** | Specialized AI personas | 9 |
-| **Workflows** | Orchestrated pipelines | 8 |
+| **Skills** | Domain knowledge modules | 95 |
+| **Agents** | Specialized AI personas | 66 |
+| **Commands** | Slash-command workflows | 164 |
 | **MCP Servers** | External tool integrations | 6+ |
 
 ## Documentation Structure
@@ -97,7 +97,7 @@ Deploy department configurations and shared workflows for collaborative AI-enhan
 
 ## Version
 
-**Current**: 3.0.0 (January 2026)
+**Current**: 11.0.0 (from acos.manifest.json)
 
 See [CHANGELOG.md](../CHANGELOG.md) for version history.
 

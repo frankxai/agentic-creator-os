@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
   "version": "11.0.0",
-  "description": "The Operating System for AI-Powered Creators — 90+ skills, 65+ commands, 38 agents, 8 plugins. Works with Claude Code, Cursor, Windsurf, Gemini.",
+  "description": "The installable Agentic Creator OS runtime for Claude Code, Cursor, Windsurf, and Gemini: 95 skills, 164 commands, 66 agents, 9 hook scripts.",
   "author": "Frank Guzman <frank@frankx.ai>",
   "license": "MIT",
   "repository": {
@@ -32,15 +32,18 @@
     "acos-enhance": "./bin/acos-enhance"
   },
   "files": [
+    ".claude/",
+    ".claude-plugin/",
+    "acos.manifest.json",
     "bin/",
     "departments/",
-    "instances/",
+    "docs/",
+    "install.sh",
     "mcp-servers/",
+    "scripts/",
     "skills/",
     "templates/",
     "workflows/",
-    "docs/",
-    "install.sh",
     "CLAUDE.md",
     "CREATOR_NEEDS.md",
     "README.md"
@@ -54,7 +57,12 @@
     "dev:all": "npm run dev --workspaces",
     "postinstall": "echo '\\n🚀 Agentic Creator OS installed! Run: ./install.sh\\n'",
     "publish": "npm run build:all && npm publish",
-    "version:bump": "npm version $npm_config_version && git push && git push --tags"
+    "version:bump": "npm version $npm_config_version && git push && git push --tags",
+    "manifest": "node scripts/acos-manifest.mjs sync",
+    "lint": "node scripts/acos-manifest.mjs lint",
+    "typecheck": "npm run build:all",
+    "smoke": "node scripts/acos-manifest.mjs smoke",
+    "check": "npm run lint && npm run typecheck && npm run smoke"
   },
   "publishConfig": {
     "access": "public"
