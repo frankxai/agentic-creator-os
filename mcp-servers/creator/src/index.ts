@@ -601,7 +601,7 @@ server.registerTool(
     annotations: { destructiveHint: false }
   },
   async (params) => {
-    const result = await Instagram.createStory(params);
+    const result = await Instagram.createStory(params as Parameters<typeof Instagram.createStory>[0]);
     return {
       content: [{ type: "text", text: result.success ? `Instagram story created: ${result.story?.id}` : `Error: ${result.error}` }],
       structuredContent: result,
@@ -640,7 +640,7 @@ server.registerTool(
     const result = await Farcaster.createCast({
       ...params,
       scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
+    } as Parameters<typeof Farcaster.createCast>[0]);
     return {
       content: [{ type: "text", text: result.success ? `Farcaster cast created: ${result.cast?.id}` : `Error: ${result.error}` }],
       structuredContent: result,
@@ -679,7 +679,7 @@ server.registerTool(
     annotations: { destructiveHint: false }
   },
   async (params) => {
-    const result = await Farcaster.createFrame(params);
+    const result = await Farcaster.createFrame(params as Parameters<typeof Farcaster.createFrame>[0]);
     return {
       content: [{ type: "text", text: result.success ? `Farcaster frame created: ${result.frame?.id}` : `Error: ${result.error}` }],
       structuredContent: result,
@@ -800,7 +800,7 @@ server.registerTool(
         ...p,
         scheduledFor: new Date(p.scheduledFor)
       }))
-    });
+    } as Parameters<typeof Scheduler.bulkSchedule>[0]);
     return {
       content: [{ type: "text", text: result.success ? `Scheduled ${result.scheduled?.length} posts` : `Scheduled ${result.scheduled?.length}, failed ${result.failed?.length}` }],
       structuredContent: result,

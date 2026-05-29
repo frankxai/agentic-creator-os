@@ -375,7 +375,7 @@ function calculateAuthenticityScore(content: string): number {
 
 function countSyllables(text: string): number {
   return text.toLowerCase().split(/\s+/).reduce((count, word) => {
-    return count + word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').match(/[aeiouy]{1,2}/g)?.length || 1;
+    return count + (word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').match(/[aeiouy]{1,2}/g)?.length || 1);
   }, 0);
 }
 
