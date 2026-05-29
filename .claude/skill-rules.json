@@ -6,6 +6,15 @@
 
   "activation_rules": [
     {
+      "skill": "multimodal-studio",
+      "triggers": {
+        "keywords": ["generate image", "generate video", "create character", "multimodal", "higgsfield", "image generation", "video generation", "b-roll", "cinematic", "thumbnail", "hero image", "character reference", "visual asset"],
+        "file_patterns": ["*.png", "*.jpg", "*.jpeg", "*.mp4", "*.mov", "public/images/**", "assets/**"],
+        "commands": ["/studio", "/generate-video", "/generate-images", "/infogenius"]
+      },
+      "priority": "high"
+    },
+    {
       "skill": "suno-ai-mastery",
       "triggers": {
         "keywords": ["music", "suno", "track", "song", "lyrics", "melody", "beat", "frequency", "hz", "audio"],

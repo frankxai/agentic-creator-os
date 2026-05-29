@@ -15,6 +15,11 @@
         "CLAUDE_FLOW_MEMORY_BACKEND": "hybrid"
       },
       "autoStart": false
+    },
+    "higgsfield": {
+      "type": "http",
+      "url": "https://mcp.higgsfield.ai/mcp",
+      "_comment": "Unified multimodal connector for the multimodal-studio skill — image, video, and character generation across 30+ models (Soul, Flux, Seedream, Kling, Hailuo, Veo, Sora). OAuth via Higgsfield account; no API keys. Add interactively: claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp"
     }
   }
 }
