@@ -80,7 +80,7 @@ On non-Claude platforms, just describe what you want. Skills activate from conte
 
 ## Available Commands (35+)
 
-### Creation (9)
+### Creation (10)
 | Command | Description |
 |---------|-------------|
 | `/article-creator` | Guided blog article creation |
@@ -92,6 +92,7 @@ On non-Claude platforms, just describe what you want. Skills activate from conte
 | `/products-creation` | Digital products, courses, templates |
 | `/author-team` | Book writing with specialist team |
 | `/hook` | Multi-dimensional content hook engineering |
+| `/build-log` | Convert a build session into MDX log, LinkedIn draft, demo brief, diagram, and prompt-pack entry (agentic-builder-lab skill) |
 
 ### Strategy (6)
 | Command | Description |
