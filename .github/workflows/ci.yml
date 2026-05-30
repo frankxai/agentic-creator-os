@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,7 +22,10 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        id: install
+        run: |
+          set -o pipefail
+          npm install --no-audit --no-fund 2>&1 | tee /tmp/install.log
 
       # Transpile-only: tsc --noCheck still emits JS + .d.ts but skips the
       # analysis pass. This avoids a pre-existing TS2589 generic-depth blowup
@@ -27,10 +34,16 @@ jobs:
       # proves the code transpiles; CI just reproduces it. Type debt is
       # surfaced separately by the non-blocking `typecheck` step below.
       - name: Build MCP servers (transpile-only)
-        run: npm run build:all
+        id: build
+        run: |
+          set -o pipefail
+          npm run build:all 2>&1 | tee /tmp/build.log
 
       - name: Lint
-        run: npm run lint
+        id: lint
+        run: |
+          set -o pipefail
+          npm run lint 2>&1 | tee /tmp/lint.log
 
       # Informational: runs tsc --noEmit across workspaces. Currently fails
       # due to the TS2589 dep-drift above; tracked separately. Kept visible
@@ -38,6 +51,39 @@ jobs:
       - name: Typecheck (informational)
         run: npm run typecheck:all
         continue-on-error: true
+
+      # Diagnostic: on any failure above, post the captured logs as a PR
+      # comment so they are visible without log-fetching tooling. Safe to
+      # leave permanently — only runs on failure().
+      - name: Post failure log as PR comment
+        if: failure() && github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          NODE_VER: ${{ steps.install.outputs.node-version }}
+        run: |
+          {
+            echo "## CI failure diagnostic (auto-posted)"
+            echo ""
+            echo "Run: ${{ github.run_id }} · commit: ${{ github.sha }}"
+            echo "Node: $(node --version) · npm: $(npm --version)"
+            echo ""
+            echo "### install (tail 30)"
+            echo '```'
+            tail -30 /tmp/install.log 2>/dev/null || echo "(no log)"
+            echo '```'
+            echo ""
+            echo "### build:all (tail 120)"
+            echo '```'
+            tail -120 /tmp/build.log 2>/dev/null || echo "(no log)"
+            echo '```'
+            echo ""
+            echo "### lint (tail 30)"
+            echo '```'
+            tail -30 /tmp/lint.log 2>/dev/null || echo "(no log)"
+            echo '```'
+          } > /tmp/comment.md
+          gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md --repo "${{ github.repository }}"
 
   release:
     needs: build
