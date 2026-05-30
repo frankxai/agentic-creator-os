@@ -51,6 +51,7 @@
   "scripts": {
     "install:all": "npm install --workspaces",
     "build:all": "npm run build --workspaces",
+    "typecheck:all": "npm run typecheck --workspaces --if-present",
     "dev:all": "npm run dev --workspaces",
     "postinstall": "echo '\\n🚀 Agentic Creator OS installed! Run: ./install.sh\\n'",
     "publish": "npm run build:all && npm publish",
