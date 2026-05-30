@@ -126,33 +126,26 @@ export declare function getRateLimitStatus(): {
 };
 export declare const createPostSchema: {
     caption: z.ZodString;
-    mediaUrls: z.ZodArray<z.ZodString>;
-    type: z.ZodOptional<z.ZodEnum<{
-        feed: "feed";
-        carousel: "carousel";
-        reel: "reel";
-    }>>;
+    mediaUrls: z.ZodArray<z.ZodString, "many">;
+    type: z.ZodOptional<z.ZodEnum<["feed", "carousel", "reel"]>>;
     location: z.ZodOptional<z.ZodString>;
-    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
 export declare const createStorySchema: {
     mediaUrl: z.ZodString;
-    type: z.ZodEnum<{
-        image: "image";
-        video: "video";
-    }>;
+    type: z.ZodEnum<["image", "video"]>;
     link: z.ZodOptional<z.ZodString>;
     stickers: z.ZodOptional<z.ZodArray<z.ZodObject<{
-        type: z.ZodEnum<{
-            mention: "mention";
-            hashtag: "hashtag";
-            location: "location";
-            poll: "poll";
-            question: "question";
-        }>;
+        type: z.ZodEnum<["mention", "hashtag", "location", "poll", "question"]>;
         data: z.ZodAny;
-    }, z.core.$strip>>>;
+    }, "strip", z.ZodTypeAny, {
+        type?: "mention" | "hashtag" | "location" | "poll" | "question";
+        data?: any;
+    }, {
+        type?: "mention" | "hashtag" | "location" | "poll" | "question";
+        data?: any;
+    }>, "many">>;
 };
 export declare const getPostAnalyticsSchema: {
     postId: z.ZodString;
@@ -162,15 +155,11 @@ export declare const getStoryAnalyticsSchema: {
 };
 export declare const schedulePostSchema: {
     caption: z.ZodString;
-    mediaUrls: z.ZodArray<z.ZodString>;
+    mediaUrls: z.ZodArray<z.ZodString, "many">;
     scheduledFor: z.ZodString;
-    type: z.ZodOptional<z.ZodEnum<{
-        feed: "feed";
-        carousel: "carousel";
-        reel: "reel";
-    }>>;
+    type: z.ZodOptional<z.ZodEnum<["feed", "carousel", "reel"]>>;
     location: z.ZodOptional<z.ZodString>;
-    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
 };
 export declare const deletePostSchema: {
     postId: z.ZodString;

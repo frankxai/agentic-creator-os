@@ -38,87 +38,74 @@ server.registerTool("create_nextjs_project", {
                 "@radix-ui/react-slot": "^1.0.0",
                 "class-variance-authority": "^0.7.0",
                 clsx: "^2.0.0",
-                tailwind
-            } - merge, "^2.0.0": ,
-            lucide
-        } - react;
-        "^0.294.0";
+                "tailwind-merge": "^2.0.0",
+                "lucide-react": "^0.294.0"
+            },
+            devDependencies: {
+                "@types/node": "^20.0.0",
+                "@types/react": "^18.2.0",
+                "@types/react-dom": "^18.2.0",
+                autoprefixer: "^10.0.0",
+                postcss: "^8.0.0",
+                tailwindcss: "^3.3.0",
+                typescript: "^5.0.0",
+                eslint: "^8.0.0",
+                "eslint-config-next": "^14.0.0"
+            }
+        };
+        await fs.writeFile(path.join(projectDir, "package.json"), JSON.stringify(packageJson, null, 2));
+        const tsconfig = {
+            compilerOptions: {
+                target: "es5",
+                lib: ["dom", "dom.iterable", "esnext"],
+                allowJs: true,
+                skipLibCheck: true,
+                strict: true,
+                noEmit: true,
+                esModuleInterop: true,
+                module: "esnext",
+                moduleResolution: "bundler",
+                resolveJsonModule: true,
+                isolatedModules: true,
+                jsx: "preserve",
+                incremental: true,
+                plugins: [{ name: "next" }],
+                paths: { "@/*": ["./*"] }
+            },
+            include: ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+            exclude: ["node_modules"]
+        };
+        await fs.writeFile(path.join(projectDir, "tsconfig.json"), JSON.stringify(tsconfig, null, 2));
+        const tailwindConfig = {
+            content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
+            theme: { extend: {} },
+            plugins: []
+        };
+        await fs.writeFile(path.join(projectDir, "tailwind.config.js"), `/** @type {import('tailwindcss').Config} */\nmodule.exports = ${JSON.stringify(tailwindConfig, null, 2)}`);
+        const postcssConfig = {
+            plugins: { tailwindcss: {}, autoprefixer: {} }
+        };
+        await fs.writeFile(path.join(projectDir, "postcss.config.js"), `module.exports = ${JSON.stringify(postcssConfig, null, 2)}`);
+        await fs.mkdir(path.join(projectDir, "src/app"), { recursive: true });
+        const layoutContent = `import type { Metadata } from 'next'\nimport { Inter } from 'next/font/google'\nimport './globals.css'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nexport const metadata: Metadata = {\n  title: '${name}',\n  description: 'Created with Agentic Creator OS',\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang="en">\n      <body className={inter.className}>{children}</body>\n    </html>\n  )\n}\n`;
+        await fs.writeFile(path.join(projectDir, "src/app/layout.tsx"), layoutContent);
+        const globalsCss = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n:root {\n  --foreground-rgb: 0, 0, 0;\n  --background-start-rgb: 214, 219, 220;\n  --background-end-rgb: 255, 255, 255;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --foreground-rgb: 255, 255, 255;\n    --background-start-rgb: 0, 0, 0;\n    --background-end-rgb: 0, 0, 0;\n  }\n}\n\nbody {\n  color: rgb(var(--foreground-rgb));\n  background: linear-gradient(\n      to bottom,\n      transparent,\n      rgb(var(--background-end-rgb))\n    ) rgb(var(--background-start-rgb));\n}\n`;
+        await fs.writeFile(path.join(projectDir, "src/app/globals.css"), globalsCss);
+        const pageContent = `export default function Home() {\n  return (\n    <main className="flex min-h-screen flex-col items-center justify-between p-24">\n      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">\n        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4">\n          Get started by editing&nbsp;\n          <code className="font-mono font-bold">src/app/page.tsx</code>\n        </p>\n      </div>\n    </main>\n  )\n}\n`;
+        await fs.writeFile(path.join(projectDir, "src/app/page.tsx"), pageContent);
+        await fs.writeFile(path.join(projectDir, "next-env.d.ts"), "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\n");
+        return {
+            content: [{ type: "text", text: `Created Next.js project: ${projectDir}` }],
+            structuredContent: { projectDir, name }
+        };
     }
-    finally { }
-    devDependencies: {
-        "@types/node";
-        "^20.0.0",
-            "@types/react";
-        "^18.2.0",
-            "@types/react-dom";
-        "^18.2.0",
-            autoprefixer;
-        "^10.0.0",
-            postcss;
-        "^8.0.0",
-            tailwindcss;
-        "^3.3.0",
-            typescript;
-        "^5.0.0",
-            eslint;
-        "^8.0.0",
-            "eslint-config-next";
-        "^14.0.0";
+    catch (error) {
+        return {
+            content: [{ type: "text", text: `Error creating project: ${error}` }],
+            isError: true
+        };
     }
 });
-await fs.writeFile(path.join(projectDir, "package.json"), JSON.stringify(packageJson, null, 2));
-const tsconfig = {
-    compilerOptions: {
-        target: "es5",
-        lib: ["dom", "dom.iterable", "esnext"],
-        allowJs: true,
-        skipLibCheck: true,
-        strict: true,
-        noEmit: true,
-        esModuleInterop: true,
-        module: "esnext",
-        moduleResolution: "bundler",
-        resolveJsonModule: true,
-        isolatedModules: true,
-        jsx: "preserve",
-        incremental: true,
-        plugins: [{ name: "next" }],
-        paths: { "@/*": ["./*"] }
-    },
-    include: ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-    exclude: ["node_modules"]
-};
-await fs.writeFile(path.join(projectDir, "tsconfig.json"), JSON.stringify(tsconfig, null, 2));
-const tailwindConfig = {
-    content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./app/**/*.{js,ts,jsx,tsx,mdx}"],
-    theme: { extend: {} },
-    plugins: []
-};
-await fs.writeFile(path.join(projectDir, "tailwind.config.js"), `/** @type {import('tailwindcss').Config} */\nmodule.exports = ${JSON.stringify(tailwindConfig, null, 2)}`);
-const postcssConfig = {
-    plugins: { tailwindcss: {}, autoprefixer: {} }
-};
-await fs.writeFile(path.join(projectDir, "postcss.config.js"), `module.exports = ${JSON.stringify(postcssConfig, null, 2)}`);
-await fs.mkdir(path.join(projectDir, "src/app"), { recursive: true });
-const layoutContent = `import type { Metadata } from 'next'\nimport { Inter } from 'next/font/google'\nimport './globals.css'\n\nconst inter = Inter({ subsets: ['latin'] })\n\nexport const metadata: Metadata = {\n  title: '${name}',\n  description: 'Created with Agentic Creator OS',\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang="en">\n      <body className={inter.className}>{children}</body>\n    </html>\n  )\n}\n`;
-await fs.writeFile(path.join(projectDir, "src/app/layout.tsx"), layoutContent);
-const globalsCss = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n:root {\n  --foreground-rgb: 0, 0, 0;\n  --background-start-rgb: 214, 219, 220;\n  --background-end-rgb: 255, 255, 255;\n}\n\n@media (prefers-color-scheme: dark) {\n  :root {\n    --foreground-rgb: 255, 255, 255;\n    --background-start-rgb: 0, 0, 0;\n    --background-end-rgb: 0, 0, 0;\n  }\n}\n\nbody {\n  color: rgb(var(--foreground-rgb));\n  background: linear-gradient(\n      to bottom,\n      transparent,\n      rgb(var(--background-end-rgb))\n    ) rgb(var(--background-start-rgb));\n}\n`;
-await fs.writeFile(path.join(projectDir, "src/app/globals.css"), globalsCss);
-const pageContent = `export default function Home() {\n  return (\n    <main className="flex min-h-screen flex-col items-center justify-between p-24">\n      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">\n        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4">\n          Get started by editing&nbsp;\n          <code className="font-mono font-bold">src/app/page.tsx</code>\n        </p>\n      </div>\n    </main>\n  )\n}\n`;
-await fs.writeFile(path.join(projectDir, "src/app/page.tsx"), pageContent);
-await fs.writeFile(path.join(projectDir, "next-env.d.ts"), "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\n");
-return {
-    content: [{ type: "text", text: `Created Next.js project: ${projectDir}` }],
-    structuredContent: { projectDir, name }
-};
-try { }
-catch (error) {
-    return {
-        content: [{ type: "text", text: `Error creating project: ${error}` }],
-        isError: true
-    };
-}
-;
 server.registerTool("add_page", {
     title: "Add Page",
     description: "Add a new page to a Next.js project",

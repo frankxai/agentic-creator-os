@@ -130,12 +130,12 @@ export declare function getRateLimitStatus(): {
 };
 export declare const postTweetSchema: {
     text: z.ZodString;
-    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
     replyToId: z.ZodOptional<z.ZodString>;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
 export declare const createThreadSchema: {
-    tweets: z.ZodArray<z.ZodString>;
+    tweets: z.ZodArray<z.ZodString, "many">;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
 export declare const getTweetAnalyticsSchema: {
@@ -147,7 +147,7 @@ export declare const getThreadAnalyticsSchema: {
 export declare const scheduleTweetSchema: {
     text: z.ZodString;
     scheduledFor: z.ZodString;
-    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
 };
 export declare const deleteTweetSchema: {
     tweetId: z.ZodString;

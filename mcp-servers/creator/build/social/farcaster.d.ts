@@ -157,19 +157,20 @@ export declare const createCastSchema: {
     parentCastId: z.ZodOptional<z.ZodString>;
     channelId: z.ZodOptional<z.ZodString>;
     embeds: z.ZodOptional<z.ZodArray<z.ZodObject<{
-        type: z.ZodEnum<{
-            image: "image";
-            video: "video";
-            url: "url";
-            frame: "frame";
-        }>;
+        type: z.ZodEnum<["url", "image", "video", "frame"]>;
         url: z.ZodString;
-    }, z.core.$strip>>>;
-    mentions: z.ZodOptional<z.ZodArray<z.ZodNumber>>;
+    }, "strip", z.ZodTypeAny, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }>, "many">>;
+    mentions: z.ZodOptional<z.ZodArray<z.ZodNumber, "many">>;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
 export declare const createThreadSchema: {
-    casts: z.ZodArray<z.ZodString>;
+    casts: z.ZodArray<z.ZodString, "many">;
     channelId: z.ZodOptional<z.ZodString>;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
@@ -178,14 +179,17 @@ export declare const createFrameSchema: {
     imageUrl: z.ZodString;
     buttons: z.ZodArray<z.ZodObject<{
         label: z.ZodString;
-        action: z.ZodEnum<{
-            post: "post";
-            post_redirect: "post_redirect";
-            link: "link";
-            mint: "mint";
-        }>;
+        action: z.ZodEnum<["post", "post_redirect", "link", "mint"]>;
         target: z.ZodOptional<z.ZodString>;
-    }, z.core.$strip>>;
+    }, "strip", z.ZodTypeAny, {
+        label?: string;
+        action?: "post" | "post_redirect" | "link" | "mint";
+        target?: string;
+    }, {
+        label?: string;
+        action?: "post" | "post_redirect" | "link" | "mint";
+        target?: string;
+    }>, "many">;
     inputText: z.ZodOptional<z.ZodString>;
     postUrl: z.ZodOptional<z.ZodString>;
     state: z.ZodOptional<z.ZodString>;
@@ -202,28 +206,30 @@ export declare const postToChannelSchema: {
     channelId: z.ZodString;
     text: z.ZodString;
     embeds: z.ZodOptional<z.ZodArray<z.ZodObject<{
-        type: z.ZodEnum<{
-            image: "image";
-            video: "video";
-            url: "url";
-            frame: "frame";
-        }>;
+        type: z.ZodEnum<["url", "image", "video", "frame"]>;
         url: z.ZodString;
-    }, z.core.$strip>>>;
+    }, "strip", z.ZodTypeAny, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }>, "many">>;
 };
 export declare const scheduleCastSchema: {
     text: z.ZodString;
     scheduledFor: z.ZodString;
     channelId: z.ZodOptional<z.ZodString>;
     embeds: z.ZodOptional<z.ZodArray<z.ZodObject<{
-        type: z.ZodEnum<{
-            image: "image";
-            video: "video";
-            url: "url";
-            frame: "frame";
-        }>;
+        type: z.ZodEnum<["url", "image", "video", "frame"]>;
         url: z.ZodString;
-    }, z.core.$strip>>>;
+    }, "strip", z.ZodTypeAny, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }, {
+        type?: "image" | "video" | "url" | "frame";
+        url?: string;
+    }>, "many">>;
 };
 export declare const deleteCastSchema: {
     castId: z.ZodString;
