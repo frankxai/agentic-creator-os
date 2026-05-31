@@ -100,6 +100,9 @@ The MDX file is the canonical artifact. The other four reference it.
 After all files are written, grep each one for banned terms. If any banned term appears, rewrite that artifact before exit. Suggested check:
 
 ```bash
+# studio, elevate, unlock are banned as metaphors only. Literal usage
+# ("recording studio", "elevate floor 3", "unlock the door") is fine —
+# review each hit against resources/voice-spec.md before rewriting.
 BANNED="soul|awaken|transformation|alignment|journey|intentional|sacred|energy|vibration|frequency|studio|elevate|unlock"
 grep -InE "\\b($BANNED)\\b" \
   content/builds/[slug].mdx \
