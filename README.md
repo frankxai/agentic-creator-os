@@ -152,6 +152,7 @@ Commands are multi-step workflows triggered by a single slash command. Each comm
 
 | Command | What It Does | Steps |
 |---------|-------------|-------|
+| `/studio` | Multimodal production | Brief → Route model → Craft → Generate (async) → Assemble |
 | `/article-creator` | Full blog pipeline | Research → Outline → Draft → SEO → Images → Social |
 | `/factory` | Mass content production | Batch input → Parallel agents → Quality gate → Export |
 | `/spec` | Feature specification | Requirements → Design → Task breakdown → Validation |
@@ -184,6 +185,26 @@ The `/acos` command analyzes your request and routes to the optimal subsystem:
   ├── Command chain: /research → /infogenius
   └── Output: 4K infographic with research-grounded content
 ```
+
+### Multimodal Studio — Image · Video · Character
+
+One connector, every modality. ACOS generates **images, video, and consistent characters** across 30+ frontier models through a single MCP — model-agnostic, brand-locked, and async by default.
+
+```
+/studio "hero image + 3 social cards + 5s teaser for the launch post"
+  ├── Routes each shot to the right model (Soul/Flux → stills, Kling/Veo → motion)
+  ├── Holds one character across the whole set via create_character → reuse ID
+  ├── Submits assets in parallel, polls for results, downloads to canonical paths
+  └── Output: a coherent, brand-locked campaign — not disconnected one-off images
+```
+
+| Modality | Models (via Higgsfield MCP) | Differentiator |
+|----------|------------------------------|----------------|
+| **Image** | Soul (4K), Flux, Seedream, Nano Banana | Brand tokens injected per asset |
+| **Video** | Kling, Hailuo, Veo, Sora-class, DoP | Image→video first (cheaper, keeps composition) |
+| **Character** | Soul character training | One reference, identical across an entire series |
+
+Skill: `multimodal-studio` · Agent: Multimodal Director · Commands: `/studio`, `/generate-video`. Connect: `claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp`. Stays vendor-agnostic — any MCP filling `~~image generation` / `~~video generation` works (`CONNECTORS.md`). Full guide + the ACOS-vs-Antigravity positioning: [`docs/multimodal-studio.md`](docs/multimodal-studio.md).
 
 ### Safety Hooks — Autonomous Protection
 
@@ -253,7 +274,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| **Creation** | 8 | `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
+| **Creation** | 10 | `/studio`, `/generate-video`, `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
 | **Strategy** | 6 | `/starlight-architect`, `/council`, `/research`, `/plan-week` |
 | **Development** | 4 | `/spec`, `/nextjs-deploy`, `/ux-design`, `/automation-dev` |
 | **System** | 5 | `/acos`, `/inventory-status`, `/mcp-status`, `/publish` |
@@ -268,7 +289,7 @@ Skills are domain knowledge modules that **activate automatically** based on wha
 | Category | Count | Examples |
 |----------|-------|----------|
 | **Technical** | 25+ | TDD, systematic-debugging, mcp-architecture, react-nextjs-patterns |
-| **Creative** | 10+ | frankx-brand, suno-ai-mastery, excellence-book-writing |
+| **Creative** | 10+ | multimodal-studio, frankx-brand, suno-ai-mastery, excellence-book-writing |
 | **Content** | 15+ | content-strategy, social-media-strategy, video-production |
 | **Oracle/Cloud** | 5+ | oci-services-expert, oracle-database-expert, oracle-ai-architect |
 | **Business** | 5+ | product-management, coaching-program, financial-modeling |
@@ -290,7 +311,7 @@ skill-rules.json → 22 pattern rules
 | **Writing** | 8 | Developmental Editor, Line Editor, Content Polisher, Story Architect |
 | **Strategy** | 5 | Starlight Orchestrator, Visionary, Oracle AI Architect |
 | **Design** | 4 | UI/UX Expert, Website Builder, Frankx Content Creation |
-| **Production** | 4 | Music Production, Sonic Engineer, Nano Banana Image Gen |
+| **Production** | 5 | Multimodal Director, Music Production, Sonic Engineer, Nano Banana Image Gen |
 | **Business** | 4 | Product Launch, Coaching Program, Product Development |
 | **Technical** | 5 | Technical Architect, Oracle Database, OpenAI AgentKit |
 | **Publishing** | 6 | Master Story Architect, Character Psychologist, Sensitivity Reader |
