@@ -100,8 +100,13 @@ The MDX file is the canonical artifact. The other four reference it.
 After all files are written, grep each one for banned terms. If any banned term appears, rewrite that artifact before exit. Suggested check:
 
 ```bash
-BANNED="soul|awaken|transformation|alignment|journey|intentional|sacred|energy|vibration|frequency"
-grep -InE "\\b($BANNED)\\b" content/builds/[slug].mdx drafts/linkedin/[slug].md drafts/demos/[slug]-brief.md
+BANNED="soul|awaken|transformation|alignment|journey|intentional|sacred|energy|vibration|frequency|studio|elevate|unlock"
+grep -InE "\\b($BANNED)\\b" \
+  content/builds/[slug].mdx \
+  drafts/linkedin/[slug].md \
+  drafts/demos/[slug]-brief.md \
+  drafts/diagrams/[slug].mmd \
+  skills/projects/agentic-builder-lab/resources/prompt-pack/[slug].md
 ```
 
 Lint must pass on a clean exit.
