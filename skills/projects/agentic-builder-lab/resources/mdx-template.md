@@ -79,7 +79,7 @@ We pulled one reusable piece out of this build and added it to the prompt pack:
 
 ## Body rules
 
-- The five body sections (`What we built`, `The stack and why`, `What worked`, `What broke`, `One reusable artifact`, `Next`) are required. Plus `Next` makes six. If a section is empty, write a one-line note about why, do not delete the header.
+- The six body sections (`What we built`, `The stack and why`, `What worked`, `What broke`, `One reusable artifact`, `Next`) are required. If a section is empty, write a one-line note about why, do not delete the header.
 - The `What broke` section must contain at least one honest item. If nothing broke, the build was too small to log.
 - Code fences allowed. Mermaid diagrams allowed inline using ` ```mermaid ` fences — the website renders these.
 - Do not include images in the MDX directly. Link to assets in the repo or hosted elsewhere.
