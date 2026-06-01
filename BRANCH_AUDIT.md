@@ -10,7 +10,7 @@ If a branch is marked `SAFE_DELETE`, every meaningful change it contains is alre
 
 | Status | Count |
 |---|---|
-| `SAFE_DELETE` (work in main) | 6 |
+| `SAFE_DELETE` (work in main) | 8 |
 | `KEEP` (active PR) | 2 |
 | `KEEP_BACKUP` (staging snapshot) | 1 |
 
