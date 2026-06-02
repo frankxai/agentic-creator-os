@@ -1,0 +1,29 @@
+{
+  "_meta": "Smoke fixture for newsletter-friday (FrankX-local). With humanGate integration (post-2026-06-02 sprint).",
+  "args": { "issue": 2, "runId": "fixture-issue-2" },
+  "expectedOutputs": {
+    "RESEARCH_SCHEMA": {
+      "stream": "Generative AI this week: new model releases, benchmark deltas, papers worth citing",
+      "items": [
+        {
+          "title": "Sonnet 4.6 ships with 30% faster TTFT",
+          "summary": "Drop-in replacement, measured on agent workloads",
+          "sourceUrl": "https://www.anthropic.com/news/sonnet-4-6",
+          "novelty": 8,
+          "whyItMatters": "Lower wall-clock on FrankX scheduled cascade without prompt changes"
+        }
+      ]
+    },
+    "SYNTH_SCHEMA": {
+      "spotlight": [
+        { "title": "Sonnet 4.6 ships faster TTFT", "hook": "30% faster TTFT means daily routines compress without prompt rewrites.", "sourceUrl": "https://www.anthropic.com/news/sonnet-4-6" }
+      ],
+      "essayThesis": "This week's pattern: latency improvements compound across scheduled cascades."
+    },
+    "GATE_SCHEMA": {
+      "verdict": "pass",
+      "summary": "All 5 integrity checks pass",
+      "corrections": []
+    }
+  }
+}

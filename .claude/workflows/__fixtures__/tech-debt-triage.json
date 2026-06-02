@@ -1,0 +1,40 @@
+{
+  "_meta": "Smoke fixture for tech-debt-triage. Validates Scan → Rank → Propose pipeline contract.",
+  "args": {},
+  "expectedOutputs": {
+    "FINDINGS_SCHEMA": {
+      "lens": "complexity",
+      "findings": [
+        {
+          "title": "initAtlas god function — 918 LOC, CC=252",
+          "severity": "high",
+          "file": "components/globe/atlas-engine.ts",
+          "line": 99,
+          "evidence": "Single function handles projection, input, animation, audio, country-card — all dimensions tightly coupled"
+        }
+      ]
+    },
+    "RANKED_SCHEMA": {
+      "doNow": [{ "title": "Fix always-true permission escalation", "file": "scripts/lib/acos-agy-registry.mjs", "line": 88 }],
+      "planSprint": [{ "title": "Refactor initAtlas god function", "file": "components/globe/atlas-engine.ts" }],
+      "defer": [{ "title": "Migrate styled-jsx in 15 files", "file": "components/music/InteractivePiano.tsx" }]
+    },
+    "PROPOSAL_SCHEMA": {
+      "item": { "title": "Fix permission escalation", "file": "scripts/lib/acos-agy-registry.mjs" },
+      "approach": "Remove `|| true` on 3 lines; verify registry output matches intended scoping",
+      "beforeSketch": "const writable = (cfg.writable || true)",
+      "afterSketch": "const writable = cfg.writable === true",
+      "effortEstimate": "30 minutes",
+      "risk": "low"
+    }
+  },
+  "calibratedRun": {
+    "runId": "wf_26eaac84-96a",
+    "date": "2026-06-02",
+    "totalTokens": 559119,
+    "agentCount": 11,
+    "durationMs": 556903,
+    "outcome": "success",
+    "findings": 65
+  }
+}

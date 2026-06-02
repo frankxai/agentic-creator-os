@@ -1,0 +1,16 @@
+{
+  "_meta": "Smoke fixture for model-arena-daily. Daily Claude tier comparison.",
+  "args": { "dayOfWeek": 0 },
+  "expectedOutputs": {
+    "VERDICT_SCHEMA": {
+      "ranking": [
+        { "tier": "opus", "rank": 1, "strengths": "deepest analysis, most specific examples", "weaknesses": "verbose by ~20%" },
+        { "tier": "sonnet", "rank": 2, "strengths": "tight prose, 95% of Opus depth", "weaknesses": "slightly less novel synthesis" },
+        { "tier": "haiku", "rank": 3, "strengths": "fastest, on-topic", "weaknesses": "shallower trade-off analysis" }
+      ],
+      "winner": "sonnet",
+      "observations": "Opus and Sonnet near-equivalent on this task class; Sonnet wins on value-per-token",
+      "valueDelta": "Opus not materially better for 250-word framework comparisons; Sonnet is the right default tier"
+    }
+  }
+}
