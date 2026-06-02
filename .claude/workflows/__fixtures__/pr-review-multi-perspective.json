@@ -1,0 +1,28 @@
+{
+  "_meta": "Smoke fixture for pr-review-multi-perspective. Validates Discover → Review → Verify pipeline contract.",
+  "args": { "baseRef": "main" },
+  "expectedOutputs": {
+    "DIFF_SCHEMA": {
+      "files": [{ "path": "src/index.ts", "additions": 42, "deletions": 8 }],
+      "summary": "Refactor auth middleware to support OAuth provider plug-ins"
+    },
+    "FINDINGS_SCHEMA": {
+      "dimension": "security",
+      "findings": [
+        {
+          "title": "JWT secret read from process.env without validation",
+          "severity": "high",
+          "file": "src/auth/jwt.ts",
+          "line": 23,
+          "evidence": "process.env.JWT_SECRET used directly; no startup check",
+          "suggestion": "Validate at startup, throw if missing/short"
+        }
+      ]
+    },
+    "VERDICT_SCHEMA": {
+      "refuted": false,
+      "reason": "Confirmed by reading src/auth/jwt.ts:23 — no validation present",
+      "confidence": 9
+    }
+  }
+}

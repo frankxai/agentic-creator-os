@@ -1,0 +1,40 @@
+{
+  "_meta": "Smoke fixture for dependency-audit workflow. Validates the security/license/freshness/size/dead-deps/supply-chain lens contract.",
+  "args": { "mode": "audit" },
+  "expectedOutputs": {
+    "FINDINGS_SCHEMA": {
+      "lens": "security",
+      "findings": [
+        {
+          "title": "protobufjs CVE chain entering via dead deps",
+          "severity": "critical",
+          "package": "protobufjs",
+          "version": "7.4.0",
+          "recommendation": "Remove agentdb + add pnpm.overrides for protobufjs>=7.5.8"
+        }
+      ]
+    },
+    "RANKED_SCHEMA": {
+      "actions": [
+        {
+          "priority": 1,
+          "action": "Remove dead deps + add pnpm overrides",
+          "package": "agentdb, @openai/codex-sdk, pdfjs-dist",
+          "impact": "Eliminates 5 CVEs + drops 100 transitive packages",
+          "effort": "small"
+        }
+      ],
+      "criticalCount": 2,
+      "highCount": 14
+    }
+  },
+  "calibratedRun": {
+    "runId": "wf_15166990-c41",
+    "date": "2026-06-02",
+    "totalTokens": 360972,
+    "agentCount": 7,
+    "durationMs": 301499,
+    "outcome": "success",
+    "findings": 88
+  }
+}

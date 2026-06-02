@@ -1,0 +1,23 @@
+{
+  "_meta": "Smoke fixture for book-deepen-pipeline (FrankX-local). Requires args.title + args.author.",
+  "args": {
+    "title": "Thinking in Systems",
+    "author": "Donella Meadows",
+    "source": "data/books/sources/thinking-in-systems-highlights.md"
+  },
+  "expectedOutputs": {
+    "BASELINE_SCHEMA": {
+      "slug": "thinking-in-systems",
+      "title": "Thinking in Systems",
+      "author": "Donella Meadows",
+      "tldr": "A primer on systems thinking — feedback loops, leverage points, and why isolated interventions usually fail.",
+      "keyInsightCount": 5
+    },
+    "QUOTES_SCHEMA": {
+      "slug": "thinking-in-systems",
+      "quotes": [
+        { "text": "A system is more than the sum of its parts.", "chapter": "1", "page": 12, "context": "Foundational definition" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "_meta": "Smoke fixture for repo-onboarding workflow. Used by scripts/workflow-test.mjs to validate schema contracts without live run.",
+  "args": {},
+  "expectedOutputs": {
+    "SCAN_SCHEMA": {
+      "lens": "architecture",
+      "findings": [
+        { "topic": "Framework", "detail": "Next.js 16 App Router with TypeScript 5.7", "file": "next.config.mjs" },
+        { "topic": "Routing", "detail": "App tree under app/ with 90+ segments", "file": "app/" }
+      ]
+    }
+  },
+  "calibratedRun": {
+    "runId": "wf_c082312e-0ed",
+    "date": "2026-06-02",
+    "totalTokens": 395403,
+    "agentCount": 7,
+    "durationMs": 278571,
+    "outcome": "success",
+    "findings": 14
+  }
+}

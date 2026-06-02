@@ -1,0 +1,35 @@
+{
+  "_meta": "Smoke fixture for hub-expansion-quarterly (FrankX-local).",
+  "args": {},
+  "expectedOutputs": {
+    "ANALYSIS_SCHEMA": {
+      "source": "content-density",
+      "signals": [
+        {
+          "theme": "12 prompt-engineering posts exist but no /prompts hub",
+          "evidence": "content/blog/* shows 12 files with prompt-engineering tag; app/ has no /prompts route",
+          "strength": "strong"
+        }
+      ]
+    },
+    "PROPOSAL_SCHEMA": {
+      "candidates": [
+        {
+          "name": "Prompts hub",
+          "slug": "prompts",
+          "rationale": "12 posts + the Prompt Hub substrate; aggregation is content-density-easy",
+          "evidenceSummary": "content-density (strong) + commit-themes (medium)",
+          "seoPattern": "/prompts as cluster head; /prompts/[slug] for each pattern",
+          "aeoQuestions": [
+            "How do I write a prompt that compounds across model versions?",
+            "What's the difference between a system prompt and a developer message?",
+            "How do I evaluate prompt quality at scale?"
+          ],
+          "effort": "med",
+          "expectedROI": "high",
+          "priority": 1
+        }
+      ]
+    }
+  }
+}
