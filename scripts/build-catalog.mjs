@@ -39,11 +39,11 @@ const OUT = outFlag !== -1 ? argv[outFlag + 1] : join(ROOT, 'tools/observatory/p
 // `tools: A, B, C` comma lists and `key:\n  - item` block lists).
 // ---------------------------------------------------------------------------
 function parseFrontmatter(raw) {
-  const m = raw.match(/^---\n([\s\S]*?)\n---/)
+  const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!m) return {}
   const out = {}
   let key = null
-  for (const line of m[1].split('\n')) {
+  for (const line of m[1].split(/\r?\n/)) {
     if (!line.trim()) continue
     const listItem = line.match(/^\s+-\s+(.*)$/)
     if (listItem && key) {

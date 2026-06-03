@@ -18,7 +18,7 @@
  */
 
 import http from 'node:http'
-import { readFileSync, existsSync, appendFileSync, mkdirSync, createReadStream } from 'node:fs'
+import { readFileSync, existsSync, appendFileSync, mkdirSync, createReadStream, statSync } from 'node:fs'
 import { join, dirname, extname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -58,7 +58,16 @@ function loadHistory(limit = 100) {
   if (!existsSync(HISTORY)) return []
   try {
     const lines = readFileSync(HISTORY, 'utf8').trim().split('\n').filter(Boolean)
-    return lines.slice(-limit).map((l) => JSON.parse(l))
+    return lines
+      .slice(-limit)
+      .map((l) => {
+        try {
+          return JSON.parse(l)
+        } catch {
+          return null // skip a partially-written / corrupted line
+        }
+      })
+      .filter(Boolean)
   } catch {
     return []
   }
@@ -106,6 +115,9 @@ const server = http.createServer((req, res) => {
     })
     res.write(`retry: 2000\n\n`)
     clients.add(res)
+    // Writing to a reset/closed socket emits an async 'error' on res; without a
+    // listener that would crash the process. Clean up the client instead.
+    res.on('error', () => clients.delete(res))
     const ping = setInterval(() => {
       try {
         res.write(': ping\n\n')
@@ -133,7 +145,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
     const file = url.pathname === '/' ? 'index.html' : url.pathname.replace(/^\//, '')
     const full = join(WEB_DIR, file)
-    if (full.startsWith(WEB_DIR) && existsSync(full)) {
+    if (full.startsWith(WEB_DIR) && existsSync(full) && statSync(full).isFile()) {
       res.writeHead(200, { ...cors, 'Content-Type': MIME[extname(full)] || 'application/octet-stream' })
       return createReadStream(full).pipe(res)
     }

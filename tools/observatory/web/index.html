@@ -88,6 +88,15 @@ const EMOJI = { Bash:'💻', Read:'📖', Write:'✍️', Edit:'✏️', MultiEd
   Grep:'🔎', Glob:'🗂', WebFetch:'🌐', WebSearch:'🔍', NotebookEdit:'📓', TodoWrite:'✅' };
 const emojiFor = (t) => EMOJI[t] || (t && t.startsWith('mcp__') ? '🔌' : '⚙️');
 
+// Escape dynamic values (agent names, file paths, commands) before innerHTML —
+// catalog and event data is attacker-influenceable (file names, tool args).
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return str.toString()
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
 const $ = (id) => document.getElementById(id);
 const nodeById = new Map();      // id -> {node, el}
 const agentByName = new Map();   // lowercased name -> id
@@ -106,7 +115,7 @@ function buildGrid(catalog) {
     const el = document.createElement('div');
     el.className = 'chip';
     const color = node.tier ? tierColor[node.tier] : kindColor[node.kind];
-    el.innerHTML = `<span class="c" style="background:${color}"></span><span class="t">${node.name}</span>`;
+    el.innerHTML = `<span class="c" style="background:${escapeHtml(color)}"></span><span class="t">${escapeHtml(node.name)}</span>`;
     el.title = node.description || node.name;
     grid.appendChild(el);
     nodeById.set(node.id, { node, el });
@@ -139,7 +148,7 @@ function renderActive() {
       const secs = Math.max(0, Math.round((Date.now() - info.since) / 1000));
       const row = document.createElement('div');
       row.className = 'active-agent';
-      row.innerHTML = `<span class="spinner"></span><span class="nm">${nm}</span><span class="mt">${secs}s</span>`;
+      row.innerHTML = `<span class="spinner"></span><span class="nm">${escapeHtml(nm)}</span><span class="mt">${escapeHtml(secs)}s</span>`;
       box.appendChild(row);
     }
   }
@@ -175,8 +184,8 @@ function addFeed(ev) {
   const det = ev.agent_id || ev.payload?.file || ev.payload?.command || ev.hook_event_type;
   const time = new Date(ev.timestamp || Date.now()).toLocaleTimeString();
   item.innerHTML = `<span class="emoji">${emojiFor(ev.tool_name)}</span>
-    <span><span class="tool">${tool}</span> <span class="det">${(det||'').toString().slice(0,60)}</span></span>
-    <span class="meta">${time}</span>`;
+    <span><span class="tool">${escapeHtml(tool)}</span> <span class="det">${escapeHtml((det||'').toString().slice(0,60))}</span></span>
+    <span class="meta">${escapeHtml(time)}</span>`;
   feed.prepend(item);
   while (feed.childElementCount > 60) feed.lastChild.remove();
 }
