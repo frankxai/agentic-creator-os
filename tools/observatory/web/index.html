@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Agent Observatory — Live Monitor</title>
+<style>
+  :root {
+    --kraft:#181712; --kraft-soft:#211f18; --panel:#26241c;
+    --cream:#f0eee6; --cream-dim:#b7b2a3; --cream-faint:#7e7a6e;
+    --clay:#cc785c; --clay-bright:#e1936f; --sage:#8c9a5b; --sky:#6a9fb5;
+    --line:rgba(240,238,230,.10); --line-strong:rgba(240,238,230,.18);
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--kraft); color:var(--cream);
+    font:14px/1.5 'Inter',system-ui,-apple-system,sans-serif;
+    height:100vh; overflow:hidden; display:flex; flex-direction:column;
+  }
+  header { padding:14px 22px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  h1 { font-size:17px; margin:0; font-weight:600; letter-spacing:-.01em; }
+  .sub { color:var(--cream-dim); font-size:13px; }
+  .status { display:flex; align-items:center; gap:7px; font-size:12px; color:var(--cream-dim); margin-left:auto; }
+  .dot { width:9px; height:9px; border-radius:50%; background:var(--cream-faint); transition:.3s; }
+  .dot.on { background:var(--sage); box-shadow:0 0 9px var(--sage); }
+  .stats { display:flex; gap:22px; }
+  .stat b { font-size:20px; font-weight:600; }
+  .stat span { color:var(--cream-faint); font-size:11px; text-transform:uppercase; letter-spacing:.05em; display:block; }
+  main { flex:1; display:grid; grid-template-columns: 280px 1fr 360px; overflow:hidden; }
+  .col { overflow:auto; padding:18px; }
+  .col + .col { border-left:1px solid var(--line); }
+  .col h2 { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--cream-faint); margin:0 0 12px; }
+  .active-agent { display:flex; align-items:center; gap:9px; padding:9px 11px; border-radius:11px; background:var(--panel);
+    border:1px solid var(--line-strong); margin-bottom:8px; animation:fadein .3s; }
+  .active-agent .spinner { width:11px; height:11px; border-radius:50%; border:2px solid var(--clay); border-top-color:transparent; animation:spin .8s linear infinite; }
+  .active-agent .nm { font-weight:500; }
+  .active-agent .mt { color:var(--cream-faint); font-size:11px; margin-left:auto; }
+  .empty { color:var(--cream-faint); font-size:13px; font-style:italic; }
+  #grid { display:flex; flex-wrap:wrap; gap:7px; align-content:flex-start; }
+  .chip { display:flex; align-items:center; gap:6px; padding:6px 10px; border-radius:9px; background:var(--kraft-soft);
+    border:1px solid var(--line); font-size:12px; color:var(--cream-dim); transition:.25s; max-width:210px; }
+  .chip .c { width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+  .chip .t { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .chip.live { background:rgba(204,120,92,.22); border-color:var(--clay); color:var(--cream);
+    box-shadow:0 0 0 1px var(--clay),0 0 18px rgba(204,120,92,.5); transform:translateY(-1px); }
+  .feed-item { display:flex; gap:9px; padding:8px 0; border-bottom:1px solid var(--line); font-size:13px; align-items:baseline; }
+  .feed-item .emoji { font-size:14px; }
+  .feed-item .meta { color:var(--cream-faint); font-size:11px; margin-left:auto; white-space:nowrap; }
+  .feed-item .tool { color:var(--clay-bright); font-weight:500; }
+  .feed-item .det { color:var(--cream-dim); font-size:11px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:170px; }
+  #pulse { display:flex; align-items:flex-end; gap:2px; height:34px; }
+  #pulse div { width:5px; background:var(--clay); border-radius:2px 2px 0 0; transition:height .3s; opacity:.85; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  @keyframes fadein { from { opacity:0; transform:translateY(-4px); } }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>🛰 Agent Observatory</h1>
+    <div class="sub" id="catalog-line">loading catalog…</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="s-active">0</b><span>active</span></div>
+    <div class="stat"><b id="s-events">0</b><span>events</span></div>
+    <div class="stat"><b id="s-rate">0</b><span>per min</span></div>
+  </div>
+  <div id="pulse" title="events / 5s"></div>
+  <div class="status"><span class="dot" id="dot"></span><span id="conn">connecting…</span></div>
+</header>
+<main>
+  <div class="col">
+    <h2>Active now</h2>
+    <div id="active"><div class="empty">No agents running. Use Claude Code to see them light up.</div></div>
+  </div>
+  <div class="col">
+    <h2>Agent fleet</h2>
+    <div id="grid"></div>
+  </div>
+  <div class="col">
+    <h2>Live activity</h2>
+    <div id="feed"></div>
+  </div>
+</main>
+
+<script type="module">
+const EMOJI = { Bash:'💻', Read:'📖', Write:'✍️', Edit:'✏️', MultiEdit:'✏️', Task:'🤖',
+  Grep:'🔎', Glob:'🗂', WebFetch:'🌐', WebSearch:'🔍', NotebookEdit:'📓', TodoWrite:'✅' };
+const emojiFor = (t) => EMOJI[t] || (t && t.startsWith('mcp__') ? '🔌' : '⚙️');
+
+const $ = (id) => document.getElementById(id);
+const nodeById = new Map();      // id -> {node, el}
+const agentByName = new Map();   // lowercased name -> id
+let eventCount = 0;
+const recentTimes = [];
+const activeAgents = new Map();  // agent_id -> {since, timer}
+
+function buildGrid(catalog) {
+  $('catalog-line').textContent =
+    `${catalog.counts.agent||0} agents · ${catalog.counts.skill||0} skills · ${catalog.counts.command||0} commands`;
+  const grid = $('grid');
+  grid.innerHTML = '';
+  const kindColor = { agent:'#cc785c', skill:'#6a9fb5', command:'#c7a35a', workflow:'#8c9a5b', 'iam-profile':'#b07c9e' };
+  const tierColor = { haiku:'#8c9a5b', sonnet:'#6a9fb5', opus:'#cc785c' };
+  for (const node of catalog.nodes.filter(n => n.kind === 'agent')) {
+    const el = document.createElement('div');
+    el.className = 'chip';
+    const color = node.tier ? tierColor[node.tier] : kindColor[node.kind];
+    el.innerHTML = `<span class="c" style="background:${color}"></span><span class="t">${node.name}</span>`;
+    el.title = node.description || node.name;
+    grid.appendChild(el);
+    nodeById.set(node.id, { node, el });
+    agentByName.set(node.name.toLowerCase(), node.id);
+    agentByName.set(node.id.replace(/^agent:/, '').toLowerCase(), node.id);
+  }
+}
+
+function resolveAgentId(agent_id) {
+  if (!agent_id) return null;
+  const key = agent_id.toLowerCase();
+  if (agentByName.has(key)) return agentByName.get(key);
+  if (nodeById.has('agent:' + key)) return 'agent:' + key;
+  return null;
+}
+
+function setAgentLive(id, on) {
+  const entry = nodeById.get(id);
+  if (entry) entry.el.classList.toggle('live', on);
+}
+
+function renderActive() {
+  const box = $('active');
+  if (activeAgents.size === 0) {
+    box.innerHTML = '<div class="empty">No agents running. Use Claude Code to see them light up.</div>';
+  } else {
+    box.innerHTML = '';
+    for (const [id, info] of activeAgents) {
+      const nm = nodeById.get(id)?.node.name || id.replace(/^agent:/, '');
+      const secs = Math.max(0, Math.round((Date.now() - info.since) / 1000));
+      const row = document.createElement('div');
+      row.className = 'active-agent';
+      row.innerHTML = `<span class="spinner"></span><span class="nm">${nm}</span><span class="mt">${secs}s</span>`;
+      box.appendChild(row);
+    }
+  }
+  $('s-active').textContent = activeAgents.size;
+}
+
+function touchAgent(agent_id) {
+  const id = resolveAgentId(agent_id);
+  if (!id) return;
+  setAgentLive(id, true);
+  const existing = activeAgents.get(id);
+  if (existing) clearTimeout(existing.timer);
+  const timer = setTimeout(() => { activeAgents.delete(id); setAgentLive(id, false); renderActive(); }, 12000);
+  activeAgents.set(id, { since: existing?.since || Date.now(), timer });
+  renderActive();
+}
+
+function stopAgent(agent_id) {
+  const id = resolveAgentId(agent_id);
+  if (!id) return;
+  const e = activeAgents.get(id);
+  if (e) clearTimeout(e.timer);
+  activeAgents.delete(id);
+  setAgentLive(id, false);
+  renderActive();
+}
+
+function addFeed(ev) {
+  const feed = $('feed');
+  const item = document.createElement('div');
+  item.className = 'feed-item';
+  const tool = ev.tool_name || ev.hook_event_type;
+  const det = ev.agent_id || ev.payload?.file || ev.payload?.command || ev.hook_event_type;
+  const time = new Date(ev.timestamp || Date.now()).toLocaleTimeString();
+  item.innerHTML = `<span class="emoji">${emojiFor(ev.tool_name)}</span>
+    <span><span class="tool">${tool}</span> <span class="det">${(det||'').toString().slice(0,60)}</span></span>
+    <span class="meta">${time}</span>`;
+  feed.prepend(item);
+  while (feed.childElementCount > 60) feed.lastChild.remove();
+}
+
+function handle(ev) {
+  eventCount++;
+  $('s-events').textContent = eventCount;
+  recentTimes.push(Date.now());
+  addFeed(ev);
+
+  const t = ev.hook_event_type;
+  if (t === 'SubagentStart' || (t === 'PreToolUse' && ev.tool_name === 'Task')) touchAgent(ev.agent_id);
+  else if (t === 'SubagentStop') stopAgent(ev.agent_id);
+  else if (ev.agent_id) touchAgent(ev.agent_id);
+}
+
+// events-per-minute + pulse sparkline
+const PULSE_BARS = 24;
+const pulseEl = $('pulse');
+for (let i = 0; i < PULSE_BARS; i++) { const d = document.createElement('div'); d.style.height = '2px'; pulseEl.appendChild(d); }
+setInterval(() => {
+  const now = Date.now();
+  while (recentTimes.length && now - recentTimes[0] > 60000) recentTimes.shift();
+  $('s-rate').textContent = recentTimes.length;
+  const last5 = recentTimes.filter((x) => now - x < 5000).length;
+  const bars = pulseEl.children;
+  for (let i = 0; i < PULSE_BARS - 1; i++) bars[i].style.height = bars[i + 1].style.height;
+  bars[PULSE_BARS - 1].style.height = Math.min(32, 2 + last5 * 6) + 'px';
+}, 1000);
+setInterval(renderActive, 1000); // refresh "Xs" timers
+
+async function init() {
+  try {
+    const catalog = await (await fetch('/catalog')).json();
+    buildGrid(catalog);
+  } catch (e) { $('catalog-line').textContent = 'catalog unavailable'; }
+  try {
+    const recent = await (await fetch('/events/recent?limit=40')).json();
+    recent.forEach(addFeed);
+  } catch {}
+
+  const es = new EventSource('/stream');
+  es.onopen = () => { $('dot').classList.add('on'); $('conn').textContent = 'live'; };
+  es.onerror = () => { $('dot').classList.remove('on'); $('conn').textContent = 'reconnecting…'; };
+  es.onmessage = (m) => { try { handle(JSON.parse(m.data)); } catch {} };
+}
+init();
+</script>
+</body>
+</html>

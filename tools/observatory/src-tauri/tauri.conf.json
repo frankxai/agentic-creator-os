@@ -1,0 +1,31 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Agent Observatory",
+  "version": "0.1.0",
+  "identifier": "ai.frankx.agent-observatory",
+  "build": {
+    "devUrl": "http://localhost:4317",
+    "frontendDist": "../web"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Agent Observatory",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 900,
+        "minHeight": 600,
+        "theme": "Dark"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "DeveloperTool",
+    "shortDescription": "Live monitor for the Agentic Creator OS agent fleet."
+  }
+}
