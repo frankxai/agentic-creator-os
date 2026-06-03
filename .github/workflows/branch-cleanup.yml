@@ -1,0 +1,63 @@
+name: Branch Cleanup (manual)
+
+# Manual maintenance workflow to delete a list of branches via the
+# GitHub API from inside the runner (which has the perms the local
+# proxy lacks). Safe to keep as a permanent tool — runs only when
+# you trigger it via the Actions tab.
+#
+# How to use:
+#   GitHub UI: Actions → "Branch Cleanup (manual)" → Run workflow
+#   Inputs: paste the space-separated branch names to delete
+#
+# Refer to BRANCH_AUDIT.md at repo root for the SAFE_DELETE list.
+
+on:
+  workflow_dispatch:
+    inputs:
+      branches:
+        description: 'Space-separated branch names to delete (e.g. "feat/x feat/y")'
+        required: true
+        type: string
+      dry_run:
+        description: 'Dry run (print without deleting)'
+        required: false
+        default: 'false'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCHES: ${{ inputs.branches }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -e
+          echo "Target repo: $REPO"
+          echo "Branches:    $BRANCHES"
+          echo "Dry run:     $DRY_RUN"
+          echo ""
+          ok=0
+          fail=0
+          for b in $BRANCHES; do
+            printf "  %-55s " "$b"
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "DRY_RUN (would delete)"
+              continue
+            fi
+            if gh api -X DELETE "repos/$REPO/git/refs/heads/$b" >/dev/null 2>&1; then
+              echo "DELETED"
+              ok=$((ok+1))
+            else
+              echo "FAILED (already gone or protected?)"
+              fail=$((fail+1))
+            fi
+          done
+          echo ""
+          echo "Summary: $ok deleted · $fail failed"
