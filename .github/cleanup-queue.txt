@@ -2,11 +2,3 @@
 # Add branch names below (one per line) and commit to main.
 # The Branch Cleanup workflow will delete them and clear this file.
 # See BRANCH_AUDIT.md for the canonical safe-delete list.
-claude/integrate-gstack-ZTgoO
-claude/slack-improve-acos-metrics-b9CP0
-claude/slack-fix-hallucinated-metrics-Ut20V
-claude/slack-improve-metrics-accuracy-4mtO1
-cursor/development-environment-setup-129a
-feat/absorb-ecc-gsd
-feat/absorb-get-shit-done
-feat/library-os
