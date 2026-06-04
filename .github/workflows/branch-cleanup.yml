@@ -72,7 +72,7 @@ jobs:
           BRANCHES: ${{ steps.list.outputs.branches }}
         run: |
           set -euo pipefail
-          python - <<'PY'
+          python3 - <<'PY'
           import os
           import re
           import sys
