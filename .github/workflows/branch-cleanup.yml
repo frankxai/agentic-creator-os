@@ -65,15 +65,65 @@ jobs:
           echo "Resolved branches: $BRANCHES"
           echo "branches=$BRANCHES" >> "$GITHUB_OUTPUT"
 
-      - name: Delete branches
+      - name: Validate branch list against audit
+        id: validate
         if: steps.list.outputs.branches != ''
+        env:
+          BRANCHES: ${{ steps.list.outputs.branches }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          import re
+          import sys
+
+          requested = []
+          seen = set()
+          for branch in os.environ.get("BRANCHES", "").split():
+              if branch not in seen:
+                  requested.append(branch)
+                  seen.add(branch)
+
+          with open("BRANCH_AUDIT.md", encoding="utf-8") as audit:
+              audit_text = audit.read()
+
+          safe_delete = set()
+          section_re = re.compile(r"^### `([^`]+)`(?P<body>.*?)(?=^### `|\n## |\Z)", re.MULTILINE | re.DOTALL)
+          for match in section_re.finditer(audit_text):
+              if "Recommendation:** `SAFE_DELETE`" in match.group("body"):
+                  safe_delete.add(match.group(1))
+
+          branch_name_re = re.compile(r"^[A-Za-z0-9._/-]+$")
+          invalid = [
+              branch for branch in requested
+              if branch in {"main", "master"}
+              or branch.startswith("-")
+              or branch.startswith("refs/")
+              or ".." in branch
+              or not branch_name_re.fullmatch(branch)
+          ]
+          unsafe = [branch for branch in requested if branch not in safe_delete]
+
+          if invalid:
+              print("Refusing malformed or protected branch name(s):", ", ".join(invalid), file=sys.stderr)
+          if unsafe:
+              print("Refusing branch(es) not marked SAFE_DELETE in BRANCH_AUDIT.md:", ", ".join(unsafe), file=sys.stderr)
+          if invalid or unsafe:
+              sys.exit(1)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"branches={' '.join(requested)}\n")
+          PY
+
+      - name: Delete branches
+        if: steps.validate.outputs.branches != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
-          BRANCHES: ${{ steps.list.outputs.branches }}
+          BRANCHES: ${{ steps.validate.outputs.branches }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
-          set -e
+          set -euo pipefail
           echo "Target repo: $REPO"
           echo "Branches:    $BRANCHES"
           ok=0
@@ -94,9 +144,13 @@ jobs:
           done
           echo ""
           echo "Summary: $ok deleted · $fail failed"
+          if [ "$fail" -gt 0 ]; then
+            echo "One or more branch deletions failed; leaving cleanup queue intact."
+            exit 1
+          fi
 
       - name: Clear the queue file
-        if: github.event_name == 'push' && steps.list.outputs.branches != ''
+        if: success() && github.event_name == 'push' && steps.validate.outputs.branches != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
