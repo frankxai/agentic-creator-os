@@ -2,7 +2,9 @@
 
 Quick reference for all agents in Agentic Creator OS. Use this to find the right agent for your task.
 
-**Total Agents:** 130+
+**Total Agents:** 133 (129 with valid frontmatter, 115 unique after deduplication)
+**Total Skills:** 285
+**Total Commands:** 165
 
 ---
 
