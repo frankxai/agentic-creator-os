@@ -1,7 +1,7 @@
 ---
 name: Agent or Skill Proposal
 about: Propose a new agent or skill for ACOS
-title: '[AGENT] ' or '[SKILL] '
+title: '[AGENT/SKILL] '
 labels: agent-contribution
 assignees: ''
 ---
