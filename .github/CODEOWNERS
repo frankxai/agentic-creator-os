@@ -1,0 +1,35 @@
+# CODEOWNERS for Agentic Creator OS
+# These owners will be requested for review when someone opens a PR
+# that modifies code that they own.
+
+# Default owner for everything
+* @frankxai
+
+# Core ACOS system — requires careful review
+.claude/ @frankxai
+.claude/FRANK_DNA.md @frankxai
+.claude/DECISION_FRAMEWORK.md @frankxai
+.claude/agent-iam.json @frankxai
+.claude/skill-rules.json @frankxai
+.claude/settings.json @frankxai
+.claude/hooks.json @frankxai
+
+# Agents — high impact changes
+.claude/agents/ @frankxai
+
+# Skills — domain expertise
+.claude/skills/ @frankxai
+
+# Commands — workflow definitions
+.claude/commands/ @frankxai
+
+# GitHub workflows — CI/CD changes
+.github/workflows/ @frankxai
+
+# Documentation
+docs/ @frankxai
+*.md @frankxai
+
+# Package configuration
+package.json @frankxai
+tsconfig.json @frankxai
