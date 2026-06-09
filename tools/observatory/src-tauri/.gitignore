@@ -1,0 +1,7 @@
+# Tauri / Rust build artifacts (generate locally)
+/target
+/gen
+Cargo.lock
+
+# Generated app icons (run: cargo tauri icon <logo.png>)
+/icons

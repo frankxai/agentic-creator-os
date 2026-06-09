@@ -6,9 +6,9 @@
 <title>Agent Observatory — Live Monitor</title>
 <style>
   :root {
-    --kraft:#181712; --kraft-soft:#211f18; --panel:#26241c;
-    --cream:#f0eee6; --cream-dim:#b7b2a3; --cream-faint:#7e7a6e;
-    --clay:#cc785c; --clay-bright:#e1936f; --sage:#8c9a5b; --sky:#6a9fb5;
+    --kraft:#141413; --kraft-soft:#1d1c1a; --panel:#232220;
+    --cream:#faf9f5; --cream-dim:#b0aea5; --cream-faint:#7c7a72;
+    --clay:#d97757; --clay-bright:#e89478; --sage:#788c5d; --sky:#6a9bcc;
     --line:rgba(240,238,230,.10); --line-strong:rgba(240,238,230,.18);
   }
   * { box-sizing:border-box; }
@@ -41,8 +41,8 @@
     border:1px solid var(--line); font-size:12px; color:var(--cream-dim); transition:.25s; max-width:210px; }
   .chip .c { width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
   .chip .t { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .chip.live { background:rgba(204,120,92,.22); border-color:var(--clay); color:var(--cream);
-    box-shadow:0 0 0 1px var(--clay),0 0 18px rgba(204,120,92,.5); transform:translateY(-1px); }
+  .chip.live { background:rgba(217,119,87,.22); border-color:var(--clay); color:var(--cream);
+    box-shadow:0 0 0 1px var(--clay),0 0 18px rgba(217,119,87,.5); transform:translateY(-1px); }
   .feed-item { display:flex; gap:9px; padding:8px 0; border-bottom:1px solid var(--line); font-size:13px; align-items:baseline; }
   .feed-item .emoji { font-size:14px; }
   .feed-item .meta { color:var(--cream-faint); font-size:11px; margin-left:auto; white-space:nowrap; }
@@ -109,8 +109,8 @@ function buildGrid(catalog) {
     `${catalog.counts.agent||0} agents · ${catalog.counts.skill||0} skills · ${catalog.counts.command||0} commands`;
   const grid = $('grid');
   grid.innerHTML = '';
-  const kindColor = { agent:'#cc785c', skill:'#6a9fb5', command:'#c7a35a', workflow:'#8c9a5b', 'iam-profile':'#b07c9e' };
-  const tierColor = { haiku:'#8c9a5b', sonnet:'#6a9fb5', opus:'#cc785c' };
+  const kindColor = { agent:'#d97757', skill:'#6a9bcc', command:'#c79a52', workflow:'#788c5d', 'iam-profile':'#a87c9f' };
+  const tierColor = { haiku:'#788c5d', sonnet:'#6a9bcc', opus:'#d97757' };
   for (const node of catalog.nodes.filter(n => n.kind === 'agent')) {
     const el = document.createElement('div');
     el.className = 'chip';
@@ -217,11 +217,22 @@ setInterval(() => {
 }, 1000);
 setInterval(renderActive, 1000); // refresh "Xs" timers
 
+async function fetchCatalogWithRetry(tries = 8) {
+  // The server may still be booting (e.g. Tauri cold start) — retry briefly.
+  for (let i = 0; i < tries; i++) {
+    try {
+      const r = await fetch('/catalog');
+      if (r.ok) return await r.json();
+    } catch {}
+    await new Promise((res) => setTimeout(res, 400));
+  }
+  return null;
+}
+
 async function init() {
-  try {
-    const catalog = await (await fetch('/catalog')).json();
-    buildGrid(catalog);
-  } catch (e) { $('catalog-line').textContent = 'catalog unavailable'; }
+  const catalog = await fetchCatalogWithRetry();
+  if (catalog) buildGrid(catalog);
+  else $('catalog-line').textContent = 'catalog unavailable';
   try {
     const recent = await (await fetch('/events/recent?limit=40')).json();
     recent.forEach(addFeed);

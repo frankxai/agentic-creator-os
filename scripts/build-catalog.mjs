@@ -266,6 +266,13 @@ for (const [name, p] of Object.entries(iam.profiles || {})) {
 }
 
 // ---------------------------------------------------------------------------
+// Drop orphan edges — compose/dependency targets may reference names that have
+// no node (e.g. a workflow that composes one not present as a file).
+// ---------------------------------------------------------------------------
+const nodeIds = new Set(nodes.map((n) => n.id))
+const cleanEdges = edges.filter((e) => nodeIds.has(e.source) && nodeIds.has(e.target))
+
+// ---------------------------------------------------------------------------
 // Emit
 // ---------------------------------------------------------------------------
 const counts = nodes.reduce((acc, n) => {
@@ -277,13 +284,13 @@ const catalog = {
   generatedAt: new Date().toISOString(),
   version: '1.0.0',
   source: 'agentic-creator-os',
-  counts: { ...counts, edges: edges.length },
+  counts: { ...counts, edges: cleanEdges.length },
   iam: iam.profiles || {},
   nodes,
-  edges,
+  edges: cleanEdges,
 }
 
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify(catalog, null, 2))
 console.log(`✓ catalog written → ${relative(ROOT, OUT)}`)
-console.log(`  ${JSON.stringify(counts)} · ${edges.length} edges`)
+console.log(`  ${JSON.stringify(counts)} · ${cleanEdges.length} edges`)

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T13:01:13.992Z",
+  "generatedAt": "2026-06-09T05:52:26.388Z",
   "version": "1.0.0",
   "source": "agentic-creator-os",
   "counts": {
@@ -8,7 +8,7 @@
     "command": 66,
     "workflow": 8,
     "iam-profile": 6,
-    "edges": 87
+    "edges": 86
   },
   "iam": {
     "content-writer": {
@@ -4701,11 +4701,6 @@
     {
       "source": "workflow:release-checklist",
       "target": "workflow:pr-review-multi-perspective",
-      "rel": "composes"
-    },
-    {
-      "source": "workflow:research-fanout",
-      "target": "workflow:research-pulse-daily",
       "rel": "composes"
     }
   ]

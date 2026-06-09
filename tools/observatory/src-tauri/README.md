@@ -1,35 +1,46 @@
-# Agent Observatory — Tauri shell (Phase 3)
+# Agent Observatory — Tauri 2 desktop shell
 
-Wraps the live monitor (`../web` + `../server.mjs`) as a lightweight native
-desktop app with a menu-bar/tray icon showing the live agent count.
+A lightweight native window + menu-bar/tray wrapper around the live monitor
+(`../web` + `../server.mjs`). Chosen over Electron: OS WebView instead of a
+bundled Chromium → ~3–10 MB bundles vs ~100 MB+, Rust core, native tray, lower
+idle memory for an always-on monitor.
 
-> Status: **scaffold only.** Building requires the Rust toolchain + `tauri-cli`,
-> which aren't part of the repo's Node setup. The `web/` dashboard already runs
-> standalone at `localhost:4317`; this is purely a packaging convenience.
+## What's wired
+- **`src/main.rs`** — on launch, spawns `node observatory/server.mjs` (bundled as
+  a resource) as a child process; shows the dashboard window (served by that
+  process on `:4317`, same-origin so the SSE + `/catalog` fetches just work);
+  adds a tray menu (Show / Quit). Closing the window hides to tray; the Node
+  server is killed only on full app exit.
+- **`Cargo.toml`** — Tauri 2 + `tauri-plugin-shell`, size-optimized release profile.
+- **`tauri.conf.json`** — window loads `http://localhost:4317`; bundles
+  `server.mjs`, `web/`, and `public/catalog.json` as resources.
+- **`capabilities/default.json`** — minimal window + shell permissions.
 
-## Why Tauri (not Electron)
-- ~10× smaller bundles (uses the OS WebView, no bundled Chromium)
-- Rust core, lower memory, native tray + notifications
-- Signed auto-updates
+> **Status: scaffold.** These files are idiomatic Tauri 2 but have **not** been
+> compiled here (the repo's CI is Node-only; Tauri needs the Rust toolchain +
+> platform WebView libs). Finalize on a dev machine with the steps below.
 
-## Build (once Rust + tauri-cli are installed)
+## Prerequisites
+- [Rust](https://rustup.rs) + `cargo`
+- Tauri CLI: `cargo install tauri-cli --version "^2"`
+- `node` on PATH (the app spawns the server with it)
+- Platform WebView deps — see https://tauri.app/start/prerequisites/
 
+## Build
 ```bash
-cargo install create-tauri-app --locked   # or: npm create tauri-app
-cd tools/observatory
-cargo tauri dev      # dev
-cargo tauri build    # production bundle
+# 1. Generate the catalog + app icons (one-time)
+npm run observatory:catalog
+cargo tauri icon path/to/logo.png        # writes src-tauri/icons/*
+
+# 2. Run / build  (from tools/observatory)
+cargo tauri dev                          # dev window
+cargo tauri build                        # signed native bundle
 ```
 
-## Plan
-1. **Sidecar**: bundle `server.mjs` as a Tauri sidecar; spawn on app launch,
-   kill on quit (`tauri.conf.json → bundle.externalBin`).
-2. **Window**: load `http://localhost:4317` (the existing dashboard).
-3. **Tray**: poll `/events/recent` (or subscribe to `/stream`) and render the
-   active-agent count as the tray title; click to show/hide the window.
-4. **Notifications**: native toast when an agent errors (`PostToolUse` with
-   `success:false`).
+## Next enhancements (tracked, not yet built)
+- Tray title shows the **live active-agent count** (poll `/events/recent` or
+  subscribe to `/stream` from Rust and call `tray.set_title`).
+- Native notification on `PostToolUse { success:false }` (agent error).
+- Auto-updater via `tauri-plugin-updater`.
 
-`tauri.conf.json` in this folder is a minimal starting point — adjust
-`build.frontendDist` / `build.devUrl` and `bundle.externalBin` when wiring the
-sidecar.
+Icons and `target/`, `gen/` are gitignored — generate locally.
