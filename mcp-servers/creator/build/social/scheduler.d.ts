@@ -79,29 +79,41 @@ export declare function processScheduledQueue(): Promise<{
     failed: number;
 }>;
 export declare const scheduleContentSchema: {
-    platform: z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>;
-    type: z.ZodEnum<["post", "thread", "article", "story", "cast"]>;
+    platform: z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>;
+    type: z.ZodEnum<{
+        thread: "thread";
+        post: "post";
+        article: "article";
+        story: "story";
+        cast: "cast";
+    }>;
     content: z.ZodAny;
     scheduledFor: z.ZodString;
     checkConflicts: z.ZodOptional<z.ZodBoolean>;
 };
 export declare const bulkScheduleSchema: {
     posts: z.ZodArray<z.ZodObject<{
-        platform: z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>;
-        type: z.ZodEnum<["post", "thread", "article", "story", "cast"]>;
+        platform: z.ZodEnum<{
+            twitter: "twitter";
+            linkedin: "linkedin";
+            instagram: "instagram";
+            farcaster: "farcaster";
+        }>;
+        type: z.ZodEnum<{
+            thread: "thread";
+            post: "post";
+            article: "article";
+            story: "story";
+            cast: "cast";
+        }>;
         content: z.ZodAny;
         scheduledFor: z.ZodString;
-    }, "strip", z.ZodTypeAny, {
-        type?: "thread" | "post" | "article" | "story" | "cast";
-        platform?: "twitter" | "linkedin" | "instagram" | "farcaster";
-        content?: any;
-        scheduledFor?: string;
-    }, {
-        type?: "thread" | "post" | "article" | "story" | "cast";
-        platform?: "twitter" | "linkedin" | "instagram" | "farcaster";
-        content?: any;
-        scheduledFor?: string;
-    }>, "many">;
+    }, z.core.$strip>>;
     autoResolveConflicts: z.ZodOptional<z.ZodBoolean>;
     conflictGapMinutes: z.ZodOptional<z.ZodNumber>;
 };
@@ -113,8 +125,18 @@ export declare const rescheduleContentSchema: {
     newScheduledFor: z.ZodString;
 };
 export declare const getScheduledContentSchema: {
-    platform: z.ZodOptional<z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>>;
-    status: z.ZodOptional<z.ZodEnum<["pending", "published", "failed", "cancelled"]>>;
+    platform: z.ZodOptional<z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>>;
+    status: z.ZodOptional<z.ZodEnum<{
+        published: "published";
+        failed: "failed";
+        pending: "pending";
+        cancelled: "cancelled";
+    }>>;
     startDate: z.ZodOptional<z.ZodString>;
     endDate: z.ZodOptional<z.ZodString>;
 };

@@ -182,7 +182,7 @@ server.registerTool("evaluate", {
             structuredContent: { result }
         };
     }
-    catch (error) {
+    finally {
         return {
             content: [{ type: "text", text: `Evaluate error: ${error}` }],
             isError: true

@@ -81,18 +81,38 @@ export declare function getEngagementTrends(params: {
 export declare const getAggregatedAnalyticsSchema: {
     startDate: z.ZodString;
     endDate: z.ZodString;
-    platforms: z.ZodOptional<z.ZodArray<z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>, "many">>;
+    platforms: z.ZodOptional<z.ZodArray<z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>>>;
 };
 export declare const compareContentPerformanceSchema: {
-    platforms: z.ZodArray<z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>, "many">;
-    contentTypes: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    platforms: z.ZodArray<z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>>;
+    contentTypes: z.ZodOptional<z.ZodArray<z.ZodString>>;
 };
 export declare const getBestPostingTimesSchema: {
-    platform: z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>;
+    platform: z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>;
     timezone: z.ZodOptional<z.ZodString>;
 };
 export declare const getEngagementTrendsSchema: {
-    platform: z.ZodEnum<["twitter", "linkedin", "instagram", "farcaster"]>;
+    platform: z.ZodEnum<{
+        twitter: "twitter";
+        linkedin: "linkedin";
+        instagram: "instagram";
+        farcaster: "farcaster";
+    }>;
     days: z.ZodNumber;
 };
 //# sourceMappingURL=analytics.d.ts.map

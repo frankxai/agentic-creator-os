@@ -116,15 +116,19 @@ export declare function getRateLimitStatus(): {
 };
 export declare const createPostSchema: {
     text: z.ZodString;
-    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
-    visibility: z.ZodOptional<z.ZodEnum<["public", "connections", "private"]>>;
+    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    visibility: z.ZodOptional<z.ZodEnum<{
+        public: "public";
+        connections: "connections";
+        private: "private";
+    }>>;
     scheduledFor: z.ZodOptional<z.ZodString>;
 };
 export declare const createArticleSchema: {
     title: z.ZodString;
     content: z.ZodString;
     coverImageUrl: z.ZodOptional<z.ZodString>;
-    tags: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
+    tags: z.ZodOptional<z.ZodArray<z.ZodString>>;
     publishNow: z.ZodOptional<z.ZodBoolean>;
 };
 export declare const publishArticleSchema: {
@@ -139,8 +143,12 @@ export declare const getArticleAnalyticsSchema: {
 export declare const schedulePostSchema: {
     text: z.ZodString;
     scheduledFor: z.ZodString;
-    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
-    visibility: z.ZodOptional<z.ZodEnum<["public", "connections", "private"]>>;
+    mediaUrls: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    visibility: z.ZodOptional<z.ZodEnum<{
+        public: "public";
+        connections: "connections";
+        private: "private";
+    }>>;
 };
 export declare const deletePostSchema: {
     postId: z.ZodString;
