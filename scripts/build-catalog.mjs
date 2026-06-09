@@ -32,6 +32,10 @@ const ROOT = join(__dirname, '..')
 
 const argv = process.argv.slice(2)
 const outFlag = argv.indexOf('--out')
+if (outFlag !== -1 && (!argv[outFlag + 1] || argv[outFlag + 1].startsWith('--'))) {
+  console.error('✗ --out requires a path, e.g. --out tools/observatory/public/catalog.json')
+  process.exit(1)
+}
 const OUT = outFlag !== -1 ? argv[outFlag + 1] : join(ROOT, 'tools/observatory/public/catalog.json')
 
 // ---------------------------------------------------------------------------
