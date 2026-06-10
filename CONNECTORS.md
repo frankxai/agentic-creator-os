@@ -22,10 +22,17 @@ ACOS is **tool-agnostic at the skill level** — workflows describe what needs t
 
 | Category | Placeholder | Default (ACOS) | Alternatives |
 |----------|-------------|----------------|--------------|
-| Image generation | `~~image generation` | nano-banana (Gemini 2.5 Flash Image) | Midjourney, Stability AI, Flux |
+| Image generation | `~~image generation` | **Higgsfield MCP** (Soul/Flux/Seedream, 4K) | nano-banana (Gemini 2.5 Flash Image), Midjourney, Stability AI |
+| Video generation | `~~video generation` | **Higgsfield MCP** (Kling/Hailuo/Veo/Sora/DoP) | Veo 3 (direct API), RunwayML |
+| Character consistency | `~~character` | **Higgsfield MCP** (Soul character training) | manual reference images |
 | Music generation | `~~music generation` | Suno AI (direct API) | Udio |
-| Video generation | `~~video generation` | Veo 3 (direct API) | RunwayML, Kling |
 | Design | `~~design` | Figma MCP | Canva |
+
+> **Multimodal Studio:** image, video, and character generation are unified under one connector
+> (Higgsfield MCP — one OAuth, 30+ models). The `multimodal-studio` skill and `/studio` command
+> drive it. Connect with:
+> `claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp`
+> Skills stay vendor-agnostic — any MCP filling these categories works.
 
 ### Communication & publishing
 

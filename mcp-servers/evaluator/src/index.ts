@@ -270,28 +270,30 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   try {
     switch (name) {
       case 'evaluate_content': {
-        const result = await evaluateContent(EvaluateContentSchema.parse(args));
+        const input = EvaluateContentSchema.parse(args);
+        const result = await evaluateContent(input as Parameters<typeof evaluateContent>[0]);
         await logEvaluation({
           type: 'content-evaluation',
-          source: args.context?.source || 'claude-code',
-          sessionId: args.context?.sessionId,
-          projectId: args.context?.projectId,
-          workflowId: args.context?.workflowId,
-          contentType: args.contentType,
+          source: input.context?.source || 'claude-code',
+          sessionId: input.context?.sessionId,
+          projectId: input.context?.projectId,
+          workflowId: input.context?.workflowId,
+          contentType: input.contentType,
           result,
         });
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };
       }
 
       case 'evaluate_hook': {
-        const result = await evaluateHook(EvaluateHookSchema.parse(args));
+        const input = EvaluateHookSchema.parse(args);
+        const result = await evaluateHook(input);
         await logEvaluation({
           type: 'hook-evaluation',
-          source: args.context?.source || 'claude-code',
-          sessionId: args.context?.sessionId,
-          projectId: args.context?.projectId,
-          workflowId: args.context?.workflowId,
-          contentType: args.platform,
+          source: input.context?.source || 'claude-code',
+          sessionId: input.context?.sessionId,
+          projectId: input.context?.projectId,
+          workflowId: input.context?.workflowId,
+          platform: input.platform,
           result,
         });
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };

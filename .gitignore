@@ -38,8 +38,8 @@ tmp/
 temp/
 *.tmp
 
-# Package lock (use npm ci)
-package-lock.json
+# Package lock — committed so `npm ci` works (reproducible, integrity-checked installs)
+# package-lock.json
 
 # Claude Flow runtime state
 .claude-flow/

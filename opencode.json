@@ -13,6 +13,10 @@
         "node",
         "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/evaluator/build/index.js"
       ]
+    },
+    "higgsfield": {
+      "type": "remote",
+      "url": "https://mcp.higgsfield.ai/mcp"
     }
   },
   "skills": {
