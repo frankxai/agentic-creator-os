@@ -22,7 +22,11 @@
     "content-creation",
     "agentic-ai",
     "mcp",
-    "anthropic"
+    "anthropic",
+    "multimodal",
+    "image-generation",
+    "video-generation",
+    "higgsfield"
   ],
   "categories": [
     "creator-tools",

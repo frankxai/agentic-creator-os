@@ -80,9 +80,12 @@ On non-Claude platforms, just describe what you want. Skills activate from conte
 
 ## Available Commands (35+)
 
-### Creation (10)
+### Creation (12)
+
 | Command | Description |
 |---------|-------------|
+| `/studio` | **Multimodal Studio** — end-to-end image + video + character production (Higgsfield MCP) |
+| `/generate-video` | Video generation: still→video or text→video (Kling/Hailuo/Veo/Sora/DoP) |
 | `/article-creator` | Guided blog article creation |
 | `/create-music` | Suno music production pipeline |
 | `/infogenius` | Research-grounded image generation |
@@ -138,6 +141,22 @@ User: "write a blog post about AI agents"
   → Auto-loads: content-strategy skill
   → Routes to: /article-creator
 ```
+
+## Multimodal Studio (v11)
+
+ACOS's unified generation layer: **image + video + consistent characters** across 30+ frontier models through a single connector.
+
+- **Skill:** `multimodal-studio` — model routing, visual prompt engineering, character consistency, async lifecycle, brand-locked output
+- **Agent:** Multimodal Director (`.claude/agents/multimodal-director.md`)
+- **Commands:** `/studio` (e2e pipeline), `/generate-video`, `/generate-images`, `/infogenius`
+- **Connector:** Higgsfield MCP (default) — one OAuth, models incl. Soul, Flux, Seedream, Kling, Hailuo, Veo, Sora
+
+```bash
+# Connect the multimodal connector (one-time)
+claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp
+```
+
+Stays **vendor-agnostic** (any MCP filling `~~image generation` / `~~video generation` works — see `CONNECTORS.md`) and **brand-locked** (assets inherit Frank DNA + active brand tokens). The differentiator vs. single-vendor agent platforms: character consistency across an entire asset set via `create_character` → reuse the character ID everywhere. See `docs/multimodal-studio.md`.
 
 ## v10 Safety Systems
 

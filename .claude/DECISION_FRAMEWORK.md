@@ -215,6 +215,55 @@ This framework exists because of real errors:
 
 ---
 
+## Security Validation Checklist
+
+For decisions affecting security-sensitive areas, complete this additional checklist:
+
+### Tier 3 Security Triggers (Always Escalate)
+
+- Authentication/authorization mechanism changes
+- Config file modifications (`.env`, credentials, keys)
+- API/database access pattern changes
+- User data handling or PII exposure
+- Permission scope changes in agent-iam.json
+- Hook modifications that affect safety gates
+
+### Security Checklist
+
+```markdown
+## Security Validation
+
+### Credential Safety
+- [ ] No credentials/secrets introduced in code?
+- [ ] No API keys, tokens, or passwords in commits?
+- [ ] .env files properly gitignored?
+
+### Access Control
+- [ ] Agent IAM boundaries respected?
+- [ ] No privilege escalation possible?
+- [ ] Gate approval required for system-architect changes?
+
+### Data Protection
+- [ ] PII properly handled/masked?
+- [ ] Audit trail captures sensitive operations?
+- [ ] No secrets logged to audit trail?
+
+### Vulnerability Check
+- [ ] OWASP Top 10 risks reviewed?
+- [ ] Dependencies scanned for CVEs?
+- [ ] Input validation in place?
+```
+
+### Security Escalation Path
+
+1. **Detect** - Circuit breaker or audit trail flags issue
+2. **Stop** - Halt operation immediately
+3. **Assess** - Review IAM violations and scope
+4. **Remediate** - Fix issue, revoke if needed
+5. **Document** - Add to audit trail with full context
+
+---
+
 ## Integration with claude-flow Patterns
 
 ACOS decision-making aligns with claude-flow's:
