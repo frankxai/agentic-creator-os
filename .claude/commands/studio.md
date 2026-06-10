@@ -7,7 +7,7 @@ description: End-to-end multimodal production — turn a brief into a coherent s
 
 **One brief in, a finished brand-locked asset set out. Images + video + consistent characters across 30+ models.**
 
-```
+```text
 ╔══════════════════════════════════════════════════════════════════════╗
 ║                      MULTIMODAL STUDIO PIPELINE                        ║
 ║         "One connector. Stills, motion, and a character that stays."   ║
@@ -63,7 +63,7 @@ Build each prompt as **Subject + Action + Setting + Composition + Lighting + Sty
 
 ## Usage
 
-```
+```text
 /studio hero image + 3 social cards + 5s teaser for the "Agentic Creator OS" launch post
 /studio a consistent course-instructor character, then 4 lesson thumbnails featuring her
 /studio animate this product still into a 5s cinematic loop

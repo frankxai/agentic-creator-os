@@ -80,7 +80,7 @@ Keys from https://cloud.higgsfield.ai/api-keys. Self-hosted exposes `generate_im
 
 ## Async lifecycle pattern
 
-```
+```text
 submit generate_image/video  →  receive job id
         ↓
 poll get_generation_status(job_id)  →  pending? wait, re-poll

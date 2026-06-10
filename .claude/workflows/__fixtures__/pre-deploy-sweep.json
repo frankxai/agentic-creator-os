@@ -1,0 +1,21 @@
+{
+  "_meta": "Smoke fixture for pre-deploy-sweep (FrankX-local).",
+  "args": { "baseRef": "main" },
+  "expectedOutputs": {
+    "GATE_SCHEMA": {
+      "lane": "build",
+      "verdict": "pass",
+      "summary": "pnpm build exit 0, 0 warnings",
+      "findings": []
+    }
+  },
+  "calibratedRun": {
+    "runId": "wf_fa8ee814-d99",
+    "date": "2026-06-02",
+    "totalTokens": 387879,
+    "agentCount": 6,
+    "durationMs": 358063,
+    "outcome": "warn",
+    "knownIssue": "build agent times out on long pnpm builds — needs polling pattern in prompt"
+  }
+}

@@ -19,7 +19,7 @@ All wrapped in ACOS's existing strengths: Frank DNA, brand-lock, safety hooks, a
 
 ## Architecture
 
-```
+```text
                         ┌─────────────────────────────┐
    brief / content  ──▶ │   /studio  ·  /generate-video │ ──▶  finished asset set
                         └──────────────┬──────────────┘
@@ -75,7 +75,7 @@ Self-hosted (stdio + `HF_API_KEY`/`HF_SECRET`) is documented in `skills/multimod
 
 ## Examples
 
-```
+```text
 /studio hero image + 3 social cards + 5s teaser for the ACOS launch post
 /studio a consistent course-instructor character, then 4 lesson thumbnails featuring her
 /generate-video animate this product still into a 5s cinematic loop, 16:9

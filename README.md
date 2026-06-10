@@ -190,7 +190,7 @@ The `/acos` command analyzes your request and routes to the optimal subsystem:
 
 One connector, every modality. ACOS generates **images, video, and consistent characters** across 30+ frontier models through a single MCP — model-agnostic, brand-locked, and async by default.
 
-```
+```text
 /studio "hero image + 3 social cards + 5s teaser for the launch post"
   ├── Routes each shot to the right model (Soul/Flux → stills, Kling/Veo → motion)
   ├── Holds one character across the whole set via create_character → reuse ID
@@ -274,7 +274,7 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 | Category | Count | Examples |
 |----------|-------|----------|
-| **Creation** | 10 | `/studio`, `/generate-video`, `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
+| **Creation** | 12 | `/studio`, `/generate-video`, `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
 | **Strategy** | 6 | `/starlight-architect`, `/council`, `/research`, `/plan-week` |
 | **Development** | 4 | `/spec`, `/nextjs-deploy`, `/ux-design`, `/automation-dev` |
 | **System** | 5 | `/acos`, `/inventory-status`, `/mcp-status`, `/publish` |

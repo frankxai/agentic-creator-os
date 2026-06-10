@@ -1,0 +1,24 @@
+{
+  "_meta": "Smoke fixture for research-pulse-daily. Cost target <100k tokens.",
+  "args": {},
+  "expectedOutputs": {
+    "SCAN_SCHEMA": {
+      "domain": "New AI model releases + benchmarks worth citing today",
+      "signals": [
+        {
+          "title": "Anthropic ships Sonnet 4.6 with 30% faster TTFT",
+          "summary": "Drop-in replacement, no API changes; measured on agent workloads",
+          "sourceUrl": "https://www.anthropic.com/news/sonnet-4-6",
+          "novelty": 8,
+          "shipWorthy": true
+        }
+      ]
+    },
+    "PULSE_SCHEMA": {
+      "leadSignal": "Sonnet 4.6 ships with 30% faster TTFT — drop-in for FrankX scheduled cascade",
+      "brief": "Morning signal: faster Sonnet means lower wall-clock on daily routines without prompt changes. Three OSS agentic frameworks shipped notable updates. One creator-economy tool hit GA.",
+      "shipWorthyCount": 3,
+      "queuedForFriday": []
+    }
+  }
+}

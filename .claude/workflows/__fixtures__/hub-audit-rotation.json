@@ -1,0 +1,43 @@
+{
+  "_meta": "Smoke fixture for hub-audit-rotation (FrankX-local). Requires args.hub.",
+  "args": { "hub": "library" },
+  "expectedOutputs": {
+    "PAGES_SCHEMA": {
+      "hub": "library",
+      "pages": [
+        { "slug": "approach", "path": "app/library/approach/page.tsx", "title": "The Library OS approach" },
+        { "slug": "build", "path": "app/library/build/page.tsx", "title": "Build your own Library OS" }
+      ]
+    },
+    "AUDIT_SCHEMA": {
+      "slug": "approach",
+      "verdicts": {
+        "a11y": "warn",
+        "seo": "pass",
+        "conversion": "warn",
+        "brand": "pass",
+        "links": "pass"
+      },
+      "priorityFindings": [
+        {
+          "severity": "high",
+          "dimension": "a11y",
+          "message": "Body text uses text-white/40 on dark — 3.5:1 contrast fails AAA",
+          "suggestion": "Raise body floor to text-white/65"
+        }
+      ]
+    }
+  },
+  "calibratedRun": {
+    "runId": "wf_45ac458c-47f",
+    "date": "2026-06-02",
+    "totalTokens": 2779378,
+    "agentCount": 34,
+    "durationMs": 625680,
+    "outcome": "success",
+    "findings": 453,
+    "hub": "library",
+    "pages": 32,
+    "notes": "Cost scales with pageCount — 32 pages × ~80k = ~2.8M actual"
+  }
+}

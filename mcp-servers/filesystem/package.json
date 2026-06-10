@@ -5,7 +5,8 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --noCheck",
+    "typecheck": "tsc --noEmit",
     "dev": "tsc -w",
     "start": "node build/index.js"
   },

@@ -293,7 +293,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           sessionId: input.context?.sessionId,
           projectId: input.context?.projectId,
           workflowId: input.context?.workflowId,
-          contentType: input.platform,
+          platform: input.platform,
           result,
         });
         return { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }] };

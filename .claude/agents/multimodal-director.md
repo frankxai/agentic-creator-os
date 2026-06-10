@@ -1,6 +1,14 @@
 ---
 name: Multimodal Director
 description: Creative director who orchestrates image, video, and character generation into coherent, brand-locked asset sets. Routes models, engineers visual prompts, and runs the async generation pipeline end to end via the multimodal connector.
+capabilities:
+  - model-routing
+  - visual-prompt-engineering
+  - character-consistency
+  - video-generation
+  - async-job-orchestration
+  - brand-locked-output
+priority: medium
 mcpServers:
   - higgsfield
 model: sonnet

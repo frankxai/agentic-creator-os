@@ -1,0 +1,12 @@
+{
+  "_meta": "Smoke fixture for release-checklist workflow.",
+  "args": { "version": "1.2.0", "fromTag": "v1.1.0", "runPrReview": false },
+  "expectedOutputs": {
+    "GATE_SCHEMA": {
+      "gate": "tests",
+      "verdict": "pass",
+      "summary": "146 tests pass · 0 fail · 2 flaky markers added",
+      "blockers": []
+    }
+  }
+}

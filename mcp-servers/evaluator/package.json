@@ -5,8 +5,9 @@
   "main": "build/index.js",
   "type": "module",
   "scripts": {
-    "build": "NODE_OPTIONS='--max-old-space-size=4096' tsc",
+    "build": "esbuild src/index.ts --bundle --outfile=build/index.js --format=esm --platform=node --target=node20 --packages=external",
     "build:fast": "esbuild src/index.ts --bundle --outfile=build/index.js --format=esm --platform=node --target=node20",
+    "typecheck": "NODE_OPTIONS='--max-old-space-size=4096' tsc --noEmit",
     "dev": "tsc -w",
     "start": "node build/index.js"
   },

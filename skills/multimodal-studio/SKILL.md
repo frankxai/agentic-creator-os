@@ -110,7 +110,7 @@ This is how you get a character that looks identical across an entire content se
 
 - `frankx-brand` / `brand-guidelines` → brand tokens for generation
 - `content-strategy` / `video-script` → briefs that feed the studio
-- `suno-ai-mastery` → score the videos this skill produces
+- `suno-mastery` → score the videos this skill produces
 - `infogenius` command → research-grounded image prompts
 - `/studio` and `/generate-video` commands → operator entry points
 

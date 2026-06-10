@@ -1,0 +1,25 @@
+{
+  "_meta": "Smoke fixture for incident-postmortem. Requires args.incidentDate + args.summary.",
+  "args": {
+    "incidentDate": "2026-05-15",
+    "summary": "checkout endpoint 502 spike for 18 minutes after deploy 7a2c4f"
+  },
+  "expectedOutputs": {
+    "TIMELINE_SCHEMA": {
+      "events": [
+        { "when": "2026-05-15T14:23:00Z", "what": "Deploy 7a2c4f landed", "source": "vercel-deployment-id-X" },
+        { "when": "2026-05-15T14:24:30Z", "what": "First 502 in logs", "source": "datadog-trace-Y" }
+      ]
+    },
+    "RCA_SCHEMA": {
+      "rootCause": "Stripe client init moved to module-top scope; missing env var on canary instance",
+      "contributingFactors": [
+        "Canary instance not in env-var sync list",
+        "No startup health check that validates external clients"
+      ],
+      "whyChain": [
+        "Checkout returned 502 → Stripe client threw on init → env var STRIPE_KEY undefined on canary → canary missed from env sync list → no automated env-var diff in deploy pipeline → process gap"
+      ]
+    }
+  }
+}

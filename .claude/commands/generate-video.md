@@ -41,7 +41,7 @@ Submit, capture the job ID, poll `get_generation_status`. Video takes longer tha
 - Offer to score it with `/create-music`.
 
 ## Usage
-```
+```text
 /generate-video animate this hero still into a 5s cinematic loop, 16:9
 /generate-video 9:16 teaser: neon city flythrough, fast cuts, 8s
 /generate-video lesson intro featuring character <id>, slow push-in, warm light

@@ -81,6 +81,7 @@ On non-Claude platforms, just describe what you want. Skills activate from conte
 ## Available Commands (35+)
 
 ### Creation (12)
+
 | Command | Description |
 |---------|-------------|
 | `/studio` | **Multimodal Studio** — end-to-end image + video + character production (Higgsfield MCP) |

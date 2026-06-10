@@ -1,0 +1,4 @@
+# Branch cleanup queue.
+# Add branch names below (one per line) and commit to main.
+# The Branch Cleanup workflow will delete them and clear this file.
+# See BRANCH_AUDIT.md for the canonical safe-delete list.
