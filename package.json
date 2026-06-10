@@ -40,6 +40,9 @@
     "templates/",
     "workflows/",
     "docs/",
+    "tools/observatory/",
+    "scripts/build-catalog.mjs",
+    "scripts/build-catalog.test.mjs",
     "install.sh",
     "CLAUDE.md",
     "CREATOR_NEEDS.md",
@@ -49,6 +52,10 @@
     "mcp-servers/*"
   ],
   "scripts": {
+    "observatory": "node tools/observatory/server.mjs",
+    "observatory:catalog": "node scripts/build-catalog.mjs",
+    "observatory:install-hooks": "node tools/observatory/install-hooks.mjs",
+    "observatory:test": "node --test scripts/build-catalog.test.mjs",
     "install:all": "npm install --workspaces",
     "build:all": "npm run build --workspaces",
     "typecheck:all": "npm run typecheck --workspaces --if-present",

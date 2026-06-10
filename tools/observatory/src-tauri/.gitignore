@@ -1,0 +1,8 @@
+# Tauri / Rust build artifacts (generate locally)
+/target
+/gen
+
+# Cargo.lock IS committed for app/binary crates (reproducible builds) — not ignored.
+
+# Generated app icons (run: cargo tauri icon <logo.png>)
+/icons
