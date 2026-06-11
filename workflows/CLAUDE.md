@@ -16,6 +16,8 @@ Workflows are step-by-step processes for creating content. They guide you throug
 ```
 workflows/
 ├── CLAUDE.md                    ← YOU ARE HERE
+├── business/
+│   └── gstack-venture-factory.yaml ← GStack workforce for ventures/products
 ├── content-strategy/
 │   └── content-strategy.yaml    ← 5-phase strategy development
 ├── content-calendar/
@@ -69,6 +71,26 @@ Most workflows follow this structure:
 | 5. Publishing | Prepare for publication |
 
 ## Available Workflows
+
+### business/gstack-venture-factory.yaml
+**Purpose:** Validate and execute business/product ideas with the GStack specialist workforce.
+
+**Triggers:**
+- `validate this business idea`
+- `turn this into a venture plan`
+- `use gstack for this project`
+- `/gstack-venture-factory`
+
+**Phases:**
+1. Venture truth
+2. Founder pressure test
+3. Buildability review
+4. Executable spec
+5. Build and review
+6. Browser and launch evidence
+7. Ship and learn
+
+**Output:** `venture-wedge.md`, `ceo-review.md`, `architecture-plan.md`, `design-or-dx-plan.md`, `executable-spec.md`, `qa-evidence.md`, `ship-packet.md`, `retro.md`, `learnings.md`
 
 ### content-strategy/content-strategy.yaml
 **Purpose:** Develop comprehensive content strategy

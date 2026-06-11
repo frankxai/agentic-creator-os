@@ -10,7 +10,7 @@
 
 [![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
+[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Grok%20Build%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
 
 </div>
 
@@ -20,7 +20,7 @@
 
 A **production-grade skill and agent system** for AI coding assistants. It ships skills (domain knowledge), commands (reusable workflows), agents (specialized personas), and safety hooks — configured to auto-activate based on what you're working on.
 
-Works with **Claude Code, Cursor, Windsurf, Gemini Code Assist**, and any AI coding agent that reads markdown context files.
+Works with **Claude Code, Grok Build (xAI CLI/TUI — full native harness + .grok/skills + .grok/hooks + subagents + MCP + grok-harness-adapter + Claude compat), Cursor, Windsurf, Gemini Code Assist, Antigravity**, and any AI coding agent that reads markdown context files. Built on SIP (Starlight Intelligence Protocol).
 
 ```
 You: "write a blog post about AI agents"
@@ -61,18 +61,22 @@ flowchart LR
 | **Agents** | Specialized personas with distinct expertise | 38 |
 | **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 5 |
 
-## Harness Role
+## Architecture & Harness Role (Whole Stack)
 
-ACOS is the execution layer inside the wider FrankX agent harness:
+ACOS (Agentic Creator OS) is the **shared execution layer** (skills + commands + agents + workflows + safety) used across the FrankX / Starlight ecosystem. It is harness-agnostic but provides first-class native adapters for the full fleet.
 
-| System | Role |
-| --- | --- |
-| **Starlight / SIS** | Memory, MCP tools, cross-agent substrate |
-| **ACOS** | Skills, commands, agents, safety hooks |
-| **FrankX harness** | Repo manifests, prompt symmetry, push safety |
-| **Arcanea** | Creative methodology and agent-world substrate |
+| Layer | Role | Key |
+|-------|------|-----|
+| **SIP (Starlight Intelligence Protocol)** | Cross-repo memory, MCP substrate (github/fs-starlight/git), sovereignty, attestation, vaults | starlightintelligence.org/protocol |
+| **ACOS** | 90+ skills, 65+ commands, 38 agents, workflows, v10+ safety (IAM, circuit-breaker, audit, self-modify), auto-activation via skill-rules + excellence | This repo; junctions to ~/.claude + .grok compat |
+| **Grok Build (xAI)** | TUI speed, subagents (explore/plan), MCP, image/video, .grok/skills + hooks native + full .claude compat. Personal excellence seeds (4 + 2 json) via grok-harness-adapter | adapters/grok/ + install --platform=grok; .grok-only grok-personal layer only |
+| **Claude Code** | Canonical full surface (slash commands, hooks, IAM, skill-rules) | Direct .claude/ install |
+| **Other (Cursor, Windsurf, Gemini, AGY)** | Context files + embedded skills/agents; delegation via multi-orchestrator | .cursorrules etc. |
+| **FrankX / Arcanea** | Brand voice, personal creative, specific verticals (content, music, oracle, etc.) | Overlays + personal .grok/.claude partitions |
 
-This separation matters: ACOS makes agents capable; the harness makes them governed.
+**Core vs Grok-Personal vs Personal-Creative Partition (strict):** See SHARING.md + SIP §5. The 4 excellence seeds live ONLY in .grok/ for Grok users ("a bit magical"). Everything else is core/shared via .claude/ junctions. Use sip-share-audit before cross moves. 5-fleet parity + God 99 gates (repo-mastery + gstack + santa/verification) on all work.
+
+This separation + adapters make ACOS the universal substrate: one catalog, many harnesses, governed outputs.
 
 ---
 
@@ -109,6 +113,24 @@ cd agentic-creator-os
 ```
 
 This generates a `GEMINI.md` context file for Gemini to read on session start.
+
+### Grok Build (xAI CLI/TUI) — Full Native Harness Support
+
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=grok
+```
+
+- Generates `GROK.md` (ACOS briefing + Frank DNA + excellence gates) + AGENTS.md pointer
+- Seeds `.grok/skills/` (exact 4 grok-personal excellence seeds per SHARING.md + SIP §5: harness-integration, excellence-review, repo-mastery, multi-harness-orchestrator) + 2 excellence json hooks as `.grok/hooks/` ONLY + `.grok/agents/` (core ACOS/gstack/santa/verification via .claude/ junctions + compat)
+- Grok Build auto-loads project `.grok/` (highest prio) + `~/.grok/` + full `~/.claude/` compat (skills, commands, agents, hooks)
+- Native Grok features leveraged: `/skills`, subagents (`/task` with personas + worktree + resume), MCP (github + fs-starlight + git), image/video gen, TUI speed
+- Run `grok` in project → `/hooks-trust` → `/skills grok-harness` (or harness-integration / repo-mastery) or natural language ACOS tasks
+- Built-in excellence gates (God 99): repo-mastery (rules first), gstack (qa/browse/design-review), santa-method + verification-loop, plan-* reviews, cso
+- Multi-harness: multi-harness-orchestrator auto-detects + emits exact delegation (e.g. `claude -p "..."` with injected rules + DNA + partition filter)
+
+This is the richest non-Claude experience — native skills/agents/hooks/subagents/MCP + full ACOS excellence substrate + 5-fleet parity. See adapters/grok/index.ts and .claude/skills/grok-harness/.
 
 ### Any AI Coding Agent
 
@@ -404,19 +426,20 @@ The install script detects your platform and configures accordingly:
 ./install.sh --platform=cursor    # Cursor only
 ./install.sh --platform=windsurf  # Windsurf only
 ./install.sh --platform=gemini    # Gemini Code Assist only
+./install.sh --platform=grok      # Grok full (GROK.md + .grok/ seeds from grok-harness-adapter)
 ./install.sh --platform=generic   # Any agent (CONTEXT.md)
 ./install.sh --platform=all       # All detected platforms
 ```
 
 ### What Gets Installed Per Platform
 
-| Component | Claude Code | Cursor | Windsurf | Gemini | Generic |
-|-----------|:-----------:|:------:|:--------:|:------:|:-------:|
-| Skills (knowledge) | ~/.claude/skills/ | .cursorrules | .windsurfrules | GEMINI.md | CONTEXT.md |
-| Commands (workflows) | ~/.claude/commands/ | — | — | — | — |
-| Agents (personas) | ~/.claude/agents/ | .cursorrules | .windsurfrules | GEMINI.md | CONTEXT.md |
-| Hooks (safety) | settings.json | — | — | — | — |
-| Auto-activation | skill-rules.json | — | — | — | — |
+| Component | Claude Code | Grok Build (xAI) | Cursor | Windsurf | Gemini | Generic |
+|-----------|:-----------:|:----:|:------:|:--------:|:------:|:-------:|
+| Skills (knowledge) | ~/.claude/skills/ | .grok/skills/ + GROK.md + ~/.claude compat (via grok-harness-adapter seeds) | .cursorrules | .windsurfrules | GEMINI.md | CONTEXT.md |
+| Commands (workflows) | ~/.claude/commands/ | Context + native /skills + subagents | — | — | — | — |
+| Agents (personas) | ~/.claude/agents/ | .grok/agents/ + subagents | .cursorrules | .windsurfrules | GEMINI.md | CONTEXT.md |
+| Hooks (safety) | settings.json + acos/hooks | .grok/hooks/ (trust with /hooks-trust) + excellence gates | — | — | — | — |
+| Auto-activation | skill-rules.json | harness-integration + excellence-review seeds (gstack/santa/verification) | — | — | — | — |
 | MCP servers | Optional | — | — | — | — |
 
 > **Claude Code gets the full feature set** including slash commands, lifecycle hooks, and auto-activation rules. Other platforms get skills and agent definitions embedded in their context files.
@@ -440,11 +463,13 @@ agentic-creator-os/
 │   ├── skill-rules.json    # 22 auto-activation rules
 │   └── hooks.json          # Hook lifecycle config
 │
-├── adapters/               # Platform adapters
-│   ├── cursor/             # .cursorrules generator
-│   ├── windsurf/           # .windsurfrules generator
-│   ├── gemini/             # GEMINI.md generator
-│   └── generic/            # CONTEXT.md generator
+├── adapters/               # Platform adapters (TS context + seed generators)
+│   ├── grok/               # grok-harness-adapter: index.ts (isGrok, parse, generateGrokContext, getGrokSeeds, installGrokPlatform), GROK excellence seeds
+│   ├── opencode/           # OpenCode integration adapter
+│   ├── cursor/             # .cursorrules generator (planned)
+│   ├── windsurf/           # .windsurfrules generator (planned)
+│   ├── gemini/             # GEMINI.md generator (planned)
+│   └── generic/            # CONTEXT.md generator (planned)
 │
 ├── departments/            # Agent team definitions
 │   ├── content/
@@ -474,8 +499,9 @@ Starlight Intelligence System (Framework)
 ├── 7 council agents with emergent leadership
 ├── 6 orchestration patterns
 └── Platform adapters
-     └── ACOS (Claude Code + Multi-Platform)
+     └── ACOS (Claude Code + Grok full harness via grok-harness-adapter + Multi-Platform)
          ├── 35+ commands routed through /acos
+         └── Grok: adapters/grok/index.ts + install.sh --platform=grok (GROK.md + .grok/ seeds: excellence, repo-mastery, gstack gates)
          ├── 38 agents aligned to Starlight council
          ├── 75+ auto-activating skills
          ├── v10 safety systems (IAM, circuit breaker, audit)

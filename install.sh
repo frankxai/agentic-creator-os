@@ -4,6 +4,7 @@
 # AGENTIC CREATOR OS v10 — Multi-Platform Installer
 # Works with: Claude Code, Cursor, Windsurf, Gemini Code Assist, any AI agent
 # github.com/frankxai/agentic-creator-os
+# SIP: Built on SIP v1.1.1 (starlightintelligence.org/protocol) — grok-personal / personal-creative partition per SHARING.md. God 99 gates. Small reversible.
 # ═══════════════════════════════════════════════════════════════════════════════
 
 set -e
@@ -18,7 +19,7 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 # Configuration
-VERSION="10.1.0"
+VERSION="11.0.0"
 GITHUB_REPO="frankxai/agentic-creator-os"
 
 # Detect installation paths
@@ -60,6 +61,8 @@ show_help() {
     echo "  --platform=cursor     Cursor (generates .cursorrules with embedded skills)"
     echo "  --platform=windsurf   Windsurf (generates .windsurfrules)"
     echo "  --platform=gemini     Gemini Code Assist (generates GEMINI.md)"
+    echo "  --platform=grok       Grok Build / Grok CLI (xAI TUI) full harness: generates GROK.md + .grok/skills/ seeds (exact 4 grok-personal excellence per SHARING/SIP: repo-mastery/multi-harness-orchestrator/excellence-review/harness-integration) + 2 excellence json hooks as .grok/hooks/ ONLY; core via .claude junctions. Source of truth: adapters/grok/index.ts + getGrokSeeds()."
+    echo "  --platform=antigravity (or agy)  Antigravity/AGY (proposes .antigravity/ seeds + harness parity like SIS; delegates via multi-orchestrator + .claude junctions for now; full scaffold on demand; matches 5-fleet: claude/codex/gemini/agy/grok)"
     echo "  --platform=generic    Any AI agent (generates CONTEXT.md)"
     echo "  --platform=all        Install for all detected platforms"
     echo ""
@@ -78,6 +81,8 @@ show_help() {
     echo "Examples:"
     echo "  ./install.sh                           # Auto-detect platform"
     echo "  ./install.sh --platform=cursor         # Cursor-specific install"
+    echo "  ./install.sh --platform=grok           # Grok Build full harness (GROK.md + .grok/ seeds from adapter)"
+    echo "  ./install.sh --platform=antigravity    # AGY scaffold (5-fleet parity + grok-personal; creates .antigravity/ + harnesses/antigravity/ minimal, reversible; see ACOS adapters parity 2026-06-02)"
     echo "  ./install.sh --platform=claude --full   # Claude Code with MCP servers"
     echo "  ./install.sh --platform=all            # All platforms"
     echo ""
@@ -108,6 +113,18 @@ detect_platforms() {
     if [ -d "$HOME/.gemini" ] || command -v gemini &>/dev/null; then
         [ -n "$platforms" ] && platforms="$platforms,"
         platforms="${platforms}gemini"
+    fi
+
+    # Grok CLI (xAI) — full harness support via .grok/ + AGENTS.md compat + Claude bridge
+    if command -v grok &>/dev/null || [ -d "$HOME/.grok" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}grok"
+    fi
+
+    # Antigravity/AGY (Google) — 96-mind swarm + junctions; 5-fleet parity w/ agy/grok upgrades
+    if command -v agy &>/dev/null || command -v antigravity &>/dev/null || [ -d "$HOME/.antigravity" ] || [ -d "$HOME/.agy" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}antigravity"
     fi
 
     # Fallback
@@ -227,6 +244,269 @@ STATEEOF
     success "Claude Code installation complete"
 }
 
+# ── Grok Full Harness Install (GROK.md + .grok/ seeds from grok-harness-adapter) ─
+install_grok() {
+    local mode="${1:-standard}"
+    local target="${2:-.}"
+    local grok_home="${GROK_HOME:-$HOME/.grok}"
+
+    log "Installing full Grok Build harness support for ACOS (grok-harness-adapter)..."
+    log "Grok personal excellence seeds ONLY in .grok/ (per SHARING.md + SIP §5 encoded-self: repo-mastery/multi-harness-orchestrator/excellence-review/harness-integration + excellence json hooks). Core shared via .claude junctions/ACOS/SIS. Never leak grok-personal to ACOS core."
+    log "5-fleet parity (Claude+Codex+Gemini+Antigravity/agy+Grok) + explicit grok-personal filter + gstack/SIP — upgraded to SIS orchestrator harness level for ACOS + beyond (claude-code-config, frankx visual sites)."
+
+    # Project-level .grok/ seeds (highest priority per Grok spec; grok-personal seeds only per SHARING)
+    mkdir -p "$target/.grok/skills" "$target/.grok/agents" "$target/.grok/hooks"
+
+    # Seed 1: harness-integration (grok-personal - auto hooks, multi-harness delegation, excellence on load; .grok native only)
+    mkdir -p "$target/.grok/skills/harness-integration"
+    cat > "$target/.grok/skills/harness-integration/SKILL.md" << 'GROKSEED1'
+---
+name: harness-integration
+description: ACOS Grok bridge. SessionStart loads repo-mastery + excellence gates. PreToolUse enforces rules read + suggests harness (claude for plans). Uses gstack for QA, verification-loop/santa-method. Full .claude/ compat + native .grok/. Delegate via terminal when needed. Trigger: setup, harness, grok, excellence.
+---
+
+# Grok Harness Integration (ACOS v10+)
+
+## Principles
+- Frank DNA in every response. God 99 via gates.
+- Shared catalog (~/.claude/skills + ~/.grok/skills + project .grok/) source of truth.
+- On start: echo excellence status, read GROK.md/CLAUDE.md/AGENTS.md (deeper wins).
+- Gates before edit: rules check, repo-mastery, plan-reviews, gstack qa (if web), santa/verification.
+- Subagent swarm + delegate: output exact claude/agy/gemini commands with injected rules for complex tasks.
+
+## Excellence Path (always)
+repo-mastery → plan-*-review → verification-loop + santa-method → gstack (qa/browse/design/benchmark) → cso if needed → ship with evidence.
+
+Composes with all ACOS skills (gstack 20+, content, dev, security). Use /skills in Grok TUI or natural language.
+GROKSEED1
+    success "Seeded .grok/skills/harness-integration"
+
+    # Seed 2: excellence-review
+    mkdir -p "$target/.grok/skills/excellence-review"
+    cat > "$target/.grok/skills/excellence-review/SKILL.md" << 'GROKSEED2'
+---
+name: excellence-review
+description: Mandatory excellence gates for Grok+ACOS. verification-loop, santa-method, gstack-qa, plan-reviews, repo-mastery, cso, rules-distill. Never ship without evidence (gstack screenshots, metrics). Use on any build/suggest/lead task.
+---
+
+# Excellence Review Skill — Grok Harness
+
+## God 99 Mandate
+1. repo-mastery (read all rules files first, map cross-repo)
+2. CEO/Eng/Design plan reviews (subagent or delegate to claude)
+3. Adversarial: verification-loop + santa-method (2 independent pass required)
+4. gstack: qa (tiers quick/standard/exhaustive), browse, design-review, benchmark, canary
+5. Security: cso / security-auditor + supply chain
+6. Polish: rules-distill, skill-comply, document-release
+
+Output format: report + before/after + artifacts. Iterate atomically.
+
+Tools: gstack (headless browser ~100ms), terminal (tests), subagents.
+GROKSEED2
+    success "Seeded .grok/skills/excellence-review (gstack + santa + verification)"
+
+    # Seed 3: repo-mastery
+    mkdir -p "$target/.grok/skills/repo-mastery"
+    cat > "$target/.grok/skills/repo-mastery/SKILL.md" << 'GROKSEED3'
+---
+name: repo-mastery
+description: Master ACOS, FrankX, Starlight-Intelligence-System, arcanea, claude-code-config and full starlight/repos ecosystem. Architecture, skills/hooks/MCP map, harness integration points. Read CLAUDE.md/AGENTS.md/GROK.md first. Use MCPs (github, fs-starlight), gstack, subagents, grep, terminal. Excellence gates required. Trigger: repo, ACOS, ecosystem, mastery, cross-repo.
+---
+
+# Repo Mastery (Grok Edition)
+
+Steps:
+1. Inventory + read rules (CLAUDE/AGENTS/GROK.md priority)
+2. Parallel subagents for ACOS core, SIP, products, mcp-servers, skills catalog
+3. Cross-ref with remote (gh/MCP) + local FS
+4. Map .grok + .claude compat, skills 100+, hooks, agents
+5. Apply gates (excellence-review) before any recs
+6. Structured output: components, critical paths, opportunities. No unrequested MDs.
+
+Embody Frank DNA. Lead with builds.
+GROKSEED3
+    success "Seeded .grok/skills/repo-mastery"
+
+    # Seed 4: multi-harness-orchestrator (grok-personal - auto detect + exact shell delegation with injected .claude + repo rules + DNA + core/personal filter; .grok native only per SHARING)
+    mkdir -p "$target/.grok/skills/multi-harness-orchestrator"
+    cat > "$target/.grok/skills/multi-harness-orchestrator/SKILL.md" << 'GROKSEED4'
+---
+name: multi-harness-orchestrator
+description: Automatically detect tasks suited for delegation to other agent harnesses (Claude Code as canonical, agy/antigravity, gemini, cursor, etc.). Leverage shared .claude catalog (skills, commands, agents, hooks, junctions for agy). Embody Frank DNA. Output exact delegation commands (e.g. claude -p "injected rules + task" --cwd ...). Auto-utilize by shelling harness CLIs with full context from rules/catalog. Combine with repo-mastery for ecosystem tasks. Suggest/lead by choosing best harness or running in parallel. Grok .grok personal excellence seeds only (core to others).
+---
+GROKSEED4
+    success "Seeded .grok/skills/multi-harness-orchestrator (grok-personal)"
+
+    # Seed 5: excellence json hooks (grok-personal - .grok/hooks/ for SessionStart/PreToolUse DNA/rules/catalog/MCP/delegation/gates; stay .grok only)
+    mkdir -p "$target/.grok/hooks"
+    cat > "$target/.grok/hooks/session-start-excellence.json" << 'GROKHOOK1'
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "command": "echo 'Frank DNA excellence mode activated. Read CLAUDE.md/AGENTS.md/SHARING.md/SIP.md first (deeper wins). Shared .claude catalog active. MCPs (github/fs-starlight/git) ready. Use multi-harness-orchestrator + repo-mastery + excellence-review + harness-integration. Gates: verification-loop/santa-method/qa/cso/plan-reviews/gstack before ship. Grok .grok personal excellence seeds (excellence gates) opt-in only.'"
+      }
+    ]
+  }
+}
+GROKHOOK1
+    success "Seeded .grok/hooks/session-start-excellence.json (grok-personal)"
+
+    cat > "$target/.grok/hooks/pretooluse-excellence.json" << 'GROKHOOK2'
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|Bash",
+        "command": "echo 'Excellence gate: rules first? DNA? multi-orchestrator? repo-mastery context? harnesses via terminal? gstack/santa if web? Review before proceed. Grok .grok personal excellence seeds only.'"
+      }
+    ]
+  }
+}
+GROKHOOK2
+    success "Seeded .grok/hooks/pretooluse-excellence.json (grok-personal)"
+
+    # Note: core seeds (e.g. gstack base patterns) come from ACOS .claude/skills junctions; grok-personal seeds only as above. Use /sip-share-audit before cross moves. Update SHARING.md tags. SIP attest required.
+
+    # Seed hooks (executable, trust via /hooks-trust in Grok)
+    cat > "$target/.grok/hooks/session-start-excellence.sh" << GROKHOOK1
+#!/usr/bin/env bash
+# ACOS Grok: excellence + repo-mastery auto on SessionStart
+echo "🧬 ACOS Grok Excellence v${VERSION:-10+} — repo-mastery + harness-integration + gstack gates + santa/verification loaded. Read GROK.md / CLAUDE.md first. God 99 mode."
+# Can call grok /skills harness-integration etc.
+GROKHOOK1
+    chmod +x "$target/.grok/hooks/session-start-excellence.sh" 2>/dev/null || true
+    success "Seeded .grok/hooks/session-start-excellence.sh"
+
+    cat > "$target/.grok/hooks/pre-tool-gate.sh" << 'GROKHOOK2'
+#!/usr/bin/env bash
+# ACOS Grok PreToolUse gate: rules + excellence reminder
+echo "⚡ Gate: Read rules (GROK.md/CLAUDE.md)? Excellence (repo-mastery → verification/santa/gstack) engaged for this action?"
+GROKHOOK2
+    chmod +x "$target/.grok/hooks/pre-tool-gate.sh" 2>/dev/null || true
+    success "Seeded .grok/hooks/pre-tool-gate.sh (user must /hooks-trust)"
+
+    # Generate primary GROK.md (project context + full briefing)
+    generate_context_file "grok" "$target"
+
+    # Also ensure AGENTS.md alias for Grok scan (if not present, symlink or copy note)
+    if [ ! -f "$target/AGENTS.md" ] && [ ! -L "$target/AGENTS.md" ]; then
+        # Grok scans AGENTS.md explicitly; create a pointer
+        cat > "$target/AGENTS.md" << 'AGENTSEOF'
+# See GROK.md and CLAUDE.md for full ACOS + Grok harness instructions.
+# Grok reads this + deeper rules files. Prefer editing GROK.md for Grok-specific.
+# (Run ./install.sh --platform=grok to (re)generate GROK.md + .grok/ grok-personal seeds.)
+AGENTSEOF
+        success "Created AGENTS.md pointer (Grok scans it natively)"
+    fi
+
+    # Optional: also seed minimal agents/ for subagent personas
+    cat > "$target/.grok/agents/acos-excellence.md" << 'GROKAGENT'
+---
+name: ACOS Excellence Reviewer
+role: Applies God 99 gates using repo-mastery, santa-method, verification-loop, gstack QA, plan reviews
+---
+You are the ACOS excellence subagent. Never allow shipping without full gate evidence.
+GROKAGENT
+    success "Seeded .grok/agents/acos-excellence.md (subagent ready)"
+
+    # State for Grok
+    local timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+    cat > "$target/.grok/acos-state.json" << STATEEOF
+{
+  "version": "${VERSION:-10.1.0}",
+  "platform": "grok",
+  "adapter": "grok-harness-adapter",
+  "installedAt": "$timestamp",
+  "features": {
+    "grokNative": true,
+    "skills": true,
+    "agentsSubagents": true,
+    "hooks": true,
+    "claudeCompat": true,
+    "excellenceGates": true,
+    "gstackQA": true,
+    "repoMastery": true,
+    "multiHarness": true
+  },
+  "seeds": ["harness-integration", "excellence-review", "repo-mastery", "multi-harness-orchestrator"],
+  "note": "Run 'grok' in this dir; trust hooks with /hooks-trust; skills auto or /skills <name>"
+}
+STATEEOF
+    success "Grok ACOS state written to .grok/acos-state.json"
+
+    # Also copy core ACOS skills into project .grok/skills if --full (namespace to avoid collision)
+    if [ "$mode" = "full" ] && [ -d "$PROJECT_DIR/.claude/skills" ]; then
+        step "Full mode: seeding ACOS skills into .grok/skills/acos-* (project local)"
+        local gskill_count=0
+        for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+            [ -d "$skill_dir" ] || continue
+            local sname=$(basename "$skill_dir")
+            [ "$sname" = "CLAUDE.md" ] && continue
+            mkdir -p "$target/.grok/skills/acos-$sname"
+            cp -r "$skill_dir"* "$target/.grok/skills/acos-$sname/" 2>/dev/null || true
+            gskill_count=$((gskill_count + 1))
+        done
+        success "Full: mirrored $gskill_count ACOS skills as acos-* in .grok/skills/"
+    fi
+
+    success "Grok full harness install complete. Open with: grok   (then /hooks-trust; /skills harness-integration)"
+    echo "  [verify] .grok/seeds: $(ls $target/.grok/skills/ 2>/dev/null | tr '\n' ' '); hooks: $(ls $target/.grok/hooks/ 2>/dev/null | tr '\n' ' '); GROK.md + AGENTS.md + .grok/acos-state.json present. grok-personal 4+2 only. No .claude leak."
+}
+
+# ── Antigravity/AGY Scaffold Proposal (5-fleet parity, no file create here; update to full like SIS harnesses/antigravity + .antigravity/ seeds on demand) ─
+# Per task: ACOS checks show no harnesses/ dir (SIS has core/orchestrator/harnesses/{claude,codex,gemini,opencode,antigravity,grok}/ + README/system/mcp/allowlist) and no .antigravity/ seeds yet.
+# Proposal (minimal reversible, via this stub only; prefer edit install over new files): if --platform=antigravity, print scaffold plan + minimal file contents for user to apply.
+# Would create: .antigravity/instructions.md (core+personal), .antigravity/swarm-96-minds-protocol.md (if swarm), .antigravity/mcp-config.json, .antigravity/allowlisted-tools.md, harnesses/antigravity/ (for ACOS-local if needed, like SIS).
+# For now delegates via multi-harness-orchestrator (agy junctions ~/.antigravity or ~/.gemini/config/plugins/acos-frankx/ per claude-code-config hooks). Matches SIS 2026-06-02 agy/grok enhancement. God 99, small rev.
+install_antigravity_propose() {
+    local mode="${1:-standard}"
+    local target="${2:-.}"
+    log "ACOS Antigravity/AGY parity scaffold (5-harness fleet + grok-personal + gstack/SIP to match SIS level)..."
+    local antidir="$target/.antigravity"
+    local harnessdir="$target/harnesses/antigravity"
+    mkdir -p "$antidir" "$harnessdir"
+
+    cat > "$antidir/instructions.md" << 'EOM'
+# Antigravity (AGY) instructions — ACOS parity
+Sovereign mandate + ACOS catalog + Frank DNA + core/personal filter (see SHARING.md + SIP §5).
+Core via .claude junctions; grok-personal .grok/agy only for the layer.
+Delegate from other harnesses via multi-harness-orchestrator.
+Built on SIP v1.1.1. gstack for QA. 2026-06-02 upgrade.
+EOM
+
+    cat > "$antidir/mcp-config.json" << 'EOM'
+{
+  "mcpServers": {
+    "starlight": { "command": "npx", "args": ["@modelcontextprotocol/server-filesystem", "$HOME/starlight"] },
+    "github": { "command": "npx", "args": ["@modelcontextprotocol/server-github"] }
+  }
+}
+EOM
+
+    cat > "$antidir/allowlisted-tools.md" << 'EOM'
+# AGY allowlisted tools (ACOS parity)
+- read, write (with excellence gate)
+- terminal (restricted)
+- mcp (github, fs-starlight)
+- subagents + excellence-review hooks
+Escalation: /starlight-board for substrate.
+EOM
+
+    cat > "$harnessdir/README.md" << 'EOM'
+# Antigravity harness (ACOS/SIS parity)
+Junctions for ACOS skills. Use with agy CLI.
+See ../grok for sibling pattern.
+EOM
+
+    cat > "$harnessdir/system-prompt.md" << 'EOM'
+You are running under ACOS via Antigravity. Embody Frank DNA. Use core catalog + personal-creative where tagged. Grok-personal stays .grok only.
+EOM
+
+    success "Minimal .antigravity/ + harnesses/antigravity/ scaffold created (reversible: rm -rf .antigravity harnesses/antigravity if undesired). Review files, commit or discard. Matches SIS level for agy/grok beyond SIS."
+    # Note: small reversible; proposal now scaffolded on demand.
+}
+
 # ── Generate Context File (for non-Claude platforms) ──────────────────────────
 generate_context_file() {
     local platform="$1"
@@ -237,6 +517,7 @@ generate_context_file() {
         cursor)    output_file="$target_dir/.cursorrules" ;;
         windsurf)  output_file="$target_dir/.windsurfrules" ;;
         gemini)    output_file="$target_dir/GEMINI.md" ;;
+        grok)      output_file="$target_dir/GROK.md" ;;  # + .grok/ seeds handled in install_grok
         generic)   output_file="$target_dir/CONTEXT.md" ;;
         *)         output_file="$target_dir/ACOS-CONTEXT.md" ;;
     esac
@@ -348,6 +629,12 @@ install_platform() {
             generate_context_file "gemini" "$target"
             success "Gemini: GEMINI.md will be read as project context"
             ;;
+        grok)
+            install_grok "$mode" "$target"
+            ;;
+        antigravity|agy)
+            install_antigravity_propose "$mode" "$target"
+            ;;
         generic)
             generate_context_file "generic" "$target"
             success "Generic: Point your AI agent at CONTEXT.md as system instructions"
@@ -418,6 +705,17 @@ show_summary() {
         echo -e "  ${YELLOW}Gemini Code Assist:${NC}"
         echo "    1. Copy GEMINI.md to your project root"
         echo "    2. Gemini reads it as project context"
+        echo ""
+    fi
+
+    if [[ "$platforms" == *"grok"* ]]; then
+        echo -e "  ${YELLOW}Grok Build (xAI CLI/TUI):${NC}"
+        echo "    1. cd to project with GROK.md + .grok/"
+        echo "    2. Run: grok"
+        echo "    3. /hooks-trust   (for lifecycle hooks)"
+        echo "    4. /skills harness-integration   or describe ACOS tasks"
+        echo "    5. Excellence: repo-mastery + gstack + santa/verification auto-suggested (via .grok seeds + .claude compat)"
+        echo "    Note: adapter/grok/index.ts + install.sh keep seeds in sync; 4 grok-personal only in .grok/"
         echo ""
     fi
 

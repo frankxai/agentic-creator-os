@@ -78,6 +78,17 @@ Instead of blanket word bans, apply these principles:
 
 On non-Claude platforms, just describe what you want. Skills activate from context.
 
+## Grok Build (xAI CLI/TUI) Full Support (via grok-harness-adapter)
+Grok Build (xAI CLI/TUI) receives native first-class integration (TUI + subagents + MCP + gen):
+- `./install.sh --platform=grok` generates `GROK.md` + project `.grok/skills/{harness-integration,excellence-review,repo-mastery,multi-harness-orchestrator}/SKILL.md` (exact 4 grok-personal excellence seeds per SHARING/SIP §5, .grok-only layer) + 2 excellence json hooks as `.grok/hooks/` ONLY + agents + state + AGENTS.md pointer. Core via .claude junctions (gstack/santa/verification/mcp-*/brand etc never leak). See .claude/skills/grok-harness/ too.
+- Grok Build scans GROK.md (or AGENTS.md/CLAUDE.md) + loads .grok/skills/ (prio) + ~/.grok/skills/ + ~/.claude/skills/ (compat).
+- Excellence gates built-in (God 99): always invoke repo-mastery (read CLAUDE/AGENTS/GROK first + deeper), gstack (qa/browse/design-review/benchmark), santa-method + verification-loop, plan-* reviews, cso. Show evidence.
+- Subagent swarms (/task explore/plan/general + persona + worktree + resume_from) + multi-harness-orchestrator delegation (emit exact claude/agy shell with full injected rules + DNA + partition + gates).
+- In Grok TUI: /hooks-trust, /skills grok-harness (or harness-integration/repo-mastery/excellence-review), natural language for full ACOS + gstack workflows.
+- Programmatic: adapters/grok/index.ts (isGrok, generateGrokContext, getGrokSeeds, installGrokPlatform, parseGrokCommand, mapToSkill, GROK_PATTERNS, processGrokInput). Also new .claude/commands/grok.md.
+
+See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for implementation. Use God 99 standards + SIP attest.
+
 ## Available Commands (35+)
 
 ### Creation (12)
@@ -218,6 +229,16 @@ Use `/browse` from gstack for all web browsing. Never use `mcp__claude-in-chrome
 - **Building software** → Use gstack sprint: `/office-hours` → `/review` → `/qa` → `/ship`
 - **Creating content** → Use ACOS: `/article-creator` → `/factory` → `/publish`
 - **Both** → Start with `/office-hours` for product thinking, build with gstack, publish with ACOS
+
+### GStack Venture Factory
+
+For business ideas, product bets, repo rescue, launch readiness, and "lead this end-to-end" work, run the ACOS workflow at `workflows/business/gstack-venture-factory.yaml`.
+
+Default operating chain:
+
+`/office-hours -> /plan-ceo-review -> /plan-eng-review or /plan-design-review or /plan-devex-review -> /spec -> /review -> /cso when trust-sensitive -> /qa or /qa-only when browser-facing -> /ship -> /retro -> /learn`
+
+Use it as the creator/business factory layer. SIS routes the workforce; ACOS applies it to ventures and products; GStack supplies the specialist bench. Do not vendor GStack into ACOS core.
 
 ## Decision Framework
 
