@@ -1,0 +1,143 @@
+name: gstack-venture-factory
+department: business
+version: 1.0.0
+purpose: Validate, plan, build, review, test, ship, and learn from a venture or product idea using the GStack specialist workforce.
+
+triggers:
+  - "validate this business idea"
+  - "turn this into a venture plan"
+  - "use gstack for this project"
+  - "run the venture board"
+  - "/gstack-venture-factory"
+
+agents:
+  - name: YC Office Hours
+    role: Reframes vague intent into pain, customer, wedge, and falsifier.
+    gstack_skill: /office-hours
+  - name: CEO Founder
+    role: Challenges scope and finds the 10-star product version.
+    gstack_skill: /plan-ceo-review
+  - name: Engineering Manager
+    role: Converts the plan into architecture, test strategy, and delivery sequencing.
+    gstack_skill: /plan-eng-review
+  - name: Design Partner
+    role: Raises product taste, UX, and visual quality before build.
+    gstack_skill: /plan-design-review
+  - name: DX Lead
+    role: Audits developer-facing onboarding, APIs, CLIs, docs, and time-to-hello-world.
+    gstack_skill: /plan-devex-review
+  - name: Staff Engineer
+    role: Finds production bugs that pass normal CI.
+    gstack_skill: /review
+  - name: Chief Security Officer
+    role: Runs OWASP and STRIDE trust review.
+    gstack_skill: /cso
+  - name: QA Lead
+    role: Uses a real browser to verify user-facing outcomes.
+    gstack_skill: /qa
+  - name: Release Engineer
+    role: Turns verified work into PR, deploy, docs, and canary loop.
+    gstack_skill: /ship
+
+phases:
+  - name: Venture truth
+    objective: Find the real customer pain and the smallest high-conviction wedge.
+    actions:
+      - Run /office-hours before writing code or pitch copy.
+      - State the target user, current pain, broken workaround, and urgent trigger.
+      - Define one falsifier that can kill or reshape the idea within 7 days.
+    output:
+      - venture-wedge.md
+      - falsifier.md
+
+  - name: Founder pressure test
+    objective: Improve scope, positioning, and business logic.
+    actions:
+      - Run /plan-ceo-review.
+      - Choose mode: expansion, selective expansion, hold scope, or reduction.
+      - Name the 10-star version and the first shippable wedge.
+    output:
+      - ceo-review.md
+      - first-wedge.md
+
+  - name: Buildability review
+    objective: Decide whether this is a product, content, service, platform, or internal automation.
+    actions:
+      - Run /plan-eng-review for technical/product builds.
+      - Run /plan-devex-review for APIs, CLIs, SDKs, docs, or platform onboarding.
+      - Run /plan-design-review for public surfaces, dashboards, apps, and brand experiences.
+      - Record the minimal architecture, test plan, and risks.
+    output:
+      - architecture-plan.md
+      - design-or-dx-plan.md
+      - test-plan.md
+
+  - name: Executable spec
+    objective: Turn the approved wedge into a precise implementation plan.
+    actions:
+      - Run /spec or /autoplan.
+      - Read repo rules before editing.
+      - Assign repo, owner, success metric, and stop condition.
+    output:
+      - executable-spec.md
+
+  - name: Build and review
+    objective: Build only after the plan has survived the specialist reviews.
+    actions:
+      - Implement in the correct repo.
+      - Run local type, lint, and targeted tests.
+      - Run /review for code risk.
+      - Run /cso for trust-sensitive surfaces.
+    output:
+      - diff-summary.md
+      - review-findings.md
+      - security-findings.md
+
+  - name: Browser and launch evidence
+    objective: Verify the output in the medium users will experience.
+    actions:
+      - Run /browse, /qa, /qa-only, /design-review, or /benchmark for browser-facing work.
+      - Capture URL, visible text, errors, and performance/design notes.
+      - Do not accept launch claims without browser evidence.
+    output:
+      - qa-evidence.md
+      - benchmark.md
+
+  - name: Ship and learn
+    objective: Close the loop so the system improves.
+    actions:
+      - Run /ship or create a release packet.
+      - Run /document-release for changed docs.
+      - Run /retro and /learn after meaningful progress.
+      - Feed decisions back to SIS/ACOS memory.
+    output:
+      - ship-packet.md
+      - retro.md
+      - learnings.md
+
+quality_gates:
+  - The idea has a target user, urgent pain, wedge, and falsifier.
+  - Every build has a repo, success metric, test plan, and stop condition.
+  - Browser-facing work has GStack browser evidence.
+  - Security-sensitive work has /cso or equivalent threat reasoning.
+  - Public-facing work has design and copy review.
+  - Shipped work updates docs or records why docs are unchanged.
+
+handoff:
+  sis_route: core/orchestrator/GSTACK-WORKFORCE.md
+  external_skill_root: ~/.agents/skills/gstack
+  canonical_install_policy: keep GStack external; absorb method and routing only.
+
+metrics:
+  - Time from idea to falsifier
+  - Time from approved wedge to first user-visible artifact
+  - Number of specialist gates passed
+  - Evidence artifacts produced
+  - Defects found before launch
+  - Learnings captured
+
+config:
+  default_chain: "/office-hours -> /plan-ceo-review -> /plan-eng-review or /plan-design-review or /plan-devex-review -> /spec -> /review -> /qa -> /ship -> /retro"
+  browser_required_for: ["website", "app", "dashboard", "landing page", "report", "public launch"]
+  security_required_for: ["auth", "payments", "personal data", "deployment", "secrets", "crypto", "multi-user"]
+

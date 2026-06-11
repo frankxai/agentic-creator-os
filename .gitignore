@@ -43,3 +43,7 @@ package-lock.json
 
 # Claude Flow runtime state
 .claude-flow/
+
+# Per-project generated Grok harness seeds (install.sh --platform=grok)
+.grok/
+
