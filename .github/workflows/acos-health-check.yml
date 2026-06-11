@@ -2,7 +2,6 @@ name: ACOS Health Check
 
 on:
   schedule:
-    - cron: '0 6 * * *'
   push:
     branches: [main]
     paths:
@@ -16,7 +15,7 @@ jobs:
   health-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Count assets
         id: count
