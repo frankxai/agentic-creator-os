@@ -58,12 +58,12 @@
     ]
   },
   "stats": {
-    "skills": 10,
-    "commands": 0,
-    "agents": 0,
-    "hooks": 0,
-    "verified": "2026-05-03",
-    "note": "Aspirational targets in docs/ACOS_V11_MASTER_PLAN.md (90+ skills / 65+ commands / 38 agents). Manifest reflects current shipped state, not aspiration."
+    "skills": 105,
+    "commands": 86,
+    "agents": 90,
+    "hooks": 15,
+    "verified": "2026-06-12",
+    "note": "ACOS V11 current shipped state."
   },
   "intelligence": {
     "version": "v11.0.0",

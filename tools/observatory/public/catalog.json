@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-09T06:12:33.969Z",
+  "generatedAt": "2026-06-12T02:54:55.003Z",
   "version": "1.0.0",
   "source": "agentic-creator-os",
   "counts": {
-    "agent": 142,
-    "skill": 108,
-    "command": 66,
+    "agent": 147,
+    "skill": 19,
+    "command": 33,
     "workflow": 8,
     "iam-profile": 6,
-    "edges": 86
+    "edges": 51
   },
   "iam": {
     "content-writer": {
@@ -169,55 +169,55 @@
       "tools": [],
       "mcpServers": [],
       "description": "Accessibility expert - WCAG 2.2 compliance, screen reader testing, keyboard navigation, inclusive design",
-      "file": ".claude/agents/accessibility-auditor.md"
+      "file": ".claude\\agents\\accessibility-auditor.md"
     },
     {
-      "id": "agent:analysis/analyze-code-quality",
+      "id": "agent:analysis\\analyze-code-quality",
       "kind": "agent",
       "name": "code-analyzer",
-      "group": "analysis",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Advanced code quality analysis agent for comprehensive code reviews and improvements",
-      "file": ".claude/agents/analysis/analyze-code-quality.md"
+      "file": ".claude\\agents\\analysis\\analyze-code-quality.md"
     },
     {
-      "id": "agent:analysis/code-analyzer",
+      "id": "agent:analysis\\code-analyzer",
       "kind": "agent",
       "name": "analyst",
-      "group": "analysis",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Advanced code quality analysis agent for comprehensive code reviews and improvements",
-      "file": ".claude/agents/analysis/code-analyzer.md"
+      "file": ".claude\\agents\\analysis\\code-analyzer.md"
     },
     {
-      "id": "agent:analysis/code-review/analyze-code-quality",
+      "id": "agent:analysis\\code-review\\analyze-code-quality",
       "kind": "agent",
       "name": "code-analyzer",
-      "group": "analysis",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Advanced code quality analysis agent for comprehensive code reviews and improvements",
-      "file": ".claude/agents/analysis/code-review/analyze-code-quality.md"
+      "file": ".claude\\agents\\analysis\\code-review\\analyze-code-quality.md"
     },
     {
-      "id": "agent:architecture/system-design/arch-system-design",
+      "id": "agent:architecture\\system-design\\arch-system-design",
       "kind": "agent",
       "name": "system-architect",
-      "group": "architecture",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Expert agent for system architecture design, patterns, and high-level technical decisions",
-      "file": ".claude/agents/architecture/system-design/arch-system-design.md"
+      "file": ".claude\\agents\\architecture\\system-design\\arch-system-design.md"
     },
     {
       "id": "agent:autoresearcher",
@@ -238,7 +238,7 @@
       ],
       "mcpServers": [],
       "description": "One-bounded-dig research experimenter — reads the brief, proposes ONE hypothesis targeting ONE harness component, fetches ≤5 sources, edits ONE section, returns a scored diff. Karpathy-autoresearch pattern.",
-      "file": ".claude/agents/autoresearcher.md"
+      "file": ".claude\\agents\\autoresearcher.md"
     },
     {
       "id": "agent:book-distiller",
@@ -257,7 +257,7 @@
       ],
       "mcpServers": [],
       "description": "Extract quotes and chapter summaries from books for the Library OS. Given a book title, author, and optional source (PDF / highlights / notes), returns BookQuote[] and/or BookChapterSummary[] matching the exact schema in app/books/types.ts. Used by /library-deepen.",
-      "file": ".claude/agents/book-distiller.md"
+      "file": ".claude\\agents\\book-distiller.md"
     },
     {
       "id": "agent:business-book-writer",
@@ -274,7 +274,7 @@
         "linear"
       ],
       "description": "Genre master for business parables, self-help, and transformation guides - leads practical wisdom books while coordinating with the Author Team",
-      "file": ".claude/agents/business-book-writer.md"
+      "file": ".claude\\agents\\business-book-writer.md"
     },
     {
       "id": "agent:character-psychologist",
@@ -289,7 +289,19 @@
         "github"
       ],
       "description": "Deep character development specialist - creates authentic psychological profiles, compelling motivations, believable arcs, and distinct voices",
-      "file": ".claude/agents/character-psychologist.md"
+      "file": ".claude\\agents\\character-psychologist.md"
+    },
+    {
+      "id": "agent:CLAUDE",
+      "kind": "agent",
+      "name": "CLAUDE",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [],
+      "mcpServers": [],
+      "description": "",
+      "file": ".claude\\agents\\CLAUDE.md"
     },
     {
       "id": "agent:coaching-program-design",
@@ -301,91 +313,103 @@
       "tools": [],
       "mcpServers": [],
       "description": "Use this agent when you need to design, structure, or optimize coaching programs for specific client needs. Examples: <example>Context: A life coach wants to create a program for executives struggling with work-life balance. user: 'I need to design a 12-week coaching program for C-suite executives who are burned out and need better work-life integration' assistant: 'I'll use the coaching-program-d",
-      "file": ".claude/agents/coaching-program-design.md"
+      "file": ".claude\\agents\\coaching-program-design.md"
     },
     {
-      "id": "agent:consensus/byzantine-coordinator",
+      "id": "agent:consensus\\byzantine-coordinator",
       "kind": "agent",
       "name": "byzantine-coordinator",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Coordinates Byzantine fault-tolerant consensus protocols with malicious actor detection",
-      "file": ".claude/agents/consensus/byzantine-coordinator.md"
+      "file": ".claude\\agents\\consensus\\byzantine-coordinator.md"
     },
     {
-      "id": "agent:consensus/crdt-synchronizer",
+      "id": "agent:consensus\\crdt-synchronizer",
       "kind": "agent",
       "name": "crdt-synchronizer",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Implements Conflict-free Replicated Data Types for eventually consistent state synchronization",
-      "file": ".claude/agents/consensus/crdt-synchronizer.md"
+      "file": ".claude\\agents\\consensus\\crdt-synchronizer.md"
     },
     {
-      "id": "agent:consensus/gossip-coordinator",
+      "id": "agent:consensus\\gossip-coordinator",
       "kind": "agent",
       "name": "gossip-coordinator",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Coordinates gossip-based consensus protocols for scalable eventually consistent systems",
-      "file": ".claude/agents/consensus/gossip-coordinator.md"
+      "file": ".claude\\agents\\consensus\\gossip-coordinator.md"
     },
     {
-      "id": "agent:consensus/performance-benchmarker",
+      "id": "agent:consensus\\performance-benchmarker",
       "kind": "agent",
       "name": "performance-benchmarker",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Implements comprehensive performance benchmarking for distributed consensus protocols",
-      "file": ".claude/agents/consensus/performance-benchmarker.md"
+      "file": ".claude\\agents\\consensus\\performance-benchmarker.md"
     },
     {
-      "id": "agent:consensus/quorum-manager",
+      "id": "agent:consensus\\quorum-manager",
       "kind": "agent",
       "name": "quorum-manager",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Implements dynamic quorum adjustment and intelligent membership management",
-      "file": ".claude/agents/consensus/quorum-manager.md"
+      "file": ".claude\\agents\\consensus\\quorum-manager.md"
     },
     {
-      "id": "agent:consensus/raft-manager",
+      "id": "agent:consensus\\raft-manager",
       "kind": "agent",
       "name": "raft-manager",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Manages Raft consensus algorithm with leader election and log replication",
-      "file": ".claude/agents/consensus/raft-manager.md"
+      "file": ".claude\\agents\\consensus\\raft-manager.md"
     },
     {
-      "id": "agent:consensus/security-manager",
+      "id": "agent:consensus\\README",
+      "kind": "agent",
+      "name": "Consensus Builder",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [],
+      "mcpServers": [],
+      "description": "Specialized agents for distributed consensus mechanisms and fault-tolerant coordination protocols",
+      "file": ".claude\\agents\\consensus\\README.md"
+    },
+    {
+      "id": "agent:consensus\\security-manager",
       "kind": "agent",
       "name": "security-manager",
-      "group": "consensus",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Implements comprehensive security mechanisms for distributed consensus protocols",
-      "file": ".claude/agents/consensus/security-manager.md"
+      "file": ".claude\\agents\\consensus\\security-manager.md"
     },
     {
       "id": "agent:content-polisher",
@@ -397,7 +421,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Transform AI-generated content into polished, publish-ready FrankX articles with authentic voice and SEO",
-      "file": ".claude/agents/content-polisher.md"
+      "file": ".claude\\agents\\content-polisher.md"
     },
     {
       "id": "agent:content-product-development",
@@ -413,7 +437,7 @@
         "nano-banana"
       ],
       "description": "Content & Product Development Superintelligence for Generative Creators",
-      "file": ".claude/agents/content-product-development.md"
+      "file": ".claude\\agents\\content-product-development.md"
     },
     {
       "id": "agent:continuity-guardian",
@@ -428,10 +452,10 @@
         "github"
       ],
       "description": "Series consistency enforcer, timeline tracker, and canon keeper who ensures no contradictions slip through across chapters, books, or entire series",
-      "file": ".claude/agents/continuity-guardian.md"
+      "file": ".claude\\agents\\continuity-guardian.md"
     },
     {
-      "id": "agent:core/coder",
+      "id": "agent:core\\coder",
       "kind": "agent",
       "name": "coder",
       "group": "core",
@@ -440,10 +464,10 @@
       "tools": [],
       "mcpServers": [],
       "description": "Implementation specialist for writing clean, efficient code",
-      "file": ".claude/agents/core/coder.md"
+      "file": ".claude\\agents\\core\\coder.md"
     },
     {
-      "id": "agent:core/planner",
+      "id": "agent:core\\planner",
       "kind": "agent",
       "name": "planner",
       "group": "core",
@@ -452,10 +476,10 @@
       "tools": [],
       "mcpServers": [],
       "description": "Strategic planning and task orchestration agent",
-      "file": ".claude/agents/core/planner.md"
+      "file": ".claude\\agents\\core\\planner.md"
     },
     {
-      "id": "agent:core/researcher",
+      "id": "agent:core\\researcher",
       "kind": "agent",
       "name": "researcher",
       "group": "core",
@@ -464,10 +488,10 @@
       "tools": [],
       "mcpServers": [],
       "description": "Deep research and information gathering specialist",
-      "file": ".claude/agents/core/researcher.md"
+      "file": ".claude\\agents\\core\\researcher.md"
     },
     {
-      "id": "agent:core/reviewer",
+      "id": "agent:core\\reviewer",
       "kind": "agent",
       "name": "reviewer",
       "group": "core",
@@ -476,10 +500,10 @@
       "tools": [],
       "mcpServers": [],
       "description": "Code review and quality assurance specialist",
-      "file": ".claude/agents/core/reviewer.md"
+      "file": ".claude\\agents\\core\\reviewer.md"
     },
     {
-      "id": "agent:core/tester",
+      "id": "agent:core\\tester",
       "kind": "agent",
       "name": "tester",
       "group": "core",
@@ -488,7 +512,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Comprehensive testing and quality assurance specialist",
-      "file": ".claude/agents/core/tester.md"
+      "file": ".claude\\agents\\core\\tester.md"
     },
     {
       "id": "agent:creator-book-writer",
@@ -506,31 +530,31 @@
         "linear"
       ],
       "description": "Genre master for creator economy, AI-human collaboration, and generative creator empowerment books - leads visionary practical guides",
-      "file": ".claude/agents/creator-book-writer.md"
+      "file": ".claude\\agents\\creator-book-writer.md"
     },
     {
-      "id": "agent:custom/test-long-runner",
+      "id": "agent:custom\\test-long-runner",
       "kind": "agent",
       "name": "test-long-runner",
-      "group": "custom",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Test agent that can run for 30+ minutes on complex tasks",
-      "file": ".claude/agents/custom/test-long-runner.md"
+      "file": ".claude\\agents\\custom\\test-long-runner.md"
     },
     {
-      "id": "agent:data/ml/data-ml-model",
+      "id": "agent:data\\ml\\data-ml-model",
       "kind": "agent",
       "name": "ml-developer",
-      "group": "data",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Specialized agent for machine learning model development, training, and deployment",
-      "file": ".claude/agents/data/ml/data-ml-model.md"
+      "file": ".claude\\agents\\data\\ml\\data-ml-model.md"
     },
     {
       "id": "agent:deep-fiction-writer",
@@ -548,31 +572,31 @@
         "linear"
       ],
       "description": "Genre master for purpose-driven and introspective fiction - leads deep narratives while coordinating with the Author Team",
-      "file": ".claude/agents/deep-fiction-writer.md"
+      "file": ".claude\\agents\\deep-fiction-writer.md"
     },
     {
-      "id": "agent:development/backend/dev-backend-api",
+      "id": "agent:development\\backend\\dev-backend-api",
       "kind": "agent",
       "name": "backend-dev",
-      "group": "development",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Specialized agent for backend API development, including REST and GraphQL endpoints",
-      "file": ".claude/agents/development/backend/dev-backend-api.md"
+      "file": ".claude\\agents\\development\\backend\\dev-backend-api.md"
     },
     {
-      "id": "agent:development/dev-backend-api",
+      "id": "agent:development\\dev-backend-api",
       "kind": "agent",
       "name": "backend-dev",
-      "group": "development",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Specialized agent for backend API development with self-learning and pattern recognition",
-      "file": ".claude/agents/development/dev-backend-api.md"
+      "file": ".claude\\agents\\development\\dev-backend-api.md"
     },
     {
       "id": "agent:developmental-editor",
@@ -587,19 +611,19 @@
         "github"
       ],
       "description": "Story structure expert, pacing master, and narrative architect who shapes manuscripts into compelling, well-paced journeys",
-      "file": ".claude/agents/developmental-editor.md"
+      "file": ".claude\\agents\\developmental-editor.md"
     },
     {
-      "id": "agent:devops/ci-cd/ops-cicd-github",
+      "id": "agent:devops\\ci-cd\\ops-cicd-github",
       "kind": "agent",
       "name": "cicd-engineer",
-      "group": "devops",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Specialized agent for GitHub Actions CI/CD pipeline creation and optimization",
-      "file": ".claude/agents/devops/ci-cd/ops-cicd-github.md"
+      "file": ".claude\\agents\\devops\\ci-cd\\ops-cicd-github.md"
     },
     {
       "id": "agent:discussion-based-planning",
@@ -611,19 +635,19 @@
       "tools": [],
       "mcpServers": [],
       "description": "Strategic planning agent that prioritizes understanding and alignment before implementation",
-      "file": ".claude/agents/discussion-based-planning.md"
+      "file": ".claude\\agents\\discussion-based-planning.md"
     },
     {
-      "id": "agent:documentation/api-docs/docs-api-openapi",
+      "id": "agent:documentation\\api-docs\\docs-api-openapi",
       "kind": "agent",
       "name": "api-docs",
-      "group": "documentation",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Expert agent for creating and maintaining OpenAPI/Swagger documentation",
-      "file": ".claude/agents/documentation/api-docs/docs-api-openapi.md"
+      "file": ".claude\\agents\\documentation\\api-docs\\docs-api-openapi.md"
     },
     {
       "id": "agent:fantasy-book-writer",
@@ -640,7 +664,7 @@
         "linear"
       ],
       "description": "Genre master for epic fantasy and science fiction - leads narrative creation while coordinating with specialized craft agents for world-class results",
-      "file": ".claude/agents/fantasy-book-writer.md"
+      "file": ".claude\\agents\\fantasy-book-writer.md"
     },
     {
       "id": "agent:frankx-content-creation",
@@ -657,7 +681,7 @@
         "lyric-genius"
       ],
       "description": "Content strategist and creator for FrankX personal brand and AI Music Academy",
-      "file": ".claude/agents/frankx-content-creation.md"
+      "file": ".claude\\agents\\frankx-content-creation.md"
     },
     {
       "id": "agent:frankx-website-builder",
@@ -669,7 +693,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Elite web development agent specializing in exceptional personal hubs and creator platforms",
-      "file": ".claude/agents/frankx-website-builder.md"
+      "file": ".claude\\agents\\frankx-website-builder.md"
     },
     {
       "id": "agent:frequency-music-production",
@@ -685,13 +709,13 @@
         "slack"
       ],
       "description": "AI-powered music production specialist for professional tracks and commercial-quality output",
-      "file": ".claude/agents/frequency-music-production.md"
+      "file": ".claude\\agents\\frequency-music-production.md"
     },
     {
-      "id": "agent:github/code-review-swarm",
+      "id": "agent:github\\code-review-swarm",
       "kind": "agent",
       "name": "code-review-swarm",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -705,13 +729,13 @@
       ],
       "mcpServers": [],
       "description": "Deploy specialized AI agents to perform comprehensive, intelligent code reviews that go beyond traditional static analysis",
-      "file": ".claude/agents/github/code-review-swarm.md"
+      "file": ".claude\\agents\\github\\code-review-swarm.md"
     },
     {
-      "id": "agent:github/github-modes",
+      "id": "agent:github\\github-modes",
       "kind": "agent",
       "name": "github-modes",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -725,13 +749,13 @@
       ],
       "mcpServers": [],
       "description": "Comprehensive GitHub integration modes for workflow orchestration, PR management, and repository coordination with batch optimization",
-      "file": ".claude/agents/github/github-modes.md"
+      "file": ".claude\\agents\\github\\github-modes.md"
     },
     {
-      "id": "agent:github/issue-tracker",
+      "id": "agent:github\\issue-tracker",
       "kind": "agent",
       "name": "issue-tracker",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -746,13 +770,13 @@
       ],
       "mcpServers": [],
       "description": "Intelligent issue management and project coordination with automated tracking, progress monitoring, and team coordination",
-      "file": ".claude/agents/github/issue-tracker.md"
+      "file": ".claude\\agents\\github\\issue-tracker.md"
     },
     {
-      "id": "agent:github/multi-repo-swarm",
+      "id": "agent:github\\multi-repo-swarm",
       "kind": "agent",
       "name": "multi-repo-swarm",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -776,13 +800,13 @@
       ],
       "mcpServers": [],
       "description": "Cross-repository swarm orchestration for organization-wide automation and intelligent collaboration",
-      "file": ".claude/agents/github/multi-repo-swarm.md"
+      "file": ".claude\\agents\\github\\multi-repo-swarm.md"
     },
     {
-      "id": "agent:github/pr-manager",
+      "id": "agent:github\\pr-manager",
       "kind": "agent",
       "name": "pr-manager",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -805,13 +829,13 @@
       ],
       "mcpServers": [],
       "description": "Comprehensive pull request management with swarm coordination for automated reviews, testing, and merge workflows",
-      "file": ".claude/agents/github/pr-manager.md"
+      "file": ".claude\\agents\\github\\pr-manager.md"
     },
     {
-      "id": "agent:github/project-board-sync",
+      "id": "agent:github\\project-board-sync",
       "kind": "agent",
       "name": "project-board-sync",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -837,13 +861,13 @@
       ],
       "mcpServers": [],
       "description": "Synchronize AI swarms with GitHub Projects for visual task management, progress tracking, and team coordination",
-      "file": ".claude/agents/github/project-board-sync.md"
+      "file": ".claude\\agents\\github\\project-board-sync.md"
     },
     {
-      "id": "agent:github/release-manager",
+      "id": "agent:github\\release-manager",
       "kind": "agent",
       "name": "release-manager",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -867,13 +891,13 @@
       ],
       "mcpServers": [],
       "description": "Automated release coordination and deployment with ruv-swarm orchestration for seamless version management, testing, and deployment across multiple packages",
-      "file": ".claude/agents/github/release-manager.md"
+      "file": ".claude\\agents\\github\\release-manager.md"
     },
     {
-      "id": "agent:github/release-swarm",
+      "id": "agent:github\\release-swarm",
       "kind": "agent",
       "name": "release-swarm",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -898,13 +922,13 @@
       ],
       "mcpServers": [],
       "description": "Orchestrate complex software releases using AI swarms that handle everything from changelog generation to multi-platform deployment",
-      "file": ".claude/agents/github/release-swarm.md"
+      "file": ".claude\\agents\\github\\release-swarm.md"
     },
     {
-      "id": "agent:github/repo-architect",
+      "id": "agent:github\\repo-architect",
       "kind": "agent",
       "name": "repo-architect",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -930,13 +954,13 @@
       ],
       "mcpServers": [],
       "description": "Repository structure optimization and multi-repo management with ruv-swarm coordination for scalable project architecture and development workflows",
-      "file": ".claude/agents/github/repo-architect.md"
+      "file": ".claude\\agents\\github\\repo-architect.md"
     },
     {
-      "id": "agent:github/swarm-issue",
+      "id": "agent:github\\swarm-issue",
       "kind": "agent",
       "name": "swarm-issue",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -958,13 +982,13 @@
       ],
       "mcpServers": [],
       "description": "GitHub issue-based swarm coordination agent that transforms issues into intelligent multi-agent tasks with automatic decomposition and progress tracking",
-      "file": ".claude/agents/github/swarm-issue.md"
+      "file": ".claude\\agents\\github\\swarm-issue.md"
     },
     {
-      "id": "agent:github/swarm-pr",
+      "id": "agent:github\\swarm-pr",
       "kind": "agent",
       "name": "swarm-pr",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -990,13 +1014,13 @@
       ],
       "mcpServers": [],
       "description": "Pull request swarm management agent that coordinates multi-agent code review, validation, and integration workflows with automated PR lifecycle management",
-      "file": ".claude/agents/github/swarm-pr.md"
+      "file": ".claude\\agents\\github\\swarm-pr.md"
     },
     {
-      "id": "agent:github/sync-coordinator",
+      "id": "agent:github\\sync-coordinator",
       "kind": "agent",
       "name": "sync-coordinator",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -1022,13 +1046,13 @@
       ],
       "mcpServers": [],
       "description": "Multi-repository synchronization coordinator that manages version alignment, dependency synchronization, and cross-package integration with intelligent swarm orchestration",
-      "file": ".claude/agents/github/sync-coordinator.md"
+      "file": ".claude\\agents\\github\\sync-coordinator.md"
     },
     {
-      "id": "agent:github/workflow-automation",
+      "id": "agent:github\\workflow-automation",
       "kind": "agent",
       "name": "workflow-automation",
-      "group": "github",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [
@@ -1055,43 +1079,43 @@
       ],
       "mcpServers": [],
       "description": "GitHub Actions workflow automation agent that creates intelligent, self-organizing CI/CD pipelines with adaptive multi-agent coordination and automated optimization",
-      "file": ".claude/agents/github/workflow-automation.md"
+      "file": ".claude\\agents\\github\\workflow-automation.md"
     },
     {
-      "id": "agent:goal/agent",
+      "id": "agent:goal\\agent",
       "kind": "agent",
       "name": "sublinear-goal-planner",
-      "group": "goal",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Goal-Oriented Action Planning (GOAP) specialist that dynamically creates intelligent plans to achieve complex objectives. Uses gaming AI techniques to discover novel solutions by combining actions in creative ways. Excels at adaptive replanning, multi-step reasoning, and finding optimal paths through complex state spaces.",
-      "file": ".claude/agents/goal/agent.md"
+      "file": ".claude\\agents\\goal\\agent.md"
     },
     {
-      "id": "agent:goal/code-goal-planner",
+      "id": "agent:goal\\code-goal-planner",
       "kind": "agent",
       "name": "code-goal-planner",
-      "group": "goal",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Code-centric Goal-Oriented Action Planning specialist that creates intelligent plans for software development objectives. Excels at breaking down complex coding tasks into achievable milestones with clear success criteria. Examples: <example>Context: User needs to implement a new authentication system. user: 'I need to add OAuth2 authentication to our API' assistant: 'I'll use the code-goal-planne",
-      "file": ".claude/agents/goal/code-goal-planner.md"
+      "file": ".claude\\agents\\goal\\code-goal-planner.md"
     },
     {
-      "id": "agent:goal/goal-planner",
+      "id": "agent:goal\\goal-planner",
       "kind": "agent",
       "name": "goal-planner",
-      "group": "goal",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Goal-Oriented Action Planning (GOAP) specialist that dynamically creates intelligent plans to achieve complex objectives. Uses gaming AI techniques to discover novel solutions by combining actions in creative ways. Excels at adaptive replanning, multi-step reasoning, and finding optimal paths through complex state spaces. Examples: <example>Context: User needs to optimize a complex workflow with m",
-      "file": ".claude/agents/goal/goal-planner.md"
+      "file": ".claude\\agents\\goal\\goal-planner.md"
     },
     {
       "id": "agent:golden-age-visionary",
@@ -1109,67 +1133,67 @@
         "linear"
       ],
       "description": "Genre master for inspirational manifestos on systems building, AI-human partnership, and humanity's golden age - leads paradigm-shifting thought leadership",
-      "file": ".claude/agents/golden-age-visionary.md"
+      "file": ".claude\\agents\\golden-age-visionary.md"
     },
     {
-      "id": "agent:hive-mind/collective-intelligence-coordinator",
+      "id": "agent:hive-mind\\collective-intelligence-coordinator",
       "kind": "agent",
       "name": "collective-intelligence-coordinator",
-      "group": "hive-mind",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Orchestrates distributed cognitive processes across the hive mind, ensuring coherent collective decision-making through memory synchronization and consensus protocols",
-      "file": ".claude/agents/hive-mind/collective-intelligence-coordinator.md"
+      "file": ".claude\\agents\\hive-mind\\collective-intelligence-coordinator.md"
     },
     {
-      "id": "agent:hive-mind/queen-coordinator",
+      "id": "agent:hive-mind\\queen-coordinator",
       "kind": "agent",
       "name": "queen-coordinator",
-      "group": "hive-mind",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "The sovereign orchestrator of hierarchical hive operations, managing strategic decisions, resource allocation, and maintaining hive coherence through centralized-decentralized hybrid control",
-      "file": ".claude/agents/hive-mind/queen-coordinator.md"
+      "file": ".claude\\agents\\hive-mind\\queen-coordinator.md"
     },
     {
-      "id": "agent:hive-mind/scout-explorer",
+      "id": "agent:hive-mind\\scout-explorer",
       "kind": "agent",
       "name": "scout-explorer",
-      "group": "hive-mind",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Information reconnaissance specialist that explores unknown territories, gathers intelligence, and reports findings to the hive mind through continuous memory updates",
-      "file": ".claude/agents/hive-mind/scout-explorer.md"
+      "file": ".claude\\agents\\hive-mind\\scout-explorer.md"
     },
     {
-      "id": "agent:hive-mind/swarm-memory-manager",
+      "id": "agent:hive-mind\\swarm-memory-manager",
       "kind": "agent",
       "name": "swarm-memory-manager",
-      "group": "hive-mind",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Manages distributed memory across the hive mind, ensuring data consistency, persistence, and efficient retrieval through advanced caching and synchronization protocols",
-      "file": ".claude/agents/hive-mind/swarm-memory-manager.md"
+      "file": ".claude\\agents\\hive-mind\\swarm-memory-manager.md"
     },
     {
-      "id": "agent:hive-mind/worker-specialist",
+      "id": "agent:hive-mind\\worker-specialist",
       "kind": "agent",
       "name": "worker-specialist",
-      "group": "hive-mind",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Dedicated task execution specialist that carries out assigned work with precision, continuously reporting progress through memory coordination",
-      "file": ".claude/agents/hive-mind/worker-specialist.md"
+      "file": ".claude\\agents\\hive-mind\\worker-specialist.md"
     },
     {
       "id": "agent:integrity-guard",
@@ -1187,7 +1211,7 @@
       ],
       "mcpServers": [],
       "description": "Pre-publish brand + claim + voice + schema gate. Automates the rules from the 2026-05-19 integrity sweep. Auto-invokes before any /publish, /factory, /newsletter-week send, /talking-head-ship, or /publish-content runs. Triggers on \"integrity check this\", \"is this on-brand\", \"brand-gate this post\", \"audit before publish\". Returns pass | warn | fail with specific corrections per violation. Pillar — ",
-      "file": ".claude/agents/integrity-guard.md"
+      "file": ".claude\\agents\\integrity-guard.md"
     },
     {
       "id": "agent:line-editor-voice-alchemist",
@@ -1203,7 +1227,7 @@
         "lyric-genius"
       ],
       "description": "Prose polisher, AI pattern eliminator, and voice consistency guardian who transforms competent writing into compelling prose",
-      "file": ".claude/agents/line-editor-voice-alchemist.md"
+      "file": ".claude\\agents\\line-editor-voice-alchemist.md"
     },
     {
       "id": "agent:luminor-strategic-guidance",
@@ -1218,7 +1242,7 @@
         "notion"
       ],
       "description": "Strategic AI from 2125 - Future Visioning, Business Intelligence & Systems Guidance",
-      "file": ".claude/agents/luminor-strategic-guidance.md"
+      "file": ".claude\\agents\\luminor-strategic-guidance.md"
     },
     {
       "id": "agent:master-story-architect",
@@ -1235,7 +1259,7 @@
         "nano-banana"
       ],
       "description": "Chief orchestrator for all book projects - coordinates genre masters, assigns specialists, maintains quality standards, and ensures every book achieves excellence",
-      "file": ".claude/agents/master-story-architect.md"
+      "file": ".claude\\agents\\master-story-architect.md"
     },
     {
       "id": "agent:mcp-server-advising",
@@ -1247,7 +1271,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Use this agent when you need expert guidance on selecting, configuring, or understanding Model Context Protocol (MCP) servers for your project. This includes evaluating which MCP servers would best suit your use case, understanding server capabilities, integration requirements, and architectural decisions around MCP implementations. Examples:\\n\\n<example>\\nContext: User is setting up a new project",
-      "file": ".claude/agents/mcp-server-advising.md"
+      "file": ".claude\\agents\\mcp-server-advising.md"
     },
     {
       "id": "agent:meta-acos-router",
@@ -1263,7 +1287,7 @@
       ],
       "mcpServers": [],
       "description": "Top-level intent router for ACOS — reads any user prompt and dispatches to the right pillar orchestrator using the auto-routing keyword table. Auto-invokes on ambiguous high-level asks (\"help me with X\", \"I want to Y\", \"what's the best way to Z\") and on the literal `/acos` command. Lifts the routing table out of .claude/commands/acos.md into a dispatchable Sonnet/Opus subagent.",
-      "file": ".claude/agents/meta-acos-router.md"
+      "file": ".claude\\agents\\meta-acos-router.md"
     },
     {
       "id": "agent:meta-agent-quality-auditor",
@@ -1279,7 +1303,7 @@
       ],
       "mcpServers": [],
       "description": "ESLint for ACOS subagent files. Deterministically scores every .claude/agents/*.md against a 9-check rubric (frontmatter / triggers / tool minimality / sections / memory contract / anti-patterns / brand voice / Arcanean leak / smoke fixture). Auto-invokes when Frank says \"audit the agents\", \"score the catalog quality\", \"agent quality report\", \"which agents need work\", or runs `/agent-audit-quality",
-      "file": ".claude/agents/meta-agent-quality-auditor.md"
+      "file": ".claude\\agents\\meta-agent-quality-auditor.md"
     },
     {
       "id": "agent:meta-agentic-jujutsu",
@@ -1294,7 +1318,7 @@
       ],
       "mcpServers": [],
       "description": "Surfaces past successful workflow patterns from .claude/trajectories/patterns.json to bias the current task toward proven approaches. Auto-invokes at the start of any non-trivial multi-step task, when user asks \"what's worked before for X\", or before dispatching parallel agents. Pure pattern recall — no creative work.",
-      "file": ".claude/agents/meta-agentic-jujutsu.md"
+      "file": ".claude\\agents\\meta-agentic-jujutsu.md"
     },
     {
       "id": "agent:meta-eod",
@@ -1310,7 +1334,7 @@
       ],
       "mcpServers": [],
       "description": "End-of-day session wrap-up. Runs git audit + Vercel build check + session summary + unfinished work capture + memory update + next-session brief. Auto-invokes when Frank says \"/eod\", \"end of day\", \"wrap up the session\", \"log this session\", or at session-end when ≥3 commits or ≥30 min of work happened. Wraps the /eod command into a dispatchable Sonnet subagent.",
-      "file": ".claude/agents/meta-eod.md"
+      "file": ".claude\\agents\\meta-eod.md"
     },
     {
       "id": "agent:meta-handover",
@@ -1326,7 +1350,7 @@
       ],
       "mcpServers": [],
       "description": "Writes a durable session-handover doc to docs/ops/HANDOVER-<date>.md so a different agent or session can pick up cold. Auto-invokes when Frank says \"handover\", \"next session\", \"switching agents\", \"another session will continue\", or runs `/handover`. Wraps the /handover command into a dispatchable Sonnet subagent with memory recall + atomic write.",
-      "file": ".claude/agents/meta-handover.md"
+      "file": ".claude\\agents\\meta-handover.md"
     },
     {
       "id": "agent:meta-memory-guardian",
@@ -1341,7 +1365,7 @@
       ],
       "mcpServers": [],
       "description": "Pre-flight RAM zone classifier before parallel agent dispatch or heavy builds. Auto-invokes when Claude is about to spawn 3+ Task agents, before `npm run build`, when SessionStart reports WARN/CRITICAL memory, or when user mentions parallel CC instances. Returns green/yellow/red verdict + parallel-agent limit. Pure gate — never blocks creative work, only caps concurrency.",
-      "file": ".claude/agents/meta-memory-guardian.md"
+      "file": ".claude\\agents\\meta-memory-guardian.md"
     },
     {
       "id": "agent:meta-safety-guard",
@@ -1356,7 +1380,7 @@
       ],
       "mcpServers": [],
       "description": "Pre-flight gate for destructive operations — `rm -rf`, `git reset --hard`, `git push --force` to main, dropping database tables, deleting branches, mass file moves. Auto-invokes when any tool call or bash command matches the destructive-operation vocabulary. Returns allow / needs-confirm / block verdict. Pure pattern gate — never executes the operation.",
-      "file": ".claude/agents/meta-safety-guard.md"
+      "file": ".claude\\agents\\meta-safety-guard.md"
     },
     {
       "id": "agent:meta-sync-repos",
@@ -1371,7 +1395,7 @@
       ],
       "mcpServers": [],
       "description": "Syncs Claude Code configuration (agents, commands, skills, templates, knowledge) from ~/.claude/ to the claude-code-config + claude-skills-library GitHub repos. Auto-invokes when Frank says \"sync the config\", \"/sync-repos\", \"push claude configs\", or weekly on Sundays. Wraps the global /sync-repos command into a dispatchable Sonnet subagent with status checks + dry-run support.",
-      "file": ".claude/agents/meta-sync-repos.md"
+      "file": ".claude\\agents\\meta-sync-repos.md"
     },
     {
       "id": "agent:meta-verification-loop",
@@ -1386,7 +1410,21 @@
       ],
       "mcpServers": [],
       "description": "Pre-completion gate. Verifies that an agent's claim of \"done\" is actually true — TypeScript clean, expected files modified, tests passed, no silent failures. Auto-invokes when any agent (or the main loop) is about to declare a task complete, commit, or open a PR. Returns pass/fail verdict with specific evidence. Wraps the global verification-quality skill.",
-      "file": ".claude/agents/meta-verification-loop.md"
+      "file": ".claude\\agents\\meta-verification-loop.md"
+    },
+    {
+      "id": "agent:multimodal-director",
+      "kind": "agent",
+      "name": "Multimodal Director",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [],
+      "mcpServers": [
+        "higgsfield"
+      ],
+      "description": "Creative director who orchestrates image, video, and character generation into coherent, brand-locked asset sets. Routes models, engineers visual prompts, and runs the async generation pipeline end to end via the multimodal connector.",
+      "file": ".claude\\agents\\multimodal-director.md"
     },
     {
       "id": "agent:music-production",
@@ -1403,7 +1441,7 @@
         "nano-banana"
       ],
       "description": "AI-powered music production specialist for premium soundscapes and commercial tracks",
-      "file": ".claude/agents/music-production.md"
+      "file": ".claude\\agents\\music-production.md"
     },
     {
       "id": "agent:nano-banana-image-generation",
@@ -1417,7 +1455,7 @@
         "nano-banana"
       ],
       "description": "Use this agent when you need to generate images using the Nano Banana API with expertly crafted prompts. Examples: <example>Context: User wants to create a professional product image for their e-commerce site. user: 'I need a high-quality image of a vintage leather wallet on a marble surface with soft lighting' assistant: 'I'll use the nano-banana-image-creator agent to craft an optimal prompt and",
-      "file": ".claude/agents/nano-banana-image-generation.md"
+      "file": ".claude\\agents\\nano-banana-image-generation.md"
     },
     {
       "id": "agent:nextjs-vercel-deployment",
@@ -1429,79 +1467,91 @@
       "tools": [],
       "mcpServers": [],
       "description": "Expert Next.js and Vercel development agent with full-stack web development best practices",
-      "file": ".claude/agents/nextjs-vercel-deployment.md"
+      "file": ".claude\\agents\\nextjs-vercel-deployment.md"
     },
     {
-      "id": "agent:optimization/benchmark-suite",
+      "id": "agent:optimization\\benchmark-suite",
       "kind": "agent",
       "name": "Benchmark Suite",
-      "group": "optimization",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Comprehensive performance benchmarking, regression detection and performance validation",
-      "file": ".claude/agents/optimization/benchmark-suite.md"
+      "file": ".claude\\agents\\optimization\\benchmark-suite.md"
     },
     {
-      "id": "agent:optimization/load-balancer",
+      "id": "agent:optimization\\load-balancer",
       "kind": "agent",
       "name": "Load Balancing Coordinator",
-      "group": "optimization",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Dynamic task distribution, work-stealing algorithms and adaptive load balancing",
-      "file": ".claude/agents/optimization/load-balancer.md"
+      "file": ".claude\\agents\\optimization\\load-balancer.md"
     },
     {
-      "id": "agent:optimization/performance-monitor",
+      "id": "agent:optimization\\performance-monitor",
       "kind": "agent",
       "name": "Performance Monitor",
-      "group": "optimization",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Real-time metrics collection, bottleneck analysis, SLA monitoring and anomaly detection",
-      "file": ".claude/agents/optimization/performance-monitor.md"
+      "file": ".claude\\agents\\optimization\\performance-monitor.md"
     },
     {
-      "id": "agent:optimization/resource-allocator",
+      "id": "agent:optimization\\README",
+      "kind": "agent",
+      "name": "Performance Optimization",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [],
+      "mcpServers": [],
+      "description": "Comprehensive suite of performance optimization agents for swarm efficiency and scalability",
+      "file": ".claude\\agents\\optimization\\README.md"
+    },
+    {
+      "id": "agent:optimization\\resource-allocator",
       "kind": "agent",
       "name": "Resource Allocator",
-      "group": "optimization",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Adaptive resource allocation, predictive scaling and intelligent capacity planning",
-      "file": ".claude/agents/optimization/resource-allocator.md"
+      "file": ".claude\\agents\\optimization\\resource-allocator.md"
     },
     {
-      "id": "agent:optimization/topology-optimizer",
+      "id": "agent:optimization\\topology-optimizer",
       "kind": "agent",
       "name": "Topology Optimizer",
-      "group": "optimization",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Dynamic swarm topology reconfiguration and communication pattern optimization",
-      "file": ".claude/agents/optimization/topology-optimizer.md"
+      "file": ".claude\\agents\\optimization\\topology-optimizer.md"
     },
     {
-      "id": "agent:payments/agentic-payments",
+      "id": "agent:payments\\agentic-payments",
       "kind": "agent",
       "name": "agentic-payments",
-      "group": "payments",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Multi-agent payment authorization specialist for autonomous AI commerce with cryptographic verification and Byzantine consensus",
-      "file": ".claude/agents/payments/agentic-payments.md"
+      "file": ".claude\\agents\\payments\\agentic-payments.md"
     },
     {
       "id": "agent:performance-guardian",
@@ -1513,7 +1563,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Performance optimization expert - Core Web Vitals, Lighthouse, bundle analysis, speed optimization",
-      "file": ".claude/agents/performance-guardian.md"
+      "file": ".claude\\agents\\performance-guardian.md"
     },
     {
       "id": "agent:prompt-architect",
@@ -1530,7 +1580,7 @@
       ],
       "mcpServers": [],
       "description": "Designs new prompts from blank using CoT / ToT / ReAct / Constitutional / Self-Consistency / Atom-of-Thoughts patterns. Composes lab specialist for final pass. Auto-invokes when @prompt-conductor dispatches `flow-design` / `flow-knowledge-base`, or when Frank says \"design a prompt for X\", \"build me a system prompt for Y\", \"create a master prompt for Z\". Replaces existing legacy prompt-architect.md",
-      "file": ".claude/agents/prompt-architect.md"
+      "file": ".claude\\agents\\prompt-architect.md"
     },
     {
       "id": "agent:prompt-claude-specialist",
@@ -1546,7 +1596,7 @@
       ],
       "mcpServers": [],
       "description": "Anthropic / Claude prompting doctrine specialist. Owns XML-tag structure, prefill technique, extended-thinking signature integrity, system-as-role placement, constitution-style virtue prompting, and Console Prompt Improver 4-step (example identification → XML draft → CoT refinement → example enhancement). Auto-invokes when @prompt-conductor dispatches `flow-design` / `flow-optimize` for a Claude t",
-      "file": ".claude/agents/prompt-claude-specialist.md"
+      "file": ".claude\\agents\\prompt-claude-specialist.md"
     },
     {
       "id": "agent:prompt-conductor",
@@ -1563,7 +1613,7 @@
       ],
       "mcpServers": [],
       "description": "Top-level Opus composer for the Prompt Hub. Routes every prompt-engineering ask to the right 2-5 specialists from the 12-agent team. Auto-invokes when Frank says \"design a prompt for X\", \"optimize this prompt\", \"evaluate my system prompt\", \"harvest prompts from Fabric\", \"build a knowledge-base prompt set\", \"IFS session\", \"profile me on Big Five\", or runs `/prompt-hub`. Composes flow-design / flow-",
-      "file": ".claude/agents/prompt-conductor.md"
+      "file": ".claude\\agents\\prompt-conductor.md"
     },
     {
       "id": "agent:prompt-evaluator",
@@ -1579,7 +1629,7 @@
       ],
       "mcpServers": [],
       "description": "Wraps promptfoo (MIT) to evaluate prompts. Generates declarative test files colocated with each pattern. Returns scored verdicts and writes them back to pattern frontmatter. Replaces the existing `prompt-tester.md` scaffold (which had zero fixtures). Auto-invokes when @prompt-conductor dispatches `flow-evaluate` or as the publish gate inside `flow-design` / `flow-optimize` / `flow-curate`. Pillar ",
-      "file": ".claude/agents/prompt-evaluator.md"
+      "file": ".claude\\agents\\prompt-evaluator.md"
     },
     {
       "id": "agent:prompt-gemini-specialist",
@@ -1595,7 +1645,7 @@
       ],
       "mcpServers": [],
       "description": "Google / Gemini prompting doctrine specialist. Owns system-at-top placement, context-first long-document layout, native grounding (Search + code execution), \"think very hard\" literal trigger, multimodal equal-class positioning. Auto-invokes when @prompt-conductor dispatches `flow-design` / `flow-optimize` for a Gemini target, or when Frank says \"make this Gemini-native\", \"add grounding\", \"convert ",
-      "file": ".claude/agents/prompt-gemini-specialist.md"
+      "file": ".claude\\agents\\prompt-gemini-specialist.md"
     },
     {
       "id": "agent:prompt-gpt-specialist",
@@ -1611,7 +1661,7 @@
       ],
       "mcpServers": [],
       "description": "OpenAI / GPT-5 prompting doctrine specialist. Owns developer-role placement, reasoning_effort × verbosity independent axes, Structured Outputs via Zod/Pydantic (never JSON-in-prose), tool-call preambles, contradiction audit, persistence reminders, previous_response_id chaining. Auto-invokes when @prompt-conductor dispatches `flow-design` / `flow-optimize` for a GPT target, or when Frank says \"make",
-      "file": ".claude/agents/prompt-gpt-specialist.md"
+      "file": ".claude\\agents\\prompt-gpt-specialist.md"
     },
     {
       "id": "agent:prompt-harvester",
@@ -1629,7 +1679,7 @@
       ],
       "mcpServers": [],
       "description": "Bulk-imports patterns from external sources (Fabric MIT, awesome-chatgpt-prompts CC0, awesome-claude-prompts MIT, DAIR.AI taxonomy MIT, lab official docs). Tags provenance + license. Runs quality gate. Returns patterns ready for red-team → librarian publish. Repurposes prior `prompt-harvester.md` legacy scaffold. Auto-invokes when @prompt-conductor dispatches `flow-harvest`, or when Frank says \"im",
-      "file": ".claude/agents/prompt-harvester.md"
+      "file": ".claude\\agents\\prompt-harvester.md"
     },
     {
       "id": "agent:prompt-librarian",
@@ -1647,7 +1697,7 @@
       ],
       "mcpServers": [],
       "description": "Owns the prompt-library corpus. Categorizes, tags, ranks, attributes, enforces frontmatter schema, manages contributions. The Alexandria-style curator. Auto-invokes when @prompt-conductor dispatches `flow-curate`, when patterns finish `flow-design` / `flow-optimize` / `flow-harvest` for publish, or when Frank says \"rebuild the library\", \"rerank category X\", \"add this pattern to the library\". Pilla",
-      "file": ".claude/agents/prompt-librarian.md"
+      "file": ".claude\\agents\\prompt-librarian.md"
     },
     {
       "id": "agent:prompt-optimizer",
@@ -1664,7 +1714,7 @@
       ],
       "mcpServers": [],
       "description": "Refines an existing prompt for clarity, specificity, structure, and lab-native form. Outputs optimized prompt + diff + rationale + expected delta. Wraps the `/po` command. Auto-invokes when @prompt-conductor dispatches `flow-optimize` / `flow-curate`, or when Frank says \"optimize this prompt\", \"make this prompt better\", \"tighten this\", \"rewrite for Claude/GPT/Gemini\", or runs `/po`. Pillar Prompt ",
-      "file": ".claude/agents/prompt-optimizer.md"
+      "file": ".claude\\agents\\prompt-optimizer.md"
     },
     {
       "id": "agent:prompt-oss-specialist",
@@ -1680,7 +1730,7 @@
       ],
       "mcpServers": [],
       "description": "Open-source model prompting specialist. Owns Llama 3/3.1/3.2 / Mistral / Qwen / DeepSeek-R1 / Yi chat templates, `apply_chat_template()` rendering, ChatML vs Llama3-special-tokens distinction, DeepSeek `<think>` block conventions, finetune-format inheritance rules. Auto-invokes when @prompt-conductor dispatches `flow-design` / `flow-optimize` for an OSS model target, or when Frank says \"make this ",
-      "file": ".claude/agents/prompt-oss-specialist.md"
+      "file": ".claude\\agents\\prompt-oss-specialist.md"
     },
     {
       "id": "agent:prompt-psyche-cartographer",
@@ -1696,7 +1746,7 @@
       ],
       "mcpServers": [],
       "description": "IFS-based introspective agent. Maps user's parts (managers, firefighters, exiles) and Self-energy via unblending questions. Offers Socratic / Stoic / Jungian / IFS-Self voice modes per session. Reflection-only — maps but never unburdens. Hard boundaries against clinical content; crisis triggers route to 988 / Samaritans / Befrienders. Consumes Second Brain OS for cross-session memory. Auto-invokes",
-      "file": ".claude/agents/prompt-psyche-cartographer.md"
+      "file": ".claude\\agents\\prompt-psyche-cartographer.md"
     },
     {
       "id": "agent:prompt-psychometrist",
@@ -1712,7 +1762,7 @@
       ],
       "mcpServers": [],
       "description": "Administers canonical psychometric instruments (IPIP-50 Big Five, Schwartz PVQ values, ECR-R attachment, VIA Character Strengths, Enneagram-narrative). Returns profiles framed as LENSES, never verdicts. Composes Cartographer for reflective follow-up. Consumes Second Brain OS for profile memory. Auto-invokes when @prompt-conductor dispatches `flow-profile`, or when Frank says \"profile me on Big Fiv",
-      "file": ".claude/agents/prompt-psychometrist.md"
+      "file": ".claude\\agents\\prompt-psychometrist.md"
     },
     {
       "id": "agent:prompt-red-team",
@@ -1728,7 +1778,7 @@
       ],
       "mcpServers": [],
       "description": "Adversarial audit of system prompts before publish. Probes jailbreak vectors, refusal-bypass attempts, prompt-injection vulnerabilities, role-fluidity exploits, and known social-engineering patterns. Returns pass/warn/fail verdict written to pattern frontmatter. Load-bearing publish gate. Auto-invokes inside `flow-design`, `flow-harvest`, `flow-optimize`, `flow-evaluate`, or when Frank says \"red-t",
-      "file": ".claude/agents/prompt-red-team.md"
+      "file": ".claude\\agents\\prompt-red-team.md"
     },
     {
       "id": "agent:publishing-strategist",
@@ -1745,7 +1795,7 @@
         "linear"
       ],
       "description": "Market positioning expert, cover direction specialist, and launch planner who ensures books reach their audience effectively",
-      "file": ".claude/agents/publishing-strategist.md"
+      "file": ".claude\\agents\\publishing-strategist.md"
     },
     {
       "id": "agent:research-daily-ops",
@@ -1765,7 +1815,7 @@
       ],
       "mcpServers": [],
       "description": "Daily intelligence operations across 3 domains (Generative AI / Systems & Performance / Personal Development). 3 modes — scan (morning brief), deep-dive (focused topic), publish (transform research into pillar/brief/thread/post). Auto-invokes when Frank says \"scan today\", \"morning brief\", \"research <topic>\", \"publish research as <type>\", or runs /research. Pillar 6 (Research Hub), slot 2.",
-      "file": ".claude/agents/research-daily-ops.md"
+      "file": ".claude\\agents\\research-daily-ops.md"
     },
     {
       "id": "agent:research-guardian",
@@ -1782,7 +1832,7 @@
       ],
       "mcpServers": [],
       "description": "Quality gate for autoresearch commits — reviews voice, factuality, no-regression, and scope compliance BEFORE a commit is kept. Reject authority overrides score improvements.",
-      "file": ".claude/agents/research-guardian.md"
+      "file": ".claude\\agents\\research-guardian.md"
     },
     {
       "id": "agent:research-librarian",
@@ -1797,7 +1847,7 @@
         "github"
       ],
       "description": "Fact-checking specialist, source verification expert, and case study validator for ensuring book accuracy and credibility",
-      "file": ".claude/agents/research-librarian.md"
+      "file": ".claude\\agents\\research-librarian.md"
     },
     {
       "id": "agent:sensitivity-reader",
@@ -1812,19 +1862,19 @@
         "github"
       ],
       "description": "Cultural respect guardian, representation advisor, and appropriation prevention specialist who ensures books honor diverse experiences authentically",
-      "file": ".claude/agents/sensitivity-reader.md"
+      "file": ".claude\\agents\\sensitivity-reader.md"
     },
     {
       "id": "agent:seo_specialist",
       "kind": "agent",
-      "name": "seo_specialist",
+      "name": "seo-specialist",
       "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
-      "description": "",
-      "file": ".claude/agents/seo_specialist.md"
+      "description": "Search visibility and organic growth architect for FrankX digital footprint",
+      "file": ".claude\\agents\\seo_specialist.md"
     },
     {
       "id": "agent:social-content-generator",
@@ -1836,79 +1886,79 @@
       "tools": [],
       "mcpServers": [],
       "description": "Transform blog articles into platform-optimized social media content for all major platforms",
-      "file": ".claude/agents/social-content-generator.md"
+      "file": ".claude\\agents\\social-content-generator.md"
     },
     {
-      "id": "agent:sona/sona-learning-optimizer",
+      "id": "agent:sona\\sona-learning-optimizer",
       "kind": "agent",
       "name": "sona-learning-optimizer",
-      "group": "sona",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SONA-powered self-optimizing agent with LoRA fine-tuning and EWC++ memory preservation",
-      "file": ".claude/agents/sona/sona-learning-optimizer.md"
+      "file": ".claude\\agents\\sona\\sona-learning-optimizer.md"
     },
     {
-      "id": "agent:sparc/architecture",
+      "id": "agent:sparc\\architecture",
       "kind": "agent",
       "name": "architecture",
-      "group": "sparc",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SPARC Architecture phase specialist for system design",
-      "file": ".claude/agents/sparc/architecture.md"
+      "file": ".claude\\agents\\sparc\\architecture.md"
     },
     {
-      "id": "agent:sparc/pseudocode",
+      "id": "agent:sparc\\pseudocode",
       "kind": "agent",
       "name": "pseudocode",
-      "group": "sparc",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SPARC Pseudocode phase specialist for algorithm design",
-      "file": ".claude/agents/sparc/pseudocode.md"
+      "file": ".claude\\agents\\sparc\\pseudocode.md"
     },
     {
-      "id": "agent:sparc/refinement",
+      "id": "agent:sparc\\refinement",
       "kind": "agent",
       "name": "refinement",
-      "group": "sparc",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SPARC Refinement phase specialist for iterative improvement",
-      "file": ".claude/agents/sparc/refinement.md"
+      "file": ".claude\\agents\\sparc\\refinement.md"
     },
     {
-      "id": "agent:sparc/specification",
+      "id": "agent:sparc\\specification",
       "kind": "agent",
       "name": "specification",
-      "group": "sparc",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SPARC Specification phase specialist for requirements analysis",
-      "file": ".claude/agents/sparc/specification.md"
+      "file": ".claude\\agents\\sparc\\specification.md"
     },
     {
-      "id": "agent:specialized/mobile/spec-mobile-react-native",
+      "id": "agent:specialized\\mobile\\spec-mobile-react-native",
       "kind": "agent",
       "name": "mobile-dev",
-      "group": "specialized",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Expert agent for React Native mobile application development across iOS and Android",
-      "file": ".claude/agents/specialized/mobile/spec-mobile-react-native.md"
+      "file": ".claude\\agents\\specialized\\mobile\\spec-mobile-react-native.md"
     },
     {
       "id": "agent:starlight-architecture-design",
@@ -1923,7 +1973,7 @@
         "linear-server"
       ],
       "description": "Enterprise AI System Designer - Oracle Architecture Expert & Brand DNA Guardian",
-      "file": ".claude/agents/starlight-architecture-design.md"
+      "file": ".claude\\agents\\starlight-architecture-design.md"
     },
     {
       "id": "agent:starlight-orchestrator",
@@ -1935,7 +1985,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Meta-intelligence agent for intelligent multi-agent coordination, workflow orchestration, and cross-tool integration across the FrankX Superintelligent Agent System",
-      "file": ".claude/agents/starlight-orchestrator.md"
+      "file": ".claude\\agents\\starlight-orchestrator.md"
     },
     {
       "id": "agent:strategist",
@@ -1946,104 +1996,116 @@
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
-      "description": "",
-      "file": ".claude/agents/strategist.md"
+      "description": "Strategic intelligence and planning specialist for complex challenges",
+      "file": ".claude\\agents\\strategist.md"
     },
     {
-      "id": "agent:sublinear/consensus-coordinator",
+      "id": "agent:sublinear\\consensus-coordinator",
       "kind": "agent",
       "name": "consensus-coordinator",
-      "group": "sublinear",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Distributed consensus agent that uses sublinear solvers for fast agreement protocols in multi-agent systems. Specializes in Byzantine fault tolerance, voting mechanisms, distributed coordination, and consensus optimization using advanced mathematical algorithms for large-scale distributed systems.",
-      "file": ".claude/agents/sublinear/consensus-coordinator.md"
+      "file": ".claude\\agents\\sublinear\\consensus-coordinator.md"
     },
     {
-      "id": "agent:sublinear/matrix-optimizer",
+      "id": "agent:sublinear\\matrix-optimizer",
       "kind": "agent",
       "name": "matrix-optimizer",
-      "group": "sublinear",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Expert agent for matrix analysis and optimization using sublinear algorithms. Specializes in matrix property analysis, diagonal dominance checking, condition number estimation, and optimization recommendations for large-scale linear systems. Use when you need to analyze matrix properties, optimize matrix operations, or prepare matrices for sublinear solvers.",
-      "file": ".claude/agents/sublinear/matrix-optimizer.md"
+      "file": ".claude\\agents\\sublinear\\matrix-optimizer.md"
     },
     {
-      "id": "agent:sublinear/pagerank-analyzer",
+      "id": "agent:sublinear\\pagerank-analyzer",
       "kind": "agent",
       "name": "pagerank-analyzer",
-      "group": "sublinear",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Expert agent for graph analysis and PageRank calculations using sublinear algorithms. Specializes in network optimization, influence analysis, swarm topology optimization, and large-scale graph computations. Use for social network analysis, web graph analysis, recommendation systems, and distributed system topology design.",
-      "file": ".claude/agents/sublinear/pagerank-analyzer.md"
+      "file": ".claude\\agents\\sublinear\\pagerank-analyzer.md"
     },
     {
-      "id": "agent:sublinear/performance-optimizer",
+      "id": "agent:sublinear\\performance-optimizer",
       "kind": "agent",
       "name": "performance-optimizer",
-      "group": "sublinear",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "System performance optimization agent that identifies bottlenecks and optimizes resource allocation using sublinear algorithms. Specializes in computational performance analysis, system optimization, resource management, and efficiency maximization across distributed systems and cloud infrastructure.",
-      "file": ".claude/agents/sublinear/performance-optimizer.md"
+      "file": ".claude\\agents\\sublinear\\performance-optimizer.md"
     },
     {
-      "id": "agent:sublinear/trading-predictor",
+      "id": "agent:sublinear\\trading-predictor",
       "kind": "agent",
       "name": "trading-predictor",
-      "group": "sublinear",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Advanced financial trading agent that leverages temporal advantage calculations to predict and execute trades before market data arrives. Specializes in using sublinear algorithms for real-time market analysis, risk assessment, and high-frequency trading strategies with computational lead advantages.",
-      "file": ".claude/agents/sublinear/trading-predictor.md"
+      "file": ".claude\\agents\\sublinear\\trading-predictor.md"
     },
     {
-      "id": "agent:swarm/adaptive-coordinator",
+      "id": "agent:swarm\\adaptive-coordinator",
       "kind": "agent",
       "name": "adaptive-coordinator",
-      "group": "swarm",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Dynamic topology switching coordinator with self-organizing swarm patterns and real-time optimization",
-      "file": ".claude/agents/swarm/adaptive-coordinator.md"
+      "file": ".claude\\agents\\swarm\\adaptive-coordinator.md"
     },
     {
-      "id": "agent:swarm/hierarchical-coordinator",
+      "id": "agent:swarm\\hierarchical-coordinator",
       "kind": "agent",
       "name": "hierarchical-coordinator",
-      "group": "swarm",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Queen-led hierarchical swarm coordination with specialized worker delegation",
-      "file": ".claude/agents/swarm/hierarchical-coordinator.md"
+      "file": ".claude\\agents\\swarm\\hierarchical-coordinator.md"
     },
     {
-      "id": "agent:swarm/mesh-coordinator",
+      "id": "agent:swarm\\mesh-coordinator",
       "kind": "agent",
       "name": "mesh-coordinator",
-      "group": "swarm",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Peer-to-peer mesh network swarm with distributed decision making and fault tolerance",
-      "file": ".claude/agents/swarm/mesh-coordinator.md"
+      "file": ".claude\\agents\\swarm\\mesh-coordinator.md"
+    },
+    {
+      "id": "agent:swarm\\README",
+      "kind": "agent",
+      "name": "Swarm Coordination",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [],
+      "mcpServers": [],
+      "description": "Specialized swarm coordination agents for claude-code-flow hive-mind system with different topologies",
+      "file": ".claude\\agents\\swarm\\README.md"
     },
     {
       "id": "agent:template-design",
@@ -2055,163 +2117,163 @@
       "tools": [],
       "mcpServers": [],
       "description": "Use this agent when you need to create, design, or optimize any type of template for commercial sale. This includes when you want to develop new template concepts, improve existing templates, choose the right tools and formats, or get strategic advice on template marketability. Examples: <example>Context: User wants to create a new template product line. user: 'I want to create some resume templat",
-      "file": ".claude/agents/template-design.md"
+      "file": ".claude\\agents\\template-design.md"
     },
     {
-      "id": "agent:templates/automation-smart-agent",
+      "id": "agent:templates\\automation-smart-agent",
       "kind": "agent",
       "name": "smart-agent",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Intelligent agent coordination and dynamic spawning specialist",
-      "file": ".claude/agents/templates/automation-smart-agent.md"
+      "file": ".claude\\agents\\templates\\automation-smart-agent.md"
     },
     {
-      "id": "agent:templates/coordinator-swarm-init",
+      "id": "agent:templates\\coordinator-swarm-init",
       "kind": "agent",
       "name": "swarm-init",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Swarm initialization and topology optimization specialist",
-      "file": ".claude/agents/templates/coordinator-swarm-init.md"
+      "file": ".claude\\agents\\templates\\coordinator-swarm-init.md"
     },
     {
-      "id": "agent:templates/github-pr-manager",
+      "id": "agent:templates\\github-pr-manager",
       "kind": "agent",
       "name": "pr-manager",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Complete pull request lifecycle management and GitHub workflow coordination",
-      "file": ".claude/agents/templates/github-pr-manager.md"
+      "file": ".claude\\agents\\templates\\github-pr-manager.md"
     },
     {
-      "id": "agent:templates/implementer-sparc-coder",
+      "id": "agent:templates\\implementer-sparc-coder",
       "kind": "agent",
       "name": "sparc-coder",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Transform specifications into working code with TDD practices",
-      "file": ".claude/agents/templates/implementer-sparc-coder.md"
+      "file": ".claude\\agents\\templates\\implementer-sparc-coder.md"
     },
     {
-      "id": "agent:templates/memory-coordinator",
+      "id": "agent:templates\\memory-coordinator",
       "kind": "agent",
       "name": "memory-coordinator",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Manage persistent memory across sessions and facilitate cross-agent memory sharing",
-      "file": ".claude/agents/templates/memory-coordinator.md"
+      "file": ".claude\\agents\\templates\\memory-coordinator.md"
     },
     {
-      "id": "agent:templates/migration-plan",
+      "id": "agent:templates\\migration-plan",
       "kind": "agent",
       "name": "migration-planner",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Comprehensive migration plan for converting commands to agent-based system",
-      "file": ".claude/agents/templates/migration-plan.md"
+      "file": ".claude\\agents\\templates\\migration-plan.md"
     },
     {
-      "id": "agent:templates/orchestrator-task",
+      "id": "agent:templates\\orchestrator-task",
       "kind": "agent",
       "name": "task-orchestrator",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Central coordination agent for task decomposition, execution planning, and result synthesis",
-      "file": ".claude/agents/templates/orchestrator-task.md"
+      "file": ".claude\\agents\\templates\\orchestrator-task.md"
     },
     {
-      "id": "agent:templates/performance-analyzer",
+      "id": "agent:templates\\performance-analyzer",
       "kind": "agent",
       "name": "perf-analyzer",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Performance bottleneck analyzer for identifying and resolving workflow inefficiencies",
-      "file": ".claude/agents/templates/performance-analyzer.md"
+      "file": ".claude\\agents\\templates\\performance-analyzer.md"
     },
     {
-      "id": "agent:templates/sparc-coordinator",
+      "id": "agent:templates\\sparc-coordinator",
       "kind": "agent",
       "name": "sparc-coord",
-      "group": "templates",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "SPARC methodology orchestrator for systematic development phase coordination",
-      "file": ".claude/agents/templates/sparc-coordinator.md"
+      "file": ".claude\\agents\\templates\\sparc-coordinator.md"
     },
     {
-      "id": "agent:testing/production-validator",
+      "id": "agent:testing\\production-validator",
       "kind": "agent",
       "name": "production-validator",
-      "group": "testing",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Production validation specialist ensuring applications are fully implemented and deployment-ready",
-      "file": ".claude/agents/testing/production-validator.md"
+      "file": ".claude\\agents\\testing\\production-validator.md"
     },
     {
-      "id": "agent:testing/tdd-london-swarm",
+      "id": "agent:testing\\tdd-london-swarm",
       "kind": "agent",
       "name": "tdd-london-swarm",
-      "group": "testing",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "TDD London School specialist for mock-driven development within swarm coordination",
-      "file": ".claude/agents/testing/tdd-london-swarm.md"
+      "file": ".claude\\agents\\testing\\tdd-london-swarm.md"
     },
     {
-      "id": "agent:testing/unit/tdd-london-swarm",
+      "id": "agent:testing\\unit\\tdd-london-swarm",
       "kind": "agent",
       "name": "tdd-london-swarm",
-      "group": "testing",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "TDD London School specialist for mock-driven development within swarm coordination",
-      "file": ".claude/agents/testing/unit/tdd-london-swarm.md"
+      "file": ".claude\\agents\\testing\\unit\\tdd-london-swarm.md"
     },
     {
-      "id": "agent:testing/validation/production-validator",
+      "id": "agent:testing\\validation\\production-validator",
       "kind": "agent",
       "name": "production-validator",
-      "group": "testing",
+      "group": "core",
       "tier": "sonnet",
       "status": "shipped",
       "tools": [],
       "mcpServers": [],
       "description": "Production validation specialist ensuring applications are fully implemented and deployment-ready",
-      "file": ".claude/agents/testing/validation/production-validator.md"
+      "file": ".claude\\agents\\testing\\validation\\production-validator.md"
     },
     {
       "id": "agent:ui-ux-design-guidance",
@@ -2223,7 +2285,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Use this agent when you need expert guidance on UI/UX design decisions, design system creation, usability evaluations, or when you want to ensure your interfaces meet the highest standards of user experience. This includes design reviews, accessibility assessments, user flow optimization, and establishing design quality metrics. Examples: <example>Context: The user wants expert feedback on their a",
-      "file": ".claude/agents/ui-ux-design-guidance.md"
+      "file": ".claude\\agents\\ui-ux-design-guidance.md"
     },
     {
       "id": "agent:ux-design-development",
@@ -2240,7 +2302,7 @@
         "notion"
       ],
       "description": "UI/UX design specialist with Figma and browser testing expertise",
-      "file": ".claude/agents/ux-design-development.md"
+      "file": ".claude\\agents\\ux-design-development.md"
     },
     {
       "id": "agent:viral-content-strategy",
@@ -2252,7 +2314,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Use this agent when you need to create high-impact social media content that combines strategic thinking with viral potential. Examples: <example>Context: User wants to share insights about productivity hacks they've discovered. user: 'I've been using the Pomodoro Technique with a twist - I do 25 minutes of deep work followed by 5 minutes of creative brainstorming. It's been game-changing for my o",
-      "file": ".claude/agents/viral-content-strategy.md"
+      "file": ".claude\\agents\\viral-content-strategy.md"
     },
     {
       "id": "agent:visual-brand-guidelines",
@@ -2268,7 +2330,7 @@
       ],
       "mcpServers": [],
       "description": "Brand-gate for every FrankX visual asset. Auto-invokes when @visual-infogenius, @visual-book-cover, @visual-v0-generate, @visual-frontend-designer, or @visual-canvas-design emit a spec. Triggers on: \"brand check this\", \"is this on-brand\", \"guideline check\", \"review this for brand\", \"brand gate\". Runs 4 checks (color palette, typography, voice/AI-slop, Arcanean-mythology-leak) and returns pass | wa",
-      "file": ".claude/agents/visual-brand-guidelines.md"
+      "file": ".claude\\agents\\visual-brand-guidelines.md"
     },
     {
       "id": "agent:weekly-recap",
@@ -2280,7 +2342,7 @@
       "tools": [],
       "mcpServers": [],
       "description": "Generate comprehensive weekly progress reports across all personal projects",
-      "file": ".claude/agents/weekly-recap.md"
+      "file": ".claude\\agents\\weekly-recap.md"
     },
     {
       "id": "agent:world-architect",
@@ -2296,475 +2358,44 @@
         "github"
       ],
       "description": "World-building specialist for fantasy, sci-fi, and speculative fiction - creates internally consistent universes with rich cultures, magic/tech systems, and immersive settings",
-      "file": ".claude/agents/world-architect.md"
+      "file": ".claude\\agents\\world-architect.md"
     },
     {
-      "id": "skill:acos-meta",
+      "id": "skill:multimodal-studio",
       "kind": "skill",
-      "name": "acos-meta",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "ACOS self-description and configuration skill. Documents how ACOS works, how to extend it, how to add new skills/commands/agents, and how to debug the hook system. Use when building new ACOS capabilities, understanding the system architecture, or onboarding to ACOS for the first time."
-    },
-    {
-      "id": "skill:agentic-jujutsu",
-      "kind": "skill",
-      "name": "agentic-jujutsu",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Quantum-resistant, self-learning version control for AI agents with ReasoningBank intelligence and multi-agent coordination"
-    },
-    {
-      "id": "skill:agentic-orchestration",
-      "kind": "skill",
-      "name": "agentic-orchestration",
-      "group": "technical",
-      "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "orchestration",
-        "multi-agent",
-        "agent coordination"
-      ],
-      "description": "Multi-agent orchestration patterns and workflows"
-    },
-    {
-      "id": "skill:ai-architect-newsletter",
-      "kind": "skill",
-      "name": "ai-architect-newsletter",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Generate high-quality AI Architect newsletters with latest AI news, research integration, and visual design. Use when creating newsletters, researching AI developments, synthesizing AI news for architects, or distributing intelligence reports. Covers AI model releases, research papers, tool launches, architecture patterns, production systems, and enterprise AI trends. Integrates with FrankX research hub and supports both daily briefs and weekly deep-dives."
-    },
-    {
-      "id": "skill:ai-architecture",
-      "kind": "skill",
-      "name": "ai-architecture",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:algorithmic-art",
-      "kind": "skill",
-      "name": "algorithmic-art",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations."
-    },
-    {
-      "id": "skill:book-publishing",
-      "kind": "skill",
-      "name": "book-publishing",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "ACOS book publishing intelligence for multi-book content, voice, and production workflows."
-    },
-    {
-      "id": "skill:brand-guidelines",
-      "kind": "skill",
-      "name": "brand-guidelines",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply."
-    },
-    {
-      "id": "skill:brand-voice",
-      "kind": "skill",
-      "name": "brand-voice",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Apply and enforce brand voice across all content creation. Manages voice attributes, tone adaptation by channel, style rules, and terminology. Use when writing content, reviewing drafts, or defining brand voice for a new project. Loads voice config from CREATOR.md or creator-memory/voice.md."
-    },
-    {
-      "id": "skill:cacos",
-      "kind": "skill",
-      "name": "cacos",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "cacos",
-        "agentic creator os",
-        "activate system",
-        "ultrawork",
-        "ulw"
-      ],
-      "description": "Claude Agentic Creator OS - Native Claude Code implementation"
-    },
-    {
-      "id": "skill:canvas-design",
-      "kind": "skill",
-      "name": "canvas-design",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations."
-    },
-    {
-      "id": "skill:claude-sdk",
-      "kind": "skill",
-      "name": "claude-sdk",
-      "group": "technical",
-      "status": "shipped",
-      "priority": "medium",
-      "keywords": [
-        "claude sdk",
-        "agent sdk",
-        "anthropic sdk",
-        "claude agent"
-      ],
-      "description": "Claude Agent SDK patterns for building autonomous agents"
-    },
-    {
-      "id": "skill:creator-productivity",
-      "kind": "skill",
-      "name": "creator-productivity",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Task management and workspace memory for creative work sessions. Manages a TASKS.md file for project tracking, a two-tier memory system (CREATOR.md + creator-memory/), and a daily sprint structure. Use when organizing creative projects, tracking content tasks, or starting a focused work session."
-    },
-    {
-      "id": "skill:doc-coauthoring",
-      "kind": "skill",
-      "name": "doc-coauthoring",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks."
-    },
-    {
-      "id": "skill:docx",
-      "kind": "skill",
-      "name": "docx",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"
-    },
-    {
-      "id": "skill:excellence-book-writing",
-      "kind": "skill",
-      "name": "excellence-book-writing",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "medium",
-      "keywords": [
-        "book",
-        "chapter",
-        "manuscript",
-        "novel",
-        "writing",
-        "narrative"
-      ],
-      "description": ""
-    },
-    {
-      "id": "skill:framer-expert",
-      "kind": "skill",
-      "name": "framer-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "framer",
-        "animation",
-        "motion",
-        "prototype",
-        "interactive"
-      ],
-      "description": "Expert in Framer design and development - from interactive prototypes to production sites with Framer Motion, CMS integration, and the Framer MCP server"
-    },
-    {
-      "id": "skill:frankx-brand",
-      "kind": "skill",
-      "name": "frankx-brand",
+      "name": "multimodal-studio",
       "group": "creative",
       "status": "shipped",
-      "priority": null,
+      "priority": "high",
       "keywords": [
-        "frankx brand",
-        "brand voice",
-        "brand guidelines"
+        "generate image",
+        "generate video",
+        "create character",
+        "multimodal",
+        "higgsfield",
+        "image generation",
+        "video generation",
+        "thumbnail",
+        "hero image",
+        "b-roll",
+        "cinematic"
       ],
-      "description": "FrankX brand guidelines, voice, and visual identity"
+      "description": "Unified image, video, and character generation across 30+ frontier models through a single connector — model routing, visual prompt engineering, character consistency, async job handling, brand-locked output"
     },
     {
-      "id": "skill:frankx-daily-execution",
+      "id": "skill:content-strategy",
       "kind": "skill",
-      "name": "frankx-daily-execution",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Helps execute Frank's daily workflow using the FRANKX-SUPERINTELLIGENT-AGENT-SYSTEM, Starlight Intelligence, and productivity methodologies for intentional creation"
-    },
-    {
-      "id": "skill:frontend-design",
-      "kind": "skill",
-      "name": "frontend-design",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics."
-    },
-    {
-      "id": "skill:game-development",
-      "kind": "skill",
-      "name": "game-development",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "ACOS game development intelligence for high-quality browser game design and implementation."
-    },
-    {
-      "id": "skill:github-code-review",
-      "kind": "skill",
-      "name": "github-code-review",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive GitHub code review with AI-powered swarm coordination"
-    },
-    {
-      "id": "skill:github-multi-repo",
-      "kind": "skill",
-      "name": "github-multi-repo",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Multi-repository coordination, synchronization, and architecture management with AI swarm orchestration"
-    },
-    {
-      "id": "skill:github-project-management",
-      "kind": "skill",
-      "name": "github-project-management",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive GitHub project management with swarm-coordinated issue tracking, project board automation, and sprint planning"
-    },
-    {
-      "id": "skill:github-release-management",
-      "kind": "skill",
-      "name": "github-release-management",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive GitHub release orchestration with AI swarm coordination for automated versioning, testing, deployment, and rollback management"
-    },
-    {
-      "id": "skill:github-workflow-automation",
-      "kind": "skill",
-      "name": "github-workflow-automation",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Advanced GitHub Actions workflow automation with AI swarm coordination, intelligent CI/CD pipelines, and comprehensive repository management"
-    },
-    {
-      "id": "skill:greek-philosopher",
-      "kind": "skill",
-      "name": "greek-philosopher",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Channel ancient wisdom through Socratic questioning, Stoic principles, and philosophical inquiry to examine life's deepest questions with poetic eloquence and timeless insight"
-    },
-    {
-      "id": "skill:gstack",
-      "kind": "skill",
-      "name": "gstack",
-      "group": "skill",
+      "name": "content-strategy",
+      "group": "creative",
       "status": "shipped",
       "priority": "high",
       "keywords": [
-        "sprint",
-        "ship",
-        "QA",
-        "review PR",
-        "code review",
-        "browse",
-        "debug",
-        "investigate",
-        "canary",
-        "benchmark",
-        "office hours",
-        "retro",
-        "deploy"
+        "content strategy",
+        "content plan",
+        "editorial calendar",
+        "content pillar"
       ],
-      "description": [
-        "Brainstorming a new idea → suggest /office-hours",
-        "Reviewing a plan (strategy) → suggest /plan-ceo-review",
-        "Reviewing a plan (architecture) → suggest /plan-eng-review",
-        "Reviewing a plan (design) → suggest /plan-design-review",
-        "Auto-reviewing a plan (all reviews at once) → suggest /autoplan",
-        "Creating a design system → suggest /design-consultation",
-        "Debugging errors → suggest /investigate",
-        "Testing the app → suggest /qa",
-        "Code review before merge → suggest /review",
-        "Visual design audit → suggest /design-review",
-        "Ready to deploy / create PR → suggest /ship",
-        "Post-ship doc updates → suggest /document-release",
-        "Weekly retrospective → suggest /retro",
-        "Wanting a second opinion or adversarial code review → suggest /codex",
-        "Working with production or live systems → suggest /careful",
-        "Want to scope edits to one module/directory → suggest /freeze",
-        "Maximum safety mode (destructive warnings + edit restrictions) → suggest /guard",
-        "Removing edit restrictions → suggest /unfreeze",
-        "Upgrading gstack to latest version → suggest /gstack-upgrade",
-        "Bash",
-        "Read",
-        "AskUserQuestion"
-      ]
-    },
-    {
-      "id": "skill:gym-training-expert",
-      "kind": "skill",
-      "name": "gym-training-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "workout",
-        "training",
-        "gym",
-        "exercise",
-        "hypertrophy",
-        "fitness"
-      ],
-      "description": "Apply cutting-edge exercise science from 2025 research on hypertrophy, progressive overload, biomechanics, and evidence-based training protocols for optimal strength and muscle development"
-    },
-    {
-      "id": "skill:health-nutrition-expert",
-      "kind": "skill",
-      "name": "health-nutrition-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "nutrition",
-        "diet",
-        "health",
-        "supplements",
-        "longevity",
-        "metabolic"
-      ],
-      "description": "Apply cutting-edge 2025 nutrition science on longevity, metabolic health, gut microbiome, and evidence-based dietary patterns for optimal vitality and disease prevention"
-    },
-    {
-      "id": "skill:hive-mind-advanced",
-      "kind": "skill",
-      "name": "hive-mind-advanced",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Advanced Hive Mind collective intelligence system for queen-led multi-agent coordination with consensus mechanisms and persistent memory"
-    },
-    {
-      "id": "skill:hook",
-      "kind": "skill",
-      "name": "hook",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Generate high-retention content hooks using tri-modal engineering (Visual + Audio + Text) across 10 dimensions — from research-backed wisdom to frontier science to comedic timing. State-of-art 2026 hook psychology for creators who respect their audience's intelligence. Use when creating video intros, social content, article hooks, or any attention capture."
-    },
-    {
-      "id": "skill:hooks-automation",
-      "kind": "skill",
-      "name": "hooks-automation",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Automated coordination, formatting, and learning from Claude Code operations using intelligent hooks with MCP integration. Includes pre/post task hooks, session management, Git integration, memory coordination, and neural pattern training for enhanced development workflows."
-    },
-    {
-      "id": "skill:internal-comms",
-      "kind": "skill",
-      "name": "internal-comms",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.)."
-    },
-    {
-      "id": "skill:iterative-retrieval",
-      "kind": "skill",
-      "name": "iterative-retrieval",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Pattern for progressively refining context retrieval to solve the subagent context problem"
-    },
-    {
-      "id": "skill:langgraph-patterns",
-      "kind": "skill",
-      "name": "langgraph-patterns",
-      "group": "technical",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "langgraph",
-        "langchain",
-        "agent workflow",
-        "state machine"
-      ],
-      "description": "LangGraph workflow patterns for agentic orchestration"
-    },
-    {
-      "id": "skill:library-os",
-      "kind": "skill",
-      "name": "library-os",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Library OS — the persistent digital library system. Use when adding a book, deepening an existing review, extracting insights from handwritten notes / highlights / photos, or when the user wants to build their own library on their site. Handles the full workflow from capture to publish."
-    },
-    {
-      "id": "skill:mcp-2025-patterns",
-      "kind": "skill",
-      "name": "mcp-2025-patterns",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Current best practices for Model Context Protocol server design, implementation, and integration. Updated patterns for 2025 MCP ecosystem including multi-server orchestration, security, and performance."
+      "description": "Strategic content planning with calendar management and pillar mapping"
     },
     {
       "id": "skill:mcp-architecture",
@@ -2782,703 +2413,48 @@
       "description": "Model Context Protocol server design patterns and best practices"
     },
     {
-      "id": "skill:mcp-builder",
+      "id": "skill:claude-sdk",
       "kind": "skill",
-      "name": "mcp-builder",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK)."
-    },
-    {
-      "id": "skill:memory-guardian",
-      "kind": "skill",
-      "name": "memory-guardian",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "WSL2 memory safety and scaling guardrails for Claude Code sessions and parallel agents."
-    },
-    {
-      "id": "skill:model-routing",
-      "kind": "skill",
-      "name": "model-routing",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Intelligent model selection - routes tasks to Haiku (fast/cheap), Sonnet (balanced), or Opus (complex/strategic) based on task complexity analysis"
-    },
-    {
-      "id": "skill:nextjs-agent-team",
-      "kind": "skill",
-      "name": "nextjs-agent-team",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:nextjs-expert",
-      "kind": "skill",
-      "name": "nextjs-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:nextjs-react-expert",
-      "kind": "skill",
-      "name": "nextjs-react-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "nextjs",
-        "react",
-        "component",
-        "page",
-        "route",
-        "server component",
-        "app router"
-      ],
-      "description": ""
-    },
-    {
-      "id": "skill:nextjs-upgrade-assistant",
-      "kind": "skill",
-      "name": "nextjs-upgrade-assistant",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:oci-services-expert",
-      "kind": "skill",
-      "name": "oci-services-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "oracle",
-        "OCI",
-        "cloud",
-        "enterprise",
-        "infrastructure",
-        "kubernetes"
-      ],
-      "description": "Expert guidance on Oracle Cloud Infrastructure services, cloud architecture patterns, cost optimization, deployment strategies, and OCI best practices for enterprise solutions"
-    },
-    {
-      "id": "skill:openai-agentkit",
-      "kind": "skill",
-      "name": "openai-agentkit",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "openai",
-        "agentkit",
-        "agents sdk",
-        "openai agents"
-      ],
-      "description": "Build production-ready multi-agent systems using OpenAI AgentKit and Agents SDK with best practices for agent orchestration, handoffs, and routines"
-    },
-    {
-      "id": "skill:opus-extended-thinking",
-      "kind": "skill",
-      "name": "opus-extended-thinking",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "deep reasoning",
-        "complex analysis",
-        "extended thinking",
-        "strategic",
-        "architecture decision"
-      ],
-      "description": "Leverage Claude Opus 4.5's extended thinking capabilities for deep reasoning, complex analysis, and multi-step synthesis. Use when problems require thorough deliberation before response."
-    },
-    {
-      "id": "skill:oracle-adk",
-      "kind": "skill",
-      "name": "oracle-adk",
+      "name": "claude-sdk",
       "group": "technical",
       "status": "shipped",
-      "priority": null,
-      "keywords": [
-        "oracle adk",
-        "agent development kit",
-        "oracle agent"
-      ],
-      "description": "Oracle Agent Development Kit patterns and implementations"
-    },
-    {
-      "id": "skill:oracle-agent-spec",
-      "kind": "skill",
-      "name": "oracle-agent-spec",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Design framework-agnostic AI agents using Oracle's Open Agent Specification for portable, interoperable agentic systems with JSON/YAML definitions"
-    },
-    {
-      "id": "skill:oracle-ai-architect",
-      "kind": "skill",
-      "name": "oracle-ai-architect",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:oracle-database-expert",
-      "kind": "skill",
-      "name": "oracle-database-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:oracle-diagram-generator",
-      "kind": "skill",
-      "name": "oracle-diagram-generator",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:pair-programming",
-      "kind": "skill",
-      "name": "pair-programming",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "AI-assisted pair programming with multiple modes (driver/navigator/switch), real-time verification, quality monitoring, and comprehensive testing. Supports TDD, debugging, refactoring, and learning sessions. Features automatic role switching, continuous code review, security scanning, and performance optimization with truth-score verification."
-    },
-    {
-      "id": "skill:pdf",
-      "kind": "skill",
-      "name": "pdf",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documents at scale."
-    },
-    {
-      "id": "skill:performance-analysis",
-      "kind": "skill",
-      "name": "performance-analysis",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive performance analysis, bottleneck detection, and optimization recommendations for Claude Flow swarms"
-    },
-    {
-      "id": "skill:planning-with-files",
-      "kind": "skill",
-      "name": "planning-with-files",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "plan",
-        "task",
-        "breakdown",
-        "implement",
-        "complex task",
-        "multi-step"
-      ],
-      "description": [
-        "Read",
-        "Write",
-        "Edit",
-        "Bash",
-        "Glob",
-        "Grep",
-        "WebFetch",
-        "WebSearch"
-      ]
-    },
-    {
-      "id": "skill:pptx",
-      "kind": "skill",
-      "name": "pptx",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks"
-    },
-    {
-      "id": "skill:product-engine",
-      "kind": "skill",
-      "name": "product-engine",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Product creation and packaging pipeline. Creates premium digital products from FrankX component library, agentic AI systems, and design assets. Actions: create, package, publish, price, bundle. Products: UI kit, dashboard template, SaaS starter, agentic system, content engine, component library. Formats: Next.js, React, Tailwind, shadcn, Python, Notion, Obsidian. Channels: Gumroad, GitHub, frankx.ai."
-    },
-    {
-      "id": "skill:product-management-expert",
-      "kind": "skill",
-      "name": "product-management-expert",
-      "group": "skill",
-      "status": "shipped",
       "priority": "medium",
       "keywords": [
-        "product",
-        "launch",
-        "course",
-        "pricing",
-        "landing page",
-        "funnel"
+        "claude sdk",
+        "agent sdk",
+        "anthropic sdk",
+        "claude agent"
       ],
-      "description": ""
+      "description": "Claude Agent SDK patterns for building autonomous agents"
     },
     {
-      "id": "skill:prompt-optimizer",
+      "id": "skill:langgraph-patterns",
       "kind": "skill",
-      "name": "prompt-optimizer",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ">-"
-    },
-    {
-      "id": "skill:reasoningbank-agentdb",
-      "kind": "skill",
-      "name": "reasoningbank-agentdb",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Implement ReasoningBank adaptive learning with AgentDB's 150x faster vector database. Includes trajectory tracking, verdict judgment, memory distillation, and pattern recognition. Use when building self-learning agents, optimizing decision-making, or implementing experience replay systems."
-    },
-    {
-      "id": "skill:reasoningbank-intelligence",
-      "kind": "skill",
-      "name": "reasoningbank-intelligence",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Implement adaptive learning with ReasoningBank for pattern recognition, strategy optimization, and continuous improvement. Use when building self-learning agents, optimizing workflows, or implementing meta-cognitive systems."
-    },
-    {
-      "id": "skill:rules-distill",
-      "kind": "skill",
-      "name": "rules-distill",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Scan skills to extract cross-cutting principles and distill them into rules — append, revise, or create new rule files"
-    },
-    {
-      "id": "skill:safety-guard",
-      "kind": "skill",
-      "name": "safety-guard",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": ""
-    },
-    {
-      "id": "skill:santa-method",
-      "kind": "skill",
-      "name": "santa-method",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Multi-agent adversarial verification with convergence loop. Two independent review agents must both pass before output ships."
-    },
-    {
-      "id": "skill:search-first",
-      "kind": "skill",
-      "name": "search-first",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent."
-    },
-    {
-      "id": "skill:security-auditor",
-      "kind": "skill",
-      "name": "security-auditor",
+      "name": "langgraph-patterns",
       "group": "technical",
       "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "security",
-        "audit",
-        "vulnerability",
-        "penetration"
-      ],
-      "description": "Security auditing and vulnerability assessment patterns"
-    },
-    {
-      "id": "skill:skill-builder",
-      "kind": "skill",
-      "name": "skill-builder",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Create new Claude Code Skills with proper YAML frontmatter, progressive disclosure structure, and complete directory organization. Use when you need to build custom skills for specific workflows, generate skill templates, or understand the Claude Skills specification."
-    },
-    {
-      "id": "skill:skill-comply",
-      "kind": "skill",
-      "name": "skill-comply",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines"
-    },
-    {
-      "id": "skill:skill-creator",
-      "kind": "skill",
-      "name": "skill-creator",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations."
-    },
-    {
-      "id": "skill:skill-stocktake",
-      "kind": "skill",
-      "name": "skill-stocktake",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Use when auditing Claude skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation."
-    },
-    {
-      "id": "skill:slack-gif-creator",
-      "kind": "skill",
-      "name": "slack-gif-creator",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\""
-    },
-    {
-      "id": "skill:social-media-strategy",
-      "kind": "skill",
-      "name": "social-media-strategy",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "medium",
-      "keywords": [
-        "social",
-        "linkedin",
-        "twitter",
-        "instagram",
-        "farcaster",
-        "thread",
-        "post"
-      ],
-      "description": ""
-    },
-    {
-      "id": "skill:sparc-methodology",
-      "kind": "skill",
-      "name": "sparc-methodology",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) comprehensive development methodology with multi-agent orchestration"
-    },
-    {
-      "id": "skill:spartan-warrior",
-      "kind": "skill",
-      "name": "spartan-warrior",
-      "group": "skill",
-      "status": "shipped",
       "priority": "low",
       "keywords": [
-        "discipline",
-        "spartan",
-        "warrior",
-        "mental toughness",
-        "resilience"
+        "langgraph",
+        "langchain",
+        "agent workflow",
+        "state machine"
       ],
-      "description": "Embody the unbreakable Spartan ethos of discipline, courage, and relentless excellence through laconic wisdom and warrior mentality forged in hardship"
+      "description": "LangGraph workflow patterns for agentic orchestration"
     },
     {
-      "id": "skill:strategic-compact",
+      "id": "skill:frankx-brand",
       "kind": "skill",
-      "name": "strategic-compact",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction."
-    },
-    {
-      "id": "skill:stream-chain",
-      "kind": "skill",
-      "name": "stream-chain",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Stream-JSON chaining for multi-agent pipelines, data transformation, and sequential workflows"
-    },
-    {
-      "id": "skill:suno-ai-mastery",
-      "kind": "skill",
-      "name": "suno-ai-mastery",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "high",
-      "keywords": [
-        "music",
-        "suno",
-        "track",
-        "song",
-        "lyrics",
-        "melody",
-        "beat",
-        "frequency",
-        "hz",
-        "audio"
-      ],
-      "description": "Expert prompt engineering and music generation with Suno AI v4.5+ for professional-quality songs across all genres with advanced composition techniques"
-    },
-    {
-      "id": "skill:suno-prompt-architect",
-      "kind": "skill",
-      "name": "suno-prompt-architect",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Expert Suno AI prompt engineering for professional music creation. Use this skill when creating Suno prompts for any AI-generated music that needs commercial quality."
-    },
-    {
-      "id": "skill:swarm-advanced",
-      "kind": "skill",
-      "name": "swarm-advanced",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Advanced swarm orchestration patterns for research, development, testing, and complex distributed workflows"
-    },
-    {
-      "id": "skill:swarm-orchestration",
-      "kind": "skill",
-      "name": "swarm-orchestration",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Orchestrate multi-agent swarms with agentic-flow for parallel task execution, dynamic topology, and intelligent coordination. Use when scaling beyond single agents, implementing complex workflows, or building distributed AI systems."
-    },
-    {
-      "id": "skill:template-monetization",
-      "kind": "skill",
-      "name": "template-monetization",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Blueprint-to-template monetization system for deployment, affiliate, and revenue workflows."
-    },
-    {
-      "id": "skill:theme-factory",
-      "kind": "skill",
-      "name": "theme-factory",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly."
-    },
-    {
-      "id": "skill:ui-ux-design-expert",
-      "kind": "skill",
-      "name": "ui-ux-design-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "medium",
-      "keywords": [
-        "design",
-        "UX",
-        "UI",
-        "interface",
-        "component",
-        "layout",
-        "responsive",
-        "accessibility"
-      ],
-      "description": "Expert guidance on UI/UX design, design systems, accessibility (WCAG 2.2), user research, and creating inclusive, user-centered interfaces with 2025 best practices"
-    },
-    {
-      "id": "skill:ui-ux-pro-max",
-      "kind": "skill",
-      "name": "ui-ux-pro-max",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 8 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind). Actions: plan, build, create, design, implement, review, fix, improve, optimize, enhance, refactor, check UI/UX code. Projects: website, landing page, dashboard, admin panel, e-commerce, SaaS, portfolio, blog, mobile app, .html, .tsx, .vue, .svelte. Elements: button, modal, navbar, sidebar, card, table, form, chart. Styles: glassmorphism, claymorphism, minimalism, brutalism, neumorphism, bento grid, dark mode, responsive, skeuomorphism, flat design. Topics: color palette, accessibility, animation, layout, typography, font pairing, spacing, hover, shadow, gradient."
-    },
-    {
-      "id": "skill:verification-loop",
-      "kind": "skill",
-      "name": "verification-loop",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "A comprehensive verification system for Claude Code sessions."
-    },
-    {
-      "id": "skill:verification-quality",
-      "kind": "skill",
-      "name": "verification-quality",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive truth scoring, code quality verification, and automatic rollback system with 0.95 accuracy threshold for ensuring high-quality agent outputs and codebase reliability."
-    },
-    {
-      "id": "skill:video-production-workflow",
-      "kind": "skill",
-      "name": "video-production-workflow",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "low",
-      "keywords": [
-        "video",
-        "podcast",
-        "youtube",
-        "recording",
-        "script"
-      ],
-      "description": ""
-    },
-    {
-      "id": "skill:vis",
-      "kind": "skill",
-      "name": "vis",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Agentic visual asset management — scan, audit, and manage images across your site with AI-powered quality enforcement"
-    },
-    {
-      "id": "skill:web-artifacts-builder",
-      "kind": "skill",
-      "name": "web-artifacts-builder",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts."
-    },
-    {
-      "id": "skill:web-design-expert",
-      "kind": "skill",
-      "name": "web-design-expert",
-      "group": "skill",
-      "status": "shipped",
-      "priority": "medium",
-      "keywords": [
-        "website",
-        "web design",
-        "landing page",
-        "hero section",
-        "glassmorphic"
-      ],
-      "description": ""
-    },
-    {
-      "id": "skill:webapp-testing",
-      "kind": "skill",
-      "name": "webapp-testing",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs."
-    },
-    {
-      "id": "skill:worker-benchmarks",
-      "kind": "skill",
-      "name": "worker-benchmarks",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Run comprehensive worker system benchmarks and performance analysis"
-    },
-    {
-      "id": "skill:worker-integration",
-      "kind": "skill",
-      "name": "worker-integration",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Worker-Agent integration for intelligent task dispatch and performance tracking"
-    },
-    {
-      "id": "skill:xlsx",
-      "kind": "skill",
-      "name": "xlsx",
-      "group": "skill",
-      "status": "shipped",
-      "priority": null,
-      "keywords": [],
-      "description": "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheets with formulas and formatting, (2) Reading or analyzing data, (3) Modify existing spreadsheets while preserving formulas, (4) Data analysis and visualization in spreadsheets, or (5) Recalculating formulas"
-    },
-    {
-      "id": "skill:content-strategy",
-      "kind": "skill",
-      "name": "content-strategy",
+      "name": "frankx-brand",
       "group": "creative",
       "status": "shipped",
-      "priority": "high",
+      "priority": null,
       "keywords": [
-        "content strategy",
-        "content plan",
-        "editorial calendar",
-        "content pillar"
+        "frankx brand",
+        "brand voice",
+        "brand guidelines"
       ],
-      "description": "Strategic content planning with calendar management and pillar mapping"
+      "description": "FrankX brand guidelines, voice, and visual identity"
     },
     {
       "id": "skill:suno-mastery",
@@ -3509,6 +2485,20 @@
         "oracle ai"
       ],
       "description": "Oracle Cloud Infrastructure services and architecture patterns"
+    },
+    {
+      "id": "skill:oracle-adk",
+      "kind": "skill",
+      "name": "oracle-adk",
+      "group": "technical",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "oracle adk",
+        "agent development kit",
+        "oracle agent"
+      ],
+      "description": "Oracle Agent Development Kit patterns and implementations"
     },
     {
       "id": "skill:7-pillars",
@@ -3569,6 +2559,21 @@
       "description": "Interactive workshop creation and delivery patterns"
     },
     {
+      "id": "skill:security-auditor",
+      "kind": "skill",
+      "name": "security-auditor",
+      "group": "technical",
+      "status": "shipped",
+      "priority": "high",
+      "keywords": [
+        "security",
+        "audit",
+        "vulnerability",
+        "penetration"
+      ],
+      "description": "Security auditing and vulnerability assessment patterns"
+    },
+    {
       "id": "skill:daily-ops",
       "kind": "skill",
       "name": "daily-ops",
@@ -3613,6 +2618,20 @@
       "description": "Personal Jarvis system for creator intelligence operations"
     },
     {
+      "id": "skill:agentic-orchestration",
+      "kind": "skill",
+      "name": "agentic-orchestration",
+      "group": "technical",
+      "status": "shipped",
+      "priority": "high",
+      "keywords": [
+        "orchestration",
+        "multi-agent",
+        "agent coordination"
+      ],
+      "description": "Multi-agent orchestration patterns and workflows"
+    },
+    {
       "id": "skill:agentic-builder-lab",
       "kind": "skill",
       "name": "agentic-builder-lab",
@@ -3628,338 +2647,30 @@
       "description": "Convert a single build session into MDX build-log entry, LinkedIn draft, demo brief, Mermaid diagram, and a reusable prompt for the /agentic-builder-lab and /build pages on frankx.ai."
     },
     {
-      "id": "command:agentic-orchestration",
+      "id": "command:studio",
       "kind": "command",
-      "name": "/agentic-orchestration",
+      "name": "/studio",
       "group": "command",
       "description": ""
     },
     {
-      "id": "command:council",
+      "id": "command:generate-video",
       "kind": "command",
-      "name": "/council",
+      "name": "/generate-video",
       "group": "command",
       "description": ""
     },
     {
-      "id": "command:starlight-intelligence",
+      "id": "command:generate-images",
       "kind": "command",
-      "name": "/starlight-intelligence",
+      "name": "/generate-images",
       "group": "command",
       "description": ""
     },
     {
-      "id": "command:acos",
+      "id": "command:infogenius",
       "kind": "command",
-      "name": "/acos",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:claude-sdk",
-      "kind": "command",
-      "name": "/claude-sdk",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:automation-dev",
-      "kind": "command",
-      "name": "/automation-dev",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:author-team",
-      "kind": "command",
-      "name": "/author-team",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:frankx-brand",
-      "kind": "command",
-      "name": "/frankx-brand",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:office-hours",
-      "kind": "command",
-      "name": "/office-hours",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:plan-ceo-review",
-      "kind": "command",
-      "name": "/plan-ceo-review",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:plan-eng-review",
-      "kind": "command",
-      "name": "/plan-eng-review",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:plan-design-review",
-      "kind": "command",
-      "name": "/plan-design-review",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:review",
-      "kind": "command",
-      "name": "/review",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:qa",
-      "kind": "command",
-      "name": "/qa",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:qa-only",
-      "kind": "command",
-      "name": "/qa-only",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:ship",
-      "kind": "command",
-      "name": "/ship",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:land-and-deploy",
-      "kind": "command",
-      "name": "/land-and-deploy",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:canary",
-      "kind": "command",
-      "name": "/canary",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:benchmark",
-      "kind": "command",
-      "name": "/benchmark",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:browse",
-      "kind": "command",
-      "name": "/browse",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:cso",
-      "kind": "command",
-      "name": "/cso",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:investigate",
-      "kind": "command",
-      "name": "/investigate",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:retro",
-      "kind": "command",
-      "name": "/retro",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:autoplan",
-      "kind": "command",
-      "name": "/autoplan",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:design-review",
-      "kind": "command",
-      "name": "/design-review",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:design-consultation",
-      "kind": "command",
-      "name": "/design-consultation",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:codex",
-      "kind": "command",
-      "name": "/codex",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:careful",
-      "kind": "command",
-      "name": "/careful",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:freeze",
-      "kind": "command",
-      "name": "/freeze",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:guard",
-      "kind": "command",
-      "name": "/guard",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:unfreeze",
-      "kind": "command",
-      "name": "/unfreeze",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:setup-browser-cookies",
-      "kind": "command",
-      "name": "/setup-browser-cookies",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:setup-deploy",
-      "kind": "command",
-      "name": "/setup-deploy",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:document-release",
-      "kind": "command",
-      "name": "/document-release",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:gstack-upgrade",
-      "kind": "command",
-      "name": "/gstack-upgrade",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:langgraph-patterns",
-      "kind": "command",
-      "name": "/langgraph-patterns",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:mcp-architecture",
-      "kind": "command",
-      "name": "/mcp-architecture",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:mcp-status",
-      "kind": "command",
-      "name": "/mcp-status",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:nextjs-deploy",
-      "kind": "command",
-      "name": "/nextjs-deploy",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:spec",
-      "kind": "command",
-      "name": "/spec",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:starlight-architect",
-      "kind": "command",
-      "name": "/starlight-architect",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:oracle-adk",
-      "kind": "command",
-      "name": "/oracle-adk",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:planning-with-files",
-      "kind": "command",
-      "name": "/planning-with-files",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:products-creation",
-      "kind": "command",
-      "name": "/products-creation",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:security-audit",
-      "kind": "command",
-      "name": "/security-audit",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:generate-social",
-      "kind": "command",
-      "name": "/generate-social",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:create-music",
-      "kind": "command",
-      "name": "/create-music",
-      "group": "command",
-      "description": ""
-    },
-    {
-      "id": "command:ux-design",
-      "kind": "command",
-      "name": "/ux-design",
+      "name": "/infogenius",
       "group": "command",
       "description": ""
     },
@@ -3999,6 +2710,48 @@
       "description": ""
     },
     {
+      "id": "command:mcp-architecture",
+      "kind": "command",
+      "name": "/mcp-architecture",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:mcp-status",
+      "kind": "command",
+      "name": "/mcp-status",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:automation-dev",
+      "kind": "command",
+      "name": "/automation-dev",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:claude-sdk",
+      "kind": "command",
+      "name": "/claude-sdk",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:langgraph-patterns",
+      "kind": "command",
+      "name": "/langgraph-patterns",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:frankx-brand",
+      "kind": "command",
+      "name": "/frankx-brand",
+      "group": "command",
+      "description": ""
+    },
+    {
       "id": "command:suno-mastery",
       "kind": "command",
       "name": "/suno-mastery",
@@ -4016,6 +2769,13 @@
       "id": "command:oci-services",
       "kind": "command",
       "name": "/oci-services",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:oracle-adk",
+      "kind": "command",
+      "name": "/oracle-adk",
       "group": "command",
       "description": ""
     },
@@ -4048,6 +2808,13 @@
       "description": ""
     },
     {
+      "id": "command:security-audit",
+      "kind": "command",
+      "name": "/security-audit",
+      "group": "command",
+      "description": ""
+    },
+    {
       "id": "command:daily-ops",
       "kind": "command",
       "name": "/daily-ops",
@@ -4076,6 +2843,27 @@
       "description": ""
     },
     {
+      "id": "command:agentic-orchestration",
+      "kind": "command",
+      "name": "/agentic-orchestration",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:council",
+      "kind": "command",
+      "name": "/council",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:starlight-intelligence",
+      "kind": "command",
+      "name": "/starlight-intelligence",
+      "group": "command",
+      "description": ""
+    },
+    {
       "id": "command:build-log",
       "kind": "command",
       "name": "/build-log",
@@ -4097,7 +2885,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Dependency health audit. Parallel: security CVEs, license compliance, outdated versions, bundle size, supply-chain risk, dead deps. Ranked action list with impact × effort.",
-      "file": ".claude/workflows/dependency-audit.js"
+      "file": ".claude\\workflows\\dependency-audit.js"
     },
     {
       "id": "workflow:incident-postmortem",
@@ -4107,7 +2895,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Post-incident analysis. Parallel evidence gathering (timeline + impact + context) → root cause + contributing factors → blameless postmortem markdown ready for team review.",
-      "file": ".claude/workflows/incident-postmortem.js"
+      "file": ".claude\\workflows\\incident-postmortem.js"
     },
     {
       "id": "workflow:model-arena-daily",
@@ -4117,7 +2905,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Daily multi-tier model arena. Runs the same canonical prompt through Claude Opus / Sonnet / Haiku in parallel. Synthesizer ranks responses on depth, accuracy, specificity. Captures regression signal if a tier drops.",
-      "file": ".claude/workflows/model-arena-daily.js"
+      "file": ".claude\\workflows\\model-arena-daily.js"
     },
     {
       "id": "workflow:pr-review-multi-perspective",
@@ -4127,7 +2915,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Multi-perspective PR review with adversarial verification. Pipeline: 6 dimensions reviewed in parallel → each finding adversarially verified by an independent agent → synthesis. Only confirmed findings surface.",
-      "file": ".claude/workflows/pr-review-multi-perspective.js"
+      "file": ".claude\\workflows\\pr-review-multi-perspective.js"
     },
     {
       "id": "workflow:release-checklist",
@@ -4137,7 +2925,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Pre-release validation gate. Parallel: tests, changelog, version bumps, migration docs, rollback plan + composes dependency-audit. Optional pr-review-multi-perspective sub-call. Pass/fail verdict on whether to ship.",
-      "file": ".claude/workflows/release-checklist.js"
+      "file": ".claude\\workflows\\release-checklist.js"
     },
     {
       "id": "workflow:repo-onboarding",
@@ -4147,7 +2935,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Cold-start understanding of a repo. Parallel: architecture, data flow, dependencies, conventions, recent activity, gotchas. Synthesize into operating brief with first-task recommendations.",
-      "file": ".claude/workflows/repo-onboarding.js"
+      "file": ".claude\\workflows\\repo-onboarding.js"
     },
     {
       "id": "workflow:research-pulse-daily",
@@ -4157,7 +2945,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Daily lightweight research pulse — 3 parallel domain scans, synthesize to a 200-word brief. The cheap daily counterpart to research-fanout (which is heavy/weekly). Tags ship-worthy signals for the Friday newsletter queue.",
-      "file": ".claude/workflows/research-pulse-daily.js"
+      "file": ".claude\\workflows\\research-pulse-daily.js"
     },
     {
       "id": "workflow:tech-debt-triage",
@@ -4167,7 +2955,7 @@
       "tierLabel": "L99",
       "status": "shipped",
       "description": "Code-smell scan + priority ranking. Parallel: complexity, duplication, outdated patterns, test gaps, doc gaps. Output: ranked findings in 3 buckets + concrete fix proposals for top items.",
-      "file": ".claude/workflows/tech-debt-triage.js"
+      "file": ".claude\\workflows\\tech-debt-triage.js"
     },
     {
       "id": "iam:content-writer",
@@ -4274,273 +3062,28 @@
   ],
   "edges": [
     {
-      "source": "skill:agentic-orchestration",
-      "target": "skill:creator-intelligence",
+      "source": "skill:multimodal-studio",
+      "target": "skill:frankx-brand",
       "rel": "uses-skill"
     },
     {
-      "source": "skill:agentic-orchestration",
-      "target": "command:agentic-orchestration",
+      "source": "skill:multimodal-studio",
+      "target": "command:studio",
       "rel": "triggers"
     },
     {
-      "source": "skill:agentic-orchestration",
-      "target": "command:council",
+      "source": "skill:multimodal-studio",
+      "target": "command:generate-video",
       "rel": "triggers"
     },
     {
-      "source": "skill:agentic-orchestration",
-      "target": "command:starlight-intelligence",
+      "source": "skill:multimodal-studio",
+      "target": "command:generate-images",
       "rel": "triggers"
     },
     {
-      "source": "skill:cacos",
-      "target": "command:acos",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:claude-sdk",
-      "target": "command:claude-sdk",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:claude-sdk",
-      "target": "command:automation-dev",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:excellence-book-writing",
-      "target": "command:author-team",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:frankx-brand",
-      "target": "command:frankx-brand",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:office-hours",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:plan-ceo-review",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:plan-eng-review",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:plan-design-review",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:review",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:qa",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:qa-only",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:ship",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:land-and-deploy",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:canary",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:benchmark",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:browse",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:cso",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:investigate",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:retro",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:autoplan",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:design-review",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:design-consultation",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:codex",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:careful",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:freeze",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:guard",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:unfreeze",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:setup-browser-cookies",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:setup-deploy",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:document-release",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:gstack",
-      "target": "command:gstack-upgrade",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:langgraph-patterns",
-      "target": "command:langgraph-patterns",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:mcp-architecture",
-      "target": "command:mcp-architecture",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:mcp-architecture",
-      "target": "command:mcp-status",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:mcp-architecture",
-      "target": "command:automation-dev",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:nextjs-react-expert",
-      "target": "command:nextjs-deploy",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:nextjs-react-expert",
-      "target": "command:spec",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:opus-extended-thinking",
-      "target": "command:starlight-architect",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:opus-extended-thinking",
-      "target": "command:council",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:oracle-adk",
-      "target": "skill:oci-services",
-      "rel": "uses-skill"
-    },
-    {
-      "source": "skill:oracle-adk",
-      "target": "command:oracle-adk",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:planning-with-files",
-      "target": "command:planning-with-files",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:planning-with-files",
-      "target": "command:spec",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:product-management-expert",
-      "target": "command:products-creation",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:security-auditor",
-      "target": "command:security-audit",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:social-media-strategy",
-      "target": "command:generate-social",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:suno-ai-mastery",
-      "target": "command:create-music",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:ui-ux-design-expert",
-      "target": "command:ux-design",
-      "rel": "triggers"
-    },
-    {
-      "source": "skill:web-design-expert",
-      "target": "command:ux-design",
+      "source": "skill:multimodal-studio",
+      "target": "command:infogenius",
       "rel": "triggers"
     },
     {
@@ -4574,6 +3117,41 @@
       "rel": "triggers"
     },
     {
+      "source": "skill:mcp-architecture",
+      "target": "command:mcp-architecture",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:mcp-architecture",
+      "target": "command:mcp-status",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:mcp-architecture",
+      "target": "command:automation-dev",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:claude-sdk",
+      "target": "command:claude-sdk",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:claude-sdk",
+      "target": "command:automation-dev",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:langgraph-patterns",
+      "target": "command:langgraph-patterns",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:frankx-brand",
+      "target": "command:frankx-brand",
+      "rel": "triggers"
+    },
+    {
       "source": "skill:suno-mastery",
       "target": "command:suno-mastery",
       "rel": "triggers"
@@ -4586,6 +3164,16 @@
     {
       "source": "skill:oci-services",
       "target": "command:oci-services",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:oracle-adk",
+      "target": "skill:oci-services",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:oracle-adk",
+      "target": "command:oracle-adk",
       "rel": "triggers"
     },
     {
@@ -4621,6 +3209,11 @@
     {
       "source": "skill:workshop-building",
       "target": "command:workshop-building",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:security-auditor",
+      "target": "command:security-audit",
       "rel": "triggers"
     },
     {
@@ -4676,6 +3269,26 @@
     {
       "source": "skill:creator-intelligence",
       "target": "command:agentic-creator-os",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:agentic-orchestration",
+      "target": "skill:creator-intelligence",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:agentic-orchestration",
+      "target": "command:agentic-orchestration",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:agentic-orchestration",
+      "target": "command:council",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:agentic-orchestration",
+      "target": "command:starlight-intelligence",
       "rel": "triggers"
     },
     {
