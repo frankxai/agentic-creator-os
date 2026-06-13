@@ -43,6 +43,7 @@ ACOS is **tool-agnostic at the skill level** — workflows describe what needs t
 | Knowledge base | `~~knowledge base` | Notion MCP | Obsidian, Confluence |
 | Publishing | `~~publishing` | Vercel (deploy commands) | GitHub Pages, Netlify |
 | Version control | `~~git` | GitHub CLI (gh) | GitLab |
+| Social publishing | `~~social publishing` | starlight-social MCP | Playwright browser automation, Web3 direct APIs (Bluesky, Farcaster), Postiz, Blotato |
 
 ### Research & intelligence
 

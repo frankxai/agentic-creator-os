@@ -288,6 +288,40 @@ skill:social-media, create a farcaster cast about [TOPIC]
 skill:social-media, turn my blog post [URL] into a thread
 ```
 
+## Programmatic Publishing (MCP Integration)
+
+Coding agents can bypass manual copy-pasting by calling the `starlight-social` MCP server tools directly:
+
+### 1. Retrieve Active Channels
+Use `get_channels` to fetch the authorized social accounts for the active adapter (e.g., Local Staging, Blotato, Postiz, Playwright Browser, or Web3 Direct):
+* **Tool:** `get_channels`
+* **Returns:** A list of active channels with their `id`, `platform`, and `profileName` (e.g., `["web3-bluesky"]` or `["browser-x"]`).
+
+### 2. Publish Content
+Use `publish_post` to post text and optional media attachments directly to one or more channel IDs:
+* **Tool:** `publish_post`
+* **Arguments:**
+* `text` (string): The post copy.
+* `channels` (array of strings): The channel IDs to post to (e.g., `["web3-bluesky"]`, `["web3-farcaster"]`, or `["browser-x"]`).
+* `mediaPath` (string, optional): Local path or URL to an image/video.
+
+### 3. Web3 Direct Configuration
+For direct, zero-cost API publishing on decentralised networks, configure:
+* **Engine Type:** `web3`
+* **Environment variables needed:**
+  * Bluesky: `BLUESKY_USERNAME`, `BLUESKY_APP_PASSWORD`
+  * Farcaster: `FARCASTER_NEYNAR_API_KEY`, `FARCASTER_SIGNER_UUID`
+
+### 4. Vision-Guided Coordinates Click
+When operating browser automation, layout selectors can break. If a DOM selector fails, the agent should transition to **Vision-Guided Mode**:
+1. Take a page screenshot using `screenshot`.
+2. Locate the compose and publish elements using visual detection coordinates (bounding box centers).
+3. Call `page.mouse.click(x, y)` to execute human-like clicks directly on the screen coordinates, avoiding DOM dependency.
+
+### 5. Handle Session Expiry (Playwright Only)
+If a browser-based post fails with a session expired error, the agent should output an instruction prompting the user to re-run the login helper:
+* **Command:** `node scripts/social-login.mjs <platform>`
+
 ## Related Skills
 
 - `blog-writing` - Create long-form content to repurpose

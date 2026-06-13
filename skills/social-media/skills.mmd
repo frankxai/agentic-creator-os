@@ -1,0 +1,60 @@
+graph TD
+    %% Define styles and classes
+    classDef cognitive fill:#1f2937,stroke:#3b82f6,stroke-width:2px,color:#fff;
+    classDef sentinel fill:#1f2937,stroke:#10b981,stroke-width:2px,color:#fff;
+    classDef storage fill:#111827,stroke:#4b5563,stroke-dasharray: 5 5,color:#fff;
+    classDef gate fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#fff;
+    classDef execution fill:#065f46,stroke:#34d399,stroke-width:2px,color:#fff;
+
+    %% Cognitive Layer
+    SubGraph Cognitive ["Cognitive Orchestration Layer"]
+        Orchestrator[starlight-orchestrator]:::cognitive
+        Strategist[starlight-social-strategist]:::cognitive
+    end
+
+    %% Vault / File system
+    SubGraph Storage ["Sovereign Storage (Local FS)"]
+        Vault[(Starlight Vaults)]:::storage
+        StagingFolder[content/staging/social/]:::storage
+    end
+
+    %% Sentinel Layer
+    SubGraph Quality ["Compliance & Security Layer"]
+        SocialSentinel[starlight-social-sentinel]:::sentinel
+    end
+
+    %% Approval Gate
+    SubGraph HumanGate ["Operator Loop"]
+        ApproveGate[Operator Approval Gate]:::gate
+    end
+
+    %% Execution Layer
+    SubGraph Execution ["Sovereign Distribution Layer (SDL)"]
+        MCPServer[starlight-social MCP]:::execution
+        BrowserAdapter[Playwright Browser Adapter]:::execution
+        Web3Adapter[Web3 Direct Adapter]:::execution
+        APIBridges[Postiz / Blotato Adapters]:::execution
+    end
+
+    %% Connection Logic
+    Orchestrator -->|1. Triggers distribution task| Strategist
+    Vault -.->|Read context & blog drafts| Strategist
+    Strategist -->|2. Drafts post copy & campaigns| StagingFolder
+    StagingFolder -->|3. Requests audit| SocialSentinel
+    SocialSentinel -.->|Sanitize secrets, check voice| SocialSentinel
+    SocialSentinel -->|4. Generates SIP Attestation Signature| StagingFolder
+    StagingFolder -->|5. Awaiting manual check| ApproveGate
+
+    ApproveGate -->|6. Operator types /approve or reviews TUI| MCPServer
+    MCPServer -->|Route by config| BrowserAdapter
+    MCPServer -->|Route by config| Web3Adapter
+    MCPServer -->|Route by config| APIBridges
+
+    BrowserAdapter -->|Headless Posting| X[X / Twitter]
+    BrowserAdapter -->|Headless Posting| Threads[Threads]
+    BrowserAdapter -->|Headless Posting| LinkedIn[LinkedIn]
+    
+    Web3Adapter -->|Direct XRPC| Bluesky[Bluesky]
+    Web3Adapter -->|Neynar API| Farcaster[Farcaster]
+
+    APIBridges -->|Webhook / API| n8n[n8n Workflow]

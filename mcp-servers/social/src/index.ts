@@ -121,7 +121,7 @@ server.registerTool(
     title: "Configure Social Publisher Engine",
     description: "Temporarily change the active social publishing adapter type",
     inputSchema: {
-      type: z.enum(["local", "blotato", "postiz", "playwright"]).describe("The adapter engine to set active")
+      type: z.enum(["local", "blotato", "postiz", "playwright", "web3"]).describe("The adapter engine to set active")
     }
   },
   async ({ type }) => {

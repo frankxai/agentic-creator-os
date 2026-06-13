@@ -21,6 +21,7 @@ import { BlotatoAdapter } from "./blotato.js";
 import { PostizAdapter } from "./postiz.js";
 import { PlaywrightBrowserAdapter } from "./playwright-browser.js";
 import { LocalStagingAdapter } from "./local-staging.js";
+import { Web3DirectAdapter } from "./web3-direct.js";
 
 export function getAdapter(type: string): SocialAdapter {
   const normalizedType = type.toLowerCase();
@@ -32,6 +33,9 @@ export function getAdapter(type: string): SocialAdapter {
     case "playwright":
     case "browser":
       return new PlaywrightBrowserAdapter();
+    case "web3":
+    case "direct":
+      return new Web3DirectAdapter();
     case "local":
     case "staging":
     default:
