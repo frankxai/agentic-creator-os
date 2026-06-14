@@ -158,15 +158,34 @@ update_local_state() {
     fi
 }
 
+# Global options
+FILTER_CATEGORY=""
+FORCE_OVERWRITE="false"
+
 # Sync all skills
 sync_all() {
-    log "Syncing all skills from GitHub..."
+    if [ -n "$FILTER_CATEGORY" ]; then
+        log "Syncing skills for category: $FILTER_CATEGORY from GitHub..."
+    else
+        log "Syncing all skills from GitHub..."
+    fi
 
     fetch_registry || true
 
     # Get list of skills from registry
     if [ -f "$REGISTRY_FILE" ] && command -v jq &> /dev/null; then
-        local skills=$(jq -r '.skills | keys[]' "$REGISTRY_FILE")
+        local skills=""
+        if [ -n "$FILTER_CATEGORY" ]; then
+            # Filter skills by category property in registry.json
+            skills=$(jq -r ".skills | to_entries[] | select(.value.category == \"$FILTER_CATEGORY\") | .key" "$REGISTRY_FILE" 2>/dev/null)
+        else
+            skills=$(jq -r '.skills | keys[]' "$REGISTRY_FILE")
+        fi
+
+        if [ -z "$skills" ]; then
+            warn "No skills found in category: $FILTER_CATEGORY"
+            return
+        fi
 
         for skill in $skills; do
             install_skill "$skill" || warn "Failed to install: $skill"
@@ -236,12 +255,37 @@ main() {
     show_banner
     check_prerequisites
 
-    case "${1:-help}" in
+    # Parse arguments for options
+    local cmd="help"
+    local skill=""
+    
+    for arg in "$@"; do
+        case $arg in
+            --category=*)
+                FILTER_CATEGORY="${arg#*=}"
+                ;;
+            --force)
+                FORCE_OVERWRITE="true"
+                ;;
+            -*)
+                # Skip other options
+                ;;
+            *)
+                if [ "$cmd" = "help" ]; then
+                    cmd="$arg"
+                elif [ -z "$skill" ]; then
+                    skill="$arg"
+                fi
+                ;;
+        esac
+    done
+
+    case "$cmd" in
         list)
             list_skills
             ;;
         install)
-            install_skill "$2"
+            install_skill "$skill"
             ;;
         sync)
             sync_all
@@ -260,7 +304,7 @@ main() {
             show_help
             ;;
         *)
-            error "Unknown command: $1. Use 'acos-sync help' for usage."
+            error "Unknown command: $cmd. Use 'acos-sync help' for usage."
             ;;
     esac
 }
