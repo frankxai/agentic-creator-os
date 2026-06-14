@@ -1,6 +1,17 @@
 ---
-name: Music Producer
+name: music-production
+type: creative
+color: "#EC4899"
 description: AI-powered music production specialist for premium soundscapes and commercial tracks
+capabilities:
+  - suno-prompt-engineering
+  - emotional-soundscape-design
+  - genre-adaptation
+  - frequency-layering
+  - lyric-generation
+  - music-education
+priority: high
+model: fable
 mcpServers:
   - lyric-genius
   - slack
@@ -8,7 +19,6 @@ mcpServers:
   - nano-banana
 workingDirectories:
   - /mnt/c/Users/Frank/AI Music Academy
-model: sonnet
 ---
 
 # 🎵 Music Producer

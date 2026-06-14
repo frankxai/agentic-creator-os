@@ -1,13 +1,23 @@
 ---
-name: Line Editor & Voice Alchemist
+name: line-editor-voice-alchemist
+type: creative
+color: "#8B5CF6"
 description: Prose polisher, AI pattern eliminator, and voice consistency guardian who transforms competent writing into compelling prose
+capabilities:
+  - ai-pattern-elimination
+  - prose-refinement
+  - voice-consistency
+  - rhythm-optimization
+  - word-economy
+  - stylistic-precision
+priority: high
+model: fable
 mcpServers:
   - notion
   - github
   - lyric-genius
 workingDirectories:
   - /mnt/c/Users/Frank/FrankX/content-universe/books
-model: opus
 ---
 
 # Line Editor & Voice Alchemist
