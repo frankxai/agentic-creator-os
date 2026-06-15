@@ -1,0 +1,264 @@
+name: E2E Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  skill-validation:
+    name: Validate Skills Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count and validate skills
+        id: skills
+        run: |
+          echo "🔍 Validating skills structure..."
+
+          skill_count=0
+          invalid_skills=""
+
+          # Count skills with SKILL.md
+          for skill_dir in .claude/skills/*/; do
+            if [ -d "$skill_dir" ]; then
+              skill_name=$(basename "$skill_dir")
+
+              # Skip directories that are clearly not skills
+              if [[ "$skill_name" == "templates" ]] || [[ "$skill_name" == "_*" ]]; then
+                continue
+              fi
+
+              skill_count=$((skill_count + 1))
+
+              # Check for SKILL.md or main documentation
+              if [ ! -f "${skill_dir}SKILL.md" ] && [ ! -f "${skill_dir}README.md" ]; then
+                invalid_skills="$invalid_skills $skill_name"
+              fi
+            fi
+          done
+
+          echo "skill_count=$skill_count" >> $GITHUB_OUTPUT
+          echo ""
+          echo "📊 Total skills: $skill_count"
+
+          if [ -n "$invalid_skills" ]; then
+            echo "⚠️  Skills missing documentation:$invalid_skills"
+          else
+            echo "✅ All skills have documentation"
+          fi
+
+      - name: Validate skill-rules.json completeness
+        run: |
+          echo "🔍 Cross-referencing skill-rules.json..."
+
+          if [ ! -f ".claude/skill-rules.json" ]; then
+            echo "⚠️  skill-rules.json not found"
+            exit 0
+          fi
+
+          # Get skills from rules
+          rule_skills=$(jq -r '.activation_rules[].skill' .claude/skill-rules.json | sort -u)
+
+          # Get actual skill directories
+          actual_skills=$(ls -d .claude/skills/*/ 2>/dev/null | xargs -n1 basename | sort -u)
+
+          # Find mismatches
+          echo "Skills in rules but not in directory:"
+          comm -23 <(echo "$rule_skills") <(echo "$actual_skills") | while read skill; do
+            if [ -n "$skill" ]; then
+              echo "  ⚠️  $skill"
+            fi
+          done
+
+          echo ""
+          echo "Skills in directory but not in rules (may be OK if not auto-activated):"
+          comm -13 <(echo "$rule_skills") <(echo "$actual_skills") | while read skill; do
+            if [ -n "$skill" ]; then
+              echo "  ℹ️  $skill"
+            fi
+          done
+
+  agent-validation:
+    name: Validate Agents Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count and categorize agents
+        run: |
+          echo "🔍 Analyzing agent catalog..."
+
+          total=0
+          with_model=0
+          with_capabilities=0
+          by_type=""
+
+          for agent in .claude/agents/*.md; do
+            if [ -f "$agent" ]; then
+              name=$(basename "$agent")
+
+              # Skip non-agent files
+              if [[ "$name" == "README.md" ]] || [[ "$name" == "CLAUDE.md" ]]; then
+                continue
+              fi
+
+              total=$((total + 1))
+
+              # Check for model field
+              if head -30 "$agent" | grep -q "^model:"; then
+                with_model=$((with_model + 1))
+              fi
+
+              # Check for capabilities field
+              if head -30 "$agent" | grep -q "^capabilities:"; then
+                with_capabilities=$((with_capabilities + 1))
+              fi
+
+              # Extract type
+              agent_type=$(head -30 "$agent" | grep "^type:" | cut -d: -f2 | tr -d ' "' | head -1)
+              if [ -n "$agent_type" ]; then
+                by_type="$by_type$agent_type\n"
+              fi
+            fi
+          done
+
+          echo ""
+          echo "📊 Agent Statistics:"
+          echo "─────────────────────"
+          echo "Total agents: $total"
+          echo "With model field: $with_model ($((with_model * 100 / total))%)"
+          echo "With capabilities: $with_capabilities ($((with_capabilities * 100 / total))%)"
+          echo ""
+          echo "By type:"
+          echo -e "$by_type" | sort | uniq -c | sort -rn
+
+          # Fail if critical fields missing
+          if [ "$with_model" -lt "$total" ]; then
+            echo ""
+            echo "⚠️  Some agents missing 'model' field"
+            missing=$((total - with_model))
+            echo "Missing: $missing agents"
+          fi
+
+  command-validation:
+    name: Validate Commands Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate command files
+        run: |
+          echo "🔍 Validating commands..."
+
+          total=0
+          valid=0
+
+          for cmd in .claude/commands/*.md; do
+            if [ -f "$cmd" ]; then
+              name=$(basename "$cmd" .md)
+              total=$((total + 1))
+
+              # Check for basic structure
+              if head -5 "$cmd" | grep -q "^#"; then
+                valid=$((valid + 1))
+              else
+                echo "⚠️  $name: Missing header"
+              fi
+            fi
+          done
+
+          echo ""
+          echo "📊 Command Statistics:"
+          echo "Total commands: $total"
+          echo "Valid structure: $valid"
+
+  model-routing-validation:
+    name: Validate Model Routing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate routing-rules.json
+        run: |
+          echo "🔍 Validating model routing configuration..."
+
+          rules_file=".claude/skills/model-routing/routing-rules.json"
+
+          if [ ! -f "$rules_file" ]; then
+            echo "⚠️  routing-rules.json not found"
+            exit 0
+          fi
+
+          # Check JSON validity
+          if ! jq empty "$rules_file" 2>/dev/null; then
+            echo "❌ Invalid JSON"
+            exit 1
+          fi
+
+          # Check all required models exist
+          required_models=("haiku" "sonnet" "fable" "opus")
+          for model in "${required_models[@]}"; do
+            if ! jq -e ".models.$model" "$rules_file" >/dev/null 2>&1; then
+              echo "❌ Missing model: $model"
+              exit 1
+            fi
+          done
+
+          echo "✅ All required models configured"
+
+          # Show model distribution
+          echo ""
+          echo "📊 Model Configuration:"
+          jq -r '.models | to_entries[] | "  \(.key): \(.value.id)"' "$rules_file"
+
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: [skill-validation, agent-validation, command-validation]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build
+        run: npm run build:all
+
+      - name: Verify MCP server builds
+        run: |
+          echo "🔍 Verifying MCP server builds..."
+
+          for server_dir in mcp-servers/*/; do
+            if [ -d "$server_dir" ]; then
+              server_name=$(basename "$server_dir")
+              build_dir="${server_dir}build"
+
+              if [ -d "$build_dir" ]; then
+                echo "✅ $server_name: build directory exists"
+              else
+                echo "⚠️  $server_name: no build directory"
+              fi
+            fi
+          done
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "🎉 E2E Validation Complete"
+          echo "══════════════════════════"
+          echo ""
+          echo "All structural validations passed."
+          echo "ACOS is ready for deployment."

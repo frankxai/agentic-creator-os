@@ -1,0 +1,168 @@
+name: Security Scan
+
+on:
+  pull_request:
+    paths:
+      - '.claude/**'
+      - 'mcp-servers/**'
+      - '**/*.ts'
+      - '**/*.js'
+  schedule:
+    - cron: '0 6 * * 1'  # Weekly on Monday 6am UTC
+
+jobs:
+  secrets-scan:
+    name: Secrets Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for diff
+
+      - name: Detect hardcoded secrets
+        run: |
+          echo "🔍 Scanning for potential secrets..."
+
+          # Patterns that suggest secrets
+          secret_patterns=(
+            'sk-[a-zA-Z0-9]{48}'           # OpenAI API keys
+            'anthropic[_-]?[a-z]*[_-]?key'  # Anthropic patterns
+            'api[_-]?key\s*[=:]\s*["\x27][^"\x27]+'
+            'password\s*[=:]\s*["\x27][^"\x27]+'
+            'secret\s*[=:]\s*["\x27][^"\x27]+'
+            'token\s*[=:]\s*["\x27][^"\x27]+'
+            'aws_secret'
+            'private_key'
+            'BEGIN RSA PRIVATE KEY'
+            'BEGIN PRIVATE KEY'
+          )
+
+          has_secrets=false
+
+          for pattern in "${secret_patterns[@]}"; do
+            if grep -rniE "$pattern" --include='*.md' --include='*.json' --include='*.ts' --include='*.js' --exclude-dir=node_modules . 2>/dev/null | grep -v 'EXAMPLE\|example\|placeholder\|<your\|YOUR_\|xxx\|REDACTED' | head -5; then
+              has_secrets=true
+            fi
+          done
+
+          if [ "$has_secrets" = true ]; then
+            echo ""
+            echo "⚠️  Potential secrets detected. Review carefully."
+            echo "If these are examples/placeholders, they're OK."
+            # Warning only - manual review needed
+          else
+            echo "✅ No obvious secrets detected"
+          fi
+
+  agent-iam-audit:
+    name: Agent IAM Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate agent-iam.json structure
+        run: |
+          echo "🔍 Auditing agent-iam.json..."
+
+          if [ ! -f ".claude/agent-iam.json" ]; then
+            echo "⚠️  No agent-iam.json found"
+            exit 0
+          fi
+
+          # Check JSON validity
+          if ! jq empty .claude/agent-iam.json 2>/dev/null; then
+            echo "❌ Invalid JSON in agent-iam.json"
+            exit 1
+          fi
+
+          # Check for overly permissive profiles
+          if jq -e '.profiles[] | select(.tools[] == "*")' .claude/agent-iam.json >/dev/null 2>&1; then
+            echo "⚠️  Found profile with wildcard tool access (*)"
+            echo "Review carefully - this grants unrestricted tool usage"
+          fi
+
+          # Verify global_deny exists
+          if ! jq -e '.global_deny' .claude/agent-iam.json >/dev/null 2>&1; then
+            echo "⚠️  No global_deny section found"
+            echo "Recommend adding global deny rules for sensitive files"
+          else
+            echo "✅ global_deny rules present"
+          fi
+
+          echo "✅ agent-iam.json structure valid"
+
+  prompt-injection-patterns:
+    name: Prompt Injection Defense Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify meta-prompt-validator coverage
+        run: |
+          echo "🔍 Checking prompt injection defense..."
+
+          validator=".claude/agents/meta-prompt-validator.md"
+
+          if [ ! -f "$validator" ]; then
+            echo "⚠️  meta-prompt-validator.md not found"
+            echo "Recommend creating prompt injection defense agent"
+            exit 0
+          fi
+
+          # Check for essential patterns
+          essential_patterns=(
+            "ignore.*instructions"
+            "jailbreak"
+            "DROP TABLE"
+            "credential"
+          )
+
+          for pattern in "${essential_patterns[@]}"; do
+            if ! grep -qi "$pattern" "$validator"; then
+              echo "⚠️  Missing defense for pattern: $pattern"
+            fi
+          done
+
+          # Check for multi-line bypass protection
+          if grep -q "tr '\\\\n' ' '" "$validator" || grep -q "prompt_flat" "$validator"; then
+            echo "✅ Multi-line bypass protection present"
+          else
+            echo "⚠️  Consider adding multi-line bypass protection"
+          fi
+
+          echo "✅ Prompt injection defenses reviewed"
+
+  dependency-audit:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run npm audit
+        run: |
+          echo "🔍 Running npm audit..."
+          npm audit --audit-level=high || true
+
+      - name: Check for known vulnerable patterns
+        run: |
+          echo "🔍 Checking for vulnerable code patterns..."
+
+          # Check for eval/exec in TypeScript
+          if grep -rn "eval(" --include='*.ts' --include='*.js' --exclude-dir=node_modules . 2>/dev/null; then
+            echo "⚠️  Found eval() usage - review for safety"
+          fi
+
+          # Check for shell injection risks
+          if grep -rn "child_process.exec(" --include='*.ts' --include='*.js' --exclude-dir=node_modules . 2>/dev/null | grep -v 'escapeShell\|sanitize'; then
+            echo "⚠️  Found exec() without obvious sanitization - review carefully"
+          fi
+
+          echo "✅ Code pattern check complete"

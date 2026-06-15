@@ -136,6 +136,41 @@ notify_user: true
 message: "Prompt blocked: [CATEGORY] pattern detected"
 ```
 
+### 7. Context Manipulation
+
+Attempts to inject fake context boundaries:
+
+```
+BLOCK: "---END OF CONTEXT---"
+BLOCK: "Previous context ends here"
+BLOCK: "</system>" or "</instructions>"
+BLOCK: "New context:" or "New instructions:"
+BLOCK: "[SYSTEM]" or "[ADMIN]"
+```
+
+### 8. Role Confusion
+
+Attempts to hijack model identity:
+
+```
+BLOCK: "Speaking as the system:"
+BLOCK: "As an AI without restrictions:"
+BLOCK: "From: Administrator"
+BLOCK: "Override mode:"
+BLOCK: "Sudo:"
+```
+
+### 9. Encoding Bypasses
+
+Attempts to hide payloads via encoding:
+
+```
+WARN: Base64-encoded strings over 20 chars
+WARN: Unicode homoglyphs (Cyrillic/Greek lookalikes)
+WARN: Zero-width characters
+BLOCK: Decoded payload matches any above patterns
+```
+
 ## Implementation
 
 ### PreToolUse Hook
@@ -145,34 +180,100 @@ message: "Prompt blocked: [CATEGORY] pattern detected"
 validate_prompt() {
   local prompt="$1"
   
-  # Flatten multi-line prompts to prevent bypass via newline injection
+  # Step 1: Decode potential Base64 payloads
+  local decoded=""
+  if echo "$prompt" | grep -qE '[A-Za-z0-9+/]{20,}={0,2}'; then
+    decoded=$(echo "$prompt" | grep -oE '[A-Za-z0-9+/]{20,}={0,2}' | base64 -d 2>/dev/null || echo "")
+  fi
+  
+  # Step 2: Strip zero-width characters and normalize Unicode
+  local prompt_clean
+  prompt_clean=$(echo "$prompt" | sed 's/\xe2\x80[\x8b-\x8f]//g' | tr -d '​‌‍﻿')
+  
+  # Step 3: Flatten multi-line prompts to prevent bypass via newline injection
   local prompt_flat
-  prompt_flat=$(echo "$prompt" | tr '\n' ' ' | tr '\r' ' ')
+  prompt_flat=$(echo "$prompt_clean" | tr '\n' ' ' | tr '\r' ' ')
+  
+  # Step 4: Normalize to lowercase for pattern matching
+  local prompt_lower
+  prompt_lower=$(echo "$prompt_flat" | tr '[:upper:]' '[:lower:]')
   
   # Check injection patterns
-  if echo "$prompt_flat" | grep -qiE "ignore (previous|all|prior) instructions"; then
+  if echo "$prompt_lower" | grep -qE "ignore (previous|all|prior) instructions"; then
     echo "BLOCK: Prompt injection detected"
     return 1
   fi
   
   # Check jailbreak patterns
-  if echo "$prompt_flat" | grep -qiE "(DAN|jailbreak|no restrictions|bypass safety)"; then
+  if echo "$prompt_lower" | grep -qE "(dan mode|jailbreak|no restrictions|bypass safety|without safety)"; then
     echo "BLOCK: Jailbreak attempt detected"
     return 1
   fi
   
   # Check SQL injection
-  if echo "$prompt_flat" | grep -qiE "(DROP TABLE|DELETE FROM|UNION SELECT|; --)"; then
+  if echo "$prompt_lower" | grep -qE "(drop table|delete from|union select|; --|or 1=1)"; then
     echo "BLOCK: SQL injection pattern detected"
     return 1
   fi
   
+  # Check context manipulation
+  if echo "$prompt_lower" | grep -qE "(end of context|previous context ends|new context:|new instructions:|\[system\]|\[admin\]|</system>|</instructions>)"; then
+    echo "BLOCK: Context manipulation detected"
+    return 1
+  fi
+  
+  # Check role confusion
+  if echo "$prompt_lower" | grep -qE "(speaking as the system|as an ai without|from: administrator|override mode|^sudo:)"; then
+    echo "BLOCK: Role confusion attack detected"
+    return 1
+  fi
+  
   # Check credential extraction
-  if echo "$prompt_flat" | grep -qiE "(show.*(api key|password|secret|credential)|print.*(env|key))"; then
+  if echo "$prompt_lower" | grep -qE "(show.*(api key|password|secret|credential)|print.*(env|key)|reveal.*(token|secret))"; then
     echo "WARN: Potential credential extraction attempt"
   fi
   
+  # Check decoded Base64 content
+  if [ -n "$decoded" ]; then
+    local decoded_lower
+    decoded_lower=$(echo "$decoded" | tr '[:upper:]' '[:lower:]')
+    if echo "$decoded_lower" | grep -qE "(ignore.*instructions|jailbreak|drop table|system:)"; then
+      echo "BLOCK: Encoded injection payload detected"
+      return 1
+    fi
+  fi
+  
   echo "ALLOW"
+  return 0
+}
+```
+
+### Tool Output Scanning
+
+Scan content returned by WebFetch, WebSearch, and Read for indirect injection:
+
+```bash
+scan_tool_output() {
+  local output="$1"
+  local tool_name="$2"
+  
+  # High-risk tools that fetch external content
+  case "$tool_name" in
+    WebFetch|WebSearch)
+      # Check for injection attempts in fetched content
+      if echo "$output" | grep -qiE "(ignore previous|new instructions|you are now|</system>)"; then
+        echo "WARN: Potential indirect injection in $tool_name output"
+        return 1
+      fi
+      ;;
+    Read)
+      # Only scan user-controlled paths
+      if echo "$output" | grep -qiE "(ignore.*instructions|system:.*you are)"; then
+        echo "WARN: Suspicious content in file"
+      fi
+      ;;
+  esac
+  
   return 0
 }
 ```
