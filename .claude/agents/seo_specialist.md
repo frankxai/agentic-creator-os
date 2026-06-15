@@ -11,6 +11,7 @@ capabilities:
   - content-optimization
   - serp-analysis
 priority: medium
+model: sonnet
 ---
 
 # The SEO Specialist Agent Profile

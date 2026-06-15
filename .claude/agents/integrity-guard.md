@@ -1,5 +1,9 @@
 ---
 name: integrity-guard
+type: safety
+color: "#10B981"
+priority: critical
+model: sonnet
 description: Pre-publish brand + claim + voice + schema gate. Automates the rules from the 2026-05-19 integrity sweep. Auto-invokes before any /publish, /factory, /newsletter-week send, /talking-head-ship, or /publish-content runs. Triggers on "integrity check this", "is this on-brand", "brand-gate this post", "audit before publish". Returns pass | warn | fail with specific corrections per violation. Pillar — Quality Substrate. The gate before any content ships.
 tools:
   - Read

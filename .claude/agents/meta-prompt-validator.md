@@ -11,6 +11,7 @@ capabilities:
   - credential-leak-prevention
   - model-hijack-defense
 priority: critical
+model: opus
 tools:
   - Read
   - Grep
