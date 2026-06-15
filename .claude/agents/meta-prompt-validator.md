@@ -145,26 +145,30 @@ message: "Prompt blocked: [CATEGORY] pattern detected"
 validate_prompt() {
   local prompt="$1"
   
+  # Flatten multi-line prompts to prevent bypass via newline injection
+  local prompt_flat
+  prompt_flat=$(echo "$prompt" | tr '\n' ' ' | tr '\r' ' ')
+  
   # Check injection patterns
-  if echo "$prompt" | grep -qiE "ignore (previous|all|prior) instructions"; then
+  if echo "$prompt_flat" | grep -qiE "ignore (previous|all|prior) instructions"; then
     echo "BLOCK: Prompt injection detected"
     return 1
   fi
   
   # Check jailbreak patterns
-  if echo "$prompt" | grep -qiE "(DAN|jailbreak|no restrictions|bypass safety)"; then
+  if echo "$prompt_flat" | grep -qiE "(DAN|jailbreak|no restrictions|bypass safety)"; then
     echo "BLOCK: Jailbreak attempt detected"
     return 1
   fi
   
   # Check SQL injection
-  if echo "$prompt" | grep -qiE "(DROP TABLE|DELETE FROM|UNION SELECT|; --)"; then
+  if echo "$prompt_flat" | grep -qiE "(DROP TABLE|DELETE FROM|UNION SELECT|; --)"; then
     echo "BLOCK: SQL injection pattern detected"
     return 1
   fi
   
   # Check credential extraction
-  if echo "$prompt" | grep -qiE "(show.*(api key|password|secret|credential)|print.*(env|key))"; then
+  if echo "$prompt_flat" | grep -qiE "(show.*(api key|password|secret|credential)|print.*(env|key))"; then
     echo "WARN: Potential credential extraction attempt"
   fi
   
