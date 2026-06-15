@@ -1,3 +1,10 @@
+---
+name: content-strategy
+version: "1.0"
+description: Strategic content planning and creation for blog articles, newsletters, and social content
+author: FrankX
+---
+
 # Content Strategy Skill
 
 **Version:** 1.0 (ACOS v11)

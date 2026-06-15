@@ -1,3 +1,11 @@
+---
+name: fable-creative-reasoning
+version: "1.0"
+description: Creative and reasoning capabilities using Fable 5 for narrative, character development, and artistic expression
+author: FrankX
+model: fable
+---
+
 # Fable Creative Reasoning Skill
 
 **Version:** 1.0 (ACOS v11)

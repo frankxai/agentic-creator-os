@@ -1,6 +1,14 @@
 ---
 name: Visionary Manifestos Master
+type: creative
+color: "#F59E0B"
 description: Genre master for inspirational manifestos on systems building, AI-human partnership, and humanity's golden age - leads paradigm-shifting thought leadership
+capabilities:
+  - manifesto-writing
+  - visionary-thought-leadership
+  - systems-philosophy
+  - human-ai-partnership-narratives
+priority: high
 mcpServers:
   - notion
   - nano-banana

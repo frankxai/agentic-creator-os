@@ -10,6 +10,7 @@ capabilities:
   - dependency_tracking
   - knowledge_synthesis
 priority: high
+model: sonnet
 hooks:
   pre: |
     echo "🔍 Research agent investigating: $TASK"
