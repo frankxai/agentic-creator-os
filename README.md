@@ -8,11 +8,51 @@
 
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
-[![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
+<!-- Badges row 1: identity -->
+[![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os/releases)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+[![npm](https://img.shields.io/npm/v/%40frankx%2Fagentic-creator-os?style=for-the-badge&color=red&label=npm)](https://www.npmjs.com/package/@frankx/agentic-creator-os)
+
+<!-- Badges row 2: community -->
+[![GitHub Stars](https://img.shields.io/github/stars/frankxai/agentic-creator-os?style=for-the-badge&color=gold)](https://github.com/frankxai/agentic-creator-os/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/frankxai/agentic-creator-os?style=for-the-badge&color=blue)](https://github.com/frankxai/agentic-creator-os/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/frankxai/agentic-creator-os?style=for-the-badge&color=orange)](https://github.com/frankxai/agentic-creator-os/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](CONTRIBUTING.md)
+
+<!-- Badges row 3: platform support -->
 [![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Grok%20Build%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen?style=for-the-badge&logo=node.js)](https://nodejs.org)
+
+<br/>
+
+### 🚀 90+ Skills &nbsp;·&nbsp; 65+ Commands &nbsp;·&nbsp; 38 Agents &nbsp;·&nbsp; 8 Plugins &nbsp;·&nbsp; 6 Platforms
+
+<br/>
+
+[**Get Started →**](#quick-start) &nbsp;&nbsp; [**View Commands →**](#whats-included) &nbsp;&nbsp; [**Join Community →**](#community--support)
 
 </div>
+
+---
+
+## Table of Contents
+
+- [What Is ACOS?](#what-is-the-agentic-creator-os)
+- [Why ACOS?](#why-acos)
+- [Quick Start](#quick-start)
+- [Demo](#demo)
+- [Core Concepts](#core-concepts)
+- [What's Included](#whats-included)
+- [How It Works](#how-it-works)
+- [Multi-Platform Install](#multi-platform-install)
+- [Directory Structure](#directory-structure)
+- [Plugin Marketplace](#plugin-marketplace)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [Community & Support](#community--support)
+- [Version History](#version-history)
+- [Credits & Attribution](#credits--attribution)
+- [License](#license)
 
 ---
 
@@ -29,6 +69,20 @@ You: "write a blog post about AI agents"
   → Routes to: /article-creator workflow
   → Result: Guided article with SEO, images, social distribution
 ```
+
+---
+
+## Why ACOS?
+
+> **Stop prompting. Start creating.** ACOS turns your AI coding agent into a specialized creative OS — no manual skill selection, no workflow repetition, no context loss.
+
+| 🧠 Auto-Activating Intelligence | ⚡ 65+ Reusable Commands | 🛡️ Production Safety |
+|:---:|:---:|:---:|
+| 90+ skills load automatically based on what you're building. Zero manual configuration. | Slash commands for every creative workflow — blog posts, music, videos, products. | Circuit breaker, audit trail, IAM, self-modify gate. Autonomous protection built-in. |
+
+| 🎭 38 Specialized Agents | 🌐 6 Platform Support | 🔌 Plugin Ecosystem |
+|:---:|:---:|:---:|
+| Writers, architects, designers, producers — each with distinct expertise and voice. | Claude Code, Grok Build, Cursor, Windsurf, Gemini, and any markdown-reading agent. | 8 domain plugins from the agentic-creator-skills marketplace. Install only what you need. |
 
 ### System Architecture
 
@@ -80,9 +134,42 @@ This separation + adapters make ACOS the universal substrate: one catalog, many 
 
 ---
 
+## Demo
+
+<div align="center">
+
+> **See ACOS in action** — auto-skill loading, smart routing, and multimodal generation.
+
+![ACOS Smart Router Demo](docs/infographics/acos-smart-router.png)
+
+*Smart router in action: intent → skill load → command chain → output*
+
+</div>
+
+**Example: Full blog post pipeline in one command**
+```
+/acos "write a blog post about AI agents with images and social posts"
+  ├── /research "AI agents 2025"          → background context
+  ├── /article-creator                    → guided draft + SEO
+  ├── /infogenius "hero image"            → 4K image via Higgsfield MCP
+  └── /generate-social                    → 5 platform-ready posts
+```
+
+**Example: Music production**
+```
+/create-music "lo-fi hip hop, melancholic, for late-night coding"
+  ├── Suno prompt engineering             → genre + mood + style tokens
+  ├── Generation                          → track + stems
+  └── Metadata                            → title, tags, cover art brief
+```
+
+---
+
 ## Quick Start
 
-### Claude Code (Full Feature Set)
+> **In under 2 minutes:** clone → install → open your project → type `/acos`
+
+### ⚡ Fastest Path (Claude Code)
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -94,7 +181,22 @@ claude
 /acos
 ```
 
-### Cursor / Windsurf
+### Platform Selector
+
+| Platform | Install Command | Config Generated |
+|----------|----------------|-----------------|
+| **Claude Code** (full) | `./install.sh --platform=claude` | `~/.claude/` skills, commands, agents, hooks |
+| **Grok Build** (xAI) | `./install.sh --platform=grok` | `GROK.md` + `.grok/skills/` + `.grok/hooks/` |
+| **Cursor** | `./install.sh --platform=cursor` | `.cursorrules` |
+| **Windsurf** | `./install.sh --platform=windsurf` | `.windsurfrules` |
+| **Gemini** | `./install.sh --platform=gemini` | `GEMINI.md` |
+| **Any Agent** | `./install.sh --platform=generic` | `CONTEXT.md` |
+| **Auto-detect all** | `./install.sh` | All detected platforms |
+
+<details>
+<summary><strong>🖥️ Platform-Specific Setup Details</strong></summary>
+
+#### Cursor / Windsurf
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -102,9 +204,9 @@ cd agentic-creator-os
 ./install.sh --platform=cursor    # or --platform=windsurf
 ```
 
-This generates a `.cursorrules` or `.windsurfrules` file with all skills embedded.
+Generates a `.cursorrules` or `.windsurfrules` file with all skills embedded.
 
-### Gemini Code Assist
+#### Gemini Code Assist
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -112,9 +214,9 @@ cd agentic-creator-os
 ./install.sh --platform=gemini
 ```
 
-This generates a `GEMINI.md` context file for Gemini to read on session start.
+Generates a `GEMINI.md` context file for Gemini to read on session start.
 
-### Grok Build (xAI CLI/TUI) — Full Native Harness Support
+#### Grok Build (xAI CLI/TUI) — Full Native Harness Support
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -132,7 +234,7 @@ cd agentic-creator-os
 
 This is the richest non-Claude experience — native skills/agents/hooks/subagents/MCP + full ACOS excellence substrate + 5-fleet parity. See adapters/grok/index.ts and .claude/skills/grok-harness/.
 
-### Any AI Coding Agent
+#### Any AI Coding Agent
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -141,6 +243,8 @@ cd agentic-creator-os
 ```
 
 Generates a `CONTEXT.md` file. Point your agent at it as a system prompt or project instructions file.
+
+</details>
 
 > **See [QUICKSTART.md](QUICKSTART.md) for detailed setup per platform**
 
@@ -546,6 +650,71 @@ claude plugin install core content-engine design-excellence
 
 ---
 
+## Roadmap
+
+> Track what's coming next. Contributions welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+| Status | Version | Feature |
+|:------:|---------|---------|
+| ✅ **Shipped** | v11.0 | Plugin ecosystem, design swarm, v11 skills |
+| ✅ **Shipped** | v11.0 | Grok Build full harness + grok-harness-adapter |
+| ✅ **Shipped** | v11.0 | Multimodal Studio (image + video + character consistency) |
+| ✅ **Shipped** | v10.0 | Agent IAM, circuit breaker, audit trail, self-modify gate |
+| 🔄 **In Progress** | v11.1 | Observatory UI — visual skill/command browser |
+| 🔄 **In Progress** | v11.1 | Enhanced MCP server catalog + health dashboard |
+| 📋 **Planned** | v11.2 | Cursor / Windsurf native adapters (full parity) |
+| 📋 **Planned** | v11.2 | OpenCode adapter + Antigravity full support |
+| 📋 **Planned** | v12.0 | Persistent cross-session memory via SIP vaults |
+| 📋 **Planned** | v12.0 | Community skill registry + one-click install |
+
+[View all open issues →](https://github.com/frankxai/agentic-creator-os/issues) · [Request a feature →](https://github.com/frankxai/agentic-creator-os/issues/new)
+
+---
+
+## Contributing
+
+ACOS is open-source and **contributions are welcome**. Whether you're adding a skill, fixing a bug, or improving docs — read the [Frank DNA](#why-acos) first, then follow the guide.
+
+```bash
+# 1. Fork & clone
+gh repo fork frankxai/agentic-creator-os --clone
+
+# 2. Create a branch
+git checkout -b feature/your-skill-name
+
+# 3. Make your changes, then validate
+npm run build:all
+npm run lint
+
+# 4. Submit a PR
+gh pr create
+```
+
+**High-value contributions:**
+- 🧠 **New Skills** — Domain expertise modules (see [docs/AGENT_CONTRIBUTION_GUIDE.md](docs/AGENT_CONTRIBUTION_GUIDE.md))
+- 🤖 **New Agents** — Specialized cognitive patterns
+- 🐛 **Bug Fixes** — Issues labeled `bug`
+- 📖 **Documentation** — Especially examples and platform-specific guides
+
+**The Frank Test:** Does this help someone build their own system, not just use someone else's?
+
+→ **Full guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## Community & Support
+
+| Channel | Purpose | Link |
+|---------|---------|------|
+| 💬 **GitHub Discussions** | Questions, ideas, show & tell | [Discussions →](https://github.com/frankxai/agentic-creator-os/discussions) |
+| 🐛 **GitHub Issues** | Bug reports, feature requests | [Issues →](https://github.com/frankxai/agentic-creator-os/issues) |
+| 🌐 **Website** | Docs, blog, product news | [frankx.ai](https://frankx.ai) |
+| 📦 **npm** | Package releases | [@frankx/agentic-creator-os](https://www.npmjs.com/package/@frankx/agentic-creator-os) |
+
+Built by [FrankX](https://frankx.ai) — AI Architect & Creator. Questions? Open an issue or start a discussion.
+
+---
+
 ## Version History
 
 | Version | Date | Highlights |
@@ -602,6 +771,10 @@ MIT — Use it, fork it, build your own OS with it.
 
 Built by [FrankX](https://frankx.ai) — AI Architect & Creator
 
-[GitHub](https://github.com/frankxai/agentic-creator-os) | [Website](https://frankx.ai/acos) | [Issues](https://github.com/frankxai/agentic-creator-os/issues)
+[GitHub](https://github.com/frankxai/agentic-creator-os) · [Website](https://frankx.ai/acos) · [npm](https://www.npmjs.com/package/@frankx/agentic-creator-os) · [Issues](https://github.com/frankxai/agentic-creator-os/issues) · [Discussions](https://github.com/frankxai/agentic-creator-os/discussions)
+
+<br/>
+
+*"Build your system, not someone else's."* — Frank DNA
 
 </div>
