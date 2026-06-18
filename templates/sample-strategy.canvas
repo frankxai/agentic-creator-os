@@ -1,0 +1,63 @@
+{
+  "nodes": [
+    {
+      "id": "node-root-1",
+      "x": 0,
+      "y": 0,
+      "width": 250,
+      "height": 100,
+      "type": "text",
+      "text": "1. Topic Research & Outline\nScan Obsidian vault #thesis files and extract core hook points."
+    },
+    {
+      "id": "node-mid-2",
+      "x": 350,
+      "y": 0,
+      "width": 250,
+      "height": 100,
+      "type": "text",
+      "text": "2. Draft Creation\nGenerate draft using brand-voice and taste-guard scripts."
+    },
+    {
+      "id": "node-end-3",
+      "x": 700,
+      "y": -100,
+      "width": 250,
+      "height": 100,
+      "type": "text",
+      "text": "3a. Social Threading\nFormat and schedule X/LinkedIn queues via postiz-distributor."
+    },
+    {
+      "id": "node-end-4",
+      "x": 700,
+      "y": 100,
+      "width": 250,
+      "height": 100,
+      "type": "text",
+      "text": "3b. Video Adaptation\nGenerate suno tracks or script slides for Suno/Udio visuals."
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "node-root-1",
+      "fromSide": "right",
+      "toNode": "node-mid-2",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "node-mid-2",
+      "fromSide": "right",
+      "toNode": "node-end-3",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "node-mid-2",
+      "fromSide": "right",
+      "toNode": "node-end-4",
+      "toSide": "left"
+    }
+  ]
+}

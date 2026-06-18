@@ -1,0 +1,25 @@
+{
+  "$schema": "skill-profile-v1",
+  "name": "Music Production",
+  "description": "Suno AI music creation and audio workflows",
+  "version": "1.0.0",
+  "priority_skills": [
+    "suno-ai-mastery",
+    "suno-prompt-architect"
+  ],
+  "secondary_skills": [
+    "creative",
+    "copywriting"
+  ],
+  "excluded_skills": [
+    "backend-*",
+    "database-*",
+    "kubernetes-*",
+    "terraform-*",
+    "security-*"
+  ],
+  "triggers": {
+    "keywords": ["suno", "music", "song", "track", "lyrics", "beat", "melody"],
+    "commands": ["/create-music", "/frankx-music"]
+  }
+}

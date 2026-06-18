@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-12T02:54:55.003Z",
+  "generatedAt": "2026-06-17T17:07:45.702Z",
   "version": "1.0.0",
   "source": "agentic-creator-os",
   "counts": {
     "agent": 147,
-    "skill": 19,
-    "command": 33,
-    "workflow": 8,
+    "skill": 23,
+    "command": 41,
+    "workflow": 10,
     "iam-profile": 6,
-    "edges": 51
+    "edges": 63
   },
   "iam": {
     "content-writer": {
@@ -2647,6 +2647,72 @@
       "description": "Convert a single build session into MDX build-log entry, LinkedIn draft, demo brief, Mermaid diagram, and a reusable prompt for the /agentic-builder-lab and /build pages on frankx.ai."
     },
     {
+      "id": "skill:sandcastles-connector",
+      "kind": "skill",
+      "name": "sandcastles-connector",
+      "group": "creative",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "outlier",
+        "viral hook",
+        "video research",
+        "youtube outlier",
+        "sandcastles"
+      ],
+      "description": "Integrates with Sandcastles.ai viral outlier research to analyze high-performing hook structures, video curves, and outline viral content models"
+    },
+    {
+      "id": "skill:qme-second-brain",
+      "kind": "skill",
+      "name": "qme-second-brain",
+      "group": "creative",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "second brain",
+        "obsidian vault",
+        "notion sync",
+        "query brain",
+        "audience profile",
+        "qme"
+      ],
+      "description": "Syncs and queries the creator's second brain (Obsidian/Notion vaults) and audience communication profiles using Qme.ai"
+    },
+    {
+      "id": "skill:postiz-distributor",
+      "kind": "skill",
+      "name": "postiz-distributor",
+      "group": "creative",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "distribute",
+        "schedule post",
+        "queue thread",
+        "postiz",
+        "blotato",
+        "buffer"
+      ],
+      "description": "Formats, schedules, and distributes creator assets across social platforms (X, LinkedIn, Threads, YouTube Shorts) via Postiz, Buffer, or Blotato"
+    },
+    {
+      "id": "skill:research-hub-template",
+      "kind": "skill",
+      "name": "research-hub-template",
+      "group": "creative",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "research hub",
+        "research template",
+        "publish research",
+        "second brain hub",
+        "obsidian blog"
+      ],
+      "description": "Scaffolds public/private research hubs (similar to frankx.ai/research) and connects them with personal vaults and static page generators"
+    },
+    {
       "id": "command:studio",
       "kind": "command",
       "name": "/studio",
@@ -2876,6 +2942,82 @@
       "name": "/agentic-builder-lab",
       "group": "command",
       "description": ""
+    },
+    {
+      "id": "command:outlier-analysis",
+      "kind": "command",
+      "name": "/outlier-analysis",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:viral-hook-gen",
+      "kind": "command",
+      "name": "/viral-hook-gen",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:brain-sync",
+      "kind": "command",
+      "name": "/brain-sync",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:query-profile",
+      "kind": "command",
+      "name": "/query-profile",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:social-cascade",
+      "kind": "command",
+      "name": "/social-cascade",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:schedule-cascade",
+      "kind": "command",
+      "name": "/schedule-cascade",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:research-hub-init",
+      "kind": "command",
+      "name": "/research-hub-init",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:research-hub-sync",
+      "kind": "command",
+      "name": "/research-hub-sync",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "workflow:creator-research-hub-sync",
+      "kind": "workflow",
+      "name": "creator-research-hub-sync",
+      "group": "workflow",
+      "tierLabel": "L4",
+      "status": "shipped",
+      "description": "Sync local Second Brain Obsidian/Notion vaults to public research hub, run quality/claims gates, and build catalog/RSS search index.",
+      "file": ".claude\\workflows\\creator-research-hub-sync.js"
+    },
+    {
+      "id": "workflow:creator-viral-cascade",
+      "kind": "workflow",
+      "name": "creator-viral-cascade",
+      "group": "workflow",
+      "tierLabel": "L3",
+      "status": "shipped",
+      "description": "Viral Outlier Analysis & Multi-Channel Content Cascade. Analyzes hook structures via Sandcastles, grabs personal context from Second Brain, and syndicates drafts to Postiz/Buffer.",
+      "file": ".claude\\workflows\\creator-viral-cascade.js"
     },
     {
       "id": "workflow:dependency-audit",
@@ -3304,6 +3446,66 @@
     {
       "source": "skill:agentic-builder-lab",
       "target": "command:agentic-builder-lab",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:sandcastles-connector",
+      "target": "skill:frankx-brand",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:sandcastles-connector",
+      "target": "command:outlier-analysis",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:sandcastles-connector",
+      "target": "command:viral-hook-gen",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:qme-second-brain",
+      "target": "skill:frankx-brand",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:qme-second-brain",
+      "target": "command:brain-sync",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:qme-second-brain",
+      "target": "command:query-profile",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:postiz-distributor",
+      "target": "skill:frankx-brand",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:postiz-distributor",
+      "target": "command:social-cascade",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:postiz-distributor",
+      "target": "command:schedule-cascade",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:research-hub-template",
+      "target": "skill:frankx-brand",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:research-hub-template",
+      "target": "command:research-hub-init",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:research-hub-template",
+      "target": "command:research-hub-sync",
       "rel": "triggers"
     },
     {

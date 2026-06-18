@@ -20,6 +20,24 @@
       "type": "http",
       "url": "https://mcp.higgsfield.ai/mcp",
       "_comment": "Unified multimodal connector for the multimodal-studio skill — image, video, and character generation across 30+ models (Soul, Flux, Seedream, Kling, Hailuo, Veo, Sora). OAuth via Higgsfield account; no API keys. Add interactively: claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp"
+    },
+    "starlight-social": {
+      "command": "node",
+      "args": [
+        "mcp-servers/social/build/index.js"
+      ],
+      "env": {
+        "SOCIAL_PUBLISHER_TYPE": "local"
+      },
+      "autoStart": true
+    },
+    "starlight-manychat": {
+      "command": "node",
+      "args": [
+        "mcp-servers/manychat/build/index.js"
+      ],
+      "env": {},
+      "autoStart": true
     }
   }
 }

@@ -1,0 +1,33 @@
+{
+  "$schema": "skill-profile-v1",
+  "name": "Oracle Enterprise Work",
+  "description": "Oracle Cloud, enterprise AI, and professional content",
+  "version": "1.0.0",
+  "priority_skills": [
+    "oci-services-expert",
+    "oracle-adk",
+    "oracle-agent-spec",
+    "ai-agents-architect",
+    "architecture-patterns",
+    "api-design-principles",
+    "cloud-architect"
+  ],
+  "secondary_skills": [
+    "kubernetes-architect",
+    "terraform-specialist",
+    "docker-expert",
+    "database-architect",
+    "microservices-patterns"
+  ],
+  "excluded_skills": [
+    "shopify-*",
+    "wordpress-*",
+    "flutter-*",
+    "unity-*",
+    "game-*"
+  ],
+  "triggers": {
+    "keywords": ["oracle", "oci", "enterprise", "cloud", "adk", "genai"],
+    "commands": ["/oracle-work"]
+  }
+}

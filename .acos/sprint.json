@@ -1,0 +1,86 @@
+{
+  "sprintId": "sprint-2026-06-17",
+  "phase": "BUILD",
+  "roles": {
+    "CEO": "operator",
+    "PM": "acos-pm",
+    "Designer": "acos-designer",
+    "Engineer": "acos-engineer",
+    "QA": "acos-qa"
+  },
+  "gates": {
+    "THINK": {
+      "approved": true,
+      "signedBy": "operator",
+      "signedAt": "2026-06-17T22:34:14.773Z",
+      "notes": null
+    },
+    "PLAN": {
+      "approved": true,
+      "signedBy": [
+        "CEO",
+        "Engineer",
+        "Designer"
+      ],
+      "signedAt": "2026-06-17T22:34:27.728Z",
+      "notes": null
+    },
+    "BUILD": {
+      "approved": false,
+      "signedBy": null,
+      "signedAt": null,
+      "notes": null
+    },
+    "QA": {
+      "approved": false,
+      "signedBy": null,
+      "signedAt": null,
+      "notes": null
+    }
+  },
+  "history": [
+    {
+      "event": "init",
+      "phase": "THINK",
+      "timestamp": "2026-06-17T22:34:09.314Z"
+    },
+    {
+      "event": "approve",
+      "phase": "THINK",
+      "role": "CEO",
+      "actor": "operator",
+      "timestamp": "2026-06-17T22:34:14.773Z"
+    },
+    {
+      "event": "advance",
+      "phase": "PLAN",
+      "timestamp": "2026-06-17T22:34:17.894Z"
+    },
+    {
+      "event": "approve",
+      "phase": "PLAN",
+      "role": "CEO",
+      "actor": "operator",
+      "timestamp": "2026-06-17T22:34:21.634Z"
+    },
+    {
+      "event": "approve",
+      "phase": "PLAN",
+      "role": "Engineer",
+      "actor": "acos-engineer",
+      "timestamp": "2026-06-17T22:34:24.688Z"
+    },
+    {
+      "event": "approve",
+      "phase": "PLAN",
+      "role": "Designer",
+      "actor": "acos-designer",
+      "timestamp": "2026-06-17T22:34:27.728Z"
+    },
+    {
+      "event": "advance",
+      "phase": "BUILD",
+      "timestamp": "2026-06-17T22:34:30.474Z"
+    }
+  ]
+}

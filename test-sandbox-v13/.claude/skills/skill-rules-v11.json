@@ -1,0 +1,84 @@
+{
+  "version": "8.0",
+  "description": "ACOS v8 Skill Auto-Activation Rules",
+  
+  "core_skills": {
+    "always_available": ["frankx-brand", "acos", "baseline-ui"],
+    "description": "Loaded every session. frankx-brand ensures voice consistency. acos provides routing intelligence. baseline-ui enforces UI quality baseline."
+  },
+
+  "skill_categories": {
+    "design": {
+      "priority": "high",
+      "skills": ["web-design-guidelines", "ui-ux-pro-max", "tailwind-css-patterns", "shadcn-ui", "fixing-accessibility", "fixing-motion-performance", "fixing-metadata"]
+    },
+    "development": {
+      "priority": "high",
+      "skills": ["vercel-react-best-practices", "next-best-practices", "nextjs-server-client-components", "typescript-docs", "clean-code"]
+    },
+    "content": {
+      "priority": "medium",
+      "skills": ["seo-fundamentals", "seo-content-writer", "schema-markup", "programmatic-seo"]
+    },
+    "ai": {
+      "priority": "medium",
+      "skills": ["ai-agents-architect", "autonomous-agents", "langgraph-patterns", "prompt-engineering-patterns"]
+    },
+    "music": {
+      "priority": "medium",
+      "skills": ["suno-ai-mastery", "suno-prompt-architect", "music-production"]
+    },
+    "brand": {
+      "priority": "high",
+      "skills": ["brand-voice", "creator-productivity"]
+    },
+    "meta": {
+      "priority": "low",
+      "skills": ["acos-meta"]
+    }
+  },
+
+  "skills": {
+    "web-design-guidelines": {
+      "type": "design",
+      "priority": "high",
+      "description": "Visual design principles, glassmorphism, premium UI patterns",
+      "triggers": {
+        "keywords": ["design", "layout", "visual", "spacing", "color", "glassmorphic", "premium", "depth", "shadow", "gradient", "animation", "hover", "card", "page", "landing", "redesign"],
+        "files": ["app/**/page.tsx", "components/**/*.tsx"]
+      },
+      "skill_path": ".claude/skills/web-design-guidelines/SKILL.md"
+    },
+    "ui-ux-pro-max": {
+      "type": "design",
+      "priority": "high",
+      "description": "50 styles, 21 palettes, 50 fonts — premium design intelligence",
+      "triggers": {
+        "keywords": ["page", "landing", "homepage", "dashboard", "component", "button", "modal", "card", "glassmorphism", "palette", "font pairing", "redesign", "styling"],
+        "files": ["app/**/page.tsx", "components/**/*.tsx"]
+      },
+      "skill_path": ".claude/skills/ui-ux-pro-max/SKILL.md"
+    },
+    "baseline-ui": {
+      "type": "design",
+      "priority": "critical",
+      "description": "UI component patterns baseline — auto-loaded for quality enforcement",
+      "triggers": {
+        "keywords": ["component", "ui", "button", "card", "form", "input", "modal"],
+        "files": ["components/**/*.tsx", "app/**/*.tsx"]
+      },
+      "skill_path": ".claude/skills/baseline-ui/SKILL.md"
+    }
+  },
+
+  "skill_profiles": {
+    "frontend-designer": {
+      "description": "UI/UX specialist — glassmorphic design, accessibility, premium patterns",
+      "auto_activate_on": {
+        "file_patterns": ["components/**/*.tsx", "app/**/page.tsx", "app/**/layout.tsx"],
+        "keywords": ["design", "redesign", "ui", "ux", "component", "glassmorphic", "animation", "accessibility", "responsive", "palette", "typography", "tailwind", "css"]
+      },
+      "priority": "high"
+    }
+  }
+}

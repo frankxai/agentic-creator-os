@@ -1,60 +1,81 @@
 graph TD
-    %% Define styles and classes
+    %% Style rules
     classDef cognitive fill:#1f2937,stroke:#3b82f6,stroke-width:2px,color:#fff;
+    classDef specialist fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
     classDef sentinel fill:#1f2937,stroke:#10b981,stroke-width:2px,color:#fff;
     classDef storage fill:#111827,stroke:#4b5563,stroke-dasharray: 5 5,color:#fff;
     classDef gate fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#fff;
     classDef execution fill:#065f46,stroke:#34d399,stroke-width:2px,color:#fff;
 
-    %% Cognitive Layer
-    SubGraph Cognitive ["Cognitive Orchestration Layer"]
+    %% Orchestrator & Strategy
+    SubGraph Cognitive ["Cognitive Orchestration"]
         Orchestrator[starlight-orchestrator]:::cognitive
         Strategist[starlight-social-strategist]:::cognitive
     end
 
-    %% Vault / File system
-    SubGraph Storage ["Sovereign Storage (Local FS)"]
-        Vault[(Starlight Vaults)]:::storage
-        StagingFolder[content/staging/social/]:::storage
+    %% Specialized Swarm
+    SubGraph Swarm ["Content Engineering Specialists"]
+        Psychologist[starlight-social-psychologist]:::specialist
+        VibeTracker[starlight-social-vibetracker]:::specialist
+        FactChecker[starlight-social-factcheck]:::specialist
+        VisualDirector[starlight-social-cinematic]:::specialist
+        NewsAnalyst[starlight-social-news-analyst]:::specialist
     end
 
-    %% Sentinel Layer
-    SubGraph Quality ["Compliance & Security Layer"]
+    %% Staging & Verification
+    SubGraph Quality ["Staging & Verification"]
+        StagingFolder[content/staging/social/]:::storage
         SocialSentinel[starlight-social-sentinel]:::sentinel
     end
 
-    %% Approval Gate
-    SubGraph HumanGate ["Operator Loop"]
+    %% Operator Gate
+    SubGraph OperatorGate ["Operator Loop"]
         ApproveGate[Operator Approval Gate]:::gate
     end
 
-    %% Execution Layer
+    %% Execution MCP & Channels
     SubGraph Execution ["Sovereign Distribution Layer (SDL)"]
         MCPServer[starlight-social MCP]:::execution
         BrowserAdapter[Playwright Browser Adapter]:::execution
         Web3Adapter[Web3 Direct Adapter]:::execution
-        APIBridges[Postiz / Blotato Adapters]:::execution
     end
 
-    %% Connection Logic
-    Orchestrator -->|1. Triggers distribution task| Strategist
-    Vault -.->|Read context & blog drafts| Strategist
-    Strategist -->|2. Drafts post copy & campaigns| StagingFolder
-    StagingFolder -->|3. Requests audit| SocialSentinel
-    SocialSentinel -.->|Sanitize secrets, check voice| SocialSentinel
-    SocialSentinel -->|4. Generates SIP Attestation Signature| StagingFolder
-    StagingFolder -->|5. Awaiting manual check| ApproveGate
+    %% Keyword loop back (ManyChat Alternative)
+    SubGraph CommentLoop ["Sovereign Comment-to-DM Engine"]
+        Crawler[Playwright Comment Monitor]:::execution
+        KeywordDb[(private/social/links.json)]:::storage
+        DirectMessenger[Playwright DM Automator]:::execution
+    end
 
-    ApproveGate -->|6. Operator types /approve or reviews TUI| MCPServer
-    MCPServer -->|Route by config| BrowserAdapter
-    MCPServer -->|Route by config| Web3Adapter
-    MCPServer -->|Route by config| APIBridges
-
-    BrowserAdapter -->|Headless Posting| X[X / Twitter]
-    BrowserAdapter -->|Headless Posting| Threads[Threads]
-    BrowserAdapter -->|Headless Posting| LinkedIn[LinkedIn]
+    %% Orchestration Flows
+    Orchestrator -->|1. Triggers campaign task| Strategist
+    Strategist -->|2. Submits drafts for optimization| Psychologist
+    Psychologist -->|Curiosity gap pass| VibeTracker
+    VibeTracker -->|Aesthetic lane pass| FactChecker
+    FactChecker -->|Factual verification pass| NewsAnalyst
+    NewsAnalyst -->|Trend & API specification check| VisualDirector
+    VisualDirector -->|3. Appends visual assets| StagingFolder
     
+    StagingFolder -->|4. Request audit| SocialSentinel
+    SocialSentinel -.->|Sanitize leaks & attach signature| SocialSentinel
+    SocialSentinel -->|5. Ready for review| ApproveGate
+
+    ApproveGate -->|6. Operator Approves| MCPServer
+    MCPServer -->|Direct API| Web3Adapter
+    MCPServer -->|Headless Browser| BrowserAdapter
+
+    %% Postings
     Web3Adapter -->|Direct XRPC| Bluesky[Bluesky]
     Web3Adapter -->|Neynar API| Farcaster[Farcaster]
+    BrowserAdapter -->|Automated clicks| X[X / Twitter]
+    BrowserAdapter -->|Automated clicks| Threads[Threads]
+    BrowserAdapter -->|Automated clicks| LinkedIn[LinkedIn]
 
-    APIBridges -->|Webhook / API| n8n[n8n Workflow]
+    %% ManyChat Alternative Loop
+    X -.->|7. Read comments| Crawler
+    Threads -.->|7. Read comments| Crawler
+    LinkedIn -.->|7. Read comments| Crawler
+    
+    Crawler -->|8. Matches Comment Keyword| KeywordDb
+    KeywordDb -->|9. Resolves Link| DirectMessenger
+    DirectMessenger -->|10. Sends direct DM to reader| ReaderMessage[Reader DM Inbox]

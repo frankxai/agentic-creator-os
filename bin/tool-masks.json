@@ -1,0 +1,30 @@
+{
+  "$schema": "https://acos.frankx.ai/schemas/tool-masks.v14.json",
+  "version": "14.0.0",
+  "defaultPolicy": "mask-all",
+  "categories": {
+    "filesystem": ["read_file", "write_file", "list_dir", "find_by_name"],
+    "system": ["shell_exec", "run_terminal", "install_mcp"],
+    "content": ["generate_article", "polish_copy", "image_gen", "suno_synth"],
+    "network": ["network_research", "fetch_url"]
+  },
+  "profiles": {
+    "blog-writer": {
+      "allowCategories": ["content"],
+      "allowIndividualTools": ["read_file", "write_file"],
+      "denyIndividualTools": ["shell_exec", "install_mcp"],
+      "fileSystemScope": ["content/posts/**", "public/images/**"]
+    },
+    "security-auditor": {
+      "allowCategories": ["filesystem"],
+      "allowIndividualTools": ["network_research"],
+      "denyIndividualTools": ["write_file", "shell_exec"],
+      "readOnly": true
+    },
+    "engineer": {
+      "allowCategories": ["filesystem", "system", "content", "network"],
+      "fileSystemScope": ["**/*"],
+      "denyIndividualTools": ["destructive_cleanup"]
+    }
+  }
+}

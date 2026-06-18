@@ -8,9 +8,9 @@
 
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
-[![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
+[![Version](https://img.shields.io/badge/version-14.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
 [![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
-[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Grok%20Build%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
+[![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Antigravity%20%7C%20Codex%20%7C%20Grok%20Build%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
 
 </div>
 
@@ -80,67 +80,90 @@ This separation + adapters make ACOS the universal substrate: one catalog, many 
 
 ---
 
-## Quick Start
+## Pre-Compiled Release Packs (No Git Required)
 
-### Claude Code (Full Feature Set)
+For environments without direct Git access, or for users who want to host specific subsets of the OS, pre-compiled zip packages are hosted at [frankx.ai/downloads](https://frankx.ai/downloads/preview/agentic-creator-os):
 
+- 📦 **[Complete OS Bundle](https://frankx.ai/downloads/preview/agentic-creator-os)** (`acos-complete.zip`): The full codebase, install scripts, daemon, and all modules.
+- 🧩 **[Skills Pack](https://frankx.ai/downloads/preview/agentic-creator-os)** (`acos-skills-pack.zip`): Standalone catalog of 90+ auto-activating skills.
+- 👥 **[Agent Pack](https://frankx.ai/downloads/preview/agentic-creator-os)** (`acos-agents-pack.zip`): Specialized personas, prompts, and swarm layouts.
+- ⚓ **[Hooks Pack](https://frankx.ai/downloads/preview/agentic-creator-os)** (`acos-hooks-pack.zip`): Git pre-commit, partition, and safety gates.
+
+Download the package, unzip it into your workspace root, and run `./install.sh --platform=<your-platform>` to finalize setup.
+
+---
+
+## Quick Start — Platform Installation
+
+ACOS v14.0.0 provides first-class, native adapters for all major agentic fleets. Run the commands below to configure your specific workspace:
+
+| Target Platform | Install Command | Context File Created |
+|---|---|---|
+| **Claude Code** | `./install.sh --platform=claude` | `~/.claude/` directories & junctions |
+| **Google Antigravity** | `./install.sh --platform=antigravity` | `.antigravity/` & `.antigravityrules` |
+| **OpenAI Codex** | `./install.sh --platform=codex` | `.codex/` & `.codexrules` |
+| **xAI Grok Build** | `./install.sh --platform=grok` | `.grok/` & `GROK.md` |
+| **Cursor / Windsurf** | `./install.sh --platform=cursor` | `.cursorrules` / `.windsurfrules` |
+| **Gemini Assist** | `./install.sh --platform=gemini` | `GEMINI.md` |
+
+---
+
+### 1. Claude Code (Full Feature Set)
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-./install.sh
+./install.sh --platform=claude
 
 # Open any project with Claude Code
 claude
 /acos
 ```
 
-### Cursor / Windsurf
+### 2. Google Antigravity (AGY)
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=antigravity
 
+# Open workspace in Antigravity
+agy
+```
+
+### 3. OpenAI Codex
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=codex
+
+# Open workspace in Codex
+cfx
+```
+
+### 4. xAI Grok Build (xAI CLI/TUI)
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=grok
+
+# Run grok in project
+grok
+/hooks-trust
+/skills harness-integration
+```
+
+### 5. Cursor / Windsurf
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh --platform=cursor    # or --platform=windsurf
 ```
 
-This generates a `.cursorrules` or `.windsurfrules` file with all skills embedded.
-
-### Gemini Code Assist
-
+### 6. Gemini Code Assist
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh --platform=gemini
 ```
-
-This generates a `GEMINI.md` context file for Gemini to read on session start.
-
-### Grok Build (xAI CLI/TUI) — Full Native Harness Support
-
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=grok
-```
-
-- Generates `GROK.md` (ACOS briefing + Frank DNA + excellence gates) + AGENTS.md pointer
-- Seeds `.grok/skills/` (exact 4 grok-personal excellence seeds per SHARING.md + SIP §5: harness-integration, excellence-review, repo-mastery, multi-harness-orchestrator) + 2 excellence json hooks as `.grok/hooks/` ONLY + `.grok/agents/` (core ACOS/gstack/santa/verification via .claude/ junctions + compat)
-- Grok Build auto-loads project `.grok/` (highest prio) + `~/.grok/` + full `~/.claude/` compat (skills, commands, agents, hooks)
-- Native Grok features leveraged: `/skills`, subagents (`/task` with personas + worktree + resume), MCP (github + fs-starlight + git), image/video gen, TUI speed
-- Run `grok` in project → `/hooks-trust` → `/skills grok-harness` (or harness-integration / repo-mastery) or natural language ACOS tasks
-- Built-in excellence gates (God 99): repo-mastery (rules first), gstack (qa/browse/design-review), santa-method + verification-loop, plan-* reviews, cso
-- Multi-harness: multi-harness-orchestrator auto-detects + emits exact delegation (e.g. `claude -p "..."` with injected rules + DNA + partition filter)
-
-This is the richest non-Claude experience — native skills/agents/hooks/subagents/MCP + full ACOS excellence substrate + 5-fleet parity. See adapters/grok/index.ts and .claude/skills/grok-harness/.
-
-### Any AI Coding Agent
-
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os
-./install.sh --platform=generic
-```
-
-Generates a `CONTEXT.md` file. Point your agent at it as a system prompt or project instructions file.
 
 > **See [QUICKSTART.md](QUICKSTART.md) for detailed setup per platform**
 
@@ -550,6 +573,8 @@ claude plugin install core content-engine design-excellence
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| **v14.0** | June 2026 | Stateful sprint gating state machine, Named Pipe/Socket keep-alive daemon (`acosd`), tool-masking profiles, SQLite Trajectory Memory (AgentDB), Nous Hermes XML steering. |
+| **v13.0** | June 2026 | Pure JS/TS setup engine installer, raw ANSI TUI statusline & dashboard, git pre-commit security partition hooks, swarm topologies framework. |
 | **v11.0** | Feb 2026 | Plugin ecosystem, design swarm, v11 skills absorbed from acos-intelligence-system |
 | v10.1 | Feb 2026 | Deep clean — removed claude-flow artifacts, honest metrics, clean repo |
 | v10.0 | Feb 2026 | Autonomous Intelligence — 5 safety systems, multi-platform, Agent IAM |
@@ -596,7 +621,7 @@ MIT — Use it, fork it, build your own OS with it.
 
 <div align="center">
 
-**Agentic Creator OS v11.0** — The Operating System for AI-Powered Creators
+**Agentic Creator OS v14.0** — The Operating System for AI-Powered Creators
 
 *90+ Skills | 65+ Commands | 38 Agents | 8 Plugins | Multi-Platform | Self-Learning*
 

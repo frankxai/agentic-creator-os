@@ -286,6 +286,12 @@ skill:social-media, create a farcaster cast about [TOPIC]
 
 # Repurpose blog to social
 skill:social-media, turn my blog post [URL] into a thread
+
+# Local Setup Installer (community configuration)
+node scripts/install-social-suite.mjs
+
+# Sovereign Comment-to-DM Keyword Dispatch Loop
+node scripts/comment-dm-engine.mjs x https://x.com/username/status/12345
 ```
 
 ## Programmatic Publishing (MCP Integration)

@@ -1,0 +1,10 @@
+{
+  "name": "frontend-designer",
+  "description": "UI/UX Development Specialist — glassmorphic design, accessibility, performance",
+  "auto_activate_on": {
+    "file_patterns": ["components/**/*.tsx", "app/**/page.tsx", "app/**/layout.tsx"],
+    "keywords": ["design", "ui", "ux", "component", "glassmorphic", "animation", "motion", "framer", "accessibility", "wcag", "color", "typography", "layout", "responsive", "mobile", "theme", "dark mode", "hover effect", "transition", "tailwind", "css"]
+  },
+  "priority": "high",
+  "skills": ["baseline-ui", "web-design-guidelines", "ui-ux-pro-max", "tailwind-css-patterns", "vercel-react-best-practices", "frankx-brand"]
+}

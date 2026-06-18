@@ -346,6 +346,62 @@
       },
       "exports": ["mdx_build_log", "linkedin_draft", "demo_brief", "mermaid_diagram", "prompt_pack_entry"],
       "voice_override": "resources/voice-spec.md"
+    },
+    "sandcastles-connector": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Integrates with Sandcastles.ai viral outlier research to analyze high-performing hook structures, video curves, and outline viral content models",
+      "author": "FrankX",
+      "license": "MIT",
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["outlier", "viral hook", "video research", "youtube outlier", "sandcastles"],
+        "commands": ["/outlier-analysis", "/viral-hook-gen"]
+      },
+      "exports": ["hook_ctr", "duration", "retention_anchors"]
+    },
+    "qme-second-brain": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Syncs and queries the creator's second brain (Obsidian/Notion vaults) and audience communication profiles using Qme.ai",
+      "author": "FrankX",
+      "license": "MIT",
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["second brain", "obsidian vault", "notion sync", "query brain", "audience profile", "qme"],
+        "commands": ["/brain-sync", "/query-profile"]
+      },
+      "exports": ["vault_mapping", "audience_profile"]
+    },
+    "postiz-distributor": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Formats, schedules, and distributes creator assets across social platforms (X, LinkedIn, Threads, YouTube Shorts) via Postiz, Buffer, or Blotato",
+      "author": "FrankX",
+      "license": "MIT",
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["distribute", "schedule post", "queue thread", "postiz", "blotato", "buffer"],
+        "commands": ["/social-cascade", "/schedule-cascade"]
+      },
+      "exports": ["thread_format", "shorts_adaptation"]
+    },
+    "research-hub-template": {
+      "version": "1.0.0",
+      "category": "creative",
+      "description": "Scaffolds public/private research hubs (similar to frankx.ai/research) and connects them with personal vaults and static page generators",
+      "author": "FrankX",
+      "license": "MIT",
+      "dependencies": ["frankx-brand"],
+      "mcp": ["filesystem-mcp"],
+      "triggers": {
+        "keywords": ["research hub", "research template", "publish research", "second brain hub", "obsidian blog"],
+        "commands": ["/research-hub-init", "/research-hub-sync"]
+      },
+      "exports": ["hub_structure", "rss_generation"]
     }
   },
 
@@ -366,7 +422,11 @@
       "frankx-brand",
       "suno-mastery",
       "daily-ops",
-      "publishing-factory"
+      "publishing-factory",
+      "sandcastles-connector",
+      "qme-second-brain",
+      "postiz-distributor",
+      "research-hub-template"
     ],
     "business": [
       "oci-services"

@@ -1,0 +1,36 @@
+{
+  "$schema": "skill-profile-v1",
+  "name": "FrankX Web Development",
+  "description": "Optimized skill set for frankx.ai website work",
+  "version": "1.0.0",
+  "priority_skills": [
+    "vercel-react-best-practices",
+    "next-best-practices",
+    "next-cache-components",
+    "nextjs-server-client-components",
+    "shadcn-ui",
+    "tailwind-css-patterns",
+    "fixing-accessibility",
+    "fixing-metadata",
+    "typescript-docs"
+  ],
+  "secondary_skills": [
+    "seo-fundamentals",
+    "schema-markup",
+    "web-design-guidelines",
+    "react-patterns",
+    "vercel-deployment"
+  ],
+  "excluded_skills": [
+    "aws-*",
+    "azure-*",
+    "flutter-*",
+    "unity-*",
+    "shopify-*",
+    "wordpress-*"
+  ],
+  "triggers": {
+    "file_patterns": ["app/**/*.tsx", "components/**/*.tsx", "content/**/*.mdx"],
+    "keywords": ["component", "page", "layout", "deploy", "vercel"]
+  }
+}
