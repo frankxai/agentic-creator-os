@@ -1,3 +1,8 @@
+---
+name: ops
+description: Weekly operations loop — triage the inquiry inbox, advance the CRM pipeline, sweep open PRs across repos, and surface the content plan. Loads the ops skill.
+---
+
 # /ops — Weekly Operations Loop
 
 **The execution layer of the FrankX Operations System.** One command surfaces
