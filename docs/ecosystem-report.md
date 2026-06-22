@@ -1,25 +1,25 @@
 # ACOS Ecosystem Intelligence Report
-**Generated**: 2026-06-15 10:17 UTC
+**Generated**: 2026-06-22 10:10 UTC
 
 | Repo | Stars | Forks | Issues | Last Push |
 |------|-------|-------|--------|-----------|
-| agentic-creator-os | 4 | 0 | 1 | 2026-06-14 |
-| agentic-creator-skills | 3 | 0 | 0 | 2026-06-12 |
-| frankx.ai-vercel-website | 3 | 1 | 11 | 2026-06-15 |
+| agentic-creator-os | 4 | 0 | 3 | 2026-06-18 |
+| agentic-creator-skills | 3 | 0 | 0 | 2026-06-18 |
+| frankx.ai-vercel-website | 3 | 1 | 17 | 2026-06-22 |
 | FrankX | 0 | 0 | 0 | ? |
-| arcanea | 5 | 0 | 8 | 2026-06-11 |
-| Starlight-Intelligence-System | 5 | 1 | 0 | 2026-06-12 |
+| arcanea | 5 | 0 | 17 | 2026-06-22 |
+| Starlight-Intelligence-System | 6 | 2 | 1 | 2026-06-22 |
 | production-agent-patterns | 0 | 0 | 0 | 2026-01-21 |
-| ai-architect-academy | 2 | 0 | 9 | 2026-06-11 |
-| claude-skills-library | 15 | 3 | 2 | 2026-06-11 |
-| vibe-os | 2 | 0 | 1 | 2026-06-11 |
-| mcp-doctor | 0 | 0 | 1 | 2026-06-04 |
+| ai-architect-academy | 2 | 0 | 9 | 2026-06-18 |
+| claude-skills-library | 14 | 4 | 1 | 2026-06-18 |
+| vibe-os | 2 | 0 | 2 | 2026-06-18 |
+| mcp-doctor | 0 | 0 | 1 | 2026-06-18 |
 | arcanea-code | 0 | 0 | 9 | 2026-04-17 |
-| arcanea-flow | 1 | 0 | 0 | 2026-05-27 |
+| arcanea-flow | 1 | 0 | 0 | 2026-06-16 |
 | claude-codex-gemini-opencode-settings | 1 | 0 | 0 | 2026-04-18 |
-| **TOTAL** | **41** | **5** | | |
+| **TOTAL** | **41** | **7** | | |
 
 ## Account Summary
-- Active repos: 138
-- Archived: 18
-- Total stars: 66
+- Active repos: 170
+- Archived: 17
+- Total stars: 72
