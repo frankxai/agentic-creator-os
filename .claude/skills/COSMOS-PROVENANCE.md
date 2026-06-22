@@ -1,3 +1,8 @@
+---
+name: cosmos-provenance
+description: Provenance, version pin, and sync model for the cosmos skills mirrored from starlight-agent-skills.
+---
+
 # Cosmos skills — provenance
 
 The seven `cosmos` domain skills below are **consumed (mirrored) from the canonical
@@ -25,6 +30,10 @@ repo remains the source of truth.
 - `space-social-repurposer`
 
 ## Sync model
+
+Only the **runnable core** of each skill is mirrored here — `SKILL.md` +
+`manifest.json`. The upstream `examples/` and `tests/` directories are QA
+artifacts that stay in `starlight-agent-skills`; consult the source repo for them.
 
 These are **version-pinned mirrors**. When the source library publishes a new
 version, re-pull the `cosmos/` domain and update the pin above. Do not hand-edit
