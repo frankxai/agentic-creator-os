@@ -1,0 +1,26 @@
+{
+  "id": "cosmos/arxiv-space-paper-to-brief",
+  "name": "arxiv-space-paper-to-brief",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "Astrophysics arXiv paper into a structured brief with object/instrument context and observational caveats.",
+  "inputs": [
+    { "name": "paper", "type": "string", "required": true, "description": "arXiv URL/ID, PDF, or text." },
+    { "name": "audience", "type": "string", "required": false, "description": "astronomer | enthusiast | general." }
+  ],
+  "outputs": [
+    { "name": "metadata", "type": "object" },
+    { "name": "context", "type": "object" },
+    { "name": "problem", "type": "string" },
+    { "name": "method", "type": "string" },
+    { "name": "results", "type": "array" },
+    { "name": "caveats", "type": "array" },
+    { "name": "why_it_matters", "type": "string" },
+    { "name": "citations", "type": "array" }
+  ],
+  "tools": ["WebFetch", "Read"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["arxiv", "astrophysics", "space", "brief", "astro-ph"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

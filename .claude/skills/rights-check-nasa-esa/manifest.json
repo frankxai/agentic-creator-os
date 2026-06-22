@@ -1,0 +1,24 @@
+{
+  "id": "cosmos/rights-check-nasa-esa",
+  "name": "rights-check-nasa-esa",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "Usage-rights verdict + attribution line for NASA/ESA/observatory space media.",
+  "inputs": [
+    { "name": "asset", "type": "string", "required": true, "description": "Image/video URL or source page." },
+    { "name": "credit", "type": "string", "required": false, "description": "Published credit string (strongly preferred)." },
+    { "name": "use", "type": "string", "required": false, "description": "editorial | commercial | merch | thumbnail." }
+  ],
+  "outputs": [
+    { "name": "verdict", "type": "string" },
+    { "name": "license", "type": "string" },
+    { "name": "attribution_line", "type": "string" },
+    { "name": "flags", "type": "array" },
+    { "name": "notes", "type": "string" }
+  ],
+  "tools": ["WebFetch", "Read"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["rights", "licensing", "attribution", "nasa", "esa", "compliance"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

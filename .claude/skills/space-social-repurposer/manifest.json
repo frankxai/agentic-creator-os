@@ -1,0 +1,84 @@
+{
+  "id": "cosmos/space-social-repurposer",
+  "name": "space-social-repurposer",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "Repurpose a space asset into a multi-platform pack with credits propagated to every variant.",
+  "inputs": [
+    {
+      "name": "source",
+      "type": "string",
+      "required": true,
+      "description": "Space asset + its credit/rights line."
+    },
+    {
+      "name": "platforms",
+      "type": "array",
+      "required": false,
+      "description": "Subset of x, linkedin, instagram, youtube-short, newsletter."
+    },
+    {
+      "name": "voice",
+      "type": "string",
+      "required": false,
+      "description": "starlight | arcanea | frankx."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "core_message",
+      "type": "string"
+    },
+    {
+      "name": "x_thread",
+      "type": "array",
+      "nullable": true
+    },
+    {
+      "name": "linkedin",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "instagram",
+      "type": "object",
+      "nullable": true
+    },
+    {
+      "name": "youtube_short",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "newsletter",
+      "type": "string",
+      "nullable": true
+    },
+    {
+      "name": "rights_line",
+      "type": "string",
+      "nullable": true
+    }
+  ],
+  "tools": [
+    "Read",
+    "WebFetch"
+  ],
+  "mcp_dependencies": [],
+  "runtimes": [
+    "claude",
+    "codex",
+    "cursor",
+    "gemini",
+    "opencode",
+    "sis"
+  ],
+  "tags": [
+    "space",
+    "repurpose",
+    "distribution",
+    "social",
+    "rights"
+  ],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}
