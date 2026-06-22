@@ -134,6 +134,7 @@ See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for 
 | `/inventory-status` | Content inventory dashboard |
 | `/mcp-status` | MCP server health |
 | `/publish` | Content publishing with quality gates |
+| `/ops` | Weekly operations loop — triage inquiry inbox, advance CRM pipeline, sweep PRs, surface content plan (ops skill) |
 
 ### Quality (3)
 | Command | Description |
