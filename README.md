@@ -1,3 +1,7 @@
+<p align="center">
+  <img src=".github/assets/hero.svg" width="100%" alt="Agentic Creator OS — The operating system for AI-powered creators"/>
+</p>
+
 <div align="center">
 
 # Agentic Creator OS
@@ -162,7 +166,7 @@ You start writing a blog post
 ```
 
 | Skill Category | Examples | Trigger Patterns |
-|---------------|----------|-----------------|
+|---------------|----------|------------------|
 | **Technical** | TDD, React patterns, TypeScript, debugging | `test`, `component`, `error` |
 | **Creative** | Brand voice, music mastery, book writing | `blog`, `music`, `create` |
 | **Infrastructure** | Oracle Cloud, Kubernetes, Terraform | `deploy`, `cloud`, `infra` |
@@ -187,7 +191,7 @@ Commands are multi-step workflows triggered by a single slash command. Each comm
 Each agent has distinct expertise, voice, and tool access. The Agentic Creator OS routes to the best agent based on task type.
 
 | Agent | Specialty | When It Activates |
-|-------|----------|------------------|
+|-------|----------|-------------------|
 | **Developmental Editor** | Story structure, pacing, narrative architecture | Book/long-form writing |
 | **Music Producer** | Suno prompts, genre production, audio engineering | Music creation |
 | **Technical Architect** | System design, Oracle Cloud, enterprise patterns | Architecture tasks |
@@ -233,7 +237,7 @@ Skill: `multimodal-studio` · Agent: Multimodal Director · Commands: `/studio`,
 Five systems that run automatically to keep the Agentic Creator OS reliable:
 
 | Hook | What It Prevents |
-|------|-----------------|
+|------|------------------|
 | **Circuit Breaker** | Stops the agent from brute-forcing broken approaches (3→warn, 5→restrict, 8→block) |
 | **Audit Trail** | Append-only JSONL log of every operation — tamper-proof ground truth |
 | **Agent IAM** | Role-based scoping — a content writer can't modify build configs |
@@ -342,7 +346,7 @@ skill-rules.json → 22 pattern rules
 ### v10 Safety Hooks
 
 | Hook | Trigger | Purpose |
-|------|---------|---------|
+|------|---------|----------|
 | **Circuit Breaker** | PostToolUse (failure) | Track failures per file, escalate at thresholds |
 | **Audit Trail** | All tool use | Append-only JSONL logging |
 | **Self-Modify Gate** | Config changes | Snapshot + validate intelligence score |
@@ -526,7 +530,7 @@ Starlight Intelligence System (Framework)
 Extend ACOS with installable domain plugins from **[agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills)**:
 
 | Plugin | Purpose |
-|--------|---------|
+|--------|----------|
 | **core** | Session management, workspace memory, task tracking |
 | **content-engine** | Content creation, voice enforcement, publishing |
 | **visual-studio** | Style-governed image generation, 7-gate quality filter |
@@ -566,7 +570,7 @@ claude plugin install core content-engine design-excellence
 ACOS builds on work from the open-source community:
 
 | Project | Author | What We Learned |
-|---------|--------|-----------------|
+|---------|--------|------------------|
 | [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies |
 | [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, modular skills |
 | [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient loading |
