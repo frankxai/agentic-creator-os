@@ -1,48 +1,70 @@
 ---
 name: cosmos-provenance
-description: Provenance, version pin, and sync model for the cosmos skills mirrored from starlight-agent-skills.
+description: Provenance, version pin, and sync instructions for the 7 cosmos skills mirrored from starlight-agent-skills. Do not hand-edit these files — make changes upstream and re-mirror.
 ---
 
 # Cosmos skills — provenance
 
-The seven `cosmos` domain skills below are **consumed (mirrored) from the canonical
-portable library** [`frankxai/starlight-agent-skills`](https://github.com/frankxai/starlight-agent-skills),
-not authored in ACOS. ACOS is the creator-content home for them; the agent-skills
-repo remains the source of truth.
+Seven production-grade space-content skills live here as a **version-pinned mirror** of
+[`frankxai/starlight-agent-skills`](https://github.com/frankxai/starlight-agent-skills).
+This directory is their runtime home in ACOS — the creator OS is the right layer for
+space-content repurposers. The source library remains the single source of truth.
+
+## Version pin
 
 | Field | Value |
 |-------|-------|
-| Source repo | `frankxai/starlight-agent-skills` |
+| Source repo | [`frankxai/starlight-agent-skills`](https://github.com/frankxai/starlight-agent-skills) |
 | Source path | `skills/cosmos/` |
 | Pinned version | `v0.1.0` |
-| Source commit | `ff4efe5` (main, CI green) |
+| Pinned commit | `ff4efe5` (main, CI ✅) |
 | License | MIT (inherited from source) |
-| Attestation | Built on SIP — each `manifest.json` carries the SIP attestation line |
+| SIP attestation | present in every `manifest.json` |
 
-## Mirrored skills
+## Skills in this mirror
 
-- `apod-to-short`
-- `arxiv-space-paper-to-brief`
-- `cosmic-mythic-overlay`
-- `nasa-image-to-atlas-page`
-- `rights-check-nasa-esa`
-- `rocket-launch-to-reel`
-- `space-social-repurposer`
+| Skill | What it does |
+|-------|--------------|
+| `apod-to-short` | NASA APOD → 30–60s vertical short: script, captions, shot list, rights line |
+| `arxiv-space-paper-to-brief` | Astrophysics arXiv paper → audience-tuned brief with object/mission context |
+| `cosmic-mythic-overlay` | Arcanea mythic framing layered over real astronomy — facts and myth stay separable |
+| `nasa-image-to-atlas-page` | NASA/ESA image → MDX cosmic-atlas page with fact table, sources, and rights |
+| `rights-check-nasa-esa` | Usage-rights check for NASA/ESA/observatory media → correct attribution line |
+| `rocket-launch-to-reel` | Launch details → punchy 30–45s vertical reel: hook, narration, captions, credit |
+| `space-social-repurposer` | One space asset → coordinated multi-platform content pack, credits intact |
 
-## Sync model
+## What's included
 
-Only the **runnable core** of each skill is mirrored here — `SKILL.md` +
-`manifest.json`. The upstream `examples/` and `tests/` directories are QA
-artifacts that stay in `starlight-agent-skills`; consult the source repo for them.
+Only the **runnable core**: `SKILL.md` + `manifest.json`. The `examples/` and `tests/`
+directories are QA artifacts that stay in the source library — consult
+[`starlight-agent-skills/skills/cosmos/`](https://github.com/frankxai/starlight-agent-skills/tree/main/skills/cosmos)
+to browse them.
 
-These are **version-pinned mirrors**. When the source library publishes a new
-version, re-pull the `cosmos/` domain and update the pin above. Do not hand-edit
-the mirrored `SKILL.md` / `manifest.json` files here — make changes upstream in
-`starlight-agent-skills` and re-mirror, so the two copies never silently diverge.
+## Sync rules
+
+> Do not hand-edit these files. Make changes upstream in `starlight-agent-skills`,
+> get CI green there, then re-mirror here.
+
+To re-mirror when the source publishes a new version:
+
+```bash
+# From your local starlight-agent-skills clone:
+for skill in apod-to-short arxiv-space-paper-to-brief cosmic-mythic-overlay \
+             nasa-image-to-atlas-page rights-check-nasa-esa \
+             rocket-launch-to-reel space-social-repurposer; do
+  node scripts/port-skill.mjs cosmos/$skill \
+       --target=/path/to/agentic-creator-os/.claude/skills \
+       --dry-run      # review output, then remove --dry-run to write
+done
+```
+
+After writing, update **Pinned version** and **Pinned commit** in the table above
+and open a PR.
 
 ## Not yet mirrored
 
-The other creator-content domains in the source library (`media`, `brand`,
-`education`, `research`, `coding` — 15 skills) are candidates for the same
-treatment in follow-up passes. The `substrate` domain (4 skills) is intended for
-the Starlight Intelligence System substrate, not ACOS.
+The 15 creator-content skills across `media`, `brand`, `education`, `research`, and
+`coding` domains are the next mirror candidates. The `substrate` domain
+(`agentic-income`, `affiliate-audit`, `payments-mandate`, `swarm-queen-coordination`)
+is intentionally not mirrored here — those 4 skills belong in
+`Starlight-Intelligence-System`, not ACOS.
