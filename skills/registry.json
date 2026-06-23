@@ -402,6 +402,20 @@
         "commands": ["/research-hub-init", "/research-hub-sync"]
       },
       "exports": ["hub_structure", "rss_generation"]
+    },
+    "agent-service-bureau": {
+      "version": "1.0.0",
+      "category": "business",
+      "description": "Implements the Human-as-a-Service to Agents (HaaStA) protocol. Manages enqueued validation tasks, attestation signing, and P2P agent consulting.",
+      "author": "FrankX",
+      "license": "MIT",
+      "dependencies": [],
+      "mcp": ["filesystem-mcp", "database-mcp"],
+      "triggers": {
+        "keywords": ["agent service bureau", "haasta", "validation queue", "human-as-a-service"],
+        "commands": ["/haasta-list", "/haasta-view", "/haasta-sign", "/haasta-p2p-escrow"]
+      },
+      "exports": ["request_schema", "attestation_schema", "callback_protocol"]
     }
   },
 
@@ -429,7 +443,8 @@
       "research-hub-template"
     ],
     "business": [
-      "oci-services"
+      "oci-services",
+      "agent-service-bureau"
     ],
     "soulbook": [
       "7-pillars",
