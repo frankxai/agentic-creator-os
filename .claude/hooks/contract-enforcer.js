@@ -2,26 +2,27 @@
 
 // NLAH Contract Enforcer — PostToolUse hook
 // Tracks budget usage against active skill contracts and emits warnings.
-// Reads contract from .acos/artifacts/{skill}/_active-contract.json
-// Writes budget state to .acos/artifacts/{skill}/_budget-state.json
+// Reads contract from .acos/artifacts/_active-contract-{sid}.json
+// Writes budget state to .acos/artifacts/_budget-state-{sid}.json
 
 const fs = require('fs');
 const path = require('path');
 
 const ACOS_DIR = path.join(process.cwd(), '.acos', 'artifacts');
+const SESSION_ID = process.env.ACOS_SESSION_ID || process.env.CLAUDE_SESSION_ID || 'default';
 const BUDGET_THRESHOLDS = { warning: 0.7, urgent: 0.9, exceeded: 1.0 };
 
 function findActiveContract() {
   if (!fs.existsSync(ACOS_DIR)) return null;
-  const activeFile = path.join(ACOS_DIR, '_active-contract.json');
+  const activeFile = path.join(ACOS_DIR, `_active-contract-${SESSION_ID}.json`);
   if (!fs.existsSync(activeFile)) return null;
   try {
     return JSON.parse(fs.readFileSync(activeFile, 'utf8'));
   } catch { return null; }
 }
 
-function readBudgetState(skillName) {
-  const stateFile = path.join(ACOS_DIR, '_budget-state.json');
+function readBudgetState() {
+  const stateFile = path.join(ACOS_DIR, `_budget-state-${SESSION_ID}.json`);
   if (!fs.existsSync(stateFile)) {
     return { tool_calls: 0, file_edits: 0, child_agents: 0, started_at: new Date().toISOString() };
   }
@@ -33,7 +34,7 @@ function readBudgetState(skillName) {
 }
 
 function writeBudgetState(state) {
-  const stateFile = path.join(ACOS_DIR, '_budget-state.json');
+  const stateFile = path.join(ACOS_DIR, `_budget-state-${SESSION_ID}.json`);
   fs.mkdirSync(path.dirname(stateFile), { recursive: true });
   fs.writeFileSync(stateFile, JSON.stringify(state, null, 2));
 }
@@ -59,12 +60,12 @@ function checkBudget(used, limit, name) {
 
 function main() {
   const contract = findActiveContract();
-  if (!contract || !contract.budget) {
+  if (!contract || !contract.contract?.budget) {
     process.exit(0);
   }
 
   const tool = getToolFromEnv();
-  const state = readBudgetState(contract.skill);
+  const state = readBudgetState();
 
   state.tool_calls += 1;
 
@@ -77,7 +78,7 @@ function main() {
 
   writeBudgetState(state);
 
-  const budget = contract.budget;
+  const budget = contract.contract.budget;
   const warnings = [
     checkBudget(state.tool_calls, budget['max-tool-calls'], 'tool-calls'),
     checkBudget(state.file_edits, budget['max-file-edits'], 'file-edits'),
@@ -85,7 +86,7 @@ function main() {
   ].filter(Boolean);
 
   if (budget['timeout-minutes'] && state.started_at) {
-    const elapsed = (Date.now() - new Date(state.started_at).getTime()) / 60000;
+    const elapsed = Math.round(((Date.now() - new Date(state.started_at).getTime()) / 60000) * 10) / 10;
     const timeWarning = checkBudget(elapsed, budget['timeout-minutes'], 'timeout');
     if (timeWarning) warnings.push(timeWarning);
   }
