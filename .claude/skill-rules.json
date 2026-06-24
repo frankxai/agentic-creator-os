@@ -213,6 +213,15 @@
       "priority": "low"
     },
     {
+      "skill": "nlah-contracts",
+      "triggers": {
+        "keywords": ["contract", "NLAH", "harness", "budget enforcement", "artifact manifest", "execution contract", "required outputs", "completion conditions"],
+        "file_patterns": [".acos/artifacts/**", "nlah-contract.schema.json"],
+        "commands": []
+      },
+      "priority": "medium"
+    },
+    {
       "skill": "cacos",
       "triggers": {
         "keywords": ["cacos", "agentic creator os", "activate system", "ultrawork", "ulw"],

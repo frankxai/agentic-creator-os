@@ -12,6 +12,46 @@ allowed-tools:
   - Grep
   - WebFetch
   - WebSearch
+contract:
+  required-outputs:
+    - type: file
+      name: "task-plan"
+      pattern: "task_plan.md"
+      format: markdown
+      description: "Structured task plan with phases, status tracking, and completion criteria"
+    - type: file
+      name: "findings"
+      pattern: "findings.md"
+      format: markdown
+      description: "Research findings and key discoveries"
+      optional: true
+    - type: file
+      name: "progress"
+      pattern: "progress.md"
+      format: markdown
+      description: "Execution progress log"
+      optional: true
+  completion-conditions:
+    - "task_plan.md exists and contains at least one phase marked DONE"
+    - "All non-optional required outputs exist and are non-empty"
+  budget:
+    max-tool-calls: 100
+    max-file-edits: 30
+    max-child-agents: 5
+    timeout-minutes: 45
+  permissions:
+    iam-profile: "frontend-engineer"
+    additional-paths: ["docs/**", "*.md"]
+    denied-paths: [".env*", "*.key"]
+    can-spawn-agents: true
+    can-modify-harness: false
+  artifacts:
+    state-dir: ".acos/artifacts/planning-with-files/${session-id}/"
+    manifest: "artifact-manifest.json"
+    retention: "30d"
+    execution-log: "execution-log.jsonl"
+  verification:
+    method: "existence"
 hooks:
   PreToolUse:
     - matcher: "Write|Edit|Bash|Read|Glob|Grep"
