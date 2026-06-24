@@ -1,0 +1,25 @@
+{
+  "id": "cosmos/nasa-image-to-atlas-page",
+  "name": "nasa-image-to-atlas-page",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "NASA/ESA image into a structured MDX cosmic-atlas page.",
+  "inputs": [
+    { "name": "image", "type": "string", "required": true, "description": "NASA/ESA image URL/page with caption + credit." },
+    { "name": "object", "type": "string", "required": false, "description": "Canonical object name." },
+    { "name": "template", "type": "string", "required": false, "description": "MDX component names." }
+  ],
+  "outputs": [
+    { "name": "slug", "type": "string" },
+    { "name": "frontmatter", "type": "object" },
+    { "name": "mdx", "type": "string" },
+    { "name": "facts", "type": "array" },
+    { "name": "sources", "type": "array" },
+    { "name": "rights_line", "type": "string" }
+  ],
+  "tools": ["WebFetch", "Read", "Write"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["nasa", "atlas", "mdx", "web", "catalog"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

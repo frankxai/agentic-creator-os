@@ -1,0 +1,23 @@
+{
+  "id": "cosmos/cosmic-mythic-overlay",
+  "name": "cosmic-mythic-overlay",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "Layer an Arcanea cosmic-mythic framing over a real space object, keeping science separable.",
+  "inputs": [
+    { "name": "object", "type": "string", "required": true, "description": "The real space object/event + facts/credit." },
+    { "name": "intensity", "type": "string", "required": false, "description": "light | medium | full." }
+  ],
+  "outputs": [
+    { "name": "astronomy_layer", "type": "string" },
+    { "name": "mythic_overlay", "type": "string" },
+    { "name": "combined", "type": "string" },
+    { "name": "canon_attribution", "type": "string" },
+    { "name": "image_credit", "type": "string" }
+  ],
+  "tools": ["Read"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["cosmos", "mythic", "arcanea", "narrative", "astronomy"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

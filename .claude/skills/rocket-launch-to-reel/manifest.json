@@ -1,0 +1,24 @@
+{
+  "id": "cosmos/rocket-launch-to-reel",
+  "name": "rocket-launch-to-reel",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "A rocket launch into a 30–45s vertical reel package.",
+  "inputs": [
+    { "name": "mission", "type": "string", "required": true, "description": "Vehicle, payload, provider, date, outcome (+ source)." },
+    { "name": "length", "type": "number", "required": false, "description": "Target seconds, default 35." },
+    { "name": "voice", "type": "string", "required": false, "description": "starlight | arcanea | frankx." }
+  ],
+  "outputs": [
+    { "name": "hook", "type": "string" },
+    { "name": "script", "type": "string" },
+    { "name": "captions", "type": "array" },
+    { "name": "rights_line", "type": "string" },
+    { "name": "duration_sec", "type": "number" }
+  ],
+  "tools": ["WebSearch", "WebFetch", "Read"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["rocket", "launch", "reel", "short", "social"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

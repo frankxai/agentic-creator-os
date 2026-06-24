@@ -1,0 +1,26 @@
+{
+  "id": "cosmos/apod-to-short",
+  "name": "apod-to-short",
+  "version": "0.1.0",
+  "domain": "cosmos",
+  "summary": "NASA Astronomy Picture of the Day into a 30–60s vertical short package.",
+  "inputs": [
+    { "name": "apod", "type": "string", "required": true, "description": "APOD URL/date or title+explanation+credit." },
+    { "name": "length", "type": "number", "required": false, "description": "Target seconds, default 45." },
+    { "name": "voice", "type": "string", "required": false, "description": "starlight | arcanea | frankx." }
+  ],
+  "outputs": [
+    { "name": "title", "type": "string" },
+    { "name": "hook", "type": "string" },
+    { "name": "script", "type": "string" },
+    { "name": "captions", "type": "array" },
+    { "name": "shot_list", "type": "array" },
+    { "name": "rights_line", "type": "string" },
+    { "name": "duration_sec", "type": "number" }
+  ],
+  "tools": ["WebFetch", "Read"],
+  "mcp_dependencies": [],
+  "runtimes": ["claude", "codex", "cursor", "gemini", "opencode", "sis"],
+  "tags": ["nasa", "apod", "video", "short", "social"],
+  "attestation": "Built on SIP — starlightintelligence.org/protocol v1.1.0"
+}

@@ -229,6 +229,150 @@
         "commands": ["/office-hours", "/plan-ceo-review", "/plan-eng-review", "/plan-design-review", "/review", "/qa", "/qa-only", "/ship", "/land-and-deploy", "/canary", "/benchmark", "/browse", "/cso", "/investigate", "/retro", "/autoplan", "/design-review", "/design-consultation", "/codex", "/careful", "/freeze", "/guard", "/unfreeze", "/setup-browser-cookies", "/setup-deploy", "/document-release", "/gstack-upgrade"]
       },
       "priority": "high"
+    },
+    {
+      "skill": "apod-to-short",
+      "triggers": {
+        "keywords": [
+          "apod",
+          "astronomy picture of the day",
+          "daily space short",
+          "nasa image short",
+          "space reel"
+        ],
+        "file_patterns": [
+          "apod.json",
+          "apod-*.md"
+        ],
+        "commands": [
+          "/apod-to-short"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "arxiv-space-paper-to-brief",
+      "triggers": {
+        "keywords": [
+          "astro-ph",
+          "astrophysics paper",
+          "space paper",
+          "observation paper",
+          "mission result"
+        ],
+        "file_patterns": [
+          "papers/astro/**",
+          "*.pdf"
+        ],
+        "commands": [
+          "/arxiv-space-paper-to-brief"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "cosmic-mythic-overlay",
+      "triggers": {
+        "keywords": [
+          "cosmic myth",
+          "mythic space",
+          "arcanea cosmos",
+          "myth this nebula",
+          "universe framing"
+        ],
+        "file_patterns": [
+          "arcanea/cosmos/**"
+        ],
+        "commands": [
+          "/cosmic-mythic-overlay"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "nasa-image-to-atlas-page",
+      "triggers": {
+        "keywords": [
+          "atlas page",
+          "cosmic atlas",
+          "object page",
+          "gallery entry",
+          "catalog entry",
+          "nasa image page"
+        ],
+        "file_patterns": [
+          "content/atlas/**",
+          "*.atlas.mdx"
+        ],
+        "commands": [
+          "/nasa-image-to-atlas-page"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "rights-check-nasa-esa",
+      "triggers": {
+        "keywords": [
+          "usage rights",
+          "can i use this image",
+          "attribution",
+          "public domain",
+          "nasa esa rights"
+        ],
+        "file_patterns": [
+          "rights.json",
+          "credits.md"
+        ],
+        "commands": [
+          "/rights-check",
+          "/rights-check-nasa-esa"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "rocket-launch-to-reel",
+      "triggers": {
+        "keywords": [
+          "launch reel",
+          "rocket short",
+          "launch recap short",
+          "reel from launch"
+        ],
+        "file_patterns": [
+          "reels/**"
+        ],
+        "commands": [
+          "/rocket-launch-to-reel"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "space-social-repurposer",
+      "triggers": {
+        "keywords": [
+          "repurpose space",
+          "space social pack",
+          "distribute space content",
+          "cross-post nasa"
+        ],
+        "file_patterns": [
+          "content/space/**"
+        ],
+        "commands": [
+          "/space-social-repurposer"
+        ]
+      },
+      "priority": "medium",
+      "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
     }
   ],
 
