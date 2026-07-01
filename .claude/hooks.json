@@ -74,7 +74,7 @@
         "name": "skill-suggestion",
         "description": "Suggest relevant skills based on recent activity",
         "type": "command",
-        "command": "echo 'SKILL SUGGESTIONS:\\n\\nCheck skill-rules.json for auto-activation matches'"
+        "command": "printf 'SKILL SUGGESTIONS:\\n\\nCheck skill-rules.json for auto-activation matches\\n'"
       }
     ]
   },
