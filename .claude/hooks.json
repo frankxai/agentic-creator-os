@@ -19,9 +19,9 @@
       },
       {
         "name": "skill-rules-loader",
-        "description": "Load enhanced skill-rules-v2.json with enforcement types",
+        "description": "Load skill-rules.json activation rules",
         "type": "command",
-        "command": "test -f .claude/skill-rules-v2.json && echo 'Enhanced skill rules (v2) loaded: confidence scoring, model routing, skip conditions' || echo 'Using standard skill rules'",
+        "command": "test -f .claude/skill-rules.json && echo 'Skill rules loaded: activation patterns for auto-loading skills' || echo 'skill-rules.json missing'",
         "once": true
       },
       {
@@ -74,7 +74,7 @@
         "name": "skill-suggestion",
         "description": "Suggest relevant skills based on recent activity",
         "type": "command",
-        "command": "echo 'SKILL SUGGESTIONS:\\n\\nCheck skill-rules-v2.json for auto-activation matches'"
+        "command": "echo 'SKILL SUGGESTIONS:\\n\\nCheck skill-rules.json for auto-activation matches'"
       }
     ]
   },

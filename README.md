@@ -4,7 +4,7 @@
 
 **The Operating System for AI-Powered Creators**
 
-*One install. Any coding agent. 90+ skills, 65+ commands, 38 agents — auto-activating.*
+*One install. Any coding agent. 90+ skills, 65+ commands, 67 agents — auto-activating.*
 
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
@@ -68,7 +68,7 @@ ACOS (Agentic Creator OS) is the **shared execution layer** (skills + commands +
 | Layer | Role | Key |
 |-------|------|-----|
 | **SIP (Starlight Intelligence Protocol)** | Cross-repo memory, MCP substrate (github/fs-starlight/git), sovereignty, attestation, vaults | starlightintelligence.org/protocol |
-| **ACOS** | 90+ skills, 65+ commands, 38 agents, workflows, v10+ safety (IAM, circuit-breaker, audit, self-modify), auto-activation via skill-rules + excellence | This repo; junctions to ~/.claude + .grok compat |
+| **ACOS** | 90+ skills, 65+ commands, 67 agents, workflows, v10+ safety (IAM, circuit-breaker, audit, self-modify), auto-activation via skill-rules + excellence | This repo; junctions to ~/.claude + .grok compat |
 | **Grok Build (xAI)** | TUI speed, subagents (explore/plan), MCP, image/video, .grok/skills + hooks native + full .claude compat. Personal excellence seeds (4 + 2 json) via grok-harness-adapter | adapters/grok/ + install --platform=grok; .grok-only grok-personal layer only |
 | **Claude Code** | Canonical full surface (slash commands, hooks, IAM, skill-rules) | Direct .claude/ install |
 | **Other (Cursor, Windsurf, Gemini, AGY)** | Context files + embedded skills/agents; delegation via multi-orchestrator | .cursorrules etc. |
@@ -326,7 +326,7 @@ skill-rules.json → 22 pattern rules
   "deploy" + "vercel"   → loads vercel-deployment + nextjs-best-practices
 ```
 
-### Agents (38 Specialized)
+### Agents (67 Specialized)
 
 | Domain | Agents | Examples |
 |--------|--------|----------|
@@ -484,7 +484,7 @@ agentic-creator-os/
 ├── docs/infographics/      # Visual documentation
 ├── install.sh              # Multi-platform installer
 ├── CLAUDE.md               # Claude Code context
-└── package.json            # v10.1.0
+└── package.json            # v11.0.0
 ```
 
 ---
@@ -502,7 +502,7 @@ Starlight Intelligence System (Framework)
      └── ACOS (Claude Code + Grok full harness via grok-harness-adapter + Multi-Platform)
          ├── 35+ commands routed through /acos
          └── Grok: adapters/grok/index.ts + install.sh --platform=grok (GROK.md + .grok/ seeds: excellence, repo-mastery, gstack gates)
-         ├── 38 agents aligned to Starlight council
+         ├── 67 agents aligned to Starlight council
          ├── 75+ auto-activating skills
          ├── v10 safety systems (IAM, circuit breaker, audit)
          └── Self-learning via trajectory patterns
@@ -598,7 +598,7 @@ MIT — Use it, fork it, build your own OS with it.
 
 **Agentic Creator OS v11.0** — The Operating System for AI-Powered Creators
 
-*90+ Skills | 65+ Commands | 38 Agents | 8 Plugins | Multi-Platform | Self-Learning*
+*90+ Skills | 65+ Commands | 67 Agents | 8 Plugins | Multi-Platform | Self-Learning*
 
 Built by [FrankX](https://frankx.ai) — AI Architect & Creator
 
