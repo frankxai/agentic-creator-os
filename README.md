@@ -284,6 +284,8 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 
 ### Skills (94 Auto-Activating)
 
+> Curated by category below; the full set includes 94 auto-activating skills. See `.claude/skills/` for the complete list.
+
 Skills are domain knowledge modules that **activate automatically** based on what you're doing. No manual invocation needed.
 
 | Category | Count | Examples |
