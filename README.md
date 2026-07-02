@@ -58,7 +58,7 @@ flowchart LR
 |-------|-------------|-------|
 | **Skills** | Domain knowledge modules that load automatically | 75+ |
 | **Commands** | Reusable workflows triggered via slash commands | 35+ |
-| **Agents** | Specialized personas with distinct expertise | 38 |
+| **Agents** | Specialized personas with distinct expertise | 67 |
 | **Safety Hooks** | Circuit breaker, audit trail, IAM, self-modify gate | 5 |
 
 ## Architecture & Harness Role (Whole Stack)
