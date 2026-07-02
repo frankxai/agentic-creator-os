@@ -16,7 +16,7 @@ outputs:
   - A prioritized ops readout (inbox · pipeline · PRs · content)
   - Optional: drafted replies, advanced Notion stages, PR actions
 dependencies: [frankx-brand]
-mcp: [notion, github, slack]
+mcp: [notion-mcp, github-mcp, slack-mcp]
 ---
 
 # Ops Cadence
@@ -45,7 +45,7 @@ wired yet). Pull every row at stage `New`.
 For each:
 - Classify urgency (commercial intent + named company + specific ask = hot).
 - Draft a reply in Frank's voice (technical-authority register — see
-  `VOICE_ROUTER.md`). Lead with the answer, propose the next step (call / scope / no-fit).
+  the `frankx-brand` skill). Lead with the answer, propose the next step (call / scope / no-fit).
 - Advance the Notion `Stage`: `New → Triaged`.
 
 Output: a ranked list — hot leads first, each with a ready-to-send draft.

@@ -126,7 +126,7 @@ See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for 
 | `/ux-design` | UI/UX design workflows |
 | `/automation-dev` | MCP servers & automation |
 
-### System (5)
+### System (6)
 | Command | Description |
 |---------|-------------|
 | `/acos` | Smart router — single entry point |
