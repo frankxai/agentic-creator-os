@@ -140,7 +140,7 @@ You start writing a blog post
 ```
 
 | Skill Category | Examples | Trigger Patterns |
-|---------------|----------|-----------------|
+|---------------|----------|------------------|
 | **Technical** | TDD, React patterns, TypeScript, debugging | `test`, `component`, `error` |
 | **Creative** | Brand voice, music mastery, book writing | `blog`, `music`, `create` |
 | **Infrastructure** | Oracle Cloud, Kubernetes, Terraform | `deploy`, `cloud`, `infra` |
@@ -211,7 +211,7 @@ Skill: `multimodal-studio` · Agent: Multimodal Director · Commands: `/studio`,
 Five systems that run automatically to keep the Agentic Creator OS reliable:
 
 | Hook | What It Prevents |
-|------|-----------------|
+|------|------------------|
 | **Circuit Breaker** | Stops the agent from brute-forcing broken approaches (3→warn, 5→restrict, 8→block) |
 | **Audit Trail** | Append-only JSONL log of every operation — tamper-proof ground truth |
 | **Agent IAM** | Role-based scoping — a content writer can't modify build configs |
@@ -320,7 +320,7 @@ skill-rules.json → 22 pattern rules
 ### v10 Safety Hooks
 
 | Hook | Trigger | Purpose |
-|------|---------|---------|
+|------|---------|----------|
 | **Circuit Breaker** | PostToolUse (failure) | Track failures per file, escalate at thresholds |
 | **Audit Trail** | All tool use | Append-only JSONL logging |
 | **Self-Modify Gate** | Config changes | Snapshot + validate intelligence score |
@@ -500,7 +500,7 @@ Starlight Intelligence System (Framework)
 Extend ACOS with installable domain plugins from **[agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills)**:
 
 | Plugin | Purpose |
-|--------|---------|
+|--------|----------|
 | **core** | Session management, workspace memory, task tracking |
 | **content-engine** | Content creation, voice enforcement, publishing |
 | **visual-studio** | Style-governed image generation, 7-gate quality filter |
@@ -540,7 +540,7 @@ claude plugin install core content-engine design-excellence
 ACOS builds on work from the open-source community:
 
 | Project | Author | What We Learned |
-|---------|--------|-----------------|
+|---------|--------|------------------|
 | [claude-flow](https://github.com/ruvnet/claude-flow) | @ruvnet | Swarm orchestration, hierarchical topologies |
 | [wshobson/agents](https://github.com/wshobson/agents) | @wshobson | Plugin architecture, modular skills |
 | [obra/superpowers](https://github.com/obra/superpowers) | @obra | Progressive disclosure, token-efficient loading |
@@ -564,9 +564,9 @@ ACOS builds on work from the open-source community:
 
 ## Music Intelligence Ecosystem
 
-ACOS's music surface — the Music Producer agent, the `/create-music` command, and the `suno-ai-mastery` / `suno-prompt-architect` skills — is registered in the [music-intelligence-systems](https://github.com/frankxai/music-intelligence-systems) hub: a cross-repo registry of ~30 music agents with JSON schemas and portable exports (Claude Projects / Custom GPTs / Gemini Gems).
+ACOS's music surface — the Music Producer agent, the `/create-music` command, and the `suno-ai-mastery` / `suno-prompt-architect` skills — is registered in the [music-intelligence-systems](https://github.com/frankxai/music-intelligence-systems) hub: a cross-repo registry of 31 music agents with JSON schemas and portable exports (Claude Projects / Custom GPTs / Gemini Gems).
 
-Siblings: [vibe-os](https://github.com/frankxai/vibe-os) (state-change music engine + MCP server) · [ai-music-academy](https://github.com/frankxai/ai-music-academy) (4-tier curriculum) · [awesome-music-agent-skills](https://github.com/frankxai/awesome-music-agent-skills) (curated tooling) · [claude-skills-library](https://github.com/frankxai/claude-skills-library) (free skills). Public surface: [frankx.ai/music-intelligence](https://frankx.ai/music-intelligence).
+Siblings: [vibe-os](https://github.com/frankxai/vibe-os) (state-change music engine + MCP server) · [awesome-music-agent-skills](https://github.com/frankxai/awesome-music-agent-skills) (curated tooling) · [claude-skills-library](https://github.com/frankxai/claude-skills-library) (free skills). Public surface: [frankx.ai/music-intelligence](https://frankx.ai/music-intelligence).
 
 ---
 
