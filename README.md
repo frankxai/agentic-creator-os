@@ -588,6 +588,14 @@ ACOS builds on work from the open-source community:
 
 ---
 
+## Music Intelligence Ecosystem
+
+ACOS's music surface — the Music Producer agent, the `/create-music` command, and the `suno-ai-mastery` / `suno-prompt-architect` skills — is registered in the [music-intelligence-systems](https://github.com/frankxai/music-intelligence-systems) hub: a cross-repo registry of ~30 music agents with JSON schemas and portable exports (Claude Projects / Custom GPTs / Gemini Gems).
+
+Siblings: [vibe-os](https://github.com/frankxai/vibe-os) (state-change music engine + MCP server) · [ai-music-academy](https://github.com/frankxai/ai-music-academy) (4-tier curriculum) · [awesome-music-agent-skills](https://github.com/frankxai/awesome-music-agent-skills) (curated tooling) · [claude-skills-library](https://github.com/frankxai/claude-skills-library) (free skills). Public surface: [frankx.ai/music-intelligence](https://frankx.ai/music-intelligence).
+
+---
+
 ## License
 
 MIT — Use it, fork it, build your own OS with it.
