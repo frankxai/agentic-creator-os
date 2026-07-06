@@ -3,8 +3,6 @@ name: E2E Validation
 on:
   pull_request:
     branches: [main]
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -15,6 +13,8 @@ jobs:
   skill-validation:
     name: Validate Skills Structure
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
 
@@ -89,6 +89,8 @@ jobs:
   agent-validation:
     name: Validate Agents Structure
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
 
@@ -151,6 +153,8 @@ jobs:
   command-validation:
     name: Validate Commands Structure
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
 
@@ -183,6 +187,8 @@ jobs:
   model-routing-validation:
     name: Validate Model Routing
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
 
@@ -223,6 +229,8 @@ jobs:
     name: Integration Test
     runs-on: ubuntu-latest
     needs: [skill-validation, agent-validation, command-validation]
+    timeout-minutes: 15
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     steps:
       - uses: actions/checkout@v4
 
