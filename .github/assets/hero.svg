@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="#0f1117"/>
+    <stop offset="100%" stop-color="#0a0a0b"/>
+  </radialGradient>
+  <linearGradient id="ec" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#10b981"/>
+    <stop offset="100%" stop-color="#06b6d4"/>
+  </linearGradient>
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<rect width="1200" height="300" fill="url(#bg)"/>
+
+<!-- OS Dashboard panels -->
+<!-- Left sidebar panel -->
+<rect x="60" y="60" width="180" height="180" rx="6" fill="none" stroke="#10b981" stroke-width="1" opacity="0.4"/>
+<rect x="72" y="75" width="60" height="8" rx="2" fill="#10b981" opacity="0.3"/>
+<rect x="72" y="90" width="100" height="6" rx="2" fill="#10b981" opacity="0.2"/>
+<rect x="72" y="103" width="80" height="6" rx="2" fill="#10b981" opacity="0.2"/>
+<rect x="72" y="116" width="90" height="6" rx="2" fill="#10b981" opacity="0.2"/>
+<rect x="72" y="129" width="70" height="6" rx="2" fill="#10b981" opacity="0.2"/>
+<!-- Indicator dots -->
+<circle cx="82" cy="160" r="4" fill="#10b981">
+  <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="96" cy="160" r="4" fill="#f59e0b">
+  <animate attributeName="opacity" values="0.2;1;0.2" dur="1.8s" begin="0.3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="110" cy="160" r="4" fill="#06b6d4">
+  <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+</circle>
+
+<!-- Main panel -->
+<rect x="260" y="60" width="380" height="180" rx="6" fill="none" stroke="#10b981" stroke-width="1" opacity="0.35"/>
+<!-- Terminal lines in main panel -->
+<rect x="275" y="78" width="200" height="5" rx="2" fill="#10b981" opacity="0.25"/>
+<rect x="275" y="90" width="160" height="5" rx="2" fill="#10b981" opacity="0.2"/>
+<rect x="275" y="102" width="220" height="5" rx="2" fill="#10b981" opacity="0.15"/>
+<rect x="275" y="114" width="140" height="5" rx="2" fill="#f59e0b" opacity="0.2"/>
+<rect x="275" y="126" width="180" height="5" rx="2" fill="#10b981" opacity="0.15"/>
+<!-- Blinking cursor -->
+<rect x="275" y="140" width="8" height="12" rx="1" fill="#10b981">
+  <animate attributeName="opacity" values="1;0;1" dur="1.0s" repeatCount="indefinite"/>
+</rect>
+
+<!-- Right panel -->
+<rect x="660" y="60" width="180" height="180" rx="6" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.4"/>
+<!-- Mini bar chart -->
+<rect x="675" y="180" width="18" height="40" rx="2" fill="#10b981" opacity="0.4"/>
+<rect x="698" y="165" width="18" height="55" rx="2" fill="#10b981" opacity="0.5"/>
+<rect x="721" y="155" width="18" height="65" rx="2" fill="#06b6d4" opacity="0.5"/>
+<rect x="744" y="145" width="18" height="75" rx="2" fill="#f59e0b" opacity="0.5"/>
+<!-- Right panel indicators -->
+<circle cx="675" cy="90" r="4" fill="#06b6d4">
+  <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+</circle>
+<circle cx="690" cy="90" r="4" fill="#10b981">
+  <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" begin="0.4s" repeatCount="indefinite"/>
+</circle>
+
+<!-- Far right panel -->
+<rect x="860" y="60" width="280" height="180" rx="6" fill="none" stroke="#10b981" stroke-width="1" opacity="0.3"/>
+<rect x="875" y="78" width="120" height="5" rx="2" fill="#06b6d4" opacity="0.3"/>
+<rect x="875" y="90" width="200" height="5" rx="2" fill="#10b981" opacity="0.2"/>
+<rect x="875" y="102" width="160" height="5" rx="2" fill="#10b981" opacity="0.15"/>
+<rect x="875" y="114" width="220" height="5" rx="2" fill="#f59e0b" opacity="0.18"/>
+<rect x="875" y="126" width="140" height="5" rx="2" fill="#10b981" opacity="0.2"/>
+
+<!-- Connecting lines between panels -->
+<line x1="240" y1="150" x2="260" y2="150" stroke="#10b981" stroke-width="1" opacity="0.3" stroke-dasharray="4,3"/>
+<line x1="640" y1="150" x2="660" y2="150" stroke="#06b6d4" stroke-width="1" opacity="0.3" stroke-dasharray="4,3"/>
+<line x1="840" y1="150" x2="860" y2="150" stroke="#10b981" stroke-width="1" opacity="0.3" stroke-dasharray="4,3"/>
+
+<!-- Title and tagline -->
+<text x="600" y="270" fill="url(#ec)" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace" font-size="28" font-weight="700" text-anchor="middle" letter-spacing="4" filter="url(#glow)">AGENTIC CREATOR OS</text>
+<text x="600" y="290" fill="#64748b" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace" font-size="11" text-anchor="middle" letter-spacing="1">The operating system for AI-powered creators · 35+ commands · 75+ skills</text>
+
+<!-- Built on SIP footer -->
+<text x="24" y="48" fill="#f59e0b" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace" font-size="11" opacity="0.8">Built on SIP</text>
+<!-- Version hint -->
+<text x="1176" y="48" fill="#334155" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace" font-size="10" text-anchor="end" opacity="0.6">v11.0</text>
+</svg>
