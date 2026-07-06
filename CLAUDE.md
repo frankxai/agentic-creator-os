@@ -1,4 +1,4 @@
-# Agentic Creator OS v10 — Project Instructions
+# Agentic Creator OS v11 — Project Instructions
 
 > The operating system for AI-powered creators. Multi-platform, self-learning, safety-first.
 
@@ -57,11 +57,11 @@ Instead of blanket word bans, apply these principles:
 
 ## What is ACOS?
 
-**Agentic Creator OS v10** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
+**Agentic Creator OS v11** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
 
 - **35+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
 - **75+ Skills** — Auto-activate via `skill-rules.json` based on task context
-- **38 Specialized Agents** — Writers, editors, designers, strategists, engineers
+- **67 Specialized Agents** — Writers, editors, designers, strategists, engineers
 - **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
 
 ## Quick Start
@@ -258,5 +258,5 @@ Before ANY structural change:
 
 ---
 
-*ACOS v10.1 — Autonomous Intelligence*
+*ACOS v11.0 — Autonomous Intelligence*
 *Created by [FrankX](https://github.com/frankxai)*
