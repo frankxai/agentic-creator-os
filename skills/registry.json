@@ -346,6 +346,24 @@
       },
       "exports": ["mdx_build_log", "linkedin_draft", "demo_brief", "mermaid_diagram", "prompt_pack_entry"],
       "voice_override": "resources/voice-spec.md"
+    },
+
+    "ops": {
+      "version": "0.1.0",
+      "category": "business",
+      "description": "Run the weekly FrankX operations loop — triage the inquiry inbox, advance the CRM pipeline, sweep open PRs across repos, and surface the content plan. The execution layer of the FrankX Operations System (frankx.ai /api/intake → Notion Inquiries CRM).",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["frankx-brand"],
+      "mcp": ["notion-mcp", "github-mcp", "slack-mcp"],
+      "triggers": {
+        "keywords": ["ops loop", "weekly ops", "triage inquiries", "what needs my attention", "ops check-in", "advance pipeline"],
+        "files": ["**/docs/ops/**", "**/admin/intake/**"],
+        "commands": ["/ops"]
+      },
+      "exports": ["ops_readout", "inbox_triage", "pipeline_advance", "pr_sweep"]
     }
   },
 
@@ -369,7 +387,8 @@
       "publishing-factory"
     ],
     "business": [
-      "oci-services"
+      "oci-services",
+      "ops"
     ],
     "soulbook": [
       "7-pillars",
