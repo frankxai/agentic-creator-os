@@ -59,7 +59,7 @@ function globMatch(pattern, cwd) {
 
 function matchSegment(pattern, name) {
   if (pattern === '*') return true;
-  const re = new RegExp('^' + pattern.replace(/\./g, '\\.').replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
+  const re = new RegExp('^' + pattern.replace(/[.+^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*').replace(/\?/g, '.') + '$');
   return re.test(name);
 }
 
