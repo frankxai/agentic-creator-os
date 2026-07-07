@@ -1,51 +1,25 @@
 #!/bin/bash
-# ══════════════════════════════════════════════════════════════
-# ACOS v10 Immutable Audit Trail
-# ══════════════════════════════════════════════════════════════
-# Append-only logging of all significant agent actions.
-# This script ONLY appends — it never reads, edits, or truncates.
-# The audit log is the ground truth for what happened.
-#
-# Usage:
-#   audit-trail.sh log <event_type> <details...>
-#   audit-trail.sh verify                        # Check integrity
-#   audit-trail.sh tail [count]                  # View recent
-# ══════════════════════════════════════════════════════════════
-
+# Append-only audit trail (JSONL, python for safety). Sources hook-env when present. Never blocks.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="${CLAUDE_PROJECT_DIR:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+source "$SCRIPT_DIR/lib/hook-env.sh" 2>/dev/null || true
+PROJECT_ROOT="${PROJECT_ROOT:-${CLAUDE_PROJECT_DIR:-$(cd "$SCRIPT_DIR/../.." && pwd)}}"
 AUDIT_FILE="$PROJECT_ROOT/.claude-flow/audit.jsonl"
-
-# Ensure audit directory exists
 mkdir -p "$(dirname "$AUDIT_FILE")" 2>/dev/null || true
 
 COMMAND="${1:-help}"
 shift || true
 
-# ── Log an audit entry (append-only) ─────────────────────────
 audit_log() {
-  local event_type="$1"
-  shift
+  local event_type="$1"; shift
   local details="$*"
-
-  # Build JSON entry with Python for safety
-  python3 -c "
+  python3 -c '
 import json, datetime, os
-entry = {
-    'ts': datetime.datetime.now().isoformat(),
-    'event': '$event_type',
-    'details': '''$details'''[:500],
-    'session': os.environ.get('CLAUDE_SESSION_ID', 'unknown')[:20],
-    'pid': os.getpid()
-}
-print(json.dumps(entry, separators=(',', ':')))
-" >> "$AUDIT_FILE" 2>/dev/null
-
-  # Return success — audit logging should never block the agent
+entry = {"ts": datetime.datetime.now().isoformat(), "event": "'"$event_type"'", "details": """'"$details"'"""[:500], "session": os.environ.get("CLAUDE_SESSION_ID", os.environ.get("GROK_SESSION", "unknown"))[:20], "pid": os.getpid()}
+print(json.dumps(entry, separators=(",", ":")))
+' >> "$AUDIT_FILE" 2>/dev/null || true
   return 0
 }
 
-# ── Log tool use ──────────────────────────────────────────────
 audit_tool() {
   local tool="$1"
   local target="$2"

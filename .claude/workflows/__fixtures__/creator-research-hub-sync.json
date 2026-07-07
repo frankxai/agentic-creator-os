@@ -1,0 +1,13 @@
+{
+  "_meta": "Smoke fixture for creator-research-hub-sync workflow. Validates the research notes sync, integrity audit, static scaffolding, and search catalog index compile phases.",
+  "args": {},
+  "expectedOutputs": {},
+  "calibratedRun": {
+    "runId": "wf_creator_sync_test_v15",
+    "date": "2026-06-23",
+    "totalTokens": 145000,
+    "agentCount": 4,
+    "durationMs": 35800,
+    "outcome": "success"
+  }
+}

@@ -1,4 +1,4 @@
-# agentic-creator-os — Agent Instructions
+# agentic-creator-os â€” Agent Instructions
 
 Read `CLAUDE.md` first (and `GROK.md` if present). They define ACOS v11+, Frank DNA, safety hooks, commands, skills, agent standards, and Grok Build (xAI) harness integration via grok-harness-adapter (see new .claude/skills/grok-harness/ + adapters/grok/). 5-fleet + SIP partition (grok-personal .grok-only seeds only).
 
@@ -29,3 +29,64 @@ The registry currently lists `pnpm test`, but `package.json` does not define a t
 - Treat ACOS as a shared substrate. Backward compatibility matters.
 - If changing public package behavior, update docs and versioning intentionally.
 
+## Design Taste Kernel
+
+## Design Taste Kernel
+For any site, app, landing page, dashboard, visual identity, brand, motion, media, social, or frontend task, apply the shared Design Taste Kernel before handoff:
+- C:\\Users\\frank\\starlight\\repos\\DESIGN_TASTE.md
+- C:\\Users\\frank\\starlight\\repos\\WEB_EXPERIENCE_STANDARD.md
+- C:\\Users\\frank\\starlight\\repos\\MOTION_TASTE_RUBRIC.md
+- C:\\Users\\frank\\starlight\\repos\\MULTI_AGENT_DESIGN_COUNCIL.md
+- C:\\Users\\frank\\starlight\\repos\\VISUAL_QA_GATE.md
+When motion, scroll, generated media, GIF/video, or premium polish matters, route through the Motion Design Studio plugin/skills and verify the result visually.
+## Frontend-Ultimate System (World-Class Frontend + Skill Provider)
+
+The ultimate frontend development agent, design skill hub, and complete end-to-end team for every site across the 93 repos (Arcanea visual, GenCreator OS/CoE, FrankX authority, Starlight substrate, _visual-qa, etc.).
+
+**Core Files (tracked in this repo and starlight structure)**:
+- Skill: `~/.hermes/skills/frontend-ultimate/SKILL.md` (aggregates claude-design, popular-web-designs, manim-video, pretext, touchdesigner-mcp, comfyui, p5js, coding-agents, codex, plan, github-repo-management + all official creative packs from Nous Creative Hackathon)
+- Codex Prompt: `~/.codex/prompts/frontend-ultimate.md` (Vercel-first verification per this AGENTS.md + taste kernel)
+- Playbook: `~/FRONTEND_PLAYBOOK.md` (segmentation, commands, workflows, repo categories)
+- Design Taste Kernel files listed above (enhanced by frontend-ultimate)
+
+**Wired into Loops, Hooks & Orchestration**:
+- **Profiles**: Use `hermes --profile arcanea| gencreator| frankx| starlight| tooling` with `-s frontend-ultimate,...`
+- **Delegation**: `delegate_task` or `codex exec` with context from playbook + this AGENTS.md + .codex/AGENTS.md
+- **Kanban/Cron**: Starlight dispatches tasks that load the skill; daily visual/motion sweeps
+- **.agent-orchestrator.yaml**: Worker rules reference frontend-ultimate for design/frontend tasks; Codex workers for impl
+- **Claude Code hooks / .claude/skills**: Reference the creative packs and frontend-ultimate for design tasks
+- **.codex/prompts**: Load frontend-ultimate.md for all frontend work
+- **Safety & DNA**: Always read CLAUDE.md first; apply Frank DNA + safety hooks before any frontend change
+
+**Usage for Any Site**:
+1. Load in correct profile with the skill.
+2. Apply Design Taste Kernel + creative packs (Pretext typography, TouchDesigner real-time visuals, ComfyUI pipelines, p5.js generative, manim motion).
+3. Produce artifact → Codex impl with Vercel verification → visual QA gate.
+4. Track changes in this repo's AGENTS.md / design.md / ECOSYSTEM.md.
+
+This system is absorbed into the ACOS substrate for persistent, self-improving frontend excellence across all brands and repos.
+When motion, scroll, generated media, GIF/video, or premium polish matters, route through the Motion Design Studio plugin/skills and verify the result visually.
+
+
+<!-- PREMIUM-WEB-OS:START -->
+## Premium Intelligence Web OS Adoption
+
+This repo participates in the Starlight Premium Intelligence Web OS.
+
+For any website, app, landing page, dashboard, brand surface, visual asset, motion system, 3D/WebGL scene, generated media, or public-facing UI work:
+
+- Read the estate OS first: `C:\Users\frank\starlight\repos\_intelligence\README.md`.
+- Use the activation contract: `C:\Users\frank\starlight\repos\_intelligence\adoption\activation-contract.md`.
+- Treat `C:\Users\frank\starlight\repos\_intelligence\` as the source of truth for premium web taste, design, motion, WebGL, copy, assets, and quality gates.
+- Use `/pwo` or the `premium-web-os` skill for full builds; use `/mad` for a design council pass.
+- Use `/pwo review-pr` before absorbing another agent's PR or branch.
+- Use `/pwo absorb-assets` before using external, generated, scientific, audio, video, or 3D assets.
+- Use `/pwo motion-score` before shipping cinematic scroll, sound-paired motion, or complex choreography.
+- Build static composition first, add Track A local motion second, add Track B GSAP/Lenis scroll only when earned, and add 3D only with fallback and reduced-motion behavior.
+- Use VIS through `C:\Users\frank\starlight\repos\visual-intelligence` for asset provenance, curation packets, rights, and publication records.
+- Use `C:\Users\frank\starlight\repos\_intelligence\visual-worlds\neural-cosmos.md` for neuroscience, cerebrum, spine, electron, signal, or golden spiral direction.
+- Do not copy reference sites or agencies. Deconstruct principles and create original execution.
+- Do not ship without responsive, accessibility, performance, reduced-motion, and visual QA checks appropriate to the change.
+
+Repo-local instructions remain authoritative when stricter.
+<!-- PREMIUM-WEB-OS:END -->

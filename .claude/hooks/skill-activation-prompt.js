@@ -161,7 +161,7 @@ function buildOutput(skills, agents) {
 
 function updateActiveTrajectory(prompt) {
     // Update active trajectory with prompt count and task detection
-    const trajDir = path.join(process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..', '..'),
+    const trajDir = path.join(process.env.CLAUDE_PROJECT_DIR || process.env.PROJECT_ROOT || path.join(__dirname, '..', '..'),
                               '.claude', 'trajectories');
     const metaPath = path.join(trajDir, '_active.json');
     try {
@@ -179,7 +179,7 @@ function updateActiveTrajectory(prompt) {
 
 function getTrajectoryHint(prompt) {
     // Check reasoning bank for similar past work
-    const trajDir = path.join(process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..', '..'),
+    const trajDir = path.join(process.env.CLAUDE_PROJECT_DIR || process.env.PROJECT_ROOT || path.join(__dirname, '..', '..'),
                               '.claude', 'trajectories');
     try {
         if (!fs.existsSync(trajDir)) return null;
@@ -222,7 +222,7 @@ function main() {
         // Update active trajectory
         updateActiveTrajectory(data.prompt);
 
-        const rulesPath = path.join(process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..', '..'),
+        const rulesPath = path.join(process.env.CLAUDE_PROJECT_DIR || process.env.PROJECT_ROOT || process.env.GLOBAL_SKILLS_DIR || path.join(__dirname, '..', '..'),
                                    '.claude', 'skills', 'skill-rules.json');
         const rules = getCachedRules(rulesPath);
         if (!rules) process.exit(0);

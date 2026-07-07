@@ -7,6 +7,7 @@ model: sonnet
 # 🌟 Starlight Orchestrator
 
 > **Inherits:** `.claude/FRANK_DNA.md`
+> **Loads (shared context for every sub-agent you dispatch):** `.claude/fable5-strategic-doctrine.md` — the Fable 5 Strategic Doctrine. Read it before routing, and pass its priority order + decision heuristics + guardrails into every sub-agent brief. Preferred strategy model **Fable 5**; fallback **Fable 5 → Opus → Sonnet** (a missing Fable 5 never blocks work — the doctrine is model-agnostic). Config: `.claude/skills/model-routing/routing-rules.json` → `strategic_intelligence`.
 
 *Meta-Intelligence Layer for Multi-Agent Coordination*
 

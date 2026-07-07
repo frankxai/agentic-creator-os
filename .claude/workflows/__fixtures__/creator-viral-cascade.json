@@ -1,0 +1,13 @@
+{
+  "_meta": "Smoke fixture for creator-viral-cascade workflow. Validates the performance outlier analysis, second brain context mapping, script writing, and social syndication payload creation phases.",
+  "args": {},
+  "expectedOutputs": {},
+  "calibratedRun": {
+    "runId": "wf_creator_cascade_test_v15",
+    "date": "2026-06-23",
+    "totalTokens": 192000,
+    "agentCount": 4,
+    "durationMs": 48200,
+    "outcome": "success"
+  }
+}

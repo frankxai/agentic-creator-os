@@ -310,6 +310,38 @@
       },
       "exports": ["system_architecture", "department_configs", "mcp_setup"]
     },
+    "eve-integration": {
+      "version": "0.1.0",
+      "category": "technical",
+      "description": "Bridge ACOS with Vercel Eve for durable, filesystem-first agent runtimes on our Next.js/Vercel sites. Porting, scaffolding, and production experiences for frankx.ai, arcanea.ai, gencreator.ai, and academy.",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["creator-intelligence", "mcp-architecture"],
+      "mcp": ["github", "fs-starlight"],
+      "triggers": {
+        "keywords": ["eve", "vercel/eve", "durable agent", "eve agent", "withEve", "filesystem agent"],
+        "files": ["**/agent/instructions.md", "**/agent/tools/**", "**/agent/skills/**", "next.config.*"],
+        "commands": ["/eve", "eve init", "build eve agent"]
+      }
+    },
+    "eve-evaluation": {
+      "version": "0.1.0",
+      "category": "technical",
+      "description": "Systematic evaluation of Eve (and alternatives) against our sites, ACOS values, costs, durability, and sovereignty. Produces reports, pilot plans, and comparison matrices.",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": ["eve-integration", "santa-method", "verification-loop"],
+      "mcp": [],
+      "triggers": {
+        "keywords": ["evaluate eve", "eve vs", "durable framework comparison", "eve pilot", "eve production"],
+        "files": ["**/*eve*.md", "**/evaluation*.md"],
+        "commands": ["/eve-eval", "evaluate eve"]
+      }
+    },
 
     "agentic-orchestration": {
       "version": "1.0.0",

@@ -87,6 +87,15 @@ When processing a request, apply these rules:
 - Keywords: "enterprise", "system", "multi-agent", "complex", "strategic"
 - Commands: `/starlight-architect`, `/council`, `/author-team`, `/research`
 
+### Route to FABLE 5 (strategic tier) when:
+- The task is strategy/doctrine authoring, weekly revenue & sell-motion planning, or book/content/affiliate/product strategy synthesis
+- Commands: `/plan-week`, `/starlight-intelligence`, `/council` (strategy framing)
+- **Fallback chain: Fable 5 → Opus → Sonnet.** If the `fable` model id is unavailable in the active harness, route to Opus, then Sonnet. Never hard-fail — the doctrine below is model-agnostic and carries the intelligence.
+
+## Strategic Doctrine Load (shared context)
+
+Before ANY creator / content / revenue / product / affiliate / book task, Opus and Sonnet orchestrators and every sub-agent they dispatch must load `.claude/fable5-strategic-doctrine.md` (the Fable 5 Strategic Doctrine) as shared context and apply its priority order, decision heuristics, brand guardrails, and weekly revenue rhythm. Config: `routing-rules.json` → `strategic_intelligence`.
+
 ## Cost Optimization
 
 ```

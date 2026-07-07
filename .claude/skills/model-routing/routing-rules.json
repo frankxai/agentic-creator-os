@@ -55,6 +55,22 @@
         "Security audits",
         "Research synthesis"
       ]
+    },
+
+    "fable": {
+      "id": "claude-fable-5",
+      "capability": "strategic-creative-maximum",
+      "latency": "medium",
+      "availability": "conditional",
+      "fallback_chain": ["opus", "sonnet"],
+      "_note": "Fable 5 — preferred for strategy/doctrine authoring and narrative-strategic work. If the id is unavailable in the active harness, fall back to opus then sonnet. The doctrine file is model-agnostic, so a missing Fable 5 never blocks strategy work.",
+      "use_for": [
+        "Strategic doctrine authoring",
+        "Creator/business strategy synthesis",
+        "Weekly revenue & sell-motion planning",
+        "Book / content / affiliate / product strategy",
+        "Narrative + strategic creative direction"
+      ]
     }
   },
 
@@ -151,6 +167,25 @@
       "research-librarian",
       "world-architect",
       "character-psychologist"
+    ],
+    "fable_agents": [
+      "luminor-strategic-guidance",
+      "strategist",
+      "starlight-orchestrator",
+      "viral-content-strategy",
+      "weekly-recap",
+      "content-product-development"
     ]
+  },
+
+  "strategic_intelligence": {
+    "_description": "Fable 5 strategic doctrine wiring. Opus/Sonnet orchestrators and their sub-agent teams load the doctrine as shared context before creator/content/revenue/product/book work. Fable 5 is preferred for strategy authoring; degrades gracefully when unavailable.",
+    "doctrine_file": ".claude/fable5-strategic-doctrine.md",
+    "load_doctrine_for": ["strategy", "content", "revenue", "product", "book", "affiliate", "orchestration", "council"],
+    "preferred_model": "fable",
+    "fallback_chain": ["fable", "opus", "sonnet"],
+    "fallback_note": "If the fable model id is unavailable in the active harness, route to opus, then sonnet. Never hard-fail on missing Fable 5 — the doctrine file is model-agnostic and carries the intelligence.",
+    "strategy_commands": ["/plan-week", "/council", "/starlight-intelligence", "/research", "/author-team"],
+    "strategy_agents": ["starlight-orchestrator", "strategist", "luminor-strategic-guidance", "viral-content-strategy", "weekly-recap", "content-product-development"]
   }
 }

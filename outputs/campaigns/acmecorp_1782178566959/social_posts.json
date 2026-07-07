@@ -1,0 +1,8 @@
+{
+  "xThread": [
+    "1/ Traditional chatbot assistants are ephemeral and reset state. Enterprise creators need a persistent, local-first Operating System. Enter ACOS v15.0.0.",
+    "2/ With background Named-Pipe daemons, tool startup latency drops below 2ms. No more spin locks or wait timeouts.",
+    "3/ We parse Obsidian canvas topologies directly into execution chains, letting you draw strategies and run them deterministically. Here is how: [link]"
+  ],
+  "linkedInPost": "Deploying enterprise-grade AI agents requires moving away from volatile web chatbots. Creators and founders need a local, stateful, and sovereign Operating System to govern their research, writing, visuals, and distribution. ACOS v15.0.0 connects Obsidian Second Brain vaults to automated multi-channel queues with built-in brand voice compliance. Read the full architectural brief here."
+}

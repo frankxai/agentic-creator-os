@@ -38,6 +38,13 @@
       ],
       "env": {},
       "autoStart": true
+    },
+    "headroom": {
+      "command": "C:/Users/frank/AppData/Roaming/Python/Python313/Scripts/headroom.exe",
+      "args": [
+        "mcp",
+        "serve"
+      ]
     }
   }
 }

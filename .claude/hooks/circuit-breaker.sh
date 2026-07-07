@@ -1,26 +1,9 @@
 #!/bin/bash
-# ══════════════════════════════════════════════════════════════
-# ACOS v10 Confidence Circuit Breaker
-# ══════════════════════════════════════════════════════════════
-# Tracks failure counts per file. After N failures on the same
-# file, outputs a warning to Claude to try a different approach.
-#
-# Integration points:
-# - PostToolUse (on failure): circuit-breaker.sh record <file> <tool>
-# - PreToolUse: circuit-breaker.sh check <file>
-# - SessionEnd: circuit-breaker.sh reset
-#
-# Thresholds:
-#   3 failures → warn (suggest different approach)
-#   5 failures → restrict (recommend skipping file)
-#   8 failures → break (block further attempts)
-# ══════════════════════════════════════════════════════════════
-
+# Portable circuit breaker (thresholds 3/5/8). Sources hook-env when present.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="${CLAUDE_PROJECT_DIR:-$(cd "$SCRIPT_DIR/../.." && pwd)}"
+source "$SCRIPT_DIR/lib/hook-env.sh" 2>/dev/null || true
+PROJECT_ROOT="${PROJECT_ROOT:-${CLAUDE_PROJECT_DIR:-$(cd "$SCRIPT_DIR/../.." && pwd)}}"
 BREAKER_DIR="$PROJECT_ROOT/.claude-flow/circuit-breaker"
-AUDIT_SCRIPT="$SCRIPT_DIR/audit-trail.sh"
-
 mkdir -p "$BREAKER_DIR" 2>/dev/null || true
 
 COMMAND="${1:-help}"
@@ -30,7 +13,6 @@ WARN_THRESHOLD=3
 RESTRICT_THRESHOLD=5
 BREAK_THRESHOLD=8
 
-# ── Normalize file path to safe filename ──────────────────────
 path_to_key() {
   echo "$1" | sed 's/[^a-zA-Z0-9._-]/_/g'
 }

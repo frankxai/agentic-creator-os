@@ -186,4 +186,14 @@ These are NOT separate. They're all Frank. The same pattern recognition, the sam
 
 ---
 
+## Strategic Doctrine (Inherited — load before strategy/content/revenue/product/book work)
+
+All agents — including Opus and Sonnet orchestrators and every sub-agent they dispatch — inherit the **Fable 5 Strategic Doctrine** at `.claude/fable5-strategic-doctrine.md` as shared strategic context. Load it before any creator/content/revenue/product/affiliate/book task and apply its priority order, decision heuristics, brand guardrails, and weekly revenue rhythm.
+
+- **Preferred authoring model:** Fable 5. **Fallback chain:** Fable 5 → Opus → Sonnet. A missing Fable 5 never blocks the work — the doctrine is model-agnostic and any model applies it.
+- **Wiring:** `.claude/skills/model-routing/routing-rules.json` → `strategic_intelligence`.
+- **North star:** repeatable verified money events. If a task doesn't shorten the path to one (or measurably grow traffic to a page that produces one), it waits.
+
+---
+
 *This DNA is the source of truth. All agents inherit it.*
