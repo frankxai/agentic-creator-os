@@ -1,9 +1,8 @@
 {
   "version": "1.0.0",
-  "lastUpdated": "2026-01-21",
+  "lastUpdated": "2026-07-08",
   "repository": "https://github.com/frankxai/agentic-creator-os",
   "description": "Master skill registry for Agentic Creator OS",
-
   "skills": {
     "multimodal-studio": {
       "version": "1.0.0",
@@ -13,16 +12,46 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["frankx-brand"],
-      "mcp": ["higgsfield"],
+      "dependencies": [
+        "frankx-brand"
+      ],
+      "mcp": [
+        "higgsfield"
+      ],
       "triggers": {
-        "keywords": ["generate image", "generate video", "create character", "multimodal", "higgsfield", "image generation", "video generation", "thumbnail", "hero image", "b-roll", "cinematic"],
-        "files": ["**/*.png", "**/*.jpg", "**/*.mp4", "**/public/images/**"],
-        "commands": ["/studio", "/generate-video", "/generate-images", "/infogenius"]
+        "keywords": [
+          "generate image",
+          "generate video",
+          "create character",
+          "multimodal",
+          "higgsfield",
+          "image generation",
+          "video generation",
+          "thumbnail",
+          "hero image",
+          "b-roll",
+          "cinematic"
+        ],
+        "files": [
+          "**/*.png",
+          "**/*.jpg",
+          "**/*.mp4",
+          "**/public/images/**"
+        ],
+        "commands": [
+          "/studio",
+          "/generate-video",
+          "/generate-images",
+          "/infogenius"
+        ]
       },
-      "exports": ["model_matrix", "visual_prompt_structure", "character_consistency_workflow", "async_lifecycle"]
+      "exports": [
+        "model_matrix",
+        "visual_prompt_structure",
+        "character_consistency_workflow",
+        "async_lifecycle"
+      ]
     },
-
     "content-strategy": {
       "version": "1.2.0",
       "category": "creative",
@@ -31,16 +60,34 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["frankx-brand"],
-      "mcp": ["filesystem-mcp"],
+      "dependencies": [
+        "frankx-brand"
+      ],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["content strategy", "content plan", "editorial calendar", "content pillar"],
-        "files": ["**/CONTENT_STRATEGY.md", "**/CONTENT_CALENDAR.md"],
-        "commands": ["/content-strategy", "/content-calendar"]
+        "keywords": [
+          "content strategy",
+          "content plan",
+          "editorial calendar",
+          "content pillar"
+        ],
+        "files": [
+          "**/CONTENT_STRATEGY.md",
+          "**/CONTENT_CALENDAR.md"
+        ],
+        "commands": [
+          "/content-strategy",
+          "/content-calendar"
+        ]
       },
-      "exports": ["content_pillars", "calendar_schema", "publishing_workflow"]
+      "exports": [
+        "content_pillars",
+        "calendar_schema",
+        "publishing_workflow"
+      ]
     },
-
     "mcp-architecture": {
       "version": "2.0.0",
       "category": "technical",
@@ -52,13 +99,26 @@
       "dependencies": [],
       "mcp": [],
       "triggers": {
-        "keywords": ["mcp server", "model context protocol", "mcp tool", "mcp resource"],
-        "files": ["**/mcp-server*", "**/mcp.json"],
-        "commands": ["/mcp-architecture"]
+        "keywords": [
+          "mcp server",
+          "model context protocol",
+          "mcp tool",
+          "mcp resource"
+        ],
+        "files": [
+          "**/mcp-server*",
+          "**/mcp.json"
+        ],
+        "commands": [
+          "/mcp-architecture"
+        ]
       },
-      "exports": ["server_patterns", "tool_schemas", "resource_patterns"]
+      "exports": [
+        "server_patterns",
+        "tool_schemas",
+        "resource_patterns"
+      ]
     },
-
     "claude-sdk": {
       "version": "1.5.0",
       "category": "technical",
@@ -70,13 +130,26 @@
       "dependencies": [],
       "mcp": [],
       "triggers": {
-        "keywords": ["claude sdk", "agent sdk", "anthropic sdk", "claude agent"],
-        "files": ["**/agent*.py", "**/agent*.ts"],
-        "commands": ["/claude-sdk"]
+        "keywords": [
+          "claude sdk",
+          "agent sdk",
+          "anthropic sdk",
+          "claude agent"
+        ],
+        "files": [
+          "**/agent*.py",
+          "**/agent*.ts"
+        ],
+        "commands": [
+          "/claude-sdk"
+        ]
       },
-      "exports": ["agent_patterns", "tool_use", "multi_turn"]
+      "exports": [
+        "agent_patterns",
+        "tool_use",
+        "multi_turn"
+      ]
     },
-
     "langgraph-patterns": {
       "version": "1.3.0",
       "category": "technical",
@@ -88,13 +161,26 @@
       "dependencies": [],
       "mcp": [],
       "triggers": {
-        "keywords": ["langgraph", "langchain", "agent workflow", "state machine"],
-        "files": ["**/graph*.py", "**/workflow*.py"],
-        "commands": ["/langgraph-patterns"]
+        "keywords": [
+          "langgraph",
+          "langchain",
+          "agent workflow",
+          "state machine"
+        ],
+        "files": [
+          "**/graph*.py",
+          "**/workflow*.py"
+        ],
+        "commands": [
+          "/langgraph-patterns"
+        ]
       },
-      "exports": ["graph_patterns", "state_management", "multi_agent"]
+      "exports": [
+        "graph_patterns",
+        "state_management",
+        "multi_agent"
+      ]
     },
-
     "frankx-brand": {
       "version": "1.0.0",
       "category": "creative",
@@ -104,15 +190,29 @@
       "downloads": 0,
       "rating": 0,
       "dependencies": [],
-      "mcp": ["filesystem-mcp"],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["frankx brand", "brand voice", "brand guidelines"],
-        "files": ["**/BRAND*.md", "**/brand/**"],
-        "commands": ["/frankx-brand"]
+        "keywords": [
+          "frankx brand",
+          "brand voice",
+          "brand guidelines"
+        ],
+        "files": [
+          "**/BRAND*.md",
+          "**/brand/**"
+        ],
+        "commands": [
+          "/frankx-brand"
+        ]
       },
-      "exports": ["brand_voice", "color_palette", "typography"]
+      "exports": [
+        "brand_voice",
+        "color_palette",
+        "typography"
+      ]
     },
-
     "suno-mastery": {
       "version": "1.1.0",
       "category": "creative",
@@ -124,13 +224,27 @@
       "dependencies": [],
       "mcp": [],
       "triggers": {
-        "keywords": ["suno", "ai music", "music generation", "song creation"],
-        "files": ["**/suno*.md", "**/music/**"],
-        "commands": ["/suno-mastery", "/suno-prompt-architect"]
+        "keywords": [
+          "suno",
+          "ai music",
+          "music generation",
+          "song creation"
+        ],
+        "files": [
+          "**/suno*.md",
+          "**/music/**"
+        ],
+        "commands": [
+          "/suno-mastery",
+          "/suno-prompt-architect"
+        ]
       },
-      "exports": ["prompt_templates", "genre_guides", "frequency_mapping"]
+      "exports": [
+        "prompt_templates",
+        "genre_guides",
+        "frequency_mapping"
+      ]
     },
-
     "oci-services": {
       "version": "1.0.0",
       "category": "business",
@@ -142,13 +256,26 @@
       "dependencies": [],
       "mcp": [],
       "triggers": {
-        "keywords": ["oci", "oracle cloud", "oci genai", "oracle ai"],
-        "files": ["**/oci*.md", "**/oracle/**"],
-        "commands": ["/oci-services"]
+        "keywords": [
+          "oci",
+          "oracle cloud",
+          "oci genai",
+          "oracle ai"
+        ],
+        "files": [
+          "**/oci*.md",
+          "**/oracle/**"
+        ],
+        "commands": [
+          "/oci-services"
+        ]
       },
-      "exports": ["genai_patterns", "deployment_guides", "cost_optimization"]
+      "exports": [
+        "genai_patterns",
+        "deployment_guides",
+        "cost_optimization"
+      ]
     },
-
     "oracle-adk": {
       "version": "1.0.0",
       "category": "technical",
@@ -157,16 +284,30 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["oci-services"],
+      "dependencies": [
+        "oci-services"
+      ],
       "mcp": [],
       "triggers": {
-        "keywords": ["oracle adk", "agent development kit", "oracle agent"],
-        "files": ["**/adk*.py", "**/oracle_agent*"],
-        "commands": ["/oracle-adk"]
+        "keywords": [
+          "oracle adk",
+          "agent development kit",
+          "oracle agent"
+        ],
+        "files": [
+          "**/adk*.py",
+          "**/oracle_agent*"
+        ],
+        "commands": [
+          "/oracle-adk"
+        ]
       },
-      "exports": ["agent_templates", "tool_patterns", "deployment_configs"]
+      "exports": [
+        "agent_templates",
+        "tool_patterns",
+        "deployment_configs"
+      ]
     },
-
     "7-pillars": {
       "version": "1.0.0",
       "category": "soulbook",
@@ -176,15 +317,30 @@
       "downloads": 0,
       "rating": 0,
       "dependencies": [],
-      "mcp": ["filesystem-mcp"],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["7 pillars", "life pillars", "soulbook pillars", "transformation"],
-        "files": ["**/pillars/**", "**/soulbook/**"],
-        "commands": ["/soulbook"]
+        "keywords": [
+          "7 pillars",
+          "life pillars",
+          "soulbook pillars",
+          "transformation"
+        ],
+        "files": [
+          "**/pillars/**",
+          "**/soulbook/**"
+        ],
+        "commands": [
+          "/soulbook"
+        ]
       },
-      "exports": ["pillar_framework", "assessment_tools", "transformation_guides"]
+      "exports": [
+        "pillar_framework",
+        "assessment_tools",
+        "transformation_guides"
+      ]
     },
-
     "life-symphony": {
       "version": "1.0.0",
       "category": "soulbook",
@@ -193,16 +349,30 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["7-pillars"],
-      "mcp": ["filesystem-mcp"],
+      "dependencies": [
+        "7-pillars"
+      ],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["life symphony", "harmony", "life balance"],
-        "files": ["**/symphony/**"],
-        "commands": ["/life-symphony"]
+        "keywords": [
+          "life symphony",
+          "harmony",
+          "life balance"
+        ],
+        "files": [
+          "**/symphony/**"
+        ],
+        "commands": [
+          "/life-symphony"
+        ]
       },
-      "exports": ["harmony_assessment", "balance_tools"]
+      "exports": [
+        "harmony_assessment",
+        "balance_tools"
+      ]
     },
-
     "golden-path": {
       "version": "1.0.0",
       "category": "soulbook",
@@ -211,16 +381,30 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["7-pillars"],
-      "mcp": ["filesystem-mcp"],
+      "dependencies": [
+        "7-pillars"
+      ],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["golden path", "soul purpose", "life purpose"],
-        "files": ["**/golden-path/**"],
-        "commands": ["/golden-path"]
+        "keywords": [
+          "golden path",
+          "soul purpose",
+          "life purpose"
+        ],
+        "files": [
+          "**/golden-path/**"
+        ],
+        "commands": [
+          "/golden-path"
+        ]
       },
-      "exports": ["purpose_discovery", "path_planning"]
+      "exports": [
+        "purpose_discovery",
+        "path_planning"
+      ]
     },
-
     "workshop-building": {
       "version": "1.0.0",
       "category": "technical",
@@ -229,16 +413,34 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["content-strategy"],
-      "mcp": ["filesystem-mcp", "browser-mcp"],
+      "dependencies": [
+        "content-strategy"
+      ],
+      "mcp": [
+        "filesystem-mcp",
+        "browser-mcp"
+      ],
       "triggers": {
-        "keywords": ["workshop", "tutorial", "hands-on", "training"],
-        "files": ["**/workshops/**", "**/workshop*.md"],
-        "commands": ["/workshop-building"]
+        "keywords": [
+          "workshop",
+          "tutorial",
+          "hands-on",
+          "training"
+        ],
+        "files": [
+          "**/workshops/**",
+          "**/workshop*.md"
+        ],
+        "commands": [
+          "/workshop-building"
+        ]
       },
-      "exports": ["workshop_templates", "exercise_patterns", "delivery_guides"]
+      "exports": [
+        "workshop_templates",
+        "exercise_patterns",
+        "delivery_guides"
+      ]
     },
-
     "security-auditor": {
       "version": "1.0.0",
       "category": "technical",
@@ -248,15 +450,30 @@
       "downloads": 0,
       "rating": 0,
       "dependencies": [],
-      "mcp": ["filesystem-mcp"],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["security", "audit", "vulnerability", "penetration"],
-        "files": ["**/security/**", "**/*.security.md"],
-        "commands": ["/security-audit"]
+        "keywords": [
+          "security",
+          "audit",
+          "vulnerability",
+          "penetration"
+        ],
+        "files": [
+          "**/security/**",
+          "**/*.security.md"
+        ],
+        "commands": [
+          "/security-audit"
+        ]
       },
-      "exports": ["audit_checklists", "vulnerability_patterns", "remediation_guides"]
+      "exports": [
+        "audit_checklists",
+        "vulnerability_patterns",
+        "remediation_guides"
+      ]
     },
-
     "daily-ops": {
       "version": "1.0.0",
       "category": "creative",
@@ -265,16 +482,33 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["content-strategy"],
-      "mcp": ["filesystem-mcp", "database-mcp"],
+      "dependencies": [
+        "content-strategy"
+      ],
+      "mcp": [
+        "filesystem-mcp",
+        "database-mcp"
+      ],
       "triggers": {
-        "keywords": ["daily ops", "morning routine", "daily workflow"],
-        "files": ["**/daily/**", "**/routines/**"],
-        "commands": ["/daily-ops", "/frankx-daily-execution"]
+        "keywords": [
+          "daily ops",
+          "morning routine",
+          "daily workflow"
+        ],
+        "files": [
+          "**/daily/**",
+          "**/routines/**"
+        ],
+        "commands": [
+          "/daily-ops",
+          "/frankx-daily-execution"
+        ]
       },
-      "exports": ["routine_templates", "checklist_patterns"]
+      "exports": [
+        "routine_templates",
+        "checklist_patterns"
+      ]
     },
-
     "publishing-factory": {
       "version": "1.0.0",
       "category": "creative",
@@ -283,16 +517,36 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["content-strategy", "frankx-brand"],
-      "mcp": ["filesystem-mcp", "browser-mcp"],
+      "dependencies": [
+        "content-strategy",
+        "frankx-brand"
+      ],
+      "mcp": [
+        "filesystem-mcp",
+        "browser-mcp"
+      ],
       "triggers": {
-        "keywords": ["publish", "factory", "content pipeline", "seo"],
-        "files": ["**/publish/**", "**/factory/**"],
-        "commands": ["/factory", "/publish"]
+        "keywords": [
+          "publish",
+          "factory",
+          "content pipeline",
+          "seo"
+        ],
+        "files": [
+          "**/publish/**",
+          "**/factory/**"
+        ],
+        "commands": [
+          "/factory",
+          "/publish"
+        ]
       },
-      "exports": ["publishing_workflow", "seo_checklist", "aeo_optimization"]
+      "exports": [
+        "publishing_workflow",
+        "seo_checklist",
+        "aeo_optimization"
+      ]
     },
-
     "creator-intelligence": {
       "version": "1.0.0",
       "category": "technical",
@@ -301,16 +555,38 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["content-strategy", "daily-ops"],
-      "mcp": ["filesystem-mcp", "database-mcp", "browser-mcp", "email-mcp"],
+      "dependencies": [
+        "content-strategy",
+        "daily-ops"
+      ],
+      "mcp": [
+        "filesystem-mcp",
+        "database-mcp",
+        "browser-mcp",
+        "email-mcp"
+      ],
       "triggers": {
-        "keywords": ["jarvis", "personal ai", "intelligence system", "creator os"],
-        "files": ["**/intelligence/**", "**/jarvis/**"],
-        "commands": ["/creator-intelligence-system", "/agentic-creator-os"]
+        "keywords": [
+          "jarvis",
+          "personal ai",
+          "intelligence system",
+          "creator os"
+        ],
+        "files": [
+          "**/intelligence/**",
+          "**/jarvis/**"
+        ],
+        "commands": [
+          "/creator-intelligence-system",
+          "/agentic-creator-os"
+        ]
       },
-      "exports": ["system_architecture", "department_configs", "mcp_setup"]
+      "exports": [
+        "system_architecture",
+        "department_configs",
+        "mcp_setup"
+      ]
     },
-
     "agentic-orchestration": {
       "version": "1.0.0",
       "category": "technical",
@@ -319,16 +595,31 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["creator-intelligence"],
-      "mcp": ["filesystem-mcp"],
+      "dependencies": [
+        "creator-intelligence"
+      ],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["orchestration", "multi-agent", "agent coordination"],
-        "files": ["**/orchestration/**"],
-        "commands": ["/agentic-orchestration"]
+        "keywords": [
+          "orchestration",
+          "multi-agent",
+          "agent coordination"
+        ],
+        "files": [
+          "**/orchestration/**"
+        ],
+        "commands": [
+          "/agentic-orchestration"
+        ]
       },
-      "exports": ["orchestration_patterns", "handoff_protocols", "state_machines"]
+      "exports": [
+        "orchestration_patterns",
+        "handoff_protocols",
+        "state_machines"
+      ]
     },
-
     "agentic-builder-lab": {
       "version": "0.1.0",
       "category": "projects",
@@ -337,17 +628,39 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["frankx-brand"],
-      "mcp": ["filesystem-mcp"],
+      "dependencies": [
+        "frankx-brand"
+      ],
+      "mcp": [
+        "filesystem-mcp"
+      ],
       "triggers": {
-        "keywords": ["log a build", "build session log", "agentic-builder-lab", "build log"],
-        "files": ["**/content/builds/**", "**/drafts/linkedin/**", "**/drafts/demos/**", "**/drafts/diagrams/**"],
-        "commands": ["/build-log", "/agentic-builder-lab"]
+        "keywords": [
+          "log a build",
+          "build session log",
+          "agentic-builder-lab",
+          "build log"
+        ],
+        "files": [
+          "**/content/builds/**",
+          "**/drafts/linkedin/**",
+          "**/drafts/demos/**",
+          "**/drafts/diagrams/**"
+        ],
+        "commands": [
+          "/build-log",
+          "/agentic-builder-lab"
+        ]
       },
-      "exports": ["mdx_build_log", "linkedin_draft", "demo_brief", "mermaid_diagram", "prompt_pack_entry"],
+      "exports": [
+        "mdx_build_log",
+        "linkedin_draft",
+        "demo_brief",
+        "mermaid_diagram",
+        "prompt_pack_entry"
+      ],
       "voice_override": "resources/voice-spec.md"
     },
-
     "ops": {
       "version": "0.1.0",
       "category": "business",
@@ -356,17 +669,81 @@
       "license": "MIT",
       "downloads": 0,
       "rating": 0,
-      "dependencies": ["frankx-brand"],
-      "mcp": ["notion-mcp", "github-mcp", "slack-mcp"],
+      "dependencies": [
+        "frankx-brand"
+      ],
+      "mcp": [
+        "notion-mcp",
+        "github-mcp",
+        "slack-mcp"
+      ],
       "triggers": {
-        "keywords": ["ops loop", "weekly ops", "triage inquiries", "what needs my attention", "ops check-in", "advance pipeline"],
-        "files": ["**/docs/ops/**", "**/admin/intake/**"],
-        "commands": ["/ops"]
+        "keywords": [
+          "ops loop",
+          "weekly ops",
+          "triage inquiries",
+          "what needs my attention",
+          "ops check-in",
+          "advance pipeline"
+        ],
+        "files": [
+          "**/docs/ops/**",
+          "**/admin/intake/**"
+        ],
+        "commands": [
+          "/ops"
+        ]
       },
-      "exports": ["ops_readout", "inbox_triage", "pipeline_advance", "pr_sweep"]
+      "exports": [
+        "ops_readout",
+        "inbox_triage",
+        "pipeline_advance",
+        "pr_sweep"
+      ]
+    },
+    "signal": {
+      "version": "0.1.0",
+      "category": "marketing",
+      "description": "Signal — the LinkedIn Authority Engine. Draft, critique, repurpose, and stage LinkedIn posts/articles in a personal and a company voice, then learn from what performed. Runs the Excellence Loop, drafts everything, never auto-posts (ToS-safe, human ships).",
+      "author": "FrankX",
+      "license": "MIT",
+      "downloads": 0,
+      "rating": 0,
+      "dependencies": [
+        "frankx-brand",
+        "integrity-guard"
+      ],
+      "mcp": [
+        "notion",
+        "firecrawl"
+      ],
+      "triggers": {
+        "keywords": [
+          "linkedin post",
+          "linkedin article",
+          "repurpose for linkedin",
+          "linkedin week",
+          "dream100",
+          "thought leadership post",
+          "linkedin top voice"
+        ],
+        "files": [
+          "**/skills/signal/**"
+        ],
+        "commands": [
+          "/signal"
+        ]
+      },
+      "exports": [
+        "linkedin_draft",
+        "weekly_plan",
+        "credited_repurpose",
+        "persona_specs",
+        "hook_taxonomy",
+        "dream100_method"
+      ]
     }
   },
-
   "categories": {
     "technical": [
       "mcp-architecture",
@@ -399,14 +776,12 @@
       "agentic-builder-lab"
     ]
   },
-
   "featured": [
     "creator-intelligence",
     "content-strategy",
     "mcp-architecture",
     "agentic-orchestration"
   ],
-
   "mcpServers": {
     "filesystem-mcp": {
       "description": "Local filesystem access for reading/writing project files",
@@ -439,27 +814,52 @@
       "package": "@frankx/mcp-creator"
     }
   },
-
   "externalSources": {
     "anthropic-cookbook": {
       "repo": "anthropics/anthropic-cookbook",
-      "patterns": ["tool-use", "multi-turn", "function-calling"],
-      "enhances": ["claude-sdk", "mcp-architecture"]
+      "patterns": [
+        "tool-use",
+        "multi-turn",
+        "function-calling"
+      ],
+      "enhances": [
+        "claude-sdk",
+        "mcp-architecture"
+      ]
     },
     "langgraph": {
       "repo": "langchain-ai/langgraph",
-      "patterns": ["agent-workflows", "state-machines", "multi-agent"],
-      "enhances": ["langgraph-patterns", "agentic-orchestration"]
+      "patterns": [
+        "agent-workflows",
+        "state-machines",
+        "multi-agent"
+      ],
+      "enhances": [
+        "langgraph-patterns",
+        "agentic-orchestration"
+      ]
     },
     "mcp-servers": {
       "repo": "modelcontextprotocol/servers",
-      "patterns": ["mcp-best-practices", "tool-schemas", "resource-patterns"],
-      "enhances": ["mcp-architecture"]
+      "patterns": [
+        "mcp-best-practices",
+        "tool-schemas",
+        "resource-patterns"
+      ],
+      "enhances": [
+        "mcp-architecture"
+      ]
     },
     "vercel-ai": {
       "repo": "vercel/ai",
-      "patterns": ["streaming", "edge-functions", "ui-components"],
-      "enhances": ["creator-intelligence"]
+      "patterns": [
+        "streaming",
+        "edge-functions",
+        "ui-components"
+      ],
+      "enhances": [
+        "creator-intelligence"
+      ]
     }
   }
 }
