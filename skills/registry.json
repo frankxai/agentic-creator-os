@@ -703,7 +703,7 @@
     },
     "signal": {
       "version": "0.1.0",
-      "category": "marketing",
+      "category": "creative",
       "description": "Signal — the LinkedIn Authority Engine. Draft, critique, repurpose, and stage LinkedIn posts/articles in a personal and a company voice, then learn from what performed. Runs the Excellence Loop, drafts everything, never auto-posts (ToS-safe, human ships).",
       "author": "FrankX",
       "license": "MIT",
@@ -713,7 +713,7 @@
         "frankx-brand"
       ],
       "mcp": [
-        "notion",
+        "notion-mcp",
         "firecrawl"
       ],
       "triggers": {
@@ -760,7 +760,8 @@
       "frankx-brand",
       "suno-mastery",
       "daily-ops",
-      "publishing-factory"
+      "publishing-factory",
+      "signal"
     ],
     "business": [
       "oci-services",

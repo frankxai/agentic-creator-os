@@ -10,6 +10,7 @@ triggers:
   - "linkedin week"
   - "dream100"
   - "thought leadership post"
+  - "linkedin top voice"
 inputs:
   required: []
   optional: [mode, brand, source, topic]
@@ -19,7 +20,7 @@ outputs:
   - A credited repurpose reframe
   - An outcome row written to the learning store (when analytics are supplied)
 dependencies: [frankx-brand]
-mcp: [notion, firecrawl]
+mcp: [notion-mcp, firecrawl]
 ---
 
 # Signal — LinkedIn Authority Engine
