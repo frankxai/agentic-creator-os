@@ -1,3 +1,8 @@
+---
+description: Route a LinkedIn task through the Signal pack — draft, critique, repurpose, and stage LinkedIn posts/articles in a personal or company voice, then learn from what performed. Never auto-posts; a human ships.
+argument-hint: "[plan | draft | repurpose | critique | ship | learn] [brand=personal|company] [source=<url>] [topic=<text>]"
+---
+
 # /signal — LinkedIn Authority Engine
 
 Route a LinkedIn task through the **Signal** pack (`skills/signal/SKILL.md`), the LinkedIn vertical of ACOS. Signal runs the [Excellence Loop](../../docs/architecture/EXCELLENCE_LOOP.md), drafts everything, and **never auto-posts** — a human ships.
