@@ -53,8 +53,15 @@ Invoke via `/signal <mode>`. Each mode is a segment of the Excellence Loop.
 | `critique` | Critique + Verify | Runs `integrity-guard` (brand/claim/schema) + a hook/format check. Returns PASS / warn / FAIL. |
 | `ship` | Interconnect | Exports the passed draft to a Typefully/LinkedIn **draft** via official API. **A human posts.** |
 | `learn` | Learn | Takes supplied post analytics → writes the graded outcome to the store → tunes next week. |
+| `research` | Ideate | Sweeps the source lanes (papers / videos / pdfs / posts) and vets them. See `research-sources.md`. |
+| `carousel` | Execute | A post → brand-locked carousel slides via multimodal + `canvas-design`. |
+| `infographic` | Execute | A post / data → a brand-locked infographic. |
+| `engage` | Distribute | Dream100 newest posts → substantive comment drafts. **A human posts** each. |
+| `index` | — | Index your existing content (posts / talks / repos) into the searchable library. |
 
-If no mode is given, route by intent: a pasted URL → `repurpose`; "plan my week" → `plan`; a raw idea → `draft`.
+If no mode is given, route by intent: a pasted URL → `repurpose`; "plan my week" → `plan`; a raw idea → `draft`; "who should I engage" → `engage`.
+
+**Command surface:** `/linkedin <mode>` (memorable front door) and `/signal <mode>` are the same engine.
 
 ## The non-negotiables
 
@@ -72,6 +79,13 @@ Applied to every draft, from `knowledge.md`:
 - One idea per 1–2 lines, generous line breaks — LinkedIn is skimmed on mobile.
 - ≤ 3 hashtags, at the end. One link, on its own line near the close (links suppress reach — place deliberately).
 - Match the persona's emoji/exclamation rules exactly (personal and company differ — see `personas.md`).
+
+## The operating manual
+
+- [`DAILY_LOOP.md`](DAILY_LOOP.md) — the daily rhythm (≈45 min of your time: ideate → draft → design → critique → ship → engage → learn) + weekly cadence.
+- [`research-sources.md`](research-sources.md) — the best-of-best intake lanes (papers / videos / pdfs / posts), the vetting bar, and the signal→post pipeline.
+- [`agent-team.md`](agent-team.md) — the multi-agent org (lead + researcher / ideator / drafter / designer / engagement + independent critic).
+- [`../../docs/architecture/SIGNAL_ROADMAP.md`](../../docs/architecture/SIGNAL_ROADMAP.md) — the road to Top Voice + the product stages.
 
 ## The knowledge base (the moat)
 
