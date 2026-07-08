@@ -18,7 +18,7 @@ outputs:
   - A weekly plan mapped to content pillars
   - A credited repurpose reframe
   - An outcome row written to the learning store (when analytics are supplied)
-dependencies: [frankx-brand, integrity-guard]
+dependencies: [frankx-brand]
 mcp: [notion, firecrawl]
 ---
 
