@@ -2,6 +2,12 @@
 name: Signal — LinkedIn Authority Engine
 description: The LinkedIn vertical of ACOS. Draft, critique, repurpose, and schedule LinkedIn posts and articles in a specific creator's voice — for a personal brand and a company brand — then learn from what performed. Runs the Excellence Loop, drafts everything, and NEVER auto-posts (a human ships). Use for "/signal", "write a linkedin post", "linkedin article", "repurpose this for linkedin", "plan my linkedin week", "dream100", "become a linkedin top voice".
 version: 0.1.0
+status: superseded (2026-07-09) — its knowledge (hook taxonomy, Dream100 method, format
+  playbooks) has been consolidated into FrankX/.claude/skills/social-media-strategy/SKILL.md,
+  which is now the live version other FrankX skills route through. This file stays as the
+  ACOS-native open reference; the ship/learn stages here were never wired (see
+  DAILY_LOOP.md's own "what's live vs needs wiring" table) — don't treat it as a running
+  system.
 triggers:
   - "/signal"
   - "linkedin post"
