@@ -6,7 +6,7 @@ mcpServers:
   - github
   - lyric-genius
 workingDirectories:
-  - /mnt/c/Users/Frank/FrankX/content-universe/books
+  - ~/FrankX/content-universe/books
 model: opus
 ---
 

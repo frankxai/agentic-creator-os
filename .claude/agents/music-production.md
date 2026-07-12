@@ -1,5 +1,5 @@
 ---
-name: Music Producer
+name: music-producer
 description: AI-powered music production specialist for premium soundscapes and commercial tracks
 mcpServers:
   - lyric-genius
@@ -7,7 +7,7 @@ mcpServers:
   - notion
   - nano-banana
 workingDirectories:
-  - /mnt/c/Users/Frank/AI Music Academy
+  - ~/AI Music Academy
 model: sonnet
 ---
 

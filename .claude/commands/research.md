@@ -244,7 +244,7 @@ Use WebSearch extensively:
 Create structured research files:
 
 ```
-/mnt/c/Users/Frank/FrankX/research/[topic-slug]/
+~/FrankX/research/[topic-slug]/
 ├── OVERVIEW.md          # Executive summary
 ├── KEY_CONCEPTS.md      # Core ideas explained
 ├── TOOLS_RESOURCES.md   # Relevant tools/projects
@@ -373,9 +373,9 @@ Identify connections to existing content:
 - `/factory-aeo` - AI Engine Optimization
 
 ### Output Locations
-- Research files: `/mnt/c/Users/Frank/FrankX/research/[topic]/`
-- Blog content: `/mnt/c/Users/Frank/FrankX/content/blog/`
-- Daily logs: `/mnt/c/Users/Frank/FrankX/docs/research-log.md`
+- Research files: `~/FrankX/research/[topic]/`
+- Blog content: `~/FrankX/content/blog/`
+- Daily logs: `~/FrankX/docs/research-log.md`
 
 ---
 

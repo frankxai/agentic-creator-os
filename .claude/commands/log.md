@@ -19,8 +19,8 @@ Cross-repository development session logging with intelligent summarization.
 
 ## Overview
 
-This command aggregates commits from all repositories under `/mnt/c/Users/Frank/`, generates AI summaries, and outputs to multiple destinations:
-- `/mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md` (master log)
+This command aggregates commits from all repositories under `~/`, generates AI summaries, and outputs to multiple destinations:
+- `~/docs/AI_GLOBAL_SESSIONS.md` (master log)
 - Per-project `CHANGELOG.md` files
 - JSON archive in `.ai-logs/sessions/`
 
@@ -32,16 +32,16 @@ Scan for active repositories with commits in the specified time range.
 
 ```bash
 # Find all git repos (28+ known)
-REPOS=$(find /mnt/c/Users/Frank -maxdepth 3 -type d -name ".git" 2>/dev/null | grep -v node_modules | grep -v .worktrees | grep -v Backup)
+REPOS=$(find ~ -maxdepth 3 -type d -name ".git" 2>/dev/null | grep -v node_modules | grep -v .worktrees | grep -v Backup)
 echo "Found $(echo "$REPOS" | wc -l) repositories"
 ```
 
 Primary repositories to always check:
-- `/mnt/c/Users/Frank/FrankX` (website, content)
-- `/mnt/c/Users/Frank/Arcanea` (game project)
-- `/mnt/c/Users/Frank/oracle-work` (professional)
-- `/mnt/c/Users/Frank/claude-mem` (tools)
-- `/mnt/c/Users/Frank/vibe-os` (product)
+- `~/FrankX` (website, content)
+- `~/Arcanea` (game project)
+- `~/oracle-work` (professional)
+- `~/claude-mem` (tools)
+- `~/vibe-os` (product)
 
 ### Step 2: Commit Aggregation
 
@@ -173,8 +173,8 @@ Display a formatted summary in the terminal:
 
   OUTPUT
   ------
-  [x] /mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md
-  [x] /mnt/c/Users/Frank/FrankX/CHANGELOG.md
+  [x] ~/docs/AI_GLOBAL_SESSIONS.md
+  [x] ~/FrankX/CHANGELOG.md
   [ ] GitHub push (use --push)
 
 ============================================================
@@ -213,8 +213,8 @@ Focus on specific project(s):
 
 ## Configuration
 
-The system reads configuration from `/mnt/c/Users/Frank/.ai-logs/config.yaml` if it exists. Default behavior if no config:
-- Scan all repos under `/mnt/c/Users/Frank`
+The system reads configuration from `~/.ai-logs/config.yaml` if it exists. Default behavior if no config:
+- Scan all repos under `~`
 - Use last 24 hours as default range
 - Output to AI_GLOBAL_SESSIONS.md
 - Enable AI summarization
@@ -234,4 +234,4 @@ The system reads configuration from `/mnt/c/Users/Frank/.ai-logs/config.yaml` if
 
 ## Architecture
 
-Full architecture documentation: `/mnt/c/Users/Frank/FrankX/docs/specs/AI_SESSION_LOGGING_SYSTEM_ARCHITECTURE.md`
+Full architecture documentation: `~/FrankX/docs/specs/AI_SESSION_LOGGING_SYSTEM_ARCHITECTURE.md`

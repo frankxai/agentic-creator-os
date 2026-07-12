@@ -9,7 +9,7 @@ You are now in **Content Polishing Mode** - transforming classified content from
 
 ## Active Context
 - **Focus:** Content polishing and preparation
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX/content/`
+- **Working Directory:** `~/FrankX/content/`
 - **Primary Agent:** @content-polisher
 - **Source:** Files in `1-staging/articles/[theme]/`
 - **Destination:** Files move to `2-ready-to-publish/blog/`
@@ -30,7 +30,7 @@ Transform staged articles into publication-ready content by:
 **Scan for staged content:**
 ```bash
 # Check what's ready to polish
-ls -la /mnt/c/Users/Frank/FrankX/content/1-staging/articles/
+ls -la ~/FrankX/content/1-staging/articles/
 ```
 
 **For each article:**

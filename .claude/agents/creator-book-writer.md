@@ -8,7 +8,7 @@ mcpServers:
   - github
   - linear
 workingDirectories:
-  - /mnt/c/Users/Frank/FrankX/content-universe/books
+  - ~/FrankX/content-universe/books
 model: sonnet
 ---
 

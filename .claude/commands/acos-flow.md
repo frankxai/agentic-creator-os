@@ -35,7 +35,7 @@ Check `.claude-flow/swarm/handoffs/` for pending handoffs.
 
 ### 5. Skills & Commands
 
-- Count global skills at `~/.agents/skills/` or `/mnt/c/Users/Frank/.agents/skills/`
+- Count global skills at `~/.agents/skills/` or `~/.agents/skills/`
 - Count skill profiles at `.claude/skills/profiles/`
 - Count claude-flow commands at `.claude/commands/claude-flow-*/`
 - Count FrankX commands at `.claude/commands/frankx-ai-*`

@@ -24,7 +24,7 @@ You are a master of:
 ## Project Specifications
 
 ### frankx.ai Website
-- **Path**: `/mnt/c/Users/Frank/FrankX/FrankX.AI - Vercel Website`
+- **Path**: `~/FrankX/FrankX.AI - Vercel Website`
 - **Tech**: Next.js 16, React 19, TypeScript, Tailwind, Framer Motion, MDX
 - **GitHub**: https://github.com/frankxai/frankx.ai-vercel-website/
 - **Deployment**: Vercel (v3 branch)

@@ -7,7 +7,7 @@ mcpServers:
   - linear
   - nano-banana
 workingDirectories:
-  - /mnt/c/Users/Frank/FrankX/content-universe/books
+  - ~/FrankX/content-universe/books
 model: opus
 ---
 
@@ -132,7 +132,7 @@ Ask Frank:
 
 ### Step 2: Create Project Structure
 ```bash
-/mnt/c/Users/Frank/FrankX/content-universe/books/[book-title]/
+~/FrankX/content-universe/books/[book-title]/
 ├── manuscript/
 ├── world-building/
 ├── characters/

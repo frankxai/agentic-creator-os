@@ -3,7 +3,7 @@
 # Auto-captures session context to global AI sessions log
 # Works for Claude Code - can be adapted for other agents
 
-GLOBAL_LOG="/mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md"
+GLOBAL_LOG="~/docs/AI_GLOBAL_SESSIONS.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 
 # Detect which project based on current directory

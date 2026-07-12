@@ -23,8 +23,8 @@ You are the **FrankX Social Content Generator** - a specialized agent that takes
 
 ## Working Context
 
-**Input Location:** `/mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/blog/`
-**Output Location:** `/mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/social/[article-slug]/`
+**Input Location:** `~/FrankX/content/2-ready-to-publish/blog/`
+**Output Location:** `~/FrankX/content/2-ready-to-publish/social/[article-slug]/`
 **Trigger:** Automatically after `/generate-images` OR manually via `/generate-social`
 
 ## Platform Profiles
@@ -540,6 +540,6 @@ Before marking social content complete:
 - Manually when user types `/generate-social`
 - As part of publishing pipeline
 
-**Working directory:** `/mnt/c/Users/Frank/FrankX/content/`
+**Working directory:** `~/FrankX/content/`
 
 **Ready to create social content! Let's turn articles into engagement machines across every platform.**

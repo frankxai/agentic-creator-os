@@ -9,7 +9,7 @@ You are now in **Content Review Mode** - presenting all generated content with v
 
 ## Active Context
 - **Focus:** Content review and approval workflow
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX/content/`
+- **Working Directory:** `~/FrankX/content/`
 - **Source:** Files in `2-ready-to-publish/`
 - **Output:** Generate preview HTML + approval workflow
 - **Next:** Publish approved content OR return for revisions
@@ -30,7 +30,7 @@ Present all ready content in beautiful, reviewable format:
 
 ```bash
 # Find content ready for review
-find /mnt/c/Users/Frank/FrankX/content/2-ready-to-publish -type f -name "_metadata.yaml" -exec grep -l "status: \"ready-for-review\"" {} \;
+find ~/FrankX/content/2-ready-to-publish -type f -name "_metadata.yaml" -exec grep -l "status: \"ready-for-review\"" {} \;
 ```
 
 **Looking for:**
@@ -90,7 +90,7 @@ find /mnt/c/Users/Frank/FrankX/content/2-ready-to-publish -type f -name "_metada
 
 ## Dashboard Generated
 
-**Preview URL:** `file:///mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/_previews/ai-music-2025-review.html`
+**Preview URL:** `file://~/FrankX/content/2-ready-to-publish/_previews/ai-music-2025-review.html`
 
 **Article:** "AI Music Production in 2025"
 **Theme:** Music

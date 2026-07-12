@@ -9,7 +9,7 @@ You are now in **UX Design Mode** with full design and testing capabilities.
 
 ## Active Context
 - **Focus:** UI/UX Design, Figma, Browser Testing
-- **Working Directory:** `/mnt/c/Users/Frank/UX Design`
+- **Working Directory:** `~/UX Design`
 - **Primary Agent:** @ux-designer
 
 ## MCP Servers Enabled

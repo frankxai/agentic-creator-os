@@ -7,7 +7,7 @@ mcpServers:
   - nano-banana
   - notion
 workingDirectories:
-  - /mnt/c/Users/Frank/UX Design
+  - ~/UX Design
 model: sonnet
 ---
 

@@ -35,7 +35,7 @@ This release completes the cleanup of banned phrases and fixes documentation gap
 **Configuration**
 - Removed duplicate skill-rules files (was 4, now 1)
 - Replaced hardcoded Windows paths with environment variable placeholders
-- Paths like `/mnt/c/Users/Frank/...` → `$FRANKX_DIR` etc.
+- Paths like `~/...` → `$FRANKX_DIR` etc.
 
 ### Removed
 - `.claude/skill-rules-v2.json` (duplicate)

@@ -9,7 +9,7 @@ You are now in **Content Classification Mode** - reviewing unclassified content 
 
 ## Active Context
 - **Focus:** Content intake, classification, and routing
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX/content/`
+- **Working Directory:** `~/FrankX/content/`
 - **Primary Agent:** @content-classifier
 - **Source:** Files in `0-intake/to-classify/`
 - **Destination:** Files move to `1-staging/[type]/[theme]/`

@@ -2,7 +2,7 @@
 # Auto-log session to global AI sessions file
 # Triggered at end of significant Claude Code sessions
 
-GLOBAL_LOG="/mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md"
+GLOBAL_LOG="~/docs/AI_GLOBAL_SESSIONS.md"
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 PROJECT="FrankX"
 

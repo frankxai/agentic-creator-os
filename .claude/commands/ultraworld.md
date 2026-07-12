@@ -67,7 +67,7 @@ When this command is invoked:
 
 The swarm loads context from:
 
-- `/mnt/c/Users/Frank/Arcanea/` - Main Arcanea repository
+- `~/Arcanea/` - Main Arcanea repository
 - `research/arcanea/` - Foundation docs, glossary, assessment
 - `.claude/skills/profiles/` - Arcanea-specific skill profiles
 - Gate-specific lore files (10 Gates)

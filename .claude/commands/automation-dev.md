@@ -9,7 +9,7 @@ You are now in **Automation Development Mode** for building custom tools, MCP se
 
 ## Active Context
 - **Focus:** Custom Tool & Automation Development
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX`
+- **Working Directory:** `~/FrankX`
 - **Primary Agent:** @creation-engine
 
 ## MCP Servers Enabled

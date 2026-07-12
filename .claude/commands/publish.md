@@ -95,9 +95,9 @@ Each gate must pass before publishing. Gates return: PASS, WARN, or FAIL.
 5. **Log to session file**:
    ```bash
    # Append to AI_GLOBAL_SESSIONS.md
-   echo "## Published: [title]" >> /mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md
-   echo "- Path: [path]" >> /mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md
-   echo "- Date: $(date)" >> /mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md
+   echo "## Published: [title]" >> ~/docs/AI_GLOBAL_SESSIONS.md
+   echo "- Path: [path]" >> ~/docs/AI_GLOBAL_SESSIONS.md
+   echo "- Date: $(date)" >> ~/docs/AI_GLOBAL_SESSIONS.md
    ```
 
 ## AI Phrase Blacklist

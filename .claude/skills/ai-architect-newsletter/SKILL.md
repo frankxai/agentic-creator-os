@@ -267,7 +267,7 @@ See [content-patterns.md](references/content-patterns.md) for complete style gui
 
 ### FrankX Repository
 ```
-/mnt/c/Users/Frank/FrankX/
+~/FrankX/
 ├── content/newsletters/
 │   ├── YYYY-MM-DD-weekly.html
 │   ├── YYYY-MM-DD-weekly.txt
@@ -279,7 +279,7 @@ See [content-patterns.md](references/content-patterns.md) for complete style gui
 
 ### AI Architect Academy Repository
 ```
-/mnt/c/Users/Frank/ai-architect-academy/
+~/ai-architect-academy/
 ├── newsletters/
 │   ├── YYYY-MM-DD.html
 │   └── archive/

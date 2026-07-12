@@ -6,22 +6,22 @@ Search the visual registry for images matching tags, mood, category, suitability
 
 ```bash
 # Positional search — words match against tags, mood, category, filename (AND logic)
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search music atmospheric
+node ~/visual-intelligence/bin/vis.mjs search music atmospheric
 
 # Structured flags
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search --tag music --mood atmospheric --theme dark
+node ~/visual-intelligence/bin/vis.mjs search --tag music --mood atmospheric --theme dark
 
 # Find by suitability
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search --suitable homepage-showcase
+node ~/visual-intelligence/bin/vis.mjs search --suitable homepage-showcase
 
 # Filter by category
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search --category blog
+node ~/visual-intelligence/bin/vis.mjs search --category blog
 
 # Size range (KB)
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search --min-size 100 --max-size 500
+node ~/visual-intelligence/bin/vis.mjs search --min-size 100 --max-size 500
 
 # Combine positional + flags
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search hero --category acos --max-size 1000
+node ~/visual-intelligence/bin/vis.mjs search hero --category acos --max-size 1000
 ```
 
 ## Run against FrankX registry
@@ -29,7 +29,7 @@ node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search hero --category a
 The FrankX project root is auto-detected. From the FrankX directory:
 
 ```bash
-node /mnt/c/Users/Frank/visual-intelligence/bin/vis.mjs search <query>
+node ~/visual-intelligence/bin/vis.mjs search <query>
 ```
 
 ## Flags

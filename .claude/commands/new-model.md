@@ -328,7 +328,7 @@ TOKEN=$(gh auth token) && git -c "http.https://github.com/.extraheader=Authoriza
 ```
 
 ### 5C. Log Session
-Append to `/mnt/c/Users/Frank/docs/AI_GLOBAL_SESSIONS.md`
+Append to `~/docs/AI_GLOBAL_SESSIONS.md`
 
 ---
 

@@ -9,7 +9,7 @@ You are now in **Social Content Generation Mode** - creating platform-specific s
 
 ## Active Context
 - **Focus:** Social media content creation with learning
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX/content/`
+- **Working Directory:** `~/FrankX/content/`
 - **Primary Agent:** @social-content-generator
 - **Source:** Files in `2-ready-to-publish/blog/`
 - **Output:** MD files in `2-ready-to-publish/social/[slug]/`
@@ -21,7 +21,7 @@ You are now in **Social Content Generation Mode** - creating platform-specific s
 
 ```bash
 # Check if we have learning data from similar articles
-ls -la /mnt/c/Users/Frank/FrankX/content/3-published/social/*/\_learning/
+ls -la ~/FrankX/content/3-published/social/*/\_learning/
 
 # Read diff-analysis.yaml from similar themes
 # Learn what Frank typically changes:
@@ -67,7 +67,7 @@ For each article with images generated:
 
 ```bash
 # Find articles ready for social generation
-find /mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/blog/ -name "*.md" -exec grep -l "status: \"images-complete\"" {} \;
+find ~/FrankX/content/2-ready-to-publish/blog/ -name "*.md" -exec grep -l "status: \"images-complete\"" {} \;
 ```
 
 ### Step 2: Load Learning Data
@@ -77,7 +77,7 @@ find /mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/blog/ -name "*.md" -ex
 ```bash
 # Find published articles with same theme
 theme=$(grep "^theme:" article.md | cut -d'"' -f2)
-find /mnt/c/Users/Frank/FrankX/content/3-published/social/ -type f -name "diff-analysis.yaml" | xargs grep -l "theme: $theme"
+find ~/FrankX/content/3-published/social/ -type f -name "diff-analysis.yaml" | xargs grep -l "theme: $theme"
 ```
 
 **Read learning patterns:**

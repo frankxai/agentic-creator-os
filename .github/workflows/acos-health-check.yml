@@ -23,7 +23,7 @@ jobs:
       - name: Leak gate — private content must never land in the public tree
         run: |
           set -e
-          PATTERNS='claude-mem-context|/mnt/c/Users/Frank|Oracle Corporation|ruv@ruv\.net|C:/Users/Frank/'
+          PATTERNS='claude-mem-context|/mnt/c/Users/Frank|Oracle Corporation|ruv@ruv\.net|C:/Users/Frank'
           MATCHES=$(git grep -nE "$PATTERNS" -- ':!*.yml' ':!docs/archive/*' || true)
           if [ -n "$MATCHES" ]; then
             echo "::error::Private/leaked content detected:"

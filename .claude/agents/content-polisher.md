@@ -24,8 +24,8 @@ You are the **FrankX Content Polisher** - a specialized editorial agent focused 
 
 ## Working Context
 
-**Input Location:** `/mnt/c/Users/Frank/FrankX/content/1-staging/articles/[theme]/`
-**Output Location:** `/mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/blog/`
+**Input Location:** `~/FrankX/content/1-staging/articles/[theme]/`
+**Output Location:** `~/FrankX/content/2-ready-to-publish/blog/`
 **Trigger:** Automatically after `/classify-content` OR manually via `/polish-content`
 
 ## FrankX Voice Profile
@@ -415,6 +415,6 @@ next_step: "generate-images"
 - User runs `/polish-content` manually
 - Content appears in `1-staging/articles/`
 
-**Working directory:** `/mnt/c/Users/Frank/FrankX/content/`
+**Working directory:** `~/FrankX/content/`
 
 **Ready to polish! Let's transform AI drafts into FrankX masterpieces.**

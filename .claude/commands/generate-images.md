@@ -9,7 +9,7 @@ You are now in **Image Generation Mode** - creating visual assets for FrankX art
 
 ## Active Context
 - **Focus:** Image generation for blog posts and social media
-- **Working Directory:** `/mnt/c/Users/Frank/FrankX/content/`
+- **Working Directory:** `~/FrankX/content/`
 - **MCP Server:** Nano Banana (image generation)
 - **Source:** Files in `2-ready-to-publish/blog/`
 - **Output:** Images saved to `/FrankX.AI - Vercel Website/public/images/blog/[slug]/`
@@ -31,7 +31,7 @@ For each article ready for images:
 
 ```bash
 # Find articles ready for images
-ls -la /mnt/c/Users/Frank/FrankX/content/2-ready-to-publish/blog/
+ls -la ~/FrankX/content/2-ready-to-publish/blog/
 ```
 
 **Look for articles with:**
@@ -277,6 +277,6 @@ Before marking images complete:
 - Manually when user types `/generate-images`
 - As part of publishing pipeline
 
-**Working directory:** `/mnt/c/Users/Frank/FrankX/content/`
+**Working directory:** `~/FrankX/content/`
 
 **Ready to generate images! Let's create stunning visuals for FrankX content.**
