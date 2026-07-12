@@ -155,8 +155,10 @@ const synth = await agent(
   `leaderboard=data/model-arena/leaderboard.json, this round's receipt, runner learnings=${JSON.stringify(runOut?.learnings || [])}, ` +
   `new models flagged=${JSON.stringify(newModels?.missing || [])}, cross-check=${JSON.stringify(crossCheck)}, ` +
   `craft-task judge verdict=${JSON.stringify(judge || 'not judged this round')}. ` +
-  `Read the leaderboard, then return: leader (top pass-rate), biggestMover if any, saturatedAxes (from learnings), and 3-4 routingImplications ` +
-  `{lane, route (which model), why} grounded in per-axis pass-rates — e.g. which model to route strict-JSON to, which for reasoning, which for cheap grounding. ` +
+  `Read the leaderboard (each model has elo, passRate, per-axis pass-rates, totalCostUsd, lastAvgLatencyMs), then return: leader (top Elo), ` +
+  `biggestMover if any, saturatedAxes (from learnings), and 3-4 routingImplications ` +
+  `{lane, route (which model), why} grounded in the per-axis pass-rates AND cost/latency — e.g. which model to route strict-JSON to, which for reasoning, ` +
+  `and where a cheaper model ties the flagship (intelligence-per-dollar). ` +
   `Be honest about small-n; this is directional.`,
   { phase: 'Synthesize', schema: SYNTH_SCHEMA, model: 'opus' }
 )

@@ -24,7 +24,7 @@ every model, verify mechanically, and keep a leaderboard.
 | `roster.json` | Who's in the ring. Registry-id → OpenRouter slug + `arena_active`. Source of truth for **who competes** (the registry stays source of truth for model **facts**). |
 | `tasks.json` | The **evolving** task bank. Meaningful capability axes, mostly self-verifying, with per-task `state` + `history` for the learning loop. |
 | `run.mjs` | The runner: rotate tasks → dispatch → verify → receipt → leaderboard → learn. |
-| `../../data/model-arena/leaderboard.json` | Standings (pass-rate per model, per axis). Written by the runner. |
+| `../../data/model-arena/leaderboard.json` | Standings — Elo + pass-rate + cost/latency/tokens per model (and per axis). Written by the runner. |
 | `../../data/model-arena/runs/<date>.json` | Per-round receipt (the durable output). |
 
 ## Running
@@ -34,12 +34,46 @@ node scripts/model-arena/run.mjs --check       # validate roster + tasks, exit
 node scripts/model-arena/run.mjs --plan         # print the round plan, no dispatch
 node scripts/model-arena/run.mjs --simulate     # full pipeline with canned responses (no network) — CI/verification
 node scripts/model-arena/run.mjs                # live dispatch via OpenRouter (needs OPENROUTER_API_KEY)
-#   flags: --tasks N (round size, default 4) · --week N (rotation seed) · --date YYYY-MM-DD
+#   flags: --tasks N (round size, default 4) · --week N (rotation seed) · --date YYYY-MM-DD · --concurrency N (default 6)
 ```
 
 Without `OPENROUTER_API_KEY` a live run **degrades** to plan-only (`mode:plan`,
 `degraded:true`) instead of failing — so a CCR routine never hard-errors on a
 missing key; it reports what it *would* have run.
+
+## Rating method (why Elo, not just pass-rate)
+
+Raw pass-rate is a weak signal once the field is large and capability is
+saturated — many models tie at 100%, and it says nothing about *relative*
+strength. So the runner also computes a persistent **pairwise Elo rating**, the
+same family of method LMArena / Chatbot Arena use:
+
+- For each task, every ordered pair of models produces a win / loss / tie from
+  their pass/fail outcomes.
+- Each comparison nudges both models' Elo (start 1000, K=24), seeded from the
+  prior leaderboard so ratings compound across rounds.
+- The leaderboard reports both `elo` and `passRate`; the receipt's `standings`
+  are ranked by Elo. Early ratings are volatile — trust them after several rounds.
+
+## Cost / latency / token telemetry
+
+Every dispatch records latency and token usage (and cost when the gateway
+returns it, via `usage:{include:true}`). The leaderboard carries
+`lastAvgLatencyMs`, `totalTokens`, and `totalCostUsd` per model — so routing can
+optimize **intelligence-per-dollar**, not just accuracy. Telemetry is
+best-effort: 0 when the gateway omits usage (and in `--simulate`).
+
+## Robustness
+
+- **Bounded concurrency** (`--concurrency`, default 6): all (task × model)
+  dispatches run through a small zero-dependency async pool — fast without
+  hammering the gateway.
+- **Retry with backoff**: transient gateway errors (timeout, HTTP 5xx, 429)
+  retry up to 3× (0.5s, 1s). A hard error is recorded as that model's result for
+  the round, never a crash.
+- **Zero runtime dependencies**: the runner uses only Node built-ins (global
+  `fetch`, `node:timers/promises`). Nothing to install; nothing added to the
+  app's dependency tree or lockfile.
 
 ## The learning loop
 
