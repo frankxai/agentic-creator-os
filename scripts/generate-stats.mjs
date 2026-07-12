@@ -59,6 +59,13 @@ const md = `# ACOS Asset Stats
 
 const errors = [];
 
+// plugin.json `agents` must enumerate .md files (the CLI rejects directory
+// paths for this field) — keep it generated so it can't drift from disk.
+const pluginPath = rel('.claude-plugin/plugin.json');
+const plugin = JSON.parse(fs.readFileSync(pluginPath, 'utf-8'));
+const agentEntries = agents.map((f) => `./.claude/agents/${f}`).sort();
+const agentsInSync = JSON.stringify(plugin.agents) === JSON.stringify(agentEntries);
+
 // Gate 1: empty skills
 for (const s of skills) if (fs.statSync(s).size === 0) errors.push(`empty SKILL.md: ${path.relative(root, s)}`);
 
@@ -72,6 +79,7 @@ for (const r of rules.activation_rules ?? []) {
 if (process.argv.includes('--check')) {
   const current = fs.existsSync(rel('STATS.md')) ? fs.readFileSync(rel('STATS.md'), 'utf-8') : '';
   if (current !== md) errors.push('STATS.md is stale — run `node scripts/generate-stats.mjs` and commit');
+  if (!agentsInSync) errors.push('plugin.json agents list is stale — run `node scripts/generate-stats.mjs` and commit');
   if (errors.length) {
     for (const e of errors) console.error(`FAIL: ${e}`);
     process.exit(1);
@@ -79,6 +87,11 @@ if (process.argv.includes('--check')) {
   console.log(`OK: ${stats.skills} skills, ${stats.commands} commands, ${stats.agents} agents, ${stats.hooks} hooks — all gates pass`);
 } else {
   fs.writeFileSync(rel('STATS.md'), md);
+  if (!agentsInSync) {
+    plugin.agents = agentEntries;
+    fs.writeFileSync(pluginPath, JSON.stringify(plugin, null, 2) + '\n');
+    console.log(`Synced plugin.json agents list (${agentEntries.length} files)`);
+  }
   console.log(`Wrote STATS.md: ${stats.skills} skills, ${stats.commands} commands, ${stats.agents} agents, ${stats.hooks} hooks`);
   if (errors.length) {
     for (const e of errors) console.error(`WARN: ${e}`);
