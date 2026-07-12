@@ -28,7 +28,7 @@ ACOS adapts to different AI coding platforms via adapters/ (see grok-harness-ada
 
 **Claude Code and Grok Build** get the richest integrations:
 - Claude: native slash commands, hooks, IAM, skill-rules auto-activation.
-- **Grok Build**: native skills/agents/hooks/subagents (explore/plan) + MCP (github/fs-starlight) + image/video + full Claude Code compat layer + dedicated grok-harness-adapter seeds (exact 4 grok-personal excellence seeds ONLY in .grok/: harness-integration, excellence-review, repo-mastery, multi-harness-orchestrator + 2 excellence json hooks; never leak to ACOS core/.claude) + gstack QA gates + multi-harness delegation. Install seeds project .grok/ + GROK.md (per SHARING.md SIP §5 "a bit magical" grok-personal .grok-only layer (opt-in); core via .claude junctions). Use /hooks-trust and /skills in Grok TUI. "Grok Build" TUI + real-time + subagents are key strengths.
+- **Grok Build**: native skills/agents/hooks/subagents (explore/plan) + MCP (github/fs-starlight) + image/video + full Claude Code compat layer + dedicated grok-harness-adapter seeds (exact 4 grok-personal excellence seeds ONLY in .grok/: harness-integration, excellence-review, repo-mastery, multi-harness-orchestrator + 2 excellence json hooks; never leak to ACOS core/.claude) + gstack QA gates + multi-harness delegation. Install seeds project .grok/ + GROK.md (per repo doctrine); core via .claude junctions). Use /hooks-trust and /skills in Grok TUI. "Grok Build" TUI + real-time + subagents are key strengths.
 
 Other platforms receive skills and agent definitions embedded in their context files, which the AI reads at session start. Grok also loads the shared ~/.claude/ catalog automatically.
 

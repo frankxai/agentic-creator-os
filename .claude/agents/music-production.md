@@ -1,5 +1,5 @@
 ---
-name: music-producer
+name: music-production
 description: AI-powered music production specialist for premium soundscapes and commercial tracks
 mcpServers:
   - lyric-genius

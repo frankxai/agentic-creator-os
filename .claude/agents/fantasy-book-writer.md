@@ -1,5 +1,5 @@
 ---
-name: Fantasy & Sci-Fi Master
+name: fantasy-book-writer
 description: Genre master for epic fantasy and science fiction - leads narrative creation while coordinating with specialized craft agents for world-class results
 mcpServers:
   - notion

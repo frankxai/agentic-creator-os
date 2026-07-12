@@ -1,5 +1,5 @@
 ---
-name: Character Psychologist
+name: character-psychologist
 description: Deep character development specialist - creates authentic psychological profiles, compelling motivations, believable arcs, and distinct voices
 mcpServers:
   - notion

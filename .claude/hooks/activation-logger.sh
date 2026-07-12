@@ -4,7 +4,7 @@
 
 HOOK_NAME="$1"
 EVENT_TYPE="${2:-unknown}"
-LOG_DIR="$HOME/.claude/projects/-mnt-c-Users-Frank-FrankX/logs"
+LOG_DIR="$HOME/.claude/projects/<project>/logs"
 LOG_FILE="$LOG_DIR/hook-activity.jsonl"
 MAX_LINES=10000  # Rolling log limit
 

@@ -46,14 +46,10 @@
         "keywords": [
           "music",
           "suno",
-          "track",
           "song",
           "lyrics",
           "melody",
-          "beat",
-          "frequency",
-          "hz",
-          "audio"
+          "frequency"
         ],
         "file_patterns": [
           "*.mp3",
@@ -73,11 +69,9 @@
           "blog",
           "article",
           "content",
-          "post",
           "newsletter",
           "SEO",
-          "publish",
-          "write"
+          "publish"
         ],
         "file_patterns": [
           "*.mdx",
@@ -96,7 +90,6 @@
       "skill": "ui-ux-design-expert",
       "triggers": {
         "keywords": [
-          "design",
           "UX",
           "UI",
           "interface",
@@ -122,7 +115,6 @@
         "keywords": [
           "MCP",
           "model context protocol",
-          "server",
           "tool integration",
           "mcp server"
         ],
@@ -141,8 +133,6 @@
       "skill": "planning-with-files",
       "triggers": {
         "keywords": [
-          "plan",
-          "task",
           "breakdown",
           "implement",
           "complex task",
@@ -228,7 +218,6 @@
         "keywords": [
           "oracle",
           "OCI",
-          "cloud",
           "enterprise",
           "infrastructure",
           "kubernetes"
@@ -248,7 +237,6 @@
           "security",
           "vulnerability",
           "OWASP",
-          "audit",
           "penetration",
           "CVE"
         ],
@@ -304,7 +292,6 @@
         "keywords": [
           "framer",
           "animation",
-          "motion",
           "prototype",
           "interactive"
         ],

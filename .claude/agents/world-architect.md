@@ -1,5 +1,5 @@
 ---
-name: World Architect
+name: world-architect
 description: World-building specialist for fantasy, sci-fi, and speculative fiction - creates internally consistent universes with rich cultures, magic/tech systems, and immersive settings
 mcpServers:
   - notion

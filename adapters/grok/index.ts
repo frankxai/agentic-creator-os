@@ -27,7 +27,7 @@
  * @see .grok/README.md (from user ~/.grok) for Grok's AGENTS.md scan order, skill locations (incl ~/.claude compat), hooks from .grok/hooks/
  * @see install.sh:install_platform + generate_grok_files for runtime usage
  *
- * Frank DNA: Premium, measurable, actionable, direct/technical/warm/playful. Use repo-mastery + excellence gates + gstack for all builds.
+ * CREATOR.md identity contract: Premium, measurable, actionable, direct/technical/warm/playful. Use repo-mastery + excellence gates + gstack for all builds.
  */
 
 // Optional audit import (shared evaluator MCP may provide; graceful fallback)
@@ -44,10 +44,10 @@ try {
   createEvaluationLogger = (src: string) => ({ log: console.log.bind(console, `[grok:${src}]`) });
 }
 
-// Grok personal excellence seeds (per SHARING.md + SIP §5 encoded-self): seeds ONLY the 4 excellence in .grok/skills + 2 json hooks in .grok/hooks/ ; core (gstack etc) via .claude/ junctions from ACOS/SIS. Never duplicate core into the grok-personal seeds. "Grok .grok only (opt-in personal excellence layer, not for everything)" / "a bit magical" Grok overlay. Use /sip-share-audit for grok-personal + personal-creative.
+// Grok personal excellence seeds (per repo doctrine): seeds ONLY the 4 excellence in .grok/skills + 2 json hooks in .grok/hooks/ ; core (gstack etc) via .claude/ junctions from ACOS/SIS. Never duplicate core into the grok-personal seeds. "Grok .grok only (opt-in personal excellence layer, not for everything)" / "a bit magical" Grok overlay. Use /sip-share-audit for grok-personal + personal-creative.
 // EXPLICIT 4 SKILLS LIST (Grok .grok only personal excellence): 1. harness-integration (hooks + multi-delegate + claude compat), 2. excellence-review (gates: repo-mastery + plan-reviews + verification/santa + gstack + cso), 3. repo-mastery (ACOS/SIS/FrankX/SIP/ecosystem + read rules first), 4. multi-harness-orchestrator (detect + delegate w/ injected SHARING/SIP/CLAUDE + core/personal filter + gstack/santa).
 // 5 FLEET: Claude (core), Codex (adversary), Gemini (long-ctx), Antigravity/agy (96-mind swarm + junctions), Grok (TUI + personal excellence seeds). gstack for visual 99+ QA. SIP v1.1.1 substrate everywhere. Matches/enhances SIS level for ACOS parity.
-// SIP attest: Built on SIP v1.1.1 — substrate: starlightintelligence.org/protocol — nodes: frankxai/agentic-creator-os + Starlight-Intelligence-System. Small reversible change. God 99 gates applied (repo-mastery reads done; excellence path).
+// SIP attest: Built on SIP v1.1.1 — substrate: starlightintelligence.org/protocol — nodes: frankxai/agentic-creator-os + Starlight-Intelligence-System. Small reversible change. excellence standards applied (repo-mastery reads done; excellence path).
 
 // ── Detection ──────────────────────────────────────────────────────────────────
 export function isGrok(): boolean {
@@ -326,7 +326,7 @@ export function generateGrokContext(options: {
   lines.push('');
 
   if (includeExcellence) {
-    lines.push('## Excellence Gates (Mandatory for God 99 Quality)');
+    lines.push('## Excellence Gates (Mandatory for excellence standards Quality)');
     lines.push('');
     lines.push('Before any structural change, build, or PR:');
     lines.push('1. Load repo-mastery (read CLAUDE.md/AGENTS.md first, map architecture)');
@@ -347,7 +347,7 @@ export function generateGrokContext(options: {
     lines.push('- **Excellence Reviewer**: verification, santa, gates, quality rubric (9-check)');
     lines.push('- **Gstack QA Lead**: headless browser testing, visual/functional, fix+verify loops');
     lines.push('- **Content Strategist**, **UI/UX God**, **Security CSO**, **Product Engine** etc.');
-    lines.push('- **Frank DNA Enforcer**: cool, premium, high-intellect, purpose-driven, fun');
+    lines.push('- **CREATOR.md identity contract Enforcer**: cool, premium, high-intellect, purpose-driven, fun');
     lines.push('');
   }
 
@@ -376,7 +376,7 @@ export function generateGrokContext(options: {
     lines.push('');
   }
 
-  lines.push('## Decision Framework + Frank DNA');
+  lines.push('## Decision Framework + CREATOR.md identity contract');
   lines.push('');
   lines.push('Before edits:');
   lines.push('1. Read target CLAUDE.md / AGENTS.md / GROK.md (deeper wins)');
@@ -384,11 +384,11 @@ export function generateGrokContext(options: {
   lines.push('3. Apply 4 excellence questions + gates');
   lines.push('4. Show work (demos, diffs, gstack screenshots, metrics)');
   lines.push('');
-  lines.push('Frank DNA: Cool • Premium • High Intellect • Purpose-Driven • FUN');
+  lines.push('CREATOR.md identity contract: Cool • Premium • High Intellect • Purpose-Driven • FUN');
   lines.push('Voice: Direct. Technical. Warm. Playful.');
   lines.push('');
   lines.push('---');
-  lines.push(`*ACOS v${version} + grok-harness-adapter — God 99 excellence. Subagent swarm ready.*`);
+  lines.push(`*ACOS v${version} + grok-harness-adapter — excellence standards excellence. Subagent swarm ready.*`);
 
   return lines.join('\n');
 }
@@ -412,10 +412,10 @@ description: Grok harness bridge for ACOS. Ensure hooks/skills ready, auto-load 
 
 # ACOS Grok Harness Integration
 
-## Principles (Frank DNA + ACOS v${acosVersion})
+## Principles (CREATOR.md identity contract + ACOS v${acosVersion})
 - Shared catalog (~/.claude/skills + .grok/skills) is source of truth.
 - Auto: excellence gates on start, rules read before edits, harness suggest for complex tasks.
-- God 99: never ship without verification-loop / santa-method / gstack qa / plan reviews.
+- excellence standards: never ship without verification-loop / santa-method / gstack qa / plan reviews.
 - Delegate: output exact command e.g. claude -p "$(cat CLAUDE.md) ..." when better harness fits.
 
 ## SessionStart Hook Behavior
@@ -445,10 +445,10 @@ description: Highest excellence for all outputs in Grok harness. Use verificatio
 
 # Excellence Review (Grok + ACOS)
 
-## Frank DNA Mandate
+## CREATOR.md identity contract Mandate
 Premium, measurable, actionable, grounded. Show work not claims. Use gstack screenshots, metrics, before/after.
 
-## Mandatory Gates (God 99)
+## Mandatory Gates (excellence standards)
 1. repo-mastery (CLAUDE.md first, ecosystem map)
 2. plan-ceo/eng/design-review (via subagent or delegate)
 3. verification-loop + santa-method (adversarial, 2+ reviewers pass)
@@ -484,7 +484,7 @@ description: Deep ACOS + FrankX + Starlight ecosystem mastery. Use for cross-rep
 6. Excellence: verification + gstack + plan reviews before suggestions.
 7. Output: structured map, critical files, actionable improvements, cross links. No unsolicited MDs.
 
-Preserve Frank DNA. Use for all ACOS/grok builds.
+Preserve CREATOR.md identity contract. Use for all ACOS/grok builds.
 `,
   });
 
@@ -493,18 +493,18 @@ Preserve Frank DNA. Use for all ACOS/grok builds.
     path: 'skills/multi-harness-orchestrator/SKILL.md',
     content: `---
 name: multi-harness-orchestrator
-description: Automatically detect tasks suited for delegation to other agent harnesses (Claude Code canonical, agy/antigravity, gemini, cursor, etc.). Leverage shared .claude catalog (skills, commands, agents, hooks, junctions for agy). Embody Frank DNA. Output exact delegation commands (e.g. claude -p "injected rules + task" --cwd ...). Auto-utilize by shelling harness CLIs with full context from rules/catalog. Combine with repo-mastery for ecosystem tasks. Suggest/lead by choosing best harness or running in parallel. Grok .grok personal excellence seeds only (core to others).
+description: Automatically detect tasks suited for delegation to other agent harnesses (Claude Code canonical, agy/antigravity, gemini, cursor, etc.). Leverage shared .claude catalog (skills, commands, agents, hooks, junctions for agy). Embody CREATOR.md identity contract. Output exact delegation commands (e.g. claude -p "injected rules + task" --cwd ...). Auto-utilize by shelling harness CLIs with full context from rules/catalog. Combine with repo-mastery for ecosystem tasks. Suggest/lead by choosing best harness or running in parallel. Grok .grok personal excellence seeds only (core to others).
 ---
 
 # Multi-Harness Orchestrator (Grok + ACOS Grok Personal Layer)
 
 ## Detection + Delegation
 - Scan task for best harness (plan/eng/design heavy → claude; quick terminal → grok native).
-- Always inject: read CLAUDE.md/AGENTS.md/SHARING.md/SIP.md first (deeper wins per DNA).
+- Always inject: read CLAUDE.md/AGENTS.md/AGENTS.md/SIP.md first (deeper wins per DNA).
 - Output ready-to-paste: e.g. \`claude -p "$(cat CREATOR.md; cat CLAUDE.md) <task> — apply repo-mastery + excellence gates + gstack if web"\`
 - Filter: grok-personal excellence seeds only here; delegate core/shared to junctions.
 
-Embody God 99. Use with repo-mastery + excellence-review + harness-integration.
+Embody excellence standards. Use with repo-mastery + excellence-review + harness-integration.
 `,
   });
 
@@ -515,7 +515,7 @@ Embody God 99. Use with repo-mastery + excellence-review + harness-integration.
   "hooks": {
     "SessionStart": [
       {
-        "command": "echo 'Frank DNA excellence mode activated (v${acosVersion}). Read CLAUDE.md/AGENTS.md/SHARING.md/SIP.md first (deeper wins). Shared .claude catalog active. MCPs (github/fs-starlight/git) ready. Use multi-harness-orchestrator + repo-mastery + excellence-review + harness-integration. Gates: verification-loop/santa-method/qa/cso/plan-reviews/gstack before ship. Grok .grok personal excellence seeds (excellence gates) opt-in only.'"
+        "command": "echo 'ACOS excellence mode active (v${acosVersion}). Read CLAUDE.md/AGENTS.md/AGENTS.md/SIP.md first (deeper wins). Shared .claude catalog active. MCPs (github/fs-starlight/git) ready. Use multi-harness-orchestrator + repo-mastery + excellence-review + harness-integration. Gates: verification-loop/santa-method/qa/cso/plan-reviews/gstack before ship. Grok .grok personal excellence seeds (excellence gates) opt-in only.'"
       }
     ]
   }
@@ -614,12 +614,12 @@ export default {
   GROK_SKILL_MAPPINGS,
 };
 
-// SIP Attestation — Phase 5 e2e verify god 99 (this harness parity + partition + gstack run)
+// SIP Attestation — Phase 5 e2e verify excellence standards (this harness parity + partition + gstack run)
 // Built on SIP — Starlight Intelligence Protocol
 // - Substrate: starlightintelligence.org/protocol v1.1.1
 // - Verticals: [agentic-creator-os, starlight, frankx]
-// - Canon: [Frank DNA, core vs grok-personal vs personal-creative partition per SHARING.md, gstack/santa/excellence gates]
+// - Canon: [CREATOR.md identity contract, core vs grok-personal vs personal-creative partition per repo doctrine
 // - Nodes: [FrankX (sovereign), Composer/Grok (lead), subagents (gstack-qa, santa, excellence-review, repo-mastery)]
 // Generated: 2026-06-02T (Phase 5 harness parity 5-way + no-leak confirmed + metrics 99+)
-// 2026-06-02 upgrade: ACOS grok adapter + install enhanced for explicit grok-personal filter/4-skills-list/gstack/SIP/5-fleet parity to match SIS level (agy/grok beyond SIS in ACOS/claude-code-config + 2 visual frankx sites); small reversible. God 99.
-// Immutable attribution preserved. Small reversible. Grok .grok personal excellence seeds only. God 99. All works.
+// 2026-06-02 upgrade: ACOS grok adapter + install enhanced for explicit grok-personal filter/4-skills-list/gstack/SIP/5-fleet parity to match SIS level (agy/grok beyond SIS in ACOS/claude-code-config + 2 visual frankx sites); small reversible. excellence standards.
+// Immutable attribution preserved. Small reversible. Grok .grok personal excellence seeds only. excellence standards. All works.

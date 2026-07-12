@@ -1,5 +1,5 @@
 ---
-name: mcp-server-advisor
+name: mcp-server-advising
 description: Use this agent when you need expert guidance on selecting, configuring, or understanding Model Context Protocol (MCP) servers for your project. This includes evaluating which MCP servers would best suit your use case, understanding server capabilities, integration requirements, and architectural decisions around MCP implementations. Examples:\n\n<example>\nContext: User is setting up a new project and needs to determine which MCP servers to integrate.\nuser: "I'm building a documentation system that needs to access GitHub repos and local files"\nassistant: "I'll use the mcp-server-advisor agent to help determine the best MCP server configuration for your documentation system."\n<commentary>\nThe user needs guidance on MCP server selection for a specific use case, so the mcp-server-advisor agent should be invoked.\n</commentary>\n</example>\n\n<example>\nContext: User is troubleshooting MCP server connectivity.\nuser: "Which MCP servers would help me connect to both PostgreSQL and Redis databases?"\nassistant: "Let me consult the mcp-server-advisor agent to identify the right MCP servers for your database connectivity needs."\n<commentary>\nThe user is asking about specific MCP server capabilities, triggering the mcp-server-advisor agent.\n</commentary>\n</example>
 model: sonnet
 ---

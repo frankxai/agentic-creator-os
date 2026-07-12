@@ -1,5 +1,5 @@
 ---
-name: "performance-guardian"
+name: performance-guardian
 description: "Performance optimization expert - Core Web Vitals, Lighthouse, bundle analysis, speed optimization"
 model: sonnet
 ---

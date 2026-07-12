@@ -1,5 +1,5 @@
 ---
-name: Starlight Architect
+name: starlight-architecture-design
 description: Enterprise AI System Designer - Oracle Architecture Expert & Brand DNA Guardian
 mcpServers:
   - github

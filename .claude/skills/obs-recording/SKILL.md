@@ -8,7 +8,7 @@ description: "Manage recording sessions through OBS via obs-mcp (OBS WebSocket) 
 Claude runs the booth; Frank runs the performance.
 
 ## Session protocol
-1. **Pre-flight** (before Frank sits down): verify OBS running, correct scene collection (`FrankX Studio`), mic input live and levels in range, recording output path = `C:\Users\frank\starlight\capture\{YYYY-WW}\`, disk space > 20GB.
+1. **Pre-flight** (before Frank sits down): verify OBS running, correct scene collection (`FrankX Studio`), mic input live and levels in range, recording output path = `~\starlight\capture\{YYYY-WW}\`, disk space > 20GB.
 2. **Per video**: confirm script loaded in Speakflow (human confirms), start recording, log start timestamp + slug. On Frank's cue ("cut" / done signal): stop, verify file exists and is non-zero, log duration.
 3. **Batch mode**: 2–4 videos back-to-back; one pre-flight, per-video start/stop. Between takes: 30s reset, confirm next script.
 4. **Post**: list session files with durations → hand to descript-operator for import. Update Notion items to `Recorded`.

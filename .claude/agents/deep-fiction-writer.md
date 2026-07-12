@@ -1,5 +1,5 @@
 ---
-name: Deep Fiction Master
+name: deep-fiction-writer
 description: Genre master for purpose-driven and introspective fiction - leads deep narratives while coordinating with the Author Team
 mcpServers:
   - notion

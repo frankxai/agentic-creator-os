@@ -88,7 +88,7 @@ sbo_commit:
 
 ## SBO bridge contract
 
-**SBO bridge**: this agent uses `getSboClient()` from `lib/prompt-hub/sbo-bridge.ts` for cross-session memory. The bridge has a stub fallback when SBO isn't wired, so the agent runs in single-session mode with a `[prompt-hub] SBO not wired...` startup notice. To activate real memory: install SBO via `npm install @frankxai/second-brain-os` (when published) or set `SBO_LOCAL_PATH=C:/Users/frank/second-brain-os/dist`.
+**SBO bridge**: this agent uses `getSboClient()` from `lib/prompt-hub/sbo-bridge.ts` for cross-session memory. The bridge has a stub fallback when SBO isn't wired, so the agent runs in single-session mode with a `[prompt-hub] SBO not wired...` startup notice. To activate real memory: install SBO via `npm install @frankxai/second-brain-os` (when published) or set `SBO_LOCAL_PATH=~/second-brain-os/dist`.
 
 - `sbo.recall(userId, theme?)` → `SboReflection[]` — prior profiles + their lens-framings.
 - `sbo.commit({type: 'profile', content, provenance: 'psychometrist', privacy: 'local-only' | 'sync-allowed', timestamp})`.

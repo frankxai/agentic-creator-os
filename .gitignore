@@ -52,3 +52,8 @@ temp/
 .swarm/
 docs/CODING_AGENTS_REGISTRY.md
 *.session.md
+
+# Runtime artifacts — never commit
+.claude/trajectories/
+.claude/memory.db
+.claude-flow/

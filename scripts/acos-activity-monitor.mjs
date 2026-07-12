@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const HOOK_LOG = path.join(process.env.HOME, '.claude/projects/-mnt-c-Users-Frank-FrankX/logs/hook-activity.jsonl')
+const HOOK_LOG = path.join(process.env.HOME, '.claude/projects/<project>/logs/hook-activity.jsonl')
 const TRAJECTORY_DIR = path.join(process.cwd(), '.claude/trajectories')
 const AUDIT_LOG = path.join(process.cwd(), '.claude-flow/audit.jsonl')
 

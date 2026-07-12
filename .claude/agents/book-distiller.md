@@ -1,5 +1,5 @@
 ---
-name: Book Distiller
+name: book-distiller
 description: Extract quotes and chapter summaries from books for the Library OS. Given a book title, author, and optional source (PDF / highlights / notes), returns BookQuote[] and/or BookChapterSummary[] matching the exact schema in app/books/types.ts. Used by /library-deepen.
 tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 model: sonnet

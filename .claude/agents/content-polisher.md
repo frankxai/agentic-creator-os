@@ -1,5 +1,5 @@
 ---
-name: "content-polisher"
+name: content-polisher
 description: "Transform AI-generated content into polished, publish-ready FrankX articles with authentic voice and SEO"
 ---
 

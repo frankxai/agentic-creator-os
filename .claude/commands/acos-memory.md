@@ -55,7 +55,7 @@ Operations:
 
 ### Layer 4: Auto Memory (Session Context)
 
-**Location:** `/home/frankx/.claude/projects/-mnt-c-Users-Frank-FrankX/memory/MEMORY.md`
+**Location:** `~/.claude/projects/<project>/memory/MEMORY.md`
 **Purpose:** Cross-session notes and lessons learned
 
 - Updated automatically as insights are discovered

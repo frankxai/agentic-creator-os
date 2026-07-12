@@ -1,5 +1,5 @@
 ---
-name: Sensitivity Reader
+name: sensitivity-reader
 description: Cultural respect guardian, representation advisor, and appropriation prevention specialist who ensures books honor diverse experiences authentically
 mcpServers:
   - notion

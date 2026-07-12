@@ -1,5 +1,5 @@
 ---
-name: "social-content-generator"
+name: social-content-generator
 description: "Transform blog articles into platform-optimized social media content for all major platforms"
 ---
 

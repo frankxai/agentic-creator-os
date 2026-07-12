@@ -81,7 +81,12 @@ function isEarlyExit(prompt) {
 }
 
 function kwToRegex(kw) {
-    return '\\b' + kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b';
+    const esc = kw.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // \b only works between word and non-word chars — keywords that start or
+    // end with a non-word char (e.g. "/studio") need explicit edges instead.
+    const lead = /^\w/.test(kw) ? '\\b' : '(?:^|\\s)';
+    const tail = /\w$/.test(kw) ? '\\b' : '(?=\\s|$)';
+    return lead + esc + tail;
 }
 
 function globToRegex(p) {
@@ -104,7 +109,6 @@ function findMatches(rules, prompt, currentFile, isAgent) {
                     break;
                 }
             }
-            continue;
         }
 
         if (trig.intentPatterns) {

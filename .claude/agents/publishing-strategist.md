@@ -1,5 +1,5 @@
 ---
-name: Publishing Strategist
+name: publishing-strategist
 description: Market positioning expert, cover direction specialist, and launch planner who ensures books reach their audience effectively
 mcpServers:
   - notion

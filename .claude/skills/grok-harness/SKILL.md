@@ -28,10 +28,10 @@ Grok loads (priority):
 
 ## The 4 grok-personal .grok-Only Excellence Seeds (SIP §5 encoded-self; .grok ONLY)
 
-Per SHARING.md + SIP, these stay ONLY in project .grok/skills/ (never in ACOS core .claude or shared flat catalog):
+per repo doctrine):
 
 1. **harness-integration** — SessionStart excellence + PreToolUse gates + auto repo-mastery + multi-delegate + claude compat.
-2. **excellence-review** — God 99 gates: repo-mastery + plan-*-review + verification-loop + santa-method + gstack (qa/browse/design) + cso.
+2. **excellence-review** — excellence standards: repo-mastery + plan-*-review + verification-loop + santa-method + gstack (qa/browse/design) + cso.
 3. **repo-mastery** — Deep ACOS/FrankX/SIS/Arcanea ecosystem map. Read rules first (CLAUDE/AGENTS/GROK.md). Use MCP github/fs-starlight + subagents.
 4. **multi-harness-orchestrator** — Detect task → choose best harness (claude for heavy plan/eng) → emit exact shell cmd with full injected context (rules + DNA + partition filter + gstack/santa).
 
@@ -54,7 +54,7 @@ repo-mastery (read CLAUDE.md/AGENTS.md/GROK.md first; deeper wins)
     ↓
 ACOS substrate: skill-rules (if compat), commands (/acos router), 90+ skills, 38 agents, workflows
     ↓ (delegation)
-multi-harness-orchestrator → e.g. `claude -p "$(cat CLAUDE.md; cat SHARING.md) <task> — apply gstack + santa + repo-mastery" --cwd ...`
+multi-harness-orchestrator → e.g. `claude -p "$(cat CLAUDE.md; cat AGENTS.md) <task> — apply gstack + santa + repo-mastery" --cwd ...`
     ↓
 SIP substrate (Starlight Intelligence Protocol) + memory/MCP cross-repo
     ↓
@@ -68,7 +68,7 @@ Output with evidence (gstack screenshots, metrics, atomic commits, SIP attest)
 
 Grok strengths leveraged: real-time TUI, subagents (with persona/capability_mode/read-only/worktree/resume_from), MCP discovery (search_tool then use_tool), built-in gen (Imagine + video), strong native terminal/grep/edit.
 
-## Excellence Gates (Mandatory — God 99)
+## Excellence Gates (Mandatory — excellence standards)
 
 Before any edit, PR, ship, or structural rec:
 1. repo-mastery (inventory + read all rules files)
@@ -111,7 +111,7 @@ See adapters/grok/index.ts for parseGrokCommand, GROK_SKILL_MAPPINGS, processGro
 - `AGENTS.md`
 - `adapters/README.md` (parity table)
 - Global: `~/.claude/skills/grok-harness-adapter/SKILL.md` (detailed setup, delegation examples, MCP)
-- SIP / SHARING.md (partition rules; read first on cross)
+- SIP / AGENTS.md (partition rules; read first on cross)
 - `gstack` (all QA; injected for Grok)
 
 ## For ACOS Contributors
@@ -124,6 +124,6 @@ When enhancing harness:
 - Add tests/scripts if extending adapter.
 - Run excellence gates + gstack verification on changes.
 
-**Built on SIP v1.1.1** (starlightintelligence.org/protocol). 5-fleet. Small reversible. God 99.
+**Built on SIP v1.1.1** (starlightintelligence.org/protocol). 5-fleet. Small reversible. excellence standards.
 
-Frank DNA: premium, measurable, actionable, direct/technical/warm/playful. Use this harness for TUI speed + MCP depth on starlight work.
+CREATOR.md identity contract: premium, measurable, actionable, direct/technical/warm/playful. Use this harness for TUI speed + MCP depth on starlight work.

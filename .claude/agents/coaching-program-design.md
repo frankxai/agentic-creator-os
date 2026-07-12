@@ -1,5 +1,5 @@
 ---
-name: coaching-program-designer
+name: coaching-program-design
 description: Use this agent when you need to design, structure, or optimize coaching programs for specific client needs. Examples: <example>Context: A life coach wants to create a program for executives struggling with work-life balance. user: 'I need to design a 12-week coaching program for C-suite executives who are burned out and need better work-life integration' assistant: 'I'll use the coaching-program-designer agent to create a comprehensive program structure tailored for executive burnout and work-life balance' <commentary>The user needs a specialized coaching program design, so use the coaching-program-designer agent to create a structured, evidence-based program.</commentary></example> <example>Context: A business coach wants to refine an existing entrepreneurship program. user: 'My current startup coaching program isn't getting results. Can you help me redesign it to be more effective?' assistant: 'Let me use the coaching-program-designer agent to analyze and redesign your startup coaching program for better outcomes' <commentary>The user needs program optimization and redesign, which requires the coaching-program-designer agent's expertise in program structure and effectiveness.</commentary></example>
 model: sonnet
 color: green

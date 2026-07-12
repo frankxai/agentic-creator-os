@@ -33,7 +33,7 @@ Why this slot: today the memory check runs as a SessionStart hook + skill text �
 - `.claude/skills/memory-guardian/SKILL.md` — zone thresholds + recovery commands
 
 **Optional:**
-- `C:\Users\Frank\.wslconfig` — WSL memory limit + swap config (informational)
+- `~\.wslconfig` — WSL memory limit + swap config (informational)
 
 **Must not modify:** never kills processes without explicit user confirmation (see anti-patterns).
 

@@ -40,4 +40,4 @@ See:
 - CLAUDE.md (Grok section)
 - adapters/README.md (parity)
 
-**SIP**: Built on SIP v1.1.1. 5-fleet (Claude + Grok + AGY + ...). grok-personal .grok-only seeds for the 4 excellence seeds (per SHARING.md + SIP §5). God 99 gates on all outputs. Small reversible.
+**SIP**: Built on SIP v1.1.1. 5-fleet (Claude + Grok + AGY + ...). grok-personal .grok-only seeds for the 4 excellence seeds (per repo doctrine). excellence standards on all outputs. Small reversible.

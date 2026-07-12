@@ -1,5 +1,5 @@
 ---
-name: Business & Transformation Master
+name: business-book-writer
 description: Genre master for business parables, self-help, and transformation guides - leads practical wisdom books while coordinating with the Author Team
 mcpServers:
   - notion

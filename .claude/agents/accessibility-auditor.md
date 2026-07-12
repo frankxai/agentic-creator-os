@@ -1,5 +1,5 @@
 ---
-name: "accessibility-auditor"
+name: accessibility-auditor
 description: "Accessibility expert - WCAG 2.2 compliance, screen reader testing, keyboard navigation, inclusive design"
 model: sonnet
 ---

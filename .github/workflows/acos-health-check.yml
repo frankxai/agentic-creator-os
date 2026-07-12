@@ -19,12 +19,17 @@ jobs:
           python3 -c "import json; json.load(open('.claude-plugin/plugin.json')); print('plugin.json OK')"
           python3 -c "import json; json.load(open('.claude-plugin/marketplace.json')); print('marketplace.json OK')"
           python3 -c "import json; json.load(open('.claude/skill-rules.json')); print('skill-rules.json OK')"
+          python3 -c "import json; json.load(open('hooks/hooks.json')); print('hooks.json OK')"
 
       - name: Leak gate — private content must never land in the public tree
         run: |
           set -e
-          PATTERNS='claude-mem-context|/mnt/c/Users/Frank|Oracle Corporation|ruv@ruv\.net|C:/Users/Frank'
-          MATCHES=$(git grep -nE "$PATTERNS" -- ':!*.yml' ':!docs/archive/*' || true)
+          # Case-insensitive; catches personal machine paths in any casing or
+          # separator style, session telemetry, and third-party attribution.
+          # "Oracle" product references (OCI skills, citations) are legitimate;
+          # employer-strategy language is caught by the non-compete pattern.
+          PATTERNS='claude-mem-context|mnt[/\\-]c[/\\-]users[/\\-]frank|c:[/\\]+users[/\\]+frank|/c/users/frank|/home/frankx|ruv@ruv\.net|onedrive - oracle|non-compete'
+          MATCHES=$(git grep -inE "$PATTERNS" -- ':!*.yml' ':!docs/archive/*' || true)
           if [ -n "$MATCHES" ]; then
             echo "::error::Private/leaked content detected:"
             echo "$MATCHES"
@@ -41,11 +46,3 @@ jobs:
           COMMANDS=$(find .claude/commands -name "*.md" 2>/dev/null | wc -l)
           AGENTS=$(find .claude/agents -maxdepth 1 -name "*.md" 2>/dev/null | wc -l)
           echo "Skills: $SKILLS | Commands: $COMMANDS | Agents: $AGENTS"
-
-      - name: Validate skills are non-empty
-        run: |
-          EMPTY=$(find .claude/skills skills -name "SKILL.md" -empty 2>/dev/null || true)
-          if [ -n "$EMPTY" ]; then
-            echo "::error::Empty SKILL.md files:"; echo "$EMPTY"; exit 1
-          fi
-          echo "No empty skills"

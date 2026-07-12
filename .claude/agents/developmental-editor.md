@@ -1,5 +1,5 @@
 ---
-name: Developmental Editor
+name: developmental-editor
 description: Story structure expert, pacing master, and narrative architect who shapes manuscripts into compelling, well-paced journeys
 mcpServers:
   - notion

@@ -46,7 +46,7 @@ Always run the memory check before:
 
 ## WSL Configuration Reference
 - Host: 16GB RAM
-- WSL limit: 12GB (`C:\Users\Frank\.wslconfig`)
+- WSL limit: 12GB (`~\.wslconfig`)
 - Swap: 12GB
 - Per CC instance: ~500MB + ~100-150MB per MCP server
 - Safe concurrent CC instances: 4-5

@@ -17,9 +17,9 @@ agentic-creator-os/                  ← Claude Code PLUGIN root (see .claude-pl
 │   ├── hooks/                       ← Node hook scripts (telemetry-only)
 │   └── skill-rules.json             ← THE activation rules file (single source)
 ├── skills/                          ← curated public skill lane (also loaded)
-├── hooks/hooks.json                 ← plugin hook wiring (3 hooks)
+├── hooks/hooks.json                 ← plugin hook wiring (4 hooks)
 ├── content-hooks/                   ← marketing "attention hooks" KB (NOT lifecycle hooks)
-├── mcp-servers/                     ← 8 local MCP server packages (creator, evaluator, …)
+├── mcp-servers/                     ← 7 local MCP server packages (creator, evaluator, …)
 ├── adapters/                        ← grok / opencode platform adapters
 ├── instances/                       ← per-creator overlays (frankx = worked example)
 ├── workflows/                       ← YAML playbooks (docs for agents, no runtime)
@@ -35,7 +35,7 @@ agentic-creator-os/                  ← Claude Code PLUGIN root (see .claude-pl
 | Skills | Progressive disclosure: lean SKILL.md + `references/` | plugin `skills` paths + auto-activation |
 | Commands | Markdown workflows, no hidden code | plugin `commands` path, `/name` |
 | Agents | Frontmatter personas with explicit `tools` scoping | plugin `agents` path, Task tool |
-| Hooks | 3 Node scripts, telemetry-only | `hooks/hooks.json` via `${CLAUDE_PLUGIN_ROOT}` |
+| Hooks | 4 Node scripts, telemetry-only | `hooks/hooks.json` via `${CLAUDE_PLUGIN_ROOT}` |
 
 ## Auto-Activation Flow
 
@@ -67,8 +67,9 @@ alternatives. Swapping vendors touches zero skill content.
 
 - **gstack** — engineering sprint system; optional external install
 - **claude-flow** — swarm orchestration; removed in v12, install upstream
-- **Anthropic document skills** (docx/pptx/xlsx/pdf) — proprietary license;
-  install from Anthropic's own distribution
+- **Anthropic document skills** (docx/pptx/xlsx/pdf) — proprietary license,
+  removed; install from Anthropic's own distribution. (The Apache-2.0 Anthropic
+  skills remain vendored with their licenses — see CREDITS.md)
 - Attribution for absorbed *patterns* lives in CREDITS.md
 
 ## Truth Enforcement

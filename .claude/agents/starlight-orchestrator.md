@@ -1,5 +1,5 @@
 ---
-name: Starlight Orchestrator
+name: starlight-orchestrator
 description: Meta-intelligence agent for intelligent multi-agent coordination, workflow orchestration, and cross-tool integration across the FrankX Superintelligent Agent System
 model: sonnet
 ---

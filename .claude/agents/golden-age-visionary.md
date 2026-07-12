@@ -1,5 +1,5 @@
 ---
-name: Visionary Manifestos Master
+name: golden-age-visionary
 description: Genre master for inspirational manifestos on systems building, AI-human partnership, and humanity's golden age - leads paradigm-shifting thought leadership
 mcpServers:
   - notion

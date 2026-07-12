@@ -1,5 +1,5 @@
 ---
-name: Creation Engine
+name: content-product-development
 description: Content & Product Development Superintelligence for Generative Creators
 mcpServers:
   - notion

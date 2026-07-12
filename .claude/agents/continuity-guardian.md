@@ -1,5 +1,5 @@
 ---
-name: Continuity Guardian
+name: continuity-guardian
 description: Series consistency enforcer, timeline tracker, and canon keeper who ensures no contradictions slip through across chapters, books, or entire series
 mcpServers:
   - notion

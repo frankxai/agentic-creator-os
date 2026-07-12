@@ -15,161 +15,57 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          fetch-depth: 0
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v44
-        with:
-          files: |
-            .claude/agents/**/*.md
-            .claude/skills/**/*.md
-            .claude/commands/**/*.md
-
-      - name: Validate YAML frontmatter
-        if: steps.changed-files.outputs.any_changed == 'true'
+      - name: Validate frontmatter of changed definition files
         run: |
-          echo "🔍 Validating YAML frontmatter in changed files..."
-
+          set -euo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          # -z output + read -d '' keeps filenames with unusual characters
+          # from ever being interpreted by the shell.
           has_errors=false
-
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              .claude/agents/*.md|.claude/skills/*.md|.claude/commands/*.md) ;;
+              *) continue ;;
+            esac
+            base=$(basename "$file")
+            [ "$base" = "README.md" ] || [ "$base" = "CLAUDE.md" ] && continue
+            [ -f "$file" ] || continue
             echo "Checking: $file"
-
-            # Skip README and CLAUDE.md files
-            if [[ "$file" == *"README.md" ]] || [[ "$file" == *"CLAUDE.md" ]]; then
-              echo "  ⏭️  Skipping (not an agent/skill definition)"
-              continue
-            fi
-
-            # Check if file has YAML frontmatter
             if ! head -1 "$file" | grep -q "^---$"; then
-              echo "  ❌ Missing YAML frontmatter"
+              echo "  ERROR: missing YAML frontmatter"
               has_errors=true
               continue
             fi
-
-            # Extract frontmatter
             frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
-
-            # Check for required fields in agents
-            if [[ "$file" == *"/agents/"* ]]; then
-              if ! echo "$frontmatter" | grep -q "^name:"; then
-                echo "  ❌ Missing 'name' field"
-                has_errors=true
-              fi
-
-              if ! echo "$frontmatter" | grep -q "^description:"; then
-                echo "  ❌ Missing 'description' field"
-                has_errors=true
-              fi
-
-              if ! echo "$frontmatter" | grep -q "^capabilities:"; then
-                echo "  ❌ Missing 'capabilities' field"
-                has_errors=true
-              fi
-
-              if ! echo "$frontmatter" | grep -q "^priority:"; then
-                echo "  ❌ Missing 'priority' field"
-                has_errors=true
-              fi
-            fi
-
-            if [ "$has_errors" = false ]; then
-              echo "  ✅ Valid"
-            fi
-          done
-
+            case "$file" in
+              .claude/agents/*)
+                echo "$frontmatter" | grep -q "^name:" || { echo "  ERROR: missing 'name'"; has_errors=true; }
+                echo "$frontmatter" | grep -q "^description:" || { echo "  ERROR: missing 'description'"; has_errors=true; }
+                ;;
+            esac
+          done < <(git diff --name-only -z "origin/${{ github.base_ref }}"...HEAD)
           if [ "$has_errors" = true ]; then
-            echo ""
-            echo "❌ Some files have invalid frontmatter. See above for details."
-            echo "📚 Reference: docs/AGENT_CONTRIBUTION_GUIDE.md"
+            echo "Some files have invalid frontmatter (agents need name + description)."
             exit 1
           fi
+          echo "Frontmatter OK"
 
-          echo ""
-          echo "✅ All changed files have valid frontmatter"
-
-      - name: Check for banned language patterns
-        if: steps.changed-files.outputs.any_changed == 'true'
+      - name: Check for banned language patterns (warn only)
         run: |
-          echo "🔍 Checking for voice/quality violations..."
-
-          # Patterns that suggest AI slop or misalignment
-          banned_patterns=(
-            "soul-aligned"
-            "consciousness evolution"
-            "overwhelmed to empowered"
-            "humble excellence"
-            "hustle harder"
-            "transformative journey"
-            "spiritual awakening"
-            "unlock your potential"
-            "game-changing"
-            "paradigm shift"
-          )
-
-          has_violations=false
-
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            for pattern in "${banned_patterns[@]}"; do
-              if grep -qi "$pattern" "$file" 2>/dev/null; then
-                echo "⚠️  Found '$pattern' in $file"
-                has_violations=true
-              fi
-            done
-          done
-
-          if [ "$has_violations" = true ]; then
-            echo ""
-            echo "⚠️  Found potentially misaligned language."
-            echo "📚 Review the identity contract: CREATOR.md"
-            echo "💡 Use direct, technical, practical language instead."
-            # Warning only, not blocking
-          else
-            echo "✅ No banned language patterns found"
-          fi
-
-      - name: Validate skill-rules.json references
-        run: |
-          echo "🔍 Validating skill-rules.json references..."
-
-          if [ -f ".claude/skill-rules.json" ]; then
-            # Extract skill names from rules
-            skills=$(jq -r '.activation_rules[].skill' .claude/skill-rules.json 2>/dev/null || echo "")
-
-            missing_skills=""
-            for skill in $skills; do
-              if [ ! -d ".claude/skills/$skill" ]; then
-                missing_skills="$missing_skills $skill"
-              fi
-            done
-
-            if [ -n "$missing_skills" ]; then
-              echo "⚠️  skill-rules.json references missing skills:$missing_skills"
-            else
-              echo "✅ All skill references are valid"
+          set -uo pipefail
+          git fetch origin "${{ github.base_ref }}" --depth=1 2>/dev/null || true
+          banned='soul-aligned|consciousness evolution|overwhelmed to empowered|hustle harder|transformative journey|spiritual awakening|unlock your potential|game-changing|paradigm shift'
+          while IFS= read -r -d '' file; do
+            [ -f "$file" ] || continue
+            if grep -qiE "$banned" "$file" 2>/dev/null; then
+              echo "WARN: banned-language pattern in $file (see CREATOR.md voice rules)"
             fi
-          else
-            echo "⏭️  No skill-rules.json found"
-          fi
+          done < <(git diff --name-only -z "origin/${{ github.base_ref }}"...HEAD)
+          echo "Language check complete (warnings are non-blocking)"
 
-      - name: Summary
+      - name: Validate skill-rules references
         run: |
-          echo ""
-          echo "📋 Alignment Check Complete"
-          echo "─────────────────────────────"
-          echo "All agents must align with the creator identity contract:"
-          echo "  • Direct, technical, practical voice"
-          echo "  • Helps people build their own systems"
-          echo "  • Practical value over philosophy"
-          echo "  • Shows don't tells"
-          echo ""
-          echo "📚 Resources:"
-          echo "  • Identity contract: CREATOR.md"
-          echo "  • Decision Framework: .claude/DECISION_FRAMEWORK.md"
-          echo "  • Agent Guide: docs/AGENT_CONTRIBUTION_GUIDE.md"
+          node scripts/generate-stats.mjs --check

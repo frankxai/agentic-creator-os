@@ -23,7 +23,7 @@ npx skills add frankxai/creator-skills
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git ~/.acos
 cd ~/.acos && ./install.sh            # claude code
-./install.sh --platform=cursor        # or windsurf / gemini / grok / opencode
+./install.sh --platform=cursor        # or windsurf / gemini / grok
 ```
 
 ## First 5 Minutes

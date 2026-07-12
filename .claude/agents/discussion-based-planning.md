@@ -1,5 +1,5 @@
 ---
-name: "discussion-based-planning"
+name: discussion-based-planning
 description: "Strategic planning agent that prioritizes understanding and alignment before implementation"
 ---
 

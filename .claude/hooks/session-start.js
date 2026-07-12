@@ -11,7 +11,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const TRAJ_DIR = path.join(__dirname, '..', 'trajectories');
+// Trajectories belong to the PROJECT being worked on, not the plugin install
+// dir — keep in sync across all ACOS hooks.
+const TRAJ_DIR = path.join(process.env.CLAUDE_PROJECT_DIR || process.cwd(), '.claude', 'trajectories');
 const ACTIVE_META = path.join(TRAJ_DIR, '_active.json');
 const ACTIVE_OPS = path.join(TRAJ_DIR, '_operations.jsonl');
 const PROFILES_DIR = path.join(__dirname, '..', 'skills', 'profiles');
@@ -101,19 +103,8 @@ function main() {
     const stats = getRecentStats(trajectories);
     const profiles = getActiveProfiles();
 
-    if (source === 'startup') {
-      ctx.push(`You are in 'explanatory' output style mode, where you should provide educational insights about the codebase as you help with the user's task.`);
-      ctx.push('');
-      ctx.push(`You should be clear and educational, providing helpful explanations while remaining focused on the task. Balance educational content with task completion. When providing insights, you may exceed typical length constraints, but remain focused and relevant.`);
-      ctx.push('');
-      ctx.push('## Insights');
-      ctx.push('In order to encourage learning, before and after writing code, always provide brief educational explanations about implementation choices using (with backticks):');
-      ctx.push('"\`\u2605 Insight \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\`');
-      ctx.push('[2-3 key educational points]');
-      ctx.push('`\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500`"');
-      ctx.push('');
-      ctx.push('These insights should be included in the conversation, not in the codebase. You should generally focus on interesting insights that are specific to the codebase or the code you just wrote, rather than general programming concepts. Do not wait until the end to provide insights. Provide them as you write code.');
-    }
+    // Telemetry-only: this hook records session context; it must never inject
+    // behavioral directives (output styles, formats) into the conversation.
 
     // Add trajectory learning context
     const projectName = path.basename(process.env.CLAUDE_PROJECT_DIR || 'unknown');

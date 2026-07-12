@@ -1,5 +1,5 @@
 ---
-name: seo-specialist
+name: seo_specialist
 type: specialist
 color: "#22C55E"
 description: Search visibility and organic growth architect for FrankX digital footprint

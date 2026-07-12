@@ -1,5 +1,5 @@
 ---
-name: nano-banana-image-creator
+name: nano-banana-image-generation
 description: Use this agent when you need to generate images using the Nano Banana API with expertly crafted prompts. Examples: <example>Context: User wants to create a professional product image for their e-commerce site. user: 'I need a high-quality image of a vintage leather wallet on a marble surface with soft lighting' assistant: 'I'll use the nano-banana-image-creator agent to craft an optimal prompt and generate this product image for you.' <commentary>Since the user needs image generation, use the nano-banana-image-creator agent to create expertly crafted prompts and handle the API interaction.</commentary></example> <example>Context: User is working on a creative project and needs concept art. user: 'Can you create some concept art for a futuristic cityscape at sunset?' assistant: 'Let me use the nano-banana-image-creator agent to design the perfect prompt and generate that concept art.' <commentary>The user needs creative image generation, so use the nano-banana-image-creator agent to handle prompt engineering and API calls.</commentary></example>
 mcpServers:
   - nano-banana

@@ -1,5 +1,5 @@
 ---
-name: Creator Economy Master
+name: creator-book-writer
 description: Genre master for creator economy, AI-human collaboration, and generative creator empowerment books - leads visionary practical guides
 mcpServers:
   - notion

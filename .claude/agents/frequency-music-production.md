@@ -1,5 +1,5 @@
 ---
-name: frequency-music-producer
+name: frequency-music-production
 description: AI-powered music production specialist for professional tracks and commercial-quality output
 mcpServers:
   - lyric-genius

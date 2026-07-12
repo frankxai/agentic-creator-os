@@ -64,8 +64,8 @@ Why this slot: today /handover is a command; agents can't dispatch it. This agen
    If found, READ their content (don't just reference — the next agent may not look there).
 
 3. Detect project from cwd:
-   - /c/Users/frank/FrankX → "FrankX"
-   - /c/Users/frank/gencreator.ai → "GenCreator"
+   - ~/FrankX → "FrankX"
+   - ~/gencreator.ai → "GenCreator"
    - else basename of pwd
 
 4. Compose HANDOVER-<date>.md per the /handover command template:

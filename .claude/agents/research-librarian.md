@@ -1,5 +1,5 @@
 ---
-name: Research Librarian
+name: research-librarian
 description: Fact-checking specialist, source verification expert, and case study validator for ensuring book accuracy and credibility
 mcpServers:
   - notion

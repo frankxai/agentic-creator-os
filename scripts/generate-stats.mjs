@@ -78,7 +78,8 @@ for (const r of rules.activation_rules ?? []) {
 
 if (process.argv.includes('--check')) {
   const current = fs.existsSync(rel('STATS.md')) ? fs.readFileSync(rel('STATS.md'), 'utf-8') : '';
-  if (current !== md) errors.push('STATS.md is stale — run `node scripts/generate-stats.mjs` and commit');
+  const normalize = (s) => s.split('\r\n').join('\n');
+  if (normalize(current) !== md) errors.push('STATS.md is stale — run `node scripts/generate-stats.mjs` and commit');
   if (!agentsInSync) errors.push('plugin.json agents list is stale — run `node scripts/generate-stats.mjs` and commit');
   if (errors.length) {
     for (const e of errors) console.error(`FAIL: ${e}`);

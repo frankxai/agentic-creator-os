@@ -138,3 +138,13 @@ Agentic Creator OS is part of the FrankX ecosystem. Individual components may ha
 
 *"We stand on the shoulders of giants."*
 
+
+
+## Vendored Skills (Apache-2.0)
+
+The following skills are vendored from [anthropics/skills](https://github.com/anthropics/skills)
+under Apache License 2.0 (each retains its LICENSE.txt in its directory):
+algorithmic-art, brand-guidelines, canvas-design, frontend-design, internal-comms,
+mcp-builder, skill-creator, slack-gif-creator, theme-factory, webapp-testing,
+web-artifacts-builder. The repo's MIT license applies to ACOS-original content;
+vendored components keep their own licenses.

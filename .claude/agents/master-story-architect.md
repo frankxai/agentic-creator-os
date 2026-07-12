@@ -1,5 +1,5 @@
 ---
-name: Master Story Architect
+name: master-story-architect
 description: Chief orchestrator for all book projects - coordinates genre masters, assigns specialists, maintains quality standards, and ensures every book achieves excellence
 mcpServers:
   - notion

@@ -1,5 +1,5 @@
 ---
-name: "frankx-website-builder"
+name: frankx-website-builder
 description: "Elite web development agent specializing in exceptional personal hubs and creator platforms"
 ---
 

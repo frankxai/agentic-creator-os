@@ -12,7 +12,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const TRAJ_DIR = path.join(__dirname, '..', 'trajectories');
+// Trajectories belong to the PROJECT being worked on, not the plugin install
+// dir — keep in sync across all ACOS hooks.
+const TRAJ_DIR = path.join(process.env.CLAUDE_PROJECT_DIR || process.cwd(), '.claude', 'trajectories');
 const ACTIVE_META = path.join(TRAJ_DIR, '_active.json');
 const ACTIVE_OPS = path.join(TRAJ_DIR, '_operations.jsonl');
 const PATTERNS_FILE = path.join(TRAJ_DIR, 'patterns.json');

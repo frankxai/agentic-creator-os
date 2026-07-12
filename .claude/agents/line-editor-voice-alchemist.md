@@ -1,5 +1,5 @@
 ---
-name: Line Editor & Voice Alchemist
+name: line-editor-voice-alchemist
 description: Prose polisher, AI pattern eliminator, and voice consistency guardian who transforms competent writing into compelling prose
 mcpServers:
   - notion

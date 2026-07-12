@@ -1,5 +1,5 @@
 ---
-name: "weekly-recap"
+name: weekly-recap
 description: "Generate comprehensive weekly progress reports across all personal projects"
 ---
 
@@ -20,7 +20,7 @@ Scan all personal project repositories for the past week:
 - `~/AI Music Academy`
 - `~/UX Design`
 
-**Exclude**: `~/OneDrive` and any Oracle work directories
+**Exclude**: `~/OneDrive` and any employer-work directories
 
 For each repository:
 ```bash

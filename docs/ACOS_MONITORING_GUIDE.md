@@ -63,7 +63,7 @@ node scripts/acos-activity-monitor.mjs
 
 | Source | Path | What It Tracks |
 |--------|------|----------------|
-| Hook Log | `~/.claude/projects/-mnt-c-Users-Frank-FrankX/logs/hook-activity.jsonl` | Hook trigger events |
+| Hook Log | `~/.claude/projects/<project>/logs/hook-activity.jsonl` | Hook trigger events |
 | Trajectories | `.claude/trajectories/*.json` | Learning sessions, success rates |
 | Audit Log | `.claude-flow/audit.jsonl` | IAM violations, gate decisions |
 
@@ -146,7 +146,7 @@ bash scripts/sync-acos-repo.sh
 
 ```bash
 # Check hook activity log
-tail -f ~/.claude/projects/-mnt-c-Users-Frank-FrankX/logs/hook-activity.jsonl
+tail -f ~/.claude/projects/<project>/logs/hook-activity.jsonl
 
 # Expected output:
 {"timestamp":"2026-02-16T...","hook":"skill-activation","event":"UserPromptSubmit",...}
@@ -220,12 +220,12 @@ cat .claude/skills/profiles/frontend-designer.json
 **Fix:**
 ```bash
 # Verify data files exist
-ls -lh ~/.claude/projects/-mnt-c-Users-Frank-FrankX/logs/hook-activity.jsonl
+ls -lh ~/.claude/projects/<project>/logs/hook-activity.jsonl
 ls -lh .claude/trajectories/*.json
 ls -lh .claude-flow/audit.jsonl
 
 # If missing, create log directory
-mkdir -p ~/.claude/projects/-mnt-c-Users-Frank-FrankX/logs
+mkdir -p ~/.claude/projects/<project>/logs
 ```
 
 ---

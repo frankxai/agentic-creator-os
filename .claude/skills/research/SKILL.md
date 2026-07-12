@@ -1,3 +1,8 @@
+---
+name: research
+description: "Research Council — multi-agent research operations. Triggers: deep research, research this topic, intelligence gathering, source verification, competitive analysis."
+---
+
 # Research Intelligence System
 
 This skill provides the Research Council - a team of specialized AI agents for sophisticated research operations.

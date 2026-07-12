@@ -23,7 +23,7 @@ node scripts/acos-activity-monitor.mjs --watch
 
 ## Data Sources
 
-- Hook activity: `~/.claude/projects/-mnt-c-Users-Frank-FrankX/logs/hook-activity.jsonl`
+- Hook activity: `~/.claude/projects/<project>/logs/hook-activity.jsonl`
 - Trajectories: `.claude/trajectories/*.json`
 - Audit log: `.claude-flow/audit.jsonl`
 

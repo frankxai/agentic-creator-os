@@ -19,11 +19,11 @@ Quality bar for everything:
 ## Developer Certificate of Origin (DCO)
 
 All commits must be signed off (`git commit -s`), certifying the
-[Developer Certificate of Origin](https://developercertificate.org/):
-you wrote the contribution or have the right to submit it under the project's
-MIT license, and you grant the project maintainer the right to relicense or
-dual-license the contribution as part of the project's open-core model.
-PRs with unsigned commits will be asked to rebase.
+[Developer Certificate of Origin](https://developercertificate.org/): you wrote
+the contribution or have the right to submit it under the project's MIT
+license. Note that MIT permits anyone — including the maintainer — to
+sublicense and incorporate contributions into derivative works, including
+commercial ones. PRs with unsigned commits will be asked to rebase.
 
 ## Quick Start
 
@@ -82,4 +82,4 @@ heavyweight hooks will be declined.
 ## License
 
 By contributing you agree your contribution is licensed under the project's
-[MIT license](LICENSE), with the DCO relicensing grant described above.
+[MIT license](LICENSE).

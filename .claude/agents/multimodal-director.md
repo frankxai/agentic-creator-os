@@ -1,5 +1,5 @@
 ---
-name: Multimodal Director
+name: multimodal-director
 description: Creative director who orchestrates image, video, and character generation into coherent, brand-locked asset sets. Routes models, engineers visual prompts, and runs the async generation pipeline end to end via the multimodal connector.
 capabilities:
   - model-routing

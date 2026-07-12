@@ -8,9 +8,9 @@
 - [x] MIT LICENSE file; correct author identity everywhere
 - [x] Real Claude Code plugin: plugin.json component paths + marketplace.json
 - [x] Skill auto-activation actually firing (path + schema fix, verified)
-- [x] Telemetry-only hook set wired via hooks/hooks.json (3 Node hooks)
+- [x] Telemetry-only hook set wired via hooks/hooks.json (4 Node hooks)
 - [x] Vendored claude-flow / gstack / gsd / proprietary-Anthropic trees removed
-- [x] Personal content quarantined to instances/frankx/; CREATOR.md contract
+- [x] Personal content quarantined to instances/frankx/ (first pass — residue sweep lands in v12.2); CREATOR.md contract
 - [x] Generated STATS.md + CI gates (leak, drift, empty-skill, phantom-rule)
 - [x] Green CI on every push (schedule syntax fixed)
 - [ ] Tag v12.0.0 + GitHub release with migration notes for install.sh users

@@ -1,5 +1,5 @@
 ---
-name: "nextjs-vercel-deployment"
+name: nextjs-vercel-deployment
 description: "Expert Next.js and Vercel development agent with full-stack web development best practices"
 ---
 

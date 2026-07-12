@@ -31,7 +31,7 @@
 npx skills add frankxai/creator-skills
 ```
 
-**Full control** (all platforms, generates context files for Grok Build, Cursor, Windsurf, OpenCode):
+**Full control** (all platforms, generates context files for Grok Build, Cursor, Windsurf, Gemini):
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git && cd agentic-creator-os && ./install.sh
@@ -40,7 +40,7 @@ git clone https://github.com/frankxai/agentic-creator-os.git && cd agentic-creat
 ## What You Get
 
 Exact counts are generated from source in [STATS.md](STATS.md) — roughly 100
-skills, ~70 command workflows, ~65 agents, and 3 wired telemetry hooks.
+skills, ~70 command workflows, ~60 agents, and 4 wired telemetry hooks.
 
 ```
 You: "write a blog post about AI agents with a hero image"
@@ -55,7 +55,7 @@ You: "write a blog post about AI agents with a hero image"
 | **Skills** | Domain knowledge that loads automatically via `.claude/skill-rules.json` |
 | **Commands** | Slash workflows: `/studio`, `/article-creator`, `/create-music`, `/factory`, … |
 | **Agents** | Specialist personas: writers, editors, strategists, a multimodal director |
-| **Hooks** | Telemetry-only: skill activation, post-tool tracking, session finalize |
+| **Hooks** | Telemetry-only: session context, skill activation, post-tool tracking, session finalize |
 
 ## Flagship: Multimodal Studio
 
@@ -78,8 +78,9 @@ Other production lanes: **music** (`/create-music` — Suno pipeline),
 
 ACOS agents inherit *your* voice from [CREATOR.md](CREATOR.md) — a fill-in
 identity contract covering voice, mission, quality bar, and hard constraints.
-Nothing about the original author is baked into the core;
-`instances/frankx/CREATOR.md` ships only as a worked example.
+The core is identity-neutral by contract; `instances/frankx/` holds the worked
+example (remaining author-specific residue in core skills is tracked for
+removal in [v12.2](docs/ROADMAP.md)).
 
 ## Architecture
 

@@ -50,9 +50,10 @@ skill, add its rule there and run `node scripts/generate-stats.mjs`.
 
 ## Hooks — Telemetry Only
 
-Three Node hooks are wired via `hooks/hooks.json` (plugin format,
-`${CLAUDE_PLUGIN_ROOT}` resolution): skill activation (UserPromptSubmit),
-post-tool tracking (PostToolUse on Write|Edit), session finalize (Stop). Hooks
+Four Node hooks are wired via `hooks/hooks.json` (plugin format,
+`${CLAUDE_PLUGIN_ROOT}` resolution): session context (SessionStart), skill
+activation (UserPromptSubmit), post-tool tracking (PostToolUse on
+Write|Edit|Bash), session finalize (Stop). Hooks
 must stay **fast, cross-platform (Node, not bash), and telemetry-only** — no
 long-running quality gates, no network calls, no formatter/linter enforcement
 in hooks. Heavy work belongs in commands, scripts, or CI.

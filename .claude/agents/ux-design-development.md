@@ -1,5 +1,5 @@
 ---
-name: UX Designer
+name: ux-design-development
 description: UI/UX design specialist with Figma and browser testing expertise
 mcpServers:
   - figma-remote-mcp
