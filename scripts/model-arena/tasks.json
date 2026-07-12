@@ -1,0 +1,120 @@
+{
+  "_description": "Evolving task bank for the Model Arena. Tasks are meaningful (real capability axes, not trivia), mostly self-verifying (mechanical checks over LLM judgment), and EVOLVING: when the whole field passes a task across ≥2 rounds it is marked `saturated` and rotated out, and the runner emits a 'harden this axis' suggestion. New tasks enter with state `active`.",
+  "_verifier_contract": "The runner executes `verifier` mechanically against the model's final text. Types: exact | contains | not_contains | regex | word_count | json_schema | numeric | judge. `judge` tasks are scored by the cross-family blind judge in the workflow layer, not the pure script.",
+  "_learning_loop": "state: active → saturated (all-active-models pass rate ≥ 0.95 for ≥2 consecutive rounds) → retired (manual). `history` accumulates {date, passRate} per round. `version` bumps when the prompt is hardened.",
+  "_updated": "2026-07-12",
+  "saturation_threshold": 0.95,
+  "saturation_rounds": 2,
+  "tasks": [
+    {
+      "id": "reasoning-lcm-not-divisible",
+      "axis": "reasoning-no-tools",
+      "difficulty": "medium",
+      "state": "active",
+      "version": 1,
+      "prompt": "Find the smallest positive integer divisible by every integer from 1 to 7 but NOT divisible by 8. Reply with ONLY the number, nothing else.",
+      "verifier": {
+        "type": "numeric",
+        "expected": 420
+      },
+      "caveat": "Ground truth fixed by harness (LCM(1..7)=420, not divisible by 8).",
+      "history": []
+    },
+    {
+      "id": "grounding-not-stated",
+      "axis": "grounding-hallucination",
+      "difficulty": "medium",
+      "state": "active",
+      "version": 1,
+      "prompt": "Context: 'The Starlight runner dispatches tasks to models via a gateway and writes a JSON receipt per round.' Question: What retry policy does the runner use on a gateway timeout? Answer in one short sentence. If the context does not state it, say exactly: not stated.",
+      "verifier": {
+        "type": "contains",
+        "expected": "not stated",
+        "case_insensitive": true
+      },
+      "caveat": "Honest answer is 'not stated' — the context is silent on retries. Fabricating a policy fails.",
+      "history": []
+    },
+    {
+      "id": "compliance-five-words",
+      "axis": "instruction-compliance",
+      "difficulty": "easy",
+      "state": "active",
+      "version": 1,
+      "prompt": "Describe a compiler in exactly five words, all lowercase, no punctuation of any kind. Output only those five words.",
+      "verifier": {
+        "type": "word_count",
+        "count": 5,
+        "lowercase": true,
+        "no_punct": true
+      },
+      "caveat": "Pure mechanical constraint check — the axis the public arena found most discriminating.",
+      "history": []
+    },
+    {
+      "id": "constraint-json-schema",
+      "axis": "structured-output",
+      "difficulty": "medium",
+      "state": "active",
+      "version": 1,
+      "prompt": "Output ONLY a raw JSON object (no code fences, no prose) matching: {\"name\": string, \"tags\": string[]}. Rules: exactly 3 tags; every string value entirely lowercase; no preamble or trailing text.",
+      "verifier": {
+        "type": "json_schema",
+        "required": [
+          "name",
+          "tags"
+        ],
+        "constraints": {
+          "tags_length": 3,
+          "all_strings_lowercase": true,
+          "no_extra_prose": true
+        }
+      },
+      "caveat": "Parses the first JSON object in the reply; fails on capitalized values, wrong tag count, or conversational leak around it.",
+      "history": []
+    },
+    {
+      "id": "reasoning-output-prediction",
+      "axis": "code-reasoning",
+      "difficulty": "medium",
+      "state": "active",
+      "version": 1,
+      "prompt": "Given this function: `def f(n): return sum(1 for i in range(2, n) if n % i == 0)`. What does f(12) return? Reply with ONLY the integer.",
+      "verifier": {
+        "type": "numeric",
+        "expected": 4
+      },
+      "caveat": "Ground truth: divisors of 12 in range(2,12) are 2,3,4,6 → 4. Tests code tracing without a tool.",
+      "history": []
+    },
+    {
+      "id": "longcontext-planted-fact",
+      "axis": "long-context-fidelity",
+      "difficulty": "medium",
+      "state": "active",
+      "version": 1,
+      "prompt": "The following log has one line that contradicts the others. Lines: 'build ok', 'tests ok', 'deploy ok', 'lint FAILED with 3 errors', 'ship ok'. Which single line reports a failure? Reply with ONLY that exact line text.",
+      "verifier": {
+        "type": "contains",
+        "expected": "lint FAILED with 3 errors",
+        "case_insensitive": false
+      },
+      "caveat": "Needle-in-context: must return the one failing line verbatim, not summarize.",
+      "history": []
+    },
+    {
+      "id": "judgment-brand-voice",
+      "axis": "judgment-craft",
+      "difficulty": "hard",
+      "state": "active",
+      "version": 1,
+      "prompt": "Rewrite this AI-slop sentence in a direct, technical, results-first voice with zero hype words (no 'unlock', 'seamless', 'supercharge', 'delve', 'elevate'): 'Our seamless AI platform unlocks transformative synergies to supercharge your workflow.' Keep it under 25 words.",
+      "verifier": {
+        "type": "judge",
+        "rubric": "Scored blind by cross-family judge on: hype-word removal (mechanical pre-check bans the 5 words), concreteness, and whether it says something real rather than nothing. Under-25-words enforced mechanically before judging."
+      },
+      "caveat": "Half-mechanical: the 5 banned words are checked by script; taste is judged blind. Kept ≤ half the card per arena task-design rules.",
+      "history": []
+    }
+  ]
+}
