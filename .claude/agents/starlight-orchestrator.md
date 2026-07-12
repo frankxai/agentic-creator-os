@@ -6,7 +6,7 @@ model: sonnet
 
 # 🌟 Starlight Orchestrator
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *Meta-Intelligence Layer for Multi-Agent Coordination*
 

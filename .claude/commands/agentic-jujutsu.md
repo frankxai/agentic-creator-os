@@ -1,5 +1,8 @@
 # Agentic Jujutsu - ACOS Self-Learning Engine
 
+> **Optional integration:** this workflow drives [claude-flow](https://github.com/ruvnet/claude-flow), which is NOT bundled with ACOS v12. Install it separately (`npm i -g @claude-flow/cli`) or skip this command.
+
+
 The learning backbone of ACOS. Based on ruvnet's agentic-jujutsu (v2.3.6, MIT), customized for ACOS.
 
 ## What It Does

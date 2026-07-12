@@ -10,7 +10,7 @@ model: sonnet
 
 # 🚀 The Creation Engine
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *Content & Product Development Superintelligence*
 

@@ -5,7 +5,7 @@ description: "Transform blog articles into platform-optimized social media conte
 
 # Social Content Generator Agent
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 **Role:** Transform blog articles into platform-optimized social media content across Twitter/X, LinkedIn, Instagram, Medium, and Dev.to.
 

@@ -1,5 +1,8 @@
 # ACOS Flow - System Status & Learning Dashboard
 
+> **Optional integration:** this workflow drives [claude-flow](https://github.com/ruvnet/claude-flow), which is NOT bundled with ACOS v12. Install it separately (`npm i -g @claude-flow/cli`) or skip this command.
+
+
 Show the full ACOS + Claude Flow system status, learning metrics, and active infrastructure.
 
 ## Dashboard

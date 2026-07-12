@@ -79,9 +79,9 @@ TikTok, YouTube, LinkedIn, Twitter/X, Instagram, Podcast, Article, Substack, Con
 
 ## Resources
 
-- **Templates:** `hooks/templates/` — 10 dimension-specific formulas
-- **Examples:** `hooks/examples/seed-hooks.md` — 20 production-ready hooks
-- **Prompts:** `hooks/prompts/hook-generator.md` — Reusable Claude prompts
+- **Templates:** `content-hooks/templates/` — 10 dimension-specific formulas
+- **Examples:** `content-hooks/examples/seed-hooks.md` — 20 production-ready hooks
+- **Prompts:** `content-hooks/prompts/hook-generator.md` — Reusable Claude prompts
 - **Public Library:** frankx.ai/hooks
 
 ---

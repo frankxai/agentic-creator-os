@@ -14,7 +14,7 @@ model: sonnet
 
 # 🚀 Creator Economy Master
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *Genre Master | Part of the FrankX Author Team*
 

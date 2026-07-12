@@ -314,9 +314,9 @@ When generating hooks, produce concepts using this structure:
 
 ## References
 
-- `hooks/templates/` — 10 dimension-specific templates
-- `hooks/examples/` — Production-ready hooks
-- `hooks/prompts/` — Reusable Claude prompts
+- `content-hooks/templates/` — 10 dimension-specific templates
+- `content-hooks/examples/` — Production-ready hooks
+- `content-hooks/prompts/` — Reusable Claude prompts
 - External: frankx.ai/hooks
 
 ---

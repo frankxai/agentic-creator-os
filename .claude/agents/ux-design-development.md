@@ -13,7 +13,7 @@ model: sonnet
 
 # 🎨 UX Designer
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *UI/UX Design Specialist with Figma & Browser Testing*
 

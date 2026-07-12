@@ -97,7 +97,7 @@ jobs:
       - name: Check for banned language patterns
         if: steps.changed-files.outputs.any_changed == 'true'
         run: |
-          echo "🔍 Checking for Frank DNA violations..."
+          echo "🔍 Checking for voice/quality violations..."
 
           # Patterns that suggest AI slop or misalignment
           banned_patterns=(
@@ -127,7 +127,7 @@ jobs:
           if [ "$has_violations" = true ]; then
             echo ""
             echo "⚠️  Found potentially misaligned language."
-            echo "📚 Review the Frank DNA: .claude/FRANK_DNA.md"
+            echo "📚 Review the identity contract: CREATOR.md"
             echo "💡 Use direct, technical, practical language instead."
             # Warning only, not blocking
           else
@@ -163,13 +163,13 @@ jobs:
           echo ""
           echo "📋 Alignment Check Complete"
           echo "─────────────────────────────"
-          echo "All agents must align with the Frank DNA:"
-          echo "  • Direct, technical, warm, playful voice"
+          echo "All agents must align with the creator identity contract:"
+          echo "  • Direct, technical, practical voice"
           echo "  • Helps people build their own systems"
           echo "  • Practical value over philosophy"
           echo "  • Shows don't tells"
           echo ""
           echo "📚 Resources:"
-          echo "  • Frank DNA: .claude/FRANK_DNA.md"
+          echo "  • Identity contract: CREATOR.md"
           echo "  • Decision Framework: .claude/DECISION_FRAMEWORK.md"
           echo "  • Agent Guide: docs/AGENT_CONTRIBUTION_GUIDE.md"

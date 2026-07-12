@@ -13,7 +13,7 @@ model: opus
 
 # Master Story Architect
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *Chief Orchestrator of the FrankX Author Team*
 

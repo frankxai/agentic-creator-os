@@ -1,6 +1,6 @@
 # Agent & Skill Contribution Guide
 
-This guide walks you through creating new agents and skills for ACOS. All contributions must align with the [Frank DNA](../.claude/FRANK_DNA.md).
+This guide walks you through creating new agents and skills for ACOS. All contributions must align with the [Frank DNA](../CREATOR.md).
 
 ## Quick Reference
 
@@ -285,7 +285,7 @@ See: `.claude/agents/templates/implementer-sparc-coder.md`
 
 - Open a [Discussion](https://github.com/frankxai/agentic-creator-os/discussions)
 - Check the [Agent Registry](AGENT_REGISTRY.md) for existing patterns
-- Review the [Frank DNA](../.claude/FRANK_DNA.md) for alignment guidance
+- Review the [Frank DNA](../CREATOR.md) for alignment guidance
 
 ---
 

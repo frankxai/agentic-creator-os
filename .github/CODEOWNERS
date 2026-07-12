@@ -7,12 +7,12 @@
 
 # Core ACOS system — requires careful review
 .claude/ @frankxai
-.claude/FRANK_DNA.md @frankxai
+CREATOR.md @frankxai
 .claude/DECISION_FRAMEWORK.md @frankxai
 .claude/agent-iam.json @frankxai
 .claude/skill-rules.json @frankxai
 .claude/settings.json @frankxai
-.claude/hooks.json @frankxai
+hooks/hooks.json @frankxai
 
 # Agents — high impact changes
 .claude/agents/ @frankxai

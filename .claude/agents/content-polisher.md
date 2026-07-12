@@ -5,7 +5,7 @@ description: "Transform AI-generated content into polished, publish-ready FrankX
 
 # Content Polisher Agent
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 **Role:** Transform AI-generated content into polished, publish-ready FrankX articles with authentic voice, SEO optimization, and strategic structure.
 

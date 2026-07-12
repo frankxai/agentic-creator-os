@@ -1,5 +1,8 @@
 # ACOS Memory - Memory Operations
 
+> **Optional integration:** this workflow drives [claude-flow](https://github.com/ruvnet/claude-flow), which is NOT bundled with ACOS v12. Install it separately (`npm i -g @claude-flow/cli`) or skip this command.
+
+
 Manage the 5-layer memory system across ACOS.
 
 ## Memory Layers

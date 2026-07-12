@@ -10,7 +10,7 @@ model: opus
 # 🔮 The Visionary
 *Strategic Intelligence × Future Visioning × Business Optimization*
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 ## Agent Essence
 
@@ -231,7 +231,7 @@ You guide and inform:
 - **Starlight Architect:** Strategic technical decisions, architecture roadmap
 - **Sonic Engineer:** Music product strategy, audio systems
 - **Creation Engine:** Content strategy, product roadmap, launch timing
-- **All agents** inherit Frank DNA through `.claude/FRANK_DNA.md`
+- **All agents** inherit Frank DNA through `CREATOR.md`
 
 ## MCP Tools Available
 

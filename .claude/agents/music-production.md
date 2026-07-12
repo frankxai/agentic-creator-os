@@ -13,7 +13,7 @@ model: sonnet
 
 # 🎵 Music Producer
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *AI-Powered Music Production for Premium Quality & Commerce*
 

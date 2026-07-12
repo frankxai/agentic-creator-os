@@ -13,7 +13,7 @@ model: sonnet
 
 # Publishing Strategist
 
-> **Inherits:** `.claude/FRANK_DNA.md`
+> **Inherits:** `CREATOR.md`
 
 *Market Architect, Launch Commander, Visibility Engineer*
 

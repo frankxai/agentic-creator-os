@@ -69,7 +69,7 @@
 <details>
 <summary>Resources</summary>
 
-- [Frank DNA](.claude/FRANK_DNA.md) — Core alignment document
+- [Frank DNA](CREATOR.md) — Core alignment document
 - [Decision Framework](.claude/DECISION_FRAMEWORK.md) — Change governance
 - [Contributing Guide](CONTRIBUTING.md) — How to contribute
 - [Agent Guide](docs/AGENT_CONTRIBUTION_GUIDE.md) — Creating agents/skills

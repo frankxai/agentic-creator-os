@@ -501,7 +501,7 @@ description: Automatically detect tasks suited for delegation to other agent har
 ## Detection + Delegation
 - Scan task for best harness (plan/eng/design heavy → claude; quick terminal → grok native).
 - Always inject: read CLAUDE.md/AGENTS.md/SHARING.md/SIP.md first (deeper wins per DNA).
-- Output ready-to-paste: e.g. \`claude -p "$(cat .claude/FRANK_DNA.md; cat CLAUDE.md) <task> — apply repo-mastery + excellence gates + gstack if web"\`
+- Output ready-to-paste: e.g. \`claude -p "$(cat CREATOR.md; cat CLAUDE.md) <task> — apply repo-mastery + excellence gates + gstack if web"\`
 - Filter: grok-personal excellence seeds only here; delegate core/shared to junctions.
 
 Embody God 99. Use with repo-mastery + excellence-review + harness-integration.
