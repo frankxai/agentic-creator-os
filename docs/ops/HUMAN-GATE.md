@@ -86,8 +86,6 @@ Universal missing primitive across hosted-agent vendors. From the 2026-06-02 evi
 
 > "The pattern everyone wants and nobody has shipped: platform-native `await human.approve(context)` that suspends mid-run with zero token consumption, surfaces a rich approval card, and resumes from exact checkpoint."
 
-Marketing line: **"The first workflow system with native HITL gates."** Defensibility for the €1000 tier.
-
 ## Future work (Phase 2)
 
 - `/admin/workflow-gates` Next.js page — visual approval card with diff preview, one-click approve/reject

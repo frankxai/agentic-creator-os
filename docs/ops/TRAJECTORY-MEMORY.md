@@ -1,6 +1,6 @@
 # Trajectory Memory Substrate
 
-Every workflow run learns from prior runs. The lock-in mechanism that turns "schema-validated cron" into "workflow system that compounds." Pattern from Karpathy AutoResearch (`results.tsv` ratchet loop) + IBM Research (arxiv 2603.10600 — trajectory-informed memory generation).
+Every workflow run learns from prior runs, so repeated failure modes get avoided instead of repeated. Pattern from Karpathy AutoResearch (`results.tsv` ratchet loop) + IBM Research (arxiv 2603.10600 — trajectory-informed memory generation).
 
 ## How it works
 
@@ -76,8 +76,6 @@ await agent(
 From the 2026-06-02 evidence briefing:
 
 > "Each workflow run is amnesic. The IBM Research pattern (extract actionable learnings from traces → persistent memory → agents avoid repeated failure modes) is exactly what `hook-learn` hints at but doesn't yet do for workflows."
-
-> "Without it: buyers churn month 2 because the product doesn't get smarter. With it: every run compounds — the lock-in mechanism."
 
 ## Future work
 

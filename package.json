@@ -1,14 +1,14 @@
 {
   "name": "@frankx/agentic-creator-os",
-  "version": "11.0.0",
-  "description": "The Operating System for AI-Powered Creators — 90+ skills, 65+ commands, 38 agents, 8 plugins. Full support for Claude Code, Grok Build (CLI/TUI via grok-harness-adapter), Cursor, Windsurf, Gemini, Antigravity. Built on SIP.",
-  "author": "Frank Guzman <frank@frankx.ai>",
+  "version": "12.0.0",
+  "description": "Agentic Creator OS — the open-source operating system for AI-powered creators. Skills, commands, agents, and hooks for content, video, music, visual, and brand workflows across Claude Code and other AI coding agents.",
+  "author": "Frank Riemer <frank@frankx.ai>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/frankxai/agentic-creator-os"
   },
-  "homepage": "https://frankx.ai/products/agentic-creator-os",
+  "homepage": "https://frankx.ai/acos",
   "bugs": {
     "url": "https://github.com/frankxai/agentic-creator-os/issues"
   },

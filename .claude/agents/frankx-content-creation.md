@@ -6,9 +6,6 @@ mcpServers:
   - slack
   - nano-banana
   - lyric-genius
-workingDirectories:
-  - /mnt/c/Users/Frank/OneDrive - Oracle Corporation/AICoE Customer Projects - Franks Focus/FrankX
-  - /mnt/c/Users/Frank/AI Music Academy
 model: sonnet
 ---
 

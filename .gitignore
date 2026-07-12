@@ -47,3 +47,8 @@ temp/
 # Per-project generated Grok harness seeds (install.sh --platform=grok)
 .grok/
 
+
+# Private/local state — never commit
+.swarm/
+docs/CODING_AGENTS_REGISTRY.md
+*.session.md
