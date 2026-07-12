@@ -1,131 +1,85 @@
 # Contributing to Agentic Creator OS
 
-Thanks for your interest in contributing to ACOS! This guide will help you get started.
+Thanks for your interest in contributing to ACOS!
 
-## The Frank DNA
+## Ground Rules
 
-**Every contribution must align with the Frank DNA.** Before you start:
+ACOS is a **shared substrate for any creator** — contributions must stay
+generic. The creator identity layer is [CREATOR.md](CREATOR.md); never hardcode
+a specific person's voice, brand, paths, or accounts into core skills, commands,
+or agents. Personal configurations belong in `instances/<name>/`.
 
-```
-Frank = Systems Architect × Composer × Gamer × Builder × GenCreator
-```
+Quality bar for everything:
 
-- **The Vibe:** Cool, ultra high status, premium quality, high intellect, purpose-driven, FUN.
-- **The Mission:** Build abundance. Help a ton of people. Have a great time doing it.
-- **The Voice:** Direct. Technical. Warm. Playful.
-- **The Test:** Does this help someone build their own system, not just use someone else's?
+1. Does this help someone build their own system?
+2. Is it practical over philosophical?
+3. Would you be proud to ship it?
+4. Can every claim survive "what does that mean, specifically?"
 
-Read the full spec: [.claude/FRANK_DNA.md](.claude/FRANK_DNA.md)
+## Developer Certificate of Origin (DCO)
+
+All commits must be signed off (`git commit -s`), certifying the
+[Developer Certificate of Origin](https://developercertificate.org/):
+you wrote the contribution or have the right to submit it under the project's
+MIT license, and you grant the project maintainer the right to relicense or
+dual-license the contribution as part of the project's open-core model.
+PRs with unsigned commits will be asked to rebase.
 
 ## Quick Start
 
 ```bash
-# 1. Fork the repository
-gh repo fork frankxai/agentic-creator-os
-
-# 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/agentic-creator-os.git
+gh repo fork frankxai/agentic-creator-os --clone
 cd agentic-creator-os
-
-# 3. Install dependencies
-npm install
-
-# 4. Create a feature branch
 git checkout -b feature/your-feature-name
-
-# 5. Make your changes
-# ...
-
-# 6. Run validation
-npm run build
-npm run lint
-
-# 7. Commit with clear message
-git commit -m "Add: description of what you added"
-
-# 8. Push and create PR
-git push origin feature/your-feature-name
+# make changes…
+node scripts/generate-stats.mjs          # refresh generated stats
+node scripts/generate-stats.mjs --check  # run the CI gates locally
+git commit -s -m "Add: what you added"
 gh pr create
 ```
 
-## What Can I Contribute?
+## What to Contribute
 
-### High Value
+**High value**: new creator-lane skills (with `references/` packs), new
+specialist agents, bug fixes, documentation with real examples,
+cross-platform support (Cursor, Windsurf, Gemini, Grok adapters).
 
-- **New Skills** — Domain expertise modules (see [docs/AGENT_CONTRIBUTION_GUIDE.md](docs/AGENT_CONTRIBUTION_GUIDE.md))
-- **New Agents** — Specialized cognitive patterns
-- **Bug Fixes** — Issues labeled `bug`
-- **Documentation** — Especially examples and clarifications
+**Discuss first** (open an issue): architecture changes, new top-level
+directories, changes to hooks or CI gates.
 
-### Medium Value
+## Adding a Skill
 
-- **Skill Improvements** — Enhance existing skills
-- **Workflow Optimizations** — Better CI/CD, faster builds
-- **Cross-Platform Support** — Cursor, Windsurf, Gemini adapters
+1. `skills/<name>/SKILL.md` or `.claude/skills/<name>/SKILL.md` with YAML
+   frontmatter: `name` + `description` including trigger phrases
+2. Keep SKILL.md under ~3K words; deep content goes in `references/`
+3. Add an activation rule to `.claude/skill-rules.json` if it should auto-load
+4. Run `node scripts/generate-stats.mjs` and commit the updated STATS.md
 
-### Lower Priority
+## Adding an Agent
 
-- **Refactoring** — Unless fixing a specific problem
-- **Architecture Changes** — Require discussion first
+1. `.claude/agents/<slug>.md` — kebab-case `name`, clear `description`
+   (when to invoke), explicit `tools` list (least privilege)
+2. No personal paths, no external-system dependencies that aren't declared
 
-## Commit Style
+## Hooks Doctrine
 
-Use clear, action-oriented commit messages:
-
-```
-Add: new suno-mastery skill for music production
-Fix: skill-rules.json not loading on Windows
-Update: README with v11 features
-Remove: deprecated legacy commands
-```
-
-## Pull Request Process
-
-1. **Fill out the PR template** — It includes the Frank DNA alignment checklist
-2. **Keep PRs focused** — One feature or fix per PR
-3. **Test your changes** — Run locally before submitting
-4. **Respond to feedback** — Reviews are collaborative, not adversarial
-
-## For Structural Changes
-
-If your change affects architecture, URLs, routes, or configuration, you **must** complete the structural change checklist in the PR template. See [.claude/DECISION_FRAMEWORK.md](.claude/DECISION_FRAMEWORK.md).
-
-**The Frank Test** (ask yourself):
-
-1. Does this help someone build their own system?
-2. Is it practical over philosophical?
-3. Would I be proud to ship this?
-4. Is it fun to use?
-
-## Adding Agents or Skills
-
-See the dedicated guide: [docs/AGENT_CONTRIBUTION_GUIDE.md](docs/AGENT_CONTRIBUTION_GUIDE.md)
-
-Quick checklist:
-
-- [ ] YAML frontmatter with name, type, capabilities
-- [ ] Aligns with Frank DNA (voice, mission, vibe)
-- [ ] Respects agent-iam.json boundaries
-- [ ] Follows existing patterns in `.claude/agents/templates/`
-- [ ] Includes activation triggers for skills
+Hooks are telemetry-only: fast, Node-based, cross-platform, no network calls,
+no quality gates. Heavy work belongs in commands, scripts, or CI. PRs adding
+heavyweight hooks will be declined.
 
 ## Code Standards
 
-- **TypeScript** — Use types, avoid `any`
-- **No Comments** — Unless explaining non-obvious WHY
-- **No AI Slop** — Avoid vague language, unmeasurable claims
-- **Test Edge Cases** — Not just the happy path
+- **TypeScript/JS** — use types, avoid `any`
+- **Comments** — only for non-obvious WHY
+- **No AI slop** — no vague language or unmeasurable claims
+- **Commit style** — `Add:` / `Fix:` / `Update:` / `Remove:` prefixes
 
 ## Getting Help
 
-- **Issues** — For bugs and feature requests
-- **Discussions** — For questions and ideas
-- **Slack** — #agentic-creator-os channel
+- **Issues** — bugs and feature requests
+- **Discussions** — questions and ideas
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the same license as the project.
-
----
-
-*"Build your system, not someone else's."* — Frank DNA
+By contributing you agree your contribution is licensed under the project's
+[MIT license](LICENSE), with the DCO relicensing grant described above.

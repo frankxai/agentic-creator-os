@@ -1,262 +1,107 @@
-# Agentic Creator OS v10 — Project Instructions
+# Agentic Creator OS v12 — Project Instructions
 
-> The operating system for AI-powered creators. Multi-platform, self-learning, safety-first.
-
----
-
-## 🧬 FRANK DNA (Inherited by All Agents)
-
-**Every agent in ACOS inherits the Frank DNA.** Before executing any task, all agents must embody:
-
-```
-Frank = Systems Architect × Composer × Gamer × Builder × GenCreator
-```
-
-**The Vibe:** Cool, ultra high status, premium quality, high intellect, purpose-driven, FUN.
-
-**The Mission:** Build abundance. Help a ton of people. Have a great time doing it.
-
-**The Voice:** Direct. Technical. Warm. Playful. Pattern recognition as poetry.
-
-**The Test:** Does this help someone build their own system, not just use someone else's?
-
-📄 **Full DNA Spec:** `.claude/FRANK_DNA.md`
-
-### Agent Behavior Standards
-All agents MUST:
-1. **Embody the vibe** — Cool, premium, intellectual, fun
-2. **Use the voice** — Direct, technical, warm, playful
-3. **Serve the mission** — Help people build their own systems
-4. **Show don't tell** — Output volume speaks, not claims
-5. **Make it enjoyable** — If it's not fun, rethink it
-6. **Stay grounded** — Avoid vague spiritual language
-7. **Be useful** — Practical value over philosophy
-
-### Language Principles (Judgment Over Bans)
-
-Instead of blanket word bans, apply these principles:
-
-| Principle | Test | Good Example | Avoid |
-|-----------|------|--------------|-------|
-| **Measurable** | Can you quantify or teach it? | "system-aligned", "purpose-driven" | Vague spiritual terms |
-| **Actionable** | Does it guide behavior? | "skill progression", "capability building" | Abstract transformation language |
-| **Grounded** | Is it concrete? | "Tool-user to System Architect" | "Overwhelmed to empowered" |
-| **Earned** | Did you demonstrate it? | Show the work, then name it | Claims without evidence |
-
-**Quick Substitutions:**
-- Vague → Specific: "transformative" → describe the actual transformation
-- Abstract → Concrete: "consciousness" → the specific skill or awareness
-- Passive → Active: "awakening" → "building", "creating", "learning"
-- Claimed → Demonstrated: Don't say "profound" — let the content be profound
-
-**The Test:** If someone asks "what does that mean specifically?" — can you answer with examples and evidence?
-
-**For Content Hooks:** See `/hook` skill and `hooks/` knowledge base for multi-dimensional hook engineering.
-
----
+> The open-source operating system for AI-powered creators. Auto-activating,
+> connector-agnostic, identity-driven, safety-honest.
 
 ## What is ACOS?
 
-**Agentic Creator OS v10** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
+A skill, command, and agent system for AI coding assistants, focused on **creator
+production work**: content, video, music, visual assets, and brand. Real counts
+live in [STATS.md](STATS.md) (generated — never hand-edit numbers into docs).
 
-- **35+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
-- **75+ Skills** — Auto-activate via `skill-rules.json` based on task context
-- **38 Specialized Agents** — Writers, editors, designers, strategists, engineers
-- **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
+Three design principles govern everything:
+
+1. **Progressive disclosure** — `SKILL.md` holds the mental model (<3K words);
+   deep material lives in `references/` and loads on demand.
+2. **Connector agnosticism** — skills reference `~~categories` (e.g.
+   `~~image generation`), never vendors. `CONNECTORS.md` maps categories to the
+   default MCP connector and alternatives.
+3. **Commands as workflows** — commands are fully specified markdown workflows:
+   trigger, input gathering, decision logic, output shape. No hidden code.
+
+## Creator Identity — CREATOR.md
+
+Agents inherit the creator's identity from [CREATOR.md](CREATOR.md) at the repo
+root (voice, mission, quality bar, constraints). **Never invent identity
+details**; if CREATOR.md is unfilled, ask before producing public-facing
+content. `instances/frankx/CREATOR.md` is a fully worked example. Personal
+instance content (creator-specific commands, agents, skills) lives under
+`instances/<name>/`, never in the shared core.
 
 ## Quick Start
 
 ```bash
-# Claude Code
-/acos                    # Smart router — shows all commands
-/article-creator         # Write a blog post
-/create-music            # Produce a track with Suno
-/spec                    # Spec-driven feature development
-/starlight-architect     # Enterprise AI system design
-/hook                    # Generate attention hooks
+/acos                    # Smart router — discover commands
+/studio                  # Multimodal image + video + character production
+/article-creator         # Guided blog article
+/create-music            # Suno music production pipeline
+/infogenius              # Research-grounded image generation
+/factory                 # Full publishing pipeline
 ```
 
-On non-Claude platforms, just describe what you want. Skills activate from context.
-
-## Grok Build (xAI CLI/TUI) Full Support (via grok-harness-adapter)
-Grok Build (xAI CLI/TUI) receives native first-class integration (TUI + subagents + MCP + gen):
-- `./install.sh --platform=grok` generates `GROK.md` + project `.grok/skills/{harness-integration,excellence-review,repo-mastery,multi-harness-orchestrator}/SKILL.md` (exact 4 grok-personal excellence seeds per SHARING/SIP §5, .grok-only layer) + 2 excellence json hooks as `.grok/hooks/` ONLY + agents + state + AGENTS.md pointer. Core via .claude junctions (gstack/santa/verification/mcp-*/brand etc never leak). See .claude/skills/grok-harness/ too.
-- Grok Build scans GROK.md (or AGENTS.md/CLAUDE.md) + loads .grok/skills/ (prio) + ~/.grok/skills/ + ~/.claude/skills/ (compat).
-- Excellence gates built-in (God 99): always invoke repo-mastery (read CLAUDE/AGENTS/GROK first + deeper), gstack (qa/browse/design-review/benchmark), santa-method + verification-loop, plan-* reviews, cso. Show evidence.
-- Subagent swarms (/task explore/plan/general + persona + worktree + resume_from) + multi-harness-orchestrator delegation (emit exact claude/agy shell with full injected rules + DNA + partition + gates).
-- In Grok TUI: /hooks-trust, /skills grok-harness (or harness-integration/repo-mastery/excellence-review), natural language for full ACOS + gstack workflows.
-- Programmatic: adapters/grok/index.ts (isGrok, generateGrokContext, getGrokSeeds, installGrokPlatform, parseGrokCommand, mapToSkill, GROK_PATTERNS, processGrokInput). Also new .claude/commands/grok.md.
-
-See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for implementation. Use God 99 standards + SIP attest.
-
-## Available Commands (35+)
-
-### Creation (12)
-
-| Command | Description |
-|---------|-------------|
-| `/studio` | **Multimodal Studio** — end-to-end image + video + character production (Higgsfield MCP) |
-| `/generate-video` | Video generation: still→video or text→video (Kling/Hailuo/Veo/Sora/DoP) |
-| `/article-creator` | Guided blog article creation |
-| `/create-music` | Suno music production pipeline |
-| `/infogenius` | Research-grounded image generation |
-| `/generate-images` | Direct image generation |
-| `/generate-social` | Platform-optimized social content |
-| `/factory` | Full publishing pipeline |
-| `/products-creation` | Digital products, courses, templates |
-| `/author-team` | Book writing with specialist team |
-| `/hook` | Multi-dimensional content hook engineering |
-| `/build-log` | Convert a build session into MDX log, LinkedIn draft, demo brief, diagram, and prompt-pack entry (agentic-builder-lab skill) |
-
-### Strategy (6)
-| Command | Description |
-|---------|-------------|
-| `/starlight-architect` | Enterprise AI system design |
-| `/starlight-intelligence` | Strategic AI orchestration |
-| `/council` | Multi-agent decision council |
-| `/research` | Intelligence operations |
-| `/plan-week` | Weekly content planning |
-| `/harvest` | Prompt discovery & collection |
-
-### Development (4)
-| Command | Description |
-|---------|-------------|
-| `/spec` | Spec-driven feature development |
-| `/nextjs-deploy` | Next.js + Vercel deployment |
-| `/ux-design` | UI/UX design workflows |
-| `/automation-dev` | MCP servers & automation |
-
-### System (5)
-| Command | Description |
-|---------|-------------|
-| `/acos` | Smart router — single entry point |
-| `/planning-with-files` | File-based planning |
-| `/inventory-status` | Content inventory dashboard |
-| `/mcp-status` | MCP server health |
-| `/publish` | Content publishing with quality gates |
-
-### Quality (3)
-| Command | Description |
-|---------|-------------|
-| `/review-content` | Content quality review |
-| `/classify-content` | Content routing & classification |
-| `/polish-content` | Polish to publish-ready |
+On non-Claude platforms, describe what you want — skills activate from context.
 
 ## Auto-Activation
 
-Skills load automatically via `.claude/skill-rules.json` — 22 pattern rules:
+`.claude/skill-rules.json` is the **single** rules file (activation_rules[]
+schema). The `UserPromptSubmit` hook (`.claude/hooks/skill-activation-prompt.js`)
+matches keywords/file patterns and surfaces the right skills. If you add a
+skill, add its rule there and run `node scripts/generate-stats.mjs`.
 
-```
-User: "write a blog post about AI agents"
-  → Detects: "blog", "write"
-  → Auto-loads: content-strategy skill
-  → Routes to: /article-creator
-```
+## Hooks — Telemetry Only
 
-## Multimodal Studio (v11)
+Three Node hooks are wired via `hooks/hooks.json` (plugin format,
+`${CLAUDE_PLUGIN_ROOT}` resolution): skill activation (UserPromptSubmit),
+post-tool tracking (PostToolUse on Write|Edit), session finalize (Stop). Hooks
+must stay **fast, cross-platform (Node, not bash), and telemetry-only** — no
+long-running quality gates, no network calls, no formatter/linter enforcement
+in hooks. Heavy work belongs in commands, scripts, or CI.
 
-ACOS's unified generation layer: **image + video + consistent characters** across 30+ frontier models through a single connector.
+`content-hooks/` is the *marketing hooks* knowledge base (attention hooks for
+content) — unrelated to lifecycle hooks. Don't mix them.
 
-- **Skill:** `multimodal-studio` — model routing, visual prompt engineering, character consistency, async lifecycle, brand-locked output
-- **Agent:** Multimodal Director (`.claude/agents/multimodal-director.md`)
-- **Commands:** `/studio` (e2e pipeline), `/generate-video`, `/generate-images`, `/infogenius`
-- **Connector:** Higgsfield MCP (default) — one OAuth, models incl. Soul, Flux, Seedream, Kling, Hailuo, Veo, Sora
+## Multimodal Studio
 
-```bash
-# Connect the multimodal connector (one-time)
-claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp
-```
+ACOS's unified generation layer: image + video + consistent characters across
+30+ frontier models through one connector.
 
-Stays **vendor-agnostic** (any MCP filling `~~image generation` / `~~video generation` works — see `CONNECTORS.md`) and **brand-locked** (assets inherit Frank DNA + active brand tokens). The differentiator vs. single-vendor agent platforms: character consistency across an entire asset set via `create_character` → reuse the character ID everywhere. See `docs/multimodal-studio.md`.
+- **Skill:** `multimodal-studio` · **Agent:** `multimodal-director` ·
+  **Commands:** `/studio`, `/generate-video`, `/generate-images`, `/infogenius`
+- **Connector:** any MCP filling `~~image generation` / `~~video generation`
+  (default: Higgsfield — `claude mcp add --transport http --scope user
+  higgsfield https://mcp.higgsfield.ai/mcp`)
+- Differentiator: character consistency across a whole asset set
+  (`create_character` → reuse the character ID everywhere).
 
-## v10 Safety Systems
+## Optional Integrations
 
-### Circuit Breaker
-Tracks failures per file. 3 → warn, 5 → restrict, 8 → block.
+ACOS **composes with**, but never vendors, other systems:
 
-### Agent IAM
-6 profiles with per-tool, per-directory scoping. Content writers can't run bash. Security auditors are read-only.
+- **gstack** (engineering sprint system) — if installed at user scope, use its
+  `/office-hours → /review → /qa → /ship` sprint for software work. If not
+  installed, ACOS works fine without it.
+- **claude-flow** (swarm orchestration) — removed from core in v12; install
+  upstream if you want it.
+- Browser automation, email, calendars — see `CONNECTORS.md` categories.
 
-### Self-Modify Gate
-Snapshots config before changes. If intelligence score drops >5 points: auto-revert.
+## Engineering Rules
 
-### Audit Trail
-Append-only JSONL logging of all significant actions.
+1. **Read before editing**: CLAUDE.md → AGENTS.md → the specific skill/command.
+2. **Prefer improving existing surfaces** over adding parallel ones.
+3. **Never hand-edit counts** — STATS.md is generated; CI fails on drift,
+   phantom skill-rule targets, empty skills, and leaked private content.
+4. **Never weaken safety/telemetry hooks** without an explicit operator decision.
+5. **No personal-machine content in core**: absolute paths, employer names,
+   private strategy, session telemetry. The CI leak gate enforces this.
+6. Before any structural change: What problem? Simplest fix? What breaks?
+   Reversible?
 
-## gstack — Engineering Sprint System (by Garry Tan)
+## Brand Voice (for generated content)
 
-Use `/browse` from gstack for all web browsing. Never use `mcp__claude-in-chrome__*` tools.
-
-### Engineering Sprint Skills (Think → Plan → Build → Review → Test → Ship → Reflect)
-
-| Phase | Command | Specialist Role |
-|-------|---------|----------------|
-| **Think** | `/office-hours` | YC Office Hours — reframes product before code |
-| **Plan** | `/plan-ceo-review` | CEO scope review (4 modes) |
-| **Plan** | `/plan-eng-review` | Eng manager: architecture, data flow, tests |
-| **Plan** | `/plan-design-review` | Designer: rates dimensions 0-10, AI slop detection |
-| **Plan** | `/design-consultation` | Design system from scratch |
-| **Plan** | `/autoplan` | Runs CEO → design → eng review automatically |
-| **Review** | `/review` | Staff engineer PR review, auto-fixes |
-| **Review** | `/investigate` | Root-cause debugging (Iron Law: no fix without investigation) |
-| **Review** | `/design-review` | Design audit + fix loop with atomic commits |
-| **Test** | `/qa` | Real browser QA: find bugs, fix, re-verify |
-| **Test** | `/qa-only` | Browser QA report only (no code changes) |
-| **Security** | `/cso` | OWASP Top 10 + STRIDE threat model |
-| **Ship** | `/ship` | Tests → review → PR in one command |
-| **Deploy** | `/land-and-deploy` | Merge → CI → deploy → verify production |
-| **Monitor** | `/canary` | Post-deploy monitoring loop |
-| **Monitor** | `/benchmark` | Performance regression detection |
-| **Reflect** | `/retro` | Weekly retro with per-person stats |
-| **Docs** | `/document-release` | Update docs to match what shipped |
-
-### Power Tools
-
-| Command | What |
-|---------|------|
-| `/browse` | Real Chromium, ~100ms/command, persistent sessions |
-| `/setup-browser-cookies` | Import cookies from Chrome/Arc/Brave/Edge |
-| `/careful` | Warn before destructive commands |
-| `/freeze` | Lock edits to one directory |
-| `/guard` | `/careful` + `/freeze` combined |
-| `/unfreeze` | Remove edit restrictions |
-| `/codex` | Second opinion from OpenAI Codex |
-| `/setup-deploy` | One-time deploy config |
-| `/gstack-upgrade` | Self-update gstack |
-
-### When to Use gstack vs ACOS
-
-- **Building software** → Use gstack sprint: `/office-hours` → `/review` → `/qa` → `/ship`
-- **Creating content** → Use ACOS: `/article-creator` → `/factory` → `/publish`
-- **Both** → Start with `/office-hours` for product thinking, build with gstack, publish with ACOS
-
-### GStack Venture Factory
-
-For business ideas, product bets, repo rescue, launch readiness, and "lead this end-to-end" work, run the ACOS workflow at `workflows/business/gstack-venture-factory.yaml`.
-
-Default operating chain:
-
-`/office-hours -> /plan-ceo-review -> /plan-eng-review or /plan-design-review or /plan-devex-review -> /spec -> /review -> /cso when trust-sensitive -> /qa or /qa-only when browser-facing -> /ship -> /retro -> /learn`
-
-Use it as the creator/business factory layer. SIS routes the workforce; ACOS applies it to ventures and products; GStack supplies the specialist bench. Do not vendor GStack into ACOS core.
-
-## Decision Framework
-
-Before ANY structural change:
-
-1. **What specific problem are we solving?**
-2. **What's the simplest solution?**
-3. **What could go wrong?**
-4. **Is this reversible?**
-
-## Brand Voice
-
-- Direct, technical, warm
-- Lead with results, not claims
-- No spiritual/guru language
-- Show don't tell
+Direct, technical, warm. Lead with results, not claims. No guru language.
+Show, don't tell. If a sentence can't survive "what does that mean,
+specifically?" — cut it or make it concrete.
 
 ---
 
-*ACOS v10.1 — Autonomous Intelligence*
-*Created by [FrankX](https://github.com/frankxai)*
+*Agentic Creator OS v12 — MIT — [FrankX](https://github.com/frankxai)*

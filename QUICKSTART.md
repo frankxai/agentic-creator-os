@@ -1,89 +1,65 @@
 # ACOS Quick Start
 
-Get 90+ skills, 65+ commands, and 38 agents auto-activating in under 2 minutes.
+Get the Agentic Creator OS auto-activating in under 2 minutes.
+Exact asset counts: [STATS.md](STATS.md) (generated from source).
 
 ## Install
 
+**Claude Code plugin (recommended):**
+
+```
+/plugin marketplace add frankxai/agentic-creator-os
+/plugin install agentic-creator-os@frankx
+```
+
+**Cross-harness skills** (Codex, Cursor, Gemini CLI, Copilot, …):
+
+```bash
+npx skills add frankxai/creator-skills
+```
+
+**Full install** (generates context files per platform):
+
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git ~/.acos
-cd ~/.acos && ./install.sh
+cd ~/.acos && ./install.sh            # claude code
+./install.sh --platform=cursor        # or windsurf / gemini / grok / opencode
 ```
 
-Open any project with Claude Code:
+## First 5 Minutes
 
-```bash
-cd your-project
-claude
+1. Fill in [CREATOR.md](CREATOR.md) — your voice, mission, quality bar.
+   Agents refuse to invent identity details without it.
+2. Try the router and a flagship workflow:
+
+```
+/acos              # discover commands + system status
+/studio            # multimodal image/video/character production
+/article-creator   # guided blog article with SEO
+/create-music      # Suno music production pipeline
+/deepresearch      # deep research with web + codebase analysis
 ```
 
-ACOS detects what you're working on and loads the right skills automatically.
-
-## How It Works
+3. Watch auto-activation work:
 
 ```
 You type: "write a blog post about AI agents"
-
-ACOS detects:  content + blog keywords
-Auto-loads:    content-strategy, seo-fundamentals skills
-Routes to:     /article-creator command
-You get:       Guided article with SEO, schema markup, social distribution
+ACOS detects:  content + blog keywords (UserPromptSubmit hook)
+Auto-loads:    content-strategy skill
+Routes to:     /article-creator
 ```
 
-No manual configuration. No skill memorization. Context-driven activation.
-
-## What You Get
-
-| Category | Count | Examples |
-|----------|-------|---------|
-| **Skills** | 90+ | article-creator, suno-mastery, react-patterns, seo-strategy |
-| **Commands** | 65+ | /ultrawork, /design-gods, /product-team-launch, /deepresearch |
-| **Agents** | 38 | Brand Architect, Music Producer, QA Engineer, Design Swarm |
-| **Hooks** | 15 | Quality gate, circuit breaker, skill activation, audit trail |
-
-## Try These First
-
-```
-/acos              # Check ACOS status and loaded skills
-/ultrawork         # Launch multi-agent swarm mode
-/design-gods       # Design system audit and build
-/deepresearch      # Deep research with web + codebase analysis
-```
-
-## Add Plugins
+## Optional: Multimodal Connector
 
 ```bash
-claude plugin marketplace add frankxai/agentic-creator-skills
-
-claude plugin install core              # Creator productivity
-claude plugin install content-engine    # Content creation + newsletter
-claude plugin install design-excellence # Design system governance
-claude plugin install music-lab         # AI music production
-claude plugin install brand-architect   # Brand voice + guidelines
-claude plugin install product-launcher  # Product launch pipeline
-claude plugin install intelligence      # Intelligence scoring
-claude plugin install visual-studio     # Visual creation council
+claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp
 ```
 
-## Multi-Platform
-
-| Platform | Command |
-|----------|---------|
-| Claude Code | `./install.sh` |
-| Cursor | `./install.sh --platform=cursor` |
-| Windsurf | `./install.sh --platform=windsurf` |
-| Gemini | `./install.sh --platform=gemini` |
-
-## Architecture
-
-```
-~/.acos/.claude/
-├── skills/        # 90+ domain skills (auto-activate)
-├── commands/      # 65+ workflow commands
-├── agents/        # 38 specialist agents
-└── hooks/         # 15 lifecycle hooks
-```
+Any MCP filling `~~image generation` / `~~video generation` works — see
+[CONNECTORS.md](CONNECTORS.md).
 
 ## Links
 
-- [Plugin Marketplace](https://github.com/frankxai/agentic-creator-skills)
-- [FrankX.AI](https://frankx.ai)
+- [README](README.md) · [Architecture](docs/ARCHITECTURE.md) · [Roadmap](docs/ROADMAP.md)
+- [creator-skills](https://github.com/frankxai/creator-skills) — skills.sh onramp
+- [frankx.ai/acos](https://frankx.ai/acos) — pro layer

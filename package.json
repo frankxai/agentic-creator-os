@@ -39,21 +39,24 @@
     "acos-enhance": "./bin/acos-enhance"
   },
   "files": [
+    ".claude/",
+    ".claude-plugin/",
+    ".mcp.json",
     "bin/",
-    "departments/",
-    "instances/",
+    "hooks/",
     "mcp-servers/",
     "skills/",
     "templates/",
     "workflows/",
-    "docs/",
     "tools/observatory/",
     "scripts/build-catalog.mjs",
-    "scripts/build-catalog.test.mjs",
+    "scripts/generate-stats.mjs",
     "install.sh",
     "CLAUDE.md",
-    "CREATOR_NEEDS.md",
-    "README.md"
+    "CREATOR.md",
+    "STATS.md",
+    "README.md",
+    "LICENSE"
   ],
   "workspaces": [
     "mcp-servers/*"

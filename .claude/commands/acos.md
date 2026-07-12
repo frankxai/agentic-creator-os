@@ -1,4 +1,4 @@
-# ACOS - Agentic Creator OS v7.0
+# ACOS - Agentic Creator OS v12
 
 The single command you need. ACOS auto-routes everything.
 
@@ -8,15 +8,14 @@ Run diagnostic and display:
 
 1. Count `.claude/trajectories/*.json` (exclude \_active, \_operations, patterns)
 2. Read `.claude/trajectories/patterns.json` for pattern count
-3. Read `.claude-flow/metrics/learning-status.json` for learning state
-4. Count total commands: `.claude/commands/*.md` + `.claude/commands/claude-flow-*/*.md`
+3. Run `node scripts/generate-stats.mjs --check` for live counts and gate status
 
 ```
 +================================================================+
-|                    AGENTIC CREATOR OS v7.0                       |
+|                    AGENTIC CREATOR OS v12                        |
 |         "One Command. Auto-Routes Everything."                   |
 +================================================================+
-|  Skills: 630+ | Agents: 40+ | Commands: 130+ | Hook Events: 7  |
+|  Live counts: STATS.md (generated) | Hook Events: 3 wired       |
 |  Trajectories: [N] | Avg Success: [N%] | Patterns: [N]         |
 |  Learning: Active | Swarm: Ready | Checkpoints: Enabled        |
 +================================================================+
@@ -45,7 +44,7 @@ ACOS Auto-Router (this command)
     +-- anything else           --> Smart routing via hooks
 ```
 
-No need to remember specific commands. No need to type /claude-flow-\* anything.
+No need to remember specific commands.
 ACOS IS the interface. Everything else is internal infrastructure.
 
 ## Auto-Routing Rules
@@ -115,7 +114,7 @@ Every session makes ACOS smarter:
 
 ### Internal Infrastructure (Never Type These)
 
-All 83 /claude-flow-\* commands are absorbed into ACOS.
+Legacy claude-flow commands were removed in v12 — install upstream claude-flow if you need swarm orchestration.
 They still exist for backwards compatibility but you never need them.
 ACOS invokes them internally when appropriate.
 

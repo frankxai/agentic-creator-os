@@ -138,28 +138,6 @@
       "priority": "medium"
     },
     {
-      "skill": "social-media-strategy",
-      "triggers": {
-        "keywords": [
-          "social",
-          "linkedin",
-          "twitter",
-          "instagram",
-          "farcaster",
-          "thread",
-          "post"
-        ],
-        "file_patterns": [
-          "social/**",
-          "templates/social-media/**"
-        ],
-        "commands": [
-          "/generate-social"
-        ]
-      },
-      "priority": "medium"
-    },
-    {
       "skill": "planning-with-files",
       "triggers": {
         "keywords": [
@@ -181,27 +159,6 @@
         ]
       },
       "priority": "high"
-    },
-    {
-      "skill": "product-management-expert",
-      "triggers": {
-        "keywords": [
-          "product",
-          "launch",
-          "course",
-          "pricing",
-          "landing page",
-          "funnel"
-        ],
-        "file_patterns": [
-          "products/**",
-          "data/products.json"
-        ],
-        "commands": [
-          "/products-creation"
-        ]
-      },
-      "priority": "medium"
     },
     {
       "skill": "excellence-book-writing",
@@ -352,23 +309,6 @@
           "interactive"
         ],
         "file_patterns": [],
-        "commands": []
-      },
-      "priority": "low"
-    },
-    {
-      "skill": "video-production-workflow",
-      "triggers": {
-        "keywords": [
-          "video",
-          "podcast",
-          "youtube",
-          "recording",
-          "script"
-        ],
-        "file_patterns": [
-          "scripts/**"
-        ],
         "commands": []
       },
       "priority": "low"

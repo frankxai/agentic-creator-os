@@ -1,31 +1,44 @@
 # agentic-creator-os — Agent Instructions
 
-Read `CLAUDE.md` first (and `GROK.md` if present). They define ACOS v11+, Frank DNA, safety hooks, commands, skills, agent standards, and Grok Build (xAI) harness integration via grok-harness-adapter (see new .claude/skills/grok-harness/ + adapters/grok/). 5-fleet + SIP partition (grok-personal .grok-only seeds only).
+Read `CLAUDE.md` first — it defines ACOS v12: design principles, the CREATOR.md
+identity contract, hook doctrine, and engineering rules. `GROK.md` is a thin
+pointer for Grok Build; deeper files win over shallower ones.
 
 ## Repo Role
 
-`agentic-creator-os` is the reusable Agentic Creator OS substrate: commands, skills, workflow patterns, agent behavior standards, and safety primitives used by FrankX and sibling creative systems.
+The reusable, MIT-licensed Agentic Creator OS core: skills, commands, agents,
+telemetry hooks, and MCP servers for creator production work. Personal/instance
+content lives only under `instances/<name>/`. Premium/pro layers live outside
+this repo.
 
 ## Work Pattern
 
-1. Read `CLAUDE.md` (and `GROK.md`/`AGENTS.md` for Grok) + any referenced `.claude/` / `.grok/` or skill docs before edits. Deeper wins.
-2. Preserve the Frank DNA and safety-first ACOS behavior. Apply repo-mastery + excellence (gstack/santa/verification) gates on Grok/ACOS changes. Read rules first (CLAUDE > AGENTS > GROK > deeper).
-3. Prefer improving existing commands/skills/hooks over inventing parallel surfaces. Extend adapters/grok/ + install.sh for Grok Build harness (keep seeds in sync between .ts and .sh). Add to .claude/skills/grok-harness/ for Claude-side awareness.
-4. Keep output practical and implementation-oriented; avoid abstract claims without examples. Show evidence (gstack screenshots, diffs, metrics).
-5. Do not touch unrelated dirty/untracked files. Scope with freeze/gstack-guard when needed.
+1. Read `CLAUDE.md` and the specific skill/command docs before editing.
+2. Prefer improving existing commands/skills/hooks over inventing parallel
+   surfaces.
+3. Counts and inventories are generated: run `node scripts/generate-stats.mjs`
+   after adding/removing assets; CI fails on stale STATS.md, empty skills,
+   phantom skill-rule targets, and leaked private content.
+4. Keep output practical; show evidence (diffs, test output), avoid abstract
+   claims.
+5. Do not touch unrelated dirty/untracked files.
 
 ## Commands
 
 ```bash
-npm run build:all
-npm run install:all
+npm run build:all              # build MCP servers
+node scripts/generate-stats.mjs        # refresh STATS.md
+node scripts/generate-stats.mjs --check  # CI gate locally
 ```
 
-The registry currently lists `pnpm test`, but `package.json` does not define a test script. If adding tests, add the script deliberately and document the runner.
+There is no test script yet; if you add tests, add the script deliberately and
+document the runner.
 
 ## Safety
 
-- Never weaken safety hooks, circuit breakers, audit trails, or self-modify gates without an explicit operator decision.
-- Treat ACOS as a shared substrate. Backward compatibility matters.
-- If changing public package behavior, update docs and versioning intentionally.
-
+- Never weaken telemetry hooks or CI gates without an explicit operator decision.
+- Hooks stay fast, Node-based, telemetry-only (no quality gates, no network).
+- Treat ACOS as a shared substrate: backward compatibility matters; if changing
+  public behavior, update docs and versioning intentionally.
+- Never commit personal-machine paths, employer references, session telemetry,
+  or internal pricing/strategy — the CI leak gate enforces this.

@@ -97,7 +97,7 @@ Deploy department configurations and shared workflows for collaborative AI-enhan
 
 ## Version
 
-**Current**: 3.0.0 (January 2026)
+**Current**: 12.0.0 (July 2026) — see [STATS.md](../STATS.md) for live asset counts
 
 See [CHANGELOG.md](../CHANGELOG.md) for version history.
 
