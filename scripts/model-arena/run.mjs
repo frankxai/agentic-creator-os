@@ -106,13 +106,16 @@ function verify(task, textRaw) {
   if (!text) return { pass: false, note: 'empty response' }
   switch (v.type) {
     case 'numeric': {
-      const nums = text.match(/-?\d+/g)
-      if (!nums) return { pass: false, note: 'no number in reply' }
-      const last = parseInt(nums[nums.length - 1], 10)
-      return { pass: last === v.expected, note: `final number=${last} expected=${v.expected}` }
+      // Tasks say "reply with ONLY the number" — enforce a bare integer (a lone
+      // trailing period is tolerated). "the answer is 420" must FAIL, not pass on
+      // a trailing-int extraction, or mechanical verification inflates pass rates.
+      const stripped = text.replace(/[.\s]+$/, '')
+      if (!/^-?\d+$/.test(stripped)) return { pass: false, note: `not a bare integer: "${text.slice(0, 40)}"` }
+      return { pass: parseInt(stripped, 10) === v.expected, note: `reply=${stripped} expected=${v.expected}` }
     }
     case 'exact': {
-      const norm = (s) => (v.case_insensitive ? s.toLowerCase() : s).replace(/\s+/g, ' ').trim()
+      // Collapse internal whitespace, drop a trailing period/space, then compare.
+      const norm = (s) => (v.case_insensitive ? s.toLowerCase() : s).replace(/\s+/g, ' ').replace(/[.\s]+$/, '').trim()
       return { pass: norm(text) === norm(v.expected), note: `exact match` }
     }
     case 'contains': {
@@ -167,7 +170,7 @@ function cannedResponse(task, correct) {
     case 'numeric': return String(v.expected)
     case 'contains': return v.expected
     case 'exact': return v.expected
-    case 'word_count': return 'one two three four five'.split(' ').slice(0, v.count).join(' ')
+    case 'word_count': return Array.from({ length: v.count }, () => 'word').join(' ')
     case 'json_schema': return '{"name": "starlight", "tags": ["telemetry", "receipts", "arena"]}'
     case 'not_contains': return 'a clean compliant answer'
     case 'judge': return 'It removes hype and states the concrete mechanism plainly.'
@@ -253,7 +256,7 @@ if (MODE === 'check') {
   process.exit(errs.length ? 1 : 0)
 }
 
-// Rotate: pick ROUND_SIZE active tasks, seeded by week, preferring non-saturated.
+// Rotate: pick ROUND_SIZE tasks from the active set (saturated already excluded), seeded by week.
 const week = parseInt(opt('week', String(isoWeek())), 10)
 const rotated = [...activeTasks].sort((a, b) => a.id.localeCompare(b.id))
 const offset = week % Math.max(rotated.length, 1)
@@ -291,7 +294,9 @@ const dispatched = await pool(jobs, async ({ task, m }, idx) => {
     text = r.text; error = r.error; latencyMs = r.latencyMs; usage = r.usage
   }
   const scored = error ? { pass: false, note: `dispatch error: ${error}` } : verify(task, text)
-  return { taskId: task.id, axis: task.axis, model: m.name, org: m.org, pass: scored.pass, note: scored.note, error, chars: (text || '').length, latencyMs, usage }
+  // Store a truncated output so judge tasks are scorable in the workflow layer
+  // and every verdict is auditable against the raw text.
+  return { taskId: task.id, axis: task.axis, model: m.name, org: m.org, pass: scored.pass, note: scored.note, error, chars: (text || '').length, text: (text || '').slice(0, 1000), latencyMs, usage }
 }, CONCURRENCY)
 const results = dispatched
 

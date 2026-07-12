@@ -1,6 +1,6 @@
 export const meta = {
   name: 'model-arena-daily',
-  description: 'Frontier Model Arena. Dispatches an evolving task bank to the top ~13 frontier models (Claude, GPT-5.5, Gemini, Grok, DeepSeek, Qwen, Kimi, Mistral, Gemma, gpt-oss) via OpenRouter, verifies mechanically, judges craft cross-family, and keeps a learning leaderboard. Detects new model releases from the registry. Durable sink: committed receipt + leaderboard + Slack DM.',
+  description: 'Frontier Model Arena. Dispatches an evolving task bank to the top ~13 frontier models (Claude, GPT-5.5, Gemini, Grok, DeepSeek, Qwen, Kimi, Mistral, Gemma, gpt-oss) via OpenRouter, verifies mechanically, judges craft cross-family, and keeps a learning leaderboard. Detects new model releases from the registry. Durable sink: committed receipt + leaderboard (+ best-effort Slack DM where a Slack connector is configured).',
   whenToUse: 'Weekly frontier round (cadence moved from daily → weekly 2026-07-12: 13 models × N tasks is heavy work, and it now feeds a durable receipt + the public /research/model-arena page). Pass args.tasks to set round size, args.week to force rotation, args.date for the receipt name. Runs degraded (plan-only) if OPENROUTER_API_KEY is absent.',
   phases: [
     { title: 'Recall', detail: 'prior rounds from trajectory' },
@@ -11,7 +11,7 @@ export const meta = {
     { title: 'Synthesize', detail: 'leaderboard delta + routing implications' },
     { title: 'Record', detail: 'persist round to trajectory memory' },
     { title: 'Commit', detail: 'commit receipt + leaderboard back to main' },
-    { title: 'Notify', detail: 'Slack DM the standings + learnings' },
+    { title: 'Notify', detail: 'best-effort Slack DM of standings + learnings' },
   ],
   acos: {
     tier: 'L99',
@@ -181,11 +181,12 @@ phase('Commit')
 // if they die in the ephemeral CCR checkout. Commit them back to main.
 await agent(
   `Commit this round's arena artifacts back to main so they survive the ephemeral checkout (durable-output-sink law). ` +
-  `FIRST, if a judge verdict exists (${judge ? 'it does' : 'it does not this round'}), merge it into the receipt so the committed artifact isn't left with pass:null for the craft task: ` +
-  `read data/model-arena/runs/${date}.json, add a top-level "judgeVerdict" field = ${JSON.stringify(judge || null)}, write it back. ` +
-  `THEN stage ONLY these paths: data/model-arena/runs/${date}.json, data/model-arena/leaderboard.json, scripts/model-arena/tasks.json ` +
-  `(tasks.json changed if a task saturated). Commit message: "chore(arena): frontier round ${date} — leader ${synth.leader}". ` +
-  `Then push to the current branch. If nothing changed (degraded/plan run wrote no receipt), skip the commit and say so. ` +
+  (runOut?.mode === 'plan'
+    ? `This was a plan/degraded run (no OPENROUTER_API_KEY): the runner wrote NO receipt and NO leaderboard change, so there is nothing to commit — report that and stop. `
+    : `FIRST${judge ? ', because a judge verdict exists this round,' : ' (no judge verdict this round, so skip straight to staging)'} merge any judge verdict into the receipt so the committed artifact isn't left with pass:null for the craft task: ` +
+      `read data/model-arena/runs/${date}.json, add a top-level "judgeVerdict" field = ${JSON.stringify(judge || null)}, write it back. ` +
+      `THEN stage ONLY these paths: data/model-arena/runs/${date}.json, data/model-arena/leaderboard.json, scripts/model-arena/tasks.json ` +
+      `(tasks.json changed if a task saturated). Commit message: "chore(arena): frontier round ${date} — leader ${synth.leader}", then push to the current branch. `) +
   `Ignore a non-fatal push failure; report what git printed.`,
   { phase: 'Commit', model: 'haiku' }
 ).catch(() => null)

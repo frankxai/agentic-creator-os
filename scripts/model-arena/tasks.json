@@ -26,9 +26,9 @@
       "difficulty": "medium",
       "state": "active",
       "version": 1,
-      "prompt": "Context: 'The Starlight runner dispatches tasks to models via a gateway and writes a JSON receipt per round.' Question: What retry policy does the runner use on a gateway timeout? Answer in one short sentence. If the context does not state it, say exactly: not stated.",
+      "prompt": "Context: 'The Starlight runner dispatches tasks to models via a gateway and writes a JSON receipt per round.' Question: What retry policy does the runner use on a gateway timeout? If the context does not state it, reply with EXACTLY these two words and nothing else: not stated.",
       "verifier": {
-        "type": "contains",
+        "type": "exact",
         "expected": "not stated",
         "case_insensitive": true
       },
@@ -93,9 +93,9 @@
       "difficulty": "medium",
       "state": "active",
       "version": 1,
-      "prompt": "The following log has one line that contradicts the others. Lines: 'build ok', 'tests ok', 'deploy ok', 'lint FAILED with 3 errors', 'ship ok'. Which single line reports a failure? Reply with ONLY that exact line text.",
+      "prompt": "The following log has one line that contradicts the others. Lines: 'build ok', 'tests ok', 'deploy ok', 'lint FAILED with 3 errors', 'ship ok'. Which single line reports a failure? Reply with ONLY that exact line text, nothing else.",
       "verifier": {
-        "type": "contains",
+        "type": "exact",
         "expected": "lint FAILED with 3 errors",
         "case_insensitive": false
       },
