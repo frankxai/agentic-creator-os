@@ -1,0 +1,23 @@
+{
+  "name": "frankx",
+  "owner": {
+    "name": "Frank Riemer",
+    "email": "frank@frankx.ai"
+  },
+  "description": "FrankX creator-tools marketplace — home of the Agentic Creator OS.",
+  "plugins": [
+    {
+      "name": "agentic-creator-os",
+      "source": "./",
+      "displayName": "Agentic Creator OS",
+      "description": "The open-source operating system for AI-powered creators: auto-activating skills, slash-command workflows, specialist agents, and telemetry hooks for content, video, music, visual, and brand work.",
+      "version": "12.0.0",
+      "author": { "name": "Frank Riemer", "email": "frank@frankx.ai" },
+      "homepage": "https://frankx.ai/acos",
+      "repository": "https://github.com/frankxai/agentic-creator-os",
+      "license": "MIT",
+      "category": "creator-tools",
+      "tags": ["content", "video", "music", "visual", "brand", "creator"]
+    }
+  ]
+}

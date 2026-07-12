@@ -46,12 +46,31 @@ function getCachedRules(rulesPath) {
 
     try {
         if (!fs.existsSync(rulesPath)) return null;
-        const rules = JSON.parse(fs.readFileSync(rulesPath, 'utf-8'));
+        const rules = normalizeRules(JSON.parse(fs.readFileSync(rulesPath, 'utf-8')));
         rulesCache.set(rulesPath, { rules, created: now });
         return rules;
     } catch {
         return null;
     }
+}
+
+// ACOS ships rules as { activation_rules: [{ skill, triggers: { keywords,
+// file_patterns, commands }, priority }] }. Convert to the internal
+// { skills: { name: { promptTriggers, fileTriggers, priority } } } shape.
+function normalizeRules(raw) {
+    if (raw.skills || raw.agents) return raw;
+    if (!Array.isArray(raw.activation_rules)) return raw;
+    const skills = {};
+    for (const rule of raw.activation_rules) {
+        if (!rule.skill || !rule.triggers) continue;
+        const keywords = [...(rule.triggers.keywords || []), ...(rule.triggers.commands || [])];
+        skills[rule.skill] = {
+            promptTriggers: keywords.length ? { keywords } : undefined,
+            fileTriggers: rule.triggers.file_patterns ? { pathPatterns: rule.triggers.file_patterns } : undefined,
+            priority: rule.priority || 'medium',
+        };
+    }
+    return { skills, agents: {} };
 }
 
 function isEarlyExit(prompt) {
@@ -222,9 +241,15 @@ function main() {
         // Update active trajectory
         updateActiveTrajectory(data.prompt);
 
-        const rulesPath = path.join(process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..', '..'),
-                                   '.claude', 'skills', 'skill-rules.json');
-        const rules = getCachedRules(rulesPath);
+        // Rules live at <repo>/.claude/skill-rules.json — resolve relative to this
+        // script first (works when installed as a plugin), then fall back to the
+        // project dir for project-level installs.
+        const candidates = [
+            path.join(__dirname, '..', 'skill-rules.json'),
+            path.join(process.env.CLAUDE_PROJECT_DIR || process.cwd(), '.claude', 'skill-rules.json'),
+        ];
+        const rulesPath = candidates.find(p => fs.existsSync(p));
+        const rules = rulesPath ? getCachedRules(rulesPath) : null;
         if (!rules) process.exit(0);
 
         const skills = findMatches(rules, data.prompt.toLowerCase(), data.cwd || '', false);

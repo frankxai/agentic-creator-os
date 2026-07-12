@@ -1,20 +1,18 @@
 {
   "name": "agentic-creator-os",
-  "version": "11.0.0",
-  "description": "ACOS — The Operating System for AI-Powered Creators. Layer-modeled skills, commands, agents, and hooks for content / video / music / visual / brand workflows. Composes a creator-meta substrate with creator-specific implementations.",
+  "displayName": "Agentic Creator OS",
+  "version": "12.0.0",
+  "description": "The open-source operating system for AI-powered creators — skills, commands, agents, and telemetry hooks for content, video, music, visual, and brand workflows. Auto-activating, connector-agnostic, creator-identity driven via CREATOR.md.",
   "author": {
     "name": "Frank Riemer",
     "email": "frank@frankx.ai",
     "url": "https://frankx.ai"
   },
-  "homepage": "https://frankx.ai/products/agentic-creator-os",
+  "homepage": "https://frankx.ai/acos",
   "repository": "https://github.com/frankxai/agentic-creator-os",
   "license": "MIT",
   "keywords": [
     "claude-code",
-    "cursor",
-    "windsurf",
-    "gemini",
     "creator-os",
     "ai-agent",
     "skills",
@@ -22,65 +20,14 @@
     "content-creation",
     "agentic-ai",
     "mcp",
-    "anthropic",
     "multimodal",
     "image-generation",
     "video-generation",
-    "higgsfield"
+    "music-generation"
   ],
-  "categories": [
-    "creator-tools",
-    "content",
-    "video",
-    "music",
-    "visual",
-    "brand"
-  ],
-  "platforms": [
-    "claude-code",
-    "opencode",
-    "cursor",
-    "windsurf",
-    "gemini-cli"
-  ],
-  "engines": {
-    "claude-code": ">=2.0.0"
-  },
-  "compose": {
-    "extends": [
-      "creator-meta"
-    ],
-    "absorbs": [
-      "knowledge-work-plugins/creator",
-      "superpowers (proven techniques)",
-      "oh-my-opencode (lifecycle hooks)",
-      "claude-flow (swarm topologies)"
-    ]
-  },
-  "stats": {
-    "skills": 105,
-    "commands": 86,
-    "agents": 90,
-    "hooks": 15,
-    "verified": "2026-06-12",
-    "note": "ACOS V11 current shipped state."
-  },
-  "intelligence": {
-    "version": "v11.0.0",
-    "targetScore": 98,
-    "currentScore": "see /acos-score",
-    "components": {
-      "skill_activation_accuracy": 0.25,
-      "pattern_extraction_quality": 0.25,
-      "memory_utilization": 0.20,
-      "hook_reliability": 0.15,
-      "self_modify_safety": 0.15
-    }
-  },
-  "principles": [
-    "Progressive disclosure — SKILL.md lean, references/ for depth",
-    "Connector agnosticism — skills reference ~~categories not vendor names",
-    "Commands as workflows — markdown, no code",
-    "Layer model — every artifact has one canonical location"
-  ]
+  "commands": ["./.claude/commands/"],
+  "agents": ["./.claude/agents/"],
+  "skills": ["./.claude/skills/"],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
 }
