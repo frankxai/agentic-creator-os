@@ -63,6 +63,36 @@ const SYNTH_SCHEMA = {
   },
 }
 
+const DETECT_SCHEMA = {
+  type: 'object',
+  required: ['missing'],
+  properties: {
+    missing: {
+      type: 'array',
+      items: {
+        type: 'object',
+        required: ['id', 'name', 'org'],
+        properties: { id: { type: 'string' }, name: { type: 'string' }, org: { type: 'string' } },
+      },
+    },
+    note: { type: 'string' },
+  },
+}
+
+const DISPATCH_SCHEMA = {
+  type: 'object',
+  required: ['ok', 'mode'],
+  properties: {
+    ok: { type: 'boolean' },
+    mode: { type: 'string' },
+    leader: { type: 'string' },
+    learnings: { type: 'array', items: { type: 'string' } },
+    receipt: { type: 'string' },
+    leaderboard: { type: 'string' },
+    judgeNeeded: { type: 'boolean' },
+  },
+}
+
 const date = args?.date || new Date().toISOString().slice(0, 10)
 const roundSize = args?.tasks || 4
 
@@ -81,7 +111,7 @@ const newModels = await agent(
   `(2) Read scripts/model-arena/roster.json and list every registry_id. ` +
   `(3) Return the GA registry models whose id is NOT in the roster, as {missing: [{id, name, org}], note}. ` +
   `This is how the ring grows as new models release — flag them so a human adds an openrouter_slug and sets arena_active.`,
-  { phase: 'Detect', model: 'haiku' }
+  { phase: 'Detect', schema: DETECT_SCHEMA, model: 'haiku' }
 ).catch(() => ({ missing: [], note: 'detect skipped' }))
 log(`New-model detection: ${(newModels?.missing?.length ?? 0)} GA model(s) not yet in the ring`)
 
@@ -91,7 +121,7 @@ const runOut = await agent(
   `Command: node scripts/model-arena/run.mjs --tasks ${roundSize} --date ${date}\n` +
   `If OPENROUTER_API_KEY is unset the runner returns mode:"plan" degraded:true — that is expected, not a failure; report it as-is. ` +
   `Return the parsed JSON (ok, mode, leader, learnings, receipt, leaderboard paths, judgeNeeded).`,
-  { phase: 'Dispatch', model: 'haiku' }
+  { phase: 'Dispatch', schema: DISPATCH_SCHEMA, model: 'haiku' }
 ).catch((e) => ({ ok: false, error: String(e), mode: 'error' }))
 log(`Arena dispatch: mode=${runOut?.mode} leader=${runOut?.leader ?? 'n/a'}`)
 
@@ -123,7 +153,8 @@ phase('Synthesize')
 const synth = await agent(
   `Synthesize this Model Arena round into routing guidance. Inputs: ` +
   `leaderboard=data/model-arena/leaderboard.json, this round's receipt, runner learnings=${JSON.stringify(runOut?.learnings || [])}, ` +
-  `new models flagged=${JSON.stringify(newModels?.missing || [])}, cross-check=${JSON.stringify(crossCheck)}. ` +
+  `new models flagged=${JSON.stringify(newModels?.missing || [])}, cross-check=${JSON.stringify(crossCheck)}, ` +
+  `craft-task judge verdict=${JSON.stringify(judge || 'not judged this round')}. ` +
   `Read the leaderboard, then return: leader (top pass-rate), biggestMover if any, saturatedAxes (from learnings), and 3-4 routingImplications ` +
   `{lane, route (which model), why} grounded in per-axis pass-rates — e.g. which model to route strict-JSON to, which for reasoning, which for cheap grounding. ` +
   `Be honest about small-n; this is directional.`,
@@ -148,7 +179,9 @@ phase('Commit')
 // if they die in the ephemeral CCR checkout. Commit them back to main.
 await agent(
   `Commit this round's arena artifacts back to main so they survive the ephemeral checkout (durable-output-sink law). ` +
-  `Stage ONLY these paths: data/model-arena/runs/${date}.json, data/model-arena/leaderboard.json, scripts/model-arena/tasks.json ` +
+  `FIRST, if a judge verdict exists (${judge ? 'it does' : 'it does not this round'}), merge it into the receipt so the committed artifact isn't left with pass:null for the craft task: ` +
+  `read data/model-arena/runs/${date}.json, add a top-level "judgeVerdict" field = ${JSON.stringify(judge || null)}, write it back. ` +
+  `THEN stage ONLY these paths: data/model-arena/runs/${date}.json, data/model-arena/leaderboard.json, scripts/model-arena/tasks.json ` +
   `(tasks.json changed if a task saturated). Commit message: "chore(arena): frontier round ${date} — leader ${synth.leader}". ` +
   `Then push to the current branch. If nothing changed (degraded/plan run wrote no receipt), skip the commit and say so. ` +
   `Ignore a non-fatal push failure; report what git printed.`,

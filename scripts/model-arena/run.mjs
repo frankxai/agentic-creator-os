@@ -49,14 +49,22 @@ const readJson = async (p) => JSON.parse(await readFile(p, 'utf8'))
 // ── Mechanical verifiers ──────────────────────────────────────────────────
 // Each returns { pass: boolean, note: string }. `judge` tasks are not scored
 // here — they return pass:null so the workflow layer routes them to the judge.
-const PUNCT_RE = /[.,!?;:'"`~@#$%^&*()\[\]{}<>/\\|+=_-]/
+const PUNCT_RE = /[.,!?;:'"`~@#$%^&*()\[\]{}<>\/\\|+=_-]/
+// Extract the first balanced JSON object. String-literal aware: braces and
+// escaped quotes inside "..." must not move the depth counter, or a model that
+// returns {"code": "if (x) { ... }"} would truncate mid-string.
 const firstJsonObject = (s) => {
   const start = s.indexOf('{')
   if (start === -1) return null
-  let depth = 0
+  let depth = 0, inString = false, escaped = false
   for (let i = start; i < s.length; i++) {
-    if (s[i] === '{') depth++
-    else if (s[i] === '}' && --depth === 0) return s.slice(start, i + 1)
+    const c = s[i]
+    if (escaped) { escaped = false; continue }
+    if (c === '\\') { escaped = true; continue }
+    if (c === '"') { inString = !inString; continue }
+    if (inString) continue
+    if (c === '{') depth++
+    else if (c === '}' && --depth === 0) return s.slice(start, i + 1)
   }
   return null
 }
@@ -223,8 +231,9 @@ let leaderboard
 try { leaderboard = await readJson(LEADERBOARD_PATH) }
 catch { leaderboard = { _description: 'Model Arena standings — updated by scripts/model-arena/run.mjs. Directional (n=1/task/round), not statistics.', rounds: 0, updated: null, models: {} } }
 
-leaderboard.rounds += 1
+leaderboard.rounds = (leaderboard.rounds || 0) + 1
 leaderboard.updated = date
+leaderboard.models ||= {}
 for (const m of activeModels) {
   const mine = results.filter((r) => r.model === m.name && r.pass !== null)
   const passes = mine.filter((r) => r.pass).length
@@ -234,6 +243,7 @@ for (const m of activeModels) {
   rec.scored += mine.length
   rec.passes += passes
   rec.passRate = rec.scored ? +(rec.passes / rec.scored).toFixed(3) : 0
+  rec.byAxis ||= {}
   for (const r of mine) {
     const ax = (rec.byAxis[r.axis] ||= { scored: 0, passes: 0 })
     ax.scored += 1; ax.passes += r.pass ? 1 : 0
