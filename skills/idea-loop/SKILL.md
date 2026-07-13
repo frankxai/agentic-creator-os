@@ -1,6 +1,6 @@
 ---
 name: idea-loop
-description: One message → live. Capture any idea as a durable GitHub issue, route it via the brand registry (ICP + voice), reason it into a wedge, build it, pass agentic excellence gates, ship it to GitHub and connected surfaces, and close with a Ship Report + Leverage Brief. Activates on "I have an idea", "quick idea", "capture this", "/idea", or any raw idea dropped in chat that would otherwise get lost.
+description: One message → live. Capture any idea as a durable GitHub issue, route it via the brand registry (ICP + voice), reason it into a wedge, build it, pass agentic excellence gates, ship it to GitHub and connected surfaces, and close with a Ship Report + Leverage Brief. Activates on "I have an idea", "quick idea", "capture this idea", "new idea", "idea:", "don't lose this", "/idea", or any raw idea dropped in chat that would otherwise get lost.
 ---
 
 # Idea Loop — Operating Protocol

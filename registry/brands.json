@@ -85,7 +85,7 @@
       "repos": ["frankxai/mind-intelligence-systems", "frankxai/human-mind-intelligence-system", "frankxai/agentic-mind-os", "frankxai/awesome-mind-agent-skills", "frankxai/second-brain-os", "frankxai/frankx-mind-palace", "frankxai/mind-palace-agent-skills"],
       "domains": [],
       "surfaces": ["GitHub", "vault templates", "schemas"],
-      "keywords": ["mind", "memory", "second brain", "vault", "cognition", "attention", "metacognition", "palace"]
+      "keywords": ["mind", "second brain", "cognition", "attention", "metacognition", "palace", "mind palace", "journal"]
     },
     {
       "id": "ocean",

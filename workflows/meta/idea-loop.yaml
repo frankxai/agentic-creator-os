@@ -7,6 +7,9 @@ triggers:
   - "I have an idea"
   - "quick idea"
   - "capture this idea"
+  - "new idea"
+  - "idea:"
+  - "don't lose this"
   - "/idea"
 
 agents:
