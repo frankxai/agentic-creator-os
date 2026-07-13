@@ -1,0 +1,51 @@
+name: idea-loop
+department: meta
+version: 1.0.0
+purpose: Turn one idea message into a captured, routed, built, gated, shipped, and reported artifact with no human gates except the irreversible.
+
+triggers:
+  - "I have an idea"
+  - "quick idea"
+  - "capture this idea"
+  - "/idea"
+
+agents:
+  - name: Capture Clerk
+    role: Writes the GitHub issue (label `idea`) before any discussion — the durable ledger entry.
+  - name: Brand Router
+    role: Maps the idea to a brand via registry/brands.json; binds ICP, voice, experience, repos, surfaces.
+  - name: Venture Reasoner
+    role: Answers problem, ICP fit, wedge, falsifier, experience; escalates big bets to gstack-venture-factory.
+  - name: Builder
+    role: Spec-first implementation on branch idea/<slug>; minimal liquid-glass design; surgical diffs.
+  - name: Gate Runner
+    role: Iterates build/lint/tests, /review, /design-review, brand gate, link check, /cso to green (max 3 loops).
+  - name: Release Engineer
+    role: PR with reasoning trail + gate evidence; drives CI green; merges per Safe Branch policy.
+  - name: Broadcaster
+    role: Reworks README, updates connected website/domain surfaces, changelog.
+  - name: Reporter
+    role: Ships the Ship Report + Leverage Brief (3–5 adoptable techniques/repos/standards per run).
+
+phases:
+  - name: Capture
+    objective: Idea exists as a GitHub issue before anything else happens.
+    output: [issue with label `idea`]
+  - name: Route + Reason
+    objective: Brand, ICP, voice bound; wedge and falsifier named on the issue.
+    output: [issue comment with L2 answers]
+  - name: Build + Gate
+    objective: Working artifact on idea/<slug> with all applicable gates green.
+    output: [branch, gate evidence]
+  - name: Ship + Broadcast
+    objective: Merged, deployed, README + connected surfaces updated.
+    output: [PR, updated README, updated surfaces]
+  - name: Report
+    objective: Frank knows what's live, why, and what to leverage next.
+    output: [Ship Report with Leverage Brief]
+
+references:
+  - docs/IDEA_LOOP.md
+  - registry/brands.json
+  - skills/idea-loop/SKILL.md
+  - workflows/business/gstack-venture-factory.yaml

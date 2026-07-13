@@ -1,0 +1,107 @@
+{
+  "$schema": "./brands.schema.json",
+  "_description": "Canonical brand registry for the Idea Loop (docs/IDEA_LOOP.md). Routing layer L1: every idea maps to exactly one brand; every brand carries ICP, voice, experience goal, repos, domains, and publish surfaces. Domains marked verify:true must be confirmed live before linking publicly.",
+  "_version": "1.0.0",
+  "_updated": "2026-07-13",
+  "defaults": {
+    "visibility": "public",
+    "design_language": "minimal, liquid-glass, restraint over decoration, dark-first",
+    "private_paths": [".claude/", ".agent/", ".env", "secrets", "financials", "client data", "/papa/"],
+    "hard_stops": ["money movement", "api key rotation", "newsletter blasts", "social auto-posting", "irreversible migrations", "force-push production main"]
+  },
+  "brands": [
+    {
+      "id": "frankx",
+      "name": "FrankX",
+      "icp": "Creators, entrepreneurs, and operators who want practical AI systems — a personal AI Center of Excellence — not another tool subscription.",
+      "voice": "Elite creator, AI architect, humble excellence. Direct, technical, warm. Results first; show don't tell. No guru language.",
+      "experience": "educate",
+      "repos": ["frankxai/FrankX", "frankxai/frankx.ai-vercel-website"],
+      "domains": [{ "host": "frankx.ai", "verify": false }],
+      "surfaces": ["frankx.ai pages via two-repo sync (FrankX → frankx.ai-vercel-website)", "blog", "newsletter", "prompt library", "research hub"],
+      "keywords": ["frankx", "blog", "newsletter", "prompt library", "personal brand", "creator systems", "ai architect"]
+    },
+    {
+      "id": "acos",
+      "name": "Agentic Creator OS",
+      "icp": "AI-powered creators and builders installing a skill/agent/workflow OS into their coding harness of choice.",
+      "voice": "Frank DNA: direct, technical, warm, playful. Pattern recognition as poetry. Help people build their own system.",
+      "experience": "guide",
+      "repos": ["frankxai/agentic-creator-os", "frankxai/agentic-creator-skills"],
+      "domains": [],
+      "surfaces": ["GitHub README + docs", "skills catalog", "install flows"],
+      "keywords": ["acos", "skill", "command", "agent", "workflow", "harness", "claude code", "grok", "cursor", "gemini"]
+    },
+    {
+      "id": "starlight",
+      "name": "Starlight Intelligence",
+      "icp": "Agent-systems builders who need persistent memory, protocol-level attestation, and multi-agent orchestration substrate.",
+      "voice": "Architect register: precise, protocol-minded, canon-free functional names. Substrate before story.",
+      "experience": "educate",
+      "repos": ["frankxai/Starlight-Intelligence-System", "frankxai/starlight-agent-skills", "frankxai/starlight-swarm", "frankxai/starlight-evals", "frankxai/starlight-cosmos-engine", "frankxai/starlight-mind-os-pro"],
+      "domains": [{ "host": "starlightintelligence.org", "verify": true }],
+      "surfaces": ["research surface (rubric-locked, board-gated)", "protocol docs", "GitHub"],
+      "keywords": ["starlight", "sip", "sis", "memory", "vault", "substrate", "attestation", "orchestration", "protocol"]
+    },
+    {
+      "id": "arcanea",
+      "name": "Arcanea",
+      "icp": "Creators and worldbuilders co-creating with AI inside a living universe — fiction, music, art, and lore with canon discipline.",
+      "voice": "Elevated but accessible, arcane + authoritative, mythic but practical. Canon per CANON_LOCKED.md.",
+      "experience": "immerse",
+      "repos": ["frankxai/arcanea", "frankxai/arcanea-ai-app"],
+      "domains": [{ "host": "arcanea.ai", "verify": true }],
+      "surfaces": ["arcanea app (Vercel)", "Library collections", "GitHub OSS"],
+      "keywords": ["arcanea", "lore", "guardian", "luminor", "worldbuilding", "canon", "gates", "mythology"]
+    },
+    {
+      "id": "music",
+      "name": "Music Intelligence / AI Music Academy",
+      "icp": "Musicians and producers using AI (Suno-class tools) to compose, release, and grow a catalog with professional discipline.",
+      "voice": "Producer-grade: technical, encouraging, zero hype. Teach the craft, show the chain.",
+      "experience": "guide",
+      "repos": ["frankxai/ai-music-academy", "frankxai/music-intelligence-systems", "frankxai/awesome-music-agent-skills"],
+      "domains": [],
+      "surfaces": ["GitHub", "academy curriculum", "release pipelines"],
+      "keywords": ["music", "suno", "song", "track", "release", "catalog", "mastering", "academy"]
+    },
+    {
+      "id": "agentic-income",
+      "name": "Agentic Income",
+      "icp": "Solopreneurs and operators building agent-run income systems — leverage without headcount, fail-closed money handling.",
+      "voice": "Grounded operator: numbers, mechanisms, receipts. No passive-income hype; agents draft, humans approve capital.",
+      "experience": "educate",
+      "repos": ["frankxai/agenticincome", "frankxai/agentic-income-skills", "frankxai/awesome-agentic-income", "frankxai/agentic-income-template", "frankxai/agenticpassiveincome", "frankxai/agentic-business-os", "frankxai/payment-intelligence-system", "frankxai/awesome-payment-agent-skills", "frankxai/agentic-ops-hub"],
+      "domains": [],
+      "surfaces": ["GitHub", "templates", "ops hub"],
+      "keywords": ["income", "revenue", "payments", "business", "ops", "monetize", "template", "ap2", "x402"]
+    },
+    {
+      "id": "mind",
+      "name": "Mind Intelligence",
+      "icp": "Builders of personal mind/second-brain systems who want cognitive models that observe and predict — never diagnose.",
+      "voice": "Direct, technical, warm; five-stage discipline (observe → interpret → hypothesize → evidence → decide). Non-clinical, non-waivable.",
+      "experience": "guide",
+      "repos": ["frankxai/mind-intelligence-systems", "frankxai/human-mind-intelligence-system", "frankxai/agentic-mind-os", "frankxai/awesome-mind-agent-skills", "frankxai/second-brain-os", "frankxai/frankx-mind-palace", "frankxai/mind-palace-agent-skills"],
+      "domains": [],
+      "surfaces": ["GitHub", "vault templates", "schemas"],
+      "keywords": ["mind", "memory", "second brain", "vault", "cognition", "attention", "metacognition", "palace"]
+    },
+    {
+      "id": "ocean",
+      "name": "Ocean / Blue Life",
+      "icp": "Marine-curious builders and ocean advocates who want intelligence systems applied to the blue world.",
+      "voice": "Wonder grounded in data. Educate through the ocean's own scale.",
+      "experience": "inspire",
+      "repos": ["frankxai/ocean-intelligence-system", "frankxai/blue-life-commons", "frankxai/marine-mcp", "frankxai/marine-agent-skills"],
+      "domains": [],
+      "surfaces": ["GitHub", "commons"],
+      "keywords": ["ocean", "marine", "blue", "sea", "reef", "conservation"]
+    }
+  ],
+  "routing": {
+    "fallback_brand": "acos",
+    "fallback_repo": "frankxai/agentic-creator-os",
+    "rule": "Match idea keywords against brands[].keywords; tie-break by repo affinity of the current session; if no match, capture in fallback_repo and route during L2 reasoning."
+  }
+}
