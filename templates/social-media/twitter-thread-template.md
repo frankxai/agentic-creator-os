@@ -1,4 +1,8 @@
-# Twitter Thread Template
+# Twitter Thread Template (FrankX X Growth — 2026 Refresh)
+
+**Aligned to**: X Growth Playbook (starlight/strategy/x-twitter-growth-playbook-2026.md), generate-social voice rules (precise, data-backed, dry humor, systems architect to peer), high-engagement patterns from Dream 100 / top creators analysis (stat → implication → actionable; curated value lists; proof + framework), no emojis/🧵 in threads per voice lock.
+
+See playbook for full research (xAI signals, viral examples, competitors like @levelsio/@karpathy, scrapers like Xquik/twscrape + xpoz integration).
 
 ## When to Use This Template
 - Teaching a concept or framework in digestible chunks

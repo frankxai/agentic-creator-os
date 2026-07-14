@@ -3,6 +3,7 @@ slug: x-content
 description: |
   Create tweets, threads, and engagement content for X/Twitter.
   Optimized for viral reach, engagement, and community building.
+  Integrated with X Growth Playbook 2026, Dream 100 radars, Grok CLI analysis + image gen, Hermes X agents, xpoz, Postiz.
 triggers:
   - "skill:content, create tweet"
   - "skill:content, write twitter thread"
@@ -13,65 +14,69 @@ agents:
   - twitter-writer
   - viral-strategist
   - community-manager
+  - hermes-x-strategist   # NEW: Dream 100 / pattern analysis + briefs
 tools:
-  - twitter-mcp
-  - filesystem-mcp
+  - xpoz-intelligence
   - browser-mcp
+  - postiz-distributor
+  - hermes-runtime
+  - image-gen (Grok Imagine)
 phases:
   1:
-    name: Tweet/Thread Planning
-    description: Plan content structure and format
+    name: Research & Radar (Dream 100 + Signals)
+    description: Ingest high-engagement patterns from top creators and current X data
     steps:
-      - Define content goal (engagement, reach, conversions)
-      - Choose format: single tweet, thread, or poll
-      - Research trending topics and hashtags
-      - Plan hook and key messages
-      - Output: content-plan.json
-    
+      - Run/extend xpoz + source/media radar or scraper for Dream 100 posts
+      - Hermes X strategist + Grok: extract hooks, voice, visuals, engagement drivers
+      - Map to FrankX voice (data-backed, precise, systems architect)
+      - Output: patterns-brief.json + idea bank
+
   2:
-    name: Hook Creation
-    description: Write attention-grabbing opening
+    name: Planning + Hook Creation
+    description: Plan structure and high-signal hooks
     steps:
-      - Generate 3-5 hook options
-      - Test hooks against viral patterns
-      - Select best hook based on goal
-      - Output: hooks.json
-    
+      - Define goal (authority, funnel to frankx.ai, engagement)
+      - Choose format (thread primary for depth)
+      - Grok generates 3-5 hook options tested against research patterns
+      - Select + align to current signal or FrankX source
+      - Output: content-plan.json + visual brief
+
   3:
-    name: Content Drafting
-    description: Write full content
+    name: Content Drafting + Visuals
+    description: Write + generate assets
     steps:
-      - Write opening tweet with hook
-      - Draft supporting tweets (3-10 depending on thread length)
-      - Include tweets with images/gifs/videos
-      - Write conclusion with CTA
-      - Output: thread-draft.md
-    
+      - Draft using refreshed templates + generate-social voice lock (no emojis/🧵)
+      - Grok image_gen: X header (1500x500), quote cards, diagrams
+      - Include proof, framework, escalating value
+      - Output: thread-draft.md + visuals/
+
   4:
-    name: Optimization
-    description: Optimize for X algorithm
+    name: Optimization + Hermes Review
+    description: Polish for X + agentic gate
     steps:
-      - Add relevant hashtags (1-2 per tweet)
-      - Include 1-2 engagement tweets (question/poll)
-      - Add mentions if relevant
-      - Optimize for 280 character limit
+      - Hermes X review for voice, patterns match, CTAs
+      - Add 1-2 engagement elements if natural
+      - Optimize length and scannability
       - Output: optimized-thread.md
-    
+
   5:
-    name: Publishing
-    description: Schedule or publish
+    name: Distribution, Engagement & Measurement (Hermes)
+    description: Schedule, engage, learn
     steps:
-      - Create thread in thread reader format
-      - Schedule tweets or publish immediately
-      - Add media if needed
-      - Prepare engagement replies
-      - Output: scheduled-content.json
+      - Hermes/Postiz: schedule (or browser fallback)
+      - Hermes sentinel: monitor + draft smart replies (human gate)
+      - Track impressions, replies, clicks, profile visits
+      - Feed winners back to playbook + radars
+      - Output: performance.json + learnings
 
 output_dir: outputs/x-content
-version: "2.0.0"
+version: "3.0.0"
+playbook: starlight/strategy/x-twitter-growth-playbook-2026.md
 templates:
-  - twitter-thread-template.md
-  - twitter-thread-expert.md
-  - twitter-thread-storytelling.md
-  - twitter-thread-howto.md
-  - twitter-thread-listicle.md
+  - twitter-thread-template.md (2026 refresh)
+  - twitter-thread-expert.md (align to patterns)
+  - others refreshed per playbook
+integrations:
+  - agentic-influencer-os radars
+  - hermes-x-strategist skill
+  - Grok CLI (analysis + image_gen + Build for tools)

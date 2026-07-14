@@ -63,3 +63,16 @@ ACOS agents are prevented from accessing sensitive files:
 ## Acknowledgments
 
 We appreciate responsible disclosure and will acknowledge security researchers who help improve ACOS security.
+
+<!-- STARLIGHT-REPO-CONTRACT:START -->
+## Starlight repository contract
+
+Contract: `starlight.repo_profile.v2` · Team: `arcanea-creative-worlds-team` · Priority: `now`
+### Data boundary
+
+- Classification: `internal`
+- PII allowed in product-owned storage: `false`
+- Auth owner: `None`
+
+Never read or print `.env` values. Keep secrets in approved secret stores, keep PII out of analytics events and receipts, scan untrusted code before execution, and stop on credential or private-memory exposure.
+<!-- STARLIGHT-REPO-CONTRACT:END -->

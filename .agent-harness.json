@@ -1,37 +1,184 @@
-﻿{
-    "risk":  "library",
-    "health":  "pnpm test",
-    "agentFiles":  [
-                       "AGENTS.md",
-                       "CLAUDE.md"
-                   ],
-    "deployPolicy":  "manual",
-    "globalHooksAllowed":  false,
-    "agentGuidance":  {
-                          "designTasteKernel":  {
-                                                    "enabled":  true,
-                                                    "root":  "C:\\Users\\frank\\starlight\\repos",
-                                                    "files":  [
-                                                                  "C:\\Users\\frank\\starlight\\repos\\DESIGN_TASTE.md",
-                                                                  "C:\\Users\\frank\\starlight\\repos\\WEB_EXPERIENCE_STANDARD.md",
-                                                                  "C:\\Users\\frank\\starlight\\repos\\MOTION_TASTE_RUBRIC.md",
-                                                                  "C:\\Users\\frank\\starlight\\repos\\MULTI_AGENT_DESIGN_COUNCIL.md",
-                                                                  "C:\\Users\\frank\\starlight\\repos\\VISUAL_QA_GATE.md"
-                                                              ],
-                                                    "appliesTo":  [
-                                                                      "site",
-                                                                      "app",
-                                                                      "landing-page",
-                                                                      "dashboard",
-                                                                      "visual-identity",
-                                                                      "brand",
-                                                                      "motion",
-                                                                      "media",
-                                                                      "social",
-                                                                      "frontend"
-                                                                  ],
-                                                    "motionPlugin":  "motion-design-studio",
-                                                    "visualVerificationRequired":  true
-                                                }
-                      }
+{
+  "schema_version": "starlight.repo_profile.v2",
+  "repo": {
+    "id": "agentic-creator-os",
+    "classification": "agent-substrate",
+    "operating_unit": "arcanea",
+    "lane": "arcanea",
+    "lifecycle": "active",
+    "priority": "now",
+    "canonical_source": {
+      "kind": "local-git",
+      "ref": "agentic-creator-os",
+      "nested_root": null
+    },
+    "default_branch": "main",
+    "visibility": "unknown"
+  },
+  "ownership": {
+    "human_owner": "Frank",
+    "steward_team": "arcanea-creative-worlds-team",
+    "support_lane": "arcanea-creative-ops"
+  },
+  "commands": {
+    "health": [
+      "git status --short"
+    ],
+    "lint": [
+      "pnpm run lint"
+    ],
+    "typecheck": [
+      "pnpm run typecheck:all"
+    ],
+    "test": [],
+    "build": [
+      "pnpm run build:all"
+    ],
+    "security": [
+      "pwsh ../security/Invoke-RepoSecurityScan.ps1 -Path ."
+    ]
+  },
+  "documents": {
+    "agents": "AGENTS.md",
+    "system": "SYSTEM.md",
+    "schema": "SCHEMA.md",
+    "skills": "SKILLS.md",
+    "product": "PRODUCT.md",
+    "gtm": "GTM.md",
+    "runbook": "RUNBOOK.md",
+    "testing": "TESTING.md",
+    "security": "SECURITY.md",
+    "design": null
+  },
+  "runtime": {
+    "package_managers": [
+      "pnpm"
+    ],
+    "services": [],
+    "dependencies": []
+  },
+  "data": {
+    "classification": "internal",
+    "persistent_store": [
+      "git",
+      "local-json"
+    ],
+    "auth_owner": null,
+    "pii_allowed": false,
+    "retention_policy_ref": "SECURITY.md"
+  },
+  "delivery": {
+    "providers": [
+      "github"
+    ],
+    "projects": [],
+    "domains": [],
+    "promotion_policy": "named-human-approval",
+    "rollback": "Revert the bounded change or promote the last verified deployment after confirming data compatibility."
+  },
+  "agentic": {
+    "team_profile_ref": "arcanea-creative-worlds-team",
+    "skills": [
+      "arcanea-world",
+      "arcanea-canon-director",
+      "anime-legends",
+      "premium-web-os"
+    ],
+    "plugins": [
+      "arcanea-creative-worlds"
+    ],
+    "tools": [
+      "github",
+      "vercel",
+      "visual-intelligence",
+      "imagegen"
+    ],
+    "write_scopes": [
+      "assigned-task-paths-only"
+    ],
+    "handoff": "Report artifacts, checks, verifier verdict, remaining risks, approval needs, and next bounded action."
+  },
+  "gates": {
+    "local": [
+      "lint",
+      "typecheck",
+      "test",
+      "build"
+    ],
+    "ci": [
+      "concurrency-cancel-in-progress",
+      "timeout",
+      "paths-filter",
+      "draft-heavy-gate"
+    ],
+    "security": [
+      "security-intake",
+      "secret-scan",
+      "data-boundary"
+    ],
+    "design": [],
+    "ai": [],
+    "release": [
+      "independent-verifier",
+      "named-human-approval",
+      "production_high_risk",
+      "dns_change",
+      "secret_change",
+      "billing_change",
+      "spend",
+      "data_migration",
+      "destructive",
+      "external_send",
+      "legal_ip",
+      "brand_identity",
+      "permission_change"
+    ],
+    "evidence": [
+      "run-receipt",
+      "operation-receipt",
+      "rollback-proof"
+    ]
+  },
+  "extensions": {
+    "purpose": "Agentic Creator OS and creator workflow adapter surface.",
+    "product_role": "Creator operating substrate",
+    "primary_outcome": "Repeatable creator workflows",
+    "legacy_v1": {
+      "risk": "library",
+      "health": "pnpm test",
+      "agentFiles": [
+        "AGENTS.md",
+        "CLAUDE.md"
+      ],
+      "deployPolicy": "manual",
+      "globalHooksAllowed": false,
+      "agentGuidance": {
+        "designTasteKernel": {
+          "enabled": true,
+          "root": "C:\\Users\\frank\\starlight\\repos",
+          "files": [
+            "C:\\Users\\frank\\starlight\\repos\\DESIGN_TASTE.md",
+            "C:\\Users\\frank\\starlight\\repos\\WEB_EXPERIENCE_STANDARD.md",
+            "C:\\Users\\frank\\starlight\\repos\\MOTION_TASTE_RUBRIC.md",
+            "C:\\Users\\frank\\starlight\\repos\\MULTI_AGENT_DESIGN_COUNCIL.md",
+            "C:\\Users\\frank\\starlight\\repos\\VISUAL_QA_GATE.md"
+          ],
+          "appliesTo": [
+            "site",
+            "app",
+            "landing-page",
+            "dashboard",
+            "visual-identity",
+            "brand",
+            "motion",
+            "media",
+            "social",
+            "frontend"
+          ],
+          "motionPlugin": "motion-design-studio",
+          "visualVerificationRequired": true
+        }
+      }
+    }
+  }
 }
