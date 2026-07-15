@@ -1,0 +1,6 @@
+{
+  "_description": "Model Arena standings — pass-rate + pairwise Elo + cost/latency, updated by scripts/model-arena/run.mjs each round. Directional (small-n), not statistics. Seeded empty; fills on first real or simulated round.",
+  "rounds": 0,
+  "updated": null,
+  "models": {}
+}

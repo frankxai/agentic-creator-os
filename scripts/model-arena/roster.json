@@ -1,0 +1,29 @@
+{
+  "_description": "Model Arena roster — which frontier models compete, and how to reach them. Derived from data/model-registry.json but adds the API-dispatch layer (OpenRouter slugs + arena_active). The registry is the source of truth for model FACTS; this roster is the source of truth for who's IN THE RING.",
+  "_maintained_by": "model-arena-daily workflow (new-model detection auto-flags registry GA models missing here) + manual review",
+  "_reachability_note": "openrouter_slug is best-effort and MUST be verified against https://openrouter.ai/models — slugs drift. The runner skips a model with a bad slug and records the error rather than failing the round. Self-host-only and preview models are arena_active:false until a hosted endpoint exists.",
+  "_updated": "2026-07-12",
+  "judge": {
+    "_note": "Blind cross-family judge for subjective tasks. Prefer a non-Anthropic model to kill the family-bias caveat the public arena has carried since 2026-06-09.",
+    "primary_slug": "openai/gpt-5.5",
+    "fallback_harness_model": "sonnet"
+  },
+  "models": [
+    { "registry_id": "claude-opus-4-8", "name": "Claude Opus 4.8", "org": "anthropic", "openrouter_slug": "anthropic/claude-opus-4.8", "harness_model": "opus", "arena_active": true, "tier": "flagship" },
+    { "registry_id": "claude-sonnet-4-6", "name": "Claude Sonnet 4.6", "org": "anthropic", "openrouter_slug": "anthropic/claude-sonnet-4.6", "harness_model": "sonnet", "arena_active": true, "tier": "workhorse" },
+    { "registry_id": "claude-haiku-4-5", "name": "Claude Haiku 4.5", "org": "anthropic", "openrouter_slug": "anthropic/claude-haiku-4.5", "harness_model": "haiku", "arena_active": true, "tier": "fast" },
+    { "registry_id": "claude-fable-5", "name": "Claude Fable 5", "org": "anthropic", "openrouter_slug": "anthropic/claude-fable-5", "harness_model": "fable", "arena_active": true, "tier": "flagship" },
+    { "registry_id": "gpt-5-5", "name": "GPT-5.5", "org": "openai", "openrouter_slug": "openai/gpt-5.5", "arena_active": true, "tier": "flagship" },
+    { "registry_id": "gemini-3-5-flash", "name": "Gemini 3.5 Flash", "org": "google", "openrouter_slug": "google/gemini-3.5-flash", "arena_active": true, "tier": "workhorse" },
+    { "registry_id": "grok-4-3", "name": "Grok 4.3", "org": "xai", "openrouter_slug": "x-ai/grok-4.3", "arena_active": true, "tier": "workhorse" },
+    { "registry_id": "deepseek-v4", "name": "DeepSeek V4", "org": "deepseek", "openrouter_slug": "deepseek/deepseek-v4", "arena_active": true, "tier": "open-frontier" },
+    { "registry_id": "qwen3-7-max", "name": "Qwen3.7-Max", "org": "alibaba", "openrouter_slug": "qwen/qwen3.7-max", "arena_active": true, "tier": "open-frontier" },
+    { "registry_id": "kimi-k2-6", "name": "Kimi K2.6", "org": "moonshot", "openrouter_slug": "moonshotai/kimi-k2.6", "arena_active": true, "tier": "open-frontier" },
+    { "registry_id": "mistral-large-3", "name": "Mistral Large 3", "org": "mistralai", "openrouter_slug": "mistralai/mistral-large-3", "arena_active": true, "tier": "open-frontier" },
+    { "registry_id": "gemma-4", "name": "Gemma 4", "org": "google", "openrouter_slug": "google/gemma-4-31b", "arena_active": true, "tier": "open-local" },
+    { "registry_id": "gpt-oss", "name": "gpt-oss-120b", "org": "openai", "openrouter_slug": "openai/gpt-oss-120b", "arena_active": true, "tier": "open-local" },
+    { "registry_id": "llama-4-maverick", "name": "Llama 4 Maverick", "org": "meta", "openrouter_slug": "meta-llama/llama-4-maverick", "arena_active": false, "tier": "open-local", "inactive_reason": "verified benchmarks now trail the open-frontier tier; keep as a reference baseline, not a live contestant" },
+    { "registry_id": "gemini-3-5-pro", "name": "Gemini 3.5 Pro", "org": "google", "openrouter_slug": "google/gemini-3.5-pro", "arena_active": false, "tier": "flagship", "inactive_reason": "limited preview as of 2026-06 — no GA endpoint; activate on GA" },
+    { "registry_id": "mai-thinking-1", "name": "MAI-Thinking-1", "org": "microsoft", "openrouter_slug": null, "arena_active": false, "tier": "flagship", "inactive_reason": "preview, vendor-claimed benchmarks, no public API endpoint" }
+  ]
+}
