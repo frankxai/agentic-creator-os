@@ -1,0 +1,13 @@
+name: 💡 Idea
+description: One message is enough. The Idea Loop captures, routes, builds, gates, ships, and reports.
+title: "[idea] "
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: Raw is fine — the loop does the reasoning. Optionally name the brand (frankx / acos / starlight / arcanea / music / agentic-income / mind / ocean) to skip routing.
+      placeholder: "What if we..."
+    validations:
+      required: true

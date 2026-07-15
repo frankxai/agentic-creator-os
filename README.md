@@ -299,10 +299,24 @@ Append-only JSONL logging of every tool use, IAM decision, gate verdict, and con
 | **Creation** | 12 | `/studio`, `/generate-video`, `/article-creator`, `/create-music`, `/infogenius`, `/factory` |
 | **Strategy** | 6 | `/starlight-architect`, `/council`, `/research`, `/plan-week` |
 | **Development** | 4 | `/spec`, `/nextjs-deploy`, `/ux-design`, `/automation-dev` |
-| **System** | 5 | `/acos`, `/inventory-status`, `/mcp-status`, `/publish` |
+| **System** | 6 | `/acos`, `/idea`, `/inventory-status`, `/mcp-status`, `/publish` |
 | **Quality** | 3 | `/review-content`, `/classify-content`, `/polish-content` |
 
 > Commands are Claude Code slash commands. On other platforms, describe the task and ACOS skills guide the agent to the same workflows.
+
+### Idea Loop — One Message → Live
+
+Drop an idea in any chat (or open a GitHub issue labeled `idea`) and the loop
+runs agent-driven end to end: **capture** (durable GitHub issue — ideas never
+die in a scrolled chat) → **route** (brand + ICP + voice via
+[`registry/brands.json`](registry/brands.json)) → **reason** (wedge + falsifier)
+→ **build** → **agentic excellence gates** (review, design, brand, links, CI —
+iterated to green) → **ship** (PR → merge → deploy) → **broadcast** (README +
+connected domains) → **Ship Report** with a Leverage Brief that teaches you
+3–5 adoptable techniques every run. Human gates exist only for the
+irreversible (money, keys, sends). Full architecture:
+[`docs/IDEA_LOOP.md`](docs/IDEA_LOOP.md) · trigger: `/idea` or the
+[💡 Idea issue template](.github/ISSUE_TEMPLATE/idea.yml).
 
 ### Skills (75+ Auto-Activating)
 

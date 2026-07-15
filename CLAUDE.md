@@ -126,10 +126,11 @@ See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for 
 | `/ux-design` | UI/UX design workflows |
 | `/automation-dev` | MCP servers & automation |
 
-### System (6)
+### System (7)
 | Command | Description |
 |---------|-------------|
 | `/acos` | Smart router — single entry point |
+| `/idea` | One message → live. Capture idea as GitHub issue → route via `registry/brands.json` → reason → build → agentic gates → ship → Ship Report + Leverage Brief (idea-loop skill, `docs/IDEA_LOOP.md`) |
 | `/planning-with-files` | File-based planning |
 | `/inventory-status` | Content inventory dashboard |
 | `/mcp-status` | MCP server health |

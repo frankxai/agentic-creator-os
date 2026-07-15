@@ -1,0 +1,56 @@
+# Idea Loop — GitHub-native trigger (docs/IDEA_LOOP.md)
+# Any issue labeled `idea` (or an `/idea` comment) launches a Claude Code agent
+# run that executes skills/idea-loop/SKILL.md end to end: route → reason →
+# build → gate → ship (PR) → report back on the issue.
+#
+# Setup (once per repo): add ANTHROPIC_API_KEY to repo secrets.
+# Rollout to other repos: copy this file + .github/ISSUE_TEMPLATE/idea.yml;
+# the skill and registry stay canonical in agentic-creator-os.
+
+name: idea-loop
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  run-idea-loop:
+    if: >
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'idea')) ||
+      (github.event_name == 'issue_comment' && startsWith(github.event.comment.body, '/idea'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run the Idea Loop
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: "--allowedTools Bash,Read,Write,Edit,Glob,Grep"
+          prompt: |
+            Execute the Idea Loop protocol in skills/idea-loop/SKILL.md for
+            issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}").
+            The idea is already captured (L0 done — this issue is the ledger entry).
+            Continue from L1:
+            1. Route via registry/brands.json; post the L2 reasoning (problem,
+               ICP fit, wedge, falsifier, experience) as an issue comment.
+            2. Build the wedge on branch idea/<slug> in THIS repo. If the routed
+               repo is a different one, post the routing verdict + hand-off plan
+               on the issue instead of building here.
+            3. Run every applicable gate (build/lint/tests, self-review, brand
+               voice per the registry); iterate to green, max 3 loops.
+            4. Open a PR referencing this issue with the reasoning trail and
+               gate evidence in the body.
+            5. Close with a Ship Report comment on the issue, including the
+               Leverage Brief (3–5 adoptable techniques/repos/standards).
+            Human gates apply only to: money movement, key rotation,
+            newsletter/social sends, irreversible ops, production force-push.
