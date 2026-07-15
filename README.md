@@ -16,6 +16,33 @@
 
 ---
 
+
+## Purpose
+
+Agentic Creator OS (ACOS) is the **reusable creator operating system**: skills, commands, agents, hooks, and plugins for Claude Code, Cursor, Windsurf, Gemini, and Grok. It is the open substrate creators install; product commerce lives on [gencreator.ai](https://github.com/frankxai/gencreator.ai).
+
+## How People Experience It
+
+- **Install:** Claude plugin marketplace / multi-platform install scripts → skills auto-activate in real work.
+- **Operate:** `/acos` smart router, slash commands, specialized agents, multimodal studio, safety hooks.
+- **Trust bar:** every public claim must be true (LICENSE, plugin paths, hook wiring, stats gates) — see v12 open-core track.
+- **Humans land on:** README → Quick Start for their harness → Core Concepts → Starlight Connection.
+
+## How Agents Explore It
+
+1. Read **`CLAUDE.md`** first (and `GROK.md` if present), then **`AGENTS.md`**.
+2. Preserve Frank DNA + safety hooks; extend existing skills/commands/adapters.
+3. Prefer improve-in-place over parallel surfaces; keep seeds synced across platforms.
+4. Before ship: plugin validate, stats/leak gates, scoped pathspecs.
+5. Cross-links: [gencreator.ai](https://github.com/frankxai/gencreator.ai) · [SIS](https://github.com/frankxai/Starlight-Intelligence-System) · [FrankX](https://github.com/frankxai/FrankX) · [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills).
+
+## Usefulness
+
+- **Humans:** one OS for AI-native creator workflows without reinventing harness glue.
+- **Agents:** auto-activating domain skills, trajectory memory, circuit breakers, installable plugin surface.
+- **Portfolio role:** distribution layer between Starlight substrate and GenCreator product/revenue.
+
+---
 ## What Is the Agentic Creator OS?
 
 A **production-grade skill and agent system** for AI coding assistants. It ships skills (domain knowledge), commands (reusable workflows), agents (specialized personas), and safety hooks — configured to auto-activate based on what you're working on.
