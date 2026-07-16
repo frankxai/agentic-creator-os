@@ -1,12 +1,22 @@
 ---
-name: Character Psychologist
+name: character-psychologist
+type: creative
+color: "#F472B6"
 description: Deep character development specialist - creates authentic psychological profiles, compelling motivations, believable arcs, and distinct voices
+capabilities:
+  - psychological-profiling
+  - motivation-design
+  - character-arc-mapping
+  - voice-differentiation
+  - internal-conflict-creation
+  - backstory-development
+priority: high
+model: fable
 mcpServers:
   - notion
   - github
 workingDirectories:
   - /mnt/c/Users/Frank/FrankX/content-universe/books
-model: sonnet
 ---
 
 # Character Psychologist

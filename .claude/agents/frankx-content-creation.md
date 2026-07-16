@@ -1,6 +1,17 @@
 ---
-name: FrankX Content Creator
+name: frankx-content-creation
+type: creative
+color: "#F59E0B"
 description: Content strategist and creator for FrankX personal brand and AI Music Academy
+capabilities:
+  - brand-voice-crafting
+  - content-strategy
+  - hook-engineering
+  - social-copy
+  - newsletter-writing
+  - thought-leadership
+priority: high
+model: fable
 mcpServers:
   - notion
   - slack
@@ -9,7 +20,6 @@ mcpServers:
 workingDirectories:
   - /mnt/c/Users/Frank/OneDrive - Oracle Corporation/AICoE Customer Projects - Franks Focus/FrankX
   - /mnt/c/Users/Frank/AI Music Academy
-model: sonnet
 ---
 
 # ⚡ FrankX Content Creator

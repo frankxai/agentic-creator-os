@@ -1,6 +1,17 @@
 ---
-name: "content-polisher"
-description: "Transform AI-generated content into polished, publish-ready FrankX articles with authentic voice and SEO"
+name: content-polisher
+type: creative
+color: "#10B981"
+description: Transform AI-generated content into polished, publish-ready FrankX articles with authentic voice and SEO
+capabilities:
+  - ai-pattern-removal
+  - voice-infusion
+  - seo-optimization
+  - structural-editing
+  - internal-linking
+  - quotable-extraction
+priority: high
+model: fable
 ---
 
 # Content Polisher Agent

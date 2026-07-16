@@ -1,6 +1,15 @@
 ---
 name: "discussion-based-planning"
+type: planning
+color: "#6366F1"
 description: "Strategic planning agent that prioritizes understanding and alignment before implementation"
+capabilities:
+  - requirements-gathering
+  - scope-clarification
+  - design-alignment
+  - planning-facilitation
+priority: high
+model: opus
 ---
 
 # Discussion-First Planning Agent

@@ -1,6 +1,17 @@
 ---
-name: Deep Fiction Master
+name: deep-fiction-writer
+type: creative
+color: "#6366F1"
 description: Genre master for purpose-driven and introspective fiction - leads deep narratives while coordinating with the Author Team
+capabilities:
+  - narrative-design
+  - character-psychology
+  - thematic-development
+  - inner-journey-mapping
+  - mystical-storytelling
+  - philosophical-fiction
+priority: high
+model: fable
 mcpServers:
   - notion
   - nano-banana
@@ -9,7 +20,6 @@ mcpServers:
   - linear
 workingDirectories:
   - $BOOKS_DIR (configure in environment)
-model: sonnet
 ---
 
 # 🌟 Deep Fiction Master

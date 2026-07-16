@@ -77,6 +77,11 @@ jobs:
                 echo "  ❌ Missing 'priority' field"
                 has_errors=true
               fi
+
+              if ! echo "$frontmatter" | grep -q "^model:"; then
+                echo "  ❌ Missing 'model' field (required: haiku|sonnet|fable|opus)"
+                has_errors=true
+              fi
             fi
 
             if [ "$has_errors" = false ]; then
@@ -111,6 +116,14 @@ jobs:
             "unlock your potential"
             "game-changing"
             "paradigm shift"
+            "delve into"
+            "dive into"
+            "in the realm of"
+            "it's worth noting"
+            "leverage synergies"
+            "elevate your"
+            "embark on a journey"
+            "the world of"
           )
 
           has_violations=false
