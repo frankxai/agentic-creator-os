@@ -66,6 +66,22 @@
         "type": "command",
         "matcher": "Task|Read|Write|Edit|Bash",
         "command": "cd .claude/hooks && TOOL_NAME=$TOOL_NAME npx tsx context-budget-tracker.ts 2>/dev/null || echo 'Context checkpoint: Monitor drift.'"
+      },
+      {
+        "name": "nlah-contract-enforcer",
+        "description": "NLAH budget enforcement — tracks tool/edit/agent usage against active skill contracts",
+        "type": "command",
+        "matcher": "Write|Edit|Agent|Task|Bash|Read",
+        "command": "node .claude/hooks/contract-enforcer.js 2>/dev/null || true"
+      }
+    ],
+
+    "Stop": [
+      {
+        "name": "nlah-artifact-manager",
+        "description": "NLAH artifact sealing — verifies required outputs and writes manifest when a contracted skill session ends",
+        "type": "command",
+        "command": "node .claude/hooks/artifact-manager.js 2>/dev/null || true"
       }
     ],
 

@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://acos.frankx.ai/schemas/nlah-contract.schema.json",
+  "title": "NLAH Execution Contract",
+  "description": "Natural-Language Agent Harness contract schema for ACOS skills. Defines required outputs, budgets, completion conditions, permissions, and artifact configuration. Based on arXiv:2603.25723.",
+  "type": "object",
+  "properties": {
+    "required-outputs": {
+      "description": "Artifacts that must be produced for the harness run to be considered complete.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["file", "artifact", "stdout", "state"],
+            "description": "Output type. 'file' = written to disk, 'artifact' = placed in artifact dir, 'stdout' = printed to user, 'state' = persisted in manifest."
+          },
+          "name": {
+            "type": "string",
+            "description": "Human-readable name for this output."
+          },
+          "pattern": {
+            "type": "string",
+            "description": "Glob pattern for file outputs (e.g. 'docs/specs/SPEC-*.md')."
+          },
+          "format": {
+            "type": "string",
+            "enum": ["markdown", "json", "yaml", "typescript", "html", "text", "jsonl", "any"],
+            "description": "Expected format of the output."
+          },
+          "description": {
+            "type": "string",
+            "description": "What this output contains and why it matters."
+          },
+          "optional": {
+            "type": "boolean",
+            "default": false,
+            "description": "If true, missing output triggers a warning instead of a failure."
+          }
+        },
+        "required": ["type", "name"]
+      }
+    },
+    "completion-conditions": {
+      "description": "Natural-language conditions that must all be true for the harness to declare completion. Evaluated by the in-loop LLM against current state.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "budget": {
+      "description": "Resource constraints for this harness run.",
+      "type": "object",
+      "properties": {
+        "max-tool-calls": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of tool invocations before budget warning."
+        },
+        "max-file-edits": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum number of Write/Edit operations."
+        },
+        "max-child-agents": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum concurrent child agents (Task/Agent tool)."
+        },
+        "context-budget": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 1.0,
+          "description": "Fraction of context window this skill should consume (0.0-1.0)."
+        },
+        "timeout-minutes": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Wall-clock timeout for the entire harness run."
+        }
+      }
+    },
+    "permissions": {
+      "description": "Permission scope for this harness. Composes with agent-iam.json via intersection semantics.",
+      "type": "object",
+      "properties": {
+        "iam-profile": {
+          "type": "string",
+          "description": "Reference to an agent-iam.json profile (e.g. 'frontend-engineer', 'content-writer')."
+        },
+        "additional-paths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional glob patterns for allowed file paths."
+        },
+        "denied-paths": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Glob patterns for explicitly denied file paths."
+        },
+        "can-spawn-agents": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this harness may spawn child agents."
+        },
+        "can-modify-harness": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this harness may modify its own SKILL.md."
+        }
+      }
+    },
+    "artifacts": {
+      "description": "Durable artifact configuration for execution state persistence.",
+      "type": "object",
+      "properties": {
+        "state-dir": {
+          "type": "string",
+          "default": ".acos/artifacts/${skill-name}/${session-id}/",
+          "description": "Template path for artifact storage. Supports ${skill-name} and ${session-id} variables."
+        },
+        "manifest": {
+          "type": "string",
+          "default": "artifact-manifest.json",
+          "description": "Filename for the artifact manifest within state-dir."
+        },
+        "retention": {
+          "type": "string",
+          "pattern": "^\\d+[dhm]$",
+          "default": "30d",
+          "description": "Retention period for artifacts (e.g. '30d', '12h', '60m')."
+        },
+        "execution-log": {
+          "type": "string",
+          "default": "execution-log.jsonl",
+          "description": "Filename for the append-only execution log."
+        }
+      }
+    },
+    "verification": {
+      "description": "How outputs are verified before the harness declares success.",
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["existence", "content-check", "script", "llm-judge"],
+          "default": "existence",
+          "description": "Verification method. 'existence' = files exist and non-empty, 'content-check' = LLM validates content against description, 'script' = run a verification script, 'llm-judge' = LLM scores output quality."
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "default": 0.8,
+          "description": "Minimum verification score (0.0-1.0) for 'llm-judge' method."
+        },
+        "script": {
+          "type": "string",
+          "description": "Path to verification script (for 'script' method)."
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
