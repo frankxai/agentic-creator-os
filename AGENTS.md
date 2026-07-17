@@ -29,9 +29,19 @@ The registry currently lists `pnpm test`, but `package.json` does not define a t
 - Treat ACOS as a shared substrate. Backward compatibility matters.
 - If changing public package behavior, update docs and versioning intentionally.
 
-## Design Taste Kernel
+## Known Doc Drift (verify before quoting counts/version)
+
+Version and skill/command/agent counts disagree across sources as of 2026-07-17 — do not copy any single number into new docs, marketing, or code without re-checking:
+
+- `package.json` version: `15.0.0`. `README.md` badge: `14.0.0`. `CLAUDE.md` title: `v10`, footer: `v10.1`. `AGENTS.md` (this file, historically): `v11+`.
+- `README.md` tagline (line ~7): "90+ skills, 65+ commands, 38 agents". `README.md` architecture table (line ~59): "75+ skills, 35+ commands, 38 agents". `package.json` description: "90+ skills, 65+ commands, 38 agents, 8 plugins".
+- `node scripts/build-catalog.mjs` (generated, 2026-07-17 run): `{"agent":147,"skill":26,"command":50,"workflow":10,"iam-profile":6}`.
+- Raw filesystem count (2026-07-17): `.claude/skills/` 112 subdirs, `.claude/commands/*.md` 84 files, `.claude/agents/*.md` 68 files — none of which match the catalog output either, likely because the catalog dedupes/filters templates and deprecated entries differently than a flat `find`.
+
+This is tracked estate-wide as the "4-way count anarchy" problem (a generated-constants fix was designed but not yet applied). Do not hand-fix individual numbers in isolation — that just adds a fifth source of truth. If you need an authoritative count, regenerate via `node scripts/build-catalog.mjs` and treat its output as current-best, then flag any doc it contradicts rather than silently overwriting.
 
 ## Design Taste Kernel
+
 For any site, app, landing page, dashboard, visual identity, brand, motion, media, social, or frontend task, apply the shared Design Taste Kernel before handoff:
 - C:\\Users\\frank\\starlight\\repos\\DESIGN_TASTE.md
 - C:\\Users\\frank\\starlight\\repos\\WEB_EXPERIENCE_STANDARD.md
