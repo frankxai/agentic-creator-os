@@ -7,6 +7,7 @@ mcpServers:
 workingDirectories:
   - /mnt/c/Users/Frank/FrankX/content-universe/books
 model: sonnet
+tools: Read, Write, Edit, Grep, Glob
 ---
 
 # Continuity Guardian

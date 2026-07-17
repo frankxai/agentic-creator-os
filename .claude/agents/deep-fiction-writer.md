@@ -10,6 +10,7 @@ mcpServers:
 workingDirectories:
   - $BOOKS_DIR (configure in environment)
 model: sonnet
+tools: Read, Write, Edit
 ---
 
 # 🌟 Deep Fiction Master
