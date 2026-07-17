@@ -1,0 +1,3362 @@
+{
+  "status": "ready",
+  "agent": "meta-agent-quality-auditor",
+  "outcome": {
+    "audited": 67,
+    "disqualified": 56,
+    "score_distribution": {
+      "9": 0,
+      "0-4": 57,
+      "5-6": 9,
+      "7-8": 1
+    },
+    "mean_score": 2.552,
+    "l99_ready_count": 0,
+    "report_path": "docs/acos/agent-quality-audit-2026-07-17.md"
+  },
+  "results": [
+    {
+      "agent": "\"accessibility-auditor\"",
+      "file": "accessibility-auditor.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"accessibility-auditor\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/\"accessibility-auditor\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "autoresearcher",
+      "file": "autoresearcher.md",
+      "score": 3,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Write, Grep, Glob, Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/autoresearcher/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#2:no trigger-pattern language found in description",
+        "#3:declared-but-unreferenced in Process: Write, Grep, Glob, Bash",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/autoresearcher/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Book Distiller",
+      "file": "book-distiller.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Grep, Glob, Bash, WebFetch, WebSearch"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 2/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, dive into, it's worth noting, certainly, absolutely"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Book Distiller/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#2:no trigger-pattern language found in description",
+        "#3:declared-but-unreferenced in Process: Read, Grep, Glob, Bash, WebFetch, WebSearch",
+        "#4:only 2/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: delve, dive into, it's worth noting, certainly, absolutely",
+        "#9:missing tests/fixtures/Book Distiller/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Business & Transformation Master",
+      "file": "business-book-writer.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Business & Transformation Master/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Business & Transformation Master/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Character Psychologist",
+      "file": "character-psychologist.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Character Psychologist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Character Psychologist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "coaching-program-designer",
+      "file": "coaching-program-design.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/coaching-program-designer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/coaching-program-designer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"content-polisher\"",
+      "file": "content-polisher.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: in conclusion, paradigm shift, cutting-edge, synergies"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"content-polisher\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: in conclusion, paradigm shift, cutting-edge, synergies",
+        "#9:missing tests/fixtures/\"content-polisher\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Creation Engine",
+      "file": "content-product-development.md",
+      "score": 0,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: thought leader"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Arcanean"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Creation Engine/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: thought leader",
+        "#8:quarantined terms: Arcanean",
+        "#9:missing tests/fixtures/Creation Engine/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Continuity Guardian",
+      "file": "continuity-guardian.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Continuity Guardian/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/Continuity Guardian/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Creator Economy Master",
+      "file": "creator-book-writer.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: paradigm shift, synergies"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Creator Economy Master/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: paradigm shift, synergies",
+        "#9:missing tests/fixtures/Creator Economy Master/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Deep Fiction Master",
+      "file": "deep-fiction-writer.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Seeker, Mystic"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Deep Fiction Master/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Seeker, Mystic",
+        "#9:missing tests/fixtures/Deep Fiction Master/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Developmental Editor",
+      "file": "developmental-editor.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Developmental Editor/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Developmental Editor/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"discussion-based-planning\"",
+      "file": "discussion-based-planning.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/0 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"discussion-based-planning\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/0 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/\"discussion-based-planning\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Fantasy & Sci-Fi Master",
+      "file": "fantasy-book-writer.md",
+      "score": 0,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: world-class"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Fantasy & Sci-Fi Master/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: world-class",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/Fantasy & Sci-Fi Master/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "FrankX Content Creator",
+      "file": "frankx-content-creation.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: deep dive, thought leader"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/FrankX Content Creator/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: deep dive, thought leader",
+        "#9:missing tests/fixtures/FrankX Content Creator/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"frankx-website-builder\"",
+      "file": "frankx-website-builder.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Realm"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"frankx-website-builder\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Realm",
+        "#9:missing tests/fixtures/\"frankx-website-builder\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Music Producer",
+      "file": "frequency-music-production.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Music Producer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Music Producer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Visionary Manifestos Master",
+      "file": "golden-age-visionary.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: paradigm shift, thought leader, synergy"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Visionary Manifestos Master/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: paradigm shift, thought leader, synergy",
+        "#9:missing tests/fixtures/Visionary Manifestos Master/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "integrity-guard",
+      "file": "integrity-guard.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, dive into, deep dive, it's worth noting, certainly, absolutely, in summary"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian, Gate, Realm, Seeker, Arcanean"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/integrity-guard/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: delve, dive into, deep dive, it's worth noting, certainly, absolutely, in summary",
+        "#8:quarantined terms: Guardian, Gate, Realm, Seeker, Arcanean",
+        "#9:missing tests/fixtures/integrity-guard/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Line Editor & Voice Alchemist",
+      "file": "line-editor-voice-alchemist.md",
+      "score": 0,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, it's worth noting"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Line Editor & Voice Alchemist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: delve, it's worth noting",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/Line Editor & Voice Alchemist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Visionary",
+      "file": "luminor-strategic-guidance.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: paradigm shift, thought leader"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Visionary/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: paradigm shift, thought leader",
+        "#9:missing tests/fixtures/Visionary/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Master Story Architect",
+      "file": "master-story-architect.md",
+      "score": 0,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: thought leader"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian, Gate"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Master Story Architect/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: thought leader",
+        "#8:quarantined terms: Guardian, Gate",
+        "#9:missing tests/fixtures/Master Story Architect/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "mcp-server-advisor",
+      "file": "mcp-server-advising.md",
+      "score": 3,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/mcp-server-advisor/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/mcp-server-advisor/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-acos-router",
+      "file": "meta-acos-router.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-acos-router/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-acos-router/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-agent-quality-auditor",
+      "file": "meta-agent-quality-auditor.md",
+      "score": 5,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Glob"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/0 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor, Arcanean"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Glob",
+        "#6:0/0 bullets are negation-form, need >=4 negated",
+        "#8:quarantined terms: Luminor, Arcanean",
+        "#9:missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-agentic-jujutsu",
+      "file": "meta-agentic-jujutsu.md",
+      "score": 7,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": true
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-agentic-jujutsu/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-agentic-jujutsu/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-eod",
+      "file": "meta-eod.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-eod/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-eod/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-handover",
+      "file": "meta-handover.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Write"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-handover/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Write",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-handover/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-memory-guardian",
+      "file": "meta-memory-guardian.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Read"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-memory-guardian/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Read",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-memory-guardian/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-safety-guard",
+      "file": "meta-safety-guard.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-safety-guard/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-safety-guard/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-sync-repos",
+      "file": "meta-sync-repos.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Read"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-sync-repos/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Read",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-sync-repos/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "meta-verification-loop",
+      "file": "meta-verification-loop.md",
+      "score": 6,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": true
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-verification-loop/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#8:quarantined terms: Luminor",
+        "#9:missing tests/fixtures/meta-verification-loop/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Multimodal Director",
+      "file": "multimodal-director.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Multimodal Director/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Multimodal Director/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Music Producer",
+      "file": "music-production.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Music Producer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Music Producer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "nano-banana-image-creator",
+      "file": "nano-banana-image-generation.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/nano-banana-image-creator/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/nano-banana-image-creator/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"nextjs-vercel-deployment\"",
+      "file": "nextjs-vercel-deployment.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"nextjs-vercel-deployment\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/\"nextjs-vercel-deployment\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"performance-guardian\"",
+      "file": "performance-guardian.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"performance-guardian\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/\"performance-guardian\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-architect",
+      "file": "prompt-architect.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/6 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-architect/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/6 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-architect/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-claude-specialist",
+      "file": "prompt-claude-specialist.md",
+      "score": 3,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, dive into, it's worth noting, certainly"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-claude-specialist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#7:banned phrases: delve, dive into, it's worth noting, certainly",
+        "#9:missing tests/fixtures/prompt-claude-specialist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-conductor",
+      "file": "prompt-conductor.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write, Task"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-conductor/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write, Task",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-conductor/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-evaluator",
+      "file": "prompt-evaluator.md",
+      "score": 3,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/5 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, dive into"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-evaluator/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/5 bullets are negation-form, need >=4 negated",
+        "#7:banned phrases: delve, dive into",
+        "#9:missing tests/fixtures/prompt-evaluator/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-gemini-specialist",
+      "file": "prompt-gemini-specialist.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/3 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-gemini-specialist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/3 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-gemini-specialist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-gpt-specialist",
+      "file": "prompt-gpt-specialist.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-gpt-specialist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-gpt-specialist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-harvester",
+      "file": "prompt-harvester.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Write, WebSearch"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-harvester/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Write, WebSearch",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-harvester/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-librarian",
+      "file": "prompt-librarian.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write, Grep"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-librarian/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write, Grep",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-librarian/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-optimizer",
+      "file": "prompt-optimizer.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Task"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/5 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-optimizer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Task",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/5 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-optimizer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-oss-specialist",
+      "file": "prompt-oss-specialist.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-oss-specialist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-oss-specialist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-psyche-cartographer",
+      "file": "prompt-psyche-cartographer.md",
+      "score": 3,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/6 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-psyche-cartographer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/6 bullets are negation-form, need >=4 negated",
+        "#7:banned phrases: delve",
+        "#9:missing tests/fixtures/prompt-psyche-cartographer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-psychometrist",
+      "file": "prompt-psychometrist.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash, Write"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/6 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-psychometrist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash, Write",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/6 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-psychometrist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "prompt-red-team",
+      "file": "prompt-red-team.md",
+      "score": 4,
+      "disqualified": false,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/4 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/prompt-red-team/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Bash",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:0/4 bullets are negation-form, need >=4 negated",
+        "#9:missing tests/fixtures/prompt-red-team/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Publishing Strategist",
+      "file": "publishing-strategist.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Publishing Strategist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/Publishing Strategist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "research-daily-ops",
+      "file": "research-daily-ops.md",
+      "score": 5,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Read, Write, Edit, WebFetch, Bash, Grep"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/5 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: deep dive"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/research-daily-ops/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Read, Write, Edit, WebFetch, Bash, Grep",
+        "#6:0/5 bullets are negation-form, need >=4 negated",
+        "#7:banned phrases: deep dive",
+        "#9:missing tests/fixtures/research-daily-ops/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "research-guardian",
+      "file": "research-guardian.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Grep, Bash"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: it's worth noting"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/research-guardian/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#2:no trigger-pattern language found in description",
+        "#3:declared-but-unreferenced in Process: Grep, Bash",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: it's worth noting",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/research-guardian/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Research Librarian",
+      "file": "research-librarian.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Research Librarian/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/Research Librarian/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Sensitivity Reader",
+      "file": "sensitivity-reader.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Sensitivity Reader/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/Sensitivity Reader/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "seo-specialist",
+      "file": "seo_specialist.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/seo-specialist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/seo-specialist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"social-content-generator\"",
+      "file": "social-content-generator.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: thought leader"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"social-content-generator\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: thought leader",
+        "#9:missing tests/fixtures/\"social-content-generator\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Starlight Architect",
+      "file": "starlight-architecture-design.md",
+      "score": 0,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: seamless, seamlessly"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian, Gates"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Starlight Architect/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: seamless, seamlessly",
+        "#8:quarantined terms: Guardian, Gates",
+        "#9:missing tests/fixtures/Starlight Architect/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "Starlight Orchestrator",
+      "file": "starlight-orchestrator.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian, Realm, Luminor"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/Starlight Orchestrator/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian, Realm, Luminor",
+        "#9:missing tests/fixtures/Starlight Orchestrator/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "strategist",
+      "file": "strategist.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/strategist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/strategist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "template-design-experts",
+      "file": "template-design.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/template-design-experts/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/template-design-experts/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "ui-ux-design-expert",
+      "file": "ui-ux-design-guidance.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: world-class"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/ui-ux-design-expert/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: world-class",
+        "#9:missing tests/fixtures/ui-ux-design-expert/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "UX Designer",
+      "file": "ux-design-development.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/UX Designer/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/UX Designer/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "viral-content-strategist",
+      "file": "viral-content-strategy.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: seamless, seamlessly, effortless"
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/viral-content-strategist/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#7:banned phrases: seamless, seamlessly, effortless",
+        "#9:missing tests/fixtures/viral-content-strategist/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "visual-brand-guidelines",
+      "file": "visual-brand-guidelines.md",
+      "score": 4,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": true
+        },
+        "2": {
+          "pass": true
+        },
+        "3": {
+          "pass": false,
+          "detail": "declared-but-unreferenced in Process: Bash, Write"
+        },
+        "4": {
+          "pass": true
+        },
+        "5": {
+          "pass": true
+        },
+        "6": {
+          "pass": false,
+          "detail": "0/6 bullets are negation-form, need >=4 negated"
+        },
+        "7": {
+          "pass": false,
+          "detail": "banned phrases: delve, dive into, it's worth noting, certainly, absolutely, in conclusion, navigate the landscape"
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian, Gate, Realm, Seeker, Luminor, Arcanean"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/visual-brand-guidelines/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#3:declared-but-unreferenced in Process: Bash, Write",
+        "#6:0/6 bullets are negation-form, need >=4 negated",
+        "#7:banned phrases: delve, dive into, it's worth noting, certainly, absolutely, in conclusion, navigate the landscape",
+        "#8:quarantined terms: Guardian, Gate, Realm, Seeker, Luminor, Arcanean",
+        "#9:missing tests/fixtures/visual-brand-guidelines/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "\"weekly-recap\"",
+      "file": "weekly-recap.md",
+      "score": 2,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": true
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/\"weekly-recap\"/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#9:missing tests/fixtures/\"weekly-recap\"/smoke.mjs"
+      ]
+    },
+    {
+      "agent": "World Architect",
+      "file": "world-architect.md",
+      "score": 1,
+      "disqualified": true,
+      "checks": {
+        "1": {
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
+        },
+        "2": {
+          "pass": false,
+          "detail": "no trigger-pattern language found in description"
+        },
+        "3": {
+          "pass": false,
+          "detail": "no tools declared"
+        },
+        "4": {
+          "pass": false,
+          "detail": "only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check"
+        },
+        "5": {
+          "pass": false,
+          "detail": "recall=false remember=false"
+        },
+        "6": {
+          "pass": false,
+          "detail": "no Anti-patterns section found"
+        },
+        "7": {
+          "pass": true
+        },
+        "8": {
+          "pass": false,
+          "detail": "quarantined terms: Guardian"
+        },
+        "9": {
+          "pass": false,
+          "detail": "missing tests/fixtures/World Architect/smoke.mjs"
+        }
+      },
+      "fails": [
+        "#1:missing one of name/description/tools/model",
+        "#2:no trigger-pattern language found in description",
+        "#3:no tools declared",
+        "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
+        "#5:recall=false remember=false",
+        "#6:no Anti-patterns section found",
+        "#8:quarantined terms: Guardian",
+        "#9:missing tests/fixtures/World Architect/smoke.mjs"
+      ]
+    }
+  ]
+}

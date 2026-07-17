@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
   "version": "11.0.0",
-  "description": "The Operating System for AI-Powered Creators — 90+ skills, 65+ commands, 38 agents, 8 plugins. Works with Claude Code, Cursor, Windsurf, Gemini.",
+  "description": "The Operating System for AI-Powered Creators — 94 skills, 78 commands, 67 agents, 8 plugins. Works with Claude Code, Cursor, Windsurf, Gemini.",
   "author": "Frank Guzman <frank@frankx.ai>",
   "license": "MIT",
   "repository": {
@@ -63,7 +63,8 @@
     "postinstall": "echo '\\n🚀 Agentic Creator OS installed! Run: ./install.sh\\n'",
     "publish": "npm run build:all && npm publish",
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
-    "lint": "node scripts/lint.mjs"
+    "lint": "node scripts/lint.mjs",
+    "agents:quality": "node scripts/agent-quality-audit.mjs"
   },
   "devDependencies": {
     "typescript": "5.6.3"
