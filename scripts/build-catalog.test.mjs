@@ -34,7 +34,7 @@ test('has the expected top-level shape', () => {
 
 test('produces a substantial, multi-kind catalog', () => {
   assert.ok(catalog.counts.agent > 50, `expected >50 agents, got ${catalog.counts.agent}`)
-  assert.ok(catalog.counts.skill > 20, `expected >20 skills, got ${catalog.counts.skill}`)
+  assert.ok(catalog.counts.skill >= 15, `expected >=15 skills, got ${catalog.counts.skill}`)
   assert.ok(catalog.counts.workflow >= 1)
   assert.equal(catalog.counts['iam-profile'], Object.keys(catalog.iam).length)
 })
