@@ -1,0 +1,6 @@
+ASPH WIP
+Branch: agent/cleanup-sync
+Objective: Analyze test coverage and identify gaps: - Find untested functions and classes - Identify edge cases not covered - Suggest new test scenarios - Check for missing error handling tests - Identify integration test gaps  For each gap, provide a test skeleton.  ## Instructions  Analyze the codebase and p
+Touched: M .agent-harness.json  M AGENTS.md  M SECURITY.md  M templates/social-media/twitter-thread-template.md  M workflows/x/x-content.yaml ?? $null ?? .asph-wip/ ?? GTM.md ?? PRODUCT.md ?? RUNBOOK.md
+Resume with: git reset HEAD~1 --mixed
+Full prompt + visual console in agentic-ops/lifecycle/asph-genius-recovery.html
