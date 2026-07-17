@@ -7,7 +7,6 @@ mcpServers:
 workingDirectories:
   - /mnt/c/Users/Frank/FrankX/content-universe/books
 model: sonnet
-tools: Read, Write, Grep, Glob
 ---
 
 # Developmental Editor

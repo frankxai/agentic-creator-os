@@ -3,14 +3,14 @@
   "agent": "meta-agent-quality-auditor",
   "outcome": {
     "audited": 67,
-    "disqualified": 54,
+    "disqualified": 56,
     "score_distribution": {
       "9": 0,
       "0-4": 57,
       "5-6": 9,
       "7-8": 1
     },
-    "mean_score": 2.642,
+    "mean_score": 2.552,
     "l99_ready_count": 0,
     "report_path": "docs/acos/agent-quality-audit-2026-07-17.md"
   },
@@ -18,11 +18,12 @@
     {
       "agent": "\"accessibility-auditor\"",
       "file": "accessibility-auditor.md",
-      "score": 3,
-      "disqualified": false,
+      "score": 2,
+      "disqualified": true,
       "checks": {
         "1": {
-          "pass": true
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
         },
         "2": {
           "pass": false,
@@ -30,7 +31,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Read, Grep, Glob"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -56,8 +57,9 @@
         }
       },
       "fails": [
+        "#1:missing one of name/description/tools/model",
         "#2:no trigger-pattern language found in description",
-        "#3:declared-but-unreferenced in Process: Read, Grep, Glob",
+        "#3:no tools declared",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -428,11 +430,12 @@
     {
       "agent": "Continuity Guardian",
       "file": "continuity-guardian.md",
-      "score": 2,
+      "score": 1,
       "disqualified": true,
       "checks": {
         "1": {
-          "pass": true
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
         },
         "2": {
           "pass": false,
@@ -440,7 +443,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Read, Write, Edit, Grep, Glob"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -467,8 +470,9 @@
         }
       },
       "fails": [
+        "#1:missing one of name/description/tools/model",
         "#2:no trigger-pattern language found in description",
-        "#3:declared-but-unreferenced in Process: Read, Write, Edit, Grep, Glob",
+        "#3:no tools declared",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -479,11 +483,12 @@
     {
       "agent": "Creator Economy Master",
       "file": "creator-book-writer.md",
-      "score": 2,
+      "score": 1,
       "disqualified": true,
       "checks": {
         "1": {
-          "pass": true
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
         },
         "2": {
           "pass": false,
@@ -491,7 +496,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Read"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -518,8 +523,9 @@
         }
       },
       "fails": [
+        "#1:missing one of name/description/tools/model",
         "#2:no trigger-pattern language found in description",
-        "#3:declared-but-unreferenced in Process: Read",
+        "#3:no tools declared",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -530,11 +536,12 @@
     {
       "agent": "Deep Fiction Master",
       "file": "deep-fiction-writer.md",
-      "score": 2,
+      "score": 1,
       "disqualified": true,
       "checks": {
         "1": {
-          "pass": true
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
         },
         "2": {
           "pass": false,
@@ -542,7 +549,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Read, Edit"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -569,8 +576,9 @@
         }
       },
       "fails": [
+        "#1:missing one of name/description/tools/model",
         "#2:no trigger-pattern language found in description",
-        "#3:declared-but-unreferenced in Process: Read, Edit",
+        "#3:no tools declared",
         "#4:only 1/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -581,11 +589,12 @@
     {
       "agent": "Developmental Editor",
       "file": "developmental-editor.md",
-      "score": 3,
-      "disqualified": false,
+      "score": 2,
+      "disqualified": true,
       "checks": {
         "1": {
-          "pass": true
+          "pass": false,
+          "detail": "missing one of name/description/tools/model"
         },
         "2": {
           "pass": false,
@@ -593,7 +602,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Write, Grep, Glob"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -619,8 +628,9 @@
         }
       },
       "fails": [
+        "#1:missing one of name/description/tools/model",
         "#2:no trigger-pattern language found in description",
-        "#3:declared-but-unreferenced in Process: Write, Grep, Glob",
+        "#3:no tools declared",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -958,7 +968,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "declared-but-unreferenced in Process: Grep, Glob, Bash"
+          "detail": "no tools declared"
         },
         "4": {
           "pass": false,
@@ -987,7 +997,7 @@
       },
       "fails": [
         "#1:missing one of name/description/tools/model",
-        "#3:declared-but-unreferenced in Process: Grep, Glob, Bash",
+        "#3:no tools declared",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -1254,7 +1264,7 @@
     {
       "agent": "meta-agent-quality-auditor",
       "file": "meta-agent-quality-auditor.md",
-      "score": 6,
+      "score": 5,
       "disqualified": true,
       "checks": {
         "1": {
@@ -1285,13 +1295,15 @@
           "detail": "quarantined terms: Luminor, Arcanean"
         },
         "9": {
-          "pass": true
+          "pass": false,
+          "detail": "missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
         }
       },
       "fails": [
         "#3:declared-but-unreferenced in Process: Bash, Glob",
         "#6:0/0 bullets are negation-form, need >=4 negated",
-        "#8:quarantined terms: Luminor, Arcanean"
+        "#8:quarantined terms: Luminor, Arcanean",
+        "#9:missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
       ]
     },
     {
