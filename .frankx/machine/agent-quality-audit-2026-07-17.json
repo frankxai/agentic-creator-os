@@ -10,7 +10,7 @@
       "5-6": 9,
       "7-8": 1
     },
-    "mean_score": 2.552,
+    "mean_score": 2.567,
     "l99_ready_count": 0,
     "report_path": "docs/acos/agent-quality-audit-2026-07-17.md"
   },
@@ -968,7 +968,7 @@
         },
         "3": {
           "pass": false,
-          "detail": "no tools declared"
+          "detail": "declared-but-unreferenced in Process: Grep, Glob, Bash"
         },
         "4": {
           "pass": false,
@@ -997,7 +997,7 @@
       },
       "fails": [
         "#1:missing one of name/description/tools/model",
-        "#3:no tools declared",
+        "#3:declared-but-unreferenced in Process: Grep, Glob, Bash",
         "#4:only 0/10 sections found (need >=8): missing Purpose, Triggers, Inputs, Process, Outputs, Integration, Smoke eval, Anti-patterns, Model choice, Voice check",
         "#5:recall=false remember=false",
         "#6:no Anti-patterns section found",
@@ -1264,7 +1264,7 @@
     {
       "agent": "meta-agent-quality-auditor",
       "file": "meta-agent-quality-auditor.md",
-      "score": 5,
+      "score": 6,
       "disqualified": true,
       "checks": {
         "1": {
@@ -1295,15 +1295,13 @@
           "detail": "quarantined terms: Luminor, Arcanean"
         },
         "9": {
-          "pass": false,
-          "detail": "missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
+          "pass": true
         }
       },
       "fails": [
         "#3:declared-but-unreferenced in Process: Bash, Glob",
         "#6:0/0 bullets are negation-form, need >=4 negated",
-        "#8:quarantined terms: Luminor, Arcanean",
-        "#9:missing tests/fixtures/meta-agent-quality-auditor/smoke.mjs"
+        "#8:quarantined terms: Luminor, Arcanean"
       ]
     },
     {
