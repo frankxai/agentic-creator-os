@@ -39,11 +39,34 @@ function parseFrontmatter(raw) {
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (!m) return null
   const block = m[1]
+  const lines = block.split(/\r?\n/)
   const fields = {}
-  for (const line of block.split(/\r?\n/)) {
-    const kv = line.match(/^(\w[\w-]*):\s*(.*)$/)
-    if (kv) fields[kv[1]] = kv[2].trim()
+  let currentKey = null
+  const listBuf = []
+  const flushList = () => {
+    if (currentKey && listBuf.length) fields[currentKey] = listBuf.join(', ')
+    listBuf.length = 0
   }
+  for (const line of lines) {
+    const listItem = line.match(/^\s+-\s+(.+)$/)
+    if (listItem && currentKey) {
+      listBuf.push(listItem[1].trim())
+      continue
+    }
+    flushList()
+    const kv = line.match(/^(\w[\w-]*):\s*(.*)$/)
+    if (kv) {
+      currentKey = kv[1]
+      const value = kv[2].trim()
+      if (value) fields[currentKey] = value
+      // else: value is empty, may be a multi-line YAML list on following lines — leave
+      // unset until flushList() collects it, so a genuinely-empty scalar (rare) still
+      // reads as missing rather than silently passing.
+    } else {
+      currentKey = null
+    }
+  }
+  flushList()
   return { fields, body: raw.slice(m[0].length) }
 }
 
@@ -144,15 +167,15 @@ function check8_arcaneaLeak(raw, fm) {
   return hits.length === 0 ? { pass: true } : { pass: false, detail: `quarantined terms: ${hits.join(', ')}` }
 }
 
-function check9_smokeFixture(fm) {
+function check9_smokeFixture(fm, fixturesDir) {
   const ref = fm?.fields?.name
   if (!ref) return { pass: false, detail: 'no name in frontmatter to resolve fixture path' }
-  const fixturePath = path.join(FIXTURES_DIR, ref, 'smoke.mjs')
+  const fixturePath = path.join(fixturesDir, ref, 'smoke.mjs')
   return fs.existsSync(fixturePath) ? { pass: true } : { pass: false, detail: `missing tests/fixtures/${ref}/smoke.mjs` }
 }
 
-function auditFile(filename) {
-  const filePath = path.join(AGENTS_DIR, filename)
+function auditFile(filename, agentsDir, fixturesDir) {
+  const filePath = path.join(agentsDir, filename)
   const raw = fs.readFileSync(filePath, 'utf8')
   const fm = parseFrontmatter(raw)
   const body = fm ? fm.body : raw
@@ -166,7 +189,7 @@ function auditFile(filename) {
     6: check6_antiPatterns(body),
     7: check7_brandVoice(raw, fm),
     8: check8_arcaneaLeak(raw, fm),
-    9: check9_smokeFixture(fm),
+    9: check9_smokeFixture(fm, fixturesDir),
   }
 
   const score = Object.values(checks).filter((c) => c.pass).length
@@ -183,23 +206,33 @@ function auditFile(filename) {
   }
 }
 
-function main() {
-  const files = fs.readdirSync(AGENTS_DIR)
-    .filter((f) => f.endsWith('.md') && !EXCLUDE.has(f))
+// Pure core: audits a directory of agent .md files against a fixtures directory.
+// No file writes, no process.cwd() dependency — safe to import from a smoke test
+// against a fixture directory without polluting real docs/acos or .frankx reports.
+export function auditDirectory(agentsDir, fixturesDir, excludeSet = EXCLUDE) {
+  const files = fs.readdirSync(agentsDir)
+    .filter((f) => f.endsWith('.md') && !excludeSet.has(f))
     .sort()
 
-  const results = files.map(auditFile)
+  const results = files.map((f) => auditFile(f, agentsDir, fixturesDir))
   const bucket = (s) => (s <= 4 ? '0-4' : s <= 6 ? '5-6' : s <= 8 ? '7-8' : '9')
   const distribution = { '0-4': 0, '5-6': 0, '7-8': 0, '9': 0 }
   results.forEach((r) => distribution[bucket(r.score)]++)
 
   const disqualifiedList = results.filter((r) => r.disqualified)
-  const meanScore = results.reduce((a, r) => a + r.score, 0) / results.length
+  const meanScore = results.length ? results.reduce((a, r) => a + r.score, 0) / results.length : 0
 
   const priorityOrder = [...results].sort((a, b) => {
     const rank = (r) => (r.disqualified ? 0 : r.score < 5 ? 1 : r.score <= 6 ? 2 : r.score <= 8 ? 3 : 4)
     return rank(a) - rank(b) || a.score - b.score
   })
+
+  return { results, distribution, disqualifiedList, meanScore, priorityOrder, l99: results.filter((r) => r.score === 9) }
+}
+
+function main() {
+  const { results, distribution, disqualifiedList, meanScore, priorityOrder, l99 } =
+    auditDirectory(AGENTS_DIR, FIXTURES_DIR)
 
   const date = new Date().toISOString().slice(0, 10)
   const lines = []
@@ -224,7 +257,6 @@ function main() {
   })
   lines.push('')
   lines.push('L99-ready (score 9/9):')
-  const l99 = results.filter((r) => r.score === 9)
   if (l99.length === 0) lines.push('  (none yet)')
   l99.forEach((r) => lines.push(`  • ${r.agent}`))
   lines.push('')
@@ -256,4 +288,9 @@ function main() {
   console.log('\n' + JSON.stringify(json))
 }
 
-main()
+// Only run the CLI (which writes real report files) when this file is executed
+// directly — e.g. `npm run agents:quality`. When imported for auditDirectory()
+// (the smoke test does this), importing must not trigger the full CLI run.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main()
+}
