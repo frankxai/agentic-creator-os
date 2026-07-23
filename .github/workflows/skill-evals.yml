@@ -1,0 +1,75 @@
+name: skill-evals
+
+# Run the promptfoo skill-eval gate when a gated skill's VERSION changes.
+# The skill VERSION is the contract (STRATEGY.md): evals re-run on version bumps,
+# so "improve=done" can never regress silently.
+#
+# STUB — the promptfoo run + threshold parse are wired but require ANTHROPIC_API_KEY
+# as a repo secret. Nothing here was executed on the authoring machine.
+
+on:
+  push:
+    paths:
+      - ".claude/skills/**/SKILL.md"    # a skill changed (incl. its `version:` frontmatter)
+      - "evals/promptfooconfig.yaml"    # the gate itself changed
+  pull_request:
+    paths:
+      - ".claude/skills/**/SKILL.md"
+      - "evals/promptfooconfig.yaml"
+  workflow_dispatch: {}
+
+jobs:
+  eval-gate:
+    runs-on: ubuntu-latest
+    env:
+      # Observability per the reference stack — traces flow to a self-hosted Langfuse.
+      CLAUDE_CODE_ENABLE_TELEMETRY: "1"
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run promptfoo skill gate
+        run: |
+          npx --yes promptfoo@latest eval \
+            --config evals/promptfooconfig.yaml \
+            --output results.json
+
+      - name: Enforce metric thresholds (the three research gates)
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          gates = {
+              "SkillDispatchCorrectness": 0.85,
+              "SkillInternalTrajectory": 0.90,
+              "SkillOutputIntegration": 0.80,
+          }
+          data = json.load(open("results.json"))
+          # promptfoo aggregates named-metric scores under results.stats.namedScores.
+          # (Field path may differ by promptfoo version — verify on first run.)
+          scores = (data.get("results", {}).get("stats", {}) or {}).get("namedScores", {})
+          if not scores:
+              sys.exit("No namedScores found — check promptfoo output shape / metric names.")
+          failed = []
+          for metric, floor in gates.items():
+              got = scores.get(metric)
+              if got is None:
+                  failed.append(f"{metric}: MISSING")
+              elif got < floor:
+                  failed.append(f"{metric}: {got:.3f} < {floor}")
+              else:
+                  print(f"{metric}: {got:.3f} >= {floor}  OK")
+          if failed:
+              sys.exit("GATE FAILED:\n  " + "\n  ".join(failed))
+          print("All skill-eval gates passed.")
+          PY
+
+      - name: Upload eval report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promptfoo-results
+          path: results.json

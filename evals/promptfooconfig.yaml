@@ -1,0 +1,114 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+# ============================================================================
+# ACOS skill-eval gate — WORKED EXAMPLE: acos-meta (skill version 1.0.0)
+# ============================================================================
+# This is the copy-me quality-bar template referenced by the command-center's
+# PACK-QUALITY-TEMPLATE.md. It gates ONE skill (acos-meta) as the worked example;
+# real coverage is added skill-by-skill by duplicating the `tests:` blocks.
+#
+# The research-derived gates (enforced in CI, see .github/workflows/skill-evals.yml):
+#   SkillDispatchCorrectness  >= 0.85   (did the right skill get selected?)
+#   SkillInternalTrajectory   >= 0.90   (did it follow the skill's intended steps?)
+#   SkillOutputIntegration    >= 0.80   (did the output integrate the skill's guidance?)
+#
+# NOT EXECUTED on the authoring machine (memory-constrained, promptfoo needs npm).
+# Authored to be correct and runnable later — see PORTABILITY NOTE at the bottom.
+# ============================================================================
+
+description: "ACOS skill gate — acos-meta v1.0.0 (dispatch/trajectory/integration)"
+
+# The provider must be a SKILL-AWARE harness so skill dispatch is observable.
+# Run from the pack root so .claude/skills/acos-meta is discoverable by the harness.
+providers:
+  - id: anthropic:messages:claude-sonnet-5
+    label: acos-harness
+    config:
+      max_tokens: 1200
+      temperature: 0
+
+prompts:
+  - "{{query}}"
+
+# Applied to every test unless overridden. `metric` names roll up in promptfoo's
+# report so CI can threshold each of the three gates independently.
+defaultTest:
+  assert:
+    - type: skill-used            # native promptfoo Claude-skill assertion (see PORTABILITY NOTE)
+      value: acos-meta
+      metric: SkillDispatchCorrectness
+
+tests:
+  # ---- POSITIVE 1 — adding a skill (acos-meta SHOULD fire) --------------------
+  - description: "positive: how to add a new ACOS skill"
+    vars:
+      query: "How do I add a new skill to ACOS, and where exactly do its files go?"
+    assert:
+      - type: skill-used
+        value: acos-meta
+        metric: SkillDispatchCorrectness
+      - type: llm-rubric
+        value: >
+          The answer follows acos-meta's documented procedure: it references the
+          .claude/skills/<name>/SKILL.md directory layout and the ACOS primitive/hook
+          model, in the order the skill teaches. Score 1.0 only if the steps match the
+          skill's trajectory; penalize invented steps or wrong ordering.
+        metric: SkillInternalTrajectory
+      - type: llm-rubric
+        value: >
+          The output integrates acos-meta's guidance into a concrete, correct answer:
+          names real ACOS primitives (skills/commands/agents/hooks), no invented paths,
+          actionable end-to-end. Score integration quality 0.0-1.0.
+        metric: SkillOutputIntegration
+
+  # ---- POSITIVE 2 — debugging the hook system (acos-meta SHOULD fire) ---------
+  - description: "positive: debug a hook that isn't firing"
+    vars:
+      query: "Explain how the ACOS hook system works and how I'd debug a hook that isn't firing."
+    assert:
+      - type: skill-used
+        value: acos-meta
+        metric: SkillDispatchCorrectness
+      - type: llm-rubric
+        value: >
+          The answer walks the ACOS hook lifecycle in the order acos-meta documents and
+          gives a concrete debug path (where hooks live, how they're wired, how to trace
+          a non-firing hook). Score trajectory fidelity 0.0-1.0.
+        metric: SkillInternalTrajectory
+      - type: llm-rubric
+        value: >
+          The output integrates the skill's hook-debugging guidance into correct, specific
+          steps with real ACOS paths/mechanisms. Score integration 0.0-1.0.
+        metric: SkillOutputIntegration
+
+  # ---- NEGATIVE — unrelated creative ask (acos-meta MUST NOT fire) -----------
+  # Dispatch precision: firing acos-meta here is a false positive and must fail.
+  - description: "negative: unrelated creative request must not trigger acos-meta"
+    vars:
+      query: "Write me a short haiku about the ocean at dawn."
+    assert:
+      - type: not-skill-used       # negated form — SEE PORTABILITY NOTE for fallback
+        value: acos-meta
+        metric: SkillDispatchCorrectness
+
+# ============================================================================
+# PORTABILITY NOTE — confirm two things against your installed promptfoo before
+# the first run (both come from the research corpus, not first-party-verified here):
+#
+#   1. Assertion type name. The corpus documents a native `skill-used` assertion.
+#      If your promptfoo build names it differently, replace `type: skill-used`
+#      with the correct name, OR use this custom javascript fallback (adjust the
+#      trace field to your harness's response shape):
+#
+#        - type: javascript
+#          value: |
+#            // pass if acos-meta appears in the harness's skill trace
+#            const used = (output.metadata?.skillsUsed) || context.vars._skillsUsed || [];
+#            return Array.isArray(used) && used.includes('acos-meta');
+#          metric: SkillDispatchCorrectness
+#
+#   2. Negation form. If `not-skill-used` isn't supported, invert the javascript
+#      fallback above (`return !used.includes('acos-meta')`) for the negative case.
+#
+# Thresholds are enforced in CI by reading promptfoo's JSON output per metric —
+# see .github/workflows/skill-evals.yml. Keep this file at evals/promptfooconfig.yaml.
+# ============================================================================

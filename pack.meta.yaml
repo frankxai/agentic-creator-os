@@ -1,0 +1,43 @@
+# ============================================================================
+# pack.meta.yaml — provenance + lifecycle for the ACOS pack
+# Mirrors the fields tracked centrally in the command-center registry.yaml
+# (frankxai/starlight-agentic-os). The pack carries its own truth; the command
+# center aggregates it. Schema per STRATEGY.md "portable-pack convention".
+# ============================================================================
+name: agentic-creator-os
+repo: frankxai/agentic-creator-os
+version: 12.0.0
+license: MIT
+origin: original                 # original | absorbed | forked
+source_url: https://github.com/frankxai/agentic-creator-os
+
+provenance:
+  source: original
+  license: MIT
+  checksum: null                 # TODO: populate on release-tag (sha256 of packed tree)
+  added: 2026-07-23
+  last_reviewed: 2026-07-23
+
+# The four tracked lifecycle states (see command-center README).
+status:
+  install: done
+  improve: in-progress           # eval gate authored (evals/promptfooconfig.yaml); acos-meta is the worked skill
+  indexed: todo
+  registered: []
+
+# Skills under an active quality gate. As each skill gets golden cases in
+# evals/promptfooconfig.yaml and passes the thresholds, list it here.
+quality:
+  eval_config: evals/promptfooconfig.yaml
+  gates:
+    SkillDispatchCorrectness: 0.85
+    SkillInternalTrajectory: 0.90
+    SkillOutputIntegration: 0.80
+  gated_skills:
+    - name: acos-meta
+      skill_version: 1.0.0       # the eval contract boundary — CI re-runs on version bump
+      status: worked-example     # worked-example | passing | failing
+  observability:
+    env: { CLAUDE_CODE_ENABLE_TELEMETRY: "1" }   # native OTel -> self-hosted Langfuse (reference stack)
+
+template_source: https://github.com/frankxai/starlight-agentic-os/blob/main/PACK-QUALITY-TEMPLATE.md
