@@ -19,7 +19,7 @@ Use a temporary `CLAUDE_HOME` to see exactly what the installer copies:
 ```bash
 export CLAUDE_HOME="$(mktemp -d)"
 ./install.sh --platform=claude --minimal
-find "$CLAUDE_HOME" -maxdepth 2 -type f | sort
+find "$CLAUDE_HOME" -type f | sort
 ```
 
 The isolated smoke path is also exercised by:

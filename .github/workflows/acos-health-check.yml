@@ -10,6 +10,7 @@ on:
       - '.claude/hooks/**'
       - '.claude/skills/**'
       - '.claude/skill-rules.json'
+      - '.claude-plugin/marketplace.json'
       - '.claude-plugin/plugin.json'
       - '.github/workflows/acos-health-check.yml'
       - 'CLAUDE.md'

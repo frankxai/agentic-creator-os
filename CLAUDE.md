@@ -62,6 +62,7 @@ Instead of blanket word bans, apply these principles:
 - **83 Top-level Commands** — Reusable workflow definitions accessible through Claude Code
 - **171 Non-empty Skill Modules** — plus 5 tracked empty placeholders that are not usable modules
 - **69 Top-level Agent Profiles** — Writers, editors, designers, strategists, and engineers
+- **9 Installable Shell Hooks** — Top-level shell hooks copied by the Claude installer
 - **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
 
 ## Quick Start

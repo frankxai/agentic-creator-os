@@ -55,7 +55,7 @@ For an isolated inspection:
 ```bash
 export CLAUDE_HOME="$(mktemp -d)"
 ./install.sh --platform=claude --minimal
-find "$CLAUDE_HOME" -maxdepth 2 -type f | sort
+find "$CLAUDE_HOME" -type f | sort
 ```
 
 Other platform flags generate context or harness-specific files:

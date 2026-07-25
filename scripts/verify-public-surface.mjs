@@ -10,7 +10,7 @@ import {
   rmSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { dirname, join } from 'node:path'
+import { dirname, isAbsolute, join, win32 } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -42,11 +42,12 @@ function readCanonicalFiles() {
   return {
     readme: readFileSync(join(ROOT, 'README.md'), 'utf8'),
     quickstart: readFileSync(join(ROOT, 'QUICKSTART.md'), 'utf8'),
+    claude: readFileSync(join(ROOT, 'CLAUDE.md'), 'utf8'),
     contributing: readFileSync(join(ROOT, 'CONTRIBUTING.md'), 'utf8'),
     packageJson: readJson(join(ROOT, 'package.json')),
     packageLock: readJson(join(ROOT, 'package-lock.json')),
     plugin: readJson(join(ROOT, '.claude-plugin', 'plugin.json')),
-    opencode: readFileSync(join(ROOT, 'opencode.json'), 'utf8'),
+    opencode: readJson(join(ROOT, 'opencode.json')),
     install: readFileSync(join(ROOT, 'install.sh'), 'utf8'),
     rules: readJson(join(ROOT, '.claude', 'skill-rules.json')),
   }
@@ -123,34 +124,62 @@ function verifyVersion(canonical) {
 }
 
 function verifyClaims(canonical, measured) {
-  const expected = {
-    nonEmptySkillModules: 171,
-    emptySkillPlaceholders: 5,
-    topLevelCommands: 83,
-    topLevelAgents: 69,
-    installableShellHooks: 9,
-    activationRules: 32,
+  const metrics = {
+    nonEmptySkillModules: {
+      expected: 171,
+      readme: 'Non-empty skill modules | 171',
+      quickstart: '171 non-empty skill modules',
+      claude: '171 Non-empty Skill Modules',
+    },
+    emptySkillPlaceholders: {
+      expected: 5,
+      readme: 'Empty skill placeholders | 5',
+      quickstart: '5 empty skill placeholders',
+      claude: '5 tracked empty placeholders',
+    },
+    topLevelCommands: {
+      expected: 83,
+      readme: 'Top-level slash commands | 83',
+      quickstart: '83 top-level slash-command definitions',
+      claude: '83 Top-level Commands',
+    },
+    topLevelAgents: {
+      expected: 69,
+      readme: 'Top-level agent profiles | 69',
+      quickstart: '69 top-level agent profiles',
+      claude: '69 Top-level Agent Profiles',
+    },
+    installableShellHooks: {
+      expected: 9,
+      readme: 'Installable shell hooks | 9',
+      quickstart: '9 installable shell hooks',
+      claude: '9 Installable Shell Hooks',
+    },
+    activationRules: {
+      expected: 32,
+      readme: 'Activation rules | 32',
+      quickstart: '32 activation rules',
+      claude: 'provides 32 activation rules',
+    },
   }
 
-  for (const [key, value] of Object.entries(expected)) {
+  const expected = Object.fromEntries(
+    Object.entries(metrics).map(([key, metric]) => [key, metric.expected])
+  )
+
+  for (const [key, metric] of Object.entries(metrics)) {
     assert.equal(
       measured[key],
-      value,
-      `${key} drifted: expected ${value}, measured ${measured[key]}`
+      metric.expected,
+      `${key} drifted: expected ${metric.expected}, measured ${measured[key]}`
     )
-  }
-
-  const requiredReadmeClaims = [
-    'Non-empty skill modules | 171',
-    'Empty skill placeholders | 5',
-    'Top-level slash commands | 83',
-    'Top-level agent profiles | 69',
-    'Installable shell hooks | 9',
-    'Activation rules | 32',
-  ]
-
-  for (const claim of requiredReadmeClaims) {
-    assert.ok(canonical.readme.includes(claim), `README is missing measured claim: ${claim}`)
+    for (const document of ['readme', 'quickstart', 'claude']) {
+      const claim = metric[document]
+      assert.ok(
+        canonical[document].includes(claim),
+        `${document} is missing measured claim: ${claim}`
+      )
+    }
   }
 
   const stats = canonical.plugin.stats
@@ -166,6 +195,11 @@ function verifyClaims(canonical, measured) {
     expected,
     '.claude-plugin/plugin.json stats drifted'
   )
+  assert.equal(
+    stats.verifiedBy,
+    'npm run verify:public-surface',
+    '.claude-plugin/plugin.json verification command drifted'
+  )
 
   assert.deepEqual(measured.emptySkillPaths, [
     '.claude/skills/nextjs-react-expert/SKILL.md',
@@ -178,7 +212,7 @@ function verifyClaims(canonical, measured) {
 
 function verifyLicenseTruth(canonical) {
   const rootLicenseFiles = readdirSync(ROOT).filter((name) =>
-    /^licen[sc]e(?:\..+)?$/i.test(name)
+    /^licen[sc]e(?:[._-].*)?$/i.test(name)
   )
 
   assert.equal(rootLicenseFiles.length, 0, 'license gate must be updated when terms are published')
@@ -209,8 +243,18 @@ function verifyMarketplaceTruth(canonical) {
 }
 
 function verifyPortablePublicConfig(canonical) {
-  assert.doesNotMatch(canonical.opencode, /[A-Z]:[\\/]Users[\\/]/i)
-  assert.doesNotMatch(canonical.opencode, /\/(?:Users|home)\/[^/]+\//)
+  for (const [name, server] of Object.entries(canonical.opencode.mcp ?? {})) {
+    if (server.type !== 'local') continue
+
+    assert.ok(Array.isArray(server.command), `local MCP ${name} must declare a command array`)
+    for (const token of server.command) {
+      assert.equal(typeof token, 'string', `local MCP ${name} command tokens must be strings`)
+      assert.ok(
+        !isAbsolute(token) && !win32.isAbsolute(token),
+        `local MCP ${name} command contains an absolute path: ${token}`
+      )
+    }
+  }
 }
 
 function smokeInstall(canonical, measured) {
