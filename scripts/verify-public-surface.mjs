@@ -46,6 +46,7 @@ function readCanonicalFiles() {
     packageJson: readJson(join(ROOT, 'package.json')),
     packageLock: readJson(join(ROOT, 'package-lock.json')),
     plugin: readJson(join(ROOT, '.claude-plugin', 'plugin.json')),
+    opencode: readFileSync(join(ROOT, 'opencode.json'), 'utf8'),
     install: readFileSync(join(ROOT, 'install.sh'), 'utf8'),
     rules: readJson(join(ROOT, '.claude', 'skill-rules.json')),
   }
@@ -189,6 +190,11 @@ function verifyMarketplaceTruth(canonical) {
   )
 }
 
+function verifyPortablePublicConfig(canonical) {
+  assert.doesNotMatch(canonical.opencode, /[A-Z]:[\\/]Users[\\/]/i)
+  assert.doesNotMatch(canonical.opencode, /\/(?:Users|home)\/[^/]+\//)
+}
+
 function smokeInstall(canonical, measured) {
   const tempRoot = mkdtempSync(join(tmpdir(), 'acos-public-surface-'))
   const claudeHome = join(tempRoot, 'claude-home')
@@ -243,6 +249,7 @@ verifyVersion(canonical)
 verifyClaims(canonical, measured)
 verifyLicenseTruth(canonical)
 verifyMarketplaceTruth(canonical)
+verifyPortablePublicConfig(canonical)
 smokeInstall(canonical, measured)
 
 console.log(

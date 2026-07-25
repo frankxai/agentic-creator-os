@@ -17,6 +17,7 @@ on:
       - 'QUICKSTART.md'
       - 'README.md'
       - 'install.sh'
+      - 'opencode.json'
       - 'package.json'
       - 'package-lock.json'
       - 'scripts/verify-public-surface.mjs'
