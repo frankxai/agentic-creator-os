@@ -27,7 +27,8 @@ The repository currently contains:
 
 | Surface | Count | Definition |
 |---|---:|---|
-| Skill modules | 176 | Every `.claude/skills/**/SKILL.md` file |
+| Non-empty skill modules | 171 | Non-empty `.claude/skills/**/SKILL.md` files |
+| Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
 | Top-level slash commands | 83 | `.claude/commands/*.md`, excluding the directory context file |
 | Top-level agent profiles | 69 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |

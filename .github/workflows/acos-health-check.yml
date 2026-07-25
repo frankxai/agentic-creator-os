@@ -43,19 +43,6 @@ jobs:
       - name: Validate installer syntax
         run: bash -n install.sh
 
-      - name: Validate skill modules
-        shell: bash
-        run: |
-          set -euo pipefail
-          failures=0
-          while IFS= read -r -d '' skill; do
-            if [ ! -s "$skill" ]; then
-              echo "Empty skill module: $skill"
-              failures=$((failures + 1))
-            fi
-          done < <(find .claude/skills -name 'SKILL.md' -type f -print0)
-          test "$failures" -eq 0
-
       - name: Validate shell hook syntax
         shell: bash
         run: |

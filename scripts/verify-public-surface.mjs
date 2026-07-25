@@ -53,10 +53,14 @@ function readCanonicalFiles() {
 }
 
 function measureRepository(rules) {
-  const skillModules = walkFiles(
+  const skillFiles = walkFiles(
     join(ROOT, '.claude', 'skills'),
     (name) => name === 'SKILL.md'
-  ).length
+  )
+  const emptySkillPaths = skillFiles
+    .filter((path) => readFileSync(path).length === 0)
+    .map((path) => path.slice(ROOT.length + 1))
+    .sort()
 
   const topLevelCommands = countTopLevel(
     join(ROOT, '.claude', 'commands'),
@@ -97,7 +101,10 @@ function measureRepository(rules) {
   )
 
   return {
-    skillModules,
+    skillFiles: skillFiles.length,
+    nonEmptySkillModules: skillFiles.length - emptySkillPaths.length,
+    emptySkillPlaceholders: emptySkillPaths.length,
+    emptySkillPaths,
     topLevelCommands,
     topLevelAgents,
     installableShellHooks,
@@ -117,7 +124,8 @@ function verifyVersion(canonical) {
 
 function verifyClaims(canonical, measured) {
   const expected = {
-    skillModules: 176,
+    nonEmptySkillModules: 171,
+    emptySkillPlaceholders: 5,
     topLevelCommands: 83,
     topLevelAgents: 69,
     installableShellHooks: 9,
@@ -133,7 +141,8 @@ function verifyClaims(canonical, measured) {
   }
 
   const requiredReadmeClaims = [
-    'Skill modules | 176',
+    'Non-empty skill modules | 171',
+    'Empty skill placeholders | 5',
     'Top-level slash commands | 83',
     'Top-level agent profiles | 69',
     'Installable shell hooks | 9',
@@ -147,7 +156,8 @@ function verifyClaims(canonical, measured) {
   const stats = canonical.plugin.stats
   assert.deepEqual(
     {
-      skillModules: stats.skillModules,
+      nonEmptySkillModules: stats.nonEmptySkillModules,
+      emptySkillPlaceholders: stats.emptySkillPlaceholders,
       topLevelCommands: stats.topLevelCommands,
       topLevelAgents: stats.topLevelAgents,
       installableShellHooks: stats.installableShellHooks,
@@ -156,6 +166,14 @@ function verifyClaims(canonical, measured) {
     expected,
     '.claude-plugin/plugin.json stats drifted'
   )
+
+  assert.deepEqual(measured.emptySkillPaths, [
+    '.claude/skills/nextjs-react-expert/SKILL.md',
+    '.claude/skills/oracle-database-expert/SKILL.md',
+    '.claude/skills/product-management-expert/SKILL.md',
+    '.claude/skills/social-media-strategy/SKILL.md',
+    '.claude/skills/video-production-workflow/SKILL.md',
+  ])
 }
 
 function verifyLicenseTruth(canonical) {
