@@ -1,15 +1,29 @@
 name: ACOS Health Check
 
 on:
-  schedule:
   push:
     branches: [main]
+  pull_request:
     paths:
-      - '.claude/skills/**'
-      - '.claude/commands/**'
       - '.claude/agents/**'
+      - '.claude/commands/**'
       - '.claude/hooks/**'
+      - '.claude/skills/**'
+      - '.claude/skill-rules.json'
+      - '.claude-plugin/plugin.json'
+      - '.github/workflows/acos-health-check.yml'
+      - 'CLAUDE.md'
+      - 'CONTRIBUTING.md'
+      - 'QUICKSTART.md'
+      - 'README.md'
+      - 'install.sh'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/verify-public-surface.mjs'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   health-check:
@@ -17,70 +31,34 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Count assets
-        id: count
-        run: |
-          SKILLS=$(find .claude/skills -name "SKILL.md" 2>/dev/null | wc -l)
-          COMMANDS=$(find .claude/commands -name "*.md" 2>/dev/null | wc -l)
-          AGENTS=$(find .claude/agents -name "*.md" 2>/dev/null | wc -l)
-          HOOKS=$(find .claude/hooks \( -name "*.sh" -o -name "*.js" -o -name "*.ts" \) 2>/dev/null | wc -l)
-          echo "skills=$SKILLS" >> "$GITHUB_OUTPUT"
-          echo "commands=$COMMANDS" >> "$GITHUB_OUTPUT"
-          echo "agents=$AGENTS" >> "$GITHUB_OUTPUT"
-          echo "hooks=$HOOKS" >> "$GITHUB_OUTPUT"
-          echo "Skills: $SKILLS | Commands: $COMMANDS | Agents: $AGENTS | Hooks: $HOOKS"
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
 
-      - name: Validate skills
+      - name: Verify public claims and isolated install
+        run: node scripts/verify-public-surface.mjs
+
+      - name: Validate installer syntax
+        run: bash -n install.sh
+
+      - name: Validate skill modules
+        shell: bash
         run: |
-          ERRORS=0
-          find .claude/skills -name "SKILL.md" | while read -r skill; do
-            NAME=$(dirname "$skill" | xargs basename)
+          set -euo pipefail
+          failures=0
+          while IFS= read -r -d '' skill; do
             if [ ! -s "$skill" ]; then
-              echo "ERROR: $NAME — empty SKILL.md"
-              ERRORS=$((ERRORS + 1))
+              echo "Empty skill module: $skill"
+              failures=$((failures + 1))
             fi
-            WORDS=$(wc -w < "$skill")
-            if [ "$WORDS" -lt 50 ]; then
-              echo "WARN: $NAME — $WORDS words (stub)"
-            fi
-          done
+          done < <(find .claude/skills -name 'SKILL.md' -type f -print0)
+          test "$failures" -eq 0
 
-      - name: Check hook syntax
+      - name: Validate shell hook syntax
+        shell: bash
         run: |
-          find .claude/hooks -name "*.sh" 2>/dev/null | while read -r hook; do
-            NAME=$(basename "$hook")
-            if bash -n "$hook" 2>/dev/null; then
-              echo "OK: $NAME"
-            else
-              echo "ERROR: $NAME — syntax error"
-            fi
-          done
-
-      - name: Cross-reference check
-        run: |
-          if [ -f ".claude/skills/skill-rules.json" ]; then
-            python3 << 'PYEOF'
-          import json, os
-          rules = json.load(open('.claude/skills/skill-rules.json'))
-          categories = rules.get('categories', {})
-          missing = 0
-          for cat, data in categories.items():
-              for s in data.get('skills', []):
-                  path = os.path.join('.claude/skills', s, 'SKILL.md')
-                  if not os.path.exists(path):
-                      print(f'WARN: skill-rules references "{s}" but not found')
-                      missing += 1
-          print(f'Cross-ref check: {missing} missing references')
-          PYEOF
-          fi
-
-      - name: Generate health badge data
-        if: always()
-        env:
-          SKILLS: ${{ steps.count.outputs.skills }}
-          COMMANDS: ${{ steps.count.outputs.commands }}
-          AGENTS: ${{ steps.count.outputs.agents }}
-          HOOKS: ${{ steps.count.outputs.hooks }}
-        run: |
-          TOTAL=$((SKILLS + COMMANDS + AGENTS + HOOKS))
-          echo "ACOS v11 Health: $TOTAL total assets ($SKILLS skills, $COMMANDS commands, $AGENTS agents, $HOOKS hooks)"
+          set -euo pipefail
+          while IFS= read -r -d '' hook; do
+            bash -n "$hook"
+          done < <(find .claude/hooks -name '*.sh' -type f -print0)
