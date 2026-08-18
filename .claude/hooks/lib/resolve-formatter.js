@@ -51,20 +51,36 @@ function detectFormatter(projectRoot) {
 }
 
 /**
- * Resolve local or npx bin for the formatter.
- * Returns { bin: string, prefix: string[] } suitable for spawn.
+ * Resolve a locally installed formatter to something directly spawnable.
+ * Returns { bin: string, prefix: string[] } suitable for spawn, or null.
+ *
+ * No npx fallback by design: it costs seconds of resolution and opens a cmd.exe
+ * console on Windows. And the extensionless node_modules/.bin entry is a shell
+ * script Windows cannot spawn, while the .cmd shim needs `shell: true`, which
+ * concatenates instead of escaping arguments (Node DEP0190). Resolving the
+ * package's own JS entrypoint and running it under the current node avoids both.
  */
 function resolveFormatterBin(projectRoot, formatter) {
   const root = projectRoot || process.cwd();
-  const isBiome = formatter === 'biome';
-  const binName = isBiome ? 'biome' : 'prettier';
-  const local = path.join(root, 'node_modules', '.bin', binName);
-  if (fs.existsSync(local)) {
-    return { bin: local, prefix: [] };
+
+  const entrypoints = formatter === 'biome'
+    ? ['@biomejs/biome/bin/biome']
+    : ['prettier/bin/prettier.cjs', 'prettier/bin-prettier.js'];
+
+  for (const entry of entrypoints) {
+    try {
+      return { bin: process.execPath, prefix: [require.resolve(entry, { paths: [root] })] };
+    } catch {
+      // Not installed under this root — try the next candidate.
+    }
   }
-  // Fallback to npx (works cross platform)
-  const npxPkg = isBiome ? '@biomejs/biome' : 'prettier';
-  return { bin: 'npx', prefix: [npxPkg] };
+
+  const exe = path.join(root, 'node_modules', '.bin', process.platform === 'win32' ? `${formatter}.exe` : formatter);
+  if (fs.existsSync(exe)) {
+    return { bin: exe, prefix: [] };
+  }
+
+  return null;
 }
 
 module.exports = { findProjectRoot, detectFormatter, resolveFormatterBin };

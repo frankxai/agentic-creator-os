@@ -45,14 +45,35 @@ function detectFormatter(projectRoot) {
   if (fs.existsSync(path.join(root, '.prettierrc')) || fs.existsSync(path.join(root, 'prettier.config.js'))) return 'prettier';
   return null;
 }
+// Resolves only to a locally installed formatter, and only to something
+// directly executable. Two things are deliberately avoided:
+//   - npx: costs seconds of package resolution and spawns a cmd.exe console on
+//     Windows, on every single edit. A hook is not the place to install tooling.
+//   - .bin/*.cmd shims: running those needs `shell: true`, which concatenates
+//     rather than escapes arguments (Node DEP0190) — file paths flow straight
+//     into a command line here, so that is an injection vector, not just a warning.
+// Preferred form is the package's own JS entrypoint run under this same node.
+// Returns { bin, prefix } where prefix precedes the tool's own arguments.
 function resolveFormatterBin(projectRoot, formatter) {
   const root = projectRoot || process.cwd();
-  const isBiome = formatter === 'biome';
-  const binName = isBiome ? 'biome' : 'prettier';
-  const local = path.join(root, 'node_modules', '.bin', binName);
-  if (fs.existsSync(local)) return { bin: local, prefix: [] };
-  const npxPkg = isBiome ? '@biomejs/biome' : 'prettier';
-  return { bin: 'npx', prefix: [npxPkg] };
+
+  const entrypoints = formatter === 'biome'
+    ? ['@biomejs/biome/bin/biome']
+    : ['prettier/bin/prettier.cjs', 'prettier/bin-prettier.js'];
+
+  for (const entry of entrypoints) {
+    try {
+      return { bin: process.execPath, prefix: [require.resolve(entry, { paths: [root] })] };
+    } catch {
+      // Not installed under this root — try the next candidate.
+    }
+  }
+
+  // Biome also ships a per-platform native binary, which needs no shell.
+  const exe = path.join(root, 'node_modules', '.bin', process.platform === 'win32' ? `${formatter}.exe` : formatter);
+  if (fs.existsSync(exe)) return { bin: exe, prefix: [] };
+
+  return null;
 }
 
 /**
@@ -68,7 +89,9 @@ function exec(command, args, cwd = process.cwd()) {
     cwd,
     encoding: 'utf8',
     env: process.env,
-    timeout: 15000
+    timeout: 15000,
+    // Without this every check flashes a console window on Windows.
+    windowsHide: true
   });
 }
 
@@ -198,4 +221,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { run };
+module.exports = { run, findProjectRoot, detectFormatter, resolveFormatterBin };

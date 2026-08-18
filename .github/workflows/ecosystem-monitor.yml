@@ -7,20 +7,18 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
+concurrency:
+  group: ecosystem-monitor
+  cancel-in-progress: true
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
-
-      - name: Install GitHub CLI
-        run: |
-          type -p gh >/dev/null 2>&1 && exit 0
-          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-          sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-          sudo apt update && sudo apt install gh -y
 
       - name: Collect ecosystem stats
         env:
@@ -97,10 +95,38 @@ jobs:
           print('\n'.join(report))
           PYEOF
 
-      - name: Commit report
+      - name: Publish report to a draft PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
+          if git diff --quiet -- docs/ecosystem-report.md; then
+            echo "No ecosystem report changes."
+            exit 0
+          fi
+
+          branch="automation/ecosystem-monitor"
           git config user.name "ACOS Bot"
           git config user.email "acos@frankx.ai"
           git add docs/ecosystem-report.md
-          git diff --staged --quiet || git commit -m "chore(docs): weekly ecosystem report [skip ci]"
-          git push
+          git commit -m "chore(docs): weekly ecosystem report [skip ci]"
+
+          remote_sha="$(git ls-remote --heads origin "refs/heads/$branch" | awk '{print $1}')"
+          if [ -n "$remote_sha" ]; then
+            git push origin "HEAD:refs/heads/$branch" \
+              --force-with-lease="refs/heads/$branch:$remote_sha"
+          else
+            git push origin "HEAD:refs/heads/$branch"
+          fi
+
+          existing_pr="$(gh pr list --head "$branch" --state open --json url --jq '.[0].url')"
+          if [ -n "$existing_pr" ]; then
+            echo "Updated existing draft PR: $existing_pr"
+          else
+            gh pr create \
+              --draft \
+              --base "$DEFAULT_BRANCH" \
+              --head "$branch" \
+              --title "chore(docs): weekly ecosystem report" \
+              --body "Automated weekly ecosystem snapshot. Review the generated metrics before merging."
+          fi

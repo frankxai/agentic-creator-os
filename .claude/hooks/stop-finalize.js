@@ -4,8 +4,8 @@
 /**
  * ACOS Stop Hook
  * - Finalizes active trajectory
- * - Auto-calculates success score from operations
- * - Extracts patterns from operation sequences
+ * - Scores outcomes from explicit artifact and verification evidence
+ * - Extracts only verified patterns from operation sequences
  * - Saves to trajectories/ for reasoning bank
  */
 
@@ -38,28 +38,76 @@ function detectType(meta, ops) {
   return 'general';
 }
 
+function hasEvidence(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+/**
+ * Evaluate whether a trajectory contains enough outcome evidence to teach the
+ * reasoning bank. Tool count, file count, commits, and pushes are activity
+ * signals only; they never prove correctness or user value.
+ */
+function evaluateOutcomeEvidence(meta, _ops = []) {
+  const verification = meta.verification || {};
+  const checks = Array.isArray(verification.checks) ? verification.checks : [];
+  const failedChecks = checks.filter(check => check?.status === 'failed');
+  const passedChecks = checks.filter(check =>
+    check?.status === 'passed' && hasEvidence(check.evidence)
+  );
+  const artifactEvidence =
+    (Array.isArray(meta.filesModified) && meta.filesModified.length > 0) ||
+    (Array.isArray(meta.artifactPaths) && meta.artifactPaths.length > 0);
+  const acceptancePassed =
+    verification.acceptance?.status === 'passed' &&
+    hasEvidence(verification.acceptance?.evidence);
+  const verifierPassed =
+    verification.independentVerifier?.verdict === 'pass' &&
+    hasEvidence(verification.independentVerifier?.evidence);
+  const independentRequired =
+    verification.independentRequired === true ||
+    ['high', 'critical'].includes(String(meta.riskLevel || '').toLowerCase());
+
+  if (failedChecks.length > 0) {
+    return {
+      score: artifactEvidence ? 0.2 : 0.15,
+      evidenceStatus: 'failed',
+      eligibleForLearning: false,
+      reasons: failedChecks.map(check => `failed:${check.name || 'unnamed-check'}`)
+    };
+  }
+
+  let score = 0.1;
+  if (artifactEvidence) score += 0.15;
+  if (passedChecks.length > 0) score += 0.35;
+  if (acceptancePassed) score += 0.15;
+  if (verifierPassed) score += 0.15;
+  score = Math.min(1, Number(score.toFixed(2)));
+
+  const reasons = [];
+  if (!artifactEvidence) reasons.push('missing-artifact-evidence');
+  if (passedChecks.length === 0) reasons.push('missing-passed-check-evidence');
+  if (independentRequired && !verifierPassed) reasons.push('missing-independent-verifier');
+
+  if (independentRequired && !verifierPassed) {
+    return {
+      score: Math.min(score, 0.49),
+      evidenceStatus: 'partial',
+      eligibleForLearning: false,
+      reasons
+    };
+  }
+
+  const verified = artifactEvidence && passedChecks.length > 0;
+  return {
+    score,
+    evidenceStatus: verified ? 'verified' : (checks.length > 0 ? 'partial' : 'unverified'),
+    eligibleForLearning: verified && score >= 0.6,
+    reasons
+  };
+}
+
 function autoScore(meta, ops) {
-  // Heuristic scoring based on what happened
-  let score = 0.5; // Baseline
-
-  const cmds = ops.filter(o => o.c).map(o => o.c.toLowerCase());
-
-  // Successful git operations boost score
-  if (cmds.some(c => c.includes('git push'))) score += 0.15;
-  if (cmds.some(c => c.includes('git commit'))) score += 0.1;
-
-  // File modifications indicate productive work
-  const fileCount = (meta.filesModified || []).length;
-  if (fileCount > 0) score += Math.min(0.15, fileCount * 0.02);
-
-  // Many tool uses indicates deep work
-  if (ops.length > 20) score += 0.1;
-  if (ops.length > 50) score += 0.05;
-
-  // TypeScript check passing is good
-  if (cmds.some(c => c.includes('tsc') && !c.includes('error'))) score += 0.05;
-
-  return Math.min(1.0, Math.max(0.1, score));
+  return evaluateOutcomeEvidence(meta, ops).score;
 }
 
 function buildSequence(ops) {
@@ -136,6 +184,8 @@ function main() {
       return;
     }
 
+    const outcome = evaluateOutcomeEvidence(meta, ops);
+
     // Finalize trajectory
     const trajectory = {
       ...meta,
@@ -143,9 +193,12 @@ function main() {
       completedAt: new Date().toISOString(),
       duration: Date.now() - new Date(meta.startedAt).getTime(),
       operationCount: ops.length,
-      successScore: autoScore(meta, ops),
+      successScore: outcome.score,
+      evidenceStatus: outcome.evidenceStatus,
+      eligibleForLearning: outcome.eligibleForLearning,
+      evidenceReasons: outcome.reasons,
       toolBreakdown: {},
-      critique: `Auto-finalized: ${ops.length} operations, ${(meta.filesModified || []).length} files modified`
+      critique: `Auto-finalized: evidence=${outcome.evidenceStatus}, learning=${outcome.eligibleForLearning ? 'eligible' : 'quarantined'}`
     };
 
     // Tool usage breakdown
@@ -158,7 +211,7 @@ function main() {
     fs.writeFileSync(path.join(TRAJ_DIR, filename), JSON.stringify(trajectory, null, 2));
 
     // Extract patterns
-    if (trajectory.successScore >= 0.5) {
+    if (trajectory.eligibleForLearning) {
       extractPatterns(trajectory, ops);
     }
 
@@ -172,4 +225,11 @@ function main() {
   }
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  autoScore,
+  evaluateOutcomeEvidence
+};

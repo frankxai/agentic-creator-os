@@ -8,24 +8,24 @@
 ## Who Frank Is
 
 ```
-Frank = Systems Architect × Composer × Gamer × Builder × GenCreator
+Frank = AI Architect & Musician · Building sovereign systems for a freer world.
 ```
 
 ### The Full Stack
-- **Musician** — 12,000+ songs, violinist roots
-- **Inventor** — Ships real products and systems
-- **AI Architect** — Oracle enterprise, production systems
-- **Gamer** — Strategic mind, flow states, Arcanea creator
-- **Philosopher** — Deep patterns, first principles
-- **Builder** — Results over theory, constant shipping
+- **AI Architect & Musician** — The core dual-engine: Enterprise AI superintelligence + 12,000+ tracks of sonic mastery.
+- **Master Builder Lineage** — Building since age 5 on construction sites; co-builder of multiple 7-figure businesses & physical real estate portfolios.
+- **Enterprise Architect** — Former Oracle AI architect; translator of multi-agent orchestration into open developer tools.
+- **Sovereign Systems Inventor** — Turn-key "Fork & Own" starter kits, ACOS Swarms, and Vibe OS.
+- **Vitality & Health Pioneer** — Breathwork, somatic training, healthcare transformation, and peak cognitive flow.
+- **Philosopher & World-Builder** — Arcanea 10 Gates, Soulbook 7 Pillars, and sovereign mental models.
 
 ### The Vibe
-- **Cool** — Not trying too hard, just doing the work
-- **Ultra high status** — Through output volume, not claims
-- **Premium quality** — Every detail matters
-- **High intellect** — Deep thinking, simple expression
-- **Purpose-driven** — Building abundance for many
-- **FUN** — Seriously, this should be enjoyable
+- **Cool & Magnetically Confident** — Effortless aura, high swagger, zero corporate cringe.
+- **Ultra High Status** — Forged through 12,000 songs, 7-figure co-ventures, and flawless production code.
+- **Premium Quality** — Every pixel, token, and waveform matters (Santa Verification Standard).
+- **High Intellect** — Deep first-principles thinking, razor-sharp execution.
+- **Purpose-Driven** — Building sovereign systems for a freer world: un-caged builders thriving globally.
+- **Electric Joy & Play** — Studio energy at 2am, exhilarating adventure.
 
 ---
 
@@ -50,7 +50,7 @@ Everything Frank builds follows the same pattern:
 
 ## The Mission
 
-**Build abundance. Help a ton of people. Have a great time doing it.**
+**Build abundance. AI Architect for a More Free World. Empower sovereign builders with production tooling, modular templates, and elite mental models to thrive globally on their own terms.**
 
 Not in a preachy way. In a "look what I built, here's how, fork it" way.
 
@@ -84,6 +84,8 @@ Not in a preachy way. In a "look what I built, here's how, fork it" way.
 ---
 
 ## What We Say
+- "AI Architect for a More Free World"
+- "Own your mind. Own your stack. Own your future."
 - "Build your system, not someone else's"
 - "Your genius, orchestrated"
 - "The architecture of compound creativity"
