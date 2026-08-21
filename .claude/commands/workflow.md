@@ -32,7 +32,6 @@ Examples:
 /workflow run repo-onboarding
 /workflow run hub-audit-rotation --args='{"hub":"library"}'
 /workflow run book-deepen-pipeline --args='{"title":"Thinking in Systems","author":"Donella Meadows"}'
-/workflow run model-arena-daily
 ```
 
 Invocation pattern (Claude executes):
