@@ -24,6 +24,7 @@ Agentic Creator OS (ACOS) is the **reusable creator operating system**: skills, 
 ## How People Experience It
 
 - **Install:** Claude plugin marketplace / multi-platform install scripts → skills auto-activate in real work.
+- **Hermes:** `profiles/gencreator-agent` is the Hermes Desktop companion (clone, then `hermes profile install ./profiles/gencreator-agent --alias`).
 - **Operate:** `/acos` smart router, slash commands, specialized agents, multimodal studio, safety hooks.
 - **Trust bar:** every public claim must be true (LICENSE, plugin paths, hook wiring, stats gates) — see v12 open-core track.
 - **Humans land on:** README → Quick Start for their harness → Core Concepts → Starlight Connection.

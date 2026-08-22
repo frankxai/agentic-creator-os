@@ -1,0 +1,46 @@
+name: gencreator
+description: GenCreator Agent — ink, cream, cyan. Not Hermes default.
+colors:
+  background: "#05060A"
+  banner_border: "#7DD3C7"
+  banner_title: "#F4EFE4"
+  banner_accent: "#7DD3C7"
+  banner_dim: "#8A8680"
+  banner_text: "#E8E2D6"
+  ui_accent: "#7DD3C7"
+  ui_primary: "#F4EFE4"
+  ui_text: "#E8E2D6"
+  ui_label: "#7DD3C7"
+  ui_ok: "#6FBF8A"
+  ui_error: "#E06B5C"
+  ui_warn: "#E0A85C"
+  ui_border: "#2A2C32"
+  ui_tool: "#7DD3C7"
+  ui_thinking: "#8A8680"
+  prompt: "#F4EFE4"
+  input_rule: "#7DD3C7"
+  response_border: "#7DD3C7"
+  session_label: "#7DD3C7"
+  session_border: "#2A2C32"
+  status_bar_bg: "#0B0C10"
+  status_bar_text: "#E8E2D6"
+  voice_status_bg: "#0B0C10"
+  selection_bg: "#1A1C22"
+  completion_menu_bg: "#0B0C10"
+  completion_menu_current_bg: "#1A1C22"
+  completion_menu_meta_bg: "#0B0C10"
+  completion_menu_meta_current_bg: "#1A1C22"
+spinner:
+  thinking_verbs:
+    - composing
+    - staging
+    - shaping
+    - checking
+branding:
+  agent_name: GenCreator Agent
+  welcome: GenCreator Agent. Stage, stack, ship. Type a loop or /help.
+  goodbye: Back to the work.
+  response_label: GenCreator
+  prompt_symbol: "◈"
+  help_header: GenCreator commands
+tool_prefix: "┊"
