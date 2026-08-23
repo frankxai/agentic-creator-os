@@ -1,12 +1,11 @@
 name: gencreator-agent
-version: 0.1.0
+version: 0.1.1
 description: GenCreator Agent — Hermes companion for the AI-native creator OS. Stages, Factory, six-pillar CoE, ship loops.
 hermes_requires: ">=0.16.0"
 author: Frank Riemer / GenCreator
 license: MIT
 distribution_owned:
   - PERSONA.md
-  - SOUL.md
   - config.yaml
   - skills
   - skins
@@ -14,4 +13,5 @@ distribution_owned:
   - docs
   - README.md
   - distribution.yaml
-source: github.com/frankxai/agentic-creator-os
+# source omitted on purpose: this folder is not the git root.
+# hermes profile update against github.com/frankxai/agentic-creator-os will fail.

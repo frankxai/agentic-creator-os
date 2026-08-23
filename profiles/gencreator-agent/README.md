@@ -4,41 +4,36 @@ Hermes profile for the Operating System for AI-native creators. Stages, Factory,
 
 This folder is a **profile distribution**. It is not a Hermes fork.
 
-## Install
+**Do not tell strangers to install this until `SOUL.md` exists.** Without it, Hermes falls back to the built-in Nous identity. Copy `PERSONA.md` → `SOUL.md` after Frank approves that write.
+
+## Install (from the ACOS repo root)
 
 1. Install [Hermes Desktop](https://hermes-agent.nousresearch.com/).
-2. Clone this repository (or use a local checkout):
+2. Clone and install the **folder**, not the repo URL:
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
-hermes profile install ./agentic-creator-os/profiles/gencreator-agent --alias
+cd agentic-creator-os
+hermes profile install ./profiles/gencreator-agent --alias
 ```
 
-Hermes install expects `distribution.yaml` at the distribution root, so the path is this folder, not the ACOS repo root.
+Do not run `hermes profile install github.com/frankxai/agentic-creator-os`. There is no `distribution.yaml` at the git root.
 
-3. Launch:
+3. Launch: `gencreator-agent chat`
 
-```bash
-gencreator-agent chat
-```
-
-Update from a newer clone:
-
-```bash
-hermes profile update gencreator-agent
-```
+Update: `git pull` in the clone, then re-run the folder install. `hermes profile update` against the ACOS repo URL will fail.
 
 ## What you get
 
 | Piece | Role |
 |---|---|
-| `PERSONA.md` | Public companion identity (copy to `SOUL.md` after approval) |
+| `PERSONA.md` | Source identity (promote to `SOUL.md` before public install) |
 | `skills/gencreator-start` | Orient, pick a stage, start a loop |
 | `skills/gencreator-factory` | Configure a creator stack |
 | `skills/gencreator-coe` | Six-pillar Personal AI CoE checklist |
 | `skills/gencreator-ship` | Turn work into a reviewable ship packet |
 | `skins/gencreator.yaml` | GenCreator look |
 
-Commerce, community, and entitlements stay on [gencreator.ai](https://gencreator.ai). The existing [Agent Pack](https://gencreator.ai/products/agent-pack) is the harness-agnostic install surface; this profile is the Hermes-native one.
+Commerce stays on [gencreator.ai](https://gencreator.ai). The [Agent Pack](https://gencreator.ai/products/agent-pack) is the harness-agnostic install surface.
 
 Independent of Nous Research.
