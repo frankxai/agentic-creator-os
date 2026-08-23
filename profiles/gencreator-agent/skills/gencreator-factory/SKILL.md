@@ -17,7 +17,7 @@ Use when the user needs a working stack, not a tool catalog dump.
 
 1. List what they already have (Hermes, Claude, Codex, Grok, editors, hosts).
 2. Pick the **smallest** stack that can finish their current loop.
-3. Write a stack card into the project (create `gencreator.stack.md` if none exists):
+3. Write a stack card from `templates/gencreator.stack.md` (create `gencreator.stack.md` in the project).
    - purpose
    - models by job (draft / reason / image / code)
    - files of record

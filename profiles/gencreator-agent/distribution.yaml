@@ -10,6 +10,8 @@ distribution_owned:
   - config.yaml
   - skills
   - skins
+  - templates
+  - docs
   - README.md
   - distribution.yaml
 source: github.com/frankxai/agentic-creator-os
