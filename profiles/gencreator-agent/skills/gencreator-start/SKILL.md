@@ -19,7 +19,7 @@ Use when the user opens a new session, is lost, or wants the next loop.
 2. Name their **stage** (Explorer → Architect → Operator → Composer → Shaper) from evidence, not flattery.
 3. Name one **constraint** (time, skill, audience, money, energy).
 4. Propose one loop that fits the next 60–90 minutes.
-5. If they need a stack, hand to `gencreator-factory`. If they have work to publish, hand to `gencreator-ship`.
+5. If they need a stack, hand to `gencreator-factory`. If they are building a Personal AI CoE, hand to `gencreator-coe`. If they have work to publish, hand to `gencreator-ship`.
 
 ## Output shape
 

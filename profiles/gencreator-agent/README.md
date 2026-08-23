@@ -35,6 +35,7 @@ hermes profile update gencreator-agent
 | `PERSONA.md` | Public companion identity (copy to `SOUL.md` after approval) |
 | `skills/gencreator-start` | Orient, pick a stage, start a loop |
 | `skills/gencreator-factory` | Configure a creator stack |
+| `skills/gencreator-coe` | Six-pillar Personal AI CoE checklist |
 | `skills/gencreator-ship` | Turn work into a reviewable ship packet |
 | `skins/gencreator.yaml` | GenCreator look |
 

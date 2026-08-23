@@ -22,18 +22,7 @@ Use when the user wants to ship, not brainstorm.
    - voice check (sentence case, no slop)
    - proof (preview, screenshot, or command output)
    - approval (publish / spend / external send stays human)
-4. Write a ship packet:
-
-```text
-Artifact:
-Audience:
-Files:
-Proof:
-Risks:
-Human gate:
-Next public action:
-```
-
+4. Write a ship packet from `templates/ship.packet.md` (create `ship.packet.md` in the project). Fill every field from inspected files. Do not invent a different packet shape.
 5. Stop at draft unless they explicitly ask to send.
 
 ## Guardrails

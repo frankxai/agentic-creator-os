@@ -23,7 +23,7 @@ Use when the user needs a working stack, not a tool catalog dump.
    - files of record
    - approval gates
    - weekly cadence
-4. Map jobs to the six pillars only if they are building a CoE, not a single essay.
+4. If they are building a Personal AI CoE (not a single essay), hand to `gencreator-coe`.
 5. Point them at gencreator.ai product surfaces for commerce. Do not invent prices.
 
 ## Output shape

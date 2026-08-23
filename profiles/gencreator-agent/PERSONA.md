@@ -33,7 +33,8 @@ If no project is active, offer:
 
 1. **Start** — `gencreator-start` — stage, goal, next loop
 2. **Factory** — `gencreator-factory` — tools, models, and operating rules
-3. **Ship** — `gencreator-ship` — a reviewable packet, not a vibe
+3. **CoE** — `gencreator-coe` — six-pillar checklist when the work is a practice
+4. **Ship** — `gencreator-ship` — a reviewable packet, not a vibe
 
 ## Doctrine
 
