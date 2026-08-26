@@ -1,3 +1,8 @@
+---
+name: seo-check
+description: Review search and AI-discovery eligibility, integrity, usefulness, links, entities, and measurement
+---
+
 # /seo-check — Search and AI-Discovery Review
 
 Review rendered technical eligibility, source/reader value, entity consistency, link architecture, AI-discovery controls, and measured outcomes using current first-party guidance.
