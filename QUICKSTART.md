@@ -1,89 +1,90 @@
-# ACOS Quick Start
+# ACOS quick start
 
-Get 90+ skills, 65+ commands, and 38 agents auto-activating in under 2 minutes.
+## 1. Inspect before installing
 
-## Install
-
-```bash
-git clone https://github.com/frankxai/agentic-creator-os.git ~/.acos
-cd ~/.acos && ./install.sh
-```
-
-Open any project with Claude Code:
+Clone the repository and read the installer:
 
 ```bash
-cd your-project
-claude
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+sed -n '1,220p' install.sh
 ```
 
-ACOS detects what you're working on and loads the right skills automatically.
+The installer writes into shared agent directories. Back up same-named files if you already maintain a customized profile.
 
-## How It Works
+## 2. Run an isolated Claude install
 
-```
-You type: "write a blog post about AI agents"
-
-ACOS detects:  content + blog keywords
-Auto-loads:    content-strategy, seo-fundamentals skills
-Routes to:     /article-creator command
-You get:       Guided article with SEO, schema markup, social distribution
-```
-
-No manual configuration. No skill memorization. Context-driven activation.
-
-## What You Get
-
-| Category | Count | Examples |
-|----------|-------|---------|
-| **Skills** | 90+ | article-creator, suno-mastery, react-patterns, seo-strategy |
-| **Commands** | 65+ | /ultrawork, /design-gods, /product-team-launch, /deepresearch |
-| **Agents** | 38 | Brand Architect, Music Producer, QA Engineer, Design Swarm |
-| **Hooks** | 15 | Quality gate, circuit breaker, skill activation, audit trail |
-
-## Try These First
-
-```
-/acos              # Check ACOS status and loaded skills
-/ultrawork         # Launch multi-agent swarm mode
-/design-gods       # Design system audit and build
-/deepresearch      # Deep research with web + codebase analysis
-```
-
-## Add Plugins
+Use a temporary `CLAUDE_HOME` to see exactly what the installer copies:
 
 ```bash
-claude plugin marketplace add frankxai/agentic-creator-skills
-
-claude plugin install core              # Creator productivity
-claude plugin install content-engine    # Content creation + newsletter
-claude plugin install design-excellence # Design system governance
-claude plugin install music-lab         # AI music production
-claude plugin install brand-architect   # Brand voice + guidelines
-claude plugin install product-launcher  # Product launch pipeline
-claude plugin install intelligence      # Intelligence scoring
-claude plugin install visual-studio     # Visual creation council
+export CLAUDE_HOME="$(mktemp -d)"
+./install.sh --platform=claude --minimal
+find "$CLAUDE_HOME" -type f | sort
 ```
 
-## Multi-Platform
+The isolated smoke path is also exercised by:
 
-| Platform | Command |
-|----------|---------|
-| Claude Code | `./install.sh` |
-| Cursor | `./install.sh --platform=cursor` |
-| Windsurf | `./install.sh --platform=windsurf` |
-| Gemini | `./install.sh --platform=gemini` |
-
-## Architecture
-
-```
-~/.acos/.claude/
-├── skills/        # 90+ domain skills (auto-activate)
-├── commands/      # 65+ workflow commands
-├── agents/        # 38 specialist agents
-└── hooks/         # 15 lifecycle hooks
+```bash
+npm run verify:public-surface
 ```
 
-## Links
+## 3. Install into your Claude profile
 
-- [Plugin Marketplace](https://github.com/frankxai/agentic-creator-skills)
-- [FrankX.AI](https://frankx.ai)
+When the isolated result matches your expectations:
+
+```bash
+unset CLAUDE_HOME
+./install.sh --platform=claude
+```
+
+Open a project with Claude Code and ask it to read the repository instructions:
+
+```text
+Read CLAUDE.md and AGENTS.md. List the ACOS skills and commands that are relevant to this project, using only files that exist locally.
+```
+
+Useful source entry points:
+
+```text
+.claude/commands/acos.md
+.claude/skill-rules.json
+.claude/skills/
+.claude/agents/
+.claude/hooks/
+```
+
+## Other platform generators
+
+```bash
+./install.sh --platform=cursor
+./install.sh --platform=windsurf
+./install.sh --platform=gemini
+./install.sh --platform=grok
+./install.sh --platform=antigravity
+./install.sh --platform=generic
+```
+
+These flags generate files for the selected target. Verify the generated output in a temporary project before adding it to an existing configuration.
+
+## Plugin installation
+
+This repository is not currently presented as a Claude marketplace installation because `.claude-plugin/marketplace.json` is absent. Use the source installer.
+
+The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is the companion plugin catalog.
+
+## Current measured surface
+
+`npm run verify:public-surface` currently measures:
+
+- 171 non-empty skill modules;
+- 5 empty skill placeholders;
+- 83 top-level slash-command definitions;
+- 69 top-level agent profiles;
+- 9 installable shell hooks;
+- 32 activation rules.
+
+The definitions for each count are documented in [README.md](README.md).
+
+## License status
+
+This repository currently has no project-wide license file. Review component-specific licenses and wait for published project-wide terms before copying, modifying, or redistributing the repository as a whole.

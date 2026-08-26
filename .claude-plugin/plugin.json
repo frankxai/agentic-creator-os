@@ -1,15 +1,13 @@
 {
   "name": "agentic-creator-os",
   "version": "11.0.0",
-  "description": "ACOS — The Operating System for AI-Powered Creators. Layer-modeled skills, commands, agents, and hooks for content / video / music / visual / brand workflows. Composes a creator-meta substrate with creator-specific implementations.",
+  "description": "Reusable skills, commands, agent profiles, hooks, and platform adapters for AI-assisted creative work.",
   "author": {
-    "name": "Frank Riemer",
-    "email": "frank@frankx.ai",
+    "name": "FrankX",
     "url": "https://frankx.ai"
   },
   "homepage": "https://frankx.ai/products/agentic-creator-os",
   "repository": "https://github.com/frankxai/agentic-creator-os",
-  "license": "MIT",
   "keywords": [
     "claude-code",
     "cursor",
@@ -58,12 +56,13 @@
     ]
   },
   "stats": {
-    "skills": 105,
-    "commands": 86,
-    "agents": 90,
-    "hooks": 15,
-    "verified": "2026-06-12",
-    "note": "ACOS V11 current shipped state."
+    "nonEmptySkillModules": 171,
+    "emptySkillPlaceholders": 5,
+    "topLevelCommands": 83,
+    "topLevelAgents": 69,
+    "installableShellHooks": 9,
+    "activationRules": 32,
+    "verifiedBy": "npm run verify:public-surface"
   },
   "intelligence": {
     "version": "v11.0.0",

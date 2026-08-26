@@ -122,9 +122,11 @@ Quick checklist:
 - **Discussions** — For questions and ideas
 - **Slack** — #agentic-creator-os channel
 
-## License
+## Project terms
 
-By contributing, you agree that your contributions will be licensed under the same license as the project.
+This repository currently has no project-wide license file. A repository owner
+must publish project terms before this guide can state how contributions will be
+licensed.
 
 ---
 

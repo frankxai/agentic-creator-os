@@ -31,12 +31,11 @@ jobs:
           set -o pipefail
           npm install --no-audit --no-fund 2>&1 | tee /tmp/install.log
 
-      # Transpile-only: tsc --noCheck still emits JS + .d.ts but skips the
-      # analysis pass. This avoids a pre-existing TS2589 generic-depth blowup
-      # in the MCP SDK + Zod under TS 5.9 (which crashed V8 for creator/db
-      # even at --max-old-space-size=4096). The committed build/*.js already
-      # proves the code transpiles; CI just reproduces it. Type debt is
-      # surfaced separately by the non-blocking `typecheck` step below.
+      - name: Verify public surface
+        run: npm run verify:public-surface
+
+      # Workspace build scripts intentionally separate emission from the
+      # blocking typecheck below.
       - name: Build MCP servers (transpile-only)
         id: build
         run: |
@@ -49,12 +48,8 @@ jobs:
           set -o pipefail
           npm run lint 2>&1 | tee /tmp/lint.log
 
-      # Informational: runs tsc --noEmit across workspaces. Currently fails
-      # due to the TS2589 dep-drift above; tracked separately. Kept visible
-      # so the type debt does not silently rot, but does not block CI.
-      - name: Typecheck (informational)
+      - name: Typecheck
         run: npm run typecheck:all
-        continue-on-error: true
 
       # Diagnostic: on any failure above, post the captured logs as a PR
       # comment so they are visible without log-fetching tooling. Safe to
