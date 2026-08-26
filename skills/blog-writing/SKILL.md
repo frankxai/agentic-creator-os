@@ -1,14 +1,6 @@
 ---
-name: Blog Writing
+name: blog-writing
 description: Create evidence-bound, distinctive articles that serve readers, remain faithful to the active creator voice, and are ready for search, AI discovery, governed media, publication, distribution, and measurement
-version: 2.0.0
-triggers:
-  - "blog post"
-  - "write blog"
-  - "create article"
-  - "blog article"
-  - "research and write"
-  - "skill:blog-writing"
 ---
 
 # Blog Writing
