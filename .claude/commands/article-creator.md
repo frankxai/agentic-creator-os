@@ -1,3 +1,8 @@
+---
+name: article-creator
+description: Create a source-grounded article and advance it only to the explicitly authorized state
+---
+
 # /article-creator — Content Intelligence Article Pipeline
 
 Create a source-grounded article and take it only as far as the operator's authority permits.
