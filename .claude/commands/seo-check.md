@@ -1,92 +1,82 @@
-# /seo-check - Weekly SEO & Traffic Review
+# /seo-check — Search and AI-Discovery Review
 
-Quick audit of SEO health and traffic performance.
+Review rendered technical eligibility, source/reader value, entity consistency, link architecture, AI-discovery controls, and measured outcomes using current first-party guidance.
 
-## Execution Steps
+## Contract
 
-### Step 1: Check Site Indexing
-```bash
-# Check how many pages Google has indexed
-curl -s "https://www.google.com/search?q=site:frankx.ai" | grep -o "About [0-9,]* results" || echo "Check manually: site:frankx.ai"
+Read:
+
+- `docs/content-intelligence.md`
+- `skills/seo-optimization/SKILL.md`
+- target repository instructions and content schema
+
+Do not use scraped `site:` result counts, keyword-density formulas, fixed link/image counts, mandatory FAQ schema, generic SEO scores, or unrepeatable prompts to AI products as measurement.
+
+## Modes
+
+```text
+/seo-check [URL-or-content-id]
+/seo-check --site [domain]
+/seo-check --cluster [cluster-id]
+/seo-check --measurement [content-id]
 ```
 
-### Step 2: Verify Sitemap
-```bash
-# Fetch and count sitemap URLs
-curl -s https://frankx.ai/sitemap.xml | grep -c "<url>" || echo "Sitemap check failed"
-```
+## Evidence collection
 
-### Step 3: Manual Checks (Open in Browser)
+1. Resolve canonical domain, repository/project, content ID, source path, current deployment, locale, and observation window.
+2. Read connected Search Console, Bing Webmaster, analytics, link, affiliate/product, and editorial records when available. State unavailable lanes rather than inventing zeros.
+3. Capture current primary search/crawler guidance for unstable policy questions.
+4. Annotate algorithm updates, data incidents, migrations, campaigns, and seasonality.
 
-**Google Search Console:**
-- https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain:frankx.ai
+## Rendered technical checks
 
-**Plausible Analytics:**
-- https://plausible.io/frankx.ai (or your dashboard URL)
+- public HTTP 200 and meaningful server/static main content;
+- index/noindex and snippet controls;
+- canonical, redirects, sitemap membership, truthful `lastmod`;
+- title, description, headings, locale, author/profile, publication/update dates;
+- visible-content-consistent JSON-LD and validation;
+- crawlable internal links, orphan status, broken links, redirect chains, canonical conflicts;
+- standard image markup, stable URLs, alt text, representative image variants, crawlability;
+- mobile output, performance, hydration/runtime errors, analytics events.
 
-**AI Citation Check:**
-- Ask ChatGPT: "What is Agentic Creator OS?"
-- Ask Perplexity: "Who is FrankX AI?"
-- Search Google: "agentic creator os" - check AI Overview
+Robots exclusion is not a deindexing method. Do not infer indexing from a sitemap alone.
 
-### Step 4: Quick SEO Audit
+## Editorial and discovery checks
 
-Check these for each new article:
+- exact reader intent and competent-reader baseline;
+- first-party origin or research delta;
+- material claims with primary/authoritative sources, dates, and freshness;
+- information gain versus current result set;
+- coherent entities, questions, answer units, and cross-format facts;
+- topic/cluster role and cannibalization/consolidation decision;
+- proportional offer/affiliate relationship and disclosure;
+- headline and imagery accurately representing the page.
 
-| Check | How |
-|-------|-----|
-| TL;DR in first 100 words | Read article intro |
-| Question-based H2s | Scan headings |
-| FAQ section | Scroll to bottom |
-| Internal links | Check for 3+ links to other content |
-| Meta description | View page source or use browser SEO extension |
+Google requires no special AI schema or AI text file and says it ignores `llms.txt`. Track `OAI-SearchBot` and `GPTBot` independently and use product-specific crawler controls. Never promise AI inclusion.
 
-### Step 5: Content Performance Review
+## Measurement
 
-**Top Performers (what's working):**
-- Which blog posts get the most traffic?
-- Which keywords drive the most clicks?
-- What's the avg. position for target keywords?
+Separate:
 
-**Opportunities (what to improve):**
-- Pages with high impressions but low CTR (improve titles)
-- Pages ranking #4-10 (push to top 3)
-- Keywords you're NOT ranking for yet
+- Google Web impressions/clicks/queries/pages;
+- Google generative-AI impressions where the report is available;
+- Bing AI citations/grounding-query samples, which are not rank or authority;
+- analytics qualified visits, engagement, actions, and conversions;
+- AI/search/social/referral traffic, earned links, subscriptions, opportunities, affiliates, and revenue;
+- research/production/distribution/maintenance cost.
 
-## Output Template
+Use T+0, T+7, T+28, and T+90 snapshots or an evidence-appropriate longer window. Search Console and analytics measure different systems and will not match exactly.
 
-```markdown
-## SEO Check - [DATE]
+## Output
 
-### Traffic Summary (Last 7 Days)
-- Visitors:
-- Pageviews:
-- Top Page:
-- Top Referrer:
+Return:
 
-### Search Console (Last 28 Days)
-- Total Clicks:
-- Total Impressions:
-- Avg. CTR:
-- Avg. Position:
+1. decision and highest-impact finding;
+2. measurement integrity and current state;
+3. technical/index/render findings;
+4. editorial/entity/link findings;
+5. discovery, trust, and commercial evidence;
+6. explicit guidance versus inference;
+7. prioritized fixes or experiment with owner, evidence, expected effect, guardrails, and verification date.
 
-### Top Keywords
-1. [keyword] - pos [X], [N] clicks
-2. [keyword] - pos [X], [N] clicks
-3. [keyword] - pos [X], [N] clicks
-
-### AI Citations Found
-- [ ] ChatGPT mentions FrankX
-- [ ] Perplexity cites content
-- [ ] Google AI Overview includes
-
-### Action Items
-- [ ] Optimize [page] for [keyword]
-- [ ] Add FAQ to [article]
-- [ ] Internal link from [high-traffic] to [new content]
-```
-
-## Related Commands
-- `/inventory-status` - Content inventory
-- `/factory` - Content publishing
-- `/log` - Session logging
+Never attribute movement to one algorithm or content change without cohort, timing, and technical evidence.
