@@ -1,17 +1,6 @@
 ---
-name: SEO Optimization
+name: seo-optimization
 description: Improve search and AI-discovery eligibility, usefulness, technical integrity, entity consistency, internal links, digital PR, and measurable outcomes using current first-party guidance without ranking guarantees or keyword-density tactics
-version: 2.0.0
-triggers:
-  - "seo"
-  - "geo"
-  - "aeo"
-  - "AI search"
-  - "search optimization"
-  - "keyword research"
-  - "rank higher"
-  - "backlinks"
-  - "skill:seo-optimization"
 ---
 
 # SEO and AI Discovery
