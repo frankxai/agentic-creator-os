@@ -1,333 +1,124 @@
 ---
 name: SEO Optimization
-description: Optimize content for search engines to increase organic traffic and rankings
-version: 1.0.0
+description: Improve search and AI-discovery eligibility, usefulness, technical integrity, entity consistency, internal links, digital PR, and measurable outcomes using current first-party guidance without ranking guarantees or keyword-density tactics
+version: 2.0.0
 triggers:
   - "seo"
-  - "seo optimization"
+  - "geo"
+  - "aeo"
+  - "AI search"
   - "search optimization"
   - "keyword research"
   - "rank higher"
+  - "backlinks"
   - "skill:seo-optimization"
 ---
 
-# SEO Optimization
-
-## Purpose
-
-Optimize content to rank higher in search engines and drive organic traffic:
-- Research and target the right keywords
-- Structure content for search intent
-- Build technical SEO foundations
-- Earn quality backlinks
-
-## When to Use This Skill
-
-- Optimizing existing blog posts
-- Planning new content around keywords
-- Technical SEO audits
-- Competitor keyword analysis
-- Local SEO optimization
-- E-commerce product pages
-
-## Core Concepts
-
-### The SEO Pyramid
-
-```
-                    ┌─────────────┐
-                    │  BACKLINKS  │ ← Authority building
-                    └──────┬──────┘
-               ┌───────────┼───────────┐
-          ┌────┴────┐ ┌────┴────┐ ┌────┴────┐
-          │Content  │ │On-Page  │ │Technical│
-          │Quality  │ │Elements │ │ SEO     │
-          └─────────┘ └─────────┘ └─────────┘
-                    ┌───────────┐
-                    │ KEYWORDS  │ ← Foundation
-                    └───────────┘
-```
-
-### Search Intent Types
-
-```typescript
-type SearchIntent =
-  | 'informational'    // "What is..." - Answer questions
-  | 'navigational'     // "Netflix login" - Brand queries
-  | 'transactional'    // "Buy iPhone" - Purchase intent
-  | 'commercial'       // "Best laptop 2024" - Research before buy
-
-function matchIntent(keyword: string, content: Content): boolean {
-  // Informational: How-to guides, explanations
-  // Navigational: Brand pages, login
-  // Transactional: Pricing, demo, buy
-  // Commercial: Comparisons, reviews
-}
-```
-
-## Patterns
-
-### Pattern 1: On-Page SEO Checklist
-
-```markdown
-## Title Tag (50-60 characters)
-<title>[Primary Keyword] - [Benefit] | [Brand]</title>
-
-## Meta Description (150-160 characters)
-<meta name="description" content="[Compelling description with keywords and CTA]">
-
-## Heading Structure
-<H1>[Title matching title tag]</H1>
-<H2>[Major section - includes secondary keywords]</H2>
-<H3>[Sub-section - includes related keywords]</H3>
-<H2>[Another major section]</H2>
-...
-
-## Content Optimization
-✓ Primary keyword in first paragraph
-✓ Secondary keywords in 2-3 paragraphs each
-✓ Keywords in bold/strong (2-3 occurrences)
-✓ Related keywords naturally throughout
-✓ LSI keywords for context
-
-## Image Optimization
-✓ Alt text with keywords
-✓ Compressed file sizes
-✓ Descriptive filenames
-✓ Lazy loading for below-fold images
-
-## Internal Linking
-✓ 2-4 internal links to related content
-✓ Anchor text varies naturally
-✓ Links to pillar/cluster content
-
-## Technical Elements
-✓ Fast loading (<3 seconds)
-✓ Mobile responsive
-✓ SSL certificate (HTTPS)
-✓ XML sitemap submitted
-✓ Robots.txt configured
-✓ Canonical tags for duplicates
-```
-
-### Pattern 2: Keyword Research Framework
-
-```typescript
-interface KeywordData {
-  keyword: string;           // Target keyword
-  volume: number;            // Monthly searches
-  difficulty: number;        // 0-100 scale
-  cpc: number;               // Cost per click
-  intent: SearchIntent;      // Type of search
-  serpFeatures: string[];    // Featured snippets, etc.
-}
-
-const researchKeywords = (topic: string): KeywordData[] => {
-  return [
-    // Primary keyword (high volume, high difficulty)
-    { keyword: `${topic}`, volume: 10000, difficulty: 70, intent: 'informational' },
-    // Long-tail keyword (low volume, low difficulty)
-    { keyword: `how to ${topic} for beginners`, volume: 1000, difficulty: 30, intent: 'informational' },
-    // Commercial intent
-    { keyword: `best ${topic} tools`, volume: 5000, difficulty: 60, intent: 'commercial' },
-    // Question keyword (featured snippet)
-    { keyword: `what is ${topic}`, volume: 3000, difficulty: 40, intent: 'informational' },
-  ];
-}
-```
-
-### Pattern 3: Content Brief Template
-
-```markdown
-# Content Brief: [Target Keyword]
-
-## Basic Info
-- Primary Keyword: [keyword]
-- Target Search Intent: [informational/navigational/transactional/commercial]
-- Target Word Count: [1,500-2,500 words]
-- Suggested Title: "[title with keyword]"
-- Target Ranking: [Position 1-3]
-
-## Keyword Strategy
-**Primary Keyword:** [keyword]
-**Secondary Keywords:**
-- [keyword 1]
-- [keyword 2]
-- [keyword 3]
-
-**Related Terms to Include:**
-- [term 1]
-- [term 2]
-- [term 3]
-
-**Questions to Answer:**
-- [Question 1]
-- [Question 2]
-- [Question 3]
-
-## Content Structure
-**H2 Outline:**
-1. [Section about X]
-2. [Section about Y]
-3. [Section about Z]
-
-**Featured Snippet Target:**
-Question: "[Question to answer]"
-Answer: "[50-word answer - direct, concise]"
-
-## Competitor Analysis
-**Top 3 Ranking Pages:**
-1. [URL 1] - Strengths, weaknesses
-2. [URL 2] - Strengths, weaknesses
-3. [URL 3] - Strengths, weaknesses
-
-**Content Gaps to Exploit:**
-- [Gap 1]
-- [Gap 2]
-
-## Links to Include
-**Internal Links (2-4):**
-- [Link 1 to pillar/cluster content]
-- [Link 2 to related content]
-
-**External Links (2-4):**
-- [Link to authoritative source 1]
-- [Link to authoritative source 2]
-
-## Success Metrics
-- Target word count: [number]
-- Readability grade: [6-8]
-- Keyword density: [1-2%]
-- Images: [3-5 with optimized alt text]
-```
-
-## Step-by-Step Process
-
-1. **Keyword Research**
-   - Use Ahrefs/Semrush/Moz for data
-   - Find keywords with right volume/difficulty balance
-   - Analyze search intent
-   - Identify content gaps
-
-2. **Competitive Analysis**
-   - Analyze top-ranking pages
-   - Identify what makes them rank
-   - Find gaps to outrank them
-   - Note their word count and structure
-
-3. **Content Planning**
-   - Create detailed content briefs
-   - Define target word count
-   - Plan headings and structure
-   - Specify internal/external links
-
-4. **On-Page Optimization**
-   - Include keywords in title/meta
-   - Structure with H2s/H3s
-   - Optimize images
-   - Add internal links
-
-5. **Technical SEO**
-   - Fix crawl errors
-   - Improve page speed
-   - Ensure mobile-friendliness
-   - Submit sitemap
-
-6. **Link Building**
-   - Create link-worthy content
-   - Reach out for backlinks
-   - Build internal links
-   - Monitor backlink profile
-
-## FrankX Application
-
-```markdown
-# SEO Strategy: [TOPIC] for [AUDIENCE]
-
-## The FrankX SEO Philosophy
-
-Most SEO is playing defense.
-
-FrankX plays offense.
-
-**Our approach:**
-
-1. Own the narrative, not just the keywords
-2. Create content so good they have to link
-3. Build topical authority, not just page authority
-
-## Target Keyword Clusters
-
-**Pillar Page:** "[Ultimate Guide to TOPIC]"
-- 10,000+ words
-- Comprehensive coverage
-- Links to all cluster content
-
-**Cluster Content:**
-- "How to [TOPIC] for Beginners" (1,500 words)
-- "[TOPIC] Mistakes to Avoid" (1,200 words)
-- "The Science Behind [TOPIC]" (1,800 words)
-- "[TOPIC] Case Studies" (2,000 words)
-
-## Link Building Strategy
-
-**Resource Page Outreach:**
-- Create ultimate resource pages
-- Pitch to relevant resource pages
-- Track responses and follow up
-
-**HARO/Connectively:**
-- Position as expert source
-- Provide valuable insights
-- Earn backlinks from journalists
-
-**Broken Link Building:**
-- Find broken links in niche
-- Offer content as replacement
-- Easy wins for backlinks
-```
-
-## Anti-Patterns
-
-| Bad Practice | Why It's Bad | Better Approach |
-|--------------|--------------|-----------------|
-| Keyword stuffing | Penalized by Google | Natural keyword usage |
-| Ignoring search intent | Low engagement metrics | Match content to intent |
-| Thin content (<1,000 words) | Doesn't satisfy users | Comprehensive 1,500+ words |
-| No internal linking | Weak site structure | Connect related content |
-| Duplicate content | Confuses search engines | Use canonical tags |
-| Ignoring mobile | Poor rankings, UX | Mobile-first design |
-| Slow page speed | High bounce rate | Optimize images, minify |
-
-## Quick Commands
-
-```bash
-# Research keywords for topic
-skill:seo-optimization, research keywords for [TOPIC]
-
-# Audit existing content
-skill:seo-optimization, audit my blog post at [URL]
-
-# Create content brief
-skill:seo-optimization, create a content brief for [KEYWORD]
-
-# Optimize existing page
-skill:seo-optimization, optimize my page [URL] for [KEYWORD]
-
-# Find link building opportunities
-skill:seo-optimization, find link building opportunities for [TOPIC]
-```
-
-## Related Skills
-
-- `blog-writing` - Create SEO-optimized content
-- `content-strategy` - Plan keyword-targeted content
-- `social-media` - Promote content for backlinks
-- `video-script` - Create YouTube SEO content
-
-## Resources
-
-- `resources/templates.md` - Content brief templates
-- `resources/checklists.md` - Pre-publication SEO checklist
-- `resources/tools.md` - SEO tool recommendations
-- `resources/competitor-analysis.md` - Competitor research framework
+# SEO and AI Discovery
+
+## Governing contract
+
+Read `docs/content-intelligence.md`. Use current first-party search and crawler documentation for any unstable rule, feature, limit, or claim.
+
+Never promise rank, traffic, rich results, or AI citation. Forecast with explicit assumptions and confidence, then preserve predicted and actual outcomes separately.
+
+## Current position
+
+Google states that existing SEO fundamentals apply to AI Overviews and AI Mode. Pages must be indexed and snippet-eligible. No special AI schema, AI text file, or artificial chunking is required, and Google says it ignores `llms.txt`.
+
+- [Google AI optimization guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), updated 2026-07-10.
+- [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features), updated 2025-12-10.
+
+AI-assisted production is not prohibited as a method. Scaled automation produced primarily to manipulate ranking can violate spam policy. Require information gain, accuracy, source visibility, relevant metadata, and disclosure where expected.
+
+- [Generative AI content guidance](https://developers.google.com/search/docs/fundamentals/using-gen-ai-content), updated 2025-12-10.
+- [People-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content), updated 2025-12-10.
+- [Spam policies](https://developers.google.com/search/docs/essentials/spam-policies), updated 2026-05-15.
+
+## Opportunity packet
+
+Capture:
+
+- query, locale, device posture, date, dominant intent, result types, source diversity;
+- competent-reader expectation and weak/duplicated result coverage;
+- creator's earned information gain and primary evidence;
+- canonical URL, existing adjacent pages, consolidation/cannibalization decision;
+- entities, subquestions, answer units, internal-link role, and freshness burden;
+- likely conversion or authority role, not only estimated traffic.
+
+Treat community language and search snippets as discovery evidence, not factual support.
+
+## Rendered technical gate
+
+Verify:
+
+- public HTTP 200 and meaningful server/static main content;
+- index/noindex and snippet controls;
+- canonical, redirects, absolute canonical sitemap URL, truthful `lastmod`;
+- title, description, heading structure, locale, author/profile identity;
+- crawlable `<a href>` internal links, no orphan important pages, no broken links or redirect chains;
+- accessible images in standard markup with stable URLs, useful alt text, captions/credits when needed;
+- visible-content-consistent JSON-LD and no schema errors;
+- mobile output, performance, hydration/runtime errors, and analytics events.
+
+Robots exclusion is not a deindexing method. Use `noindex` while allowing the crawler to read it when deindexing is intended.
+
+## Content and entities
+
+- Lead with the actual answer or earned thesis.
+- Use clear sections inside a substantial canonical page; do not create thin fan-out pages.
+- Preserve exact entity names, dates, units, scope, author, organization, sources, method, and update history.
+- Use `Article`/`BlogPosting`, profile, organization, breadcrumb, or media schema only when supported and visible.
+- Do not force FAQ sections or FAQ schema. Google reported FAQ rich results stopped appearing in May 2026; Q&A still belongs where readers need it.
+- Internal links should be contextual and descriptive. There is no magic link count.
+
+## AI crawler controls
+
+- `OAI-SearchBot` controls ChatGPT Search visibility; `GPTBot` is a separate training-use control: [OpenAI crawler docs](https://developers.openai.com/api/docs/bots).
+- `PerplexityBot` controls Perplexity search crawling; `Perplexity-User` is distinct: [Perplexity crawler docs](https://docs.perplexity.ai/docs/resources/perplexity-crawlers).
+- Validate published IP/signature guidance and WAF behavior; do not trust user-agent text alone.
+- `llms.txt` may remain optional ecosystem metadata but does not replace HTML, schema, crawler access, or sitemaps.
+
+## Images
+
+Use high-quality relevant images near supporting text, descriptive filenames, contextual alt text, stable crawlable URLs, and standard markup. Keep the clean representative article/schema image separate from text-led social cards. Preserve high-resolution 16:9, 4:3, and 1:1 variants where the publisher supports them.
+
+- [Google Images guidance](https://developers.google.com/search/docs/appearance/google-images), updated 2026-03-02.
+- [Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article).
+
+## Digital PR and links
+
+Earn links through original datasets, benchmarks, tools, calculators, templates, primary interviews, definitive maps, maintained references, and uncommon visual explanations.
+
+Reject paid ranking credit, automated link creation, excessive exchanges, low-quality directories, disguised advertorials, and mass low-context outreach. Qualify paid and affiliate links with `sponsored` or appropriate `nofollow`; use `ugc` for user-generated links.
+
+- [Qualifying outbound links](https://developers.google.com/search/docs/crawling-indexing/qualify-outbound-links).
+
+## Measurement
+
+Separate:
+
+- Google Search Console Web impressions/clicks/queries/pages;
+- Google Generative AI Performance where available;
+- Bing AI citations and grounding queries, which are not rank or authority;
+- analytics sessions, engagement, actions, and conversions;
+- AI/search/social/referral sources, earned links, affiliate/product value.
+
+Annotate algorithm updates, data incidents, migrations, campaigns, and seasonality before diagnosis.
+
+- [Google Generative AI Performance](https://support.google.com/webmasters/answer/16984139?hl=en).
+- [Search Console and Analytics](https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console).
+- [Bing AI Performance](https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview), 2026-02-10.
+
+## Output
+
+Return opportunity evidence, technical findings, content/entity findings, link graph, prioritized actions, forecast with assumptions, executed fixes, verification, and measurement date. Distinguish explicit guidance from implementation inference.
+
+## Remove these legacy patterns
+
+- keyword density, LSI keywords, bolding keywords, and universal title/meta/word-count formulas;
+- fixed minimum internal/external link or image counts;
+- manual `site:` result-count scraping as an indexing metric;
+- asking an AI product whether it mentions the brand as a measurement system;
+- mandatory FAQPage schema or “featured snippet” copy blocks;
+- automatically interpreting an SEO score as publication quality.
