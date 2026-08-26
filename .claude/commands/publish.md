@@ -1,3 +1,8 @@
+---
+name: publish
+description: Publish a reviewed content packet through the canonical publisher and verify the remote result
+---
+
 # /publish — Evidence-Bound Publishing Orchestrator
 
 Publish a reviewed content packet through the active repository/CMS and verify the actual production result.
