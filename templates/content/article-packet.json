@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "content_id": "cnt_example_replace_me",
+  "status": "SEED",
+  "authority": "DRAFT",
+  "brand": {
+    "brand_id": "replace-me",
+    "domain": "replace-me.example",
+    "repository": "blocked",
+    "deployment_project": "blocked",
+    "editorial_record": "blocked"
+  },
+  "brief": {
+    "working_title": "Replace with an earned title",
+    "subject": "Replace with the exact subject",
+    "origin": "Replace with first-party origin or research delta",
+    "thesis": "Replace with one governing thesis",
+    "reader": "Replace with the competent reader",
+    "reader_baseline": "Replace with what the reader already believes",
+    "reader_delta": "Replace with what changes after reading",
+    "stakes": "Replace with what is decided, risked, spent, changed, won, or lost",
+    "strongest_objection": "Replace with the strongest informed objection",
+    "commercial_relationship": "none"
+  },
+  "content_graph": {
+    "cluster_id": "cluster_replace_me",
+    "canonical_url": "blocked",
+    "existing_related_urls": [],
+    "internal_links": [],
+    "entities": []
+  },
+  "search": {
+    "primary_intent": "Replace with one intent",
+    "query_set": [],
+    "serp_snapshot": {
+      "captured_at": "blocked",
+      "locale": "blocked",
+      "device": "blocked",
+      "dominant_intent": "blocked",
+      "information_gap": "blocked"
+    },
+    "answer_units": [],
+    "structured_data": ["Article"],
+    "indexation": "index",
+    "crawler_policy_checked": false
+  },
+  "sources": [],
+  "claims": [],
+  "article": {
+    "source_path": "blocked",
+    "canonical_title": "blocked",
+    "description": "blocked",
+    "author_id": "blocked",
+    "published_at": null,
+    "modified_at": null
+  },
+  "media": [],
+  "affiliates": [],
+  "distribution": [],
+  "reviews": [],
+  "publication": {
+    "branch": "blocked",
+    "pull_request": "blocked",
+    "preview_url": "blocked",
+    "live_url": "blocked",
+    "verified_at": null,
+    "rollback": "blocked"
+  },
+  "measurement": {
+    "hypothesis": "blocked",
+    "primary_metric": "blocked",
+    "guardrails": [],
+    "snapshots": [],
+    "freshness_review_at": "blocked",
+    "freshness_triggers": []
+  },
+  "blocked": [
+    "Replace template values with connected evidence before promotion beyond SEED."
+  ]
+}
