@@ -9,7 +9,7 @@
 ![Agentic Creator OS — FRANK-Ω Command Center](docs/infographics/acos-hero-omega.png)
 
 [![Version](https://img.shields.io/badge/version-11.0.0-cyan?style=for-the-badge)](https://github.com/frankxai/agentic-creator-os)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=for-the-badge)](LICENSE)
 [![Platforms](https://img.shields.io/badge/platforms-Claude%20%7C%20Grok%20Build%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-purple?style=for-the-badge)](#multi-platform-install)
 
 </div>
