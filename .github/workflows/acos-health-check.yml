@@ -2,6 +2,7 @@ name: ACOS Health Check
 
 on:
   schedule:
+    - cron: '0 6 * * *'   # daily 06:00 UTC — no cadence specified in file/name, defaulting to daily per estate cost-discipline rule
   push:
     branches: [main]
     paths:
