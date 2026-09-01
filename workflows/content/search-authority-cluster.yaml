@@ -1,0 +1,142 @@
+name: Search Authority Cluster Pipeline
+slug: search-authority-cluster
+version: "1.0.0"
+description: |
+  Evidence-bound path from estate audit and category ownership through demand mapping,
+  page commissioning, a maximum three-asset proof wave, article production,
+  governed preview and release, distribution, and dated authority learning.
+
+triggers:
+  - "/build-search-authority"
+  - "build a search authority cluster"
+  - "plan a long-tail content strategy"
+  - "create a topic cluster"
+  - "own this category in search"
+
+contract: docs/content-intelligence.md
+state_template: templates/content/search-authority-cluster-packet.json
+default_authority: DRAFT
+
+agents:
+  - editor-in-chief
+  - commissioning-editor
+  - demand-intelligence-analyst
+  - research-lead
+  - fact-rights-reviewer
+  - seo-geo-architect
+  - author
+  - visual-director
+  - distribution-revenue-lead
+  - production-engineer
+  - measurement-analyst
+
+phases:
+  - name: Task Envelope
+    steps:
+      - Resolve category, canonical brand and domain, audience job, commercial or capability outcome, authority, permissions, timing, and success condition
+      - Inspect repository and CMS instructions, current URLs, products, tools, assessments, research, media, analytics, editorial records, and deployment state
+      - Preserve unavailable analytics, credentials, IDs, URLs, or publication state as explicit blockers; never invent them
+    output: search-authority-cluster-packet.json
+
+  - name: Estate Audit
+    parallel_lanes:
+      - Inventory current URLs, titles, intents, internal links, structured data, traffic, conversions, and freshness where evidence is available
+      - Inventory first-party artifacts, products, code, assessments, benchmarks, screenshots, demonstrations, and customer-language evidence
+      - Inspect sibling brands and domains for semantic overlap or conflicting ownership
+    steps:
+      - Classify every relevant asset as KEEP, REFRESH, MERGE, REDIRECT, RETIRE, or UNRESOLVED
+      - Record evidence source, captured date, confidence, and the decision affected
+      - Prefer consolidation over new pages when an existing URL already satisfies the reader job
+    output: estate inventory and collision map
+
+  - name: Category Ownership
+    steps:
+      - Freeze one durable category thesis, canonical owner, canonical hub, audience job, and product bridge
+      - Define which sibling-brand application angles are materially distinct and which are prohibited duplicates
+      - Resolve canonical and routing conflicts before keyword or page ideation continues
+    output: canonical ownership map or HOLD
+
+  - name: Demand and Opportunity Graph
+    parallel_lanes:
+      - Collect first-party query, analytics, site-search, CRM, support, interview, and community language when connected
+      - Capture dated SERP, competitor, entity, question, comparison, and implementation evidence where relevant
+      - Map product capabilities, direct evidence, executable artifacts, and commercial continuity
+    steps:
+      - Build an intent-entity-job-URL graph rather than a flat keyword list
+      - Group query formulations by reader decision and canonical URL
+      - Mark estimated demand, weak signals, information gaps, freshness requirements, and maintenance burden explicitly
+    output: opportunity graph and evidence ledger
+
+  - name: Page Commission Gate
+    steps:
+      - Score business relevance, demand evidence, intent distinctness, differentiated thesis, evidence, executable artifact, offer bridge, and maintenance fitness from zero to two
+      - Require at least 12 of 16 and prohibit PASS when intent distinctness, evidence, or executable artifact scores zero
+      - Return PASS, MERGE, HOLD, or KILL for every proposal with a reason and destination
+      - Cap the first commissioned wave at three publishable assets
+    output: page scorecards and commission decisions
+
+  - name: Proof Wave Design
+    steps:
+      - Prefer one category authority page, one decision or implementation asset, and one proof asset
+      - For every PASS asset freeze the URL hypothesis, parent hub, reader job, exclusion boundary, thesis, evidence contract, original artifact, primary action, internal links, distribution role, maintainer, and measurement dates
+      - Reject waves that validate publication volume rather than category demand, product resonance, or reader capability delivered
+    output: frozen proof wave and article packets
+
+  - name: Production Cells
+    condition: at least one proposal is PASS
+    steps:
+      - For each commissioned asset, invoke the research-to-article workflow using its frozen article packet
+      - Keep commissioning, research, authoring, truth review, search review, commercial review, visual review, and production verification as distinct passes even when one person fills several roles
+      - Allow one substantive editorial rewrite per asset; continue deterministic correctness fixes until pass or exact blocker
+    output: reviewed article, artifact, and media packets
+
+  - name: Build and Preview
+    condition: authority is PREVIEW, PUBLISH, or DISTRIBUTE and an asset is READY_FOR_OPERATOR
+    steps:
+      - Create the smallest coherent repository branch and pull request for each release unit
+      - Run repository-native format, lint, type, content/schema, link, build, and test checks
+      - Inspect rendered Vercel or equivalent previews on mobile and desktop, including metadata, canonical, robots, sitemap, JSON-LD, media, accessibility, analytics events, links, and runtime errors
+      - Record pull request, preview URL, evidence receipt, rollback, and unresolved risk
+    output: PREVIEW_LIVE or HOLD
+
+  - name: Publish and Verify
+    condition: authority is PUBLISH or DISTRIBUTE and all release gates pass
+    steps:
+      - Merge or release through the repository or CMS native path
+      - Verify the canonical production URL serves the intended version and is eligible for the intended indexation state
+      - Capture deployment, live URL, time, analytics baseline, and rollback evidence
+    output: PUBLISHED
+
+  - name: Distribute
+    condition: authority is DISTRIBUTE and target accounts, approval, and schedule are resolved
+    steps:
+      - Create channel-native derivatives from the idea and evidence rather than near-identical cross-posts
+      - Tie every derivative to canonical content and source versions with stable UTMs, disclosures, and approved asset renditions
+      - Capture scheduler or channel result IDs and final URLs
+    output: DISTRIBUTED or DISTRIBUTION_STAGED
+
+  - name: Learn and Govern
+    condition: at least one asset is PUBLISHED
+    steps:
+      - At T+7 verify indexation, query breadth, release quality, distribution reach, and instrumentation
+      - At T+28 evaluate qualified discovery, engaged reading, action completion, internal progression, conversion, and missing answer units
+      - At T+90 evaluate durable authority, citations, branded and non-branded movement, assisted revenue, maintenance cost, and product signal
+      - Decide EXPAND, REFRESH, CONSOLIDATE, REDIRECT, ARCHIVE, REPOSITION, or KILL while preserving the original hypothesis and dated evidence
+      - Do not commission the next wave until the current learning window yields a decision or an explicit operator override
+    output: dated authority snapshots and next-wave decision
+
+termination:
+  external_research_rounds: 2
+  substantive_editorial_rewrites_per_asset: 1
+  proof_wave_asset_limit: 3
+  stop_on:
+    - unresolved canonical owner
+    - duplicate reader job with an adequate existing URL
+    - unverifiable central claim
+    - missing original artifact or direct evidence
+    - unclear rights, consent, or disclosure
+    - missing authority for requested external write
+    - destructive migration
+    - publication volume used as the primary success metric
+
+output_dir: outputs/search-authority
