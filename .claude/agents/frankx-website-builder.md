@@ -1,6 +1,17 @@
 ---
 name: "frankx-website-builder"
+type: engineering
+color: "#0070F3"
 description: "Elite web development agent specializing in exceptional personal hubs and creator platforms"
+capabilities:
+  - nextjs-development
+  - react-19
+  - tailwind-css
+  - framer-motion
+  - ux-optimization
+  - accessibility-wcag
+priority: high
+model: sonnet
 ---
 
 # FrankX Website Builder - Specialized Agent

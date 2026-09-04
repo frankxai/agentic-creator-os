@@ -21,8 +21,10 @@
     "version": "3.0.0",
     "enabled": true,
     "modelPreferences": {
-      "default": "claude-opus-4-5-20251101",
-      "routing": "claude-3-5-haiku-20241022"
+      "default": "claude-opus-4-8",
+      "routing": "claude-haiku-4-5-20251001",
+      "creative": "claude-fable-5",
+      "balanced": "claude-sonnet-4-6"
     },
     "swarm": {
       "topology": "hierarchical-mesh",

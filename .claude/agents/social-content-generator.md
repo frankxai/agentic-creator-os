@@ -1,6 +1,17 @@
 ---
-name: "social-content-generator"
-description: "Transform blog articles into platform-optimized social media content for all major platforms"
+name: social-content-generator
+type: creative
+color: "#3B82F6"
+description: Transform blog articles into platform-optimized social media content for all major platforms
+capabilities:
+  - platform-optimization
+  - hook-generation
+  - hashtag-strategy
+  - tone-adaptation
+  - cta-crafting
+  - viral-content-patterns
+priority: medium
+model: fable
 ---
 
 # Social Content Generator Agent

@@ -11,6 +11,7 @@ capabilities:
   - roadmapping
   - business-intelligence
 priority: high
+model: opus
 ---
 
 # The Strategist Agent Profile

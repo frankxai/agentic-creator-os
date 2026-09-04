@@ -1,6 +1,15 @@
 ---
 name: "weekly-recap"
+type: operations
+color: "#64748B"
 description: "Generate comprehensive weekly progress reports across all personal projects"
+capabilities:
+  - git-activity-scanning
+  - progress-reporting
+  - project-aggregation
+  - milestone-tracking
+priority: medium
+model: haiku
 ---
 
 # Weekly Recap Agent

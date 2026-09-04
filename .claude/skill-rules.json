@@ -1,8 +1,8 @@
 {
-  "_description": "ACOS v6 Skill Auto-Activation Rules - Skills activate based on context without manual invocation",
-  "_version": "6.0.0",
+  "_description": "ACOS v7 Skill Auto-Activation Rules - Fable 5 creative routing + intelligent activation",
+  "_version": "7.0.0",
   "_pattern_source": "diet103/claude-code-infrastructure-showcase + ChrisWiles/claude-code-showcase",
-  "_updated": "2026-01-25",
+  "_updated": "2026-06-10",
 
   "activation_rules": [
     {
@@ -21,7 +21,8 @@
         "file_patterns": ["*.mp3", "*.wav", "music.json"],
         "commands": ["/create-music"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "fable"
     },
     {
       "skill": "content-strategy",
@@ -30,7 +31,8 @@
         "file_patterns": ["*.mdx", "*.md", "content/**"],
         "commands": ["/article-creator", "/factory", "/publish"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "fable"
     },
     {
       "skill": "ui-ux-design-expert",
@@ -39,7 +41,8 @@
         "file_patterns": ["*.tsx", "*.css", "components/**"],
         "commands": ["/ux-design"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "sonnet"
     },
     {
       "skill": "nextjs-react-expert",
@@ -48,7 +51,8 @@
         "file_patterns": ["app/**/*.tsx", "components/**/*.tsx", "next.config.*"],
         "commands": ["/nextjs-deploy", "/spec"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "sonnet"
     },
     {
       "skill": "mcp-architecture",
@@ -57,7 +61,8 @@
         "file_patterns": ["mcp-servers/**", "*.mcp.*"],
         "commands": ["/mcp-status", "/automation-dev"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "sonnet"
     },
     {
       "skill": "social-media-strategy",
@@ -66,7 +71,8 @@
         "file_patterns": ["social/**", "templates/social-media/**"],
         "commands": ["/generate-social"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "fable"
     },
     {
       "skill": "planning-with-files",
@@ -75,7 +81,8 @@
         "file_patterns": ["task_plan.md", "findings.md", "progress.md"],
         "commands": ["/planning-with-files", "/spec"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "opus"
     },
     {
       "skill": "product-management-expert",
@@ -84,7 +91,8 @@
         "file_patterns": ["products/**", "data/products.json"],
         "commands": ["/products-creation"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "opus"
     },
     {
       "skill": "excellence-book-writing",
@@ -93,7 +101,8 @@
         "file_patterns": ["manuscripts/**", "chapters/**"],
         "commands": ["/author-team"]
       },
-      "priority": "medium"
+      "priority": "high",
+      "model_preference": "fable"
     },
     {
       "skill": "agentic-orchestration",
@@ -102,7 +111,8 @@
         "file_patterns": ["workflows/**", "departments/**"],
         "commands": ["/council", "/starlight-intelligence"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "opus"
     },
     {
       "skill": "claude-sdk",
@@ -111,7 +121,8 @@
         "file_patterns": ["agents/**"],
         "commands": ["/automation-dev"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "sonnet"
     },
     {
       "skill": "oci-services-expert",
@@ -120,7 +131,8 @@
         "file_patterns": ["terraform/**", "*.tf"],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "opus"
     },
     {
       "skill": "security-auditor",
@@ -129,7 +141,8 @@
         "file_patterns": [".env*", "auth/**"],
         "commands": []
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "opus"
     },
     {
       "skill": "opus-extended-thinking",
@@ -138,7 +151,18 @@
         "file_patterns": [],
         "commands": ["/starlight-architect", "/council"]
       },
-      "priority": "low"
+      "priority": "high",
+      "model_preference": "opus"
+    },
+    {
+      "skill": "fable-creative-reasoning",
+      "triggers": {
+        "keywords": ["creative", "narrative", "story", "character", "emotional", "artistic", "philosophical"],
+        "file_patterns": ["content/**", "manuscripts/**"],
+        "commands": ["/author-team", "/article-creator", "/create-music"]
+      },
+      "priority": "high",
+      "model_preference": "fable"
     },
     {
       "skill": "web-design-expert",
@@ -147,7 +171,8 @@
         "file_patterns": ["app/**/*.tsx", "styles/**"],
         "commands": ["/ux-design"]
       },
-      "priority": "medium"
+      "priority": "medium",
+      "model_preference": "sonnet"
     },
     {
       "skill": "framer-expert",
@@ -156,7 +181,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "sonnet"
     },
     {
       "skill": "gym-training-expert",
@@ -165,7 +191,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "haiku"
     },
     {
       "skill": "health-nutrition-expert",
@@ -174,7 +201,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "haiku"
     },
     {
       "skill": "spartan-warrior",
@@ -183,7 +211,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "fable"
     },
     {
       "skill": "video-production-workflow",
@@ -192,7 +221,8 @@
         "file_patterns": ["scripts/**"],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "fable"
     },
     {
       "skill": "langgraph-patterns",
@@ -201,7 +231,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "sonnet"
     },
     {
       "skill": "openai-agentkit",
@@ -210,7 +241,8 @@
         "file_patterns": [],
         "commands": []
       },
-      "priority": "low"
+      "priority": "low",
+      "model_preference": "sonnet"
     },
     {
       "skill": "cacos",
@@ -219,7 +251,8 @@
         "file_patterns": [],
         "commands": ["/acos"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "opus"
     },
     {
       "skill": "gstack",
@@ -228,7 +261,8 @@
         "file_patterns": [],
         "commands": ["/office-hours", "/plan-ceo-review", "/plan-eng-review", "/plan-design-review", "/review", "/qa", "/qa-only", "/ship", "/land-and-deploy", "/canary", "/benchmark", "/browse", "/cso", "/investigate", "/retro", "/autoplan", "/design-review", "/design-consultation", "/codex", "/careful", "/freeze", "/guard", "/unfreeze", "/setup-browser-cookies", "/setup-deploy", "/document-release", "/gstack-upgrade"]
       },
-      "priority": "high"
+      "priority": "high",
+      "model_preference": "sonnet"
     },
     {
       "skill": "apod-to-short",
@@ -382,6 +416,13 @@
     "keyword_match_threshold": 1,
     "auto_load_brand_skill": true,
     "brand_skill": "frankx-brand",
-    "always_active": ["cacos", "planning-with-files"]
+    "always_active": ["cacos", "planning-with-files"],
+    "model_routing": {
+      "creative_tasks": "fable",
+      "reasoning_tasks": "fable",
+      "technical_tasks": "sonnet",
+      "complex_tasks": "opus",
+      "simple_tasks": "haiku"
+    }
   }
 }

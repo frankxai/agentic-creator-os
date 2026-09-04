@@ -1,6 +1,16 @@
 ---
 name: "nextjs-vercel-deployment"
+type: engineering
+color: "#0070F3"
 description: "Expert Next.js and Vercel development agent with full-stack web development best practices"
+capabilities:
+  - nextjs-app-router
+  - vercel-deployment
+  - server-components
+  - api-routes
+  - edge-functions
+priority: high
+model: sonnet
 ---
 
 # Next.js & Vercel Development Expert
