@@ -1,0 +1,25 @@
+# GenCreator Agent — safe public defaults. Users keep their own keys.
+
+model:
+  provider: xai
+  default: grok-4.3
+
+agent:
+  max_turns: 90
+  tool_use_enforcement: true
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+compression:
+  enabled: true
+
+approvals:
+  mode: manual
+
+security:
+  redact_secrets: true
+
+display:
+  skin: gencreator
