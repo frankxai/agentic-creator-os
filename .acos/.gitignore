@@ -1,0 +1,3 @@
+# NLAH execution artifacts are project-local and ephemeral.
+# Only the .gitignore itself is committed.
+artifacts/
