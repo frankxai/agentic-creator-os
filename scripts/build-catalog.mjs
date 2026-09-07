@@ -111,12 +111,12 @@ function addEdge(source, target, rel) {
 // 1. Agents — .claude/agents/**/*.md (skip CLAUDE.md / README.md docs)
 // ---------------------------------------------------------------------------
 const agentDir = join(ROOT, '.claude/agents')
-const agentFiles = walk(agentDir, (f) => f.endsWith('.md') && !/\/(CLAUDE|README)\.md$/i.test(f))
+const agentFiles = walk(agentDir, (f) => f.endsWith('.md') && !/^(CLAUDE|README)\.md$/i.test(basename(f)))
 const agentIds = new Set()
 for (const file of agentFiles) {
   const raw = readFileSync(file, 'utf8')
   const fm = parseFrontmatter(raw)
-  const rel = relative(agentDir, file)
+  const rel = relative(agentDir, file).replaceAll('\\', '/')
   const sub = rel.includes('/') ? rel.split('/')[0] : 'core'
   const id = `agent:${rel.replace(/\.md$/, '')}`
   const name = fm.name || basename(file, '.md')
@@ -131,7 +131,7 @@ for (const file of agentFiles) {
     tools: toToolList(fm.tools),
     mcpServers: toToolList(fm.mcpServers),
     description: (fm.description || '').slice(0, 400),
-    file: relative(ROOT, file),
+    file: relative(ROOT, file).replaceAll('\\', '/'),
   })
 }
 
@@ -165,7 +165,7 @@ try {
 // Canonical skill set = every .claude/skills/*/SKILL.md directory, enriched
 // with registry.json metadata when the directory name matches a registry key.
 const skillsDir = join(ROOT, '.claude/skills')
-const skillMdFiles = walk(skillsDir, (f) => /\/SKILL\.md$/i.test(f))
+const skillMdFiles = walk(skillsDir, (f) => /^SKILL\.md$/i.test(basename(f)))
 const skillIds = new Set()
 const skillNamesSeen = new Set()
 function addSkill(name, fromRegistry, fm) {
@@ -242,7 +242,7 @@ for (const file of wfFiles) {
     tierLabel: tierM ? tierM[1] : null,
     status: 'shipped',
     description: descM ? descM[1] : '',
-    file: relative(ROOT, file),
+    file: relative(ROOT, file).replaceAll('\\', '/'),
   })
 }
 for (const w of wfMeta) {

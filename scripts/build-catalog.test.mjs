@@ -8,7 +8,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync, mkdtempSync } from 'node:fs'
+import { readFileSync, mkdtempSync, readdirSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -23,6 +23,29 @@ function generate() {
 }
 
 const catalog = generate()
+
+test('includes every directory-backed and registered skill on this host', () => {
+  const root = join(__dirname, '..')
+  const skillsRoot = join(root, '.claude', 'skills')
+  const directorySkills = readdirSync(skillsRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(join(skillsRoot, entry.name, 'SKILL.md')))
+    .map((entry) => entry.name)
+  const registry = JSON.parse(readFileSync(join(root, 'skills', 'registry.json'), 'utf8'))
+  assert.ok(directorySkills.some((name) => !(name in registry.skills)), 'fixture needs filesystem-only skills')
+  const expected = [...new Set([...directorySkills, ...Object.keys(registry.skills)])].sort()
+  const actual = catalog.nodes.filter((node) => node.kind === 'skill').map((node) => node.name).sort()
+  assert.deepEqual(actual, expected)
+})
+
+test('uses portable paths and excludes agent instruction documents', () => {
+  for (const node of catalog.nodes) {
+    if (node.file) assert.ok(!node.file.includes('\\'), `nonportable file path: ${node.file}`)
+    if (node.kind === 'agent') {
+      assert.ok(!node.id.includes('\\'), `nonportable agent id: ${node.id}`)
+      assert.doesNotMatch(node.file, /\/(?:CLAUDE|README)\.md$/i)
+    }
+  }
+})
 
 test('has the expected top-level shape', () => {
   for (const key of ['generatedAt', 'version', 'counts', 'iam', 'nodes', 'edges']) {

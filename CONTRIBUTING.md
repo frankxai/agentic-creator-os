@@ -122,9 +122,11 @@ Quick checklist:
 - **Discussions** — For questions and ideas
 - **Slack** — #agentic-creator-os channel
 
-## License
+## Project terms
 
-By contributing, you agree that your contributions will be licensed under the same license as the project.
+Original software and technical documentation use Apache-2.0 unless different
+terms are stated locally. Preserve historical MIT grants and third-party notices.
+Read [LICENSING.md](LICENSING.md), [LICENSE](LICENSE), and [NOTICE](NOTICE) before contributing.
 
 ---
 

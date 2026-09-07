@@ -1,0 +1,228 @@
+{
+  "schema_version": "1.0.0",
+  "cluster_id": "cluster_example_replace_me",
+  "status": "SEED",
+  "authority": "DRAFT",
+  "category_decision": {
+    "category": "Replace with the durable category",
+    "thesis": "Replace with the category thesis",
+    "canonical_brand_id": "replace-me",
+    "canonical_domain": "replace-me.example",
+    "canonical_hub": "blocked",
+    "audience": "Replace with the competent audience",
+    "reader_job": "Replace with the decision or outcome to enable",
+    "commercial_or_capability_outcome": "Replace with the intended value outcome",
+    "product_bridge": "blocked",
+    "why_now": "Replace with dated market evidence",
+    "why_this_brand": "Replace with the authority and evidence advantage",
+    "non_goals": []
+  },
+  "workspace": {
+    "canonical_repository": "blocked",
+    "deployment_project": "blocked",
+    "editorial_campaign": "blocked",
+    "content_database": "blocked",
+    "production_task_database": "blocked",
+    "analytics_sources": [],
+    "demand_intelligence_sources": []
+  },
+  "estate_inventory": [
+    {
+      "asset_id": "replace-me",
+      "url_or_path": "blocked",
+      "brand_id": "replace-me",
+      "current_intent": "blocked",
+      "reader_job": "blocked",
+      "performance_evidence": [],
+      "conversion_evidence": [],
+      "artifact_evidence": [],
+      "freshness": "unknown",
+      "decision": "UNRESOLVED",
+      "reason": "Replace after audit"
+    }
+  ],
+  "canonical_ownership": {
+    "owner": {
+      "brand_id": "replace-me",
+      "domain": "replace-me.example",
+      "hub_url": "blocked"
+    },
+    "sibling_brand_rules": [],
+    "prohibited_duplicates": [],
+    "collision_risks": [],
+    "status": "UNRESOLVED"
+  },
+  "evidence_ledger": [
+    {
+      "evidence_id": "ev_replace_me",
+      "type": "first_party",
+      "source": "blocked",
+      "captured_at": "blocked",
+      "confidence": "unknown",
+      "observation": "Replace with the observed signal",
+      "decision_affected": "Replace with the decision",
+      "limitations": []
+    }
+  ],
+  "opportunity_graph": {
+    "entities": [],
+    "reader_jobs": [],
+    "intent_nodes": [
+      {
+        "node_id": "intent_replace_me",
+        "intent": "learn",
+        "audience": "replace-me",
+        "reader_job": "replace-me",
+        "awareness_stage": "blocked",
+        "query_hypotheses": [],
+        "canonical_url": "blocked",
+        "parent_node": null,
+        "sibling_nodes": [],
+        "required_evidence": [],
+        "required_artifact": "blocked",
+        "product_bridge": "blocked",
+        "freshness_rule": "blocked",
+        "maintenance_burden": "unknown"
+      }
+    ],
+    "internal_link_graph": [],
+    "information_gaps": [],
+    "demand_assumptions": []
+  },
+  "page_proposals": [
+    {
+      "proposal_id": "page_replace_me",
+      "working_title": "Replace with an earned title",
+      "url_hypothesis": "blocked",
+      "parent_hub": "blocked",
+      "reader_job": "Replace with the exact reader job",
+      "exclusion_boundary": "Replace with what this page will not cover",
+      "primary_intent": "replace-me",
+      "query_set": [],
+      "entities": [],
+      "thesis": "Replace with one governing thesis",
+      "counter_position": "Replace with the strongest informed alternative",
+      "evidence_contract": [],
+      "original_artifact_contract": "blocked",
+      "primary_action": "blocked",
+      "secondary_action": null,
+      "product_bridge": "blocked",
+      "distribution_role": "blocked",
+      "commission_score": {
+        "business_relevance": 0,
+        "demand_evidence": 0,
+        "intent_distinctness": 0,
+        "differentiated_thesis": 0,
+        "evidence": 0,
+        "executable_artifact": 0,
+        "offer_bridge": 0,
+        "maintenance_fitness": 0,
+        "total": 0,
+        "threshold": 12
+      },
+      "decision": "HOLD",
+      "decision_reason": "Replace after commission review",
+      "merge_destination": null,
+      "maintainer": "blocked",
+      "refresh_triggers": [],
+      "measurement_dates": {
+        "t_plus_7": "blocked",
+        "t_plus_28": "blocked",
+        "t_plus_90": "blocked"
+      }
+    }
+  ],
+  "proof_wave": {
+    "asset_limit": 3,
+    "hypothesis": "Replace with the smallest market or product question this wave resolves",
+    "success_condition": "Replace with the evidence required to unlock the next decision",
+    "assets": [],
+    "commissioned_at": null,
+    "commissioning_editor": "blocked",
+    "operator_override": null
+  },
+  "production_assignments": {
+    "commissioning_editor": "blocked",
+    "demand_intelligence_analyst": "blocked",
+    "research_lead": "blocked",
+    "authors": [],
+    "fact_rights_reviewers": [],
+    "seo_geo_architect": "blocked",
+    "commercial_editor": "blocked",
+    "visual_director": "blocked",
+    "production_engineer": "blocked",
+    "measurement_analyst": "blocked"
+  },
+  "article_packets": [],
+  "release": {
+    "branch_strategy": "blocked",
+    "pull_requests": [],
+    "preview_urls": [],
+    "checks": [],
+    "rendered_preview_evidence": [],
+    "production_urls": [],
+    "verified_at": null,
+    "rollback": "blocked",
+    "unresolved_risks": []
+  },
+  "distribution": {
+    "canonical_content_ids": [],
+    "derivatives": [],
+    "utm_policy": "blocked",
+    "approval": "blocked",
+    "results": []
+  },
+  "measurement": {
+    "baseline_captured_at": "blocked",
+    "primary_metric": "blocked",
+    "guardrails": [],
+    "t_plus_7": {
+      "scheduled_for": "blocked",
+      "indexation": "blocked",
+      "query_breadth": "blocked",
+      "release_quality": "blocked",
+      "distribution_reach": "blocked",
+      "instrumentation": "blocked",
+      "decision": null
+    },
+    "t_plus_28": {
+      "scheduled_for": "blocked",
+      "qualified_discovery": "blocked",
+      "engaged_reading": "blocked",
+      "action_completion": "blocked",
+      "internal_progression": "blocked",
+      "conversion": "blocked",
+      "missing_answer_units": [],
+      "decision": null
+    },
+    "t_plus_90": {
+      "scheduled_for": "blocked",
+      "durable_authority": "blocked",
+      "citations": "blocked",
+      "branded_nonbranded_movement": "blocked",
+      "assisted_revenue": "blocked",
+      "maintenance_cost": "blocked",
+      "product_signal": "blocked",
+      "decision": null
+    },
+    "next_wave_decision": "BLOCKED"
+  },
+  "governance": {
+    "allowed_decisions": [
+      "EXPAND",
+      "REFRESH",
+      "CONSOLIDATE",
+      "REDIRECT",
+      "ARCHIVE",
+      "REPOSITION",
+      "KILL"
+    ],
+    "next_wave_locked": true,
+    "lock_reason": "Complete the current proof-wave learning window or record an explicit operator override."
+  },
+  "blocked": [
+    "Replace template values with connected evidence before promotion beyond SEED.",
+    "Resolve canonical ownership before commissioning pages.",
+    "Do not publish more than three proof-wave assets before a dated learning decision."
+  ]
+}

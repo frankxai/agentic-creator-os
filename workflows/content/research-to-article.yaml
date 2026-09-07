@@ -1,62 +1,125 @@
-name: Research to Article Pipeline
+name: Content Intelligence Article Pipeline
 slug: research-to-article
-version: "6.0.0"
+version: "7.0.0"
 description: |
-  Deep research on a topic → structured outline → draft article →
-  SEO optimization → publish-ready content.
+  Evidence-bound path from commission and current research through authored article,
+  governed media, independent review, preview, conditional publication,
+  channel-native distribution, and dated performance learning.
 
 triggers:
   - "/factory"
   - "/article-creator"
   - "research and write article"
+  - "write and publish article"
+
+contract: docs/content-intelligence.md
+state_template: templates/content/article-packet.json
+default_authority: DRAFT
 
 agents:
-  - frankx-content-creation
-  - seo_specialist
-  - content-polisher
-
-skills:
-  - content-strategy
-  - planning-with-files
+  - editor-in-chief
+  - research-lead
+  - fact-rights-reviewer
+  - seo-geo-architect
+  - author
+  - commissioning-editor
+  - visual-director
+  - production-engineer
+  - distribution-revenue-lead
+  - measurement-analyst
 
 phases:
-  - name: Research
+  - name: Task Envelope
     steps:
-      - Web search for current data and trends on the topic
-      - Gather 5-10 authoritative sources
-      - Extract key facts, statistics, and expert quotes
-      - Identify unique angle not covered by competitors
-    output: research-notes.md
+      - Resolve deliverables, creator/property, canonical repository or CMS, audience, authority, permissions, rights, timing, and success condition
+      - Inspect existing instructions, content model, related URLs, active editorial ledger, live deployment, and available performance evidence
+      - Preserve unknown or unavailable state as explicit blockers; never invent IDs, URLs, credentials, or publication state
+    output: article-packet.json
 
-  - name: Outline
+  - name: Research and Opportunity
+    parallel_lanes:
+      - Collect first-party artifacts, canonical product facts, and primary external sources
+      - Capture dated SERP, competitor, entity, question, and community-language evidence where relevant
+      - Map existing canonical URLs, cannibalization, internal-link role, offer and affiliate fit
     steps:
-      - Create H2 structure with question-based headings
-      - Plan TL;DR for the opening paragraph
-      - Map supporting evidence to each section
-      - Plan FAQ section with 5+ questions
-    output: article-outline.md
+      - Build a source ledger with publication/update and retrieval dates
+      - Build atomic claim candidates typed as fact, first_party, inference, opinion, forecast, or community_signal
+      - State information gap, strongest objection, maintenance burden, and confidence
+    output: research-and-opportunity packet
 
-  - name: Draft
+  - name: Commission Gate
     steps:
-      - Write full article following the outline
-      - Include internal links (minimum 3)
-      - Include external authority links (minimum 1)
-      - Write in FrankX voice (technical, direct, warm)
-    output: article-draft.mdx
+      - Require first-party origin, measured result, original reporting, working artifact, consequential decision, uncommon example, or proprietary synthesis
+      - Freeze one thesis, reader baseline, reader delta, stakes, canonical route, and freshness rule
+      - Return COMMISSION, HOLD, or KILL when the work cannot beat publishing nothing
+    output: frozen brief or reporting assignment
 
-  - name: Optimization
+  - name: Author and Direct Media
+    parallel_lanes:
+      - Draft from evidence using the active creator voice and subject-native structure
+      - Decide visual necessity and create governed media briefs or assets only when meaning requires them
     steps:
-      - SEO title optimization (50-60 characters)
-      - Meta description (120-160 characters)
-      - Add schema markup (Article + FAQPage)
-      - Verify keyword density and placement
-    output: article-optimized.mdx
+      - Keep facts adjacent to their sources and label inference or forecast
+      - Create deliberate metadata and social/representative image treatment
+      - Preserve article, asset, version, rendition, and placement identities
+    output: article draft and media packet
+
+  - name: Independent Review
+    parallel_lanes:
+      - Truth, rights, privacy, quotation, and disclosure
+      - Commissioning editor and ICP reader
+      - SEO/GEO, entity, crawl/render, schema, and link graph
+      - Art critic when media exists
+      - Production verifier when files or remote state exist
+    steps:
+      - Require categorical verdicts with reasons
+      - Allow one substantive editorial rewrite
+      - Continue deterministic correctness fixes until pass or exact blocker
+    output: READY_FOR_OPERATOR, COMMISSION, HOLD, or KILL
+
+  - name: Build and Preview
+    condition: authority is PREVIEW, PUBLISH, or DISTRIBUTE
+    steps:
+      - Create a content branch and smallest coherent repository change
+      - Run repository-native format, lint, type, content/schema, link, and build checks
+      - Create a pull request with evidence receipt, rollback, and unresolved risk
+      - Inspect the rendered preview on mobile and desktop, including metadata, canonical, robots, JSON-LD, images, links, and runtime errors
+    output: PREVIEW_LIVE with confirmed pull request and preview URL
 
   - name: Publish
+    condition: authority is PUBLISH or DISTRIBUTE and all release gates pass
     steps:
-      - Run quality gates (structure, SEO, voice, AEO)
-      - Generate hero image via /infogenius
-      - Deploy via /publish command
-    output: published-url
+      - Merge or release through the repository or CMS native path
+      - Verify canonical production URL serves the intended version
+      - Capture deployment, live URL, time, and rollback evidence
+    output: PUBLISHED
+
+  - name: Distribute
+    condition: authority is DISTRIBUTE and target accounts, approval, and schedule are resolved
+    steps:
+      - Create channel-native derivatives tied to the canonical content ID and source version
+      - Apply stable UTMs, disclosure, approved asset renditions, and provider-neutral distribution records
+      - Capture scheduler or channel result ID and final URL
+    output: DISTRIBUTED or DISTRIBUTION_STAGED
+
+  - name: Learn
+    condition: article is PUBLISHED
+    steps:
+      - Verify T+0 technical and measurement state
+      - Append T+7, T+28, and T+90 discovery, trust, commercial, cost, and qualitative snapshots
+      - Preserve original hypothesis and annotate algorithms, incidents, migrations, campaigns, and seasonality
+      - Decide refresh, consolidate, redirect, archive, expand, or kill
+    output: dated performance and learning records
+
+termination:
+  external_research_rounds: 2
+  substantive_editorial_rewrites: 1
+  visual_directions: 3
+  stop_on:
+    - unverifiable central claim
+    - unclear rights or consent
+    - conflicting canonical property
+    - missing authority for requested external write
+    - destructive migration
 
 output_dir: outputs/articles
