@@ -59,7 +59,7 @@ Instead of blanket word bans, apply these principles:
 
 **Agentic Creator OS v11** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
 
-- **83 Top-level Commands** — Reusable workflow definitions accessible through Claude Code
+- **85 Top-level Commands** — Reusable workflow definitions accessible through Claude Code
 - **171 Non-empty Skill Modules** — plus 5 tracked empty placeholders that are not usable modules
 - **69 Top-level Agent Profiles** — Writers, editors, designers, strategists, and engineers
 - **9 Installable Shell Hooks** — Top-level shell hooks copied by the Claude installer

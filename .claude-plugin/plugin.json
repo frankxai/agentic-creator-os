@@ -60,7 +60,7 @@
   "stats": {
     "nonEmptySkillModules": 171,
     "emptySkillPlaceholders": 5,
-    "topLevelCommands": 83,
+    "topLevelCommands": 85,
     "topLevelAgents": 69,
     "installableShellHooks": 9,
     "activationRules": 32,
