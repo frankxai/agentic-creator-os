@@ -5,6 +5,8 @@ argument-hint: "[plan | draft | repurpose | critique | ship | learn] [brand=pers
 
 # /signal — LinkedIn Authority Engine
 
+> **Status:** superseded (2026-07-09) as a running system — the knowledge lives on in FrankX's `social-media-strategy` skill. This pack stays as the ACOS-native open reference; the ship/learn stages were never wired (see `skills/signal/DAILY_LOOP.md`).
+
 Route a LinkedIn task through the **Signal** pack (`skills/signal/SKILL.md`), the LinkedIn vertical of ACOS. Signal runs the [Excellence Loop](../../docs/architecture/EXCELLENCE_LOOP.md), drafts everything, and **never auto-posts** — a human ships.
 
 ## Usage

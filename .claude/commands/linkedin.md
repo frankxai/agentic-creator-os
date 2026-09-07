@@ -5,6 +5,8 @@ argument-hint: "[plan|research|draft|repurpose|carousel|infographic|critique|shi
 
 # /linkedin — LinkedIn Authority Engine
 
+> **Status:** superseded (2026-07-09) as a running system — the knowledge lives on in FrankX's `social-media-strategy` skill. This pack stays as the ACOS-native open reference; the ship/learn stages were never wired (see `skills/signal/DAILY_LOOP.md`).
+
 The front door for your daily LinkedIn operation. This is the memorable alias for the **Signal** pack (`skills/signal/SKILL.md`); `/signal` and `/linkedin` are the same engine. Runs the [Daily Loop](../../skills/signal/DAILY_LOOP.md), drafts everything, and **never auto-posts** — you click post.
 
 ## Modes

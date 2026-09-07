@@ -138,10 +138,10 @@ function verifyClaims(canonical, measured) {
       claude: '5 tracked empty placeholders',
     },
     topLevelCommands: {
-      expected: 83,
-      readme: 'Top-level slash commands | 83',
-      quickstart: '83 top-level slash-command definitions',
-      claude: '83 Top-level Commands',
+      expected: 85,
+      readme: 'Top-level slash commands | 85',
+      quickstart: '85 top-level slash-command definitions',
+      claude: '85 Top-level Commands',
     },
     topLevelAgents: {
       expected: 69,

@@ -29,7 +29,7 @@ The repository currently contains:
 |---|---:|---|
 | Non-empty skill modules | 171 | Non-empty `.claude/skills/**/SKILL.md` files |
 | Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
-| Top-level slash commands | 83 | `.claude/commands/*.md`, excluding the directory context file |
+| Top-level slash commands | 85 | `.claude/commands/*.md`, excluding the directory context file |
 | Top-level agent profiles | 69 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
