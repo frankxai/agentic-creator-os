@@ -4,14 +4,14 @@
       "type": "local",
       "command": [
         "node",
-        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/creator/build/index.js"
+        "./mcp-servers/creator/build/index.js"
       ]
     },
     "agentic-evaluator": {
       "type": "local",
       "command": [
         "node",
-        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/evaluator/build/index.js"
+        "./mcp-servers/evaluator/build/index.js"
       ]
     },
     "higgsfield": {

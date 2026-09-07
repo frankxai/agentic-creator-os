@@ -59,9 +59,10 @@ Instead of blanket word bans, apply these principles:
 
 **Agentic Creator OS v11** is a skill, agent, and workflow system for AI coding assistants. When loaded, you get:
 
-- **35+ Commands** — Reusable workflows accessible via `/acos` smart router (Claude Code)
-- **75+ Skills** — Auto-activate via `skill-rules.json` based on task context
-- **67 Specialized Agents** — Writers, editors, designers, strategists, engineers
+- **83 Top-level Commands** — Reusable workflow definitions accessible through Claude Code
+- **171 Non-empty Skill Modules** — plus 5 tracked empty placeholders that are not usable modules
+- **69 Top-level Agent Profiles** — Writers, editors, designers, strategists, and engineers
+- **9 Installable Shell Hooks** — Top-level shell hooks copied by the Claude installer
 - **v10 Safety Hooks** — Circuit breaker, audit trail, self-modify gate, agent IAM
 
 ## Quick Start
@@ -89,7 +90,7 @@ Grok Build (xAI CLI/TUI) receives native first-class integration (TUI + subagent
 
 See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for implementation. Use God 99 standards + SIP attest.
 
-## Available Commands (35+)
+## Available Commands
 
 ### Creation (12)
 
@@ -145,7 +146,8 @@ See install.sh:install_grok , adapters/grok/ and the new grok-harness skill for 
 
 ## Auto-Activation
 
-Skills load automatically via `.claude/skill-rules.json` — 22 pattern rules:
+The repository provides 32 activation rules in `.claude/skill-rules.json`. Whether
+they load automatically depends on the target harness and its local configuration:
 
 ```
 User: "write a blog post about AI agents"

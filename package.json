@@ -1,7 +1,7 @@
 {
   "name": "@frankx/agentic-creator-os",
   "version": "11.0.0",
-  "description": "The Operating System for AI-Powered Creators — 90+ skills, 65+ commands, 67 agents, 8 plugins. Full support for Claude Code, Grok Build (CLI/TUI via grok-harness-adapter), Cursor, Windsurf, Gemini, Antigravity. Built on SIP.",
+  "description": "Reusable skills, commands, agent profiles, hooks, and platform adapters for AI-assisted creative work.",
   "author": "Frank Riemer <frank@frankx.ai>",
   "license": "Apache-2.0",
   "repository": {
@@ -63,6 +63,7 @@
     "observatory:catalog": "node scripts/build-catalog.mjs",
     "observatory:install-hooks": "node tools/observatory/install-hooks.mjs",
     "observatory:test": "node --test scripts/build-catalog.test.mjs",
+    "verify:public-surface": "node scripts/verify-public-surface.mjs",
     "install:all": "npm install --workspaces",
     "build:all": "npm run build --workspaces",
     "typecheck:all": "npm run typecheck --workspaces --if-present",
