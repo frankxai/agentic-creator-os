@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   monitor:
@@ -97,10 +98,22 @@ jobs:
           print('\n'.join(report))
           PYEOF
 
-      - name: Commit report
+      - name: Open report PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "ACOS Bot"
           git config user.email "acos@frankx.ai"
           git add docs/ecosystem-report.md
-          git diff --staged --quiet || git commit -m "chore(docs): weekly ecosystem report [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to report."
+            exit 0
+          fi
+          BRANCH="bot/ecosystem-report-$(date +%Y%m%d)"
+          git checkout -b "$BRANCH"
+          git commit -m "chore(docs): weekly ecosystem report [skip ci]"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "chore(docs): weekly ecosystem report $(date +%Y-%m-%d)" \
+            --body "Automated weekly ecosystem stats snapshot. No manual changes." \
+            --base main --head "$BRANCH"
