@@ -1,3 +1,15 @@
+---
+name: ai-architecture
+description: Expert guidance on multi-cloud architecture, cost analysis, and technical decision-making for AI-powered platforms
+version: 1.0.0
+invocable: true
+author: frankx
+capabilities:
+  - cloud_architecture
+  - cost_analysis
+  - technical_decision_making
+---
+
 # AI Architecture Skill
 
 ## Purpose
@@ -69,4 +81,3 @@ Always balance technical accuracy with warm, accessible language.
 **Version:** 1.0  
 **Created:** January 14, 2026  
 **Expert:** Oracle AI Architect
-

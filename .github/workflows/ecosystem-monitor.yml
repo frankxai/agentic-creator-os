@@ -7,10 +7,16 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+
+concurrency:
+  group: ecosystem-monitor
+  cancel-in-progress: true
 
 jobs:
   monitor:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v5
 
@@ -97,10 +103,25 @@ jobs:
           print('\n'.join(report))
           PYEOF
 
-      - name: Commit report
+      - name: Open report PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           git config user.name "ACOS Bot"
           git config user.email "acos@frankx.ai"
           git add docs/ecosystem-report.md
-          git diff --staged --quiet || git commit -m "chore(docs): weekly ecosystem report [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to report."
+            exit 0
+          fi
+          # Run and attempt IDs keep manual runs and retries from colliding.
+          BRANCH="bot/ecosystem-report-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          git checkout -b "$BRANCH"
+          git commit -m "chore(docs): weekly ecosystem report [skip ci]"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --draft \
+            --title "chore(docs): weekly ecosystem report $(date +%Y-%m-%d)" \
+            --body "Automated weekly ecosystem stats snapshot. No manual changes." \
+            --base "$DEFAULT_BRANCH" --head "$BRANCH"
