@@ -73,7 +73,9 @@
     "postinstall": "echo '\\n🚀 Agentic Creator OS installed! Run: ./install.sh\\n'",
     "publish": "npm run build:all && npm publish",
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
-    "lint": "node scripts/lint.mjs"
+    "lint": "node scripts/lint.mjs",
+    "portability:sync": "node scripts/sync-portable-assets.mjs",
+    "portability:check": "node scripts/sync-portable-assets.mjs --check"
   },
   "devDependencies": {
     "typescript": "5.6.3"

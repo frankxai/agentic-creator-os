@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Operations"
+  short_description: "Operate Frank's multi-repo agent company safely"
+  default_prompt: "Audit or coordinate the Frank agent estate using canonical registries, repo-local rules, and the operations ledger."

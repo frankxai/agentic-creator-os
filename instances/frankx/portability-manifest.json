@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "owner": "frankx",
+  "sourceOfTruth": "agentic-creator-os",
+  "policy": {
+    "mode": "explicit-allowlist",
+    "deleteUnmanagedFiles": false,
+    "requireProvenance": true,
+    "requireLicense": true,
+    "requireTrustTier": true
+  },
+  "assets": [
+    {
+      "id": "agentic-ops",
+      "kind": "skill",
+      "source": "instances/frankx/skills/agentic-ops",
+      "targets": [
+        ".agents/skills/agentic-ops",
+        ".claude/skills/agentic-ops"
+      ],
+      "provenance": {
+        "origin": "frankx-local",
+        "upstream": null,
+        "adaptation": "Machine-specific control-plane workflow informed by OpenAI Agents SDK, LangGraph, Google ADK, Microsoft Agent Framework, GitHub Agentic Workflows, A2A, and the Agent Skills convention."
+      },
+      "license": "private-internal",
+      "trustTier": "owner",
+      "status": "active"
+    },
+    {
+      "id": "frankx-prod",
+      "kind": "skill",
+      "source": "instances/frankx/skills/frankx-prod",
+      "targets": [
+        ".agents/skills/frankx-prod",
+        ".claude/skills/frankx-prod"
+      ],
+      "provenance": {
+        "origin": "frankx-local",
+        "upstream": null,
+        "adaptation": "Machine-specific production boundary and deployment gate."
+      },
+      "license": "private-internal",
+      "trustTier": "owner",
+      "status": "active"
+    }
+  ]
+}

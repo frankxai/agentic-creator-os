@@ -1,0 +1,4 @@
+interface:
+  display_name: "FrankX Production"
+  short_description: "Protect and operate the frankx.ai production lane"
+  default_prompt: "Make a scoped FrankX production change while preserving the authoring and production boundary and deployment gates."
