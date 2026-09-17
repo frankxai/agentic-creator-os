@@ -4,19 +4,22 @@
       "type": "local",
       "command": [
         "node",
-        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/creator/build/index.js"
+        "./mcp-servers/creator/build/index.js"
       ]
     },
     "agentic-evaluator": {
       "type": "local",
       "command": [
         "node",
-        "C:/Users/Frank/FrankX/FrankX.AI - Vercel Website/agentic-creator-os/mcp-servers/evaluator/build/index.js"
+        "./mcp-servers/evaluator/build/index.js"
       ]
     },
-    "higgsfield": {
-      "type": "remote",
-      "url": "https://mcp.higgsfield.ai/mcp"
+    "starlight-substrate": {
+      "type": "local",
+      "command": [
+        "node",
+        "../Starlight-Intelligence-System/dist/mcp-server.js"
+      ]
     }
   },
   "skills": {
@@ -35,11 +38,15 @@
     "evaluator": {
       "command": "skill:evaluator",
       "description": "Quality evaluation and audit logging for content"
+    },
+    "ultrawork": {
+      "command": "skill:ultrawork",
+      "description": "Autonomous multi-agent 3-layer discipline swarm execution"
     }
   },
   "audit": {
     "enabled": true,
     "path": "~/.claude/agentic-creator-os/audit",
-    "sources": ["opencode", "claude-code", "gemini", "custom"]
+    "sources": ["opencode", "claude-code", "gemini", "antigravity", "codex", "grok"]
   }
 }

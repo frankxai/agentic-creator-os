@@ -71,7 +71,11 @@
     "publish": "npm run build:all && npm publish",
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
     "lint": "node scripts/lint.mjs",
-    "package": "node scripts/package-acos.mjs"
+    "package": "node scripts/package-acos.mjs",
+    "headroom:proxy": "headroom proxy --port 8787",
+    "headroom:status": "headroom mcp status",
+    "headroom:learn": "headroom learn",
+    "headroom:savings": "headroom output-savings"
   },
   "devDependencies": {
     "typescript": "5.6.3"
