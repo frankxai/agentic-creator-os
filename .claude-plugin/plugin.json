@@ -26,7 +26,11 @@
     "multimodal",
     "image-generation",
     "video-generation",
-    "higgsfield"
+    "veo",
+    "nano-banana",
+    "antigravity",
+    "codex",
+    "grok"
   ],
   "categories": [
     "creator-tools",
@@ -38,6 +42,9 @@
   ],
   "platforms": [
     "claude-code",
+    "codex",
+    "grok",
+    "antigravity",
     "opencode",
     "cursor",
     "windsurf",

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/plugin.v1.json",
+  "name": "agentic-creator-os",
+  "version": "11.0.0",
+  "description": "ACOS — The Operating System for AI-Powered Creators. Layer-modeled skills, commands, agents, and hooks for content, video, music, visual, and brand workflows across Claude Code, OpenAI Codex, Grok Build, Google Antigravity, and Cursor.",
+  "author": {
+    "name": "Frank Riemer",
+    "email": "frank@frankx.ai",
+    "url": "https://frankx.ai",
+    "github": "frankxai"
+  },
+  "homepage": "https://frankx.ai/products/agentic-creator-os",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankxai/agentic-creator-os.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "creator-os",
+    "agent-skills",
+    "agent-plugins",
+    "acos",
+    "claude-code",
+    "codex",
+    "grok",
+    "antigravity",
+    "content-creation",
+    "video",
+    "music",
+    "brand"
+  ],
+  "skills": "./skills",
+  "runtimes": {
+    "codex": {
+      "supported": true,
+      "skills_dir": "./skills"
+    },
+    "claude": {
+      "supported": true,
+      "skills_dir": "./skills"
+    },
+    "grok": {
+      "supported": true,
+      "skills_dir": "./skills"
+    },
+    "antigravity": {
+      "supported": true,
+      "skills_dir": "./skills"
+    },
+    "cursor": {
+      "supported": true,
+      "skills_dir": "./skills"
+    }
+  }
+}

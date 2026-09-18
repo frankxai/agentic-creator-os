@@ -1,0 +1,7 @@
+{
+  "name": "agentic-creator-os",
+  "version": "11.0.0",
+  "description": "ACOS — The Operating System for AI-Powered Creators. Layer-modeled skills, commands, agents, and hooks for content, video, music, visual, and brand workflows across Claude Code, OpenAI Codex, Grok Build, Google Antigravity, and Cursor.",
+  "author": "Frank Riemer",
+  "skills": "./skills"
+}
