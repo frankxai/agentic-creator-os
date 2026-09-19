@@ -1,0 +1,105 @@
+name: Stale drafts
+
+# Draft pull requests accumulate here faster than they are finished: most of
+# the estate's open PRs are drafts, and a draft nobody has touched in two
+# months is noise that hides the PRs that matter.
+#
+# Deliberately narrow:
+#   - DRAFTS ONLY. A ready PR is someone asking for a merge; that decision is
+#     never made on a timer.
+#   - Two phases. A draft is labelled and warned first, and only closed if
+#     nothing happens for another 14 days. Any push, comment or label removal
+#     resets it, because those all bump updatedAt.
+#   - Closing is reversible: reopening a PR restores the branch and history.
+#
+# Opt out per PR with `hold`, `keep`, `no-automerge`, `do-not-merge`,
+# `pinned` or `security`.
+#
+# Run it manually first (workflow_dispatch) — dry_run defaults to true, so it
+# reports what it would do and changes nothing.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Report only, change nothing"
+        type: boolean
+        default: true
+
+permissions:
+  pull-requests: write
+
+concurrency:
+  group: stale-drafts
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Sweep stale drafts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          # The scheduled run is the real one; manual runs default to a report.
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}
+          STALE_AFTER_DAYS: "45"
+          CLOSE_AFTER_DAYS: "14"
+        run: |
+          set -euo pipefail
+
+          exempt='hold|keep|no-automerge|do-not-merge|pinned|security'
+          now=$(date -u +%s)
+
+          gh pr list --repo "$REPO" --state open --draft --limit 200 \
+            --json number,title,updatedAt,labels \
+            --jq '.[] | [.number, .updatedAt, ([.labels[].name] | join(",")), .title] | @tsv' \
+          > drafts.tsv || true
+
+          [ -s drafts.tsv ] || { echo "No open drafts."; exit 0; }
+
+          while IFS=$'\t' read -r number updated labels title; do
+            [ -n "$number" ] || continue
+
+            if printf '%s' "$labels" | grep -qiE "(^|,)($exempt)(,|$)"; then
+              echo "#$number exempt (labels: $labels)"
+              continue
+            fi
+
+            age_days=$(( (now - $(date -u -d "$updated" +%s)) / 86400 ))
+            is_stale=false
+            printf '%s' "$labels" | grep -qiE '(^|,)stale(,|$)' && is_stale=true
+
+            if [ "$is_stale" = true ]; then
+              # updatedAt was bumped when the stale label was applied, so the
+              # clock since then is the untouched-after-warning window.
+              if [ "$age_days" -ge "$CLOSE_AFTER_DAYS" ]; then
+                echo "CLOSE #$number (${age_days}d since warning) — $title"
+                if [ "$DRY_RUN" != "true" ]; then
+                  gh pr close "$number" --repo "$REPO" --comment \
+                    "Closing: draft, no activity for ${age_days} days after the stale notice. Nothing is lost — reopen this PR to pick it up again, and the branch is untouched."
+                fi
+              else
+                echo "warned #$number (${age_days}d since warning, closes at ${CLOSE_AFTER_DAYS}d)"
+              fi
+              continue
+            fi
+
+            if [ "$age_days" -ge "$STALE_AFTER_DAYS" ]; then
+              echo "MARK #$number (${age_days}d idle) — $title"
+              if [ "$DRY_RUN" != "true" ]; then
+                # --add-label fails on a label the repo does not have yet.
+                gh label create stale --repo "$REPO" --color ededed --force >/dev/null 2>&1 || true
+                gh pr edit "$number" --repo "$REPO" --add-label stale
+                gh pr comment "$number" --repo "$REPO" --body \
+                  "This draft has had no activity for ${age_days} days, so it is marked stale and will close in ${CLOSE_AFTER_DAYS} days. Any push or comment keeps it open, or add the \`keep\` label to exempt it permanently."
+              fi
+            fi
+          done < drafts.tsv
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "DRY RUN — nothing was changed."
+          fi
