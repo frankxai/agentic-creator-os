@@ -11,8 +11,8 @@
     "start": "node build/index.js"
   },
   "dependencies": {
-    "@libsql/client": "^0.14.0",
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@libsql/client": "^0.18.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "zod": "^3.22.0"
   },
   "devDependencies": {

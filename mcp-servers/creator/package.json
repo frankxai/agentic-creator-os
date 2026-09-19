@@ -12,12 +12,12 @@
     "start": "node build/index.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "zod": "^3.22.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "esbuild": "^0.27.2",
+    "esbuild": "^0.28.2",
     "typescript": "^5.0.0"
   }
 }
