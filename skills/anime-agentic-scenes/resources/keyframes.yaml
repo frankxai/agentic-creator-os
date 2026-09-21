@@ -237,3 +237,25 @@ bakeoff:
       credits: 1
       score: {composition: null, staging: null, light: null, colour: null, depth: null, render: null, cast: null, mechanism: null, cost_cue: null, clean: null, total: null}
   baseline_for_comparison: ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee   # the pre-protocol render
+
+# Character forge run, 2026-09-21 — direction sheets. Pick one direction per character, then turnaround.
+direction_sheets:
+  ren:
+    directions: [A Shardwright (recommended), B Keeper, C Courier]
+    model_served: nano_banana_2
+    job_id: c793bba5-2d5c-4ad7-8c6a-6bf3be15c0db
+    url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203625_c793bba5-2d5c-4ad7-8c6a-6bf3be15c0db.png
+    chosen: null
+  mira:
+    directions: [A Sail (recommended), B Cartographer, C Kite]
+    model_served: nano_banana_2
+    job_id: f1dccdac-1eb8-455f-b00a-4280c69daf02
+    url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203625_f1dccdac-1eb8-455f-b00a-4280c69daf02.png
+    chosen: null
+  squad_lineup:
+    test: five silhouettes must read as five shape families
+    model_served: nano_banana_2
+    job_id: 8904f3ee-6136-4762-b193-20241e128662
+    url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203624_8904f3ee-6136-4762-b193-20241e128662.png
+    passed: null
+  superseded: e16d2f8f-8608-41bc-b285-b0b634ea0aa4   # first Ren turnaround, generic; do not use
