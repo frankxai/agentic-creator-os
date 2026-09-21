@@ -45,14 +45,19 @@ Scene without mechanism is decoration. Mechanism without lab is a lecture. All t
 | Episodes, beats, labs | `resources/season-1.md` | Ship a scene whose lab does not run |
 | Prompts ready to render | `resources/keyframes.yaml` | Paste a prompt without the consistency block |
 | Rendering | `multimodal-studio` skill + Higgsfield MCP | Fabricate an image URL |
+| Pre-production, critique, motion, post | `resources/cinema-protocol.md` | Render one candidate and call it a keyframe |
 
-## Workflow: CONCEPT → GRAMMAR → BEATS → KEYFRAMES → RENDER → LAB → SHIP
+## Step 0 — the cinema protocol (read before the workflow)
+
+`resources/cinema-protocol.md` is the pre-production gate. Eight locks: director's intent and pre-viz, image system (lens set, value structure, colour script), cast lock via the Higgsfield character-sheet workflow saved as reference Elements, location plates, a measured lane bake-off, a four-candidate loop with a three-lens critique against a 30-point rubric (gate 24, no zero), motion only from gated stills, and post. A scene that skips a lock is not a scene. The first proof render in `keyframes.yaml` is the baseline the protocol exists to beat.
+
+## Workflow: CONCEPT → GRAMMAR → INTENT → LOCKS → CANDIDATES → GATE → RENDER → LAB → SHIP
 
 1. **CONCEPT** — name the mechanism in one sentence an engineer would sign. ("A circuit breaker counts failures per file and restricts writes after 5.") If you cannot write that sentence, you are not ready to draw.
 2. **GRAMMAR** — look up the concept in `visual-grammar.md`. Use the registered body / weapon / room / cost. If the concept is new, register it there first (one row), then proceed.
 3. **BEATS** — five shots, always: *Establish · Trigger · Mechanism · Cost · Resolution*. Each beat is one sentence of action and one sentence of what the viewer learns.
 4. **KEYFRAMES** — write one prompt per beat using the template below. Prepend the consistency block from the style bible. Three keyframes minimum per scene (Establish, Mechanism, Resolution); five for a full episode.
-5. **RENDER** — route through `multimodal-studio`: stills via the stylized lane (Flux / Seedream class), motion via image-to-video (Kling class) from the approved still. Recurring cast goes through `create_character` once; reuse the ID. Check credits; atomize before generating net-new.
+5. **RENDER** — only after the cinema protocol's locks: cast and location Elements attached, the season's bake-off-winning lane, four candidates per beat, three-lens critique, one refine, 4k upscale. Motion via `seedance_2_0` from the gated still with the cast Element as identity reference. Check credits; log actuals in the ledger.
 6. **LAB** — write or link the runnable lab. It must execute with only the repo plus one API key. Include the expected output.
 7. **SHIP** — package as `episodes/<nn>-<slug>/` with `scene.md` (beats + mechanism), `keyframes/` (renders), `lab/` (code + README). Run `/review-content` on the mechanism text; run the brand gate on the frames.
 
