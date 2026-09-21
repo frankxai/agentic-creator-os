@@ -48,6 +48,10 @@ Scene without mechanism is decoration. Mechanism without lab is a lecture. All t
 | Rendering | `multimodal-studio` skill + Higgsfield MCP | Fabricate an image URL |
 | Pre-production, critique, motion, post | `resources/cinema-protocol.md` | Render one candidate and call it a keyframe |
 
+## Step -1 — the studio bible (read first)
+
+`resources/STUDIO-BIBLE.md` fixes the world, the look, the cast briefs, the signature devices, and the production pipeline with eyes at every gate. It supersedes the style bible's world and palette where they conflict (the world is INK on paper, light not dark, one red). Any session that cannot view images does research, writing, and prep under this bible and never spends credits on frames.
+
 ## Step 0 — the cinema protocol (read before the workflow)
 
 `resources/cinema-protocol.md` is the pre-production gate. Eight locks: director's intent and pre-viz, image system (lens set, value structure, colour script), cast lock via the Higgsfield character-sheet workflow saved as reference Elements, location plates, a measured lane bake-off, a four-candidate loop with a three-lens critique against a 30-point rubric (gate 24, no zero), motion only from gated stills, and post. A scene that skips a lock is not a scene. The first proof render in `keyframes.yaml` is the baseline the protocol exists to beat.
