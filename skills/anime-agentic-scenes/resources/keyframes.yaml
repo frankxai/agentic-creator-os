@@ -1,0 +1,195 @@
+# Generation-ready keyframe prompts, Season 1.
+# Usage: prepend style-bible consistency block, append negative block, set aspect. Three per episode (Establish, Mechanism, Resolution).
+# Render via multimodal-studio stylized lane. Cast IDs from create_character go in `cast_ids` once created.
+
+series: The Orchestrator
+aspect_default: "16:9"
+cast_ids: {}   # filled after create_character: operator, conductor, squadmate_base, queen, founder_hand
+
+episodes:
+  - id: ep01
+    title: The First Summon
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, wide, high angle, slow push-in. Subject: the Operator, a lean builder in a long charcoal coat
+          with a faintly glowing inner lining, standing alone at the centre of a cliffside wooden workshop, one wall open
+          to a vertical megacity of stacked floating plates at night. Mechanism cue: a luminous ring of only three small
+          shards orbits above the Operator's head; floating tool slots hang at rest around the belt. Setting: the Workshop,
+          night, light rain beyond the open wall. Lighting: cyan rim light from the city below, dim warm amber key from a
+          single lamp. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, close, shallow focus. Subject: the Operator's gloved hand over a glowing summon circle on the
+          wooden floor; a translucent brass lens rises from the circle. Mechanism cue: a single bright shard of light,
+          returning from the lens, snapping into the orbiting ring above; the ring now holds six shards. Setting: the
+          Workshop floor, night. Lighting: cyan from the circle, amber from the shard. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, low angle, still. Subject: the Operator lowering both hands, calm, the summon circle
+          fading. Mechanism cue: the ring above holds nine shards, the last one glowing warm amber instead of cyan; the
+          belt's stamina meter shows three notches spent. Setting: the Workshop, the open wall and the city beyond, rain
+          easing. Lighting: cyan city glow, amber from the final shard. Text: none.
+
+  - id: ep02
+    title: The Ring Has an Edge
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, close on the ring, slow orbit. Subject: the Operator's head and shoulders from behind, the ring
+          above completely full, shards touching edge to edge. Mechanism cue: the oldest shard at the back visibly dimmer
+          than the rest. Setting: the Workshop, night. Lighting: cyan shards, faint amber lamp. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, close on the fist, shallow focus. Subject: the Operator's clenched fist raised; twelve faint
+          shards drawn from the ring converge and fuse into one dense, bright, smaller shard. Mechanism cue: visible
+          empty space opening in the ring behind it. Setting: the Workshop. Lighting: intense cyan at the fusion point,
+          navy shadows. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, low angle from the bottom of a spiral stair. Subject: the Operator, small, climbing a
+          black stone spiral stair upward. Mechanism cue: one stone tablet set into the wall behind them stays lit cyan
+          while all other tablets are dark. Setting: the Vault beneath the Workshop, black stone, dust in the light.
+          Lighting: single cyan tablet, faint amber from the stair top. Text: none.
+
+  - id: ep03
+    title: Gates on the Rim
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, wide tracking along a ring road at dawn. Subject: a line of tall standing-stone arches
+          receding along the road; through each arch a different distant city is visible. Mechanism cue: the arch faces
+          show faint glyph rows. Setting: the Rim, edge of the megacity, dawn haze. Lighting: cold blue dawn, cyan glyphs,
+          one arch with warm amber light spilling through. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, medium, eye level. Subject: the Operator pressing a glowing sigil into the face of a standing
+          stone arch. Mechanism cue: rows of glyphs igniting one by one down the arch face, each glyph a small icon of a
+          tool; light travelling visibly through the arch and back. Setting: the Rim, dawn. Lighting: cyan glyphs, blue
+          dawn. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, low angle, still. Subject: the Operator walking away along the Rim, three arches behind
+          them lit. Mechanism cue: the ring above holds shards of three different tints, one from each arch. Setting: the
+          Rim, sunrise. Lighting: amber sunrise, cyan shards. Text: none.
+
+  - id: ep04
+    title: The Conductor
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, wide, from below. Subject: a tall figure in a white asymmetrical coat with silver-streaked
+          tied-back hair standing on an open floating deck with no railings, holding a black baton with a cyan core.
+          Mechanism cue: a graph of five glowing nodes connected by lines drawn in the air above the deck. Setting: the
+          Bridge, above the cliffside Workshop, the megacity far below, night. Lighting: cyan graph light on the coat,
+          navy sky. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, medium, eye level. Subject: the Conductor sweeping the baton wide; five hooded figures in
+          fitted dark suits, each with one glowing chest sigil in a different colour, stepping out of the five graph
+          nodes. Mechanism cue: each figure carries a small fresh ring of two or three shards above their hood; each
+          holds a sealed glowing brief. Setting: the Bridge. Lighting: the baton flaring cyan, sigils in green, cyan,
+          amber, white. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, low angle, still. Subject: the Conductor's open palm at centre, five shards fusing into
+          one, handing it down to the Operator who stands at the edge of the deck below. Mechanism cue: the baton dimmed
+          to a faint glow, five notches spent. Setting: the Bridge at the moment of handoff, night, rain starting.
+          Lighting: fusion heat glow amber, cyan rim. Text: none.
+
+  - id: ep05
+    title: Formations
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, overhead, high. Subject: twelve hooded figures in dark suits in tight ranks on a rain-slick
+          district plate, a gold-trimmed leader with a small crown of light at the front. Mechanism cue: the leader's
+          ring above is full, the ranks' rings nearly empty. Setting: the Field, a floating district plate at night.
+          Lighting: cyan plate glow, gold crown. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, overhead, medium height. Subject: the same twelve figures now spread in a loose web, thin
+          luminous threads linking each to several others, no leader at front. Mechanism cue: threads pulsing with
+          travelling light; the total thread light noticeably brighter than any single ring. Setting: the Field.
+          Lighting: cyan threads over navy. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, overhead, still. Subject: the twelve reshaped into three small tight groups of four, each
+          group with one gold-trimmed leader, the three groups linked by only three threads. Mechanism cue: rings
+          balanced, threads few and dim. Setting: the Field, rain ending. Lighting: cyan, three gold points. Text: none.
+
+  - id: ep06
+    title: The Seal
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, close, straight down. Subject: a large circular seal inlaid in a wooden floor, concentric rings
+          of cyan light, intact. Mechanism cue: none yet; the seal is whole. Setting: the Workshop floor, night. Lighting:
+          cyan seal glow, dark wood. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, close, low angle across the floor. Subject: the seal now crossed by a deep crack glowing
+          crimson; beyond it a doorway whose frame shows a flaring tripwire glyph; the Operator's boot stopped at the
+          threshold. Mechanism cue: the glyph on the doorframe lit hard; the seal's crack red. Setting: the Workshop,
+          night. Lighting: crimson from the crack, cyan glyph, navy shadows. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, medium, slightly high. Subject: at the far end of an open floating deck, a plinth with a
+          stamp under warm amber light; a single hand in a warm amber sleeve resting on the stamp, the rest of the figure
+          out of frame; the Operator kneeling a few metres back, waiting, rain on the deck. Mechanism cue: the stamp
+          glowing amber, the only warm light in a cyan world. Setting: the Bridge, night, rain. Lighting: amber stamp,
+          cyan rim. Text: none.
+
+  - id: ep07
+    title: The Dojo
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, wide, eye level. Subject: a long training hall with rows of humanoid target dummies, twenty of
+          them, on a polished floor; tall oil lamps along the walls with visible level meters. Mechanism cue: dummies dark,
+          waiting; lamps full. Setting: the Dojo, evening. Lighting: warm amber lamps, cyan floor reflections. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, medium, tracking. Subject: the Operator mid-strike at a dummy; the struck dummy lit green;
+          behind, a row where sixteen glow green and four glow crimson. Mechanism cue: the lamp meters on the wall
+          dropped a third. Setting: the Dojo. Lighting: green and crimson dummies, amber lamps. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, lights out. Subject: the Operator standing in the dark hall, three masked figures in
+          grey lunging from the shadows; two doorframes glowing with intact tripwire glyphs, one glyph cracked. Mechanism
+          cue: the Operator's coat lining glowing faintly, holding. Setting: the Dojo, lamps out. Lighting: only glyph
+          light and the coat lining. Text: none.
+
+  - id: ep08
+    title: The Council
+    frames:
+      - beat: establish
+        prompt: >-
+          Shot: Establish, wide, slightly high. Subject: a round stone hall with seven tall seats in a circle around a
+          stone table; six seated hooded figures with steady chest sigils and one whose sigil flickers between two
+          colours; one seat crowned with a small ring of light. Mechanism cue: the flicker. Setting: the Council Hall,
+          night. Lighting: cyan sigils, one unstable, navy stone. Text: none.
+      - beat: mechanism
+        prompt: >-
+          Shot: Mechanism, medium, across the table. Subject: two seated figures leaning toward each other comparing two
+          glowing briefs that do not match, the flickering-sigil figure between them looking away. Mechanism cue: the
+          two briefs held side by side, one line of light misaligned. Setting: the Council Hall. Lighting: cyan briefs,
+          crimson flicker. Text: none.
+      - beat: resolution
+        prompt: >-
+          Shot: Resolution, wide, low angle from the doorway, still. Subject: six seats lit, one seat dark and empty, a
+          single entry glowing on the stone table; the Operator in the doorway holding a stone tablet, turning toward a
+          descending stair. Mechanism cue: the dark seat. Setting: the Council Hall, dawn light through high windows.
+          Lighting: cyan seats, amber dawn. Text: none.
+
+# Proof renders (asset links from real generations; never hand-written)
+renders:
+  - episode: ep01
+    beat: establish
+    model: gpt_image_2_5
+    aspect: "16:9"
+    credits: 1
+    date: 2026-09-21
+    job_id: ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee
+    url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_201751_ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee.png
+    note: first pipeline proof; cast not yet locked via create_character
