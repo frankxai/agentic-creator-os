@@ -41,7 +41,8 @@ Scene without mechanism is decoration. Mechanism without lab is a lecture. All t
 | Layer | Source of truth | Never |
 |---|---|---|
 | Concept → visual metaphor | `resources/visual-grammar.md` | Invent a second metaphor for a concept that already has one |
-| Look, characters, camera, palette | `resources/style-bible.md` | Drift the character sheet between shots |
+| Look, camera, palette | `resources/style-bible.md` | Drift the image system between shots |
+| Cast design and cast lock | `resources/character-forge.md` | Render a cast member that fails the seven tests |
 | Episodes, beats, labs | `resources/season-1.md` | Ship a scene whose lab does not run |
 | Prompts ready to render | `resources/keyframes.yaml` | Paste a prompt without the consistency block |
 | Rendering | `multimodal-studio` skill + Higgsfield MCP | Fabricate an image URL |

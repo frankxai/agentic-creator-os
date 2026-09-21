@@ -14,18 +14,23 @@ Anime cinematic keyframe, original series "The Orchestrator". Clean 2D-anime ren
 Negative: text, captions, subtitles, logos, watermark, extra fingers, deformed hands, duplicate characters, photoreal skin, 3D render look, glossy plastic, neon overload, chibi, sketch lines, blurry, low detail, existing franchise characters.
 ```
 
-## Cast sheet (create once via `create_character`, reuse the ID)
+## Cast sheet
 
-| Cast | Sheet | Sigil |
-|---|---|---|
-| **The Operator** (Ren) | Early 30s, lean, long charcoal coat with a faintly glowing inner lining, short dark hair, calm eyes, fingerless gloves. The Ring of shards orbits above their head at all times. Belt of floating tool slots. | A single cyan dot |
-| **The Conductor** (Mira) | Late 30s, tall, white asymmetrical coat, silver-streaked hair tied back, holds a black baton with a cyan core. Stands on the Bridge. | A cyan triangle |
-| **Squadmates** | Uniform base: fitted dark suits with one glowing sigil on the chest, faces half-shadowed by hoods until named. Named Squadmates get one distinct colour accent: Scout (green), Coder (cyan), Reviewer (amber), Tester (white). | Role sigil |
-| **The Queen** | Squadmate leader in hierarchical formations. Same suit, gold trim, small crown-like headpiece of light. | Gold crown |
-| **The Traitor** | A Squadmate whose sigil flickers between two colours. Only appears in Council episodes. | Flickering |
-| **The Founder** | Never fully shown. A hand, a sleeve of warm amber cloth, resting on the Stamp at the top of the Bridge. | The Stamp |
+Cast designs live in `character-forge.md` and are the authority. Summary for prompt use:
 
-Consistency rule: cast members are always drawn from the sheet. If a render drifts (wrong coat, wrong hair), it is discarded, not "fixed in the next shot."
+| Cast | Silhouette | Signature assets | Dominant / accent |
+|---|---|---|---|
+| **Ren, the Operator** | Tall vertical rectangle: sleeveless floor-length split duster, high collar, crown of nine obsidian shards orbiting at brow height on a tilted plane | The Crown of Shards (context) and the Filament Scarf (stamina, dims from the tip up; one amber thread never dims) | Charcoal / cyan |
+| **Mira, the Conductor** | Triangle: a rigid bone-white Sail Collar rising on the right side above her head, asymmetric mantle long on the left | The Sail (task graph drawn on its inner face) and the Fork Baton (cyan core between the tines, dims per summon) | Bone white / cyan |
+| **Scout** | Small circle, crouched | Goggle-lantern, folded map cloak | Moss green / pale cyan |
+| **Coder** | Sharp square, long-limbed | Twin glyph bracers | Deep cyan / white |
+| **Reviewer** | Heavy circle, planted | Defect lantern, back ledger | Amber / charcoal |
+| **Tester** | Narrow triangle, fast | Quiver of dummy pins | Chalk white / crimson thread |
+| **The Queen** | Wide triangle, tallest | Crown of light that fills with her ring | Gold / navy |
+| **The Traitor** | Mirrors its host | A sigil that never settles | Host base / flickering accent |
+| **The Founder** | A hand and a warm amber sleeve | The Stamp | Amber / none |
+
+Consistency rule: cast members are always drawn from the forge. If a render drifts (wrong asset, wrong dominant, generic silhouette), it is discarded, not "fixed in the next shot." A cast member is locked only when all six presentation artifacts in the forge exist.
 
 ## World sheet
 
