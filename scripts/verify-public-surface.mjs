@@ -138,16 +138,16 @@ function verifyClaims(canonical, measured) {
       claude: '5 tracked empty placeholders',
     },
     topLevelCommands: {
-      expected: 85,
-      readme: 'Top-level slash commands | 85',
-      quickstart: '85 top-level slash-command definitions',
-      claude: '85 Top-level Commands',
+      expected: 86,
+      readme: 'Top-level slash commands | 86',
+      quickstart: '86 top-level slash-command definitions',
+      claude: '86 Top-level Commands',
     },
     topLevelAgents: {
-      expected: 69,
-      readme: 'Top-level agent profiles | 69',
-      quickstart: '69 top-level agent profiles',
-      claude: '69 Top-level Agent Profiles',
+      expected: 70,
+      readme: 'Top-level agent profiles | 70',
+      quickstart: '70 top-level agent profiles',
+      claude: '70 Top-level Agent Profiles',
     },
     installableShellHooks: {
       expected: 9,
@@ -156,10 +156,10 @@ function verifyClaims(canonical, measured) {
       claude: '9 Installable Shell Hooks',
     },
     activationRules: {
-      expected: 32,
-      readme: 'Activation rules | 32',
-      quickstart: '32 activation rules',
-      claude: 'provides 32 activation rules',
+      expected: 33,
+      readme: 'Activation rules | 33',
+      quickstart: '33 activation rules',
+      claude: 'provides 33 activation rules',
     },
   }
 
