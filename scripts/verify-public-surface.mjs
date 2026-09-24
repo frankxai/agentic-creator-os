@@ -232,16 +232,34 @@ function verifyLicenseTruth(canonical) {
 
 function verifyMarketplaceTruth(canonical) {
   const marketplacePath = join(ROOT, '.claude-plugin', 'marketplace.json')
-  assert.equal(
-    existsSync(marketplacePath),
-    false,
-    'marketplace gate must be updated when a marketplace manifest is added'
-  )
-  assert.match(canonical.readme, /not currently presented as a Claude marketplace installation/)
-  assert.doesNotMatch(
-    canonical.readme,
-    /claude plugin marketplace add frankxai\/agentic-creator-os/
-  )
+  const marketplace = readJson(marketplacePath)
+  assert.equal(marketplace.name, 'frankx-creator')
+  assert.equal(marketplace.plugins.length, 1)
+  assert.equal(marketplace.plugins[0].name, 'creator-os-core')
+  assert.equal(marketplace.plugins[0].source.path, './plugins/creator-os-core')
+
+  const pluginRoot = join(ROOT, 'plugins', 'creator-os-core')
+  const skillDirs = readdirSync(join(pluginRoot, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+  assert.deepEqual(skillDirs, [
+    'handoff-clean',
+    'review-a-diff',
+    'run-the-checks',
+    'start-safely',
+    'stated-voice',
+  ])
+  for (const skill of skillDirs) {
+    const body = readFileSync(join(pluginRoot, 'skills', skill, 'SKILL.md'), 'utf8')
+    assert.match(body, /^---\nname: /)
+    assert.doesNotMatch(body, /C:\\Users\\|\/Users\/frank|starlight\/repos/)
+  }
+  assert.equal(existsSync(join(pluginRoot, 'commands', 'acos.md')), true)
+  assert.match(canonical.readme, /claude plugin marketplace add frankxai\/agentic-creator-os/)
+  assert.match(canonical.readme, /grok plugin install creator-os-core --trust/)
+  assert.doesNotMatch(canonical.readme, /npx @frankx\/acos/)
+  assert.doesNotMatch(canonical.readme, /not currently presented as a Claude marketplace installation/)
 }
 
 function verifyPortablePublicConfig(canonical) {
@@ -323,7 +341,7 @@ console.log(
       ...measured,
       licenseFile: 'LICENSE',
       license: canonical.packageJson.license,
-      marketplaceManifest: false,
+      marketplaceManifest: existsSync(join(ROOT, '.claude-plugin', 'marketplace.json')),
       claudeInstallSmoke: 'passed',
     },
     null,

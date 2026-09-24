@@ -71,11 +71,27 @@ Other platform flags generate context or harness-specific files:
 
 Those generators are present in the tree. They should not be read as a claim that every external harness or third-party connector has been independently certified end to end.
 
-## Claude plugin status
+## One plugin, five practices
 
-This repository includes `.claude-plugin/plugin.json`, but it does not include `.claude-plugin/marketplace.json`. It is therefore not currently presented as a Claude marketplace installation.
+The full source install above copies the whole catalog. For a first install, add this repository as a marketplace and install `creator-os-core`. It contains five skills and the `/acos` command: start safely, review a diff, write in a stated voice, run the project's checks, and hand off without secrets.
 
-Use the source installer above. The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is the companion plugin catalog; evaluate its installation instructions and license independently.
+```bash
+# Claude Code
+claude plugin marketplace add frankxai/agentic-creator-os
+claude plugin install creator-os-core@frankx-creator
+
+# Codex
+codex plugin marketplace add frankxai/agentic-creator-os
+codex plugin add creator-os-core@frankx-creator
+
+# Grok
+grok plugin marketplace add frankxai/agentic-creator-os
+grok plugin install creator-os-core --trust
+```
+
+Open a new session after installing. The index is `.claude-plugin/marketplace.json`. Grok also reads that Claude-compatible index.
+
+The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is a companion catalog. Evaluate its installation instructions and license independently.
 
 ## How the pieces fit
 
