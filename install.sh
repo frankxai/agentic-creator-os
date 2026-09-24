@@ -213,6 +213,9 @@ preflight_claude_code() {
         check_claude_target "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
     fi
     [ ! -L "$claude_home/acos/state.json" ] || error "Refusing a symlinked ACOS state file"
+    if [ -e "$claude_home/acos/state.json" ] && [ ! -f "$claude_home/acos/state.json" ]; then
+        error "Refusing a non-file ACOS state destination. No files were copied."
+    fi
 }
 
 install_claude_code() {

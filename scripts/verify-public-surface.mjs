@@ -284,6 +284,7 @@ function smokeInstall(canonical, measured) {
   const claudeHome = join(tempRoot, 'claude-home')
   const collisionHome = join(tempRoot, 'collision-home')
   const parentCollisionHome = join(tempRoot, 'parent-collision-home')
+  const stateCollisionHome = join(tempRoot, 'state-collision-home')
   const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
     .find((name) => name.endsWith('.md'))
   assert.ok(firstAgent, 'the installer needs a real agent collision fixture')
@@ -306,6 +307,13 @@ function smokeInstall(canonical, measured) {
     assert.equal(readFileSync(blockedParent, 'utf8'), 'preexisting user file\n')
     assert.deepEqual(readdirSync(parentCollisionHome), ['skills'],
       'non-directory ancestor must stop installation before any profile writes')
+
+    const blockedState = join(stateCollisionHome, 'acos', 'state.json')
+    mkdirSync(blockedState, { recursive: true })
+    assert.throws(() => install(stateCollisionHome), /Command failed/)
+    assert.deepEqual(readdirSync(stateCollisionHome), ['acos'],
+      'a state-file type collision must stop before any profile writes')
+    assert.deepEqual(readdirSync(join(stateCollisionHome, 'acos')), ['state.json'])
 
     const collisionPath = join(collisionHome, 'agents', firstAgent)
     mkdirSync(dirname(collisionPath), { recursive: true })
