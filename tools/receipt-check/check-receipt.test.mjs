@@ -19,7 +19,13 @@ test('a complete practice receipt is yes and unsigned', () => {
 })
 
 test('a secret or an extra signature claim is no', () => {
-  assert.equal(checkReceipt({ ...good, command: 'export API_KEY=sk-live' }).yes, false)
+  assert.equal(checkReceipt({ ...good, command: 'export API_KEY=sk-live-secret' }).yes, false)
   assert.equal(checkReceipt({ ...good, signed: true }).yes, false)
   assert.equal(checkReceipt({ ...good, skill: 'ship-the-company' }).yes, false)
+  assert.equal(checkReceipt({ ...good, finishedAt: '2026-09-24' }).yes, false)
+})
+
+test('ordinary words that contain sk are still yes', () => {
+  const result = checkReceipt({ ...good, summary: 'Ask the reader to copy the command. Used start-safely first.' })
+  assert.equal(result.yes, true)
 })

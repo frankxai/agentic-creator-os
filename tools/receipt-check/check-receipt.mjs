@@ -1,11 +1,14 @@
+import { readFileSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
+
 const SKILLS = ['handoff-clean', 'review-a-diff', 'run-the-checks', 'start-safely', 'stated-voice']
 const SCHEMA = 'creator-os.practice-receipt.v1'
-const SECRET = /sk-|api[_-]?key|BEGIN (?:OPENSSH |RSA )?PRIVATE|ghp_|github_pat_|xai-/i
+const SECRET = /(?:^|[^A-Za-z0-9])sk-[A-Za-z0-9]{8,}|ghp_[A-Za-z0-9]{20,}|github_pat_|xai-[A-Za-z0-9]{8,}|-----BEGIN [A-Z ]*PRIVATE KEY-----|\b(?:api[_-]?key|token|secret)\s*[:=]\s*\S+/i
 
 export function checkReceipt(receipt) {
   const errors = []
   if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)) {
-    return { yes: false, verdict: 'no', errors: ['Receipt must be an object.'] }
+    return { yes: false, verdict: 'no', signed: false, errors: ['Receipt must be an object.'] }
   }
   const allowed = new Set(['schema', 'skill', 'finishedAt', 'outcome', 'command', 'summary'])
   for (const key of Object.keys(receipt)) {
@@ -13,7 +16,7 @@ export function checkReceipt(receipt) {
   }
   if (receipt.schema !== SCHEMA) errors.push(`schema must be ${SCHEMA}`)
   if (!SKILLS.includes(receipt.skill)) errors.push('skill must be one of the five creator-os-core practices')
-  if (typeof receipt.finishedAt !== 'string' || Number.isNaN(Date.parse(receipt.finishedAt))) {
+  if (typeof receipt.finishedAt !== 'string' || !receipt.finishedAt.includes('T') || Number.isNaN(Date.parse(receipt.finishedAt))) {
     errors.push('finishedAt must be a date-time string')
   }
   if (receipt.outcome !== 'pass' && receipt.outcome !== 'fail') errors.push('outcome must be pass or fail')
@@ -31,4 +34,15 @@ export function checkReceipt(receipt) {
     signed: false,
     errors,
   }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const file = process.argv[2]
+  if (!file) {
+    console.log(JSON.stringify({ yes: false, verdict: 'no', signed: false, errors: ['Pass a receipt JSON file.'] }))
+    process.exit(1)
+  }
+  const result = checkReceipt(JSON.parse(readFileSync(file, 'utf8')))
+  console.log(JSON.stringify(result))
+  process.exit(result.yes ? 0 : 1)
 }

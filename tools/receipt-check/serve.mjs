@@ -19,6 +19,7 @@ function answer(id, result) {
 
 function handleRpc(message) {
   if (!message || message.jsonrpc !== '2.0') return null
+  if (message.method && message.id === undefined) return null
   if (message.method === 'initialize') {
     return answer(message.id, {
       protocolVersion: '2025-03-26',
@@ -55,8 +56,14 @@ export function createReceiptServer() {
         response.end(JSON.stringify(checkReceipt(body.receipt ?? body)))
         return
       }
+      const rpc = handleRpc(body)
+      if (!rpc) {
+        response.writeHead(202)
+        response.end()
+        return
+      }
       response.writeHead(200, { 'content-type': 'application/json' })
-      response.end(JSON.stringify(handleRpc(body)))
+      response.end(JSON.stringify(rpc))
     })
   })
 }
