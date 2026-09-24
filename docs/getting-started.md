@@ -19,7 +19,10 @@ Run this from the project you want to set up. The script reads this clone and wr
 ```bash
 git clone --depth 1 https://github.com/frankxai/agentic-creator-os.git
 bash ./agentic-creator-os/install.sh --platform=claude --target=.
+bash ./agentic-creator-os/install.sh --apply --platform=claude --target=.
 ```
+
+The first installer command is a dry run. It prints what would change and writes nothing. The second command writes.
 
 Other platforms: `--platform=cursor`, `--platform=antigravity`, or `--platform=grok`.
 
@@ -29,6 +32,7 @@ Other platforms: `--platform=cursor`, `--platform=antigravity`, or `--platform=g
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh --platform=claude
+./install.sh --apply --platform=claude
 ```
 
 ### Method 3: Manual Setup

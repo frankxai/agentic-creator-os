@@ -67,6 +67,8 @@ show_help() {
     echo "  --platform=all        Install for all detected platforms"
     echo ""
     echo "Install Modes:"
+    echo "  (default)             Dry run. Prints what would change and writes nothing."
+    echo "  --apply               Write files. Required for any install."
     echo "  --full                Full installation (all skills + MCP servers)"
     echo "  --minimal             Core skills only"
     echo "  --skills-only         Skills without commands/agents"
@@ -79,7 +81,8 @@ show_help() {
     echo "  --help                Show this help"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh                           # Auto-detect platform"
+    echo "  ./install.sh                           # Dry run for the detected platform"
+    echo "  ./install.sh --apply --platform=claude"
     echo "  ./install.sh --platform=cursor         # Cursor-specific install"
     echo "  ./install.sh --platform=grok           # Grok Build full harness (GROK.md + .grok/ seeds from adapter)"
     echo "  ./install.sh --platform=antigravity    # AGY scaffold (5-fleet parity + grok-personal; creates .antigravity/ + harnesses/antigravity/ minimal, reversible; see ACOS adapters parity 2026-06-02)"
@@ -113,6 +116,12 @@ detect_platforms() {
     if [ -d "$HOME/.gemini" ] || command -v gemini &>/dev/null; then
         [ -n "$platforms" ] && platforms="$platforms,"
         platforms="${platforms}gemini"
+    fi
+
+    # Codex CLI
+    if command -v codex &>/dev/null || [ -d "$HOME/.codex" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}codex"
     fi
 
     # Grok CLI (xAI) — full harness support via .grok/ + AGENTS.md compat + Claude bridge
@@ -607,6 +616,48 @@ generate_context_file() {
     success "Generated: $output_file ($(wc -l < "$output_file") lines)"
 }
 
+# ── Dry run ───────────────────────────────────────────────────────────────────
+note_path() {
+    local path="$1"
+    if [ -e "$path" ]; then
+        echo "REPLACE $path"
+    else
+        echo "CREATE  $path"
+    fi
+}
+
+preview_platform() {
+    local platform="$1"
+    local target="$2"
+    local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
+
+    case "$platform" in
+        claude|claude-code)
+            echo "Claude Code writes into the profile, not the project."
+            note_path "$claude_home"
+            echo "Same-named skills, commands, agents, and hooks in that profile would be replaced."
+            ;;
+        cursor) note_path "$target/.cursorrules" ;;
+        windsurf) note_path "$target/.windsurfrules" ;;
+        gemini) note_path "$target/GEMINI.md" ;;
+        grok)
+            note_path "$target/GROK.md"
+            note_path "$target/.grok"
+            note_path "$target/AGENTS.md"
+            ;;
+        antigravity|agy)
+            note_path "$target/.antigravity"
+            note_path "$target/harnesses/antigravity"
+            ;;
+        codex)
+            echo "Codex is present. This installer does not write Codex files."
+            ;;
+        generic|*)
+            note_path "$target/CONTEXT.md"
+            ;;
+    esac
+}
+
 # ── Install for specific platform ─────────────────────────────────────────────
 install_platform() {
     local platform="$1"
@@ -631,6 +682,9 @@ install_platform() {
             ;;
         grok)
             install_grok "$mode" "$target"
+            ;;
+        codex)
+            warn "Codex has no writer in this installer. No files were changed."
             ;;
         antigravity|agy)
             install_antigravity_propose "$mode" "$target"
@@ -728,11 +782,13 @@ main() {
     local platform=""
     local mode="standard"
     local target_dir="."
+    local apply=0
 
     while [[ $# -gt 0 ]]; do
         case $1 in
             --platform=*)  platform="${1#*=}"; shift ;;
             --target=*)    target_dir="${1#*=}"; shift ;;
+            --apply)       apply=1; shift ;;
             --full)        mode="full"; shift ;;
             --minimal)     mode="minimal"; shift ;;
             --skills-only) mode="skills"; shift ;;
@@ -751,6 +807,22 @@ main() {
     if [ -z "$platform" ]; then
         platform=$(detect_platforms)
         log "Detected platform(s): $platform"
+    fi
+
+    if [ "$apply" -eq 1 ] && [ "$platform" = "codex" ]; then
+        warn "Codex has no writer in this installer. No files were changed."
+        exit 2
+    fi
+
+    if [ "$apply" -ne 1 ]; then
+        echo "Dry run. Nothing will be written. Re-run with --apply to write."
+        IFS=',' read -ra PREVIEW <<< "$platform"
+        for p in "${PREVIEW[@]}"; do
+            p=$(echo "$p" | xargs)
+            [ -z "$p" ] && continue
+            preview_platform "$p" "$target_dir"
+        done
+        exit 0
     fi
 
     # Handle special modes

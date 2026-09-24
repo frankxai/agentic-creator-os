@@ -1,20 +1,17 @@
 {
-  "name": "frankx-creator",
-  "description": "A five-skill Creator OS plugin. The full repository remains available through install.sh.",
+  "name": "frankx",
   "owner": {
     "name": "Frank Riemer",
-    "email": "frank@frankx.ai"
+    "email": "frank@frankx.ai",
+    "url": "https://frankx.ai"
   },
+  "description": "Agentic Creator OS for Claude Code.",
   "plugins": [
     {
-      "name": "creator-os-core",
-      "description": "Five practices for starting, reviewing, writing, checking, and handing off creative work.",
-      "version": "1.0.0",
-      "source": {
-        "type": "local",
-        "path": "./plugins/creator-os-core"
-      },
-      "category": "creator-tools"
+      "name": "agentic-creator-os",
+      "source": "./",
+      "description": "Skills, commands, and agent profiles for creative work.",
+      "version": "11.0.0"
     }
   ]
 }
