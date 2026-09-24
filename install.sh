@@ -158,6 +158,9 @@ check_claude_target() {
     # outside the path the user inspected.
     while [ "$path" != "." ] && [ "$path" != "/" ]; do
         [ ! -L "$path" ] || error "Refusing a symlinked Claude destination: $path"
+        if [ "$path" != "$target" ] && [ -e "$path" ] && [ ! -d "$path" ]; then
+            error "Refusing a non-directory Claude destination ancestor: $path. No files were copied."
+        fi
         case "$path" in
             */*) path="${path%/*}"; [ -n "$path" ] || path="/" ;;
             *) break ;;

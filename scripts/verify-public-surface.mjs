@@ -283,6 +283,7 @@ function smokeInstall(canonical, measured) {
   const tempRoot = mkdtempSync(join(tmpdir(), 'acos-public-surface-'))
   const claudeHome = join(tempRoot, 'claude-home')
   const collisionHome = join(tempRoot, 'collision-home')
+  const parentCollisionHome = join(tempRoot, 'parent-collision-home')
   const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
     .find((name) => name.endsWith('.md'))
   assert.ok(firstAgent, 'the installer needs a real agent collision fixture')
@@ -298,6 +299,14 @@ function smokeInstall(canonical, measured) {
   })
 
   try {
+    mkdirSync(parentCollisionHome)
+    const blockedParent = join(parentCollisionHome, 'skills')
+    writeFileSync(blockedParent, 'preexisting user file\n')
+    assert.throws(() => install(parentCollisionHome), /Command failed/)
+    assert.equal(readFileSync(blockedParent, 'utf8'), 'preexisting user file\n')
+    assert.deepEqual(readdirSync(parentCollisionHome), ['skills'],
+      'non-directory ancestor must stop installation before any profile writes')
+
     const collisionPath = join(collisionHome, 'agents', firstAgent)
     mkdirSync(dirname(collisionPath), { recursive: true })
     writeFileSync(collisionPath, 'preexisting user agent\n')
