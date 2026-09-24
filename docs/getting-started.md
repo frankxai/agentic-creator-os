@@ -49,34 +49,21 @@ cd agentic-creator-os
 3. Copy skill files to `~/.claude-skills/`
 4. Configure MCP servers in Claude Code settings
 
-## Post-Installation
+## After it is installed
 
-### Verify Installation
+Open a new session. Type `/acos`, or say what you are doing in one sentence.
 
-```bash
-# Check version and status
-acos status
+You have five practices.
 
-# List available skills
-acos list skills
+- Start safely, before the first change in a repository.
+- Review a diff, when you want a judgment and not a rewrite.
+- Stated voice, when someone else will read the words.
+- Run the checks, when a change needs proof.
+- Hand off clean, when another person will continue.
 
-# Test a skill
-acos test content-strategy
-```
+The first things people ask are "Review this diff", "Write the install note", and "Run the checks".
 
-### Configure Your Instance
-
-Create your project configuration:
-
-```bash
-# Initialize a new instance
-acos init my-project
-
-# This creates:
-# - instances/my-project/CLAUDE.md
-# - instances/my-project/brand-voice.md
-# - instances/my-project/agents/
-```
+There is no `acos status` command. If the new session does not know `/acos`, add the marketplace again in that profile and open another session.
 
 ## First Steps
 

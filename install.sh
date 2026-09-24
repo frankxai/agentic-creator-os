@@ -816,7 +816,8 @@ main() {
     fi
 
     if [ "$apply" -ne 1 ]; then
-        echo "Dry run. Nothing will be written. Re-run without --dry-run to write."
+        echo "Dry run. Nothing will be written."
+        echo "When the list looks right, run the same command without --dry-run."
         IFS=',' read -ra PREVIEW <<< "$platform"
         for p in "${PREVIEW[@]}"; do
             p=$(echo "$p" | xargs)
