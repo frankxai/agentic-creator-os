@@ -236,7 +236,7 @@ function verifyMarketplaceTruth(canonical) {
   assert.equal(marketplace.name, 'frankx-creator')
   assert.equal(marketplace.plugins.length, 1)
   assert.equal(marketplace.plugins[0].name, 'creator-os-core')
-  assert.equal(marketplace.plugins[0].source.path, './plugins/creator-os-core')
+  assert.equal(marketplace.plugins[0].source, './plugins/creator-os-core')
 
   const pluginRoot = join(ROOT, 'plugins', 'creator-os-core')
   const skillDirs = readdirSync(join(pluginRoot, 'skills'), { withFileTypes: true })
