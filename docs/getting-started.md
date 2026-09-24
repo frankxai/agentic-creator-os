@@ -12,21 +12,31 @@ This guide walks you through setting up and using Agentic Creator OS with Claude
 
 `@frankx/agentic-creator-os` is not published on npm. Use the repository installer.
 
-### Method 1: Clone, then install into your project
+### Method 1: Claude Code
 
-Run this from the project you want to set up. The script reads this clone and writes harness files to the current directory, except Claude Code, which copies into your Claude profile and can replace files with the same name.
+Claude Code 2.1.275 or newer:
+
+```text
+/plugin install creator-os-core --marketplace frankxai/agentic-creator-os
+```
+
+That installs five skills. It does not copy the rest of this repository into your profile.
+
+### Method 2: Other harnesses
+
+Run this from the project you want to set up. The script reads this clone and writes harness files to the current directory. The first command is a dry run. The second writes.
 
 ```bash
 git clone --depth 1 https://github.com/frankxai/agentic-creator-os.git
-bash ./agentic-creator-os/install.sh --platform=claude --target=.
-bash ./agentic-creator-os/install.sh --apply --platform=claude --target=.
+bash ./agentic-creator-os/install.sh --platform=cursor --target=.
+bash ./agentic-creator-os/install.sh --apply --platform=cursor --target=.
 ```
 
 The first installer command is a dry run. It prints what would change and writes nothing. The second command writes.
 
-Other platforms: `--platform=cursor`, `--platform=antigravity`, or `--platform=grok`.
+Use `--platform=antigravity` or `--platform=grok` the same way. `--platform=claude --apply` copies the full catalog into your Claude profile and can replace files with the same name. Prefer Method 1 unless you want that.
 
-### Method 2: Install from inside the clone
+### Method 3: Install from inside the clone
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
@@ -35,7 +45,7 @@ cd agentic-creator-os
 ./install.sh --apply --platform=claude
 ```
 
-### Method 3: Manual Setup
+### Method 4: Manual setup
 
 1. Download the latest release from GitHub
 2. Extract to your desired location
