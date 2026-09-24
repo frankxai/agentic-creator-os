@@ -10,28 +10,25 @@ This guide walks you through setting up and using Agentic Creator OS with Claude
 
 ## Installation Methods
 
-### Method 1: npm (Recommended)
+`@frankx/agentic-creator-os` is not published on npm. Use the repository installer.
+
+### Method 1: Clone, then install into your project
+
+Run this from the project you want to set up. The script reads this clone and writes harness files to the current directory, except Claude Code, which copies into your Claude profile and can replace files with the same name.
 
 ```bash
-# Install globally
-npm install -g @frankx/agentic-creator-os
-
-# Run installer
-acos install
-
-# Or use npx without installing
-npx @frankx/agentic-creator-os install
+git clone --depth 1 https://github.com/frankxai/agentic-creator-os.git
+bash ./agentic-creator-os/install.sh --platform=claude --target=.
 ```
 
-### Method 2: Clone Repository
+Other platforms: `--platform=cursor`, `--platform=antigravity`, or `--platform=grok`.
+
+### Method 2: Install from inside the clone
 
 ```bash
-# Clone the repo
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
-
-# Run installer
-./install.sh
+./install.sh --platform=claude
 ```
 
 ### Method 3: Manual Setup
@@ -116,17 +113,17 @@ After installation, you'll have:
 
 ```
 agentic-creator-os/
-├── CLAUDE.md               # AI context (read this!)
-├── skills/                 # All skill files
-│   ├── technical/         # Technical skills
-│   ├── creative/          # Creative skills
-│   ├── business/          # Business skills
-│   └── personal/          # Personal development
-├── departments/            # Agent team configurations
-├── workflows/              # Orchestrated pipelines
-├── templates/              # Content templates
-├── instances/              # Project configurations
-└── mcp-servers/            # MCP server implementations
+Γö£ΓöÇΓöÇ CLAUDE.md               # AI context (read this!)
+Γö£ΓöÇΓöÇ skills/                 # All skill files
+Γöé   Γö£ΓöÇΓöÇ technical/         # Technical skills
+Γöé   Γö£ΓöÇΓöÇ creative/          # Creative skills
+Γöé   Γö£ΓöÇΓöÇ business/          # Business skills
+Γöé   ΓööΓöÇΓöÇ personal/          # Personal development
+Γö£ΓöÇΓöÇ departments/            # Agent team configurations
+Γö£ΓöÇΓöÇ workflows/              # Orchestrated pipelines
+Γö£ΓöÇΓöÇ templates/              # Content templates
+Γö£ΓöÇΓöÇ instances/              # Project configurations
+ΓööΓöÇΓöÇ mcp-servers/            # MCP server implementations
 ```
 
 ## Key Concepts
@@ -135,7 +132,7 @@ agentic-creator-os/
 Domain-specific knowledge modules that enhance Claude's capabilities. Each skill:
 - Has a focused purpose
 - Includes working code examples
-- Follows progressive disclosure (metadata → instructions → resources)
+- Follows progressive disclosure (metadata ΓåÆ instructions ΓåÆ resources)
 - Auto-activates based on context keywords
 
 ### Agents
@@ -147,7 +144,7 @@ Specialized AI personas with distinct voices and expertise:
 
 ### Workflows
 Orchestrated sequences that coordinate skills and agents:
-- **Pipeline**: Sequential steps (Research → Plan → Create → Publish)
+- **Pipeline**: Sequential steps (Research ΓåÆ Plan ΓåÆ Create ΓåÆ Publish)
 - **Parallel**: Concurrent execution (Blog + Social + Email)
 - **Iterative**: Loop until quality threshold met
 
