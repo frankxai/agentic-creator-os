@@ -56,3 +56,11 @@ additional agents. Maximum quality comes first; cost and time break quality ties
 Release status: candidate; independent review, live evaluation and publication
 approval remain required. Removing this optional directory and its package
 scripts restores the previous interface without changing installed model defaults.
+
+## Optional Codex invocation planner
+
+`node tools/orchestration/codex-plan.mjs private-request-and-capabilities.json`
+accepts a request and capability rows and returns argv plus stdin. It does not
+launch Codex or override permissions. This original adapter is maintained here;
+the upstream manifest covers only the listed Swarm files. It was developed in an
+Arcanea lane, then housed here because that repository is archived/read-only.

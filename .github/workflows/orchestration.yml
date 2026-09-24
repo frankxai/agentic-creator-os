@@ -15,4 +15,4 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "24"
-      - run: node --test tools/orchestration/orchestration.test.mjs
+      - run: node --test tools/orchestration/orchestration.test.mjs tools/orchestration/codex-plan.test.mjs
