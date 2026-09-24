@@ -9,7 +9,7 @@ mkdir -p "$HOME" "$work/project"
 before="$(find "$work" -type f | wc -l)"
 
 set +e
-out="$(bash "$root/install.sh" --platform=claude --target="$work/project" 2>&1)"
+out="$(bash "$root/install.sh" --dry-run --platform=claude --target="$work/project" 2>&1)"
 rc=$?
 set -e
 
@@ -19,7 +19,7 @@ printf '%s\n' "$out" | grep -q "Nothing will be written"
 after="$(find "$work" -type f | wc -l)"
 test "$before" -eq "$after"
 
-bash "$root/install.sh" --apply --platform=claude --target="$work/project" >/dev/null
+bash "$root/install.sh" --platform=claude --target="$work/project" >/dev/null
 test -d "$CLAUDE_HOME/skills" || test -d "$CLAUDE_HOME/acos"
 test ! -e "$work/project/.cursorrules"
 

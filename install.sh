@@ -67,8 +67,8 @@ show_help() {
     echo "  --platform=all        Install for all detected platforms"
     echo ""
     echo "Install Modes:"
-    echo "  (default)             Dry run. Prints what would change and writes nothing."
-    echo "  --apply               Write files. Required for any install."
+    echo "  (default)             Writes the selected platform."
+    echo "  --dry-run             Print what would change and write nothing."
     echo "  --full                Full installation (all skills + MCP servers)"
     echo "  --minimal             Core skills only"
     echo "  --skills-only         Skills without commands/agents"
@@ -81,8 +81,8 @@ show_help() {
     echo "  --help                Show this help"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh                           # Dry run for the detected platform"
-    echo "  ./install.sh --apply --platform=claude"
+    echo "  ./install.sh --dry-run                 # Preview the detected platform"
+    echo "  ./install.sh --platform=claude        # Write the Claude profile"
     echo "  ./install.sh --platform=cursor         # Cursor-specific install"
     echo "  ./install.sh --platform=grok           # Grok Build full harness (GROK.md + .grok/ seeds from adapter)"
     echo "  ./install.sh --platform=antigravity    # AGY scaffold (5-fleet parity + grok-personal; creates .antigravity/ + harnesses/antigravity/ minimal, reversible; see ACOS adapters parity 2026-06-02)"
@@ -782,13 +782,14 @@ main() {
     local platform=""
     local mode="standard"
     local target_dir="."
-    local apply=0
+    local apply=1
 
     while [[ $# -gt 0 ]]; do
         case $1 in
             --platform=*)  platform="${1#*=}"; shift ;;
             --target=*)    target_dir="${1#*=}"; shift ;;
             --apply)       apply=1; shift ;;
+            --dry-run)     apply=0; shift ;;
             --full)        mode="full"; shift ;;
             --minimal)     mode="minimal"; shift ;;
             --skills-only) mode="skills"; shift ;;
@@ -815,7 +816,7 @@ main() {
     fi
 
     if [ "$apply" -ne 1 ]; then
-        echo "Dry run. Nothing will be written. Re-run with --apply to write."
+        echo "Dry run. Nothing will be written. Re-run without --dry-run to write."
         IFS=',' read -ra PREVIEW <<< "$platform"
         for p in "${PREVIEW[@]}"; do
             p=$(echo "$p" | xargs)

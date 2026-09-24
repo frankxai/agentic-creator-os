@@ -43,8 +43,11 @@ The verified installation path is the repository installer:
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
+./install.sh --dry-run --platform=claude
 ./install.sh --platform=claude
 ```
+
+`--dry-run` prints the files that would be created or replaced and writes nothing. The second command writes.
 
 The Claude path copies the repository's skill groups, top-level commands, agent profiles, shell hooks, hook configuration, activation rules, and state metadata into `CLAUDE_HOME` (or `~/.claude` by default).
 

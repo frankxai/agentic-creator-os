@@ -12,37 +12,34 @@ This guide walks you through setting up and using Agentic Creator OS with Claude
 
 `@frankx/agentic-creator-os` is not published on npm. Use the repository installer.
 
-### Method 1: Claude Code
+### Method 1: Claude Code, Codex, or Grok
 
-Claude Code 2.1.275 or newer:
+This installs five skills. It does not copy the rest of the repository.
 
-```text
-/plugin install creator-os-core --marketplace frankxai/agentic-creator-os
+```bash
+claude plugin marketplace add frankxai/agentic-creator-os
+claude plugin install creator-os-core@frankx-creator
 ```
 
-That installs five skills. It does not copy the rest of this repository into your profile.
+Codex uses `codex plugin marketplace add frankxai/agentic-creator-os` and `codex plugin add creator-os-core@frankx-creator`. Grok uses `grok plugin marketplace add frankxai/agentic-creator-os` and `grok plugin install creator-os-core --trust`.
 
-### Method 2: Other harnesses
-
-Run this from the project you want to set up. The script reads this clone and writes harness files to the current directory. The first command is a dry run. The second writes.
+### Method 2: Full catalog, with a preview
 
 ```bash
 git clone --depth 1 https://github.com/frankxai/agentic-creator-os.git
+bash ./agentic-creator-os/install.sh --dry-run --platform=cursor --target=.
 bash ./agentic-creator-os/install.sh --platform=cursor --target=.
-bash ./agentic-creator-os/install.sh --apply --platform=cursor --target=.
 ```
 
-The first installer command is a dry run. It prints what would change and writes nothing. The second command writes.
-
-Use `--platform=antigravity` or `--platform=grok` the same way. `--platform=claude --apply` copies the full catalog into your Claude profile and can replace files with the same name. Prefer Method 1 unless you want that.
+`--dry-run` writes nothing. The second command writes into the project. Use `--platform=antigravity` or `--platform=grok` the same way. `--platform=claude` copies the full catalog into your Claude profile and can replace files with the same name. Prefer Method 1 unless you want that.
 
 ### Method 3: Install from inside the clone
 
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
+./install.sh --dry-run --platform=claude
 ./install.sh --platform=claude
-./install.sh --apply --platform=claude
 ```
 
 ### Method 4: Manual setup
