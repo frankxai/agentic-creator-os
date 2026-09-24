@@ -93,6 +93,17 @@ Open a new session after installing. The index is `.claude-plugin/marketplace.js
 
 The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is a companion catalog. Evaluate its installation instructions and license independently.
 
+## Practice receipt
+
+`tools/receipt-check/check-receipt.mjs` answers yes or no for one practice receipt. Yes means the five fields match the public rules. The checker sets `signed` to false. A yes is not a human signature and not a lab attestation.
+
+```bash
+node --test tools/receipt-check/check-receipt.test.mjs
+node tools/receipt-check/serve.mjs
+```
+
+`POST /check` takes the receipt JSON. `POST /mcp` accepts `initialize`, `tools/list`, and `tools/call` for `check_practice_receipt`. The server listens on `127.0.0.1` and `RECEIPT_PORT` (default 8787). It is a local check, not a public registry.
+
 ## How the pieces fit
 
 ```mermaid
