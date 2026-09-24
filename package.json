@@ -64,6 +64,7 @@
     "observatory:install-hooks": "node tools/observatory/install-hooks.mjs",
     "observatory:test": "node --test scripts/build-catalog.test.mjs",
     "verify:public-surface": "node scripts/verify-public-surface.mjs",
+    "test:receipt": "node --test tools/receipt-check/check-receipt.test.mjs",
     "install:all": "npm install --workspaces",
     "build:all": "npm run build --workspaces",
     "typecheck:all": "npm run typecheck --workspaces --if-present",
