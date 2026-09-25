@@ -291,6 +291,9 @@ function smokeInstall(canonical, measured, symlinkFixtureOnly = false) {
   const linkedSourceRoot = join(tempRoot, 'linked-source-repo')
   const linkedParentHome = join(tempRoot, 'linked-parent-home')
   const linkedParentRoot = join(tempRoot, 'linked-parent-repo')
+  const linkedRepoHome = join(tempRoot, 'linked-repo-home')
+  const linkedRepoRoot = join(tempRoot, 'linked-repo')
+  const linkedRepoAlias = join(tempRoot, 'linked-repo-alias')
   const outsideSkill = join(tempRoot, 'outside-skill')
   const outsideSkillsRoot = join(tempRoot, 'outside-skills-root')
   const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
@@ -341,6 +344,19 @@ function smokeInstall(canonical, measured, symlinkFixtureOnly = false) {
     }), /Command failed/, 'a linked skills parent must stop before any profile write')
     assert.equal(existsSync(linkedParentHome), false,
       'linked skills parent must not create the destination profile')
+
+    mkdirSync(join(linkedRepoRoot, '.claude', 'skills', 'ordinary-skill'), { recursive: true })
+    writeFileSync(join(linkedRepoRoot, '.claude', 'skills', 'ordinary-skill', 'SKILL.md'),
+      'root alias must not install\n')
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedRepoRoot, 'install.sh'))
+    symlinkSync(linkedRepoRoot, linkedRepoAlias, process.platform === 'win32' ? 'junction' : 'dir')
+    assert.throws(() => execFileSync('bash', [join(linkedRepoAlias, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedRepoAlias,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedRepoHome },
+      stdio: 'pipe',
+    }), /Command failed/, 'a linked repository root must stop before any profile write')
+    assert.equal(existsSync(linkedRepoHome), false,
+      'linked repository root must not create the destination profile')
 
     if (symlinkFixtureOnly) return
 

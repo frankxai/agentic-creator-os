@@ -159,6 +159,7 @@ check_claude_source_path() {
             *) break ;;
         esac
     done
+    [ ! -L "$PROJECT_DIR" ] || error "Refusing a symlinked installer root: $PROJECT_DIR"
 }
 
 check_claude_target() {
