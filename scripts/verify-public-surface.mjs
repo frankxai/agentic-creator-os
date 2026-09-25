@@ -3,12 +3,14 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  copyFileSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -279,12 +281,18 @@ function verifyPortablePublicConfig(canonical) {
   }
 }
 
-function smokeInstall(canonical, measured) {
+function smokeInstall(canonical, measured, symlinkFixtureOnly = false) {
   const tempRoot = mkdtempSync(join(tmpdir(), 'acos-public-surface-'))
   const claudeHome = join(tempRoot, 'claude-home')
   const collisionHome = join(tempRoot, 'collision-home')
   const parentCollisionHome = join(tempRoot, 'parent-collision-home')
   const stateCollisionHome = join(tempRoot, 'state-collision-home')
+  const linkedSourceHome = join(tempRoot, 'linked-source-home')
+  const linkedSourceRoot = join(tempRoot, 'linked-source-repo')
+  const linkedParentHome = join(tempRoot, 'linked-parent-home')
+  const linkedParentRoot = join(tempRoot, 'linked-parent-repo')
+  const outsideSkill = join(tempRoot, 'outside-skill')
+  const outsideSkillsRoot = join(tempRoot, 'outside-skills-root')
   const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
     .find((name) => name.endsWith('.md'))
   assert.ok(firstAgent, 'the installer needs a real agent collision fixture')
@@ -300,6 +308,42 @@ function smokeInstall(canonical, measured) {
   })
 
   try {
+    mkdirSync(join(linkedSourceRoot, '.claude', 'skills'), { recursive: true })
+    mkdirSync(outsideSkill)
+    writeFileSync(join(outsideSkill, 'SKILL.md'), 'foreign source must not install\n')
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedSourceRoot, 'install.sh'))
+    symlinkSync(
+      outsideSkill,
+      join(linkedSourceRoot, '.claude', 'skills', 'linked-skill'),
+      process.platform === 'win32' ? 'junction' : 'dir',
+    )
+    assert.throws(() => execFileSync('bash', [join(linkedSourceRoot, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedSourceRoot,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedSourceHome },
+      stdio: 'pipe',
+    }), /Command failed/, 'a linked skill source must stop before any profile write')
+    assert.equal(existsSync(linkedSourceHome), false,
+      'linked skill source must not create the destination profile')
+
+    mkdirSync(join(outsideSkillsRoot, 'ordinary-skill'), { recursive: true })
+    writeFileSync(join(outsideSkillsRoot, 'ordinary-skill', 'SKILL.md'), 'parent link must not install\n')
+    mkdirSync(join(linkedParentRoot, '.claude'), { recursive: true })
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedParentRoot, 'install.sh'))
+    symlinkSync(
+      outsideSkillsRoot,
+      join(linkedParentRoot, '.claude', 'skills'),
+      process.platform === 'win32' ? 'junction' : 'dir',
+    )
+    assert.throws(() => execFileSync('bash', [join(linkedParentRoot, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedParentRoot,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedParentHome },
+      stdio: 'pipe',
+    }), /Command failed/, 'a linked skills parent must stop before any profile write')
+    assert.equal(existsSync(linkedParentHome), false,
+      'linked skills parent must not create the destination profile')
+
+    if (symlinkFixtureOnly) return
+
     mkdirSync(parentCollisionHome)
     const blockedParent = join(parentCollisionHome, 'skills')
     writeFileSync(blockedParent, 'preexisting user file\n')
@@ -371,9 +415,12 @@ verifyClaims(canonical, measured)
 verifyLicenseTruth(canonical)
 verifyMarketplaceTruth(canonical)
 verifyPortablePublicConfig(canonical)
-smokeInstall(canonical, measured)
+const symlinkFixtureOnly = process.argv.includes('--symlink-fixture-only')
+smokeInstall(canonical, measured, symlinkFixtureOnly)
 
-console.log(
+if (symlinkFixtureOnly) {
+  console.log('Claude source-symlink fixtures passed without profile writes')
+} else console.log(
   JSON.stringify(
     {
       version: canonical.packageJson.version,

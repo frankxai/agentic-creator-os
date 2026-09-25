@@ -147,6 +147,20 @@ check_prerequisites() {
 }
 
 # ── Claude Code Install ──────────────────────────────────────────────────────
+check_claude_source_path() {
+    local source_path="${1%/}"
+
+    # A source directory reached through a symlink can copy files from outside
+    # the checked-out installer, even when its individual files are regular.
+    while [ "$source_path" != "$PROJECT_DIR" ] && [ "$source_path" != "." ] && [ "$source_path" != "/" ]; do
+        [ ! -L "$source_path" ] || error "Refusing a symlinked installer source: $source_path"
+        case "$source_path" in
+            */*) source_path="${source_path%/*}"; [ -n "$source_path" ] || source_path="/" ;;
+            *) break ;;
+        esac
+    done
+}
+
 check_claude_target() {
     local source="$1"
     local target="$2"
@@ -180,9 +194,11 @@ preflight_claude_code() {
     # Check every destination before creating even the first directory. A
     # successful repeat install may skip identical files, but user edits stop
     # the entire install rather than being replaced midway through it.
+    check_claude_source_path "$PROJECT_DIR/.claude/skills"
     for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+        skill_dir="${skill_dir%/}"
         [ -d "$skill_dir" ] || continue
-        [ ! -L "$skill_dir" ] || error "Refusing a symlinked skill source: $skill_dir"
+        check_claude_source_path "$skill_dir"
         name=$(basename "$skill_dir")
         [ "$name" = "CLAUDE.md" ] && continue
         while IFS= read -r -d '' source; do
@@ -194,14 +210,17 @@ preflight_claude_code() {
     if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
         check_claude_target "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
     fi
+    check_claude_source_path "$PROJECT_DIR/.claude/commands"
     for source in "$PROJECT_DIR/.claude/commands"/*.md; do
         [ -f "$source" ] || continue
         check_claude_target "$source" "$claude_home/commands/$(basename "$source")"
     done
+    check_claude_source_path "$PROJECT_DIR/.claude/agents"
     for source in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
         [ -f "$source" ] || continue
         check_claude_target "$source" "$claude_home/agents/$(basename "$source")"
     done
+    check_claude_source_path "$PROJECT_DIR/.claude/hooks"
     for source in "$PROJECT_DIR/.claude/hooks"/*.sh; do
         [ -f "$source" ] || continue
         check_claude_target "$source" "$claude_home/acos/hooks/$(basename "$source")"
