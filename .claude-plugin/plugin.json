@@ -25,7 +25,8 @@
     "anthropic",
     "multimodal",
     "image-generation",
-    "video-generation"
+    "video-generation",
+    "higgsfield"
   ],
   "categories": [
     "creator-tools",
