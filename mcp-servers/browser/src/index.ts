@@ -41,7 +41,7 @@ server.registerTool(
     title: "Navigate to URL",
     description: "Open a URL in the shared headless Chromium page (launched on first use, ~1-2 s) and wait for it to load. Use it before reading, clicking or screenshotting a page. Returns the final URL after redirects, the page title and the HTTP status.",
     inputSchema: {
-      url: z.string().url().max(2048).describe("Absolute http(s) URL to open"),
+      url: z.string().url().max(2048).regex(/^https?:\/\//i, "Only http and https URLs are allowed").describe("Absolute http(s) URL to open"),
       waitUntil: z.enum(["load", "domcontentloaded", "networkidle"]).default("networkidle").describe("Load event to wait for; networkidle is slowest but waits for late requests"),
       timeout: timeout(30_000).describe("Milliseconds to wait before failing")
     },
@@ -50,7 +50,7 @@ server.registerTool(
       title: z.string().describe("Page title"),
       status: z.number().nullable().describe("HTTP status of the main response, or null for same-document navigation")
     },
-    annotations: { readOnlyHint: true, openWorldHint: true }
+    annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: true }
   },
   async ({ url, waitUntil, timeout }) => {
     try {

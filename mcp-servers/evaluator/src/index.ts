@@ -164,7 +164,7 @@ server.registerTool(
   'evaluator_track_performance',
   {
     title: 'Track published performance',
-    description: 'Record the real engagement numbers of a published piece against an earlier evaluationId, so predicted and actual performance can be compared. Held in memory for this server session. Returns success and an accuracy percentage; cheap, local only.',
+    description: 'Record the real engagement numbers of a published piece under an evaluationId, for evaluator_get_metrics. Accuracy is measured against a fixed baseline prediction of 70; the stored evaluation is not looked up yet. Held in memory for this session. Returns success and accuracy.',
     inputSchema: {
       evaluationId: z.string().min(1).max(100).describe('evaluationId returned by evaluator_evaluate_content'),
       actualMetrics: z.object({
@@ -200,7 +200,7 @@ server.registerTool(
   'evaluator_get_metrics',
   {
     title: 'Get evaluation metrics',
-    description: 'Summarise tracked performance over a time range: evaluation count, average score and prediction accuracy, top content types, trend, and breakdowns by platform and type. Use it for a periodic content review. Returns one aggregate object; reads local files only.',
+    description: 'Summarise tracked performance over a time range (this session\'s evaluator_track_performance entries plus any metrics files): count, average score and accuracy, top content types, trend, and per-platform and per-type breakdowns. Returns one aggregate object; local only.',
     inputSchema: {
       timeRange: z.enum(['24h', '7d', '30d', '90d', 'all']).default('30d').describe('Window to aggregate'),
       contentType: z.string().max(50).optional().describe('Only this content type'),

@@ -326,7 +326,7 @@ server.registerTool("database_save_workflow", {
     }
     try {
         const result = await db.execute({
-            sql: "INSERT OR REPLACE INTO workflows (name, department, steps, config) VALUES (?, ?, ?, ?)",
+            sql: "INSERT INTO workflows (name, department, steps, config) VALUES (?, ?, ?, ?) ON CONFLICT(name) DO UPDATE SET department = excluded.department, steps = excluded.steps, config = excluded.config",
             args: [name, department, JSON.stringify(steps), JSON.stringify(parsedConfig)]
         });
         return ok({ name, changes: result.rowsAffected });
@@ -390,7 +390,7 @@ server.registerTool("database_set_key_value", {
     }
     try {
         await db.execute({
-            sql: "INSERT OR REPLACE INTO creator_data (key, value, type, updated_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)",
+            sql: "INSERT INTO creator_data (key, value, type) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value, type = excluded.type, updated_at = CURRENT_TIMESTAMP",
             args: [key, value, type]
         });
         return ok({ key, value, type });

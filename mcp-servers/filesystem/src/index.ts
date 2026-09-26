@@ -40,6 +40,10 @@ async function validatePath(inputPath: string): Promise<string> {
       existing = await fs.realpath(existing);
       break;
     } catch {
+      // A dangling symlink exists but cannot be resolved; following it on write could escape the roots.
+      if (await fs.lstat(existing).then(() => true, () => false)) {
+        throw new Error(`Path ${inputPath} goes through a broken symlink (${existing}); refusing to follow it`);
+      }
       const parent = path.dirname(existing);
       if (parent === existing) throw new Error(`Path ${inputPath} has no existing ancestor`);
       missing.unshift(path.basename(existing));
