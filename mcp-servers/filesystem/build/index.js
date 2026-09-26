@@ -5,136 +5,160 @@ import * as fs from "fs/promises";
 import * as path from "path";
 const server = new McpServer({
     name: "filesystem",
-    version: "1.0.0"
+    version: "1.1.0"
 });
 let allowedDirectories = [];
+const MAX_FILE_CHARS = 1000000;
+const pathInput = z.string().min(1).max(4096);
+function ok(data) {
+    return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }], structuredContent: data };
+}
+function fail(message) {
+    return { content: [{ type: "text", text: message }], isError: true };
+}
+function isInside(allowed, candidate) {
+    const relative = path.relative(allowed, candidate);
+    return !relative.startsWith("..") && !path.isAbsolute(relative);
+}
+/**
+ * Resolves symlinks through the deepest existing ancestor, so a path that does not exist yet
+ * (a file about to be written) is still checked against the allowed roots.
+ */
 async function validatePath(inputPath) {
-    const normalized = path.normalize(inputPath);
-    const resolved = await fs.realpath(normalized);
-    const isAllowed = allowedDirectories.some(allowed => {
-        const relative = path.relative(allowed, resolved);
-        return !relative.startsWith("..") && !path.isAbsolute(relative);
-    });
-    if (!isAllowed) {
-        throw new Error(`Path ${inputPath} is not allowed`);
+    const absolute = path.resolve(inputPath);
+    let existing = absolute;
+    const missing = [];
+    for (;;) {
+        try {
+            existing = await fs.realpath(existing);
+            break;
+        }
+        catch {
+            // A dangling symlink exists but cannot be resolved; following it on write could escape the roots.
+            if (await fs.lstat(existing).then(() => true, () => false)) {
+                throw new Error(`Path ${inputPath} goes through a broken symlink (${existing}); refusing to follow it`);
+            }
+            const parent = path.dirname(existing);
+            if (parent === existing)
+                throw new Error(`Path ${inputPath} has no existing ancestor`);
+            missing.unshift(path.basename(existing));
+            existing = parent;
+        }
+    }
+    const resolved = path.join(existing, ...missing);
+    if (!allowedDirectories.some((allowed) => isInside(allowed, resolved))) {
+        throw new Error(`Path ${inputPath} is outside the allowed directories (${allowedDirectories.join(", ")}); set FILESYSTEM_ALLOWED_DIRS to widen them`);
     }
     return resolved;
 }
-server.registerTool("read_file", {
-    title: "Read File",
-    description: "Read the contents of a file",
+server.registerTool("filesystem_read_file", {
+    title: "Read file",
+    description: "Read a UTF-8 text file inside the allowed directories (FILESYSTEM_ALLOWED_DIRS, default: the server's working directory). Returns the file content, truncated at maxChars (default 100,000) with a truncated flag, so large files do not flood the context.",
     inputSchema: {
-        path: z.string().describe("Path to the file to read")
+        path: pathInput.describe("Path of the file to read, absolute or relative to the server's working directory"),
+        maxChars: z.number().int().min(1).max(MAX_FILE_CHARS).default(100000).describe("Maximum characters to return; the rest is cut and truncated is true")
     },
-    annotations: {
-        readOnlyHint: true
-    }
-}, async ({ path: filePath }) => {
+    outputSchema: {
+        path: z.string().describe("Resolved absolute path"),
+        content: z.string().describe("File content, possibly truncated"),
+        totalChars: z.number().describe("Length of the whole file in characters"),
+        truncated: z.boolean().describe("True when content was cut at maxChars")
+    },
+    annotations: { readOnlyHint: true, openWorldHint: false }
+}, async ({ path: filePath, maxChars }) => {
     try {
         const validPath = await validatePath(filePath);
         const content = await fs.readFile(validPath, "utf-8");
-        return {
-            content: [{ type: "text", text: content }],
-            structuredContent: { content }
-        };
+        return ok({ path: validPath, content: content.slice(0, maxChars), totalChars: content.length, truncated: content.length > maxChars });
     }
     catch (error) {
-        return {
-            content: [{ type: "text", text: `Error reading file: ${error}` }],
-            isError: true
-        };
+        return fail(`Error reading file: ${error}`);
     }
 });
-server.registerTool("write_file", {
-    title: "Write File",
-    description: "Write content to a file, creating if necessary",
+server.registerTool("filesystem_write_file", {
+    title: "Write file",
+    description: "Write UTF-8 text to a file inside the allowed directories, creating it (and missing parent folders) or replacing its whole content. Use it to save generated drafts or configs; it overwrites without a backup. Returns the resolved path and bytes written.",
     inputSchema: {
-        path: z.string().describe("Path to the file to write"),
-        content: z.string().describe("Content to write to the file")
+        path: pathInput.describe("Path of the file to write, absolute or relative to the server's working directory"),
+        content: z.string().max(MAX_FILE_CHARS).describe("Full text to write; replaces any existing content")
     },
-    annotations: {
-        destructiveHint: false,
-        idempotentHint: false
-    }
+    outputSchema: {
+        path: z.string().describe("Resolved absolute path that was written"),
+        bytes: z.number().describe("Bytes written")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
 }, async ({ path: filePath, content }) => {
     try {
         const validPath = await validatePath(filePath);
+        await fs.mkdir(path.dirname(validPath), { recursive: true });
         await fs.writeFile(validPath, content, "utf-8");
-        return {
-            content: [{ type: "text", text: `Successfully wrote to ${filePath}` }],
-            structuredContent: { path: validPath }
-        };
+        return ok({ path: validPath, bytes: Buffer.byteLength(content, "utf-8") });
     }
     catch (error) {
-        return {
-            content: [{ type: "text", text: `Error writing file: ${error}` }],
-            isError: true
-        };
+        return fail(`Error writing file: ${error}`);
     }
 });
-server.registerTool("list_directory", {
-    title: "List Directory",
-    description: "List files and directories in a folder",
+server.registerTool("filesystem_list_directory", {
+    title: "List directory",
+    description: "List the files and folders directly inside one directory within the allowed directories (not recursive). Returns name and type per entry, up to limit (default 200, max 1000) with a truncated flag; page further with offset.",
     inputSchema: {
-        path: z.string().describe("Path to the directory to list")
+        path: pathInput.describe("Directory to list, absolute or relative to the server's working directory"),
+        limit: z.number().int().min(1).max(1000).default(200).describe("Maximum entries to return"),
+        offset: z.number().int().min(0).max(1000000).default(0).describe("Entries to skip, for paging past the first limit")
     },
-    annotations: {
-        readOnlyHint: true
-    }
-}, async ({ path: dirPath }) => {
+    outputSchema: {
+        path: z.string().describe("Resolved absolute directory path"),
+        entries: z.array(z.object({
+            name: z.string().describe("Entry name"),
+            type: z.enum(["file", "directory"]).describe("Entry kind")
+        })).describe("Entries in this page, sorted by name"),
+        total: z.number().describe("Total entries in the directory"),
+        truncated: z.boolean().describe("True when more entries follow this page")
+    },
+    annotations: { readOnlyHint: true, openWorldHint: false }
+}, async ({ path: dirPath, limit, offset }) => {
     try {
         const validPath = await validatePath(dirPath);
-        const entries = await fs.readdir(validPath, { withFileTypes: true });
-        const result = entries.map(entry => ({
-            name: entry.name,
-            type: entry.isDirectory() ? "directory" : "file"
-        }));
-        return {
-            content: [{ type: "text", text: JSON.stringify(result, null, 2) }],
-            structuredContent: { entries: result }
-        };
+        const all = (await fs.readdir(validPath, { withFileTypes: true }))
+            .map((entry) => ({ name: entry.name, type: entry.isDirectory() ? "directory" : "file" }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+        return ok({ path: validPath, entries: all.slice(offset, offset + limit), total: all.length, truncated: offset + limit < all.length });
     }
     catch (error) {
-        return {
-            content: [{ type: "text", text: `Error listing directory: ${error}` }],
-            isError: true
-        };
+        return fail(`Error listing directory: ${error}`);
     }
 });
-server.registerTool("create_directory", {
-    title: "Create Directory",
-    description: "Create a new directory",
+server.registerTool("filesystem_create_directory", {
+    title: "Create directory",
+    description: "Create a directory, including any missing parents, inside the allowed directories. Safe to repeat: an existing directory is left untouched. Use before writing several files into a new folder. Returns the resolved path; cheap, local only.",
     inputSchema: {
-        path: z.string().describe("Path to the directory to create")
+        path: pathInput.describe("Directory to create, absolute or relative to the server's working directory")
     },
-    annotations: {
-        destructiveHint: false
-    }
+    outputSchema: {
+        path: z.string().describe("Resolved absolute directory path")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false }
 }, async ({ path: dirPath }) => {
     try {
         const validPath = await validatePath(dirPath);
         await fs.mkdir(validPath, { recursive: true });
-        return {
-            content: [{ type: "text", text: `Created directory: ${dirPath}` }],
-            structuredContent: { path: validPath }
-        };
+        return ok({ path: validPath });
     }
     catch (error) {
-        return {
-            content: [{ type: "text", text: `Error creating directory: ${error}` }],
-            isError: true
-        };
+        return fail(`Error creating directory: ${error}`);
     }
 });
-server.registerTool("delete_file", {
-    title: "Delete File",
-    description: "Delete a file or empty directory",
+server.registerTool("filesystem_delete_file", {
+    title: "Delete file",
+    description: "Permanently delete one file or one empty directory inside the allowed directories; there is no recycle bin and non-empty directories are refused. Use only when the user asked for the removal. Returns the resolved path that was deleted.",
     inputSchema: {
-        path: z.string().describe("Path to the file or directory to delete")
+        path: pathInput.describe("File or empty directory to delete, absolute or relative to the server's working directory")
     },
-    annotations: {
-        destructiveHint: true
-    }
+    outputSchema: {
+        path: z.string().describe("Resolved absolute path that was deleted"),
+        type: z.enum(["file", "directory"]).describe("What was deleted")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
 }, async ({ path: filePath }) => {
     try {
         const validPath = await validatePath(filePath);
@@ -145,46 +169,37 @@ server.registerTool("delete_file", {
         else {
             await fs.unlink(validPath);
         }
-        return {
-            content: [{ type: "text", text: `Deleted: ${filePath}` }],
-            structuredContent: { path: validPath }
-        };
+        return ok({ path: validPath, type: stat.isDirectory() ? "directory" : "file" });
     }
     catch (error) {
-        return {
-            content: [{ type: "text", text: `Error deleting: ${error}` }],
-            isError: true
-        };
+        return fail(`Error deleting: ${error}`);
     }
 });
-server.registerTool("file_exists", {
-    title: "Check File Exists",
-    description: "Check if a file or directory exists",
+server.registerTool("filesystem_file_exists", {
+    title: "Check path exists",
+    description: "Check whether a file or directory exists inside the allowed directories, without reading it. Use it before read or write calls to avoid errors. Returns exists and, when present, whether it is a file or a directory; cheap, local only.",
     inputSchema: {
-        path: z.string().describe("Path to check")
+        path: pathInput.describe("Path to check, absolute or relative to the server's working directory")
     },
-    annotations: {
-        readOnlyHint: true
-    }
+    outputSchema: {
+        path: z.string().describe("The path as given"),
+        exists: z.boolean().describe("True when the path exists"),
+        type: z.enum(["file", "directory"]).optional().describe("Kind of entry, when it exists")
+    },
+    annotations: { readOnlyHint: true, openWorldHint: false }
 }, async ({ path: filePath }) => {
     try {
         const validPath = await validatePath(filePath);
-        await fs.access(validPath);
-        return {
-            content: [{ type: "text", text: `File exists: ${filePath}` }],
-            structuredContent: { exists: true, path: filePath }
-        };
+        const stat = await fs.stat(validPath);
+        return ok({ path: filePath, exists: true, type: stat.isDirectory() ? "directory" : "file" });
     }
     catch {
-        return {
-            content: [{ type: "text", text: `File does not exist: ${filePath}` }],
-            structuredContent: { exists: false, path: filePath }
-        };
+        return ok({ path: filePath, exists: false });
     }
 });
 async function main() {
-    const configPath = process.env.FILESYSTEM_ALLOWED_DIRS?.split(",") || [process.cwd()];
-    allowedDirectories = configPath.map(p => path.resolve(p));
+    const configured = process.env.FILESYSTEM_ALLOWED_DIRS?.split(",") || [process.cwd()];
+    allowedDirectories = await Promise.all(configured.map((dir) => fs.realpath(path.resolve(dir)).catch(() => path.resolve(dir))));
     const transport = new StdioServerTransport();
     await server.connect(transport);
 }

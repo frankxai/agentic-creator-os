@@ -359,66 +359,65 @@ export function getRateLimitStatus() {
   };
 }
 
+const id = () => z.string().min(1).max(100);
+const isoDate = () => z.string().max(40);
+const url = () => z.string().url().max(2048);
+const embeds = () => z.array(z.object({
+  type: z.enum(["url", "image", "video", "frame"]).describe("Embed kind"),
+  url: url().describe("Embed URL")
+})).max(2);
+
 export const createCastSchema = {
   text: z.string().min(1).max(320).describe("Cast text (max 320 characters)"),
-  parentCastId: z.string().optional().describe("Parent cast ID for replies"),
-  channelId: z.string().optional().describe("Channel ID to post in"),
-  embeds: z.array(z.object({
-    type: z.enum(["url", "image", "video", "frame"]),
-    url: z.string().url()
-  })).max(2).optional().describe("Embeds (max 2)"),
-  mentions: z.array(z.number()).optional().describe("FIDs to mention"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  parentCastId: id().optional().describe("Local cast ID this replies to"),
+  channelId: id().optional().describe("Channel ID to post in"),
+  embeds: embeds().optional().describe("Embeds (max 2)"),
+  mentions: z.array(z.number().int().min(1).max(Number.MAX_SAFE_INTEGER)).max(10).optional().describe("FIDs to mention (max 10)"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule for; omit to record it as published now")
 };
 
 export const createThreadSchema = {
-  casts: z.array(z.string().min(1).max(320)).min(1).describe("Array of cast texts"),
-  channelId: z.string().optional().describe("Channel ID to post in"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  casts: z.array(z.string().min(1).max(320)).min(1).max(25).describe("Cast texts in thread order (1-25, max 320 characters each)"),
+  channelId: id().optional().describe("Channel ID to post in"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule the thread for")
 };
 
 export const createFrameSchema = {
-  castId: z.string().describe("Cast ID to attach frame to"),
-  imageUrl: z.string().url().describe("Frame image URL"),
+  castId: id().describe("Local cast ID to attach the frame to"),
+  imageUrl: url().describe("Frame image URL"),
   buttons: z.array(z.object({
-    label: z.string(),
-    action: z.enum(["post", "post_redirect", "link", "mint"]),
-    target: z.string().optional()
+    label: z.string().min(1).max(40).describe("Button label"),
+    action: z.enum(["post", "post_redirect", "link", "mint"]).describe("What the button does"),
+    target: z.string().max(2048).optional().describe("Target URL or mint address")
   })).min(1).max(4).describe("Frame buttons (1-4)"),
-  inputText: z.string().optional().describe("Input field placeholder"),
-  postUrl: z.string().url().optional().describe("Post action URL"),
-  state: z.string().optional().describe("Frame state")
+  inputText: z.string().max(100).optional().describe("Input field placeholder"),
+  postUrl: url().optional().describe("URL that receives button posts"),
+  state: z.string().max(4096).optional().describe("Opaque frame state")
 };
 
 export const getCastAnalyticsSchema = {
-  castId: z.string().describe("Cast ID")
+  castId: id().describe("Local cast ID returned by creator_farcaster_cast")
 };
 
 export const createChannelSchema = {
   name: z.string().min(1).max(50).describe("Channel name (max 50 characters)"),
-  description: z.string().describe("Channel description"),
-  imageUrl: z.string().url().optional().describe("Channel image URL")
+  description: z.string().max(500).describe("Channel description"),
+  imageUrl: url().optional().describe("Channel image URL")
 };
 
 export const postToChannelSchema = {
-  channelId: z.string().describe("Channel ID"),
+  channelId: id().describe("Channel ID"),
   text: z.string().min(1).max(320).describe("Cast text"),
-  embeds: z.array(z.object({
-    type: z.enum(["url", "image", "video", "frame"]),
-    url: z.string().url()
-  })).max(2).optional().describe("Embeds")
+  embeds: embeds().optional().describe("Embeds (max 2)")
 };
 
 export const scheduleCastSchema = {
   text: z.string().min(1).max(320).describe("Cast text"),
-  scheduledFor: z.string().describe("ISO date string for scheduling"),
-  channelId: z.string().optional().describe("Channel ID"),
-  embeds: z.array(z.object({
-    type: z.enum(["url", "image", "video", "frame"]),
-    url: z.string().url()
-  })).max(2).optional().describe("Embeds")
+  scheduledFor: isoDate().describe("ISO 8601 date-time to schedule for"),
+  channelId: id().optional().describe("Channel ID"),
+  embeds: embeds().optional().describe("Embeds (max 2)")
 };
 
 export const deleteCastSchema = {
-  castId: z.string().describe("Cast ID to delete")
+  castId: id().describe("Local cast ID to delete")
 };

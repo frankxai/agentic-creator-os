@@ -289,41 +289,47 @@ export async function processScheduledQueue(): Promise<{
   };
 }
 
+const platform = () => z.enum(["twitter", "linkedin", "instagram", "farcaster"]);
+const contentType = () => z.enum(["post", "thread", "article", "story", "cast"]);
+const isoDate = () => z.string().max(40);
+const contentBody = () => z.string().min(1).max(125000);
+
 export const scheduleContentSchema = {
-  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"]).describe("Platform"),
-  type: z.enum(["post", "thread", "article", "story", "cast"]).describe("Content type"),
-  content: z.any().describe("Content data (platform-specific)"),
-  scheduledFor: z.string().describe("ISO date string for scheduling"),
-  checkConflicts: z.boolean().optional().describe("Check for scheduling conflicts")
+  platform: platform().describe("Platform the content is for"),
+  type: contentType().describe("Content type"),
+  content: contentBody().describe("The post text, or a JSON-encoded platform payload"),
+  scheduledFor: isoDate().describe("ISO 8601 date-time in the future"),
+  checkConflicts: z.boolean().optional().describe("Refuse when another item is queued within 15 minutes on the same platform")
 };
 
 export const bulkScheduleSchema = {
   posts: z.array(z.object({
-    platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"]),
-    type: z.enum(["post", "thread", "article", "story", "cast"]),
-    content: z.any(),
-    scheduledFor: z.string()
-  })).describe("Array of posts to schedule"),
-  autoResolveConflicts: z.boolean().optional().describe("Automatically resolve conflicts"),
-  conflictGapMinutes: z.number().optional().describe("Minutes between posts to avoid conflicts")
+    platform: platform().describe("Platform the content is for"),
+    type: contentType().describe("Content type"),
+    content: contentBody().describe("The post text, or a JSON-encoded platform payload"),
+    scheduledFor: isoDate().describe("ISO 8601 date-time in the future")
+  })).min(1).max(100).describe("Items to schedule (1-100)"),
+  autoResolveConflicts: z.boolean().optional().describe("Shift items that collide with queued content instead of failing them"),
+  conflictGapMinutes: z.number().int().min(1).max(1440).optional().describe("Minimum minutes between items on one platform; default 15")
 };
 
 export const cancelScheduledContentSchema = {
-  contentId: z.string().describe("Scheduled content ID")
+  contentId: z.string().min(1).max(100).describe("Scheduled content ID")
 };
 
 export const rescheduleContentSchema = {
-  contentId: z.string().describe("Scheduled content ID"),
-  newScheduledFor: z.string().describe("New ISO date string for scheduling")
+  contentId: z.string().min(1).max(100).describe("Scheduled content ID"),
+  newScheduledFor: isoDate().describe("New ISO 8601 date-time in the future")
 };
 
 export const getScheduledContentSchema = {
-  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"]).optional().describe("Filter by platform"),
-  status: z.enum(["pending", "published", "failed", "cancelled"]).optional().describe("Filter by status"),
-  startDate: z.string().optional().describe("Filter by start date"),
-  endDate: z.string().optional().describe("Filter by end date")
+  platform: platform().optional().describe("Only this platform"),
+  status: z.enum(["pending", "published", "failed", "cancelled"]).optional().describe("Only this status"),
+  startDate: isoDate().optional().describe("Only items scheduled at or after this ISO 8601 date-time"),
+  endDate: isoDate().optional().describe("Only items scheduled at or before this ISO 8601 date-time"),
+  limit: z.number().int().min(1).max(500).default(50).describe("Maximum items to return")
 };
 
 export const getUpcomingContentSchema = {
-  hours: z.number().optional().describe("Hours ahead to look (default 24)")
+  hours: z.number().int().min(1).max(720).default(24).describe("Hours ahead to look, 1-720")
 };
