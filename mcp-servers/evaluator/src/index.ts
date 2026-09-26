@@ -27,10 +27,10 @@ import { logEvaluation, logSession, getAuditTrail } from './logging/audit.js';
 import type { EvaluationResult, ContentMetrics, AuditEntry } from './types/index.js';
 
 // Initialize the MCP Server
-const server = new Server({
-  name: 'agentic-creator-os/evaluator',
-  version: '1.0.0',
-});
+const server = new Server(
+  { name: 'agentic-creator-os/evaluator', version: '1.0.0' },
+  { capabilities: { tools: {} } },
+);
 
 // Tool Schemas
 const EvaluateContentSchema = z.object({
@@ -38,7 +38,7 @@ const EvaluateContentSchema = z.object({
   contentType: z.enum(['twitter', 'linkedin', 'instagram', 'tiktok', 'farcaster', 'blog', 'email', 'video']),
   platform: z.string().optional(),
   brandVoice: z.object({
-    tone: z.enum(['professional', 'casual', 'authoritative', 'friendly', ' provocative']),
+    tone: z.enum(['professional', 'casual', 'authoritative', 'friendly', 'provocative']),
     personality: z.array(z.string()),
     keywords: z.array(z.string()).optional(),
     avoidKeywords: z.array(z.string()).optional(),

@@ -191,7 +191,7 @@ server.registerTool(
   "create_client",
   {
     title: "Create Client",
-    description: "Create a new client",
+    description: "Create a client record (name, email, optional company) for tracking projects and invoices",
     inputSchema: {
       name: z.string().min(1).describe("Client name"),
       email: z.string().email().describe("Client email"),
@@ -226,7 +226,7 @@ server.registerTool(
   "get_client",
   {
     title: "Get Client",
-    description: "Get a client by ID",
+    description: "Fetch one client record by its ID, as returned by create_client or list_clients",
     inputSchema: {
       id: z.string().describe("Client ID")
     },
@@ -255,7 +255,7 @@ server.registerTool(
   "list_clients",
   {
     title: "List Clients",
-    description: "List all clients",
+    description: "List every client record with its ID; use it to find a client before get_client",
     inputSchema: {},
     annotations: {
       readOnlyHint: true
@@ -321,7 +321,7 @@ server.registerTool(
   "get_project",
   {
     title: "Get Project",
-    description: "Get a project by ID",
+    description: "Fetch one client project by its ID, including its status and client link",
     inputSchema: {
       id: z.string().describe("Project ID")
     },
