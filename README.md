@@ -43,8 +43,11 @@ The verified installation path is the repository installer:
 ```bash
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
+./install.sh --dry-run --platform=claude
 ./install.sh --platform=claude
 ```
+
+`--dry-run` prints the files that would be created or replaced and writes nothing. The second command writes.
 
 The Claude path copies the repository's skill groups, top-level commands, agent profiles, shell hooks, hook configuration, activation rules, and state metadata into `CLAUDE_HOME` (or `~/.claude` by default).
 
@@ -89,7 +92,13 @@ grok plugin marketplace add frankxai/agentic-creator-os
 grok plugin install creator-os-core --trust
 ```
 
-Open a new session after installing. The index is `.claude-plugin/marketplace.json`. Grok also reads that Claude-compatible index.
+Open a new session after installing. Type `/acos`, or say what you are doing in one sentence.
+
+You have five practices: start safely, review a diff, write in a stated voice, run the checks, and hand off clean. The first things people ask are "Review this diff", "Write the install note", and "Run the checks".
+
+If the new session does not know `/acos`, the marketplace was added in a different profile. Run the add command again in that profile, then install the plugin, then open another session.
+
+The index is `.claude-plugin/marketplace.json`. Grok also reads that Claude-compatible index.
 
 The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is a companion catalog. Evaluate its installation instructions and license independently.
 

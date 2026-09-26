@@ -25,34 +25,24 @@ Welcome to the Agentic Creator OS documentation. This guide will help you unders
 
 ### Installation
 
-```bash
-# npm (recommended)
-npm install -g @frankx/agentic-creator-os
-acos install
-
-# or clone
-git clone https://github.com/frankxai/agentic-creator-os.git
-cd agentic-creator-os && ./install.sh
-```
-
-### Common Commands
+`@frankx/agentic-creator-os` is not published on npm. For a first install, add the marketplace and install five skills:
 
 ```bash
-# Check system status
-acos status
-
-# List available skills
-acos list skills
-
-# Run a workflow
-/daily-content-ops
-
-# Activate a skill
-/skill content-strategy
-
-# Get help
-acos help
+claude plugin marketplace add frankxai/agentic-creator-os
+claude plugin install creator-os-core@frankx-creator
 ```
+
+Open a new session and type `/acos`.
+
+### Common commands
+
+Inside that session, say what you are doing:
+
+- "Review this diff."
+- "Write the install note."
+- "Run the checks."
+
+The full catalog installer is `./install.sh`. Add `--dry-run` first. It writes nothing until you run it again without that flag.
 
 ### Key Concepts
 

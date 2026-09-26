@@ -3,17 +3,15 @@
   "description": "A five-skill Creator OS plugin. The full repository remains available through install.sh.",
   "owner": {
     "name": "Frank Riemer",
-    "email": "frank@frankx.ai"
+    "email": "frank@frankx.ai",
+    "url": "https://frankx.ai"
   },
   "plugins": [
     {
       "name": "creator-os-core",
       "description": "Five practices for starting, reviewing, writing, checking, and handing off creative work.",
       "version": "1.0.0",
-      "source": {
-        "type": "local",
-        "path": "./plugins/creator-os-core"
-      },
+      "source": "./plugins/creator-os-core",
       "category": "creator-tools"
     }
   ]
