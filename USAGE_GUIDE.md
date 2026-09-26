@@ -163,36 +163,37 @@ When multiple perspectives are needed, specialist agents contribute based on the
 
 ### Available Servers
 
-| Server | Tools | Purpose |
+| Server | Tools (examples) | Purpose |
 |--------|-------|---------|
-| **browser-mcp** | `navigate`, `click`, `type` | Web automation |
-| **creator-mcp** | `twitter_post`, `linkedin_post` | Social publishing |
-| **database-mcp** | `query`, `create_article`, `store_memory` | Data persistence |
-| **email-mcp** | `send_email`, `create_campaign` | Email delivery |
-| **evaluator-mcp** | `evaluate_content`, `evaluate_hook` | Quality scoring |
-| **website-mcp** | `fetch_page`, `extract_content` | Web scraping |
+| **browser-mcp** | `browser_navigate`, `browser_click`, `browser_get_page_content` | Web automation (Playwright) |
+| **creator-mcp** | `creator_twitter_post`, `creator_schedule_content` | Creator CRM and simulated social drafts |
+| **database-mcp** | `database_query`, `database_create_article`, `database_store_memory` | Data persistence (libSQL) |
+| **email-mcp** | `email_send_email`, `email_send_template_email` | Email delivery (SMTP) |
+| **evaluator-mcp** | `evaluator_evaluate_content`, `evaluator_evaluate_hook` | Quality scoring |
+| **filesystem-mcp** | `filesystem_read_file`, `filesystem_write_file` | Sandboxed file access |
+| **website-mcp** | `website_create_nextjs_project`, `website_add_page` | Next.js scaffolding |
 
 ### Database MCP Tools
 
 ```typescript
 // Store agent memory
-store_memory({
+database_store_memory({
   agent_id: "creation-engine",
   memory_type: "observation",
   content: "User prefers concise content"
 });
 
 // Recall memories
-recall_memory({
+database_recall_memory({
   agent_id: "creation-engine",
   memory_type: "observation",
   limit: 10
 });
 
 // Article management
-create_article({ title: "...", content: "...", tags: ["ai"] });
-list_articles({ status: "draft", limit: 20 });
-update_article({ id: 1, status: "published" });
+database_create_article({ title: "...", content: "...", tags: ["ai"] });
+database_list_articles({ status: "draft", limit: 20 });
+database_update_article({ id: 1, status: "published" });
 ```
 
 ---
