@@ -60,10 +60,10 @@
   "stats": {
     "nonEmptySkillModules": 174,
     "emptySkillPlaceholders": 5,
-    "topLevelCommands": 85,
-    "topLevelAgents": 69,
+    "topLevelCommands": 86,
+    "topLevelAgents": 70,
     "installableShellHooks": 9,
-    "activationRules": 32,
+    "activationRules": 33,
     "verifiedBy": "npm run verify:public-surface"
   },
   "intelligence": {

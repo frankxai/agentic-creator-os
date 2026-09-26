@@ -29,10 +29,10 @@ The repository currently contains:
 |---|---:|---|
 | Non-empty skill modules | 174 | Non-empty `.claude/skills/**/SKILL.md` files |
 | Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
-| Top-level slash commands | 85 | `.claude/commands/*.md`, excluding the directory context file |
-| Top-level agent profiles | 69 | `.claude/agents/*.{md,json}`, excluding the directory context file |
+| Top-level slash commands | 86 | `.claude/commands/*.md`, excluding the directory context file |
+| Top-level agent profiles | 70 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
-| Activation rules | 32 | Entries in `.claude/skill-rules.json` |
+| Activation rules | 33 | Entries in `.claude/skill-rules.json` |
 
 These numbers are generated from the tree. `npm run verify:public-surface` fails if the counts, version metadata, install smoke test, or public license and marketplace statements drift.
 
