@@ -51,7 +51,7 @@ cd agentic-creator-os
 
 The Claude path copies the repository's skill groups, top-level commands, agent profiles, shell hooks, hook configuration, activation rules, and state metadata into `CLAUDE_HOME` (or `~/.claude` by default).
 
-Before installing into an existing profile, inspect the script and back up any files with matching names. The installer copies files into shared directories and can replace same-named files.
+Before installing into an existing profile, inspect the script and back up your profile. The Claude installer checks every file it would copy before writing anything: a differing file or symlinked destination stops the install instead of replacing your work. An unchanged repeat install skips identical files. It still writes ACOS-owned `acos/state.json`; there is no automatic uninstall or rollback yet. `--target` controls project files for other platforms, not the Claude profile path; set `CLAUDE_HOME` to choose an isolated Claude destination.
 
 For an isolated inspection:
 

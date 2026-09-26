@@ -4,10 +4,12 @@ import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
+  writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, isAbsolute, join, win32 } from 'node:path'
@@ -280,17 +282,48 @@ function verifyPortablePublicConfig(canonical) {
 function smokeInstall(canonical, measured) {
   const tempRoot = mkdtempSync(join(tmpdir(), 'acos-public-surface-'))
   const claudeHome = join(tempRoot, 'claude-home')
+  const collisionHome = join(tempRoot, 'collision-home')
+  const parentCollisionHome = join(tempRoot, 'parent-collision-home')
+  const stateCollisionHome = join(tempRoot, 'state-collision-home')
+  const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
+    .find((name) => name.endsWith('.md'))
+  assert.ok(firstAgent, 'the installer needs a real agent collision fixture')
+
+  const install = (home) => execFileSync('bash', [join(ROOT, 'install.sh'), '--platform=claude', '--minimal'], {
+    cwd: ROOT,
+    env: {
+      ...process.env,
+      HOME: tempRoot,
+      CLAUDE_HOME: home,
+    },
+    stdio: 'pipe',
+  })
 
   try {
-    execFileSync('bash', [join(ROOT, 'install.sh'), '--platform=claude', '--minimal'], {
-      cwd: ROOT,
-      env: {
-        ...process.env,
-        HOME: tempRoot,
-        CLAUDE_HOME: claudeHome,
-      },
-      stdio: 'pipe',
-    })
+    mkdirSync(parentCollisionHome)
+    const blockedParent = join(parentCollisionHome, 'skills')
+    writeFileSync(blockedParent, 'preexisting user file\n')
+    assert.throws(() => install(parentCollisionHome), /Command failed/)
+    assert.equal(readFileSync(blockedParent, 'utf8'), 'preexisting user file\n')
+    assert.deepEqual(readdirSync(parentCollisionHome), ['skills'],
+      'non-directory ancestor must stop installation before any profile writes')
+
+    const blockedState = join(stateCollisionHome, 'acos', 'state.json')
+    mkdirSync(blockedState, { recursive: true })
+    assert.throws(() => install(stateCollisionHome), /Command failed/)
+    assert.deepEqual(readdirSync(stateCollisionHome), ['acos'],
+      'a state-file type collision must stop before any profile writes')
+    assert.deepEqual(readdirSync(join(stateCollisionHome, 'acos')), ['state.json'])
+
+    const collisionPath = join(collisionHome, 'agents', firstAgent)
+    mkdirSync(dirname(collisionPath), { recursive: true })
+    writeFileSync(collisionPath, 'preexisting user agent\n')
+    assert.throws(() => install(collisionHome), /Command failed/)
+    assert.equal(readFileSync(collisionPath, 'utf8'), 'preexisting user agent\n')
+    assert.equal(existsSync(join(collisionHome, 'skills')), false,
+      'collision preflight must stop before the first directory is written')
+
+    install(claudeHome)
 
     const installedSkillGroups = countTopLevel(
       join(claudeHome, 'skills'),
@@ -319,6 +352,12 @@ function smokeInstall(canonical, measured) {
 
     const state = readJson(join(claudeHome, 'acos', 'state.json'))
     assert.equal(state.version, canonical.packageJson.version)
+
+    install(claudeHome)
+    const installedAgentPath = join(claudeHome, 'agents', firstAgent)
+    writeFileSync(installedAgentPath, 'locally edited agent\n')
+    assert.throws(() => install(claudeHome), /Command failed/)
+    assert.equal(readFileSync(installedAgentPath, 'utf8'), 'locally edited agent\n')
   } finally {
     rmSync(tempRoot, { recursive: true, force: true })
   }

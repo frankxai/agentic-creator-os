@@ -156,11 +156,83 @@ check_prerequisites() {
 }
 
 # ── Claude Code Install ──────────────────────────────────────────────────────
+check_claude_target() {
+    local source="$1"
+    local target="$2"
+    local path="$target"
+
+    [ ! -L "$source" ] || error "Refusing a symlinked installer source: $source"
+
+    # A symlink at any destination ancestor could redirect a profile copy
+    # outside the path the user inspected.
+    while [ "$path" != "." ] && [ "$path" != "/" ]; do
+        [ ! -L "$path" ] || error "Refusing a symlinked Claude destination: $path"
+        if [ "$path" != "$target" ] && [ -e "$path" ] && [ ! -d "$path" ]; then
+            error "Refusing a non-directory Claude destination ancestor: $path. No files were copied."
+        fi
+        case "$path" in
+            */*) path="${path%/*}"; [ -n "$path" ] || path="/" ;;
+            *) break ;;
+        esac
+    done
+
+    if [ -e "$target" ]; then
+        [ -f "$target" ] && cmp -s "$source" "$target" ||
+            error "Existing Claude file differs: $target. Back it up or use an isolated CLAUDE_HOME; no files were copied."
+    fi
+}
+
+preflight_claude_code() {
+    local claude_home="$1"
+    local skill_dir source relative name
+
+    # Check every destination before creating even the first directory. A
+    # successful repeat install may skip identical files, but user edits stop
+    # the entire install rather than being replaced midway through it.
+    for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+        [ -d "$skill_dir" ] || continue
+        [ ! -L "$skill_dir" ] || error "Refusing a symlinked skill source: $skill_dir"
+        name=$(basename "$skill_dir")
+        [ "$name" = "CLAUDE.md" ] && continue
+        while IFS= read -r -d '' source; do
+            relative="${source#"$skill_dir"}"
+            check_claude_target "$source" "$claude_home/skills/$name/$relative"
+        done < <(find "$skill_dir" \( -type f -o -type l \) -print0)
+    done
+
+    if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
+    fi
+    for source in "$PROJECT_DIR/.claude/commands"/*.md; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/commands/$(basename "$source")"
+    done
+    for source in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/agents/$(basename "$source")"
+    done
+    for source in "$PROJECT_DIR/.claude/hooks"/*.sh; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/acos/hooks/$(basename "$source")"
+    done
+    if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
+    fi
+    if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
+    fi
+    [ ! -L "$claude_home/acos/state.json" ] || error "Refusing a symlinked ACOS state file"
+    if [ -e "$claude_home/acos/state.json" ] && [ ! -f "$claude_home/acos/state.json" ]; then
+        error "Refusing a non-file ACOS state destination. No files were copied."
+    fi
+}
+
 install_claude_code() {
     local mode="${1:-standard}"
     local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
 
     log "Installing for Claude Code..."
+    preflight_claude_code "$claude_home"
 
     mkdir -p "$claude_home/skills" "$claude_home/commands" "$claude_home/agents" "$claude_home/acos"
 
@@ -172,7 +244,7 @@ install_claude_code() {
             local name=$(basename "$skill_dir")
             [ "$name" = "CLAUDE.md" ] && continue
             mkdir -p "$claude_home/skills/$name"
-            cp -r "$skill_dir"* "$claude_home/skills/$name/" 2>/dev/null || true
+            cp -rn "$skill_dir". "$claude_home/skills/$name/"
             skill_count=$((skill_count + 1))
         done
         success "Installed $skill_count skills"
@@ -180,7 +252,7 @@ install_claude_code() {
 
     # Skill rules (auto-activation)
     if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
-        cp "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
+        cp -n "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
         success "Installed 22 auto-activation rules"
     fi
 
@@ -189,7 +261,7 @@ install_claude_code() {
         local cmd_count=0
         for cmd in "$PROJECT_DIR/.claude/commands"/*.md; do
             [ -f "$cmd" ] || continue
-            cp "$cmd" "$claude_home/commands/"
+            cp -n "$cmd" "$claude_home/commands/"
             cmd_count=$((cmd_count + 1))
         done
         success "Installed $cmd_count slash commands"
@@ -200,7 +272,7 @@ install_claude_code() {
         local agent_count=0
         for agent in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
             [ -f "$agent" ] || continue
-            cp "$agent" "$claude_home/agents/"
+            cp -n "$agent" "$claude_home/agents/"
             agent_count=$((agent_count + 1))
         done
         success "Installed $agent_count agents"
@@ -211,7 +283,7 @@ install_claude_code() {
         mkdir -p "$claude_home/acos/hooks"
         for hook in "$PROJECT_DIR/.claude/hooks"/*.sh; do
             [ -f "$hook" ] || continue
-            cp "$hook" "$claude_home/acos/hooks/"
+            cp -n "$hook" "$claude_home/acos/hooks/"
             chmod +x "$claude_home/acos/hooks/$(basename "$hook")"
         done
         success "Installed v10 safety hooks (circuit-breaker, audit-trail, self-modify-gate)"
@@ -219,13 +291,13 @@ install_claude_code() {
 
     # Hooks config
     if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
-        cp "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
+        cp -n "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
         success "Installed hook lifecycle config"
     fi
 
     # Agent IAM
     if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
-        cp "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
+        cp -n "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
         success "Installed Agent IAM (6 profiles)"
     fi
 
