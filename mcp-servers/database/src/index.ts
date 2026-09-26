@@ -245,7 +245,7 @@ server.registerTool(
   "list_articles",
   {
     title: "List Articles",
-    description: "List all articles",
+    description: "List articles, optionally filtered by status (draft, published, archived), up to 100",
     inputSchema: {
       status: z.enum(["draft", "published", "archived"]).optional().describe("Filter by status"),
       limit: z.number().max(100).default(10).describe("Maximum number of articles")
