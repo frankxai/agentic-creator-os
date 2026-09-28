@@ -103,8 +103,6 @@ export async function getAuditTrail(args: {
   endDate?: string;
   limit?: number;
 }): Promise<AuditEntry[]> {
-  await ensureAuditDir();
-  
   const { sessionId, projectId, source, startDate, endDate, limit = 100 } = args;
   
   const entries: AuditEntry[] = [];
@@ -148,7 +146,10 @@ export async function getAuditTrail(args: {
         if (sessionId && entry.sessionId !== sessionId) continue;
         if (projectId && entry.projectId !== projectId) continue;
         if (source && source !== 'all' && entry.source !== source) continue;
-        
+        // Date files are pre-filtered by name; the per-source file is not, so filter by timestamp too.
+        if (startDate && new Date(entry.timestamp) < new Date(startDate)) continue;
+        if (endDate && new Date(entry.timestamp) > new Date(endDate)) continue;
+
         entries.push(entry);
       }
     } catch {

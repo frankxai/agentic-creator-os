@@ -6,21 +6,34 @@ import * as path from "path";
 
 const server = new McpServer({
   name: "website",
-  version: "1.0.0"
+  version: "1.1.0"
 });
 
+const SKIPPED_DIRS = new Set(["node_modules", ".git", ".next"]);
+
+function ok<T extends Record<string, unknown>>(data: T) {
+  return { content: [{ type: "text" as const, text: JSON.stringify(data, null, 2) }], structuredContent: data };
+}
+
+function fail(message: string) {
+  return { content: [{ type: "text" as const, text: message }], isError: true };
+}
+
 server.registerTool(
-  "create_nextjs_project",
+  "website_create_nextjs_project",
   {
-    title: "Create Next.js Project",
-    description: "Create a new Next.js project with TypeScript and Tailwind",
+    title: "Create Next.js project",
+    description: "Scaffold a Next.js 14 app (TypeScript, Tailwind, App Router) as plain files in directory/name; it writes files only and does not run npm install. Overwrites same-named files. Returns the project path and the files written; local and fast.",
     inputSchema: {
-      name: z.string().describe("Project name"),
-      directory: z.string().describe("Directory to create project in")
+      name: z.string().regex(/^[a-z0-9][a-z0-9._-]{0,213}$/).describe("Project folder and package name: lowercase letters, digits, '.', '_' or '-'"),
+      directory: z.string().min(1).max(4096).describe("Existing parent directory the project folder is created in")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: {
+      projectDir: z.string().describe("Absolute path of the created project"),
+      name: z.string().describe("Project name"),
+      files: z.array(z.string()).describe("Files written, relative to projectDir")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
   },
   async ({ name, directory }) => {
     try {
@@ -116,139 +129,127 @@ server.registerTool(
       
       await fs.writeFile(path.join(projectDir, "next-env.d.ts"), "/// <reference types=\"next\" />\n/// <reference types=\"next/image-types/global\" />\n");
       
-      return {
-        content: [{ type: "text", text: `Created Next.js project: ${projectDir}` }],
-        structuredContent: { projectDir, name }
-      };
+      return ok({
+        projectDir: path.resolve(projectDir),
+        name,
+        files: ["package.json", "tsconfig.json", "tailwind.config.js", "postcss.config.js", "src/app/layout.tsx", "src/app/globals.css", "src/app/page.tsx", "next-env.d.ts"]
+      });
     } catch (error) {
-      return {
-        content: [{ type: "text", text: `Error creating project: ${error}` }],
-        isError: true
-      };
+      return fail(`Error creating project: ${error}`);
     }
   }
 );
 
 server.registerTool(
-  "add_page",
+  "website_add_page",
   {
-    title: "Add Page",
-    description: "Add a new page to a Next.js project",
+    title: "Add page",
+    description: "Add an App Router page at src/app/<pageName>/page.tsx in an existing Next.js project, wrapping the given JSX in a default component. Overwrites an existing page at that route. Returns the route and file path; local file write only.",
     inputSchema: {
-      projectPath: z.string().describe("Path to the Next.js project"),
-      pageName: z.string().describe("Name of the page (e.g., 'about' creates /about)"),
-      content: z.string().describe("React component content")
+      projectPath: z.string().min(1).max(4096).describe("Root folder of the Next.js project (the one holding package.json)"),
+      pageName: z.string().regex(/^[a-z0-9][a-z0-9_/-]{0,127}$/).describe("Route segment(s), e.g. 'about' creates /about and 'blog/archive' creates /blog/archive"),
+      content: z.string().max(100_000).describe("JSX placed inside the page's wrapping <div>")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: {
+      route: z.string().describe("URL path of the page, e.g. /about"),
+      path: z.string().describe("Absolute path of the written page.tsx")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
   },
   async ({ projectPath, pageName, content }) => {
     try {
-      const appDir = path.join(projectPath, "src/app");
-      const pagePath = path.join(appDir, pageName);
-      
-      await fs.mkdir(pagePath, { recursive: true });
-      
-      const pageContent = `export default function ${pageName.charAt(0).toUpperCase() + pageName.slice(1)}Page() {\n  return (\n    <div className=\"p-24\">\n      ${content}\n    </div>\n  )\n}\n`;
-      
-      await fs.writeFile(path.join(pagePath, "page.tsx"), pageContent);
-      
-      return {
-        content: [{ type: "text", text: `Created page: /${pageName}` }],
-        structuredContent: { pageName, path: pagePath }
-      };
+      const pageDir = path.join(projectPath, "src/app", pageName);
+      await fs.mkdir(pageDir, { recursive: true });
+
+      const componentName = pageName.split(/[/_-]/).filter(Boolean).map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join("");
+      const pageContent = `export default function ${componentName}Page() {\n  return (\n    <div className=\"p-24\">\n      ${content}\n    </div>\n  )\n}\n`;
+      const pageFile = path.resolve(pageDir, "page.tsx");
+      await fs.writeFile(pageFile, pageContent);
+
+      return ok({ route: `/${pageName}`, path: pageFile });
     } catch (error) {
-      return {
-        content: [{ type: "text", text: `Error creating page: ${error}` }],
-        isError: true
-      };
+      return fail(`Error creating page: ${error}`);
     }
   }
 );
 
 server.registerTool(
-  "add_api_route",
+  "website_add_api_route",
   {
-    title: "Add API Route",
-    description: "Add a new API route to a Next.js project",
+    title: "Add API route",
+    description: "Add a Route Handler at src/app/api/<route>/route.ts in an existing Next.js project, exporting one HTTP method with the given handler body. Overwrites an existing route.ts. Returns the route, method and file path; local file write only.",
     inputSchema: {
-      projectPath: z.string().describe("Path to the Next.js project"),
-      route: z.string().describe("Route path (e.g., 'users' creates /api/users)"),
-      method: z.enum(["GET", "POST", "PUT", "DELETE"]).default("GET").describe("HTTP method"),
-      handler: z.string().describe("Handler code")
+      projectPath: z.string().min(1).max(4096).describe("Root folder of the Next.js project (the one holding package.json)"),
+      route: z.string().regex(/^[a-z0-9][a-z0-9_/-]{0,127}$/).describe("Route segment(s) under /api, e.g. 'users' creates /api/users"),
+      method: z.enum(["GET", "POST", "PUT", "DELETE"]).default("GET").describe("HTTP method the handler exports"),
+      handler: z.string().max(50_000).describe("TypeScript body of the handler function; NextResponse is imported for you")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: {
+      route: z.string().describe("URL path, e.g. /api/users"),
+      method: z.string().describe("Exported HTTP method"),
+      path: z.string().describe("Absolute path of the written route.ts")
+    },
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false }
   },
   async ({ projectPath, route, method, handler }) => {
     try {
-      const appDir = path.join(projectPath, "src/app");
-      const apiDir = path.join(appDir, "api", route);
-      
+      const apiDir = path.join(projectPath, "src/app/api", route);
       await fs.mkdir(apiDir, { recursive: true });
-      
+
       const routeContent = `import { NextResponse } from 'next/server'\n\nexport async function ${method}(request: Request) {\n  ${handler}\n}\n`;
-      
-      await fs.writeFile(path.join(apiDir, "route.ts"), routeContent);
-      
-      return {
-        content: [{ type: "text", text: `Created API route: /api/${route}` }],
-        structuredContent: { route, method, path: apiDir }
-      };
+      const routeFile = path.resolve(apiDir, "route.ts");
+      await fs.writeFile(routeFile, routeContent);
+
+      return ok({ route: `/api/${route}`, method, path: routeFile });
     } catch (error) {
-      return {
-        content: [{ type: "text", text: `Error creating API route: ${error}` }],
-        isError: true
-      };
+      return fail(`Error creating API route: ${error}`);
     }
   }
 );
 
 server.registerTool(
-  "get_project_structure",
+  "website_get_project_structure",
   {
-    title: "Get Project Structure",
-    description: "Get the file structure of a project",
+    title: "Get project structure",
+    description: "Walk a project folder and return its file tree as indented lines, skipping node_modules, .git and .next. Use it to orient before adding pages or routes. Stops at maxEntries (default 500, max 5000) and sets truncated, so large repos stay cheap.",
     inputSchema: {
-      path: z.string().describe("Path to the project")
+      path: z.string().min(1).max(4096).describe("Folder to walk, absolute or relative to the server's working directory"),
+      maxEntries: z.number().int().min(1).max(5000).default(500).describe("Stop after this many files and folders")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: {
+      root: z.string().describe("Absolute path that was walked"),
+      structure: z.array(z.string()).describe("Tree lines; folders end with '/', two spaces per depth level"),
+      truncated: z.boolean().describe("True when the walk stopped at maxEntries")
+    },
+    annotations: { readOnlyHint: true, openWorldHint: false }
   },
-  async ({ path: projectPath }) => {
+  async ({ path: projectPath, maxEntries }) => {
     try {
-      async function getTree(dir: string, prefix = ""): Promise<string[]> {
-        const entries = await fs.readdir(dir, { withFileTypes: true });
-        const result: string[] = [];
-        
+      const structure: string[] = [];
+      let truncated = false;
+
+      async function walk(dir: string, prefix: string): Promise<void> {
+        const entries = (await fs.readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name));
         for (const entry of entries) {
-          const fullPath = path.join(dir, entry.name);
-          const relativePath = path.relative(projectPath, fullPath);
-          
+          if (structure.length >= maxEntries) {
+            truncated = true;
+            return;
+          }
           if (entry.isDirectory()) {
-            result.push(`${prefix}${entry.name}/`);
-            result.push(...(await getTree(fullPath, prefix + "  ")));
+            if (SKIPPED_DIRS.has(entry.name)) continue;
+            structure.push(`${prefix}${entry.name}/`);
+            await walk(path.join(dir, entry.name), prefix + "  ");
           } else {
-            result.push(`${prefix}${entry.name}`);
+            structure.push(`${prefix}${entry.name}`);
           }
         }
-        
-        return result;
       }
-      
-      const tree = await getTree(projectPath);
-      return {
-        content: [{ type: "text", text: tree.join("\n") }],
-        structuredContent: { structure: tree }
-      };
+
+      const root = path.resolve(projectPath);
+      await walk(root, "");
+      return ok({ root, structure, truncated });
     } catch (error) {
-      return {
-        content: [{ type: "text", text: `Error: ${error}` }],
-        isError: true
-      };
+      return fail(`Error: ${error}`);
     }
   }
 );

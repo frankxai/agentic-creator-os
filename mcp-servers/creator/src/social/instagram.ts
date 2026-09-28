@@ -225,8 +225,9 @@ export async function getPostAnalytics(postId: string): Promise<{
     engagementRate: 0
   };
   
-  analytics.engagementRate = 
-    ((analytics.likes + analytics.comments + analytics.saves + analytics.shares) / analytics.reach) * 100;
+  analytics.engagementRate = analytics.reach > 0
+    ? ((analytics.likes + analytics.comments + analytics.saves + analytics.shares) / analytics.reach) * 100
+    : 0;
   
   post.metrics = analytics;
   posts.set(postId, post);
@@ -329,42 +330,46 @@ export function getRateLimitStatus() {
   };
 }
 
+const id = () => z.string().min(1).max(100);
+const isoDate = () => z.string().max(40);
+const url = () => z.string().url().max(2048);
+
 export const createPostSchema = {
   caption: z.string().min(1).max(2200).describe("Post caption (max 2200 characters)"),
-  mediaUrls: z.array(z.string().url()).min(1).max(10).describe("Media URLs (1-10 items)"),
-  type: z.enum(["feed", "carousel", "reel"]).optional().describe("Post type"),
-  location: z.string().optional().describe("Location tag"),
-  tags: z.array(z.string()).optional().describe("Hashtags and mentions"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  mediaUrls: z.array(url()).min(1).max(10).describe("Media URLs (1-10 items)"),
+  type: z.enum(["feed", "carousel", "reel"]).optional().describe("Post type; default feed"),
+  location: z.string().max(200).optional().describe("Location tag"),
+  tags: z.array(z.string().max(100)).max(30).optional().describe("Hashtags and mentions (max 30)"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule for; omit to record it as published now")
 };
 
 export const createStorySchema = {
-  mediaUrl: z.string().url().describe("Story media URL"),
+  mediaUrl: url().describe("Story image or video URL"),
   type: z.enum(["image", "video"]).describe("Media type"),
-  link: z.string().url().optional().describe("Swipe-up link"),
+  link: url().optional().describe("Link sticker URL"),
   stickers: z.array(z.object({
-    type: z.enum(["mention", "hashtag", "location", "poll", "question"]),
-    data: z.any()
-  })).optional().describe("Story stickers")
+    type: z.enum(["mention", "hashtag", "location", "poll", "question"]).describe("Sticker kind"),
+    data: z.string().max(500).describe("Sticker text: the handle, hashtag, place, poll question or prompt")
+  })).max(10).optional().describe("Interactive stickers (max 10)")
 };
 
 export const getPostAnalyticsSchema = {
-  postId: z.string().describe("Post ID")
+  postId: id().describe("Local post ID returned by creator_instagram_post")
 };
 
 export const getStoryAnalyticsSchema = {
-  storyId: z.string().describe("Story ID")
+  storyId: id().describe("Local story ID")
 };
 
 export const schedulePostSchema = {
   caption: z.string().min(1).max(2200).describe("Post caption"),
-  mediaUrls: z.array(z.string().url()).min(1).max(10).describe("Media URLs"),
-  scheduledFor: z.string().describe("ISO date string for scheduling"),
+  mediaUrls: z.array(url()).min(1).max(10).describe("Media URLs"),
+  scheduledFor: isoDate().describe("ISO 8601 date-time to schedule for"),
   type: z.enum(["feed", "carousel", "reel"]).optional().describe("Post type"),
-  location: z.string().optional().describe("Location tag"),
-  tags: z.array(z.string()).optional().describe("Hashtags and mentions")
+  location: z.string().max(200).optional().describe("Location tag"),
+  tags: z.array(z.string().max(100)).max(30).optional().describe("Hashtags and mentions")
 };
 
 export const deletePostSchema = {
-  postId: z.string().describe("Post ID to delete")
+  postId: id().describe("Local post ID to delete")
 };

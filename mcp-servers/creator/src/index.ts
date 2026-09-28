@@ -10,7 +10,7 @@ import * as Scheduler from "./social/scheduler.js";
 
 const server = new McpServer({
   name: "creator",
-  version: "1.0.0"
+  version: "1.1.0"
 });
 
 interface Article {
@@ -49,841 +49,691 @@ const articles: Map<string, Article> = new Map();
 const clients: Map<string, Client> = new Map();
 const projects: Map<string, Project> = new Map();
 
+const ARTICLE_STATUSES = ["draft", "published", "archived"] as const;
+const PROJECT_STATUSES = ["planning", "active", "completed", "on_hold"] as const;
+
+// Tool metadata shared by the surface. Social tools are simulations: they keep records in this
+// process's memory and never call a platform API, so they are closed-world and non-publishing.
+const SIMULATED = "Simulated: stored in this server's memory only (lost on restart); no platform API is called and nothing is published.";
+const SIMULATED_METRICS = "Simulated: the numbers are randomly generated sample data, not real platform analytics.";
+const LOCAL_CREATE = { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false };
+const LOCAL_OVERWRITE = { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false };
+const LOCAL_READ = { readOnlyHint: true, openWorldHint: false };
+
+const id = () => z.string().min(1).max(100);
+const record = <T extends z.ZodRawShape>(shape: T) => z.object(shape).passthrough();
+
+const articleShape = record({
+  id: z.string(), title: z.string(), content: z.string(), status: z.enum(ARTICLE_STATUSES), tags: z.array(z.string()),
+  createdAt: z.string(), updatedAt: z.string()
+});
+const clientShape = record({
+  id: z.string(), name: z.string(), email: z.string(), status: z.enum(["active", "inactive"]), projects: z.array(z.string()), createdAt: z.string()
+});
+const projectShape = record({
+  id: z.string(), name: z.string(), clientId: z.string(), status: z.enum(PROJECT_STATUSES), createdAt: z.string()
+});
+const postShape = record({ id: z.string(), status: z.string(), createdAt: z.string() });
+const scheduledShape = record({
+  id: z.string(), platform: z.string(), type: z.string(), content: z.unknown(), scheduledFor: z.string(), status: z.string()
+});
+const simulated = z.literal(true).describe("Always true: this is an in-memory simulation, not a live platform call");
+
+/** JSON round trip: Dates become ISO strings, so the text block and structuredContent match exactly. */
+function ok<T extends Record<string, unknown>>(data: T) {
+  const plain = JSON.parse(JSON.stringify(data)) as T;
+  return { content: [{ type: "text" as const, text: JSON.stringify(plain, null, 2) }], structuredContent: plain };
+}
+
+function fail(message: string) {
+  return { content: [{ type: "text" as const, text: message }], isError: true };
+}
+
+function social<T extends { success: boolean; error?: string }>(result: T) {
+  return result.success ? ok({ simulated: true as const, ...result }) : fail(`Error: ${result.error}`);
+}
+
+function parseDate(value: string, field: string): Date {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) throw new Error(`${field} '${value}' is not an ISO 8601 date-time, e.g. 2026-10-01T09:00:00Z`);
+  return date;
+}
+
+function optionalDate(value: string | undefined, field: string): Date | undefined {
+  return value === undefined ? undefined : parseDate(value, field);
+}
+
+async function guarded<T>(run: () => Promise<T>) {
+  try {
+    return await run();
+  } catch (error) {
+    return fail(error instanceof Error ? error.message : String(error));
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Articles, clients and projects (in-memory creator CRM)
+// ---------------------------------------------------------------------------
+
 server.registerTool(
-  "create_article",
+  "creator_create_article",
   {
-    title: "Create Article",
-    description: "Create a new article for blog or content",
+    title: "Create article",
+    description: "Start a new article draft in the creator workspace (in-memory, lost on restart; use database_create_article to persist). Each call creates a new draft with a fresh ID. Returns the full article record including its ID and timestamps.",
     inputSchema: {
-      title: z.string().min(1).describe("Article title"),
-      content: z.string().describe("Article content"),
-      tags: z.array(z.string()).optional().describe("Article tags")
+      title: z.string().min(1).max(500).describe("Article title"),
+      content: z.string().max(500_000).describe("Article body, usually Markdown"),
+      tags: z.array(z.string().max(100)).max(50).default([]).describe("Tags for filtering and SEO")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: { article: articleShape.describe("The new draft") },
+    annotations: LOCAL_CREATE
   },
-  async ({ title, content, tags = [] }) => {
-    const id = crypto.randomUUID();
-    const article: Article = {
-      id,
-      title,
-      content,
-      status: "draft",
-      tags,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    
-    articles.set(id, article);
-    
-    return {
-      content: [{ type: "text", text: `Created article: ${title} (${id})` }],
-      structuredContent: { article }
-    };
+  async ({ title, content, tags }) => {
+    const now = new Date();
+    const article: Article = { id: crypto.randomUUID(), title, content, status: "draft", tags, createdAt: now, updatedAt: now };
+    articles.set(article.id, article);
+    return ok({ article });
   }
 );
 
 server.registerTool(
-  "update_article",
+  "creator_update_article",
   {
-    title: "Update Article",
-    description: "Update an existing article",
+    title: "Update article",
+    description: "Overwrite fields of an in-memory article: title, body, status, tags or SEO title and description. Omitted fields are kept; previous values are not versioned. Returns the updated article, or an error when the ID is unknown.",
     inputSchema: {
-      id: z.string().describe("Article ID"),
-      title: z.string().optional().describe("New title"),
-      content: z.string().optional().describe("New content"),
-      status: z.enum(["draft", "published", "archived"]).optional().describe("New status"),
-      tags: z.array(z.string()).optional().describe("New tags"),
-      seoTitle: z.string().optional().describe("SEO title"),
-      seoDescription: z.string().optional().describe("SEO description")
+      id: id().describe("Article ID from creator_create_article or creator_list_articles"),
+      title: z.string().min(1).max(500).optional().describe("New title"),
+      content: z.string().max(500_000).optional().describe("New body, replacing the old one"),
+      status: z.enum(ARTICLE_STATUSES).optional().describe("New status"),
+      tags: z.array(z.string().max(100)).max(50).optional().describe("New tags, replacing the old list"),
+      seoTitle: z.string().max(70).optional().describe("SEO title (max 70 characters)"),
+      seoDescription: z.string().max(160).optional().describe("SEO meta description (max 160 characters)")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: { article: articleShape.describe("The updated article") },
+    annotations: LOCAL_OVERWRITE
   },
-  async ({ id, title, content, status, tags, seoTitle, seoDescription }) => {
-    const article = articles.get(id);
-    
-    if (!article) {
-      return {
-        content: [{ type: "text", text: `Article not found: ${id}` }],
-        isError: true
-      };
-    }
-    
-    if (title) article.title = title;
-    if (content) article.content = content;
-    if (status) article.status = status;
-    if (tags) article.tags = tags;
-    if (seoTitle) article.seoTitle = seoTitle;
-    if (seoDescription) article.seoDescription = seoDescription;
+  async ({ id: articleId, title, content, status, tags, seoTitle, seoDescription }) => {
+    const article = articles.get(articleId);
+    if (!article) return fail(`Article not found: ${articleId}. Use creator_list_articles to find IDs.`);
+
+    if (title !== undefined) article.title = title;
+    if (content !== undefined) article.content = content;
+    if (status !== undefined) article.status = status;
+    if (tags !== undefined) article.tags = tags;
+    if (seoTitle !== undefined) article.seoTitle = seoTitle;
+    if (seoDescription !== undefined) article.seoDescription = seoDescription;
     article.updatedAt = new Date();
-    
-    articles.set(id, article);
-    
-    return {
-      content: [{ type: "text", text: `Updated article: ${article.title}` }],
-      structuredContent: { article }
-    };
+
+    return ok({ article });
   }
 );
 
 server.registerTool(
-  "get_article",
+  "creator_get_article",
   {
-    title: "Get Article",
-    description: "Get an article by ID",
+    title: "Get article",
+    description: "Fetch one in-memory article by ID, as returned by creator_create_article or creator_list_articles. Returns the full record including body, status, tags and SEO fields, or an error when the ID is unknown. Instant, local only.",
     inputSchema: {
-      id: z.string().describe("Article ID")
+      id: id().describe("Article ID")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: { article: articleShape.describe("The article") },
+    annotations: LOCAL_READ
   },
-  async ({ id }) => {
-    const article = articles.get(id);
-    
-    if (!article) {
-      return {
-        content: [{ type: "text", text: `Article not found: ${id}` }],
-        isError: true
-      };
-    }
-    
-    return {
-      content: [{ type: "text", text: JSON.stringify(article, null, 2) }],
-      structuredContent: { article }
-    };
+  async ({ id: articleId }) => {
+    const article = articles.get(articleId);
+    if (!article) return fail(`Article not found: ${articleId}. Use creator_list_articles to find IDs.`);
+    return ok({ article });
   }
 );
 
 server.registerTool(
-  "list_articles",
+  "creator_list_articles",
   {
-    title: "List Articles",
-    description: "List all articles with optional filtering",
+    title: "List articles",
+    description: "List in-memory articles in creation order, optionally only one status (draft, published, archived). Use it to find an article ID. Returns up to limit articles (default 50, max 100) including full bodies, plus the total matching.",
     inputSchema: {
-      status: z.enum(["draft", "published", "archived"]).optional().describe("Filter by status"),
-      limit: z.number().max(100).default(50).describe("Maximum number of articles")
+      status: z.enum(ARTICLE_STATUSES).optional().describe("Only articles with this status"),
+      limit: z.number().int().min(1).max(100).default(50).describe("Maximum number of articles")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: {
+      articles: z.array(articleShape).describe("Articles in this page"),
+      total: z.number().describe("Articles matching the filter")
+    },
+    annotations: LOCAL_READ
   },
   async ({ status, limit }) => {
-    let result = Array.from(articles.values());
-    
-    if (status) {
-      result = result.filter(a => a.status === status);
-    }
-    
-    result = result.slice(0, limit);
-    
-    return {
-      content: [{ type: "text", text: `Found ${result.length} articles` }],
-      structuredContent: { articles: result }
-    };
+    const matching = Array.from(articles.values()).filter((a) => !status || a.status === status);
+    return ok({ articles: matching.slice(0, limit), total: matching.length });
   }
 );
 
 server.registerTool(
-  "create_client",
+  "creator_create_client",
   {
-    title: "Create Client",
-    description: "Create a client record (name, email, optional company) for tracking projects and invoices",
+    title: "Create client",
+    description: "Add a client record (name, email, optional company) to the in-memory creator CRM for tracking projects. Each call creates a new client, even for a repeated email. Returns the client record with its ID for creator_create_project.",
     inputSchema: {
-      name: z.string().min(1).describe("Client name"),
-      email: z.string().email().describe("Client email"),
-      company: z.string().optional().describe("Company name")
+      name: z.string().min(1).max(200).describe("Client name"),
+      email: z.string().email().max(254).describe("Client email"),
+      company: z.string().max(200).optional().describe("Company name")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: { client: clientShape.describe("The new client") },
+    annotations: LOCAL_CREATE
   },
   async ({ name, email, company }) => {
-    const id = crypto.randomUUID();
-    const client: Client = {
-      id,
-      name,
-      email,
-      company,
-      status: "active",
-      projects: [],
-      createdAt: new Date()
-    };
-    
-    clients.set(id, client);
-    
-    return {
-      content: [{ type: "text", text: `Created client: ${name} (${id})` }],
-      structuredContent: { client }
-    };
+    const client: Client = { id: crypto.randomUUID(), name, email, company, status: "active", projects: [], createdAt: new Date() };
+    clients.set(client.id, client);
+    return ok({ client });
   }
 );
 
 server.registerTool(
-  "get_client",
+  "creator_get_client",
   {
-    title: "Get Client",
-    description: "Fetch one client record by its ID, as returned by create_client or list_clients",
+    title: "Get client",
+    description: "Fetch one client record by ID, as returned by creator_create_client or creator_list_clients. Returns name, email, company, status and the IDs of the client's projects, or an error when the ID is unknown. Instant, local only.",
     inputSchema: {
-      id: z.string().describe("Client ID")
+      id: id().describe("Client ID")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: { client: clientShape.describe("The client") },
+    annotations: LOCAL_READ
   },
-  async ({ id }) => {
-    const client = clients.get(id);
-    
-    if (!client) {
-      return {
-        content: [{ type: "text", text: `Client not found: ${id}` }],
-        isError: true
-      };
-    }
-    
-    return {
-      content: [{ type: "text", text: JSON.stringify(client, null, 2) }],
-      structuredContent: { client }
-    };
-  }
-);
-
-server.registerTool(
-  "list_clients",
-  {
-    title: "List Clients",
-    description: "List every client record with its ID; use it to find a client before get_client",
-    inputSchema: {},
-    annotations: {
-      readOnlyHint: true
-    }
-  },
-  async () => {
-    const allClients = Array.from(clients.values());
-    return {
-      content: [{ type: "text", text: `Found ${allClients.length} clients` }],
-      structuredContent: { clients: allClients }
-    };
-  }
-);
-
-server.registerTool(
-  "create_project",
-  {
-    title: "Create Project",
-    description: "Create a new project for a client",
-    inputSchema: {
-      name: z.string().min(1).describe("Project name"),
-      clientId: z.string().describe("Client ID"),
-      budget: z.number().optional().describe("Project budget"),
-      deadline: z.string().optional().describe("Project deadline (ISO date)")
-    },
-    annotations: {
-      destructiveHint: false
-    }
-  },
-  async ({ name, clientId, budget, deadline }) => {
+  async ({ id: clientId }) => {
     const client = clients.get(clientId);
-    
-    if (!client) {
-      return {
-        content: [{ type: "text", text: `Client not found: ${clientId}` }],
-        isError: true
-      };
-    }
-    
-    const id = crypto.randomUUID();
+    if (!client) return fail(`Client not found: ${clientId}. Use creator_list_clients to find IDs.`);
+    return ok({ client });
+  }
+);
+
+server.registerTool(
+  "creator_list_clients",
+  {
+    title: "List clients",
+    description: "List client records in the in-memory creator CRM, in creation order, optionally only active or inactive ones. Use it to find a client ID before creator_get_client or creator_create_project. Returns up to limit clients and the total.",
+    inputSchema: {
+      status: z.enum(["active", "inactive"]).optional().describe("Only clients with this status"),
+      limit: z.number().int().min(1).max(500).default(100).describe("Maximum clients to return")
+    },
+    outputSchema: {
+      clients: z.array(clientShape).describe("Clients in this page"),
+      total: z.number().describe("Clients matching the filter")
+    },
+    annotations: LOCAL_READ
+  },
+  async ({ status, limit }) => {
+    const matching = Array.from(clients.values()).filter((c) => !status || c.status === status);
+    return ok({ clients: matching.slice(0, limit), total: matching.length });
+  }
+);
+
+server.registerTool(
+  "creator_create_project",
+  {
+    title: "Create project",
+    description: "Create a project for an existing client in the in-memory creator CRM, starting in planning status, with optional budget and deadline. Each call creates a new project. Returns the project record, or an error when the client ID is unknown.",
+    inputSchema: {
+      name: z.string().min(1).max(200).describe("Project name"),
+      clientId: id().describe("Client ID from creator_create_client"),
+      budget: z.number().min(0).max(1e12).optional().describe("Budget in your currency"),
+      deadline: z.string().max(40).optional().describe("Deadline, ISO 8601 date")
+    },
+    outputSchema: { project: projectShape.describe("The new project") },
+    annotations: LOCAL_CREATE
+  },
+  async ({ name, clientId, budget, deadline }) => guarded(async () => {
+    const client = clients.get(clientId);
+    if (!client) return fail(`Client not found: ${clientId}. Use creator_list_clients to find IDs.`);
+
     const project: Project = {
-      id,
+      id: crypto.randomUUID(),
       name,
       clientId,
       status: "planning",
       budget,
-      deadline: deadline ? new Date(deadline) : undefined,
+      deadline: optionalDate(deadline, "deadline"),
       createdAt: new Date()
     };
-    
-    projects.set(id, project);
-    client.projects.push(id);
-    clients.set(clientId, client);
-    
-    return {
-      content: [{ type: "text", text: `Created project: ${name} for ${client.name}` }],
-      structuredContent: { project }
-    };
-  }
+    projects.set(project.id, project);
+    client.projects.push(project.id);
+    return ok({ project });
+  })
 );
 
 server.registerTool(
-  "get_project",
+  "creator_get_project",
   {
-    title: "Get Project",
-    description: "Fetch one client project by its ID, including its status and client link",
+    title: "Get project",
+    description: "Fetch one project by ID from the in-memory creator CRM, including status, budget, deadline and the owning client's ID and name. Use it to check a project before updating it. Returns an error when the ID is unknown. Instant, local only.",
     inputSchema: {
-      id: z.string().describe("Project ID")
+      id: id().describe("Project ID")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: {
+      project: projectShape.describe("The project"),
+      client: record({ id: z.string(), name: z.string() }).nullable().describe("Owning client, or null if it was removed")
+    },
+    annotations: LOCAL_READ
   },
-  async ({ id }) => {
-    const project = projects.get(id);
-    
-    if (!project) {
-      return {
-        content: [{ type: "text", text: `Project not found: ${id}` }],
-        isError: true
-      };
-    }
-    
+  async ({ id: projectId }) => {
+    const project = projects.get(projectId);
+    if (!project) return fail(`Project not found: ${projectId}. Use creator_list_projects to find IDs.`);
     const client = clients.get(project.clientId);
-    
-    return {
-      content: [{ type: "text", text: JSON.stringify(project, null, 2) }],
-      structuredContent: { project, client: client ? { id: client.id, name: client.name } : null }
-    };
+    return ok({ project, client: client ? { id: client.id, name: client.name } : null });
   }
 );
 
 server.registerTool(
-  "list_projects",
+  "creator_list_projects",
   {
-    title: "List Projects",
-    description: "List all projects with optional filtering",
+    title: "List projects",
+    description: "List projects in the in-memory creator CRM, in creation order, optionally filtered by status and/or client. Use it for a pipeline overview or to find a project ID. Returns up to limit projects (default 100, max 500) and the total matching.",
     inputSchema: {
-      status: z.enum(["planning", "active", "completed", "on_hold"]).optional().describe("Filter by status"),
-      clientId: z.string().optional().describe("Filter by client")
+      status: z.enum(PROJECT_STATUSES).optional().describe("Only projects with this status"),
+      clientId: id().optional().describe("Only projects for this client"),
+      limit: z.number().int().min(1).max(500).default(100).describe("Maximum projects to return")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: {
+      projects: z.array(projectShape).describe("Projects in this page"),
+      total: z.number().describe("Projects matching the filters")
+    },
+    annotations: LOCAL_READ
   },
-  async ({ status, clientId }) => {
-    let result = Array.from(projects.values());
-    
-    if (status) {
-      result = result.filter(p => p.status === status);
-    }
-    
-    if (clientId) {
-      result = result.filter(p => p.clientId === clientId);
-    }
-    
-    return {
-      content: [{ type: "text", text: `Found ${result.length} projects` }],
-      structuredContent: { projects: result }
-    };
+  async ({ status, clientId, limit }) => {
+    const matching = Array.from(projects.values()).filter((p) => (!status || p.status === status) && (!clientId || p.clientId === clientId));
+    return ok({ projects: matching.slice(0, limit), total: matching.length });
   }
 );
 
 server.registerTool(
-  "update_project_status",
+  "creator_update_project_status",
   {
-    title: "Update Project Status",
-    description: "Update a project's status",
+    title: "Update project status",
+    description: "Set a project's status to planning, active, completed or on_hold in the in-memory creator CRM, replacing the previous status. Repeating the same call changes nothing further. Returns the updated project, or an error for an unknown ID.",
     inputSchema: {
-      id: z.string().describe("Project ID"),
-      status: z.enum(["planning", "active", "completed", "on_hold"]).describe("New status")
+      id: id().describe("Project ID"),
+      status: z.enum(PROJECT_STATUSES).describe("New status")
     },
-    annotations: {
-      destructiveHint: false
-    }
+    outputSchema: { project: projectShape.describe("The updated project") },
+    annotations: LOCAL_OVERWRITE
   },
-  async ({ id, status }) => {
-    const project = projects.get(id);
-    
-    if (!project) {
-      return {
-        content: [{ type: "text", text: `Project not found: ${id}` }],
-        isError: true
-      };
-    }
-    
+  async ({ id: projectId, status }) => {
+    const project = projects.get(projectId);
+    if (!project) return fail(`Project not found: ${projectId}. Use creator_list_projects to find IDs.`);
     project.status = status;
-    projects.set(id, project);
-    
-    return {
-      content: [{ type: "text", text: `Updated project status to: ${status}` }],
-      structuredContent: { project }
-    };
+    return ok({ project });
   }
 );
 
 server.registerTool(
-  "generate_article_summary",
+  "creator_generate_article_summary",
   {
-    title: "Generate Article Summary",
-    description: "Generate a summary of an article",
+    title: "Summarise article stats",
+    description: "Compute quick statistics for an in-memory article: word count, sentence count and average sentence length, with its title, status and tags. It does not write prose; use it to check length before publishing. Instant, local only.",
     inputSchema: {
-      articleId: z.string().describe("Article ID")
+      articleId: id().describe("Article ID")
     },
-    annotations: {
-      readOnlyHint: true
-    }
+    outputSchema: {
+      title: z.string().describe("Article title"),
+      status: z.enum(ARTICLE_STATUSES).describe("Article status"),
+      tags: z.array(z.string()).describe("Article tags"),
+      wordCount: z.number().describe("Words in the body"),
+      sentenceCount: z.number().describe("Sentences in the body"),
+      avgSentenceLength: z.number().describe("Average words per sentence, one decimal"),
+      createdAt: z.string().describe("Creation time"),
+      updatedAt: z.string().describe("Last update time")
+    },
+    annotations: LOCAL_READ
   },
   async ({ articleId }) => {
     const article = articles.get(articleId);
-    
-    if (!article) {
-      return {
-        content: [{ type: "text", text: `Article not found: ${articleId}` }],
-        isError: true
-      };
-    }
-    
-    const wordCount = article.content.split(/\s+/).length;
-    const sentences = article.content.split(/[.!?]+/).filter(s => s.trim());
+    if (!article) return fail(`Article not found: ${articleId}. Use creator_list_articles to find IDs.`);
+
+    const wordCount = article.content.split(/\s+/).filter(Boolean).length;
+    const sentences = article.content.split(/[.!?]+/).filter((s) => s.trim());
     const avgSentenceLength = sentences.length > 0 ? wordCount / sentences.length : 0;
-    
-    return {
-      content: [{ type: "text", text: `Summary for: ${article.title}` }],
-      structuredContent: {
-        title: article.title,
-        status: article.status,
-        tags: article.tags,
-        wordCount,
-        sentenceCount: sentences.length,
-        avgSentenceLength: Math.round(avgSentenceLength * 10) / 10,
-        createdAt: article.createdAt,
-        updatedAt: article.updatedAt
-      }
-    };
+
+    return ok({
+      title: article.title,
+      status: article.status,
+      tags: article.tags,
+      wordCount,
+      sentenceCount: sentences.length,
+      avgSentenceLength: Math.round(avgSentenceLength * 10) / 10,
+      createdAt: article.createdAt,
+      updatedAt: article.updatedAt
+    });
   }
 );
 
+// ---------------------------------------------------------------------------
+// Social platforms (simulated)
+// ---------------------------------------------------------------------------
+
 server.registerTool(
-  "twitter_post",
+  "creator_twitter_post",
   {
-    title: "Post Tweet",
-    description: "Post a tweet to Twitter/X",
+    title: "Draft tweet (simulated)",
+    description: `Record a tweet (max 280 characters), optionally scheduled or as a reply, to rehearse an X/Twitter posting flow. ${SIMULATED} Returns the stored tweet with its local ID and status.`,
     inputSchema: Twitter.postTweetSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), tweet: postShape.describe("The stored tweet") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Twitter.postTweet({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `Tweet posted: ${result.tweet?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Twitter.postTweet({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "twitter_thread",
+  "creator_twitter_thread",
   {
-    title: "Create Twitter Thread",
-    description: "Create a thread of tweets",
+    title: "Draft Twitter thread (simulated)",
+    description: `Record a thread of up to 25 tweets, each max 280 characters, linked as replies in order. ${SIMULATED} Returns the thread with its local ID and the stored tweets.`,
     inputSchema: Twitter.createThreadSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      thread: record({ id: z.string(), tweets: z.array(postShape), status: z.string() }).describe("The stored thread")
+    },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Twitter.createThread({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `Thread created with ${result.thread?.tweets.length} tweets` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Twitter.createThread({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "twitter_analytics",
+  "creator_twitter_analytics",
   {
-    title: "Get Tweet Analytics",
-    description: "Get analytics for a specific tweet",
+    title: "Get tweet analytics (simulated)",
+    description: `Read impressions, likes, retweets, replies and engagement rate for a tweet recorded by creator_twitter_post. ${SIMULATED_METRICS} Returns the metrics object.`,
     inputSchema: Twitter.getTweetAnalyticsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      analytics: record({ impressions: z.number(), likes: z.number(), retweets: z.number(), replies: z.number(), engagementRate: z.number() }).describe("Tweet metrics")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Twitter.getTweetAnalytics(params.tweetId);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.analytics, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Twitter.getTweetAnalytics(params.tweetId))
 );
 
 server.registerTool(
-  "linkedin_post",
+  "creator_linkedin_post",
   {
-    title: "Create LinkedIn Post",
-    description: "Create a post on LinkedIn",
+    title: "Draft LinkedIn post (simulated)",
+    description: `Record a LinkedIn post (max 3000 characters) with optional media, visibility and schedule, to rehearse a LinkedIn flow. ${SIMULATED} Returns the stored post with its local ID and status.`,
     inputSchema: LinkedIn.createPostSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), post: postShape.describe("The stored post") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await LinkedIn.createPost({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `LinkedIn post created: ${result.post?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await LinkedIn.createPost({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "linkedin_article",
+  "creator_linkedin_article",
   {
-    title: "Create LinkedIn Article",
-    description: "Create an article on LinkedIn",
+    title: "Draft LinkedIn article (simulated)",
+    description: `Record a long-form LinkedIn article (title max 150, body max 125,000 characters) as a draft or published. ${SIMULATED} Returns the stored article with its local ID and status.`,
     inputSchema: LinkedIn.createArticleSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), article: postShape.describe("The stored article") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await LinkedIn.createArticle(params);
-    return {
-      content: [{ type: "text", text: result.success ? `LinkedIn article created: ${result.article?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await LinkedIn.createArticle(params))
 );
 
 server.registerTool(
-  "linkedin_analytics",
+  "creator_linkedin_analytics",
   {
-    title: "Get LinkedIn Post Analytics",
-    description: "Get analytics for a LinkedIn post",
+    title: "Get LinkedIn post analytics (simulated)",
+    description: `Read impressions, likes, comments, shares and click-through rate for a post recorded by creator_linkedin_post. ${SIMULATED_METRICS} Returns the metrics object.`,
     inputSchema: LinkedIn.getPostAnalyticsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      analytics: record({ impressions: z.number(), likes: z.number(), comments: z.number(), shares: z.number(), clickThroughRate: z.number() }).describe("Post metrics")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await LinkedIn.getPostAnalytics(params.postId);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.analytics, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await LinkedIn.getPostAnalytics(params.postId))
 );
 
 server.registerTool(
-  "instagram_post",
+  "creator_instagram_post",
   {
-    title: "Create Instagram Post",
-    description: "Create a post on Instagram (feed, carousel, or reel)",
+    title: "Draft Instagram post (simulated)",
+    description: `Record an Instagram feed post, carousel or reel with caption (max 2200 characters), 1-10 media URLs, tags and optional schedule. ${SIMULATED} Returns the stored post with its local ID.`,
     inputSchema: Instagram.createPostSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), post: postShape.describe("The stored post") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Instagram.createPost({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `Instagram post created: ${result.post?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Instagram.createPost({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "instagram_story",
+  "creator_instagram_story",
   {
-    title: "Create Instagram Story",
-    description: "Create a story on Instagram",
+    title: "Draft Instagram story (simulated)",
+    description: `Record an Instagram story from one image or video URL, with an optional link and up to 10 stickers; stories expire after 24 hours. ${SIMULATED} Returns the stored story with its local ID.`,
     inputSchema: Instagram.createStorySchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), story: record({ id: z.string(), mediaUrl: z.string(), expiresAt: z.string() }).describe("The stored story") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Instagram.createStory(params as Parameters<typeof Instagram.createStory>[0]);
-    return {
-      content: [{ type: "text", text: result.success ? `Instagram story created: ${result.story?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Instagram.createStory(params as Parameters<typeof Instagram.createStory>[0]))
 );
 
 server.registerTool(
-  "instagram_analytics",
+  "creator_instagram_analytics",
   {
-    title: "Get Instagram Post Analytics",
-    description: "Get analytics for an Instagram post",
+    title: "Get Instagram post analytics (simulated)",
+    description: `Read impressions, reach, likes, comments, saves, shares and engagement rate for a post recorded by creator_instagram_post. ${SIMULATED_METRICS} Returns the metrics object.`,
     inputSchema: Instagram.getPostAnalyticsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: { simulated, success: z.boolean(), analytics: record({ reach: z.number(), engagementRate: z.number() }).describe("Post metrics") },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Instagram.getPostAnalytics(params.postId);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.analytics, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Instagram.getPostAnalytics(params.postId))
 );
 
 server.registerTool(
-  "farcaster_cast",
+  "creator_farcaster_cast",
   {
-    title: "Create Farcaster Cast",
-    description: "Create a cast on Farcaster",
+    title: "Draft Farcaster cast (simulated)",
+    description: `Record a Farcaster cast (max 320 characters) with optional channel, reply target, embeds, mentions and schedule. ${SIMULATED} Returns the stored cast with its local ID and status.`,
     inputSchema: Farcaster.createCastSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), cast: postShape.describe("The stored cast") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Farcaster.createCast({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    } as Parameters<typeof Farcaster.createCast>[0]);
-    return {
-      content: [{ type: "text", text: result.success ? `Farcaster cast created: ${result.cast?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Farcaster.createCast({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") } as Parameters<typeof Farcaster.createCast>[0])))
 );
 
 server.registerTool(
-  "farcaster_thread",
+  "creator_farcaster_thread",
   {
-    title: "Create Farcaster Thread",
-    description: "Create a thread of casts on Farcaster",
+    title: "Draft Farcaster thread (simulated)",
+    description: `Record a thread of up to 25 Farcaster casts (max 320 characters each), linked as replies, optionally in a channel or scheduled. ${SIMULATED} Returns the stored casts in order.`,
     inputSchema: Farcaster.createThreadSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), thread: z.array(postShape).describe("The stored casts in order") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Farcaster.createThread({
-      ...params,
-      scheduledFor: params.scheduledFor ? new Date(params.scheduledFor) : undefined
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `Farcaster thread created with ${result.thread?.length} casts` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Farcaster.createThread({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "farcaster_frame",
+  "creator_farcaster_frame",
   {
-    title: "Create Farcaster Frame",
-    description: "Create an interactive frame for a Farcaster cast",
+    title: "Draft Farcaster frame (simulated)",
+    description: `Record an interactive frame (image plus 1-4 buttons, optional input and post URL) attached to a cast from creator_farcaster_cast. ${SIMULATED} Returns the stored frame with its local ID.`,
     inputSchema: Farcaster.createFrameSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), frame: record({ id: z.string(), castId: z.string(), imageUrl: z.string() }).describe("The stored frame") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Farcaster.createFrame(params as Parameters<typeof Farcaster.createFrame>[0]);
-    return {
-      content: [{ type: "text", text: result.success ? `Farcaster frame created: ${result.frame?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Farcaster.createFrame(params as Parameters<typeof Farcaster.createFrame>[0]))
 );
 
 server.registerTool(
-  "farcaster_analytics",
+  "creator_farcaster_analytics",
   {
-    title: "Get Farcaster Cast Analytics",
-    description: "Get analytics for a Farcaster cast",
+    title: "Get Farcaster cast analytics (simulated)",
+    description: `Read reactions, recasts, replies and watches for a cast recorded by creator_farcaster_cast. ${SIMULATED_METRICS} Returns the metrics object, or an error for an unknown cast ID.`,
     inputSchema: Farcaster.getCastAnalyticsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: { simulated, success: z.boolean(), analytics: z.object({}).passthrough().describe("Cast metrics") },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Farcaster.getCastAnalytics(params.castId);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.analytics, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Farcaster.getCastAnalytics(params.castId))
 );
 
 server.registerTool(
-  "analytics_aggregated",
+  "creator_analytics_aggregated",
   {
-    title: "Get Aggregated Analytics",
-    description: "Get aggregated analytics across all social platforms",
+    title: "Get cross-platform analytics (simulated)",
+    description: `Summarise posts, impressions and engagement per platform and in total for a date range, with the best platform and recommendations. ${SIMULATED_METRICS} Do not report these figures as real results.`,
     inputSchema: Analytics.getAggregatedAnalyticsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      analytics: record({
+        platforms: z.array(z.object({}).passthrough()),
+        totals: z.object({}).passthrough(),
+        bestPerformingPlatform: z.string(),
+        recommendations: z.array(z.string())
+      }).describe("Aggregated metrics")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Analytics.getAggregatedAnalytics({
-      startDate: new Date(params.startDate),
-      endDate: new Date(params.endDate),
-      platforms: params.platforms
-    });
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.analytics, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Analytics.getAggregatedAnalytics({
+    startDate: parseDate(params.startDate, "startDate"),
+    endDate: parseDate(params.endDate, "endDate"),
+    platforms: params.platforms
+  })))
 );
 
 server.registerTool(
-  "analytics_best_times",
+  "creator_analytics_best_times",
   {
-    title: "Get Best Posting Times",
-    description: "Get recommended best times to post for a platform",
+    title: "Get best posting times (sample)",
+    description: "Return a fixed table of generally strong weekday posting slots (day, hour, score out of 10) for a platform. It is a static rule of thumb, not computed from your account's data, and the timezone is not applied. Instant, local only.",
     inputSchema: Analytics.getBestPostingTimesSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      times: z.array(z.object({ dayOfWeek: z.string(), hour: z.number(), score: z.number() })).describe("Suggested slots")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Analytics.getBestPostingTimes(params);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.times, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Analytics.getBestPostingTimes(params))
 );
 
 server.registerTool(
-  "analytics_trends",
+  "creator_analytics_trends",
   {
-    title: "Get Engagement Trends",
-    description: "Get engagement trends over time for a platform",
+    title: "Get engagement trends (simulated)",
+    description: `Return one row per day for the last 1-90 days with impressions, engagements and engagement rate for a platform. ${SIMULATED_METRICS} Useful only to prototype charts or reports.`,
     inputSchema: Analytics.getEngagementTrendsSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      trends: z.array(z.object({ date: z.string(), impressions: z.number(), engagements: z.number(), rate: z.number() })).describe("Daily rows, oldest first")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const result = await Analytics.getEngagementTrends(params);
-    return {
-      content: [{ type: "text", text: result.success ? JSON.stringify(result.trends, null, 2) : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Analytics.getEngagementTrends(params))
 );
 
 server.registerTool(
-  "schedule_content",
+  "creator_schedule_content",
   {
-    title: "Schedule Content",
-    description: "Schedule content to be posted on a specific platform",
+    title: "Schedule content (simulated)",
+    description: `Queue one piece of content for a platform at a future time, optionally refusing when another item is queued within 15 minutes. ${SIMULATED} Nothing is ever posted when the time arrives. Returns the queued item.`,
     inputSchema: Scheduler.scheduleContentSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), scheduled: scheduledShape.describe("The queued item") },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
-    const result = await Scheduler.scheduleContent({
-      ...params,
-      scheduledFor: new Date(params.scheduledFor)
-    });
-    return {
-      content: [{ type: "text", text: result.success ? `Content scheduled: ${result.scheduled?.id}` : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Scheduler.scheduleContent({ ...params, scheduledFor: parseDate(params.scheduledFor, "scheduledFor") })))
 );
 
 server.registerTool(
-  "schedule_bulk",
+  "creator_schedule_bulk",
   {
-    title: "Bulk Schedule Content",
-    description: "Schedule multiple pieces of content at once",
+    title: "Bulk schedule content (simulated)",
+    description: `Queue up to 100 items at once, optionally shifting items that collide with queued content by conflictGapMinutes. ${SIMULATED} Returns the queued items and, if any failed, their indexes and errors.`,
     inputSchema: Scheduler.bulkScheduleSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      scheduled: z.array(scheduledShape).describe("Items queued"),
+      failed: z.array(z.object({ index: z.number(), error: z.string() })).optional().describe("Items that could not be queued")
+    },
+    annotations: LOCAL_CREATE
   },
-  async (params) => {
+  async (params) => guarded(async () => {
     const result = await Scheduler.bulkSchedule({
       ...params,
-      posts: params.posts.map(p => ({
-        ...p,
-        scheduledFor: new Date(p.scheduledFor)
-      }))
+      posts: params.posts.map((post, index) => ({ ...post, scheduledFor: parseDate(post.scheduledFor, `posts[${index}].scheduledFor`) }))
     } as Parameters<typeof Scheduler.bulkSchedule>[0]);
-    return {
-      content: [{ type: "text", text: result.success ? `Scheduled ${result.scheduled?.length} posts` : `Scheduled ${result.scheduled?.length}, failed ${result.failed?.length}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+    return ok({ simulated: true as const, ...result });
+  })
 );
 
 server.registerTool(
-  "schedule_list",
+  "creator_schedule_list",
   {
-    title: "List Scheduled Content",
-    description: "List all scheduled content with optional filtering",
+    title: "List scheduled content",
+    description: "List queued content sorted by scheduled time, filtered by platform, status (pending, published, failed, cancelled) and/or a date range. Use it to review the calendar or find an item ID. Returns up to limit items (default 50, max 500) and the total.",
     inputSchema: Scheduler.getScheduledContentSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      content: z.array(scheduledShape).describe("Items in this page, earliest first"),
+      total: z.number().describe("Items matching the filters")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
+  async ({ limit, ...params }) => guarded(async () => {
     const content = Scheduler.getScheduledContent({
       ...params,
-      startDate: params.startDate ? new Date(params.startDate) : undefined,
-      endDate: params.endDate ? new Date(params.endDate) : undefined
+      startDate: optionalDate(params.startDate, "startDate"),
+      endDate: optionalDate(params.endDate, "endDate")
     });
-    return {
-      content: [{ type: "text", text: `Found ${content.length} scheduled items` }],
-      structuredContent: { content }
-    };
-  }
+    return ok({ content: content.slice(0, limit), total: content.length });
+  })
 );
 
 server.registerTool(
-  "schedule_upcoming",
+  "creator_schedule_upcoming",
   {
-    title: "Get Upcoming Content",
-    description: "Get content scheduled for the next N hours",
+    title: "Get upcoming content",
+    description: "Return pending queued content due within the next N hours (default 24, max 720), earliest first. Use it for a daily or weekly publishing check. Returns the items and their count; reads the in-memory queue only, instant.",
     inputSchema: Scheduler.getUpcomingContentSchema,
-    annotations: { readOnlyHint: true }
+    outputSchema: {
+      content: z.array(scheduledShape).describe("Pending items due in the window, earliest first"),
+      count: z.number().describe("Number of items")
+    },
+    annotations: LOCAL_READ
   },
-  async (params) => {
-    const content = Scheduler.getUpcomingContent(params.hours);
-    return {
-      content: [{ type: "text", text: `Found ${content.length} upcoming items` }],
-      structuredContent: { content }
-    };
+  async ({ hours }) => {
+    const content = Scheduler.getUpcomingContent(hours);
+    return ok({ content, count: content.length });
   }
 );
 
 server.registerTool(
-  "schedule_cancel",
+  "creator_schedule_cancel",
   {
-    title: "Cancel Scheduled Content",
-    description: "Cancel a scheduled post",
+    title: "Cancel scheduled content",
+    description: "Mark a pending queued item as cancelled so it will not be treated as due. Only pending items can be cancelled, and it cannot be undone (re-schedule instead). Returns success, or an error for an unknown or non-pending ID.",
     inputSchema: Scheduler.cancelScheduledContentSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean() },
+    annotations: LOCAL_OVERWRITE
   },
-  async (params) => {
-    const result = await Scheduler.cancelScheduledContent(params.contentId);
-    return {
-      content: [{ type: "text", text: result.success ? "Content cancelled" : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => social(await Scheduler.cancelScheduledContent(params.contentId))
 );
 
 server.registerTool(
-  "schedule_reschedule",
+  "creator_schedule_reschedule",
   {
-    title: "Reschedule Content",
-    description: "Change the scheduled time for a post",
+    title: "Reschedule content",
+    description: "Move a pending queued item to a new future time, replacing its previous time. Only pending items can be moved. Returns the updated item, or an error when the ID is unknown, the item is not pending or the time is in the past.",
     inputSchema: Scheduler.rescheduleContentSchema,
-    annotations: { destructiveHint: false }
+    outputSchema: { simulated, success: z.boolean(), scheduled: scheduledShape.describe("The updated item") },
+    annotations: LOCAL_OVERWRITE
   },
-  async (params) => {
-    const result = await Scheduler.rescheduleContent({
-      contentId: params.contentId,
-      newScheduledFor: new Date(params.newScheduledFor)
-    });
-    return {
-      content: [{ type: "text", text: result.success ? "Content rescheduled" : `Error: ${result.error}` }],
-      structuredContent: result,
-      isError: !result.success
-    };
-  }
+  async (params) => guarded(async () => social(await Scheduler.rescheduleContent({
+    contentId: params.contentId,
+    newScheduledFor: parseDate(params.newScheduledFor, "newScheduledFor")
+  })))
 );
 
 async function main() {

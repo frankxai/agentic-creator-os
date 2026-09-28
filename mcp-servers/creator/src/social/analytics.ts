@@ -212,28 +212,25 @@ export async function getEngagementTrends(params: {
   return { success: true, trends };
 }
 
+const platforms = () => z.array(z.enum(["twitter", "linkedin", "instagram", "farcaster"])).max(4);
+
 export const getAggregatedAnalyticsSchema = {
-  startDate: z.string().describe("Start date (ISO format)"),
-  endDate: z.string().describe("End date (ISO format)"),
-  platforms: z.array(z.enum(["twitter", "linkedin", "instagram", "farcaster"]))
-    .optional()
-    .describe("Platforms to include")
+  startDate: z.string().max(40).describe("Start of the period, ISO 8601 date"),
+  endDate: z.string().max(40).describe("End of the period, ISO 8601 date"),
+  platforms: platforms().optional().describe("Platforms to include; default all four")
 };
 
 export const compareContentPerformanceSchema = {
-  platforms: z.array(z.enum(["twitter", "linkedin", "instagram", "farcaster"]))
-    .describe("Platforms to compare"),
-  contentTypes: z.array(z.string()).optional().describe("Content types to analyze")
+  platforms: platforms().describe("Platforms to compare"),
+  contentTypes: z.array(z.string().max(50)).max(20).optional().describe("Content types to analyze")
 };
 
 export const getBestPostingTimesSchema = {
-  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"])
-    .describe("Platform to analyze"),
-  timezone: z.string().optional().describe("Timezone (e.g., 'America/New_York')")
+  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"]).describe("Platform to analyze"),
+  timezone: z.string().max(64).optional().describe("IANA timezone, e.g. America/New_York (currently not applied)")
 };
 
 export const getEngagementTrendsSchema = {
-  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"])
-    .describe("Platform to analyze"),
-  days: z.number().min(1).max(90).describe("Number of days to analyze")
+  platform: z.enum(["twitter", "linkedin", "instagram", "farcaster"]).describe("Platform to analyze"),
+  days: z.number().int().min(1).max(90).describe("Number of days to return, 1-90")
 };

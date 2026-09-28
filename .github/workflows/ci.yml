@@ -51,6 +51,19 @@ jobs:
       - name: Typecheck
         run: npm run typecheck:all
 
+      # Offline tests only: the MCP contract test starts every server over stdio.
+      # The browser server's sample call (browser_close) never launches Chromium,
+      # so no Playwright browser download is needed.
+      - name: Test
+        id: test
+        run: |
+          set -o pipefail
+          {
+            node --test test/*.test.mjs
+            npm run observatory:test
+            npm run test:receipt
+          } 2>&1 | tee /tmp/test.log
+
       # Diagnostic: on any failure above, post the captured logs as a PR
       # comment so they are visible without log-fetching tooling. Safe to
       # leave permanently — only runs on failure().
@@ -80,6 +93,11 @@ jobs:
             echo "### lint (tail 30)"
             echo '```'
             tail -30 /tmp/lint.log 2>/dev/null || echo "(no log)"
+            echo '```'
+            echo ""
+            echo "### test (tail 60)"
+            echo '```'
+            tail -60 /tmp/test.log 2>/dev/null || echo "(no log)"
             echo '```'
           } > /tmp/comment.md
           gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md --repo "${{ github.repository }}"
