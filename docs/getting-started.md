@@ -75,7 +75,7 @@ Open Claude Code and try:
 What skills are available?
 ```
 
-Claude will list the 62+ skills organized by category:
+Claude will list the installed skills, organized by category:
 - **Technical**: TDD, debugging, MCP architecture
 - **Creative**: Brand voice, content strategy, music production
 - **Business**: OCI services, product management
