@@ -28,35 +28,6 @@
     "video-generation",
     "higgsfield"
   ],
-  "categories": [
-    "creator-tools",
-    "content",
-    "video",
-    "music",
-    "visual",
-    "brand"
-  ],
-  "platforms": [
-    "claude-code",
-    "opencode",
-    "cursor",
-    "windsurf",
-    "gemini-cli"
-  ],
-  "engines": {
-    "claude-code": ">=2.0.0"
-  },
-  "compose": {
-    "extends": [
-      "creator-meta"
-    ],
-    "absorbs": [
-      "knowledge-work-plugins/creator",
-      "superpowers (proven techniques)",
-      "oh-my-opencode (lifecycle hooks)",
-      "claude-flow (swarm topologies)"
-    ]
-  },
   "stats": {
     "nonEmptySkillModules": 174,
     "emptySkillPlaceholders": 5,
@@ -65,23 +36,5 @@
     "installableShellHooks": 9,
     "activationRules": 32,
     "verifiedBy": "npm run verify:public-surface"
-  },
-  "intelligence": {
-    "version": "v11.0.0",
-    "targetScore": 98,
-    "currentScore": "see /acos-score",
-    "components": {
-      "skill_activation_accuracy": 0.25,
-      "pattern_extraction_quality": 0.25,
-      "memory_utilization": 0.20,
-      "hook_reliability": 0.15,
-      "self_modify_safety": 0.15
-    }
-  },
-  "principles": [
-    "Progressive disclosure — SKILL.md lean, references/ for depth",
-    "Connector agnosticism — skills reference ~~categories not vendor names",
-    "Commands as workflows — markdown, no code",
-    "Layer model — every artifact has one canonical location"
-  ]
+  }
 }
