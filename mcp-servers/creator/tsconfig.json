@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "ignoreDeprecations": "5.0",
+    "moduleResolution": "bundler",
+    "types": ["node"],
     "outDir": "./build",
     "rootDir": "./src",
     "strict": false,

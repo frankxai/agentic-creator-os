@@ -26,7 +26,7 @@ const BOUNDED_FORMATS = new Set(['uuid', 'date', 'date-time', 'time', 'email', '
 const SAMPLE_CALLS = {
   browser: { name: 'browser_close', arguments: {} },
   creator: { name: 'creator_list_clients', arguments: { limit: 5 } },
-  database: { name: 'database_list_articles', arguments: { limit: 5 } },
+  database: { name: 'database_query', arguments: { sql: 'SELECT 1 AS value', limit: 1 } },
   email: { name: 'email_list_templates', arguments: { limit: 10 } },
   evaluator: {
     name: 'evaluator_compare_content',

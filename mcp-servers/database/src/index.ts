@@ -138,7 +138,7 @@ server.registerTool(
     },
     outputSchema: {
       columns: z.array(z.string()).describe("Column names in result order"),
-      rows: z.array(z.record(z.unknown())).describe("Result rows as column-to-value objects"),
+      rows: z.array(z.record(z.string(), z.unknown())).describe("Result rows as column-to-value objects"),
       rowCount: z.number().describe("Rows the query produced before the limit"),
       truncated: z.boolean().describe("True when rows were cut at limit")
     },

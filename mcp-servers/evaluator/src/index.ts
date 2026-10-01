@@ -214,8 +214,8 @@ server.registerTool(
       averageAccuracy: z.number().describe('Average prediction accuracy, 0-100'),
       topPerformingContent: z.array(z.object({ type: z.string(), avgEngagement: z.number() }).passthrough()).describe('Best content types'),
       improvementTrend: z.enum(['improving', 'declining', 'stable']).describe('Direction of scores over time'),
-      metricsByPlatform: z.record(z.object({}).passthrough()).describe('Counts and averages per platform'),
-      metricsByType: z.record(z.object({}).passthrough()).describe('Counts and averages per content type'),
+      metricsByPlatform: z.record(z.string(), z.object({}).passthrough()).describe('Counts and averages per platform'),
+      metricsByType: z.record(z.string(), z.object({}).passthrough()).describe('Counts and averages per content type'),
     },
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
@@ -274,7 +274,7 @@ server.registerTool(
       metrics: z.array(z.enum(COMPARE_METRICS)).min(1).max(COMPARE_METRICS.length).describe('Metrics to compare'),
     },
     outputSchema: {
-      comparison: z.record(z.object({
+      comparison: z.record(z.string(), z.object({
         original: z.number().nullable(),
         revised: z.number().nullable(),
         improvement: z.number().nullable(),
