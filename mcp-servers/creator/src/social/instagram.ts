@@ -350,7 +350,7 @@ export const createStorySchema = {
   stickers: z.array(z.object({
     type: z.enum(["mention", "hashtag", "location", "poll", "question"]).describe("Sticker kind"),
     data: z.string().max(500).describe("Sticker text: the handle, hashtag, place, poll question or prompt")
-  })).max(10).optional().describe("Interactive stickers (max 10)")
+  }).strict()).max(10).optional().describe("Interactive stickers (max 10)")
 };
 
 export const getPostAnalyticsSchema = {
