@@ -365,7 +365,7 @@ const url = () => z.string().url().max(2048);
 const embeds = () => z.array(z.object({
   type: z.enum(["url", "image", "video", "frame"]).describe("Embed kind"),
   url: url().describe("Embed URL")
-})).max(2);
+}).strict()).max(2);
 
 export const createCastSchema = {
   text: z.string().min(1).max(320).describe("Cast text (max 320 characters)"),
@@ -389,7 +389,7 @@ export const createFrameSchema = {
     label: z.string().min(1).max(40).describe("Button label"),
     action: z.enum(["post", "post_redirect", "link", "mint"]).describe("What the button does"),
     target: z.string().max(2048).optional().describe("Target URL or mint address")
-  })).min(1).max(4).describe("Frame buttons (1-4)"),
+  }).strict()).min(1).max(4).describe("Frame buttons (1-4)"),
   inputText: z.string().max(100).optional().describe("Input field placeholder"),
   postUrl: url().optional().describe("URL that receives button posts"),
   state: z.string().max(4096).optional().describe("Opaque frame state")

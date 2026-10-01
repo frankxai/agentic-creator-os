@@ -28,7 +28,7 @@ const context = z.object({
   sessionId: shortText().optional().describe('Agent session ID, for filtering the audit trail'),
   projectId: shortText().optional().describe('Project ID, for filtering the audit trail'),
   source: z.enum(SOURCES).default('claude-code').describe('Which assistant produced the content'),
-}).describe('Where the content came from; recorded in the audit trail');
+}).strict().describe('Where the content came from; recorded in the audit trail');
 
 const suggestion = z.object({
   area: z.string().optional(),
@@ -66,13 +66,13 @@ server.registerTool(
         personality: z.array(z.string().max(100)).max(20).describe('Personality traits, e.g. curious, direct'),
         keywords: z.array(z.string().max(100)).max(50).optional().describe('Words the brand wants to use'),
         avoidKeywords: z.array(z.string().max(100)).max(50).optional().describe('Words the brand avoids'),
-      }).optional().describe('Brand voice to check against; omit to skip the brand-voice score'),
+      }).strict().optional().describe('Brand voice to check against; omit to skip the brand-voice score'),
       context: context.optional(),
       options: z.object({
         includeSuggestions: z.boolean().default(true).describe('Include improvement suggestions'),
         strictMode: z.boolean().default(false).describe('Grade more harshly'),
         benchmarkAgainst: z.enum(['industry-average', 'top-performers', 'previous-outputs']).default('industry-average').describe('Baseline for the grade'),
-      }).optional().describe('Scoring options'),
+      }).strict().optional().describe('Scoring options'),
     },
     outputSchema: {
       evaluationId: z.string().describe('ID for evaluator_track_performance once the content is published'),
@@ -177,7 +177,7 @@ server.registerTool(
         conversions: metricCount().optional().describe('Conversions'),
         reach: metricCount().optional().describe('Unique accounts reached'),
         followerGrowth: z.number().int().min(-1e9).max(1e9).optional().describe('Net follower change'),
-      }).describe('Observed metrics; send the ones you have'),
+      }).strict().describe('Observed metrics; send the ones you have'),
       publishedAt: z.string().max(40).describe('When it was published, ISO 8601'),
       platform: z.string().min(1).max(50).describe('Where it was published'),
     },
@@ -214,8 +214,8 @@ server.registerTool(
       averageAccuracy: z.number().describe('Average prediction accuracy, 0-100'),
       topPerformingContent: z.array(z.object({ type: z.string(), avgEngagement: z.number() }).passthrough()).describe('Best content types'),
       improvementTrend: z.enum(['improving', 'declining', 'stable']).describe('Direction of scores over time'),
-      metricsByPlatform: z.record(z.object({}).passthrough()).describe('Counts and averages per platform'),
-      metricsByType: z.record(z.object({}).passthrough()).describe('Counts and averages per content type'),
+      metricsByPlatform: z.record(z.string(), z.object({}).passthrough()).describe('Counts and averages per platform'),
+      metricsByType: z.record(z.string(), z.object({}).passthrough()).describe('Counts and averages per content type'),
     },
     annotations: { readOnlyHint: true, openWorldHint: false },
   },
@@ -274,7 +274,7 @@ server.registerTool(
       metrics: z.array(z.enum(COMPARE_METRICS)).min(1).max(COMPARE_METRICS.length).describe('Metrics to compare'),
     },
     outputSchema: {
-      comparison: z.record(z.object({
+      comparison: z.record(z.string(), z.object({
         original: z.number().nullable(),
         revised: z.number().nullable(),
         improvement: z.number().nullable(),

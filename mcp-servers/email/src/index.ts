@@ -131,7 +131,7 @@ server.registerTool(
       variables: z.array(z.object({
         name: z.string().regex(/^[a-z_][a-z0-9_]{0,31}$/).describe("Placeholder name without braces, e.g. name"),
         value: z.string().max(5000).describe("Text substituted for {{name}}")
-      })).max(30).default([]).describe("Values for the template's {{placeholders}}; unfilled placeholders are left as-is"),
+      }).strict()).max(30).default([]).describe("Values for the template's {{placeholders}}; unfilled placeholders are left as-is"),
       subject: z.string().min(1).max(500).optional().describe("Subject line; defaults to 'Notification from <template>'")
     },
     outputSchema: { template: z.string().describe("Template used"), ...sentOutput },
