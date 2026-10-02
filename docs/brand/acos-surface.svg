@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 170" width="1280" height="170" role="img" aria-labelledby="t d">
+  <title id="t">Verified public surface</title>
+  <desc id="d">174 skill modules, 85 slash commands, 69 agent profiles, 9 shell hooks, 32 activation rules, 7 install targets.</desc>
+  <defs>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0b1022"/>
+    </linearGradient>
+    <linearGradient id="num" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+  </defs>
+  <g font-family="Inter,'Segoe UI',system-ui,-apple-system,sans-serif" text-anchor="middle">
+    <g>
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#22d3ee" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">174</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">skill modules</text>
+    </g>
+    <g transform="translate(213 0)">
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#22d3ee" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">85</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">slash commands</text>
+    </g>
+    <g transform="translate(426 0)">
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#a855f7" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">69</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">agent profiles</text>
+    </g>
+    <g transform="translate(639 0)">
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#a855f7" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">9</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">shell hooks</text>
+    </g>
+    <g transform="translate(852 0)">
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">32</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">activation rules</text>
+    </g>
+    <g transform="translate(1065 0)">
+      <rect x="4" y="10" width="200" height="150" rx="18" fill="url(#card)" stroke="#fbbf24" stroke-opacity="0.35"/>
+      <text x="104" y="86" font-size="52" font-weight="800" fill="url(#num)">7</text>
+      <text x="104" y="124" font-size="16" fill="#cbd5e1">install targets</text>
+    </g>
+  </g>
+</svg>

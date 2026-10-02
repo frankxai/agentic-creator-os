@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-labelledby="t d">
+  <title id="t">Agentic Creator OS</title>
+  <desc id="d">Skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05070f"/>
+      <stop offset="0.55" stop-color="#0b1022"/>
+      <stop offset="1" stop-color="#120a24"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.18" cy="0.2" r="0.55">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.85" cy="0.85" r="0.6">
+      <stop offset="0" stop-color="#a855f7" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="0.5" stop-color="#67e8f9"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a855f7" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.04"/>
+    </pattern>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="420" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#grid)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#glowA)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#glowB)"/>
+
+  <!-- orbit system -->
+  <g transform="translate(1010 210)" fill="none">
+    <circle r="150" stroke="#a855f7" stroke-opacity="0.18"/>
+    <circle r="105" stroke="#22d3ee" stroke-opacity="0.25" stroke-dasharray="4 8"/>
+    <circle r="60" stroke="#e0f2fe" stroke-opacity="0.2"/>
+    <circle r="26" fill="#22d3ee" fill-opacity="0.25" filter="url(#soft)"/>
+    <circle r="14" fill="#67e8f9"/>
+    <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" fill="#cbd5e1">
+      <circle cx="0" cy="-150" r="6" fill="#a855f7"/><text x="12" y="-146">skills</text>
+      <circle cx="130" cy="75" r="6" fill="#22d3ee"/><text x="142" y="80">commands</text>
+      <circle cx="-130" cy="75" r="6" fill="#f0abfc"/><text x="-205" y="80">agents</text>
+      <circle cx="74" cy="-74" r="5" fill="#fbbf24"/><text x="84" y="-70">hooks</text>
+      <circle cx="-74" cy="-74" r="5" fill="#34d399"/><text x="-130" y="-80">MCP</text>
+    </g>
+  </g>
+
+  <g font-family="Inter,'Segoe UI',system-ui,-apple-system,sans-serif">
+    <text x="72" y="104" font-size="15" letter-spacing="5" fill="#67e8f9" font-weight="600">AGENTIC CREATOR OS · v11</text>
+    <text x="72" y="182" font-size="64" font-weight="800" fill="url(#title)" letter-spacing="-1.5">Build your own</text>
+    <text x="72" y="252" font-size="64" font-weight="800" fill="url(#title)" letter-spacing="-1.5">creative system.</text>
+    <rect x="72" y="282" width="420" height="2" fill="url(#line)"/>
+    <text x="72" y="320" font-size="20" fill="#cbd5e1">Skills, commands, agent profiles, and local safety tooling</text>
+    <text x="72" y="348" font-size="20" fill="#cbd5e1">for AI-assisted creative work.</text>
+  </g>
+</svg>

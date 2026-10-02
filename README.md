@@ -1,12 +1,23 @@
 <div align="center">
 
-# Agentic Creator OS
+<img src="docs/brand/acos-hero.svg" alt="Agentic Creator OS — build your own creative system" width="100%">
 
-Reusable skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.
+<br>
 
-[Quick start](QUICKSTART.md) · [Project instructions](CLAUDE.md) · [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/frankxai/agentic-creator-os/issues)
+[![Version](https://img.shields.io/badge/version-11.0.0-22d3ee?style=for-the-badge&labelColor=0b1022)](package.json)
+[![License](https://img.shields.io/badge/license-Apache--2.0-a855f7?style=for-the-badge&labelColor=0b1022)](LICENSE)
+[![CI](https://img.shields.io/github/actions/workflow/status/frankxai/agentic-creator-os/ci.yml?branch=main&style=for-the-badge&labelColor=0b1022&label=CI)](https://github.com/frankxai/agentic-creator-os/actions/workflows/ci.yml)
+[![Harnesses](https://img.shields.io/badge/Claude%20·%20Codex%20·%20Grok%20·%20Cursor%20·%20Gemini-0b1022?style=for-the-badge&labelColor=0b1022&color=1f2937)](#install-from-source)
+
+**[Quick start](QUICKSTART.md)** · **[Install](#install-from-source)** · **[Plugin](#one-plugin-five-practices)** · **[Architecture](#how-the-pieces-fit)** · **[Gallery](#visual-gallery)** · **[Contributing](CONTRIBUTING.md)** · **[Issues](https://github.com/frankxai/agentic-creator-os/issues)**
+
+<img src="docs/brand/acos-surface.svg" alt="Verified surface: 174 skill modules, 85 slash commands, 69 agent profiles, 9 shell hooks, 32 activation rules, 7 install targets" width="100%">
+
+<sub>Every number above is counted from the tree and enforced by <code>npm run verify:public-surface</code>.</sub>
 
 </div>
+
+---
 
 ## What this repository is
 
@@ -126,9 +137,37 @@ flowchart LR
   Agents --> Work
   Hooks["Local hook source"] --> Evidence["Local receipts and checks"]
   Work --> Evidence
+
+  classDef intent fill:#0b1022,stroke:#22d3ee,color:#e0f2fe
+  classDef layer fill:#111827,stroke:#a855f7,color:#ede9fe
+  classDef out fill:#111827,stroke:#fbbf24,color:#fef3c7
+  class Intent,Instructions intent
+  class Skills,Commands,Agents,Hooks layer
+  class Work,Evidence out
 ```
 
 The files provide instructions and tooling. Whether a skill activates, a command is available, or a hook executes depends on the target harness and its local configuration.
+
+## Visual gallery
+
+<div align="center">
+
+<img src="docs/infographics/acos-hero-omega.png" alt="Agentic Creator OS — FRANK-Ω command center concept art" width="88%">
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/infographics/acos-smart-router.png" alt="Smart router concept art"><br><sub><b>Smart router</b> — one entry point, intent-based routing</sub></td>
+    <td width="50%"><img src="docs/infographics/acos-self-learning.png" alt="Self-learning cycle concept art"><br><sub><b>Learning loop</b> — work, receipts, refinement</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/infographics/acos-architecture.png" alt="Layered architecture concept art"><br><sub><b>Layers</b> — skills, commands, agents, safety hooks</sub></td>
+    <td width="50%"><img src="docs/infographics/v7-09-architecture-premium.png" alt="Full system architecture concept art"><br><sub><b>System map</b> — MCP, templates, orchestration</sub></td>
+  </tr>
+</table>
+
+</div>
+
+<sub>Concept art generated for earlier releases with <code>/infogenius</code>. Counts drawn inside these images are historical; the verified surface above is authoritative. The full archive lives in <a href="docs/infographics/README.md"><code>docs/infographics/</code></a>.</sub>
 
 ## Start with the system
 
@@ -191,3 +230,9 @@ Original software and technical documentation use Apache-2.0, unless a file or d
 ## Contributing
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) and the nearest `AGENTS.md` or `CLAUDE.md` before editing. Keep changes narrow, preserve existing safety boundaries, and attach commands or artifacts that let another reviewer reproduce the result.
+
+---
+
+<div align="center">
+<sub>Built by <a href="https://github.com/frankxai">FrankX</a> · Systems architect × composer × builder · Help people build their own systems.</sub>
+</div>
