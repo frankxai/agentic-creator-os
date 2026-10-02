@@ -373,6 +373,15 @@
       },
       "priority": "medium",
       "_source": "starlight-agent-skills@v0.1.0 (cosmos)"
+    },
+    {
+      "skill": "anime-agentic-scenes",
+      "triggers": {
+        "keywords": ["anime scene", "anime agentic", "agentic anime", "explain agents as anime", "keyframe", "storyboard agents", "the orchestrator series", "teach agentic systems", "ai world"],
+        "file_patterns": ["content/anime-scenes/**", "skills/anime-agentic-scenes/**"],
+        "commands": ["/anime-scene"]
+      },
+      "priority": "high"
     }
   ],
 
