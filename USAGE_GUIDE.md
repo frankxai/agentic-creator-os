@@ -308,10 +308,9 @@ Always run content through the evaluator MCP before publishing.
 
 | Document | Purpose |
 |----------|---------|
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | 7-pillar system design |
-| [CHANGELOG.md](./CHANGELOG.md) | Version history |
-| [PRO_STATUS_DASHBOARD.md](./PRO_STATUS_DASHBOARD.md) | System health |
-| [SKILL_TREE.md](./SKILL_TREE.md) | Visual skill map |
+| [CHANGELOG.md](./docs/archive/CHANGELOG.md) | Version history |
+| [PRO_STATUS_DASHBOARD.md](./docs/archive/PRO_STATUS_DASHBOARD.md) | System health |
+| [SKILL_TREE.md](./docs/archive/SKILL_TREE.md) | Visual skill map |
 
 ---
 

@@ -21,7 +21,7 @@ npm run build:all
 npm run install:all
 ```
 
-The registry currently lists `pnpm test`, but `package.json` does not define a test script. If adding tests, add the script deliberately and document the runner.
+`npm test` builds the MCP workspaces and runs `node --test test/*.test.mjs`. CI also runs `npm run lint`, `npm run typecheck:all`, `npm run observatory:test`, `npm run test:receipt`, and `npm run verify:public-surface`.
 
 ## Safety
 
