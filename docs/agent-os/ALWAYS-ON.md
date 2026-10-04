@@ -40,6 +40,24 @@ Long-running agent workflows that must survive restarts belong on one durable
 backbone with one owner per workflow. Do not stitch durability out of cron jobs
 and chat sessions.
 
+## Status from receipts
+
+```bash
+node scripts/always-on-status.mjs --mesh <mesh.json> [--json] [--no-gh]
+```
+
+Reads the `alwaysOn` block of the mesh registry: CI runs, the last pulse
+receipt, scheduler jobs, the routine registry, other machines' heartbeats, and
+recent dispatch receipts. Anything without a receipt is reported as not running;
+a disabled routine is reported as disabled, not as healthy.
+
+## Upstream watch
+
+`scripts/upstream-watch.mjs` checks the frontier repositories listed in
+`agent-os/upstreams.json` (what we take from each, and what change should prompt
+a review) and reports which moved since the last review. It runs in the daily CI
+clock and writes to the run summary; it never blocks and never edits.
+
 ## Receipts
 
 Every clock writes a receipt a later session can read without the transcript:

@@ -21,10 +21,10 @@
  * Dependency-free so it runs in CI without an install step.
  */
 import { readFileSync, readdirSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
-import { join, dirname, sep } from 'node:path'
+import { join, dirname, sep, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const KEBAB_NAME = /^[a-z0-9]+([-_][a-z0-9]+)*$/
+const KEBAB_NAME = /^_?[a-z0-9]+([-_][a-z0-9]+)*$/
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
@@ -141,9 +141,18 @@ function compile(spec, overlay) {
 }
 
 const overlay = loadOverlay()
-const outDir = INSTANCE ? join(ROOT, 'instances', INSTANCE, 'agents') : join(ROOT, '.claude', 'agents')
+// --out and --instance-specs redirect output and instance specs (previews, tests, and adopters' dry runs).
+const optValue = (n) => {
+  const i = args.indexOf(n)
+  if (i < 0) return null
+  if (!args[i + 1] || args[i + 1].startsWith('--')) { console.error(`✗ ${n} needs a value`); process.exit(2) }
+  return args[i + 1]
+}
+const OUT = optValue('--out')
+const outDir = OUT ? resolve(OUT) : INSTANCE ? join(ROOT, 'instances', INSTANCE, 'agents') : join(ROOT, '.claude', 'agents')
 // Core specs compile everywhere; an instance's own specs (for example Domain Queens) compile only into that instance.
-const INSTANCE_SPEC_DIR = INSTANCE ? join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs') : null
+const INSTANCE_SPECS = optValue('--instance-specs')
+const INSTANCE_SPEC_DIR = INSTANCE_SPECS ? resolve(INSTANCE_SPECS) : INSTANCE ? join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs') : null
 const specFiles = (dir) => (existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.agent.json')).sort().map((f) => join(dir, f)) : [])
 const specPaths = [...specFiles(SPEC_DIR), ...(INSTANCE_SPEC_DIR ? specFiles(INSTANCE_SPEC_DIR) : [])]
 const specs = specPaths.map((p) => p.slice(p.lastIndexOf(sep) + 1))
@@ -184,4 +193,5 @@ if (existsSync(outDir)) {
 
 if (errors) process.exit(1)
 if (CHECK && stale) { console.error(`agent-compile: ${stale} compiled agent(s) stale — run node scripts/agent-compile.mjs${INSTANCE ? ` --instance ${INSTANCE}` : ''}`); process.exit(1) }
-console.log(`agent-compile: ${specs.length} spec(s), ${written} written${CHECK ? ', all fresh' : ''} → ${outDir.slice(ROOT.length + 1)}`)
+const shown = outDir.startsWith(ROOT) ? outDir.slice(ROOT.length + 1) : outDir
+console.log(`agent-compile: ${specs.length} spec(s), ${written} written${CHECK ? ', all fresh' : ''} → ${shown}`)

@@ -34,7 +34,7 @@
   "org": {
     "domain": "gencreator",
     "sourceId": "GENCREATOR-QUEEN",
-    "source": "starlight-swarm config/domain-queens.json",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
     "generals": [
       {
         "title": "Product OS General",

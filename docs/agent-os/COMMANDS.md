@@ -31,9 +31,10 @@ Before any dispatch, `/si` runs the mesh doctor (`node scripts/mesh-doctor.mjs
 | `/si swarm <goal>` | Explicit opt-in to R3 parallel or scripted multi-agent work, capped by the zone |
 | `/si batch <scope>` | R4: `starlight-queen` across repositories |
 | `/si review <pr>` | Same-family review plus a different-family skeptic (R5) for high-risk diffs |
-| `/si offload <job>` | R5: package the job for another machine, CI, or a cloud routine |
-| `/si 24/7` | Status of the always-on clocks: CI, observers, routines, last receipts |
+| `/si offload <job>` | R5: `mesh-dispatch` sends the job to another machine, model family, CI, or Copilot, with guards and a receipt |
+| `/si 24/7` | `always-on-status`: CI, pulse, observers, routines, machines, dispatches, from receipts only |
 | `/si pulse` | Run the estate quality pulse now and compare to the baseline |
+| `/si upstreams` | `upstream-watch`: which frontier repositories moved since the last review |
 
 Plain language works too: "have the CFO check this", "ask the Arcanea Queen",
 "run a council on pricing", "send this to the other machine".

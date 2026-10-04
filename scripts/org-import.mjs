@@ -16,7 +16,7 @@
  * General titles fail the import (fail closed) until mapped in TITLE_TO_ROLE.
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
-import { join, dirname } from 'node:path'
+import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -51,10 +51,14 @@ const TITLE_TO_ROLE = {
 }
 
 const org = JSON.parse(readFileSync(ORG, 'utf8'))
+// Name the org file the Queens came from: repo-relative when inside this repo, else its file name.
+const orgAbs = resolve(ORG)
+const ORG_SOURCE = orgAbs.startsWith(ROOT) ? orgAbs.slice(ROOT.length + 1).split(/[\\/]/).join('/') : orgAbs.split(/[\\/]/).pop()
 if (org.schema !== 'starlight.domainQueens.v1') { console.error(`✗ unsupported org schema ${org.schema}`); process.exit(2) }
 
 const coreRoles = new Set(readdirSync(join(ROOT, 'agent-os', 'specs')).filter((f) => f.startsWith('general-')).map((f) => f.slice(8, -11)))
-const outDir = join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs')
+const OUT = flag('--out')
+const outDir = OUT ? resolve(OUT) : join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs')
 let errors = 0
 let stale = 0
 const specs = []
@@ -85,7 +89,7 @@ for (const d of org.domains || []) {
     modules: ['agent-os/roles/queen.md'],
     requiredReading: ['CREATOR.md', 'AGENTS.md'],
     knowledge: [],
-    org: { domain: d.domain, sourceId: q.id, source: 'starlight-swarm config/domain-queens.json', generals },
+    org: { domain: d.domain, sourceId: q.id, source: ORG_SOURCE, generals },
     evals: 'evals/agents/queen-domain',
   })
 }

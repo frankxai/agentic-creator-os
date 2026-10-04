@@ -24,7 +24,14 @@ on:
       - 'scripts/estate-audit.mjs'
       - 'scripts/org-import.mjs'
       - 'scripts/mesh-doctor.mjs'
+      - 'scripts/mesh-dispatch.mjs'
+      - 'scripts/always-on-status.mjs'
+      - 'scripts/agent-os-init.mjs'
+      - 'scripts/upstream-watch.mjs'
+      - 'scripts/lib/**'
+      - 'agent-os/upstreams.json'
       - 'test/agent-os.test.mjs'
+      - 'test/mesh.test.mjs'
       - '.github/workflows/agent-os.yml'
 
 concurrency:
@@ -56,10 +63,16 @@ jobs:
       - name: Graph obeys the ontology
         run: node scripts/agent-os-graph.mjs --instance frankx
 
-      - name: Agent OS tests
-        run: node --test test/agent-os.test.mjs
+      - name: Agent OS and mesh tests
+        run: node --test test/agent-os.test.mjs test/mesh.test.mjs
 
       - name: Quality ratchet (scorecard in the run summary)
         # 72 = the 2026-10-04 baseline for this repo's own skills, agents, and commands.
         # Raise it when the average rises; never lower it to make a red run green.
         run: node scripts/estate-audit.mjs --home . --md "$GITHUB_STEP_SUMMARY" --min-score 72
+
+      - name: Upstream watch (which frontier repos moved; review prompt, never blocks)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"

@@ -29,6 +29,12 @@ audit, fix the lowest-scoring loaded artifacts, re-run, compare.
 | [COMMANDS.md](COMMANDS.md) | The one-door command grammar: `/si` and the R0-R5 ladder. |
 | [MESH.md](MESH.md) | Other harnesses, model families, machines, CI, and routines; zones and probes. |
 | [ALWAYS-ON.md](ALWAYS-ON.md) | The three clocks that keep work moving 24/7, and what each may never do. |
+| [ADOPT.md](ADOPT.md) | From a clone to your own Generals in about ten minutes; troubleshooting; contributing. |
+
+Leverage: `agent-os/upstreams.json` lists the frontier repositories this system
+builds on (Agent Skills, Claude Code, claude-code-action, MCP, AGENTS.md,
+spec-kit, Codex, Gemini CLI, the Queen org chart, the shared memory server) and
+what each feeds; `scripts/upstream-watch.mjs` reports which moved.
 
 Sources:
 
@@ -49,6 +55,10 @@ node scripts/agent-os-graph.mjs --brands <dir> --out graph.jsonl   # typed graph
 node scripts/estate-audit.mjs --repos <dir> --md audit.md --json audit.json
 node scripts/org-import.mjs --org <domain-queens.json> --instance <name>   # org chart → Domain Queen specs
 node scripts/mesh-doctor.mjs --mesh <mesh.json> [--deep]                     # zone + reachable mesh
+node scripts/mesh-dispatch.mjs --mesh <mesh.json> --member <id> --job task.md  # guarded dispatch + receipt
+node scripts/always-on-status.mjs --mesh <mesh.json>                          # what runs unattended
+node scripts/agent-os-init.mjs --name <you>                                   # new adopter instance
+node scripts/upstream-watch.mjs                                               # frontier repos that moved
 claude plugin eval --eval-dir evals/agents       # run the Generals' eval cases
 ```
 

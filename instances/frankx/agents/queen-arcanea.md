@@ -34,7 +34,7 @@ Read these before acting, when they exist in the working repository:
 
 ## Your Generals (arcanea)
 
-Imported from starlight-swarm config/domain-queens.json (ARCANEA-QUEEN). Delegate with the Agent tool to the functional General and open the brief with the domain context in this table.
+Imported from instances/frankx/agent-os/org/domain-queens.json (ARCANEA-QUEEN). Delegate with the Agent tool to the functional General and open the brief with the domain context in this table.
 
 | Domain General | Spawn | Swarms it owns |
 | --- | --- | --- |

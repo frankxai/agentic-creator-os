@@ -1,0 +1,39 @@
+{
+  "schema": "acos.mesh.v1",
+  "machine": "my-workstation",
+  "receiptsDir": "~/.acos/dispatch",
+  "zone": {
+    "green": { "ramGiB": 6, "diskGiB": 80 },
+    "yellow": { "ramGiB": 4, "diskGiB": 50 },
+    "localParallel": { "green": 4, "yellow": 2, "red": 0 }
+  },
+  "alwaysOn": {
+    "ci": { "repo": "your-org/your-repo", "workflow": "agent-os.yml" },
+    "pulse": { "receipts": "~/.acos/pulse.jsonl", "maxAgeDays": 8 }
+  },
+  "members": [
+    {
+      "id": "claude-local",
+      "kind": "harness",
+      "role": "This session and its subagents; headless runs for small jobs.",
+      "useWhen": "Reasoning, decisions, small verified edits.",
+      "probe": { "bin": "claude" },
+      "run": { "mode": "argv", "argv": ["claude", "-p", "Follow the task given on stdin.", "--max-turns", "20", "--output-format", "json", "--allowedTools", "Read,Grep,Glob"], "stdin": "job", "local": true, "minRamGiB": 1.5, "maxConcurrent": 1 }
+    },
+    {
+      "id": "github-actions",
+      "kind": "ci",
+      "role": "Deterministic checks on a schedule and on pull requests.",
+      "useWhen": "Checks that need no model.",
+      "probe": { "bin": "gh" },
+      "run": { "mode": "argv", "argv": ["gh", "workflow", "run", "agent-os.yml", "-R", "{repo}"], "local": false }
+    },
+    {
+      "id": "shared-memory",
+      "kind": "memory",
+      "role": "One shared memory server for every harness.",
+      "useWhen": "Always: search before deciding, append decisions with tags.",
+      "probe": { "tcp": "127.0.0.1:8767" }
+    }
+  ]
+}

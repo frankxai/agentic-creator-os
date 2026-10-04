@@ -34,7 +34,7 @@
   "org": {
     "domain": "frankx",
     "sourceId": "FRANKX-QUEEN",
-    "source": "starlight-swarm config/domain-queens.json",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
     "generals": [
       {
         "title": "Revenue General",

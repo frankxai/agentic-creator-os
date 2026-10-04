@@ -34,7 +34,7 @@
   "org": {
     "domain": "sis",
     "sourceId": "SIS-QUEEN",
-    "source": "starlight-swarm config/domain-queens.json",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
     "generals": [
       {
         "title": "Research General",

@@ -62,3 +62,37 @@ work where it can actually run.
 6. Shared memory is one authority; never start a private memory process per agent.
 
 `node scripts/mesh-doctor.mjs --mesh <mesh.json> [--json] [--deep]`
+
+## Dispatch
+
+A member with a `run` block can take a job from a script:
+
+```json
+"run": { "mode": "argv", "argv": ["reviewer", "exec", "--read-only", "-"], "stdin": "job", "local": true, "minRamGiB": 2.5, "maxConcurrent": 2 }
+```
+
+| Mode | Meaning |
+| --- | --- |
+| `argv` | Run a command in the background; `{job}`, `{cwd}`, `{repo}` are filled in; `stdin: "job"` pipes the job file |
+| `envelope` | Build a job envelope (task id, summary, instructions, acceptance, evidence) for another machine's queue |
+| `session` | Only a Claude session can start it (cloud routines); the script refuses with that instruction |
+
+```bash
+node scripts/mesh-dispatch.mjs --mesh <mesh.json> --member <id> --job task.md [--cwd dir] [--repo owner/name] [--dry-run]
+```
+
+Guards run in code, in this order: the member exists and is dispatchable; its
+cheap probe passes (a `knownIssue` keeps it down); free memory meets
+`minRamGiB` for `local` members; running jobs stay under `maxConcurrent`.
+Every dispatch and every refusal writes a receipt (`receiptsDir`); output lands
+next to it. Exit 0 started or dry run, 3 refused, 2 bad input.
+
+On Windows, npm installs command-line tools as `.cmd` shims. A detached
+`cmd.exe` loses the output of the Node program such a shim starts, so dispatch
+resolves the shim to its JavaScript entry and runs that with Node directly. The
+receipt records which launch path was used.
+
+## Lessons from the first live mesh
+
+- A receipt with empty output is a failure, not a success. The first live review job produced zero bytes; the receipt made it visible and led to two fixes: the shim launch above, and a retired model-provider sign-in that is now recorded as a `knownIssue`.
+- Remote members (another machine, a cloud agent, CI) stay available in the red zone; local model CLIs do not.

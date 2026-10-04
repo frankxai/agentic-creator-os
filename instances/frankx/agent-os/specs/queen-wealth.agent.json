@@ -34,7 +34,7 @@
   "org": {
     "domain": "wealth",
     "sourceId": "WEALTH-PASSIVE-QUEEN",
-    "source": "starlight-swarm config/domain-queens.json",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
     "generals": [
       {
         "title": "Revenue Streams General",
