@@ -17,7 +17,7 @@ work where it can actually run.
 {
   "schema": "acos.mesh.v1",
   "machine": "workstation",
-  "zone": { "green": { "ramGiB": 6, "diskGiB": 80 }, "yellow": { "ramGiB": 4, "diskGiB": 50 }, "localParallel": { "green": 4, "yellow": 2, "red": 0 } },
+  "zone": { "green": { "ramGiB": 6, "diskGiB": 80 }, "yellow": { "ramGiB": 4, "diskGiB": 50 }, "localParallel": { "green": 4, "yellow": 2, "red": 1 } },
   "members": [
     {
       "id": "reviewer-cli",
@@ -50,7 +50,15 @@ work where it can actually run.
 | --- | --- | ---: |
 | Green | RAM and disk above the green thresholds | 4 |
 | Yellow | Above the yellow thresholds | 2 |
-| Red | Below yellow | 0 (one small local worker at most) |
+| Red | Below yellow | 1 (one small local job; everything else goes to the mesh) |
+
+## The registry is code
+
+A mesh registry decides which programs run on your machine. Treat it like
+code: only the owner edits it, agents never write to it (widening permissions
+is a human gate in the kernel), and changes are reviewed. The scripts still
+validate what they read: values never reach a shell, programs are resolved
+without one, and CI fields must be plain `owner/name` and file names.
 
 ## Routing rules
 

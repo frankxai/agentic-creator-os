@@ -37,7 +37,8 @@ export function measureZone(mesh, { ramFreeGiB } = {}) {
   const yellow = z.yellow || { ramGiB: 4, diskGiB: 50 }
   const meets = (t) => ramFree >= t.ramGiB && (diskFree === null || diskFree >= t.diskGiB)
   const zone = meets(green) ? 'green' : meets(yellow) ? 'yellow' : 'red'
-  const caps = { green: 4, yellow: 2, red: 0, ...(z.localParallel || {}) }
+  // One number per zone: concurrent local jobs (subagents or local CLIs). Red allows one small job.
+  const caps = { green: 4, yellow: 2, red: 1, ...(z.localParallel || {}) }
   return {
     zone,
     ramFreeGiB: Number(ramFree.toFixed(2)),
@@ -87,6 +88,27 @@ export function npmShimEntry(cmdPath) {
   } catch { return null }
 }
 
+/**
+ * Resolve argv[0] to something spawnable WITHOUT a shell: a real executable, or an npm shim's
+ * JavaScript entry run by this Node. Returns [file, args] or null. Registry text never reaches cmd.exe.
+ */
+export function resolveNoShell(argv) {
+  const exe = onPath(argv[0])
+  if (!exe) return null
+  if (platform() === 'win32' && /\.(cmd|bat)$/i.test(exe)) {
+    const entry = npmShimEntry(exe)
+    return entry ? [process.execPath, [entry, ...argv.slice(1)]] : null
+  }
+  return [exe, argv.slice(1)]
+}
+
+/** execFileSync without a shell; throws when the program cannot be resolved safely. */
+export function runNoShell(argv, options = {}) {
+  const resolved = resolveNoShell(argv)
+  if (!resolved) throw new Error(`${argv[0]} cannot be run without a shell`)
+  return execFileSync(resolved[0], resolved[1], { ...options, shell: false })
+}
+
 export function fileAgeMinutes(path) {
   try { return (Date.now() - statSync(expand(path)).mtimeMs) / 60000 } catch { return null }
 }
@@ -113,7 +135,7 @@ export async function probeMember(m, { deep = false } = {}) {
   }
   if (deep && p.cmd) {
     try {
-      execFileSync(p.cmd[0], p.cmd.slice(1), { stdio: 'ignore', timeout: p.timeoutMs || 15000, shell: platform() === 'win32' })
+      runNoShell(p.cmd, { stdio: 'ignore', timeout: p.timeoutMs || 15000 })
       out.detail.push(`${p.cmd.join(' ')} ok`)
     } catch {
       out.ok = false

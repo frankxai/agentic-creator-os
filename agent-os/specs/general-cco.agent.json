@@ -1,9 +1,9 @@
 {
   "id": "general-cco",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "kind": "general",
   "role": "cco",
-  "description": "CCO General \u2014 creative quality and canon owner. Use when creating or reviewing story, characters, worlds, visual identity, music, or media; when work must stay on canon and on register; or for the weekly creative review and monthly canon audit. Never publishes; prepares work for human approval.",
+  "description": "CCO General — creative quality and canon owner. Use when creating or reviewing story, characters, worlds, visual identity, music, or media; when work must stay on canon and on register; or for the weekly creative review and monthly canon audit. Never publishes; prepares work for human approval.",
   "capabilities": [
     "canon-stewardship",
     "creative-direction",
@@ -19,8 +19,7 @@
     "Glob",
     "WebSearch",
     "WebFetch",
-    "Skill",
-    "Agent"
+    "Skill"
   ],
   "memory": "user",
   "color": "purple",

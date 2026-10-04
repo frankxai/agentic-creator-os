@@ -16,8 +16,7 @@
  */
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { execFileSync } from 'node:child_process'
-import { loadMesh, measureZone, probeMember, expand, onPath, fileAgeMinutes } from './lib/mesh-core.mjs'
+import { loadMesh, measureZone, probeMember, expand, onPath, fileAgeMinutes, runNoShell } from './lib/mesh-core.mjs'
 
 const args = process.argv.slice(2)
 const i = args.indexOf('--mesh')
@@ -34,12 +33,16 @@ const days = (minutes) => (minutes / 1440).toFixed(1)
 const readJson = (p) => JSON.parse(readFileSync(expand(p), 'utf8'))
 
 // CI workflow runs.
+// The registry is owner-edited code, but values still never reach a shell, and are validated first.
+const SAFE_REPO = /^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/
+const SAFE_WORKFLOW = /^[A-Za-z0-9_.-]+\.ya?ml$/
 if (ao.ci) {
-  if (NO_GH || !onPath('gh')) add('ci', `${ao.ci.repo} ${ao.ci.workflow}`, 'unknown', 'gh unavailable')
+  if (!SAFE_REPO.test(ao.ci.repo || '') || !SAFE_WORKFLOW.test(ao.ci.workflow || '')) add('ci', 'alwaysOn.ci', 'unknown', 'refused: repo or workflow is not a plain owner/name and file name')
+  else if (NO_GH || !onPath('gh')) add('ci', `${ao.ci.repo} ${ao.ci.workflow}`, 'unknown', 'gh unavailable')
   else {
     try {
-      const runs = JSON.parse(execFileSync('gh', ['run', 'list', '-R', ao.ci.repo, '-w', ao.ci.workflow, '-L', '3', '--json', 'status,conclusion,createdAt,event,headBranch'],
-        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 20000, shell: process.platform === 'win32' }))
+      const runs = JSON.parse(runNoShell(['gh', 'run', 'list', '-R', ao.ci.repo, '-w', ao.ci.workflow, '-L', '3', '--json', 'status,conclusion,createdAt,event,headBranch'],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'], timeout: 20000 }))
       if (!runs.length) add('ci', `${ao.ci.repo} ${ao.ci.workflow}`, 'NOT RUNNING', 'no runs recorded')
       else {
         const last = runs[0]

@@ -22,7 +22,7 @@ cadence.
 - **Generals:** `memory: user`. One memory per General across all repositories.
 - **Brand specialists:** `memory: project`. Memory travels with the brand's repository.
 - **Scratch or experimental agents:** `memory: local` (untracked).
-- **Shared memory tags:** `agent:<id>`, `brand:<id>`, `domain:<id>`, `role:<role>`. Until the memory connector supports native scope filters, tags are the scope.
+- **Shared memory tags:** the canonical set in `agent-os/memory.json` (`agent:<id>`, `role:<role>`, `brand:<id>`, `domain:<id>`). Until the memory connector supports native scope filters, tags are the scope. Every shared entry opens with one header line: `source: … | review: YYYY-MM-DD | supersedes: <entry id or none>`, because most memory servers have no fields for these.
 
 ## Write rules
 
@@ -41,8 +41,8 @@ needs, unverified numbers presented as facts.
 ## Freshness and contradiction
 
 - Every fact has a confidence and a review date. Past-due facts are leads, not truth.
-- A contradiction is recorded as a new entry that points to the old one; the old one is marked superseded, never silently overwritten.
-- `MEMORY.md` stays under 200 lines, in sections: Decisions, Facts, Patterns that work, Patterns that failed, Open questions. The agent prunes it at the end of a task when it grows past that.
+- A contradiction is recorded as a new entry that points to the old one (`supersedes:`); the old one is marked with the server's contradict operation, never silently overwritten.
+- Agent memory follows the runtime's own convention: `MEMORY.md` is an index with one line per entry, and each entry lives in its own file with one type (decision, fact, pattern, open question). The index stays far below the 200-line injection limit; the agent prunes stale lines at the end of a task.
 
 ## Promotion
 

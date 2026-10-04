@@ -33,8 +33,8 @@ General's role module marks as its own, and every human gate.
 ## Delegating to a General
 
 Spawn the General with the Agent tool and open the brief with the domain
-context it should take on, for example: "Act as the FrankX Growth General:
-domain frankx, swarms content-hooks, distribution, creator-kit." The General
+context it should take on, for example: "Act as the Studio Growth General:
+domain studio, swarms content-hooks, distribution." The General
 inherits its own role module and memory; your brief supplies the domain.
 
 ## Output shape

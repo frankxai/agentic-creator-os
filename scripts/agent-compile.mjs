@@ -42,10 +42,23 @@ const REQUIRED = ['id', 'version', 'role', 'description', 'model', 'tools', 'mem
 
 let errors = 0
 const fail = (msg) => { console.error(`✗ ${msg}`); errors++ }
+// Shared-memory conventions live in one file (agent-os/memory.json); every compiled agent renders them.
+const MEMORY_CONV = JSON.parse(readFileSync(join(ROOT, 'agent-os', 'memory.json'), 'utf8'))
 const readRel = (rel) => {
-  const p = join(ROOT, rel)
+  const p = resolve(ROOT, rel)
+  // Only files inside this repository may be inlined into a compiled prompt.
+  if (!p.startsWith(ROOT + sep)) { fail(`refusing to read outside the repository: ${rel}`); return '' }
   if (!existsSync(p)) { fail(`missing file ${rel}`); return '' }
   return readFileSync(p, 'utf8').trim()
+}
+
+// Every value that lands in YAML frontmatter is allowlisted: one line, no YAML syntax, so a spec or
+// overlay can never smuggle in keys such as permissionMode or hooks.
+const SAFE = {
+  model: /^(opus|sonnet|haiku|inherit|claude-[a-z0-9.-]+)$/,
+  color: /^(red|blue|green|yellow|purple|orange|pink|cyan)$/,
+  tool: /^[A-Za-z][A-Za-z0-9_:*.-]*(\([A-Za-z0-9_:*., -]+\))?$/,
+  skill: /^[A-Za-z0-9][A-Za-z0-9:_-]*$/,
 }
 
 /** Drop frontmatter, a leading H1, and a leading blockquote so stacked documents read as sections of one prompt. */
@@ -65,6 +78,10 @@ function validate(spec, file) {
   // ACOS agent convention (docs/AGENT_CONTRIBUTION_GUIDE.md): 3-7 kebab-case capabilities and a priority.
   if (!Array.isArray(spec.capabilities) || spec.capabilities.length < 3 || spec.capabilities.length > 7 || !spec.capabilities.every((c) => KEBAB.test(c))) fail(`${file}: capabilities must be 3-7 kebab-case entries`)
   if (!['high', 'medium', 'low'].includes(spec.priority)) fail(`${file}: priority must be high, medium, or low`)
+  if (spec.model && !SAFE.model.test(spec.model)) fail(`${file}: model ${JSON.stringify(spec.model)} is not an allowed model name`)
+  if (spec.color && !SAFE.color.test(spec.color)) fail(`${file}: color ${JSON.stringify(spec.color)} is not an allowed color`)
+  for (const t of spec.tools || []) if (!SAFE.tool.test(t)) fail(`${file}: tool ${JSON.stringify(t)} is not a plain tool name`)
+  for (const s of spec.skills || []) if (!SAFE.skill.test(s)) fail(`${file}: skill ${JSON.stringify(s)} is not a plain skill name`)
 }
 
 function loadOverlay() {
@@ -78,6 +95,7 @@ function compile(spec, overlay) {
   const extra = (overlay && overlay.agents && overlay.agents[spec.id]) || {}
   const shared = (overlay && overlay.all) || {}
   const tools = [...new Set([...spec.tools, ...(shared.extraTools || []), ...(extra.extraTools || [])])]
+  for (const t of tools) if (!SAFE.tool.test(t)) fail(`${spec.id}: overlay tool ${JSON.stringify(t)} is not a plain tool name`)
   const reading = [...new Set([...(spec.requiredReading || []), ...(shared.requiredReading || []), ...(extra.requiredReading || [])])]
   const knowledge = [...(spec.knowledge || []), ...(shared.knowledge || []), ...(extra.knowledge || [])]
   const overlayDocs = [...(shared.overlayFiles || []), ...(extra.overlayFiles || [])]
@@ -135,7 +153,10 @@ function compile(spec, overlay) {
     body.push('', '## Knowledge sources', '', '| Source | What it is for | Review every |', '| --- | --- | --- |')
     for (const k of knowledge) body.push(`| \`${k.source}\` | ${k.purpose || ''} | ${k.review || 'quarter'} |`)
   }
-  body.push('', '## Memory scope', '', `Agent memory: \`${spec.memory}\` scope (Claude Code \`memory:\` frontmatter). Shared memory tags: \`agent:${spec.id}\`, \`role:${spec.role}\`, plus \`brand:<id>\` for the brand in play.`)
+  const tags = MEMORY_CONV.tags.map((t) => t.replace('<id>', t.startsWith('agent:') ? spec.id : '<id>').replace('<role>', spec.role))
+  body.push('', '## Memory scope', '',
+    `Agent memory: \`${spec.memory}\` scope (Claude Code \`memory:\` frontmatter). ${MEMORY_CONV.agentMemory}.`, '',
+    `Shared memory tags: ${tags.map((t) => `\`${t}\``).join(', ')}. First line of every shared entry: \`${MEMORY_CONV.header}\`.`)
   if (spec.evals) body.push('', `Evals live in \`${spec.evals}\`. A change to this agent's sources is not done until they pass.`)
   return fm.join('\n') + '\n\n' + body.join('\n').replace(/\n{3,}/g, '\n\n') + '\n'
 }

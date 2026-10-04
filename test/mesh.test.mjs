@@ -78,6 +78,37 @@ test('a dispatched job really runs in the background and its output lands next t
   assert.match(readFileSync(receipt.out, 'utf8'), /hello from the mesh test/);
 });
 
+test('the zone cap refuses another local job while one is running, whichever member it targets', () => {
+  const { dir, meshPath, job } = fixture();
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.zone.localParallel = { green: 1, yellow: 1, red: 1 };
+  mesh.members.push({ id: 'sleeper', kind: 'harness', probe: { bin: 'node' }, run: { mode: 'argv', argv: ['node', '-e', 'setTimeout(function () {}, 8000)'], local: true } });
+  writeFileSync(meshPath, JSON.stringify(mesh));
+  const first = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'sleeper', '--job', job, '--json']);
+  assert.equal(first.status, 0, first.stderr);
+  const pid = JSON.parse(first.stdout).pid;
+  try {
+    const second = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'echo', '--job', job, '--json']);
+    assert.equal(second.status, 3);
+    assert.match(JSON.parse(second.stdout).reason, /allows 1 local job/);
+  } finally {
+    try { process.kill(pid); } catch { /* already gone */ }
+  }
+  assert.ok(dir);
+});
+
+test('registry values never reach a shell: an unsafe CI repo is refused before gh runs', () => {
+  const { meshPath } = fixture();
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.alwaysOn.ci = { repo: 'owner/repo & calc', workflow: 'agent-os.yml' };
+  writeFileSync(meshPath, JSON.stringify(mesh));
+  const out = JSON.parse(execFileSync(process.execPath, [script('always-on-status.mjs'), '--mesh', meshPath, '--json', '--no-gh'], { encoding: 'utf8' }));
+  assert.match(out.clocks.find((c) => c.clock === 'ci').evidence, /refused/);
+  const src = readFileSync(script('mesh-dispatch.mjs'), 'utf8') + readFileSync(script('always-on-status.mjs'), 'utf8') + readFileSync(path.join(root, 'scripts', 'lib', 'mesh-core.mjs'), 'utf8');
+  assert.doesNotMatch(src, /shell:\s*(true|process\.platform|platform\(\))/, 'no shell-enabled spawn in the mesh scripts');
+  assert.doesNotMatch(src, /spawn(Sync)?\(\s*['"]cmd\.exe/, 'no cmd.exe fallback');
+});
+
 test('an npm Windows shim resolves to its JavaScript entry (background output is kept)', async () => {
   const { npmShimEntry } = await import(new URL('../scripts/lib/mesh-core.mjs', import.meta.url));
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-shim-'));

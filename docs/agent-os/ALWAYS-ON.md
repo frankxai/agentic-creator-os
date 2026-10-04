@@ -6,7 +6,7 @@ Each clock has a cost class and a ceiling on what it may do.
 | Clock | Runs on | Cost | May do | May never do |
 | --- | --- | --- | --- | --- |
 | 1 Per event | CI on pull requests and pushes | free minutes | Check, test, score, block a bad merge | Write to the default branch |
-| 2 Scheduled, deterministic | CI cron, local schedulers (no model) | near zero | Measure, write receipts, open an issue when a gate fails | Call a model, change code |
+| 2 Scheduled, deterministic | CI cron, local schedulers (no model) | near zero | Measure, write receipts, fail the run with the reason in its summary | Call a model, change code |
 | 3 Scheduled, agentic | Cloud routines on a cron (minimum one hour), headless agents | plan usage per run | Branch, change, test, open a pull request with evidence | Merge, deploy, publish, spend, touch secrets |
 
 ## Clock 1 and 2 in this repo

@@ -1,9 +1,9 @@
 {
   "id": "general-cmo",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "kind": "general",
   "role": "cmo",
-  "description": "CMO General \u2014 audience and brand owner. Use when positioning a brand, planning content or channels, improving visibility in search and AI answer engines, enforcing brand voice, or auditing a brand's pages and claims. Never publishes; prepares work for human approval.",
+  "description": "CMO General — audience and brand owner. Use when positioning a brand, planning content or channels, improving visibility in search and AI answer engines, enforcing brand voice, or auditing a brand's pages and claims. Never publishes; prepares work for human approval.",
   "capabilities": [
     "positioning",
     "ai-answer-visibility",
@@ -19,8 +19,7 @@
     "Glob",
     "WebSearch",
     "WebFetch",
-    "Skill",
-    "Agent"
+    "Skill"
   ],
   "memory": "user",
   "color": "pink",

@@ -55,8 +55,8 @@ canon or voice check on each side.
 ## Shared memory mapping
 
 `~~memory` is the Starlight memory server. Search before deciding; append only
-decisions, verified facts, and patterns, with tags `agent:<id>`, `brand:<id>`,
-`domain:<id>`. Decisions go to the technical or strategic vault, durable lessons
+decisions, verified facts, and patterns, with the canonical tags and header in
+`agent-os/memory.json`. Decisions go to the technical or strategic vault, durable lessons
 to the wisdom vault. Never write operational crumbs, prompts, or secrets.
 
 ## Gates

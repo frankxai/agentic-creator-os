@@ -5,7 +5,7 @@
   "zone": {
     "green": { "ramGiB": 6, "diskGiB": 80 },
     "yellow": { "ramGiB": 4, "diskGiB": 50 },
-    "localParallel": { "green": 4, "yellow": 2, "red": 0 }
+    "localParallel": { "green": 4, "yellow": 2, "red": 1 }
   },
   "alwaysOn": {
     "ci": { "repo": "your-org/your-repo", "workflow": "agent-os.yml" },
@@ -18,7 +18,7 @@
       "role": "This session and its subagents; headless runs for small jobs.",
       "useWhen": "Reasoning, decisions, small verified edits.",
       "probe": { "bin": "claude" },
-      "run": { "mode": "argv", "argv": ["claude", "-p", "Follow the task given on stdin.", "--max-turns", "20", "--output-format", "json", "--allowedTools", "Read,Grep,Glob"], "stdin": "job", "local": true, "minRamGiB": 1.5, "maxConcurrent": 1 }
+      "run": { "mode": "argv", "argv": ["claude", "-p", "Follow the task given on stdin.", "--max-turns", "20", "--output-format", "json", "--tools", "Read,Grep,Glob", "--disallowedTools", "mcp__*"], "stdin": "job", "local": true, "minRamGiB": 1.5, "maxConcurrent": 1 }
     },
     {
       "id": "github-actions",

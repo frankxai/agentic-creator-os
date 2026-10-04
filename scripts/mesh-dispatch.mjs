@@ -23,8 +23,7 @@
 import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { spawn } from 'node:child_process'
-import { platform } from 'node:os'
-import { loadMesh, measureZone, probeMember, onPath, expand, npmShimEntry } from './lib/mesh-core.mjs'
+import { loadMesh, measureZone, probeMember, expand, resolveNoShell } from './lib/mesh-core.mjs'
 
 const args = process.argv.slice(2)
 const VALUE_FLAGS = ['--mesh', '--member', '--job', '--cwd', '--repo']
@@ -85,6 +84,18 @@ if (run.maxConcurrent && existsSync(receiptsDir)) {
     .filter((r) => r && r.status === 'started' && r.pid && alive(r.pid))
   if (running.length >= run.maxConcurrent) finish('refused', { reason: `${running.length} ${MEMBER} job(s) already running (max ${run.maxConcurrent})` }, 3)
 }
+// The zone cap counts every running local job, whichever member it went to.
+if (run.local) {
+  const runningLocal = existsSync(receiptsDir)
+    ? readdirSync(receiptsDir).filter((f) => f.endsWith('.json'))
+      .map((f) => { try { return JSON.parse(readFileSync(join(receiptsDir, f), 'utf8')) } catch { return null } })
+      .filter((r) => r && r.status === 'started' && r.local && r.pid && alive(r.pid)).length
+    : 0
+  if (runningLocal >= zone.localParallelCap) {
+    finish('refused', { reason: `zone ${zone.zone} allows ${zone.localParallelCap} local job(s) and ${runningLocal} running; offload to a remote member` }, 3)
+  }
+}
+receipt.local = !!run.local
 
 // ---- Build the command ----
 
@@ -105,36 +116,25 @@ if (run.mode === 'argv') {
   finish('refused', { reason: `unknown run mode "${run.mode}"` }, 3)
 }
 
-const exe = onPath(argv[0])
-if (!exe) finish('refused', { reason: `${argv[0]} not on PATH` }, 3)
+// Resolve without a shell: a real executable, or an npm shim's JavaScript entry run by Node.
+// A shim that is not a recognisable npm shim is refused (a cmd.exe fallback would expand %VARS%).
+const resolved = resolveNoShell(argv)
+if (!resolved) finish('refused', { reason: `${argv[0]} is not on PATH or cannot be run without a shell` }, 3)
+const [file, fileArgs] = resolved
 receipt.command = [argv[0], ...argv.slice(1).map((a) => (a.length > 120 ? `${a.slice(0, 117)}...` : a))]
+receipt.launch = file === process.execPath && argv[0] !== 'node' ? 'npm-shim-entry' : 'direct'
 
-if (DRY) finish('dry-run', { resolved: exe, stdin: run.stdin === 'job' ? 'job file' : 'none' })
+if (DRY) finish('dry-run', { resolved: file, stdin: run.stdin === 'job' ? 'job file' : 'none' })
 
 // ---- Launch in the background; output goes next to the receipt ----
 
 mkdirSync(receiptsDir, { recursive: true })
 const out = join(receiptsDir, `${id}.out.txt`)
 const fd = openSync(out, 'a')
-// Windows cannot spawn .cmd/.bat shims directly, and a detached cmd.exe loses the output of the
-// Node program an npm shim starts. So resolve an npm shim to its JavaScript entry and run that with
-// this Node, detached; only an unrecognised shim falls back to cmd.exe (output capture unverified).
-const quote = (a) => (/[\s"&|<>^()]/.test(a) ? `"${a.replace(/"/g, '""')}"` : a)
+// Windows cannot spawn .cmd shims directly, and a detached cmd.exe loses the output of the Node
+// program an npm shim starts; resolveNoShell already turned such a shim into Node + its JS entry.
 const stdio = [run.stdin === 'job' ? 'pipe' : 'ignore', fd, fd]
-let child
-if (platform() === 'win32' && /\.(cmd|bat)$/i.test(exe)) {
-  const entry = npmShimEntry(exe)
-  if (entry) {
-    receipt.launch = 'npm-shim-entry'
-    child = spawn(process.execPath, [entry, ...argv.slice(1)], { cwd: CWD, detached: true, windowsHide: true, stdio })
-  } else {
-    receipt.launch = 'cmd-fallback (output capture unverified)'
-    child = spawn('cmd.exe', ['/d', '/s', '/c', `"${[exe, ...argv.slice(1)].map(quote).join(' ')}"`], { cwd: CWD, detached: true, windowsVerbatimArguments: true, windowsHide: true, stdio })
-  }
-} else {
-  receipt.launch = 'direct'
-  child = spawn(exe, argv.slice(1), { cwd: CWD, detached: true, windowsHide: true, stdio })
-}
+const child = spawn(file, fileArgs, { cwd: CWD, detached: true, windowsHide: true, stdio, shell: false })
 if (run.stdin === 'job') {
   child.stdin.end(readFileSync(jobPath))
 }
