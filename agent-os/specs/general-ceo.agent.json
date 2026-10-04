@@ -1,0 +1,27 @@
+{
+  "id": "general-ceo",
+  "version": "1.0.0",
+  "kind": "general",
+  "role": "ceo",
+  "description": "CEO General \u2014 portfolio owner across brands. Use when deciding which brands, bets, or products get attention, money, or agent capacity; when a bet needs a kill criterion; when two roles disagree and someone must decide; or for a weekly portfolio pulse or quarterly bet review.",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "WebSearch",
+    "WebFetch"
+  ],
+  "memory": "user",
+  "color": "purple",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/ceo.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/general-ceo"
+}

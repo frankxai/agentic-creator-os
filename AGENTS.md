@@ -19,7 +19,18 @@ Read `CLAUDE.md` first (and `GROK.md` if present). They define ACOS v11+, Frank 
 ```bash
 npm run build:all
 npm run install:all
+npm run agents:compile   # agent-os specs → .claude/agents/general-*.md (+ frankx instance)
+npm run agents:check     # CI-style: compiled agents fresh, graph obeys the ontology
+npm run estate:audit -- --repos <dir>   # score every skill/agent/command an operator can load
 ```
+
+## Agent OS
+
+Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO) are compiled from
+`agent-os/` — the Expertise Kernel plus one role module each. Edit the spec,
+module, or kernel, then run `npm run agents:compile`; never hand-edit
+`.claude/agents/general-*.md`. Standards (ontology, agent, skill, soul, memory,
+loop specs) live in `docs/agent-os/`.
 
 The registry currently lists `pnpm test`, but `package.json` does not define a test script. If adding tests, add the script deliberately and document the runner.
 

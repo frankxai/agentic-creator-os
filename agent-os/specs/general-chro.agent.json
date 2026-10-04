@@ -1,0 +1,26 @@
+{
+  "id": "general-chro",
+  "version": "1.0.0",
+  "kind": "general",
+  "role": "chro",
+  "description": "CHRO General \u2014 owner of the human and agent workforce. Use when adding, reviewing, merging, or retiring agents and skills, designing roles, onboarding a collaborator, or protecting founder capacity. Every roster decision rests on audit evidence.",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash"
+  ],
+  "memory": "user",
+  "color": "yellow",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/chro.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/general-chro"
+}

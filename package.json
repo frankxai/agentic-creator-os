@@ -73,6 +73,9 @@
     "publish": "npm run build:all && npm publish",
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
     "lint": "node scripts/lint.mjs",
+    "agents:compile": "node scripts/agent-compile.mjs && node scripts/agent-compile.mjs --instance frankx",
+    "agents:check": "node scripts/agent-compile.mjs --check && node scripts/agent-compile.mjs --check --instance frankx && node scripts/agent-os-graph.mjs",
+    "estate:audit": "node scripts/estate-audit.mjs",
     "test": "npm run build:all && node --test test/*.test.mjs"
   },
   "devDependencies": {

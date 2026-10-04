@@ -1,0 +1,89 @@
+{
+  "all": {
+    "extraTools": [
+      "mcp__starlight-memory__sis_vault_search",
+      "mcp__starlight-memory__sis_search",
+      "mcp__starlight-memory__sis_recent_entries",
+      "mcp__starlight-memory__sis_stale",
+      "mcp__starlight-memory__sis_append_entry",
+      "mcp__starlight-memory__sis_confirm",
+      "mcp__starlight-memory__sis_contradict"
+    ],
+    "requiredReading": [
+      "SOUL.md",
+      "taste.md",
+      "design.md",
+      "~/.agent-harness/REGISTER-BOUNDARIES.md",
+      "~/.agent-harness/PRINCIPLES.md"
+    ],
+    "overlayFiles": [
+      "instances/frankx/agent-os/company-soul.md"
+    ]
+  },
+  "agents": {
+    "general-cfo": {
+      "knowledge": [
+        {
+          "source": "starlight-cfo skill",
+          "purpose": "entity, tax, and runway model for the founder's company",
+          "review": "quarter"
+        }
+      ]
+    },
+    "general-coo": {
+      "knowledge": [
+        {
+          "source": "agentic-ops/ops/OPS-LEDGER.md",
+          "purpose": "cross-repo status (single source)",
+          "review": "week"
+        },
+        {
+          "source": "~/.starlight/restart/QUEUE.md",
+          "purpose": "lane queue and conductor order",
+          "review": "day"
+        }
+      ]
+    },
+    "general-caio": {
+      "knowledge": [
+        {
+          "source": "agentic-creator-os/scripts/estate-audit.mjs",
+          "purpose": "estate quality scores",
+          "review": "week"
+        },
+        {
+          "source": "~/.starlight/agent-os/",
+          "purpose": "private brand manifests, estate graph, audits",
+          "review": "month"
+        }
+      ]
+    },
+    "general-chro": {
+      "knowledge": [
+        {
+          "source": "~/.starlight/agent-os/",
+          "purpose": "roster evidence: latest estate audit and brand manifests",
+          "review": "month"
+        }
+      ]
+    },
+    "general-ceo": {
+      "knowledge": [
+        {
+          "source": "~/.starlight/agent-os/brands/",
+          "purpose": "brand doors, bets, and gaps",
+          "review": "month"
+        }
+      ]
+    },
+    "general-cmo": {
+      "knowledge": [
+        {
+          "source": "~/.agent-harness/REGISTER-BOUNDARIES.md",
+          "purpose": "register and leak rules",
+          "review": "quarter"
+        }
+      ]
+    }
+  }
+}

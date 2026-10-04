@@ -148,10 +148,10 @@ function verifyClaims(canonical, measured) {
       claude: '85 Top-level Commands',
     },
     topLevelAgents: {
-      expected: 69,
-      readme: 'Top-level agent profiles | 69',
-      quickstart: '69 top-level agent profiles',
-      claude: '69 Top-level Agent Profiles',
+      expected: 77,
+      readme: 'Top-level agent profiles | 77',
+      quickstart: '77 top-level agent profiles',
+      claude: '77 Top-level Agent Profiles',
     },
     installableShellHooks: {
       expected: 9,

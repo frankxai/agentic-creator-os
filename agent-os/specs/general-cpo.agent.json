@@ -1,0 +1,27 @@
+{
+  "id": "general-cpo",
+  "version": "1.0.0",
+  "kind": "general",
+  "role": "cpo",
+  "description": "CPO General \u2014 product owner. Use when deciding what a brand sells or ships next, writing a product brief or spec with acceptance criteria and evals, designing an offer ladder or packaging, or reviewing whether a live product is working.",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "WebSearch",
+    "WebFetch"
+  ],
+  "memory": "user",
+  "color": "cyan",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/cpo.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/general-cpo"
+}

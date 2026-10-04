@@ -1,0 +1,27 @@
+{
+  "id": "general-cmo",
+  "version": "1.0.0",
+  "kind": "general",
+  "role": "cmo",
+  "description": "CMO General \u2014 audience and brand owner. Use when positioning a brand, planning content or channels, improving visibility in search and AI answer engines, enforcing brand voice, or auditing a brand's pages and claims. Never publishes; prepares work for human approval.",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "WebSearch",
+    "WebFetch"
+  ],
+  "memory": "user",
+  "color": "pink",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/cmo.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/general-cmo"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "general-coo",
+  "version": "1.0.0",
+  "kind": "general",
+  "role": "coo",
+  "description": "COO General \u2014 operations owner. Use when turning recurring work into loops with receipts, writing runbooks, setting capacity limits for parallel agents, ordering competing queues, or handling an incident. Runs the daily and weekly ops pulses.",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/coo.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/general-coo"
+}
