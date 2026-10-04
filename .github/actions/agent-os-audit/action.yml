@@ -1,0 +1,36 @@
+name: Agent OS audit
+description: >-
+  Score this repository's Claude Code skills, agents, and commands against the
+  ACOS Agent OS specs, write the scorecard to the run summary, and optionally
+  fail below a quality floor. No install step, no secrets, no model calls.
+
+inputs:
+  min-score:
+    description: Fail when the average score of loadable artifacts is below this (0 disables the floor).
+    required: false
+    default: '0'
+  acos-ref:
+    description: Branch, tag, or commit of frankxai/agentic-creator-os to take the scanner from.
+    required: false
+    default: main
+
+runs:
+  using: composite
+  steps:
+    - name: Fetch the Agent OS scanner
+      uses: actions/checkout@v4
+      with:
+        repository: frankxai/agentic-creator-os
+        ref: ${{ inputs.acos-ref }}
+        path: .acos-agent-os
+        sparse-checkout: scripts
+
+    - name: Score skills, agents, and commands
+      shell: bash
+      env:
+        MIN_SCORE: ${{ inputs.min-score }}
+      run: |
+        set -euo pipefail
+        floor=()
+        if [ "$MIN_SCORE" != "0" ]; then floor=(--min-score "$MIN_SCORE"); fi
+        node .acos-agent-os/scripts/estate-audit.mjs --home "$GITHUB_WORKSPACE" --md "$GITHUB_STEP_SUMMARY" "${floor[@]}"

@@ -99,6 +99,14 @@ test('always-on status reads receipts only and marks missing clocks as not runni
   assert.match(pulse.evidence, /average 80/);
 });
 
+test('the reusable audit action runs the scanner on the calling repository without secrets', () => {
+  const action = readFileSync(path.join(root, '.github', 'actions', 'agent-os-audit', 'action.yml'), 'utf8');
+  assert.match(action, /using: composite/);
+  assert.match(action, /node \.acos-agent-os\/scripts\/estate-audit\.mjs --home "\$GITHUB_WORKSPACE"/);
+  assert.doesNotMatch(action, /secrets\./, 'the action must not need secrets');
+  assert.match(action, /MIN_SCORE: \$\{\{ inputs\.min-score \}\}/, 'inputs reach the shell through env, not inline interpolation');
+});
+
 test('a new adopter instance compiles from the template, out of tree', () => {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-adopt-'));
   const org = path.join(root, 'instances', '_template', 'agent-os', 'org', 'domain-queens.example.json');

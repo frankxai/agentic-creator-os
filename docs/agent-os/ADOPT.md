@@ -65,10 +65,25 @@ Fix the five lowest first.
 
 ## 5. Keep it from drifting
 
-Copy `.github/workflows/agent-os.yml` into your repository. It compiles, checks
-the ontology, and enforces a quality floor every day with no model calls and
-no secrets. Raise the floor as your score rises. [ALWAYS-ON.md](ALWAYS-ON.md)
-covers scheduled agentic work.
+Any repository with a `.claude/` folder can get the scorecard and a quality
+floor in CI with one step, no install and no secrets:
+
+```yaml
+# .github/workflows/agent-quality.yml
+name: Agent quality
+on: [pull_request, workflow_dispatch]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: frankxai/agentic-creator-os/.github/actions/agent-os-audit@main
+        with:
+          min-score: 70   # start at your current average; raise it as you improve
+```
+
+For the compile and ontology checks too, copy `.github/workflows/agent-os.yml`.
+[ALWAYS-ON.md](ALWAYS-ON.md) covers scheduled agentic work.
 
 ## 6. Optional: the mesh
 
