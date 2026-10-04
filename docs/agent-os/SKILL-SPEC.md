@@ -15,7 +15,10 @@ audit scores skills against rules S1-S8 (100 points).
 
 Claude Code loads only `<skills-root>/<name>/SKILL.md`. A `SKILL.md` nested one
 folder deeper, and any loose `.md` file in a skills root, never loads. The audit
-reports those as dead files.
+reports those as dead files. Harness roots are `.claude/{skills,agents,commands}`,
+`.agents/skills`, and plugin roots (a folder with `.claude-plugin/plugin.json`);
+a `skills`, `agents`, or `commands` folder anywhere else in a repository is
+inventoried as `outside` and never scored or counted as shadowing.
 
 ## Frontmatter
 
@@ -40,7 +43,7 @@ publish, send).
 
 | Rule | Points | Check |
 | --- | ---: | --- |
-| S1 | 20 | Has YAML frontmatter |
+| S1 | 20 | Has YAML frontmatter (Claude Code loads a skill without it, falling back to the folder name and first line, so S1 measures routing quality, not loadability) |
 | S2 | 10 | `name` kebab-case, at most 64 characters |
 | S2b | 5 | `name` equals the folder name |
 | S3 | 20 | `description` 50-1024 characters (8 if present but out of range) |
@@ -48,7 +51,7 @@ publish, send).
 | S5 | 10 | Body at most 500 lines |
 | S6 | 10 | Body at most 200 lines, or depth moved to `references/` or `scripts/` |
 | S7 | 5 | No placeholder text in the description |
-| S8 | 5 | Has `evals/` or a verification, eval, test, or checklist section |
+| S8 | 5 | Has `evals/`, or a heading with the whole word verify/verification, eval(s), test(s)/testing, quality gate, or checklist |
 
 ## Evals
 

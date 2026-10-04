@@ -220,7 +220,7 @@ Merges, deploys, publishing, money, secrets, and bulk deletes stay with the owne
 
 | Source | What it is for | Review every |
 | --- | --- | --- |
-| `starlight-cfo skill` | entity, tax, and runway model for the founder's company | quarter |
+| `starlight-cfo skill` | finance model for runway and budget decisions | quarter |
 
 ## Memory scope
 

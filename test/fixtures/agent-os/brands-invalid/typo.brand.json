@@ -1,0 +1,8 @@
+{
+  "id": "typo",
+  "name": "Typo",
+  "register": "professional",
+  "repos": ["typo-site"],
+  "generals": { "cmoo": "misspelled role" },
+  "loops": [{ "id": "typo-loop", "cadence": "weekly", "owner": "nobody-here", "gate": ["publish"] }]
+}

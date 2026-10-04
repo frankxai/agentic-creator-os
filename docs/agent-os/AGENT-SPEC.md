@@ -45,9 +45,9 @@ enables Read, Write, and Edit for that directory.
 | A3b | 10 | `description` contains a when-to-use trigger |
 | A4 | 15 | `tools` declared (otherwise the agent inherits every tool) |
 | A5 | 5 | `model` declared |
-| A6 | 10 | Body has an output, deliverable, report, or done heading |
+| A6 | 10 | Body has a heading containing output, deliverable, return, report, done, verification, or acceptance |
 | A7 | 10 | Body between 15 and 400 lines |
-| A8 | 5 | Declares a memory scope, preloaded skills, or a knowledge/required-reading section |
+| A8 | 5 | Declares `memory` or `skills` in frontmatter, or has a heading containing required reading, knowledge, sources, or memory |
 
 Grades: A ≥ 85, B ≥ 70, C ≥ 50, D below.
 

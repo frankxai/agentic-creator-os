@@ -26,12 +26,21 @@ test('agent-os graph obeys the ontology', () => {
   assert.match(out, /agent-os-graph: \d+ nodes, \d+ edges/);
 });
 
+test('brand manifests resolve to real agents; typos fail instead of becoming phantom agents', () => {
+  const fixtures = path.join(root, 'test', 'fixtures', 'agent-os');
+  assert.match(run('agent-os-graph.mjs', ['--brands', path.join(fixtures, 'brands-valid')]), /nodes/);
+  assert.throws(
+    () => run('agent-os-graph.mjs', ['--brands', path.join(fixtures, 'brands-invalid')]),
+    (err) => err.status === 1 && /unknown agent "general-cmoo"/.test(err.stderr) && /unknown agent "nobody-here"/.test(err.stderr),
+  );
+});
+
 test('every compiled General declares tools, model, and a native memory scope', () => {
   for (const spec of specs) {
     for (const dir of ['.claude/agents', 'instances/frankx/agents']) {
       const file = path.join(root, dir, `${spec.id}.md`);
       assert.ok(existsSync(file), `${dir}/${spec.id}.md missing`);
-      const fm = readFileSync(file, 'utf8').match(/^---\n([\s\S]*?)\n---/);
+      const fm = readFileSync(file, 'utf8').replace(/\r\n/g, '\n').match(/^---\n([\s\S]*?)\n---/);
       assert.ok(fm, `${spec.id}: no frontmatter`);
       assert.match(fm[1], new RegExp(`^name: ${spec.id}$`, 'm'));
       assert.match(fm[1], /^description: ".*Use (when|for).*"$/m);
@@ -49,8 +58,15 @@ test('every spec has at least one eval case with graders', () => {
     const cases = readdirSync(dir).filter((c) => existsSync(path.join(dir, c, 'prompt.md')));
     assert.ok(cases.length > 0, `${spec.id}: no eval case with prompt.md`);
     for (const c of cases) {
+      const prompt = readFileSync(path.join(dir, c, 'prompt.md'), 'utf8').replace(/\r\n/g, '\n');
+      assert.match(prompt, /^---\nmax_turns: \d+\nallowed_tools: \[.*\bAgent\b.*\]\n---\n/, `${spec.id}/${c}: prompt.md frontmatter`);
+      assert.match(prompt, new RegExp(`\\b${spec.id}\\b`), `${spec.id}/${c}: prompt must name the agent under test`);
       const graders = path.join(dir, c, 'graders');
       assert.ok(existsSync(graders) && readdirSync(graders).length > 0, `${spec.id}/${c}: no graders`);
+      for (const g of readdirSync(graders)) {
+        const body = readFileSync(path.join(graders, g), 'utf8').replace(/\r\n/g, '\n');
+        assert.match(body, /^---\ntype: (llm|regex|tool_used|tool_order|file_exists|baseline)\nweight: \d+(\.\d+)?\n---\n+\S/, `${spec.id}/${c}/${g}: grader frontmatter`);
+      }
     }
   }
 });

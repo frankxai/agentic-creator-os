@@ -18,12 +18,19 @@
  * Exit 1 only when --min-score is given and the loadable average falls below it.
  */
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs'
-import { join, basename, dirname, sep } from 'node:path'
+import { join, basename, dirname, resolve, sep } from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { homedir } from 'node:os'
 
 const args = process.argv.slice(2)
+const VALUE_FLAGS = new Set(['--home', '--repos', '--json', '--md', '--min-score'])
+for (let i = 0; i < args.length; i++) {
+  if (VALUE_FLAGS.has(args[i]) && (args[i + 1] === undefined || args[i + 1].startsWith('--'))) {
+    console.error(`✗ ${args[i]} needs a value`)
+    process.exit(2)
+  }
+}
 const flag = (name) => {
   const i = args.indexOf(name)
   return i >= 0 ? args[i + 1] : undefined
@@ -45,7 +52,16 @@ const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/
 const TRIGGER = /\b(use (this |it )?(when|for|to|after|before|whenever|proactively)|when (the )?(user|frank|you|asked)|trigger|invoke[sd]?|auto-?invokes?|activates? (when|on)|should be used)/i
 const OUTPUT_CONTRACT = /^#{1,3} .*(output|deliverable|return|report|done|verification|acceptance)/im
 
-const tilde = (p) => (p.startsWith(HOME) ? '~' + p.slice(HOME.length).split(sep).join('/') : p.split(sep).join('/'))
+/** Absolute path with forward slashes; Windows comparisons ignore case. */
+const posix = (p) => resolve(p).split(sep).join('/')
+const fold = (p) => (process.platform === 'win32' ? p.toLowerCase() : p)
+const HOME_POSIX = posix(HOME)
+/** Print paths relative to home so reports never carry a personal home path. */
+const tilde = (p) => {
+  const q = posix(p)
+  const under = fold(q) === fold(HOME_POSIX) || fold(q).startsWith(fold(HOME_POSIX) + '/')
+  return under ? '~' + q.slice(HOME_POSIX.length) : q
+}
 
 function isDir(p) {
   try { return statSync(p).isDirectory() } catch { return false }
@@ -75,9 +91,16 @@ function frontmatter(text) {
       while (i + 1 < lines.length && (/^\s+/.test(lines[i + 1]) || lines[i + 1] === '')) block.push(lines[++i].trim())
       val = block.join(' ').trim()
     }
-    fm[key] = val.replace(/^["']|["']$/g, '').trim()
+    fm[key] = unquote(val.trim())
   }
   return { fm, body: text.slice(m[0].length) }
+}
+
+/** YAML scalar quoting: double-quoted values follow JSON escapes, single quotes double up. */
+function unquote(v) {
+  if (/^".*"$/.test(v)) { try { return JSON.parse(v) } catch { return v.slice(1, -1) } }
+  if (/^'.*'$/.test(v)) return v.slice(1, -1).replace(/''/g, "'")
+  return v
 }
 
 const items = []
@@ -94,52 +117,61 @@ function record(kind, path, scope, extra = {}) {
   items.push({ kind, scope, path: tilde(path), name, fm, body, bodyLines, hash, mtime, dirName, ...extra })
 }
 
-/** Skills root: <root>/<name>/SKILL.md is loadable; deeper SKILL.md and loose .md are not. */
-function scanSkillsRoot(root, scope) {
+// Why an artifact does not load. `nested` and `loose` sit inside a harness root but are
+// never picked up; `outside` sits in a repo folder no harness reads (code, docs, archives).
+const WHY = {
+  nested: 'nested skill (Claude Code loads only <skills>/<name>/SKILL.md)',
+  loose: 'loose .md in skills root (not a <name>/SKILL.md)',
+  outside: 'outside a harness root (repo content, not loaded)',
+}
+const isDocName = (entry) => { const stem = entry.slice(0, -3); return stem === stem.toUpperCase() }
+const skillExtras = (dir) => ({
+  hasRefs: isDir(join(dir, 'references')) || isDir(join(dir, 'scripts')) || isDir(join(dir, 'reference')),
+  hasEvals: isDir(join(dir, 'evals')) || existsSync(join(dir, 'evals.json')),
+})
+
+/** Skills root: <root>/<name>/SKILL.md loads; deeper SKILL.md and loose .md do not. */
+function scanSkillsRoot(root, scope, harness = true) {
   if (!isDir(root)) return
   for (const d of entries(root)) {
     const entry = d.name
     const full = join(root, entry)
     if (d.isDirectory() || (d.isSymbolicLink() && isDir(full))) {
       if (existsSync(join(full, 'SKILL.md'))) {
-        record('skill', join(full, 'SKILL.md'), scope, {
-          loadable: true,
-          hasRefs: isDir(join(full, 'references')) || isDir(join(full, 'scripts')) || isDir(join(full, 'reference')),
-          hasEvals: isDir(join(full, 'evals')) || existsSync(join(full, 'evals.json')),
-        })
+        record('skill', join(full, 'SKILL.md'), scope, harness
+          ? { loadable: true, ...skillExtras(full) }
+          : { loadable: false, why: 'outside', ...skillExtras(full) })
       }
-      walkNested(full, scope, 1)
-    } else if (entry.endsWith('.md') && !NOT_ARTIFACTS.test(entry) && entry !== entry.toUpperCase()) {
-      record('skill', full, scope, { loadable: false, reason: 'loose .md in skills root (not a <name>/SKILL.md)' })
+      walkNested(full, scope, 1, harness)
+    } else if (entry.endsWith('.md') && !NOT_ARTIFACTS.test(entry) && !isDocName(entry)) {
+      record('skill', full, scope, { loadable: false, why: harness ? 'loose' : 'outside' })
     }
   }
 }
 
-function walkNested(dir, scope, depth) {
+function walkNested(dir, scope, depth, harness) {
   if (depth > 5) return
   for (const d of entries(dir)) {
     const entry = d.name
     if (PRUNE.has(entry) || !d.isDirectory()) continue
     const full = join(dir, entry)
     if (existsSync(join(full, 'SKILL.md'))) {
-      record('skill', join(full, 'SKILL.md'), scope, {
-        loadable: false,
-        reason: 'nested skill (Claude Code loads only <skills>/<name>/SKILL.md)',
-        hasRefs: isDir(join(full, 'references')) || isDir(join(full, 'scripts')),
-      })
+      record('skill', join(full, 'SKILL.md'), scope, { loadable: false, why: harness ? 'nested' : 'outside', ...skillExtras(full) })
     }
-    walkNested(full, scope, depth + 1)
+    walkNested(full, scope, depth + 1, harness)
   }
 }
 
-function scanMdDir(root, kind, scope, depth = 0) {
+function scanMdDir(root, kind, scope, harness = true, depth = 0) {
   if (!isDir(root) || depth > 3) return
   for (const d of entries(root)) {
     const entry = d.name
     if (PRUNE.has(entry)) continue
     const full = join(root, entry)
-    if (d.isDirectory()) scanMdDir(full, kind, scope, depth + 1)
-    else if (entry.endsWith('.md') && !NOT_ARTIFACTS.test(entry)) record(kind, full, scope, { nested: depth > 0 })
+    if (d.isDirectory()) scanMdDir(full, kind, scope, harness, depth + 1)
+    else if (entry.endsWith('.md') && !NOT_ARTIFACTS.test(entry)) {
+      record(kind, full, scope, harness ? { loadable: true, nested: depth > 0 } : { loadable: false, why: 'outside' })
+    }
   }
 }
 
@@ -171,20 +203,30 @@ if (existsSync(installed)) {
 scanSkillsRoot(join(HOME, '.agents', 'skills'), 'agents-catalog')
 scanHarnessDir(join(HOME, '.grok'), 'grok-user')
 
-// 4. Repos: harness dirs at the repo root plus any skills/agents/commands dir up to depth 4.
+// 4. Repos. Harness roots load: <repo>/.claude/{skills,agents,commands}, <repo>/.agents/skills,
+// and plugin roots (a folder with .claude-plugin/plugin.json). Any other skills/agents/commands
+// folder up to depth 4 is inventoried as `outside` so it never inflates scores or shadowing.
 function scanRepo(repo) {
   const scope = `repo:${basename(repo)}`
-  const seen = new Set()
+  const roots = new Set()
+  const harness = (base) => {
+    for (const sub of ['skills', 'agents', 'commands']) roots.add(join(base, sub))
+    scanHarnessDir(base, scope)
+  }
+  harness(join(repo, '.claude'))
+  roots.add(join(repo, '.agents', 'skills'))
+  scanSkillsRoot(join(repo, '.agents', 'skills'), scope)
   const visit = (dir, depth) => {
     if (depth > 4) return
     for (const d of entries(dir)) {
       const entry = d.name
       if (PRUNE.has(entry) || !d.isDirectory()) continue
       const full = join(dir, entry)
-      if (seen.has(full)) continue
-      if (entry === 'skills') { seen.add(full); scanSkillsRoot(full, scope) }
-      else if (entry === 'agents') { seen.add(full); scanMdDir(full, 'agent', scope) }
-      else if (entry === 'commands') { seen.add(full); scanMdDir(full, 'command', scope) }
+      if (roots.has(full)) continue
+      if (existsSync(join(full, '.claude-plugin', 'plugin.json'))) { harness(full); visit(full, depth + 1); continue }
+      if (entry === 'skills') { roots.add(full); scanSkillsRoot(full, scope, false) }
+      else if (entry === 'agents') { roots.add(full); scanMdDir(full, 'agent', scope, false) }
+      else if (entry === 'commands') { roots.add(full); scanMdDir(full, 'command', scope, false) }
       else visit(full, depth + 1)
     }
   }
@@ -199,8 +241,15 @@ function originOf(repo) {
   } catch { return null }
 }
 
+function branchOf(repo) {
+  try {
+    return execFileSync('git', ['-C', repo, 'rev-parse', '--abbrev-ref', 'HEAD'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()
+  } catch { return '' }
+}
+
 // Several local folders often point at one remote (worktrees, flagship clones, sync copies).
-// Scan one canonical folder per remote: the folder whose name matches the remote, else the first seen.
+// Scan one canonical folder per remote, chosen deterministically: the folder whose name
+// matches the remote, else one on main/master, else the first by path.
 const clones = []
 const byOrigin = new Map()
 for (const parent of REPO_DIRS) {
@@ -213,9 +262,12 @@ for (const parent of REPO_DIRS) {
     byOrigin.get(origin).push(repo)
   }
 }
-for (const [origin, repos] of byOrigin) {
+for (const [origin, unsorted] of byOrigin) {
+  const repos = [...unsorted].sort()
   const remoteName = origin.split('/').pop()
-  const canonical = repos.find((r) => basename(r).toLowerCase() === remoteName) || repos[0]
+  const canonical = repos.find((r) => basename(r).toLowerCase() === remoteName)
+    || (repos.length > 1 && repos.find((r) => ['main', 'master'].includes(branchOf(r))))
+    || repos[0]
   scanRepo(canonical)
   for (const r of repos) if (r !== canonical) clones.push({ folder: tilde(r), sameRemoteAs: tilde(canonical), origin })
 }
@@ -238,7 +290,7 @@ function scoreSkill(it) {
   if (it.bodyLines <= 500) s += 10; else f.push('S5 body >500 lines (move depth to references/)')
   if (it.bodyLines <= 200 || it.hasRefs) s += 10; else f.push('S6 long body without references/ or scripts/')
   if (!/\{\{|TODO|TBD|lorem ipsum/i.test(desc)) s += 5; else f.push('S7 placeholder in description')
-  if (it.hasEvals || /^#{1,3} .*(verif|eval|test|quality gate|checklist)/im.test(it.body)) s += 5; else f.push('S8 no verification/eval section')
+  if (it.hasEvals || /^#{1,3} .*\b(verif\w*|evals?|tests?|testing|quality gate|checklist)\b/im.test(it.body)) s += 5; else f.push('S8 no verification/eval section')
   return { score: s, findings: f }
 }
 
@@ -273,12 +325,12 @@ for (const it of items) {
   const r = it.kind === 'skill' ? scoreSkill(it) : it.kind === 'agent' ? scoreAgent(it) : scoreCommand(it)
   it.score = r.score
   it.findings = r.findings
-  if (it.kind === 'skill' && !it.loadable) it.findings.unshift(`DEAD ${it.reason}`)
+  if (!it.loadable) it.findings.unshift(`NOT-LOADED ${WHY[it.why]}`)
 }
 
 // ---- Cross-cutting: shadowing and duplication ----
 
-const loadable = items.filter((i) => i.kind !== 'skill' || i.loadable)
+const loadable = items.filter((i) => i.loadable)
 const byName = new Map()
 for (const it of loadable) {
   const key = `${it.kind}:${it.name.toLowerCase()}`
@@ -307,16 +359,17 @@ const avg = (xs) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.l
 
 const scopes = new Map()
 for (const it of items) {
-  const s = scopes.get(it.scope) || { scope: it.scope, skills: 0, deadSkills: 0, agents: 0, commands: 0, scores: [] }
-  if (it.kind === 'skill') { if (it.loadable) s.skills++; else s.deadSkills++ }
-  if (it.kind === 'agent') s.agents++
-  if (it.kind === 'command') s.commands++
-  if (it.kind !== 'skill' || it.loadable) s.scores.push(it.score)
+  const s = scopes.get(it.scope) || { scope: it.scope, skills: 0, deadSkills: 0, agents: 0, commands: 0, outside: 0, scores: [] }
+  if (it.loadable) {
+    s[`${it.kind}s`]++
+    s.scores.push(it.score)
+  } else if (it.why === 'outside') s.outside++
+  else s.deadSkills++
   scopes.set(it.scope, s)
 }
 const scopeRows = [...scopes.values()]
   .map((s) => ({ ...s, avg: avg(s.scores), total: s.skills + s.agents + s.commands, scores: undefined }))
-  .sort((a, b) => b.total + b.deadSkills - (a.total + a.deadSkills))
+  .sort((a, b) => b.total - a.total || b.deadSkills - a.deadSkills)
 
 const findingCounts = {}
 for (const it of loadable) for (const f of it.findings) {
@@ -328,10 +381,11 @@ for (const it of loadable) for (const f of it.findings) {
 const totals = {
   generated: new Date().toISOString().slice(0, 10),
   scopes: scopeRows.length,
-  loadableSkills: items.filter((i) => i.kind === 'skill' && i.loadable).length,
-  deadSkills: items.filter((i) => i.kind === 'skill' && !i.loadable).length,
-  agents: items.filter((i) => i.kind === 'agent').length,
-  commands: items.filter((i) => i.kind === 'command').length,
+  loadableSkills: loadable.filter((i) => i.kind === 'skill').length,
+  deadSkills: items.filter((i) => !i.loadable && i.why !== 'outside').length,
+  agents: loadable.filter((i) => i.kind === 'agent').length,
+  commands: loadable.filter((i) => i.kind === 'command').length,
+  outsideHarness: items.filter((i) => i.why === 'outside').length,
   loadableAverage: avg(loadable.map((i) => i.score)),
   grades: loadable.reduce((g, i) => ((g[grade(i.score)] = (g[grade(i.score)] || 0) + 1), g), {}),
   shadowedNames: shadowed.length,
@@ -361,17 +415,18 @@ md.push('## Totals', '')
 md.push('| Measure | Value |', '| --- | --- |')
 md.push(`| Scopes scanned | ${totals.scopes} |`)
 md.push(`| Loadable skills | ${totals.loadableSkills} |`)
-md.push(`| Dead skill files (never loaded) | ${totals.deadSkills} |`)
-md.push(`| Agents | ${totals.agents} |`)
-md.push(`| Commands | ${totals.commands} |`)
+md.push(`| Dead skill files inside harness roots (never loaded) | ${totals.deadSkills} |`)
+md.push(`| Loadable agents | ${totals.agents} |`)
+md.push(`| Loadable commands | ${totals.commands} |`)
+md.push(`| Files outside harness roots (inventoried, not scored) | ${totals.outsideHarness} |`)
 md.push(`| Average score (loadable) | ${totals.loadableAverage}/100 |`)
 md.push(`| Grades A/B/C/D | ${['A', 'B', 'C', 'D'].map((g) => totals.grades[g] || 0).join(' / ')} |`)
 md.push(`| Names loadable in more than one scope | ${totals.shadowedNames} |`)
 md.push(`| Exact-duplicate clusters (extra copies) | ${totals.duplicateClusters} (${totals.duplicateCopies}) |`)
 md.push(`| Clone/worktree folders skipped (same remote) | ${totals.cloneFoldersSkipped} |`, '')
 md.push('## By scope', '')
-md.push('| Scope | Skills | Dead | Agents | Commands | Avg |', '| --- | ---: | ---: | ---: | ---: | ---: |')
-for (const s of scopeRows) md.push(`| ${s.scope} | ${s.skills} | ${s.deadSkills} | ${s.agents} | ${s.commands} | ${s.avg} |`)
+md.push('| Scope | Skills | Dead | Agents | Commands | Outside | Avg |', '| --- | ---: | ---: | ---: | ---: | ---: | ---: |')
+for (const s of scopeRows) md.push(`| ${s.scope} | ${s.skills} | ${s.deadSkills} | ${s.agents} | ${s.commands} | ${s.outside} | ${s.avg} |`)
 md.push('', '## Most common findings (loadable artifacts)', '')
 md.push('| Rule | Count | Example |', '| --- | ---: | --- |')
 for (const f of Object.values(findingCounts).sort((a, b) => b.count - a.count).slice(0, 20)) md.push(`| ${f.code} | ${f.count} | ${f.example} |`)
@@ -389,6 +444,6 @@ md.push('')
 if (MD_OUT) writeFileSync(MD_OUT, md.join('\n'))
 else console.log(md.join('\n'))
 
-console.error(`estate-audit: ${totals.loadableSkills} skills (+${totals.deadSkills} dead), ${totals.agents} agents, ${totals.commands} commands across ${totals.scopes} scopes; avg ${totals.loadableAverage}/100`)
+console.error(`estate-audit: ${totals.loadableSkills} skills (+${totals.deadSkills} dead), ${totals.agents} agents, ${totals.commands} commands loadable across ${totals.scopes} scopes (${totals.outsideHarness} files outside harness roots); avg ${totals.loadableAverage}/100`)
 
 if (MIN_SCORE !== undefined && totals.loadableAverage < MIN_SCORE) process.exit(1)

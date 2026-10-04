@@ -25,7 +25,7 @@
       "knowledge": [
         {
           "source": "starlight-cfo skill",
-          "purpose": "entity, tax, and runway model for the founder's company",
+          "purpose": "finance model for runway and budget decisions",
           "review": "quarter"
         }
       ]
@@ -36,11 +36,6 @@
           "source": "agentic-ops/ops/OPS-LEDGER.md",
           "purpose": "cross-repo status (single source)",
           "review": "week"
-        },
-        {
-          "source": "~/.starlight/restart/QUEUE.md",
-          "purpose": "lane queue and conductor order",
-          "review": "day"
         }
       ]
     },

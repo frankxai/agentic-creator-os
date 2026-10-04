@@ -70,6 +70,10 @@ never contradict it.
 }
 ```
 
+Install either the core build (`.claude/agents/`) or an instance build
+(`instances/<name>/agents/`) of a General into a given scope, never both: they
+share a name, and one would silently shadow the other.
+
 ## Adding a role
 
 1. Write `agent-os/roles/<role>.md` with: Mandate, Decisions owned, Scorecard, Frontier capability pack, Operating loops, Output shape, Human gates, Skill map, Anti-patterns.

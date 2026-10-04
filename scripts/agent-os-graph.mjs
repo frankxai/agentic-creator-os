@@ -21,6 +21,10 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
+for (const n of ['--brands', '--out']) {
+  const i = args.indexOf(n)
+  if (i >= 0 && (args[i + 1] === undefined || args[i + 1].startsWith('--'))) { console.error(`✗ ${n} needs a value`); process.exit(2) }
+}
 const flag = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : undefined)
 const BRANDS = flag('--brands')
 const OUT = flag('--out')
@@ -71,7 +75,14 @@ if (BRANDS) {
     if (b.register) edge('speaks_in', brand, node('register', b.register))
     if (b.soul) edge('identified_by', brand, node('soul', `${b.id}`, { path: b.soul }))
     for (const r of b.repos || []) edge('owns', brand, node('repo', r))
-    for (const [role, focus] of Object.entries(b.generals || {})) edge('staffs', brand, node('agent', `general-${role}`), { focus })
+    // References must resolve to agents that already exist (a compiled spec or a specialist
+    // declared in this manifest); creating them on the fly would hide typos as phantom agents.
+    const ref = (id, where) => {
+      const full = `agent:${id}`
+      if (!nodes.has(full)) errors.push(`${f}: ${where} references unknown agent "${id}"`)
+      return full
+    }
+    for (const [role, focus] of Object.entries(b.generals || {})) edge('staffs', brand, ref(`general-${role}`, `generals.${role}`), { focus })
     for (const a of b.specialists || []) {
       const agent = node('agent', a.id, { name: a.id, role: a.role })
       edge('staffs', brand, agent)
@@ -85,7 +96,7 @@ if (BRANDS) {
     for (const l of b.loops || []) {
       const loop = node('loop', l.id, { cadence: l.cadence, receipt: l.receipt })
       edge('runs', brand, loop)
-      if (l.owner) edge('executed_by', loop, node('agent', l.owner))
+      if (l.owner) edge('executed_by', loop, ref(l.owner, `loops.${l.id}.owner`))
       for (const g of [].concat(l.gate || [])) edge('gated_by', loop, node('human-gate', g))
     }
   }
