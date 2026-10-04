@@ -20,9 +20,11 @@ function run(extra) {
 }
 
 const probe = run(['--widths', '375']);
-const noBrowser = probe.r.status === 2 && /no Chrome, Edge, or Chromium/.test(probe.r.stderr);
+// Rendering needs a browser and Node 22+ (built-in WebSocket). Elsewhere these skip with the reason;
+// the dedicated visual job in agent-os.yml runs them on Node 22 with Chrome, so a real regression still fails CI.
+const cannotRender = probe.r.status === 2 && /(no Chrome, Edge, or Chromium|needs Node 22)/.test(probe.r.stderr) && probe.r.stderr.trim();
 
-test('renders a screenshot and catches every deliberate defect at phone width', { skip: noBrowser && 'no browser installed' }, () => {
+test('renders a screenshot and catches every deliberate defect at phone width', { skip: cannotRender }, () => {
   const { r, out } = probe;
   assert.equal(r.status, 0, r.stderr);
   const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
@@ -40,7 +42,7 @@ test('renders a screenshot and catches every deliberate defect at phone width', 
   assert.doesNotMatch(run375.warnings.join(' | '), /Skip to main content/);
 });
 
-test('--gate fails the run when blocking findings exist', { skip: noBrowser && 'no browser installed' }, () => {
+test('--gate fails the run when blocking findings exist', { skip: cannotRender }, () => {
   const { r } = run(['--widths', '1440', '--gate']);
   assert.equal(r.status, 1);
 });
