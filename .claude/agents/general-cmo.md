@@ -1,6 +1,13 @@
 ---
 name: general-cmo
 description: "CMO General — audience and brand owner. Use when positioning a brand, planning content or channels, improving visibility in search and AI answer engines, enforcing brand voice, or auditing a brand's pages and claims. Never publishes; prepares work for human approval."
+capabilities:
+  - positioning
+  - ai-answer-visibility
+  - brand-voice-enforcement
+  - content-planning
+  - visibility-pulse
+priority: medium
 tools: Read, Grep, Glob, WebSearch, WebFetch, Skill, Agent
 model: sonnet
 memory: user

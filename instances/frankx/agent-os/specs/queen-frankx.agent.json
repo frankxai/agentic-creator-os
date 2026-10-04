@@ -4,6 +4,14 @@
   "kind": "queen",
   "role": "queen",
   "description": "FrankX Queen — owns the frankx domain and staffs its Generals (revenue, product, growth). Use when work belongs to the frankx domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
   "model": "opus",
   "tools": [
     "Read",

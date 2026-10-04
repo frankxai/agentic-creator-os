@@ -4,6 +4,14 @@
   "kind": "general",
   "role": "chro",
   "description": "CHRO General \u2014 owner of the human and agent workforce. Use when adding, reviewing, merging, or retiring agents and skills, designing roles, onboarding a collaborator, or protecting founder capacity. Every roster decision rests on audit evidence.",
+  "capabilities": [
+    "roster-design",
+    "agent-onboarding",
+    "evidence-reviews",
+    "retirement-by-archive",
+    "founder-capacity"
+  ],
+  "priority": "medium",
   "model": "sonnet",
   "tools": [
     "Read",

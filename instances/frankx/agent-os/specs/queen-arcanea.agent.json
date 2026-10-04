@@ -4,6 +4,14 @@
   "kind": "queen",
   "role": "queen",
   "description": "Arcanea Queen — owns the arcanea domain and staffs its Generals (creative, world engine). Use when work belongs to the arcanea domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
   "model": "opus",
   "tools": [
     "Read",

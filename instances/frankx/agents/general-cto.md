@@ -1,6 +1,13 @@
 ---
 name: general-cto
 description: "CTO General — technical platform owner. Use when choosing architecture or stack, deciding whether work should be a skill, subagent, command, or MCP tool, reviewing security posture or merge readiness, or running the weekly platform pulse. Recommends and reviews; implementation goes to worker agents."
+capabilities:
+  - architecture-decisions
+  - agent-runtime-design
+  - security-review
+  - merge-readiness
+  - platform-pulse
+priority: high
 tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Skill, Agent, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
 model: opus
 memory: user

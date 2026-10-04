@@ -1,6 +1,13 @@
 ---
 name: general-coo
 description: "COO General — operations owner. Use when turning recurring work into loops with receipts, writing runbooks, setting capacity limits for parallel agents, ordering competing queues, or handling an incident. Runs the daily and weekly ops pulses."
+capabilities:
+  - loop-design
+  - runbooks
+  - capacity-planning
+  - queue-ordering
+  - incident-response
+priority: medium
 tools: Read, Grep, Glob, Bash, Skill, Agent
 model: sonnet
 memory: user

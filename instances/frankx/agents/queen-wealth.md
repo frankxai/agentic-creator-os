@@ -1,6 +1,13 @@
 ---
 name: queen-wealth
 description: "Wealth / Passive Queen — owns the wealth domain and staffs its Generals (revenue streams). Use when work belongs to the wealth domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General."
+capabilities:
+  - domain-routing
+  - general-delegation
+  - acceptance-review
+  - domain-pulse
+  - cross-domain-escalation
+priority: high
 tools: Read, Grep, Glob, Skill, Agent(general-cfo, general-ceo), mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
 model: opus
 memory: user

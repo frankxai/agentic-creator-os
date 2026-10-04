@@ -1,6 +1,13 @@
 ---
 name: general-chro
 description: "CHRO General — owner of the human and agent workforce. Use when adding, reviewing, merging, or retiring agents and skills, designing roles, onboarding a collaborator, or protecting founder capacity. Every roster decision rests on audit evidence."
+capabilities:
+  - roster-design
+  - agent-onboarding
+  - evidence-reviews
+  - retirement-by-archive
+  - founder-capacity
+priority: medium
 tools: Read, Grep, Glob, Bash, Skill, Agent, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
 model: sonnet
 memory: user

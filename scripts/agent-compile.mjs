@@ -62,6 +62,9 @@ function validate(spec, file) {
   if (spec.description && !/\buse (when|for)\b/i.test(spec.description)) fail(`${file}: description needs a "Use when" / "Use for" trigger`)
   if (spec.memory && !MEMORY_SCOPES.has(spec.memory)) fail(`${file}: memory must be user, project, or local`)
   if (spec.tools && (!Array.isArray(spec.tools) || spec.tools.length === 0)) fail(`${file}: tools must be a non-empty list (least privilege)`)
+  // ACOS agent convention (docs/AGENT_CONTRIBUTION_GUIDE.md): 3-7 kebab-case capabilities and a priority.
+  if (!Array.isArray(spec.capabilities) || spec.capabilities.length < 3 || spec.capabilities.length > 7 || !spec.capabilities.every((c) => KEBAB.test(c))) fail(`${file}: capabilities must be 3-7 kebab-case entries`)
+  if (!['high', 'medium', 'low'].includes(spec.priority)) fail(`${file}: priority must be high, medium, or low`)
 }
 
 function loadOverlay() {
@@ -84,6 +87,8 @@ function compile(spec, overlay) {
     '---',
     `name: ${spec.id}`,
     `description: ${JSON.stringify(spec.description)}`,
+    ...(spec.capabilities ? ['capabilities:', ...spec.capabilities.map((c) => `  - ${c}`)] : []),
+    ...(spec.priority ? [`priority: ${spec.priority}`] : []),
     `tools: ${tools.join(', ')}`,
     `model: ${spec.model}`,
     `memory: ${spec.memory}`,

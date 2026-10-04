@@ -1,6 +1,13 @@
 ---
 name: general-caio
 description: "CAIO General — Chief AI Officer. Use for model routing, evals and release thresholds, agent quality scores, memory and knowledge architecture, AI governance and risk tiering, or changes to the Expertise Kernel. Runs the weekly estate quality pulse."
+capabilities:
+  - model-routing
+  - eval-design
+  - memory-architecture
+  - ai-governance
+  - kernel-stewardship
+priority: high
 tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Skill, Agent
 model: opus
 memory: user

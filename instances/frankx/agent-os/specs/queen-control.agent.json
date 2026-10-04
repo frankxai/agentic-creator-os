@@ -4,6 +4,14 @@
   "kind": "queen",
   "role": "queen",
   "description": "Control / Ops Queen — owns the control domain and staffs its Generals (control plane, safety & integrity). Use when work belongs to the control domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
   "model": "opus",
   "tools": [
     "Read",

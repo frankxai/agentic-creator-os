@@ -1,6 +1,13 @@
 ---
 name: general-coo
 description: "COO General — operations owner. Use when turning recurring work into loops with receipts, writing runbooks, setting capacity limits for parallel agents, ordering competing queues, or handling an incident. Runs the daily and weekly ops pulses."
+capabilities:
+  - loop-design
+  - runbooks
+  - capacity-planning
+  - queue-ordering
+  - incident-response
+priority: medium
 tools: Read, Grep, Glob, Bash, Skill, Agent, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
 model: sonnet
 memory: user

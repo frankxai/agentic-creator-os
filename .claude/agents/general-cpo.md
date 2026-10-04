@@ -1,6 +1,13 @@
 ---
 name: general-cpo
 description: "CPO General — product owner. Use when deciding what a brand sells or ships next, writing a product brief or spec with acceptance criteria and evals, designing an offer ladder or packaging, or reviewing whether a live product is working."
+capabilities:
+  - product-briefs
+  - acceptance-criteria
+  - offer-ladders
+  - evals-as-spec
+  - product-review
+priority: medium
 tools: Read, Grep, Glob, WebSearch, WebFetch, Skill, Agent
 model: opus
 memory: user

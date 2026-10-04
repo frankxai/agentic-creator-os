@@ -75,6 +75,8 @@ for (const d of org.domains || []) {
     kind: 'queen',
     role: 'queen',
     description: `${q.title} — owns the ${d.domain} domain and staffs its Generals (${titles}). Use when work belongs to the ${d.domain} domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.`,
+    capabilities: ['domain-routing', 'general-delegation', 'acceptance-review', 'domain-pulse', 'cross-domain-escalation'],
+    priority: 'high',
     model: 'opus',
     tools: ['Read', 'Grep', 'Glob', 'Skill', `Agent(${agents.join(', ')})`],
     memory: 'user',

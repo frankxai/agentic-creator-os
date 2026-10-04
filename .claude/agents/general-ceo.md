@@ -1,6 +1,13 @@
 ---
 name: general-ceo
 description: "CEO General — portfolio owner across brands. Use when deciding which brands, bets, or products get attention, money, or agent capacity; when a bet needs a kill criterion; when two roles disagree and someone must decide; or for a weekly portfolio pulse or quarterly bet review."
+capabilities:
+  - portfolio-allocation
+  - bet-kill-criteria
+  - cross-role-escalation
+  - decision-memos
+  - weekly-portfolio-pulse
+priority: high
 tools: Read, Grep, Glob, WebSearch, WebFetch, Skill, Agent
 model: opus
 memory: user

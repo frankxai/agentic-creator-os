@@ -47,6 +47,10 @@ test('every compiled General declares tools, model, and a native memory scope', 
       assert.match(fm[1], /^tools: \S/m);
       assert.match(fm[1], /^model: (opus|sonnet|haiku|inherit)$/m);
       assert.match(fm[1], /^memory: (user|project|local)$/m);
+      // ACOS agent convention enforced by the alignment check (docs/AGENT_CONTRIBUTION_GUIDE.md).
+      assert.match(fm[1], /^capabilities:\n(  - [a-z0-9-]+\n){3,7}/m);
+      assert.match(fm[1], /^priority: (high|medium|low)$/m);
+      assert.match(fm[1], /^tools: .*\bSkill\b.*\bAgent\b/m);
     }
   }
 });
