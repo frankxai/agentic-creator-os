@@ -11,10 +11,12 @@
   </style>
 </head>
 <body>
-  <h1>Fixture with deliberate defects</h1>
+  <a href="#main" style="position:absolute;top:4px;left:4px;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Skip to main content</a>
+  <div style="position:fixed;top:0;left:0;right:0;height:48px;background:#245;color:#fff">fixed bar over a hidden skip link (not a defect)</div>
+  <h1 style="margin-top:56px">Fixture with deliberate defects</h1>
   <div class="wide">This bar is wider than a phone screen.</div>
   <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" width="10" height="10">
-  <button></button>
+  <button class="nav-close icon"></button>
   <a href="#x" style="position:absolute;top:300px;left:200px;display:block;width:150px;height:40px">Covered action</a>
   <div style="position:fixed;top:290px;left:300px;width:80px;height:60px;background:#222;color:#fff">chip</div>
   <script>console.error('fixture error for the visual check');</script>

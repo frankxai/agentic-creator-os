@@ -127,14 +127,22 @@ const PROBE = `(() => {
   const d = document.documentElement;
   const named = (e) => (e.innerText || '').trim() || e.getAttribute('aria-label') || e.getAttribute('aria-labelledby') || e.getAttribute('title') || e.querySelector('img[alt]:not([alt=""]), svg title, [aria-label]');
   const visible = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none' };
+  // Visually hidden until focused (sr-only skip links and the like): rendered for screen readers, not on screen.
+  const srOnly = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width <= 1 || r.height <= 1 || s.opacity === '0' || /rect\\(0(px)?,? 0(px)?,? 0(px)?,? 0(px)?\\)/.test(s.clip) || s.clipPath === 'inset(50%)' };
+  const describe = (e) => { let d = e.tagName.toLowerCase(); const h = e.getAttribute('href'); if (h) d += '[href="' + h.slice(0, 60) + '"]'; const c = (typeof e.className === 'string' ? e.className : '').trim().split(/\\s+/).filter(Boolean).slice(0, 2); if (c.length) d += '.' + c.join('.'); return d };
   const controls = [...document.querySelectorAll('a[href], button, [role="button"], input:not([type="hidden"]), select, textarea')].filter(visible);
+  const shown = controls.filter((e) => !srOnly(e));
+  const unnamed = controls.filter((e) => !named(e) && e.tagName !== 'INPUT' && e.tagName !== 'SELECT' && e.tagName !== 'TEXTAREA');
+  const small = shown.filter((e) => { const r = e.getBoundingClientRect(); return r.width < 24 || r.height < 24 });
   const imgs = [...document.images];
   return {
     overflowPx: Math.max(0, d.scrollWidth - d.clientWidth),
     images: imgs.length,
     imagesWithoutAlt: imgs.filter((i) => !i.hasAttribute('alt')).length,
-    unnamedControls: controls.filter((e) => !named(e) && e.tagName !== 'INPUT' && e.tagName !== 'SELECT' && e.tagName !== 'TEXTAREA').length,
-    smallTargets: controls.filter((e) => { const r = e.getBoundingClientRect(); return r.width < 24 || r.height < 24 }).length,
+    unnamedControls: unnamed.length,
+    unnamedSamples: unnamed.slice(0, 5).map(describe),
+    smallTargets: small.length,
+    smallTargetSamples: small.slice(0, 3).map(describe),
     // A control in the first viewport partly covered by a fixed or sticky element (floating chips, banners, bars):
     // intersect the two boxes inside the viewport and check which element is actually on top in the overlap.
     occluded: (() => {
@@ -143,7 +151,7 @@ const PROBE = `(() => {
         return (p === 'fixed' || p === 'sticky') && visible(el);
       });
       const out = [];
-      for (const c of controls) {
+      for (const c of shown) {
         const r = c.getBoundingClientRect();
         if (r.bottom <= 0 || r.top >= innerHeight || r.right <= 0 || r.left >= innerWidth) continue;
         for (const f of floating) {
@@ -226,8 +234,8 @@ try {
         if (http.length > pageHttp.length) warnings.push(`${http.length - pageHttp.length} failed request(s)`)
         if (probe.overflowPx > 1) blocking.push(`page scrolls sideways by ${probe.overflowPx}px`)
         if (probe.imagesWithoutAlt) blocking.push(`${probe.imagesWithoutAlt} image(s) without alt`)
-        if (probe.unnamedControls) blocking.push(`${probe.unnamedControls} link(s)/button(s) without an accessible name`)
-        if (probe.smallTargets) warnings.push(`${probe.smallTargets} interactive target(s) under 24px`)
+        if (probe.unnamedControls) blocking.push(`${probe.unnamedControls} link(s)/button(s) without an accessible name, e.g. ${probe.unnamedSamples.join(', ')}`)
+        if (probe.smallTargets) warnings.push(`${probe.smallTargets} interactive target(s) under 24px, e.g. ${probe.smallTargetSamples.join(', ')}`)
         if (probe.occluded.length) warnings.push(`${probe.occluded.length} control(s) covered by another element at first view: ${probe.occluded.slice(0, 3).map((t) => `"${t}"`).join(', ')}`)
         if (probe.h1 !== 1) warnings.push(`${probe.h1} h1 element(s) (expected 1)`)
         if (!probe.lang) warnings.push('html lang missing')

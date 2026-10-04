@@ -35,6 +35,9 @@ test('renders a screenshot and catches every deliberate defect at phone width', 
   assert.match(blocking, /without alt/);
   assert.match(blocking, /without an accessible name/);
   assert.match(run375.warnings.join(' | '), /covered by another element at first view: "Covered action"/);
+  // Findings name the element so the fix is obvious; a visually hidden skip link is never reported as covered.
+  assert.match(blocking, /without an accessible name, e\.g\. button\.nav-close\.icon/);
+  assert.doesNotMatch(run375.warnings.join(' | '), /Skip to main content/);
 });
 
 test('--gate fails the run when blocking findings exist', { skip: noBrowser && 'no browser installed' }, () => {
