@@ -1,6 +1,6 @@
 {
   "id": "general-chro",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "chro",
   "description": "CHRO General \u2014 owner of the human and agent workforce. Use when adding, reviewing, merging, or retiring agents and skills, designing roles, onboarding a collaborator, or protecting founder capacity. Every roster decision rests on audit evidence.",
@@ -9,7 +9,9 @@
     "Read",
     "Grep",
     "Glob",
-    "Bash"
+    "Bash",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "yellow",

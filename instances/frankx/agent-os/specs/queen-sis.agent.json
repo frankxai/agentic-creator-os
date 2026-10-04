@@ -1,0 +1,55 @@
+{
+  "id": "queen-sis",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "SIS / Intelligence Queen — owns the sis domain and staffs its Generals (research, knowledge). Use when work belongs to the sis domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-caio, general-ceo)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "sis",
+    "sourceId": "SIS-QUEEN",
+    "source": "starlight-swarm config/domain-queens.json",
+    "generals": [
+      {
+        "title": "Research General",
+        "sourceId": "SIS-RESEARCH-GENERAL",
+        "role": "caio",
+        "agent": "general-caio",
+        "swarms": [
+          "research-synthesis",
+          "per-domain-pipeline"
+        ]
+      },
+      {
+        "title": "Knowledge General",
+        "sourceId": "SIS-KNOWLEDGE-GENERAL",
+        "role": "caio",
+        "agent": "general-caio",
+        "swarms": [
+          "second-brain",
+          "vertical-intelligence",
+          "evidence"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}

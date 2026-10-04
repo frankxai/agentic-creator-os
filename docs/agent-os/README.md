@@ -26,13 +26,16 @@ audit, fix the lowest-scoring loaded artifacts, re-run, compare.
 | [SOUL-SPEC.md](SOUL-SPEC.md) | One identity schema for brands, agents, and creators. |
 | [MEMORY-SPEC.md](MEMORY-SPEC.md) | Four memory tiers, write rules, provenance and freshness. |
 | [LOOP-SPEC.md](LOOP-SPEC.md) | Anatomy of a recurring loop with gates and receipts. |
+| [COMMANDS.md](COMMANDS.md) | The one-door command grammar: `/si` and the R0-R5 ladder. |
+| [MESH.md](MESH.md) | Other harnesses, model families, machines, CI, and routines; zones and probes. |
+| [ALWAYS-ON.md](ALWAYS-ON.md) | The three clocks that keep work moving 24/7, and what each may never do. |
 
 Sources:
 
 | Path | Role |
 | --- | --- |
 | `agent-os/kernel/expertise-kernel.md` | Shared doctrine. |
-| `agent-os/roles/*.md` | The eight Generals: CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO. |
+| `agent-os/roles/*.md` | Nine Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO, CCO) and the Domain Queen module. |
 | `agent-os/specs/*.agent.json` | Agent specs that compile to `.claude/agents/`. |
 | `evals/agents/<agent>/<case>/` | `claude plugin eval` cases per agent. |
 
@@ -44,12 +47,14 @@ node scripts/agent-compile.mjs --check            # CI: fail when compiled agent
 node scripts/agent-compile.mjs --instance <name>  # add the instance overlay → instances/<name>/agents/
 node scripts/agent-os-graph.mjs --brands <dir> --out graph.jsonl   # typed graph, validated
 node scripts/estate-audit.mjs --repos <dir> --md audit.md --json audit.json
+node scripts/org-import.mjs --org <domain-queens.json> --instance <name>   # org chart → Domain Queen specs
+node scripts/mesh-doctor.mjs --mesh <mesh.json> [--deep]                     # zone + reachable mesh
 claude plugin eval --eval-dir evals/agents       # run the Generals' eval cases
 ```
 
-## Using the Generals
+## Using the Generals and Queens
 
-Ask in plain words; the descriptions route. "Have the CFO check whether this
+Start with `/si` (see [COMMANDS.md](COMMANDS.md)) or ask in plain words; the descriptions route. Domain Queens (`queen-<domain>`, compiled per instance from an org chart) route a brand's work to the right General. "Have the CFO check whether this
 tool pays for itself", "CAIO, run the weekly quality pulse", "CHRO, which agents
 should we retire?". Each General keeps its own memory (`memory: user`), reads
 the repo's `CREATOR.md` and `AGENTS.md`, and stops at human gates.

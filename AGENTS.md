@@ -26,11 +26,12 @@ npm run estate:audit -- --repos <dir>   # score every skill/agent/command an ope
 
 ## Agent OS
 
-Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO) are compiled from
+Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO, CCO) and instance Domain Queens are compiled from
 `agent-os/` — the Expertise Kernel plus one role module each. Edit the spec,
 module, or kernel, then run `npm run agents:compile`; never hand-edit
 `.claude/agents/general-*.md`. Standards (ontology, agent, skill, soul, memory,
-loop specs) live in `docs/agent-os/`.
+loop, commands, mesh, always-on) live in `docs/agent-os/`. Domain Queens come from
+`node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx`.
 
 The registry currently lists `pnpm test`, but `package.json` does not define a test script. If adding tests, add the script deliberately and document the runner.
 

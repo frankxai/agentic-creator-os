@@ -1,6 +1,6 @@
 {
   "id": "general-cpo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "cpo",
   "description": "CPO General \u2014 product owner. Use when deciding what a brand sells or ships next, writing a product brief or spec with acceptance criteria and evals, designing an offer ladder or packaging, or reviewing whether a live product is working.",
@@ -10,7 +10,9 @@
     "Grep",
     "Glob",
     "WebSearch",
-    "WebFetch"
+    "WebFetch",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "cyan",

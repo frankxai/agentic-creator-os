@@ -1,0 +1,65 @@
+name: Agent OS
+
+# Deterministic 24/7 clock for the Agent OS: no model calls, no secrets.
+# Compiled agents stay fresh, the org import and graph obey the ontology, and
+# the repo's own skills/agents/commands may not fall below the quality ratchet.
+# The scorecard lands in the run summary.
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # daily 05:30 UTC
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'agent-os/**'
+      - 'docs/agent-os/**'
+      - 'evals/agents/**'
+      - 'instances/*/agent-os/**'
+      - 'instances/*/agents/**'
+      - '.claude/agents/**'
+      - '.claude/skills/**'
+      - '.claude/commands/**'
+      - 'scripts/agent-compile.mjs'
+      - 'scripts/agent-os-graph.mjs'
+      - 'scripts/estate-audit.mjs'
+      - 'scripts/org-import.mjs'
+      - 'scripts/mesh-doctor.mjs'
+      - 'test/agent-os.test.mjs'
+      - '.github/workflows/agent-os.yml'
+
+concurrency:
+  group: agent-os-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  agent-os:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      - name: Compiled agents are fresh (core and instance)
+        run: |
+          node scripts/agent-compile.mjs --check
+          node scripts/agent-compile.mjs --check --instance frankx
+
+      - name: Domain Queens match the vendored org chart
+        run: node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx --check
+
+      - name: Graph obeys the ontology
+        run: node scripts/agent-os-graph.mjs --instance frankx
+
+      - name: Agent OS tests
+        run: node --test test/agent-os.test.mjs
+
+      - name: Quality ratchet (scorecard in the run summary)
+        # 72 = the 2026-10-04 baseline for this repo's own skills, agents, and commands.
+        # Raise it when the average rises; never lower it to make a red run green.
+        run: node scripts/estate-audit.mjs --home . --md "$GITHUB_STEP_SUMMARY" --min-score 72

@@ -1,0 +1,45 @@
+{
+  "id": "queen-wealth",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "Wealth / Passive Queen — owns the wealth domain and staffs its Generals (revenue streams). Use when work belongs to the wealth domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-cfo, general-ceo)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "wealth",
+    "sourceId": "WEALTH-PASSIVE-QUEEN",
+    "source": "starlight-swarm config/domain-queens.json",
+    "generals": [
+      {
+        "title": "Revenue Streams General",
+        "sourceId": "INCOME-STREAMS-GENERAL",
+        "role": "cfo",
+        "agent": "general-cfo",
+        "swarms": [
+          "income-optimizer",
+          "token-tracker",
+          "funnel"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}

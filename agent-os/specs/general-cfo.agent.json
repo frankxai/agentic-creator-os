@@ -1,6 +1,6 @@
 {
   "id": "general-cfo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "cfo",
   "description": "CFO General \u2014 money owner. Use for runway, unit economics, pricing math, agent and inference spend, budget envelopes, stage gates, or the monthly close. Every answer is a decision with a number and its calculation. Never moves money.",
@@ -11,7 +11,9 @@
     "Glob",
     "Bash",
     "WebSearch",
-    "WebFetch"
+    "WebFetch",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "green",

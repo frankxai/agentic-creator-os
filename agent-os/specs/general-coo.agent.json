@@ -1,6 +1,6 @@
 {
   "id": "general-coo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "coo",
   "description": "COO General \u2014 operations owner. Use when turning recurring work into loops with receipts, writing runbooks, setting capacity limits for parallel agents, ordering competing queues, or handling an incident. Runs the daily and weekly ops pulses.",
@@ -9,7 +9,9 @@
     "Read",
     "Grep",
     "Glob",
-    "Bash"
+    "Bash",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "orange",

@@ -28,6 +28,36 @@
           "purpose": "finance model for runway and budget decisions",
           "review": "quarter"
         }
+      ],
+      "skillMap": [
+        {
+          "skill": "anthropic-skills:starlight-cfo",
+          "when": "runway, budget, or any decision that needs a number"
+        },
+        {
+          "skill": "finance:variance-analysis",
+          "when": "actuals differ from plan"
+        },
+        {
+          "skill": "finance:financial-statements",
+          "when": "the monthly close"
+        },
+        {
+          "skill": "small-business:cash-flow-snapshot",
+          "when": "the weekly cash pulse"
+        },
+        {
+          "skill": "small-business:month-end-prep",
+          "when": "preparing month end"
+        },
+        {
+          "skill": "vercel-cost-watch",
+          "when": "hosting spend moves"
+        },
+        {
+          "skill": "data:analyze",
+          "when": "a spreadsheet or export needs analysis"
+        }
       ]
     },
     "general-coo": {
@@ -36,6 +66,40 @@
           "source": "agentic-ops/ops/OPS-LEDGER.md",
           "purpose": "cross-repo status (single source)",
           "review": "week"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "operations:runbook",
+          "when": "turning a repeated procedure into a runbook"
+        },
+        {
+          "skill": "operations:process-optimization",
+          "when": "a process keeps failing or stalling"
+        },
+        {
+          "skill": "operations:capacity-plan",
+          "when": "deciding how much parallel work the machines and budget allow"
+        },
+        {
+          "skill": "operations:status-report",
+          "when": "the weekly ops review"
+        },
+        {
+          "skill": "operations:risk-assessment",
+          "when": "a change carries operational risk"
+        },
+        {
+          "skill": "pp",
+          "when": "checking machine health before parallel work"
+        },
+        {
+          "skill": "fleet",
+          "when": "checking both machines' heartbeats"
+        },
+        {
+          "skill": "daily-ops",
+          "when": "the daily ops pulse"
         }
       ]
     },
@@ -51,6 +115,44 @@
           "purpose": "private brand manifests, estate graph, audits",
           "review": "month"
         }
+      ],
+      "skillMap": [
+        {
+          "skill": "model-routing",
+          "when": "choosing a model tier for a task class"
+        },
+        {
+          "skill": "model-arena",
+          "when": "comparing models head to head with receipts"
+        },
+        {
+          "skill": "model-intelligence",
+          "when": "checking current model capabilities and prices"
+        },
+        {
+          "skill": "ai-governance-legal:ai-inventory",
+          "when": "maintaining the AI system inventory"
+        },
+        {
+          "skill": "ai-governance-legal:use-case-triage",
+          "when": "triaging a new AI use case for risk"
+        },
+        {
+          "skill": "ai-governance-legal:reg-gap-analysis",
+          "when": "checking AI-regulation exposure"
+        },
+        {
+          "skill": "skill-creator:skill-creator",
+          "when": "creating or evaluating a skill"
+        },
+        {
+          "skill": "prompt-hub",
+          "when": "designing, optimising, or red-teaming a prompt"
+        },
+        {
+          "skill": "claude-api",
+          "when": "anything about Claude models, pricing, or the API"
+        }
       ]
     },
     "general-chro": {
@@ -59,6 +161,36 @@
           "source": "~/.starlight/agent-os/",
           "purpose": "roster evidence: latest estate audit and brand manifests",
           "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "human-resources:org-planning",
+          "when": "designing roles and the roster"
+        },
+        {
+          "skill": "human-resources:onboarding",
+          "when": "onboarding a collaborator"
+        },
+        {
+          "skill": "human-resources:performance-review",
+          "when": "reviewing an agent's or collaborator's performance on evidence"
+        },
+        {
+          "skill": "human-resources:people-report",
+          "when": "reporting on the workforce"
+        },
+        {
+          "skill": "skill-builder",
+          "when": "upgrading a weak skill"
+        },
+        {
+          "skill": "memory-prune",
+          "when": "pruning stale memory"
+        },
+        {
+          "skill": "people-update",
+          "when": "updating people records"
         }
       ]
     },
@@ -69,6 +201,32 @@
           "purpose": "brand doors, bets, and gaps",
           "review": "month"
         }
+      ],
+      "skillMap": [
+        {
+          "skill": "anthropic-skills:decision-framework",
+          "when": "a choice with real tradeoffs needs a recorded decision"
+        },
+        {
+          "skill": "anthropic-skills:strategic-reasoning",
+          "when": "a bet or portfolio question needs first-principles analysis"
+        },
+        {
+          "skill": "founder-review",
+          "when": "a new product, route, agent, or repo is about to start"
+        },
+        {
+          "skill": "product-management:roadmap-update",
+          "when": "the quarterly bet list changes"
+        },
+        {
+          "skill": "small-business:business-pulse",
+          "when": "the weekly portfolio pulse"
+        },
+        {
+          "skill": "weekly-recap",
+          "when": "summarising the week across projects"
+        }
       ]
     },
     "general-cmo": {
@@ -77,6 +235,112 @@
           "source": "~/.agent-harness/REGISTER-BOUNDARIES.md",
           "purpose": "register and leak rules",
           "review": "quarter"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "marketing:campaign-plan",
+          "when": "planning a launch or campaign"
+        },
+        {
+          "skill": "marketing:brand-review",
+          "when": "checking work against a brand's identity"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "a draft must match a brand voice before review"
+        },
+        {
+          "skill": "small-business:seo-ai-visibility",
+          "when": "measuring presence in AI answer engines"
+        },
+        {
+          "skill": "marketing:seo-audit",
+          "when": "auditing a site's search health"
+        },
+        {
+          "skill": "seo-check",
+          "when": "a single page needs an SEO pass"
+        },
+        {
+          "skill": "content-strategy",
+          "when": "planning pillars and a content calendar"
+        },
+        {
+          "skill": "generate-social",
+          "when": "turning one piece into platform-native posts"
+        },
+        {
+          "skill": "marketing:content-creation",
+          "when": "drafting long-form content"
+        }
+      ]
+    },
+    "general-cto": {
+      "skillMap": [
+        {
+          "skill": "code-review",
+          "when": "a diff or pull request needs a correctness review"
+        },
+        {
+          "skill": "security-review",
+          "when": "changes touch auth, secrets, input handling, or agent tools"
+        },
+        {
+          "skill": "adversarial-review",
+          "when": "a high-stakes change needs a second model family"
+        },
+        {
+          "skill": "engineering:architecture",
+          "when": "choosing architecture or writing an ADR"
+        },
+        {
+          "skill": "engineering:tech-debt",
+          "when": "the monthly simplification pass"
+        },
+        {
+          "skill": "engineering:incident-response",
+          "when": "production is degraded"
+        },
+        {
+          "skill": "engineering:deploy-checklist",
+          "when": "preparing a production ship for the owner's approval"
+        },
+        {
+          "skill": "superpowers:systematic-debugging",
+          "when": "a bug with no obvious cause"
+        },
+        {
+          "skill": "canary",
+          "when": "the first minutes after a deploy"
+        }
+      ]
+    },
+    "general-cpo": {
+      "skillMap": [
+        {
+          "skill": "product-management:write-spec",
+          "when": "writing a product spec with acceptance criteria"
+        },
+        {
+          "skill": "product-management:competitive-brief",
+          "when": "positioning against competitors"
+        },
+        {
+          "skill": "product-management:metrics-review",
+          "when": "the weekly product review"
+        },
+        {
+          "skill": "product-management:synthesize-research",
+          "when": "turning user evidence into decisions"
+        },
+        {
+          "skill": "app-studio-team:app-brief",
+          "when": "briefing a new app idea"
+        },
+        {
+          "skill": "project-brief",
+          "when": "briefing any new project"
         }
       ]
     }

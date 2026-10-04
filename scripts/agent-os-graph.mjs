@@ -21,13 +21,14 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const args = process.argv.slice(2)
-for (const n of ['--brands', '--out']) {
+for (const n of ['--brands', '--out', '--instance']) {
   const i = args.indexOf(n)
   if (i >= 0 && (args[i + 1] === undefined || args[i + 1].startsWith('--'))) { console.error(`✗ ${n} needs a value`); process.exit(2) }
 }
 const flag = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : undefined)
 const BRANDS = flag('--brands')
 const OUT = flag('--out')
+const INSTANCE = flag('--instance')
 
 const ontology = JSON.parse(readFileSync(join(ROOT, 'docs', 'agent-os', 'ontology.json'), 'utf8'))
 const nodes = new Map()
@@ -42,11 +43,14 @@ const node = (kind, key, props = {}) => {
 }
 const edge = (rel, from, to, props = {}) => edges.push({ type: 'edge', rel, from, to, ...props })
 
-// Core: kernel, role modules, Generals.
-const specDir = join(ROOT, 'agent-os', 'specs')
-const specs = existsSync(specDir)
-  ? readdirSync(specDir).filter((f) => f.endsWith('.agent.json')).map((f) => JSON.parse(readFileSync(join(specDir, f), 'utf8')))
-  : []
+// Core: kernel, role modules, Generals; plus an instance's own specs (Domain Queens) with --instance.
+const readSpecs = (dir) => (existsSync(dir)
+  ? readdirSync(dir).filter((f) => f.endsWith('.agent.json')).sort().map((f) => JSON.parse(readFileSync(join(dir, f), 'utf8')))
+  : [])
+const specs = [
+  ...readSpecs(join(ROOT, 'agent-os', 'specs')),
+  ...(INSTANCE ? readSpecs(join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs')) : []),
+]
 
 for (const s of specs) {
   const agent = node('agent', s.id, { name: s.id, model: s.model, memory: s.memory, kindOfAgent: s.kind })
@@ -62,7 +66,19 @@ for (const s of specs) {
   edge('remembers_in', agent, node('memory-scope', `${s.memory}:${s.id}`, { scope: s.memory }))
   if (s.evals) edge('verified_by', agent, node('eval', s.id, { path: s.evals }))
   for (const k of s.knowledge || []) edge('reads', agent, node('knowledge-source', k.id || k.source, { source: k.source }))
-  if (s.kind === 'general' && s.role !== 'ceo') edge('reports_to', role, node('role', 'ceo'))
+  if ((s.kind === 'general' || s.kind === 'queen') && s.role !== 'ceo') edge('reports_to', role, node('role', 'ceo'))
+}
+
+// Delegation: an Agent(a, b) tool restriction is a typed edge, checked like any other.
+for (const s of specs) {
+  for (const t of s.tools || []) {
+    const m = /^Agent\((.+)\)$/.exec(t)
+    if (!m) continue
+    for (const target of m[1].split(',').map((x) => x.trim()).filter(Boolean)) {
+      if (!nodes.has(`agent:${target}`)) errors.push(`${s.id}: Agent(...) allows unknown agent "${target}"`)
+      edge('delegates_to', `agent:${s.id}`, `agent:${target}`)
+    }
+  }
 }
 
 // Brand team manifests.

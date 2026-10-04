@@ -51,6 +51,23 @@ test('every compiled General declares tools, model, and a native memory scope', 
   }
 });
 
+test('Domain Queens import from the org chart and delegate only to real Generals', () => {
+  assert.doesNotThrow(() => run('org-import.mjs', ['--org', path.join(root, 'instances', 'frankx', 'agent-os', 'org', 'domain-queens.json'), '--instance', 'frankx', '--check']));
+  const queenDir = path.join(root, 'instances', 'frankx', 'agent-os', 'specs');
+  const queens = readdirSync(queenDir).filter((f) => f.startsWith('queen-'));
+  assert.ok(queens.length >= 1, 'no Domain Queen specs');
+  const generals = new Set(specs.map((s) => s.id));
+  for (const f of queens) {
+    const q = JSON.parse(readFileSync(path.join(queenDir, f), 'utf8'));
+    const restriction = q.tools.find((t) => t.startsWith('Agent('));
+    assert.ok(restriction, `${q.id}: Agent tool must be restricted to its Generals`);
+    for (const target of restriction.slice(6, -1).split(',').map((x) => x.trim())) assert.ok(generals.has(target), `${q.id}: delegates to unknown ${target}`);
+    const compiled = readFileSync(path.join(root, 'instances', 'frankx', 'agents', `${q.id}.md`), 'utf8');
+    assert.match(compiled, /## Your Generals \(/, `${q.id}: compiled Queen lacks its Generals table`);
+  }
+  assert.match(run('agent-os-graph.mjs', ['--instance', 'frankx']), /"delegates_to":\d+/);
+});
+
 test('every spec has at least one eval case with graders', () => {
   for (const spec of specs) {
     const dir = path.join(root, spec.evals);

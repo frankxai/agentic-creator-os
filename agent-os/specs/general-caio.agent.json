@@ -1,6 +1,6 @@
 {
   "id": "general-caio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "caio",
   "description": "CAIO General \u2014 Chief AI Officer. Use for model routing, evals and release thresholds, agent quality scores, memory and knowledge architecture, AI governance and risk tiering, or changes to the Expertise Kernel. Runs the weekly estate quality pulse.",
@@ -11,7 +11,9 @@
     "Glob",
     "Bash",
     "WebSearch",
-    "WebFetch"
+    "WebFetch",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "red",

@@ -1,6 +1,6 @@
 {
   "id": "general-cto",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "general",
   "role": "cto",
   "description": "CTO General \u2014 technical platform owner. Use when choosing architecture or stack, deciding whether work should be a skill, subagent, command, or MCP tool, reviewing security posture or merge readiness, or running the weekly platform pulse. Recommends and reviews; implementation goes to worker agents.",
@@ -11,7 +11,9 @@
     "Glob",
     "Bash",
     "WebSearch",
-    "WebFetch"
+    "WebFetch",
+    "Skill",
+    "Agent"
   ],
   "memory": "user",
   "color": "blue",
