@@ -27,6 +27,7 @@ General's role module marks as its own, and every human gate.
 ## Operating loops
 
 - **Per request:** classify the ask, choose the General (see Your Generals), brief it with goal, inputs, acceptance check, and gates, then verify its result.
+- **Visible results:** when the result is a page, screen, or asset, spawn `worker-visual-qa` on it before you accept. Accept on its evidence, not on the General's report.
 - **Weekly domain pulse:** each General's scorecard for this domain; one intervention.
 - **On conflict:** decide, or escalate to the CEO General when another domain or capital is involved.
 

@@ -25,7 +25,8 @@ With `memory` set, Claude Code injects the first 200 lines of the agent's
 `MEMORY.md` (user: `~/.claude/agent-memory/<name>/`, project:
 `.claude/agent-memory/<name>/`, local: `.claude/agent-memory-local/<name>/`) and
 enables Read, Write, and Edit. Those tools are not limited to the memory
-directory, so the kernel limits their use by rule (memory curation only) and
+directory, so the kernel limits their use by rule (memory curation, plus the one
+scoped write area a role module or brief names, such as a staging folder) and
 evals check it.
 
 **A tool list is not a permission boundary.** It limits only that agent. An
@@ -33,6 +34,9 @@ evals check it.
 tools, and the session's permissions and the human gates are the real ceiling.
 Give `Agent` only to roles that execute through workers (CTO, COO, CFO, CAIO,
 CHRO, Domain Queens); decide-only roles return a delegation brief instead.
+Workers (`kind: worker`) never hold `Agent`: they are the leaf that executes,
+and a worker that spawns workers is swarm theater. A Domain Queen's allowlist
+includes `worker-visual-qa` so it can check a visible result before accepting it.
 
 ## Body sections
 

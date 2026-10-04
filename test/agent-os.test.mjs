@@ -35,7 +35,7 @@ test('brand manifests resolve to real agents; typos fail instead of becoming pha
   );
 });
 
-test('every compiled General declares tools, model, and a native memory scope', () => {
+test('every compiled agent declares tools, model, and a native memory scope', () => {
   for (const spec of specs) {
     for (const dir of ['.claude/agents', 'instances/frankx/agents']) {
       const file = path.join(root, dir, `${spec.id}.md`);
@@ -52,8 +52,10 @@ test('every compiled General declares tools, model, and a native memory scope', 
       assert.match(fm[1], /^priority: (high|medium|low)$/m);
       assert.match(fm[1], /^tools: .*\bSkill\b/m);
       // Decide-only roles return a delegation brief; only executing roles hold Agent (AGENT-SPEC).
+      // Workers are leaf executors: they never spawn agents.
       const decideOnly = ['ceo', 'cmo', 'cpo', 'cco'].includes(spec.role);
-      if (decideOnly) assert.doesNotMatch(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} is decide-only and must not hold Agent`);
+      if (spec.kind === 'worker') assert.doesNotMatch(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} is a worker and must not hold Agent`);
+      else if (decideOnly) assert.doesNotMatch(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} is decide-only and must not hold Agent`);
       else assert.match(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} delegates and needs Agent`);
     }
   }

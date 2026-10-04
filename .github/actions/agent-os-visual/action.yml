@@ -1,0 +1,78 @@
+name: Agent OS visual check
+description: >-
+  Render pages the way people see them (phone, tablet, desktop; light and dark)
+  in headless Chrome, report console errors, sideways overflow, missing alt
+  text, unnamed or covered controls, small targets, and layout shift, write the
+  report to the run summary, and upload the screenshots. No install step, no
+  secrets, no model calls.
+
+inputs:
+  urls:
+    description: Pages to check, separated by spaces or new lines (http, https, or file URLs).
+    required: true
+  widths:
+    description: Viewport widths in CSS pixels, comma separated.
+    required: false
+    default: '375,768,1440'
+  themes:
+    description: Color schemes to emulate, comma separated (light, dark).
+    required: false
+    default: 'light,dark'
+  gate:
+    description: "'true' fails the step when a blocking finding exists."
+    required: false
+    default: 'false'
+  artifact-name:
+    description: Name of the uploaded screenshot artifact.
+    required: false
+    default: visual-check
+  acos-ref:
+    description: Branch, tag, or commit of frankxai/agentic-creator-os to take the checker from.
+    required: false
+    default: main
+
+runs:
+  using: composite
+  steps:
+    - name: Fetch the Agent OS visual checker
+      uses: actions/checkout@v4
+      with:
+        repository: frankxai/agentic-creator-os
+        ref: ${{ inputs.acos-ref }}
+        path: .acos-agent-os
+        sparse-checkout: scripts
+
+    - name: Node 22 (built-in WebSocket)
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Render and check
+      shell: bash
+      env:
+        URLS: ${{ inputs.urls }}
+        WIDTHS: ${{ inputs.widths }}
+        THEMES: ${{ inputs.themes }}
+        GATE: ${{ inputs.gate }}
+      run: |
+        set -euo pipefail
+        flags=()
+        for u in $URLS; do
+          case "$u" in http://*|https://*|file://*) flags+=(--url "$u") ;; *) echo "::error::not an http(s) or file URL: $u"; exit 2 ;; esac
+        done
+        [ "${#flags[@]}" -gt 0 ] || { echo "::error::no URLs given"; exit 2; }
+        gate=()
+        if [ "$GATE" = "true" ]; then gate=(--gate); fi
+        status=0
+        node .acos-agent-os/scripts/visual-check.mjs "${flags[@]}" --widths "$WIDTHS" --themes "$THEMES" --out "$RUNNER_TEMP/visual-check" "${gate[@]}" || status=$?
+        [ -f "$RUNNER_TEMP/visual-check/report.md" ] && cat "$RUNNER_TEMP/visual-check/report.md" >> "$GITHUB_STEP_SUMMARY"
+        exit "$status"
+
+    - name: Upload screenshots and report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ runner.temp }}/visual-check
+        if-no-files-found: ignore
+        retention-days: 14

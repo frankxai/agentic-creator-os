@@ -57,6 +57,8 @@ const ORG_SOURCE = orgAbs.startsWith(ROOT) ? orgAbs.slice(ROOT.length + 1).split
 if (org.schema !== 'starlight.domainQueens.v1') { console.error(`✗ unsupported org schema ${org.schema}`); process.exit(2) }
 
 const coreRoles = new Set(readdirSync(join(ROOT, 'agent-os', 'specs')).filter((f) => f.startsWith('general-')).map((f) => f.slice(8, -11)))
+// Workers a Queen may run itself: only the read-only acceptance check for visible results.
+const ACCEPTANCE_WORKERS = ['worker-visual-qa'].filter((w) => existsSync(join(ROOT, 'agent-os', 'specs', `${w}.agent.json`)))
 const OUT = flag('--out')
 const outDir = OUT ? resolve(OUT) : join(ROOT, 'instances', INSTANCE, 'agent-os', 'specs')
 let errors = 0
@@ -71,7 +73,7 @@ for (const d of org.domains || []) {
     else if (!coreRoles.has(role)) { console.error(`✗ ${q.id}: "${g.title}" maps to ${role}, but agent-os/specs/general-${role}.agent.json does not exist`); errors++ }
     return { title: g.title, sourceId: g.id, role, agent: `general-${role}`, swarms: g.swarms || [] }
   })
-  const agents = [...new Set(generals.map((g) => g.agent).filter(Boolean)), 'general-ceo']
+  const agents = [...new Set(generals.map((g) => g.agent).filter(Boolean)), 'general-ceo', ...ACCEPTANCE_WORKERS]
   const titles = generals.map((g) => g.title.replace(/ General$/, '').toLowerCase()).join(', ')
   specs.push({
     id: `queen-${d.domain}`,

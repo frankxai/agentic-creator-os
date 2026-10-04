@@ -1,0 +1,36 @@
+{
+  "id": "worker-visual-producer",
+  "version": "1.0.0",
+  "kind": "worker",
+  "role": "visual-producer",
+  "description": "Visual Producer worker: turns a creative brief into reviewable image, video, or infographic candidates within a credit budget. Use when a page, post, product, or campaign needs original visuals: checks the brief, picks the model by task, drafts, looks at every output, refines the best, and stages candidates with provenance. Never publishes or exceeds the budget.",
+  "capabilities": [
+    "brief-check",
+    "model-selection",
+    "draft-generation",
+    "visual-critique",
+    "asset-records"
+  ],
+  "priority": "medium",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Write",
+    "Glob",
+    "Bash",
+    "Skill"
+  ],
+  "memory": "user",
+  "color": "pink",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/visual-producer.md"
+  ],
+  "requiredReading": [
+    "AGENTS.md",
+    "design.md",
+    "taste.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/worker-visual-producer"
+}

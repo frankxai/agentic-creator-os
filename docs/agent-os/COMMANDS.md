@@ -35,9 +35,13 @@ Before any dispatch, `/si` runs the mesh doctor (`node scripts/mesh-doctor.mjs
 | `/si 24/7` | `always-on-status`: CI, pulse, observers, routines, machines, dispatches, from receipts only |
 | `/si pulse` | Run the estate quality pulse now and compare to the baseline |
 | `/si upstreams` | `upstream-watch`: which frontier repositories moved since the last review |
+| `/si look <url>` | R2: `worker-visual-qa` renders the page at three widths in light and dark, opens every screenshot, and returns ship, revise, or block with evidence |
+| `/si create <brief>` | R1 then R2: the CCO General shapes the brief; `worker-visual-producer` drafts candidates inside the stated credit budget and stages them (see [STUDIO.md](STUDIO.md)) |
+| `/si publish <content>` | R1 then R2: the CMO General picks channels; `worker-publisher` builds and verifies the package and stops at the publish gate |
 
 Plain language works too: "have the CFO check this", "ask the Arcanea Queen",
-"run a council on pricing", "send this to the other machine".
+"run a council on pricing", "send this to the other machine", "look at the pricing
+page on mobile", "make three hero options for the launch".
 
 ## Gates that never move
 

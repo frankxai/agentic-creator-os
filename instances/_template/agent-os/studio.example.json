@@ -1,0 +1,40 @@
+{
+  "schema": "acos.studio.v1",
+  "reviewed": "YYYY-MM-DD",
+  "authority": ["BRAND-MEDIA.md (your asset rules)"],
+  "provider": {
+    "id": "<your image/video provider>",
+    "connector": "<the MCP connector that fills ~~image generation>",
+    "costRule": "This table is a planning guide. Ask the provider for the live cost before every generation; the live cost wins."
+  },
+  "routing": [
+    { "task": "draft image (exploring directions)", "model": "<cheapest model that meets the brief>", "credits": 0, "fallback": "<next cheapest>" },
+    { "task": "selected direction, final still", "model": "<quality model>", "credits": 0, "fallback": "<alternative>" },
+    { "task": "image edit or one-variable refinement", "model": "<edit model>", "credits": 0, "fallback": "<alternative>" },
+    { "task": "draft motion", "model": "<cheap video model>", "credits": 0, "fallback": "<alternative>" },
+    { "task": "infographic or diagram", "model": "none: HTML/SVG or a research-grounded visual skill", "credits": 0, "fallback": "none" },
+    { "task": "UI capture or page screenshot", "model": "none: scripts/visual-check.mjs", "credits": 0, "fallback": "none" }
+  ],
+  "budget": {
+    "defaultPerBrief": 60,
+    "ownerApprovalAbove": 150,
+    "rules": [
+      "The brief states the budget. No budget, no spend: return a plan with the credits it would need.",
+      "Three first-round directions, one draft each. At most two one-variable refinements on one direction, then stop.",
+      "Report credits spent and the remaining balance in every hand-off."
+    ]
+  },
+  "staging": {
+    "root": "<your asset folder>/<brand>/candidates/<YYYY-MM-DD>-<slug>/",
+    "record": "asset.json beside the files: job, placement, model, prompt, creation id, credits, rights note, alt intent, scores, lifecycle",
+    "rule": "Download into staging; never hotlink a generation URL. Staging is the producer's only write area besides its memory."
+  },
+  "lifecycle": ["intake", "briefed", "candidate", "reviewed", "integration-ready", "released", "learned", "archived"],
+  "releaseBar": { "rubric": "agent-os/rubrics/art-asset.md", "ship": "no 0s, average at least 2.2, provenance at least 2, asset record complete" },
+  "never": [
+    "Generation on a schedule",
+    "Uploading local files to a provider without the owner's approval",
+    "A real person's likeness, a third-party mark, or a copyrighted character",
+    "Publishing or moving files out of staging into a product repository"
+  ]
+}

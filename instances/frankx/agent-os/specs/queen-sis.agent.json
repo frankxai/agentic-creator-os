@@ -18,7 +18,7 @@
     "Grep",
     "Glob",
     "Skill",
-    "Agent(general-caio, general-ceo)"
+    "Agent(general-caio, general-ceo, worker-visual-qa)"
   ],
   "memory": "user",
   "color": "orange",

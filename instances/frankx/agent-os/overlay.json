@@ -273,6 +273,18 @@
         {
           "skill": "marketing:content-creation",
           "when": "drafting long-form content"
+        },
+        {
+          "skill": "publish-distribute",
+          "when": "adapting one piece of content into channel-native packages"
+        },
+        {
+          "skill": "marketing:draft-content",
+          "when": "drafting a post, email, or page section in the brand voice"
+        },
+        {
+          "skill": "marketing:email-sequence",
+          "when": "planning a newsletter or nurture sequence"
         }
       ]
     },
@@ -313,6 +325,22 @@
         {
           "skill": "canary",
           "when": "the first minutes after a deploy"
+        },
+        {
+          "skill": "impeccable",
+          "when": "a frontend change needs a design-quality audit, polish, or hardening pass"
+        },
+        {
+          "skill": "frontend-design:frontend-design",
+          "when": "briefing a worker to build a distinctive, production-grade interface"
+        },
+        {
+          "skill": "design:accessibility-review",
+          "when": "a page or component needs a WCAG 2.2 review"
+        },
+        {
+          "skill": "performance-analysis",
+          "when": "a page is slow or Core Web Vitals regressed"
         }
       ]
     },
@@ -341,6 +369,147 @@
         {
           "skill": "project-brief",
           "when": "briefing any new project"
+        },
+        {
+          "skill": "ui-ux-pro-max",
+          "when": "choosing a style, palette, type pairing, or layout pattern for a product surface"
+        },
+        {
+          "skill": "impeccable",
+          "when": "shaping or critiquing a product screen before it is built"
+        },
+        {
+          "skill": "design:design-handoff",
+          "when": "turning a design into a build spec with states and tokens"
+        },
+        {
+          "skill": "design:ux-copy",
+          "when": "interface copy: labels, empty states, errors, calls to action"
+        }
+      ]
+    },
+    "general-cco": {
+      "skillMap": [
+        {
+          "skill": "canon-check",
+          "when": "a story, character, or world detail must stay on canon"
+        },
+        {
+          "skill": "design:design-critique",
+          "when": "reviewing a visual design or asset set"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "creative copy must match a brand voice"
+        },
+        {
+          "skill": "acos-visual-gen",
+          "when": "an infographic or diagram must be factually accurate"
+        },
+        {
+          "skill": "hyperframes",
+          "when": "motion: title cards, captions, short HTML-based video"
+        },
+        {
+          "skill": "video-production-workflow",
+          "when": "planning a video from script to edit"
+        },
+        {
+          "skill": "suno-prompt-architect",
+          "when": "a music bed or track needs a production-grade Suno prompt"
+        }
+      ],
+      "knowledge": [
+        {
+          "source": "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
+          "purpose": "asset lifecycle, roles, and release gates",
+          "review": "quarter"
+        }
+      ]
+    },
+    "worker-visual-qa": {
+      "requiredReading": [
+        "~/.agent-harness/DESIGN-EXCELLENCE.md"
+      ],
+      "knowledge": [
+        {
+          "source": "~/agentic-creator-os/scripts/visual-check.mjs",
+          "purpose": "renderer: screenshots, probes, report",
+          "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "impeccable",
+          "when": "auditing hierarchy, spacing, type, and polish once you have the screenshots"
+        },
+        {
+          "skill": "design:accessibility-review",
+          "when": "the rubric flags accessibility below 2"
+        },
+        {
+          "skill": "design:design-critique",
+          "when": "writing the critique for the three fixes"
+        },
+        {
+          "skill": "canary",
+          "when": "the page was just deployed and you compare before and after"
+        }
+      ]
+    },
+    "worker-visual-producer": {
+      "requiredReading": [
+        "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
+        "~/agentic-creator-os/instances/frankx/agent-os/studio.json"
+      ],
+      "extraTools": [
+        "mcp__claude_ai_Openart__openart_account_get",
+        "mcp__claude_ai_Openart__openart_model_list",
+        "mcp__claude_ai_Openart__openart_model_cost",
+        "mcp__claude_ai_Openart__openart_model_form_get",
+        "mcp__claude_ai_Openart__openart_generate_image",
+        "mcp__claude_ai_Openart__openart_generate_video",
+        "mcp__claude_ai_Openart__openart_creation_get"
+      ],
+      "skillMap": [
+        {
+          "skill": "acos-visual-gen",
+          "when": "an infographic or diagram that must be factually accurate"
+        },
+        {
+          "skill": "design",
+          "when": "banners, social cards, or brand identity pieces"
+        },
+        {
+          "skill": "hyperframes",
+          "when": "motion, captions, or title cards as HTML video"
+        },
+        {
+          "skill": "suno-prompt-architect",
+          "when": "the brief asks for a music bed"
+        }
+      ]
+    },
+    "worker-publisher": {
+      "requiredReading": [
+        "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md"
+      ],
+      "skillMap": [
+        {
+          "skill": "publish-distribute",
+          "when": "building the per-channel package"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "checking each variant against the brand voice"
+        },
+        {
+          "skill": "marketing:draft-content",
+          "when": "a channel variant needs a fresh draft"
+        },
+        {
+          "skill": "seo-check",
+          "when": "the content lands on a web page"
         }
       ]
     }

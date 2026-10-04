@@ -8,6 +8,7 @@ name: Agent OS
 on:
   schedule:
     - cron: '30 5 * * *'   # daily 05:30 UTC
+    - cron: '0 6 * * 1'    # Mondays 06:00 UTC: visual watch of the brand front doors
   workflow_dispatch:
   pull_request:
     paths:
@@ -32,6 +33,10 @@ on:
       - 'agent-os/upstreams.json'
       - 'test/agent-os.test.mjs'
       - 'test/mesh.test.mjs'
+      - 'scripts/visual-check.mjs'
+      - 'test/visual.test.mjs'
+      - 'test/fixtures/visual/**'
+      - '.github/actions/agent-os-visual/**'
       - '.github/workflows/agent-os.yml'
 
 concurrency:
@@ -43,6 +48,7 @@ permissions:
 
 jobs:
   agent-os:
+    if: github.event.schedule != '0 6 * * 1'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -76,3 +82,48 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"
+
+  visual:
+    # The agents' eyes must work: render a page with deliberate defects and catch every one.
+    if: github.event.schedule != '0 6 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'   # built-in WebSocket for the DevTools protocol
+
+      - name: Visual check tests (headless Chrome)
+        run: node --test test/visual.test.mjs
+
+  visual-watch:
+    # Report-only: renders each brand front door weekly. Never blocks, never changes a site.
+    if: github.event.schedule == '0 6 * * 1' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Render the brand front doors
+        run: |
+          set -euo pipefail
+          mapfile -t flags < <(node -e "const w=require('./instances/frankx/agent-os/visual-watch.json'); for (const s of w.sites) { console.log('--url'); console.log(s.url) }")
+          read -r widths themes < <(node -e "const w=require('./instances/frankx/agent-os/visual-watch.json'); console.log(w.widths, w.themes)")
+          node scripts/visual-check.mjs "${flags[@]}" --widths "$widths" --themes "$themes" --out "$RUNNER_TEMP/visual-watch" || true
+          cat "$RUNNER_TEMP/visual-watch/report.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-watch
+          path: ${{ runner.temp }}/visual-watch
+          if-no-files-found: ignore
+          retention-days: 14
