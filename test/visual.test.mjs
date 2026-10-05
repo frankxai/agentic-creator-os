@@ -40,6 +40,9 @@ test('renders a screenshot and catches every deliberate defect at phone width', 
   // Findings name the element so the fix is obvious; a visually hidden skip link is never reported as covered.
   assert.match(blocking, /without an accessible name, e\.g\. button\.nav-close\.icon/);
   assert.doesNotMatch(run375.warnings.join(' | '), /Skip to main content/);
+  // Links inside a closed <details> menu are not rendered: never count them as unnamed or small.
+  assert.equal(run375.probe.unnamedControls, 1, run375.blocking.join(' | '));
+  assert.doesNotMatch(blocking, /closed-menu-link/);
 });
 
 test('--gate fails the run when blocking findings exist', { skip: cannotRender }, () => {

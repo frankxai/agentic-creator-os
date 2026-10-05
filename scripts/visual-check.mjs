@@ -126,7 +126,8 @@ try{new PerformanceObserver(function(l){const es=l.getEntries();const e=es[es.le
 const PROBE = `(() => {
   const d = document.documentElement;
   const named = (e) => (e.innerText || '').trim() || e.getAttribute('aria-label') || e.getAttribute('aria-labelledby') || e.getAttribute('title') || e.querySelector('img[alt]:not([alt=""]), svg title, [aria-label]');
-  const visible = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none' };
+  // checkVisibility also rejects content Chrome lays out but does not render, such as a closed <details> menu.
+  const visible = (e) => { if (e.checkVisibility && !e.checkVisibility({ visibilityProperty: true })) return false; const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none' };
   // Visually hidden until focused (sr-only skip links and the like): rendered for screen readers, not on screen.
   const srOnly = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width <= 1 || r.height <= 1 || s.opacity === '0' || /rect\\(0(px)?,? 0(px)?,? 0(px)?,? 0(px)?\\)/.test(s.clip) || s.clipPath === 'inset(50%)' };
   const describe = (e) => { let d = e.tagName.toLowerCase(); const h = e.getAttribute('href'); if (h) d += '[href="' + h.slice(0, 60) + '"]'; const c = (typeof e.className === 'string' ? e.className : '').trim().split(/\\s+/).filter(Boolean).slice(0, 2); if (c.length) d += '.' + c.join('.'); return d };
