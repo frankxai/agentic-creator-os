@@ -32,6 +32,9 @@ const ORG = flag('--org')
 const INSTANCE = flag('--instance')
 const CHECK = args.includes('--check')
 if (!ORG || !INSTANCE) { console.error('✗ usage: org-import.mjs --org <domain-queens.json> --instance <name> [--check]'); process.exit(2) }
+// INSTANCE and each domain become path segments, so both must be plain ids.
+const PLAIN_ID = /^[a-z0-9_][a-z0-9_-]{0,63}$/
+if (!PLAIN_ID.test(INSTANCE)) { console.error(`✗ --instance must be a plain id like "frankx" (lowercase letters, digits, _ or -); got ${JSON.stringify(INSTANCE)}`); process.exit(2) }
 
 // Functional General each Domain General title maps to. Extend deliberately.
 const TITLE_TO_ROLE = {
@@ -66,6 +69,7 @@ let stale = 0
 const specs = []
 
 for (const d of org.domains || []) {
+  if (!PLAIN_ID.test(String(d.domain || ''))) { console.error(`✗ domain ${JSON.stringify(d.domain)} must be a plain id (lowercase letters, digits, _ or -)`); errors++; continue }
   const q = d.queen
   const generals = (q.generals || []).map((g) => {
     const role = TITLE_TO_ROLE[g.title]

@@ -40,6 +40,8 @@ const REPO = flag('--repo') || ''
 const DRY = args.includes('--dry-run')
 const JSON_OUT = args.includes('--json')
 if (!MESH || !MEMBER || !JOB) { console.error('✗ usage: mesh-dispatch.mjs --mesh <mesh.json> --member <id> --job <file> [--cwd d] [--repo o/n] [--dry-run]'); process.exit(2) }
+// The member id becomes part of the receipt file name, so it must be a plain id.
+if (!/^[a-z0-9][a-z0-9-]{0,63}$/.test(MEMBER)) { console.error(`✗ --member must be a mesh id like "codex" (lowercase letters, digits, hyphens); got ${JSON.stringify(MEMBER)}`); process.exit(2) }
 
 let mesh
 try { mesh = loadMesh(MESH) } catch (err) { console.error(`✗ cannot read mesh: ${err.message}`); process.exit(2) }

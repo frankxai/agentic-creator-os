@@ -148,3 +148,16 @@ test('a new adopter instance compiles from the template, out of tree', () => {
   const init = node([script('agent-os-init.mjs'), '--name', 'frankx']);
   assert.equal(init.status, 1, 'init must refuse an existing instance');
 });
+
+test('ids that become path segments are refused before any file is written', () => {
+  const { dir, meshPath, receipts, job } = fixture();
+  const r = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', '../../escape', '--job', job, '--json']);
+  assert.equal(r.status, 2, r.stderr);
+  assert.match(r.stderr, /--member must be a mesh id/);
+  assert.equal(existsSync(receipts) ? readdirSync(receipts).length : 0, 0, 'no receipt may be written');
+  assert.equal(existsSync(path.join(dir, '..', 'escape.json')), false);
+  const org = path.join(root, 'instances', '_template', 'agent-os', 'org', 'domain-queens.example.json');
+  const o = node([script('org-import.mjs'), '--org', org, '--instance', '../escape', '--check']);
+  assert.equal(o.status, 2, o.stderr);
+  assert.match(o.stderr, /--instance must be a plain id/);
+});
