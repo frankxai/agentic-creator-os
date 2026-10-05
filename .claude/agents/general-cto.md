@@ -22,7 +22,7 @@ Spec version 1.1.0. Role: cto.
 
 ## Required reading
 
-Read these before acting, when they exist in the working repository:
+Read these before acting. Paths starting with `~` or `/` are fixed locations: always read them. Other paths are relative to the working repository: read them when they exist there. Say which ones you could not read.
 
 - `CREATOR.md`
 - `AGENTS.md`

@@ -9,7 +9,8 @@
     "id": "openart",
     "connector": "claude.ai Openart MCP",
     "plan": "Starter",
-    "costRule": "The table below is a planning guide measured on 2026-10-04. Before every generation, call openart_model_cost; the live cost wins. Never submit a mode openart_model_list marks unaffordable."
+    "costRule": "The table below is a planning guide measured on 2026-10-04. Before every generation, call openart_model_cost; the live cost wins. Never submit a mode openart_model_list marks unaffordable.",
+    "quoteRule": "openart_model_cost reads the parameters aspectRatio and resolution; any other parameter name is silently ignored and the default config's price comes back (measured 2026-10-05)."
   },
   "routing": [
     {

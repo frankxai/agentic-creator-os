@@ -107,6 +107,7 @@ dispatch or refusal leaves a receipt. See [MESH.md](MESH.md).
 | `orphan: … has no spec` | A compiled agent lost its spec; restore the spec or remove the file |
 | `org-import` says a title has no mapping | Add the title to `TITLE_TO_ROLE` in `scripts/org-import.mjs`, or rename it to an existing General |
 | A General does not appear in Claude Code | Start a new session; agents load at session start |
+| You edited an agent, but it behaves as before | A running session keeps the version it loaded first. Recompile, then test in a new session. To check, ask the agent to quote a line you just added from its own instructions |
 | The audit average is low | Most points come from descriptions with a "Use when" trigger and declared tools; fix those first |
 
 ## Contribute back
