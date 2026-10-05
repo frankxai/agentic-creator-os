@@ -2,6 +2,8 @@
 
 # Agentic Creator OS
 
+**The skills, agents and commands behind GenCreator, installable in Claude Code, Codex, Cursor, Grok and Antigravity.**
+
 Reusable skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.
 
 [Quick start](QUICKSTART.md) · [Project instructions](CLAUDE.md) · [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/frankxai/agentic-creator-os/issues)
