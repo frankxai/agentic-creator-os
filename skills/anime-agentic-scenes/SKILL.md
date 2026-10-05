@@ -45,6 +45,8 @@ Scene without mechanism is decoration. Mechanism without lab is a lecture. All t
 | Cast design and cast lock | `resources/character-forge.md` | Render a cast member that fails the seven tests |
 | Episodes, beats, labs | `resources/season-1.md` | Ship a scene whose lab does not run |
 | Prompts ready to render | `resources/keyframes.yaml` | Paste a prompt without the consistency block |
+| INK look test and cast run sheet | `resources/look-test-ink.yaml` | Run it before the director's INK call, or from a session that cannot see |
+| Render receipts | `resources/renders/` (sidecars, `ledger.jsonl`, `verify_ledger.py`) | Cite a render that has no sidecar, no ledger line, or a score nobody looked at |
 | Rendering | `multimodal-studio` skill + Higgsfield MCP | Fabricate an image URL |
 | Pre-production, critique, motion, post | `resources/cinema-protocol.md` | Render one candidate and call it a keyframe |
 

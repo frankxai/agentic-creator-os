@@ -193,10 +193,15 @@ renders:
     job_id: ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee
     url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_201751_ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee.png
     note: first pipeline proof; cast not yet locked via create_character
+    status: superseded          # pre-protocol, pre-INK; sidecar in renders/
 
 # Cinema protocol run, 2026-09-21 — ep01 cast lock + season lane bake-off.
 # Scores are blank on purpose: the session that produced these could not view images (egress blocked).
 # Score with the three lenses from cinema-protocol.md, then set `lane_locked`.
+# 2026-10-05 review attempt: still unscored. The review session's egress policy also blocks the render CDN and the
+# Higgsfield MCP did not connect, so nothing was viewed. All Sept-21 renders below are marked unverified/superseded.
+# They predate the INK world thesis (cyan/amber palette), so they cannot win the lane lock under STUDIO-BIBLE even if
+# scored; keep them only as pre-INK reference. Provenance sidecars + ledger: renders/ (verify: renders/verify_ledger.py).
 cast_lock:
   operator_ren:
     sheet: turnaround
@@ -206,7 +211,7 @@ cast_lock:
     job_id: e16d2f8f-8608-41bc-b285-b0b634ea0aa4
     url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203102_e16d2f8f-8608-41bc-b285-b0b634ea0aa4.png
     element_id: null            # set after show_reference_elements create on the approved sheet
-    status: awaiting_review
+    status: superseded          # generic prose-to-image turnaround; redo as image-to-image after the INK call
 bakeoff:
   control_shot: ep01 establish, cinema-protocol prompt (24mm, 60/30/10, Establish colour script)
   lane_locked: null
@@ -217,24 +222,28 @@ bakeoff:
       job_id: a37f1d97-7d7b-495b-a14e-134b00b1652e
       url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203102_a37f1d97-7d7b-495b-a14e-134b00b1652e.png
       credits: 2
+      status: unverified
       score: {composition: null, staging: null, light: null, colour: null, depth: null, render: null, cast: null, mechanism: null, cost_cue: null, clean: null, total: null}
     - lane: B
       model_requested: cinematic_studio_2_5
       job_id: 6d7f57eb-11f8-4519-88b1-2a2df2bbc592
       url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203101_6d7f57eb-11f8-4519-88b1-2a2df2bbc592.png
       credits: 2
+      status: unverified
       score: {composition: null, staging: null, light: null, colour: null, depth: null, render: null, cast: null, mechanism: null, cost_cue: null, clean: null, total: null}
     - lane: C
       model_requested: gpt_image_2_5
       job_id: 241b4361-1105-451e-b4ef-9baca0b70a49
       url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203102_241b4361-1105-451e-b4ef-9baca0b70a49.png
       credits: 1
+      status: unverified
       score: {composition: null, staging: null, light: null, colour: null, depth: null, render: null, cast: null, mechanism: null, cost_cue: null, clean: null, total: null}
     - lane: D
       model_requested: soul_cinematic
       job_id: 1eac85fa-f27b-41df-8ce5-36b5f827471c
       url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203103_1eac85fa-f27b-41df-8ce5-36b5f827471c.png
       credits: 1
+      status: unverified
       score: {composition: null, staging: null, light: null, colour: null, depth: null, render: null, cast: null, mechanism: null, cost_cue: null, clean: null, total: null}
   baseline_for_comparison: ab8c4ed4-b58b-4a19-8fd2-2f8a269eb7ee   # the pre-protocol render
 
@@ -246,16 +255,19 @@ direction_sheets:
     job_id: c793bba5-2d5c-4ad7-8c6a-6bf3be15c0db
     url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203625_c793bba5-2d5c-4ad7-8c6a-6bf3be15c0db.png
     chosen: null
+    status: unverified
   mira:
     directions: [A Sail (recommended), B Cartographer, C Kite]
     model_served: nano_banana_2
     job_id: f1dccdac-1eb8-455f-b00a-4280c69daf02
     url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203625_f1dccdac-1eb8-455f-b00a-4280c69daf02.png
     chosen: null
+    status: unverified
   squad_lineup:
     test: five silhouettes must read as five shape families
     model_served: nano_banana_2
     job_id: 8904f3ee-6136-4762-b193-20241e128662
     url: https://d8j0ntlcm91z4.cloudfront.net/user_32GhXb30ZEIgk6EA10e5RYFiKSg/hf_20260921_203624_8904f3ee-6136-4762-b193-20241e128662.png
     passed: null
+    status: unverified
   superseded: e16d2f8f-8608-41bc-b285-b0b634ea0aa4   # first Ren turnaround, generic; do not use

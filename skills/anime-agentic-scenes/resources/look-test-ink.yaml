@@ -1,0 +1,91 @@
+# Look test + cast run sheet, INK world (STUDIO-BIBLE stages 2-6).
+# Prep only. Nothing here has been rendered. Blocked on:
+#   1. Director's yes/no on INK (STUDIO-BIBLE §10, open item 1). If no, rewrite `style_block` for the chosen world;
+#      the structure below is world-agnostic.
+#   2. A session that can view images (vision + render CDN reachable). Text-only sessions do not run this file.
+# Every job run from here gets: a renders/<file>.vis.provenance.json sidecar, a renders/ledger.jsonl line,
+# and passes renders/verify_ledger.py before it is cited anywhere.
+
+world: INK
+status: blocked_on_director_ink_call
+
+style_block: >-
+  Sumi ink wash on visible cold-press paper grain, pooled edges, dry-brush texture, deliberate bleed. Architecture is
+  monolithic brutalist concrete rendered as paper white with hard shadow and large negative space. Backgrounds carry no
+  outline, wash and edge only. Palette limited to paper white #F3EFE6, paper shadow #D9D3C6, ink wash grey #6B6E78,
+  ink black #15161A, ink blue-black #1E2A44. Daylight, light world, not dark. 24mm lens, at least 40 percent empty paper.
+  Original design.
+
+negative_block: >-
+  no red, no text, no letters, no signage, no logos, no watermark, no airbrushed gradient, no glossy surfaces,
+  no neon, no bloom, no chromatic aberration, no volumetric rays, no dark background, no ornament, no fantasy armour,
+  no period costume, no figures
+
+# Stage 2 — look test. Same empty district, same composition, one variable: the lane.
+look_test:
+  subject: >-
+    An empty district of the paper city at mid-morning: three monolithic concrete blocks drawn in ink on a vast sheet of
+    paper, a wide stair descending between them, one block still in pencil outline and unfinished, the page edge visible
+    as blank paper at the horizon. Wide establishing shot, eye level.
+  aspect: "16:9"            # composite to 2.39:1 later; do not crop in-model
+  frames_per_lane: 1        # STUDIO-BIBLE asks for six frames total; 4 lanes x 1 plus 2 re-rolls on the top two lanes
+  lanes:
+    - {lane: A, model_requested: nano_banana_pro}
+    - {lane: B, model_requested: cinematic_studio_2_5}
+    - {lane: C, model_requested: soul_cinematic}
+    - {lane: D, model_requested: gpt_image_2_5}
+  served_model_check: >-
+    Read model_served from each job's metadata before scoring. A lane whose served model differs from the request is
+    scored under the served model's name, not the requested one (nano_banana_pro was served as nano_banana_2 on 2026-09-21).
+  hard_fails: [any red, any dark background, gradient shading, text or glyphs, franchise resemblance, figures present]
+  score_axes: [composition, light, depth, negative_space, ink_material, paper_grain, palette_discipline, brutalist_read, clean, taste]
+  lock_rule: highest total with zero hard fails; ties go to the lane with stronger ink_material. Record lane_locked in keyframes.yaml.
+
+# Stages 3-6 — cast. Image-to-image throughout. A text block is used once, for the silhouette sheet, never again.
+cast_run:
+  order: [ren, mira]        # squad after both are locked; Founder needs only a hand-and-cuff sheet
+  ren:
+    brief_ref: STUDIO-BIBLE.md §4 (Ren)
+    stage_3_silhouettes: >-
+      Sixteen solid ink-black full-body silhouettes on paper white in a 4x4 grid, no interior detail. Tall vertical
+      figure, oversized open technical parka over a slim base, one sleeve pushed up, a single long round brush carried
+      across the back like a pole. Vary parka length, hood, stance and brush angle across the sixteen.
+    stage_3_gate: pick one; must read at 64 px
+    stage_4_ladder:
+      rule: each pass references the previous output via image_references/medias; one change per pass; 6-10 passes
+      passes:
+        - block in two-tone cel inside the chosen silhouette, ink outline weight varies like a brush
+        - resolve the parka construction (seams, hood, pushed sleeve)
+        - face at three-quarter, 85mm read, minimal features
+        - right forearm and hand inked solid (full ink state)
+        - brush detail: long round brush, hairs intact
+        - the pale: same figure with right hand faded to pencil outline (spent state), nothing else changed
+      gate: forge rubric >= 18/21 (character-forge.md)
+    stage_5_sheets: [turnaround front/side/back/3-quarter, expression sheet x6, callout sheet (brush, parka, forearm states), key art]
+    stage_6_lock: save approved turnaround as a reference Element; record element_id in keyframes.yaml cast_ids.operator
+  mira:
+    brief_ref: STUDIO-BIBLE.md §4 (Mira)
+    stage_3_silhouettes: >-
+      Sixteen solid ink-black full-body silhouettes on paper white in a 4x4 grid, no interior detail. Triangle silhouette,
+      a rigid drafting apron that stands off the body on one side like a board, a flat carpenter's pencil behind the ear.
+      Vary apron angle, stance and hair across the sixteen.
+    stage_4_ladder:
+      rule: same as ren
+      passes:
+        - two-tone cel inside the chosen silhouette, pencil-grey outline (planning state)
+        - apron construction as a rigid board
+        - face at three-quarter, minimal features
+        - same figure with outline fully inked (graph-complete state), nothing else changed
+      gate: forge rubric >= 18/21
+    stage_5_sheets: [turnaround, expression sheet x6, callout sheet, key art]
+    stage_6_lock: reference Element; record in cast_ids.conductor
+
+# Stage 8 — ep01 Establish keyframe (only after lane lock, location plate, and Ren Element exist).
+ep01_establish:
+  inputs: [locked lane, district plate Element, ren Element]
+  beat: >-
+    Ren alone at the foot of the wide stair in the empty district, small in frame, long brush across his back, right
+    forearm inked solid. The unfinished pencil block above him. Page edge blank at the horizon.
+  candidates: 4
+  critique: three lenses (STUDIO-BIBLE §7), one refine pass on the winner, 4k upscale
+  gate: cinema rubric >= 24/30 (cinema-protocol.md)

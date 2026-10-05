@@ -2,6 +2,13 @@
 
 Target: `frankxai/agentic-creator-os`, PR #63 (`claude/anime-agentic-ai-scenes-e1sp3w` → `main`), currently draft.
 
+## Session log — 2026-10-05 (review attempt 2)
+
+- **Vision check failed again.** The cloud session's egress policy denies `d8j0ntlcm91z4.cloudfront.net` (CONNECT 403) and the Higgsfield MCP did not connect. No image was viewed, no credit spent, no score written.
+- **Done without eyes:** `.vis.provenance.json` sidecars + `renders/ledger.jsonl` lines backfilled for all 9 Sept-21 renders; every one marked `unverified` or `superseded` in `keyframes.yaml`. `renders/verify_ledger.py` fails on a render with no ledger line, a missing or mismatched sidecar, or a score without `review_status: scored` + `scored_by`. Stage 2-8 prep in `look-test-ink.yaml`.
+- **Still open, in order:** Frank's INK yes/no → look test → silhouette + image-to-image ladder → cast Element → ep01 Establish gate. PR stays draft until a gated ep01 keyframe exists.
+- **To unblock a cloud session:** add `d8j0ntlcm91z4.cloudfront.net` to the environment's allowed domains and reconnect the Higgsfield connector, or run steps 3-6 from Claude desktop/Cowork.
+
 ## Precondition — read first
 
 **Do not spend generation credits unless this session can actually view images** (Claude desktop, Cowork, or a harness with vision — not a text-only CLI session behind an egress-blocked proxy). Verify by fetching one existing render URL from `resources/keyframes.yaml` and confirming you can see it before doing anything else. If you cannot see it, stop generating and do documentation/code work only — that was the exact failure of the prior session: ~13 Higgsfield credits spent on renders nobody scored.
