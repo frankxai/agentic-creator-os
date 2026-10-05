@@ -210,7 +210,7 @@ Decided by this document, pending the director's veto:
 - Pipeline: eyes at every gate; no credits spent by a session that cannot see.
 
 Open, and the director's alone:
-1. INK, or one of the alternatives.
+1. INK, or one of the alternatives. *2026-10-05: INK adopted as the working world under delegation from Frank's lead session ("proceed with the option you recommend"). Frank can override at any time before the look test locks a lane; nothing has been rendered against it yet.*
 2. Whether Ren keeps his name under PAGE.
 3. The lane, after the look test with eyes.
 

@@ -1,13 +1,14 @@
 # Look test + cast run sheet, INK world (STUDIO-BIBLE stages 2-6).
-# Prep only. Nothing here has been rendered. Blocked on:
-#   1. Director's yes/no on INK (STUDIO-BIBLE §10, open item 1). If no, rewrite `style_block` for the chosen world;
-#      the structure below is world-agnostic.
-#   2. A session that can view images (vision + render CDN reachable). Text-only sessions do not run this file.
+# Prep only. Nothing here has been rendered.
+#   World: INK adopted 2026-10-05 under delegation (see STUDIO-BIBLE §10). Reversible: if Frank overrides, rewrite
+#   `style_block` for the chosen world; the structure below is world-agnostic.
+#   Still blocked on: a session that can view images (vision + render CDN reachable) and approved credit spend.
+#   Text-only sessions do not run this file.
 # Every job run from here gets: a renders/<file>.vis.provenance.json sidecar, a renders/ledger.jsonl line,
 # and passes renders/verify_ledger.py before it is cited anywhere.
 
 world: INK
-status: blocked_on_director_ink_call
+status: blocked_on_vision_and_credit_approval
 
 style_block: >-
   Sumi ink wash on visible cold-press paper grain, pooled edges, dry-brush texture, deliberate bleed. Architecture is

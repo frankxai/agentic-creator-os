@@ -6,7 +6,8 @@ Target: `frankxai/agentic-creator-os`, PR #63 (`claude/anime-agentic-ai-scenes-e
 
 - **Vision check failed again.** The cloud session's egress policy denies `d8j0ntlcm91z4.cloudfront.net` (CONNECT 403) and the Higgsfield MCP did not connect. No image was viewed, no credit spent, no score written.
 - **Done without eyes:** `.vis.provenance.json` sidecars + `renders/ledger.jsonl` lines backfilled for all 9 Sept-21 renders; every one marked `unverified` or `superseded` in `keyframes.yaml`. `renders/verify_ledger.py` fails on a render with no ledger line, a missing or mismatched sidecar, or a score without `review_status: scored` + `scored_by`. Stage 2-8 prep in `look-test-ink.yaml`.
-- **Still open, in order:** Frank's INK yes/no → look test → silhouette + image-to-image ladder → cast Element → ep01 Establish gate. PR stays draft until a gated ep01 keyframe exists.
+- **World call (later the same day):** Frank's lead session delegated the call ("proceed with the option you recommend"); INK is adopted as the working world, recorded in STUDIO-BIBLE §10 and reversible until a lane is locked.
+- **Still open, in order:** look test → silhouette + image-to-image ladder → cast Element → ep01 Establish gate. PR stays draft until a gated ep01 keyframe exists.
 - **To unblock a cloud session:** add `d8j0ntlcm91z4.cloudfront.net` to the environment's allowed domains and reconnect the Higgsfield connector, or run steps 3-6 from Claude desktop/Cowork.
 
 ## Precondition — read first
@@ -37,7 +38,7 @@ Target: `frankxai/agentic-creator-os`, PR #63 (`claude/anime-agentic-ai-scenes-e
 ## Immediate next steps, in order
 
 1. **Confirm vision.** Per precondition above.
-2. **World call.** Get Frank's explicit yes/no on INK (`STUDIO-BIBLE.md` §1). Do not proceed to rendering without this — it's an open decision, not a default.
+2. **World call.** Resolved 2026-10-05: INK, by delegation (see session log above). Re-open only if Frank overrides.
 3. **Look test** (`STUDIO-BIBLE.md` stage 2): one empty district, ink-wash style, across 3-4 lanes (`nano_banana_pro`, `cinematic_studio_2_5`, `soul_cinematic`, confirm actual served model in the job metadata — `nano_banana_pro` was silently served as `nano_banana_2` last time, check every job). Score with eyes against the cinema-protocol rubric. Lock one lane. Record in `keyframes.yaml`.
 4. **Character redesign as image-to-image**, not prose-to-image: 16-silhouette sheet → pick one → 6-10 refinement passes each referencing the prior output (`medias`/`image_references`), never restarting from a text block. Forge rubric gate: 18/21.
 5. **Cast lock**: turnaround, expression sheet, callout sheet, key art, saved as a `show_reference_elements` Element. Record the Element ID.
