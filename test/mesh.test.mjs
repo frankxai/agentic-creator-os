@@ -78,6 +78,32 @@ test('a dispatched job really runs in the background and its output lands next t
   assert.match(readFileSync(receipt.out, 'utf8'), /hello from the mesh test/);
 });
 
+async function settled(receiptFile) {
+  for (let i = 0; i < 100; i++) {
+    const r = JSON.parse(readFileSync(receiptFile, 'utf8'));
+    if (r.status !== 'started') return r;
+    await sleep(100);
+  }
+  return JSON.parse(readFileSync(receiptFile, 'utf8'));
+}
+
+test('a job that exits non-zero ends as failed with its exit code, never as started or success', async () => {
+  const { meshPath, receipts, job } = fixture();
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.members.push({ id: 'crasher', kind: 'harness', probe: { bin: 'node' }, run: { mode: 'argv', argv: ['node', '-e', 'process.exit(7)'], local: true } });
+  writeFileSync(meshPath, JSON.stringify(mesh));
+  const bad = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'crasher', '--job', job, '--json']);
+  assert.equal(bad.status, 0, bad.stderr);
+  const failed = await settled(path.join(receipts, `${JSON.parse(bad.stdout).id}.json`));
+  assert.equal(failed.status, 'failed');
+  assert.equal(failed.exitCode, 7);
+  assert.ok(failed.endedAt);
+  const good = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'echo', '--job', job, '--json']);
+  const ok = await settled(path.join(receipts, `${JSON.parse(good.stdout).id}.json`));
+  assert.equal(ok.status, 'succeeded');
+  assert.equal(ok.exitCode, 0);
+});
+
 test('the zone cap refuses another local job while one is running, whichever member it targets', () => {
   const { dir, meshPath, job } = fixture();
   const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));

@@ -13,6 +13,8 @@
  * Guards, in order: member exists and is dispatchable; the cheap probe passes
  * (known issues stay down); free RAM meets minRamGiB for local members; running
  * receipts for this member stay under maxConcurrent. A refusal is a receipt too.
+ * A launched job's receipt says "started" until the job ends, then "succeeded"
+ * (exit 0) or "failed" with its exit code; see lib/mesh-supervise.mjs.
  *
  * Usage:
  *   node scripts/mesh-dispatch.mjs --mesh <mesh.json> --member <id> --job <file>
@@ -21,7 +23,8 @@
  * Exit 0 when dispatched or dry-run, 3 when refused by a guard, 2 on bad input.
  */
 import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync, statSync, unlinkSync } from 'node:fs'
-import { join, resolve, sep } from 'node:path'
+import { join, resolve, sep, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { spawn } from 'node:child_process'
 import { loadMesh, measureZone, probeMember, expand, resolveNoShell } from './lib/mesh-core.mjs'
 
@@ -162,7 +165,10 @@ const fd = openSync(out, 'a')
 // Windows cannot spawn .cmd shims directly, and a detached cmd.exe loses the output of the Node
 // program an npm shim starts; resolveNoShell already turned such a shim into Node + its JS entry.
 const stdio = [run.stdin === 'job' ? 'pipe' : 'ignore', fd, fd]
-const child = spawn(file, fileArgs, { cwd: CWD, detached: true, windowsHide: true, stdio, shell: false })
+// The job runs under a small Node supervisor that rewrites this receipt when the job ends
+// ("succeeded" on exit 0, else "failed", with exitCode and signal), so "started" only ever means launched.
+const SUPERVISOR = join(dirname(fileURLToPath(import.meta.url)), 'lib', 'mesh-supervise.mjs')
+const child = spawn(process.execPath, [SUPERVISOR, receiptPath, file, ...fileArgs], { cwd: CWD, detached: true, windowsHide: true, stdio, shell: false })
 if (run.stdin === 'job') {
   child.stdin.end(readFileSync(jobPath))
 }

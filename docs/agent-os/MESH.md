@@ -93,7 +93,9 @@ Guards run in code, in this order: the member exists and is dispatchable; its
 cheap probe passes (a `knownIssue` keeps it down); free memory meets
 `minRamGiB` for `local` members; running jobs stay under `maxConcurrent`.
 Every dispatch and every refusal writes a receipt (`receiptsDir`); output lands
-next to it. Exit 0 started or dry run, 3 refused, 2 bad input.
+next to it. A launched job's receipt reads `started` until the job ends, then
+`succeeded` (exit 0) or `failed` with its `exitCode`; `started` never means success.
+Exit 0 started or dry run, 3 refused, 2 bad input.
 
 On Windows, npm installs command-line tools as `.cmd` shims. A detached
 `cmd.exe` loses the output of the Node program such a shim starts, so dispatch
