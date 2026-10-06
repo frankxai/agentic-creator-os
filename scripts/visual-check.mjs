@@ -79,11 +79,23 @@ const profile = mkdtempSync(join(tmpdir(), 'acos-visual-'))
 const asRoot = typeof process.getuid === 'function' && process.getuid() === 0
 const proc = spawn(browserPath, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${profile}`, ...(asRoot ? ['--no-sandbox'] : []), '--no-first-run',
   '--no-default-browser-check', '--disable-gpu', '--hide-scrollbars', '--mute-audio', '--disable-extensions', '--disable-background-networking', 'about:blank'],
-{ stdio: ['ignore', 'ignore', 'pipe'] })
+// On Linux and macOS the browser gets its own process group, so cleanup can stop helpers that outlive it.
+{ stdio: ['ignore', 'ignore', 'pipe'], detached: platform() !== 'win32' })
 
-function cleanup() {
-  try { proc.kill() } catch {}
-  setTimeout(() => { try { rmSync(profile, { recursive: true, force: true }) } catch {} }, 300)
+// Remove the throwaway profile before the process exits. Windows keeps the browser's files locked
+// until it has exited, so wait for the exit (at most 5 s), then remove with retries.
+async function cleanup() {
+  if (proc.exitCode === null && proc.signalCode === null) {
+    const exited = new Promise((r) => proc.once('exit', r))
+    try { proc.kill() } catch {}
+    await Promise.race([exited, new Promise((r) => setTimeout(r, 5000))])
+  }
+  // Helpers (renderers, the crash handler) can outlive the browser and keep writing into the profile.
+  if (platform() !== 'win32') { try { process.kill(-proc.pid, 'SIGKILL') } catch {} }
+  for (let i = 0; i < 15 && existsSync(profile); i++) {
+    try { rmSync(profile, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }) } catch {}
+    await new Promise((r) => setTimeout(r, 200))
+  }
 }
 
 const wsUrl = await new Promise((resolveWs, reject) => {
@@ -95,10 +107,10 @@ const wsUrl = await new Promise((resolveWs, reject) => {
     if (m) { clearTimeout(timer); resolveWs(m[1]) }
   })
   proc.on('exit', (code) => { clearTimeout(timer); reject(new Error(`browser exited early (code ${code})`)) })
-}).catch((err) => { console.error(`✗ ${err.message}`); cleanup(); process.exit(2) })
+}).catch(async (err) => { console.error(`✗ ${err.message}`); await cleanup(); process.exit(2) })
 
 const ws = new WebSocket(wsUrl)
-await new Promise((r, j) => { ws.onopen = r; ws.onerror = () => j(new Error('cannot connect to the browser')) }).catch((err) => { console.error(`✗ ${err.message}`); cleanup(); process.exit(2) })
+await new Promise((r, j) => { ws.onopen = r; ws.onerror = () => j(new Error('cannot connect to the browser')) }).catch(async (err) => { console.error(`✗ ${err.message}`); await cleanup(); process.exit(2) })
 
 let nextId = 0
 const pending = new Map()
@@ -258,13 +270,13 @@ try {
 } catch (err) {
   console.error(`✗ visual check failed: ${err.message}`)
   try { ws.close() } catch {}
-  cleanup()
+  await cleanup()
   process.exit(2)
 }
 
 try { await send('Browser.close') } catch {}
 try { ws.close() } catch {}
-cleanup()
+await cleanup()
 
 // ---- Report ----
 

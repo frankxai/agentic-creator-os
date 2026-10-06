@@ -3,20 +3,28 @@
 // headless Chrome/Edge (skipped when no browser is installed; CI runners have one).
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
+import test, { after } from 'node:test';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const script = path.join(root, 'scripts', 'visual-check.mjs');
 const fixture = pathToFileURL(path.join(root, 'test', 'fixtures', 'visual', 'broken.html')).href;
 
+// Each run gets its own temp root: the renderer's throwaway browser profile lands there, so a
+// leaked profile is visible to the test. Everything the tests create is removed afterwards.
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); });
+
 function run(extra) {
-  const out = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
-  const r = spawnSync(process.execPath, [script, '--url', fixture, '--out', out, '--themes', 'light', ...extra], { encoding: 'utf8', timeout: 120000 });
-  return { r, out };
+  const tmp = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
+  made.push(tmp);
+  const out = path.join(tmp, 'out');
+  const env = { ...process.env, TMP: tmp, TEMP: tmp, TMPDIR: tmp };
+  const r = spawnSync(process.execPath, [script, '--url', fixture, '--out', out, '--themes', 'light', ...extra], { encoding: 'utf8', timeout: 120000, env });
+  return { r, out, tmp };
 }
 
 const probe = run(['--widths', '375']);
@@ -45,6 +53,11 @@ test('renders a screenshot and catches every deliberate defect at phone width', 
   assert.doesNotMatch(blocking, /closed-menu-link/);
 });
 
+test('removes its browser profile before exiting', { skip: cannotRender }, () => {
+  const left = readdirSync(probe.tmp).filter((f) => f.startsWith('acos-visual-'));
+  assert.deepEqual(left, [], `browser profile left behind: ${left.join(', ')}`);
+});
+
 test('--gate fails the run when blocking findings exist', { skip: cannotRender }, () => {
   const { r } = run(['--widths', '1440', '--gate']);
   assert.equal(r.status, 1);
@@ -66,6 +79,7 @@ test('rejects width or theme sets with an invalid entry instead of rendering not
 test('--gate fails when the main frame cannot be loaded', { skip: cannotRender }, () => {
   const missing = pathToFileURL(path.join(root, 'test', 'fixtures', 'visual', 'does-not-exist.html')).href;
   const out = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
+  made.push(out);
   const r = spawnSync(process.execPath, [script, '--url', missing, '--out', out, '--widths', '375', '--themes', 'light', '--gate'], { encoding: 'utf8', timeout: 120000 });
   assert.equal(r.status, 1, r.stderr);
   const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
@@ -84,6 +98,7 @@ function watchBlock() {
 }
 function runWatch(sites) {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-watch-'));
+  made.push(dir);
   mkdirSync(path.join(dir, 'instances', 'frankx', 'agent-os'), { recursive: true });
   writeFileSync(path.join(dir, 'instances', 'frankx', 'agent-os', 'visual-watch.json'), JSON.stringify({ widths: '375', themes: 'light', sites }));
   const r = spawnSync('bash', ['-c', watchBlock()], { cwd: dir, encoding: 'utf8', env: { ...process.env, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: path.join(dir, 'summary') } });
