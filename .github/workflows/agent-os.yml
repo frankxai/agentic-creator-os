@@ -77,10 +77,18 @@ jobs:
         # Raise it when the average rises; never lower it to make a red run green.
         run: node scripts/estate-audit.mjs --home . --md "$GITHUB_STEP_SUMMARY" --min-score 72
 
+      # The token only reaches code from the default branch. On a pull request the script is
+      # PR-controlled, so it runs unauthenticated (public repos, lower rate limit).
       - name: Upstream watch (which frontier repos moved; review prompt, never blocks)
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"
+
+      - name: Upstream watch, unauthenticated (pull requests and other branches)
+        if: github.event_name == 'pull_request' || github.ref != format('refs/heads/{0}', github.event.repository.default_branch)
+        continue-on-error: true
         run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"
 
   visual:

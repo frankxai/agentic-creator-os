@@ -134,3 +134,14 @@ test('the quality ratchet refuses a --min-score that is not a number from 0 to 1
     assert.match(r.stderr, /--min-score must be a number from 0 to 100/);
   }
 });
+
+test('agent-os.yml gives GITHUB_TOKEN only to steps that never run on a pull request', () => {
+  const yml = readFileSync(path.join(root, '.github', 'workflows', 'agent-os.yml'), 'utf8').replace(/\r\n/g, '\n');
+  const steps = yml.split(/\n(?= {6}- )/).filter((s) => s.startsWith('      - '));
+  const tokenSteps = steps.filter((s) => /\bGITHUB_TOKEN:|\bGH_TOKEN:|github\.token|secrets\./.test(s));
+  assert.ok(tokenSteps.length >= 1, 'the authenticated upstream watch step exists');
+  for (const s of tokenSteps) {
+    assert.match(s, /\n {8}if: github\.event_name != 'pull_request' && github\.ref == format\('refs\/heads\/\{0\}', github\.event\.repository\.default_branch\)\n/, `token-bearing step may run on a pull request:\n${s}`);
+  }
+  assert.match(yml, /name: Upstream watch, unauthenticated[^\n]*\n {8}if: github\.event_name == 'pull_request'/, 'pull requests still get an unauthenticated upstream watch');
+});
