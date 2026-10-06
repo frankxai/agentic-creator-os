@@ -3,8 +3,8 @@
 // refusals leave receipts, a dispatched job really runs, and nothing needs a
 // network, a secret, or another machine.
 import assert from 'node:assert/strict';
-import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -95,6 +95,44 @@ test('the zone cap refuses another local job while one is running, whichever mem
     try { process.kill(pid); } catch { /* already gone */ }
   }
   assert.ok(dir);
+});
+
+function sleeperMesh(meshPath, cap) {
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.zone.localParallel = { green: cap, yellow: cap, red: cap };
+  mesh.members.push({ id: 'sleeper', kind: 'harness', probe: { bin: 'node' }, run: { mode: 'argv', argv: ['node', '-e', 'setTimeout(function () {}, 8000)'], local: true } });
+  writeFileSync(meshPath, JSON.stringify(mesh));
+}
+const dispatchAsync = (args) => new Promise((done) => {
+  const child = spawn(process.execPath, [script('mesh-dispatch.mjs'), ...args], { cwd: root });
+  let stdout = '';
+  child.stdout.on('data', (d) => { stdout += d; });
+  child.on('close', (status) => done({ status, stdout }));
+});
+const killAll = (results) => { for (const r of results) { try { process.kill(JSON.parse(r.stdout).pid); } catch { /* refused or gone */ } } };
+
+test('concurrent dispatches cannot overrun the zone cap: count and launch are atomic', async () => {
+  const { meshPath, job } = fixture();
+  sleeperMesh(meshPath, 1);
+  const results = await Promise.all(Array.from({ length: 6 }, () => dispatchAsync(['--mesh', meshPath, '--member', 'sleeper', '--job', job, '--json'])));
+  try {
+    assert.equal(results.filter((r) => r.status === 0).length, 1, results.map((r) => r.stdout).join('\n'));
+    assert.equal(results.filter((r) => r.status === 3).length, 5);
+  } finally {
+    killAll(results);
+  }
+});
+
+test('a stale dispatch lock from a crashed run is cleared', () => {
+  const { meshPath, receipts, job } = fixture();
+  mkdirSync(receipts, { recursive: true });
+  const lock = path.join(receipts, '.dispatch.lock');
+  writeFileSync(lock, '');
+  const old = new Date(Date.now() - 120000);
+  utimesSync(lock, old, old);
+  const r = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'echo', '--job', job, '--json']);
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(existsSync(lock), false, 'the lock is released after the receipt is written');
 });
 
 test('free disk that cannot be read is never green: the zone is unknown and local dispatch is refused', () => {

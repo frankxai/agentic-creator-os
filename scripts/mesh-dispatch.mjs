@@ -20,7 +20,7 @@
  *
  * Exit 0 when dispatched or dry-run, 3 when refused by a guard, 2 on bad input.
  */
-import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync } from 'node:fs'
+import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync, statSync, unlinkSync } from 'node:fs'
 import { join, resolve, sep } from 'node:path'
 import { spawn } from 'node:child_process'
 import { loadMesh, measureZone, probeMember, expand, resolveNoShell } from './lib/mesh-core.mjs'
@@ -87,6 +87,25 @@ if (run.local && run.minRamGiB && zone.ramFreeGiB < run.minRamGiB) {
 function alive(pid) {
   try { process.kill(pid, 0); return true } catch { return false }
 }
+// Count-then-launch must be atomic, or two dispatches can both see room under a cap.
+// An exclusive-create lock file in receiptsDir is held from the count until the receipt is written;
+// a lock older than LOCK_STALE_MS belongs to a crashed dispatch and is cleared.
+const LOCK_STALE_MS = 30000
+const LOCK_WAIT_MS = 5000
+const lockPath = inReceipts('.dispatch.lock')
+let lockHeld = false
+process.on('exit', () => { if (lockHeld) { try { unlinkSync(lockPath) } catch {} } })
+function acquireLock() {
+  mkdirSync(receiptsDir, { recursive: true })
+  const deadline = Date.now() + LOCK_WAIT_MS
+  for (;;) {
+    try { closeSync(openSync(lockPath, 'wx')); lockHeld = true; return true } catch (err) { if (err.code !== 'EEXIST') throw err }
+    try { if (Date.now() - statSync(lockPath).mtimeMs > LOCK_STALE_MS) { unlinkSync(lockPath); continue } } catch { continue }
+    if (Date.now() > deadline) return false
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 25)
+  }
+}
+if (!DRY && !acquireLock()) finish('refused', { reason: `another dispatch has held ${lockPath} for over ${LOCK_WAIT_MS / 1000} s; retry` }, 3)
 if (run.maxConcurrent && existsSync(receiptsDir)) {
   const running = readdirSync(receiptsDir).filter((f) => f.endsWith(`-${MEMBER}.json`))
     .map((f) => { try { return JSON.parse(readFileSync(join(receiptsDir, f), 'utf8')) } catch { return null } })
