@@ -3,7 +3,7 @@
 // headless Chrome/Edge (skipped when no browser is installed; CI runners have one).
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -70,4 +70,37 @@ test('--gate fails when the main frame cannot be loaded', { skip: cannotRender }
   assert.equal(r.status, 1, r.stderr);
   const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
   assert.match(report.results[0].blocking.join(' | '), /navigation failed: net::ERR_FILE_NOT_FOUND/);
+});
+
+// The weekly watch's shell block, run as written in agent-os.yml with visual-check stubbed out:
+// a URL from visual-watch.json must never become more than one argument or a CLI option.
+function watchBlock() {
+  const yml = readFileSync(path.join(root, '.github', 'workflows', 'agent-os.yml'), 'utf8').replace(/\r\n/g, '\n');
+  const m = yml.match(/- name: Render the brand front doors\n {8}run: \|\n((?: {10}.*\n|\n)+?)\n {6}- /);
+  assert.ok(m, 'visual-watch render step not found');
+  return m[1].split('\n').map((l) => l.slice(10)).join('\n')
+    .replace('node scripts/visual-check.mjs', 'printf "%s\\n" >"$RUNNER_TEMP/argv"')
+    .replace(/test -s [^\n]*\n/, '').replace(/cat [^\n]*report\.md[^\n]*\n/, '');
+}
+function runWatch(sites) {
+  const dir = mkdtempSync(path.join(tmpdir(), 'acos-watch-'));
+  mkdirSync(path.join(dir, 'instances', 'frankx', 'agent-os'), { recursive: true });
+  writeFileSync(path.join(dir, 'instances', 'frankx', 'agent-os', 'visual-watch.json'), JSON.stringify({ widths: '375', themes: 'light', sites }));
+  const r = spawnSync('bash', ['-c', watchBlock()], { cwd: dir, encoding: 'utf8', env: { ...process.env, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: path.join(dir, 'summary') } });
+  const argvFile = path.join(dir, 'argv');
+  return { r, argv: existsSync(argvFile) ? readFileSync(argvFile, 'utf8').split('\n').slice(0, -1) : null };
+}
+
+test('visual-watch passes each https URL as exactly one argument', { skip: process.platform === 'win32' && 'needs bash' }, () => {
+  const { r, argv } = runWatch([{ url: 'https://a.example/' }, { url: 'https://b.example/x?y=1&z=2' }]);
+  assert.equal(r.status, 0, r.stderr);
+  assert.deepEqual(argv, ['--url', 'https://a.example/', '--url', 'https://b.example/x?y=1&z=2', '--widths', '375', '--themes', 'light', '--out', `${path.dirname(argv.at(-1))}/visual-watch`]);
+});
+
+test('visual-watch rejects a URL that is not https or carries whitespace or newlines', { skip: process.platform === 'win32' && 'needs bash' }, () => {
+  for (const url of ['https://a.example/\n--out\n/tmp/pwned', 'https://a.example/ --browser /bin/sh', 'http://a.example/', 'file:///etc/passwd', '--out']) {
+    const { r, argv } = runWatch([{ url: 'https://ok.example/' }, { url }]);
+    assert.notEqual(r.status, 0, `${JSON.stringify(url)} must be rejected`);
+    assert.equal(argv, null, `${JSON.stringify(url)}: visual-check must not run`);
+  }
 });

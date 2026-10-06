@@ -99,11 +99,11 @@ jobs:
         run: node --test test/visual.test.mjs
 
   visual-watch:
-    # Report-only: renders each brand front door weekly. Never blocks, never changes a site.
+    # Report-only: renders each brand front door weekly. Findings never block and nothing changes a site;
+    # the job fails only when rendering fails or no report is written.
     if: github.event.schedule == '0 6 * * 1' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v7
 
@@ -111,12 +111,25 @@ jobs:
         with:
           node-version: '22'
 
+      # Findings stay report-only (no --gate); a render failure or a missing report fails the job.
       - name: Render the brand front doors
         run: |
           set -euo pipefail
-          mapfile -t flags < <(node -e "const w=require('./instances/frankx/agent-os/visual-watch.json'); for (const s of w.sites) { console.log('--url'); console.log(s.url) }")
-          read -r widths themes < <(node -e "const w=require('./instances/frankx/agent-os/visual-watch.json'); console.log(w.widths, w.themes)")
-          node scripts/visual-check.mjs "${flags[@]}" --widths "$widths" --themes "$themes" --out "$RUNNER_TEMP/visual-watch" || true
+          # Every URL must be https with no whitespace or control characters, or the run is rejected.
+          # URLs are written NUL-separated and each becomes exactly one --url argument.
+          node -e "
+            const w = require('./instances/frankx/agent-os/visual-watch.json')
+            const bad = w.sites.map((s) => s.url).filter((u) => typeof u !== 'string' || !/^https:\/\/[^\s\x00-\x1f\x7f]+$/.test(u) || new URL(u).protocol !== 'https:')
+            if (!w.sites.length || bad.length) { console.error('visual-watch.json: every site needs one https URL without whitespace; rejected: ' + JSON.stringify(bad)); process.exit(1) }
+            process.stdout.write(w.sites.map((s) => s.url + '\0').join(''))
+          " > "$RUNNER_TEMP/visual-watch-urls"
+          mapfile -d '' -t urls < "$RUNNER_TEMP/visual-watch-urls"
+          flags=()
+          for u in "${urls[@]}"; do flags+=(--url "$u"); done
+          widths=$(node -p "require('./instances/frankx/agent-os/visual-watch.json').widths")
+          themes=$(node -p "require('./instances/frankx/agent-os/visual-watch.json').themes")
+          node scripts/visual-check.mjs "${flags[@]}" --widths "$widths" --themes "$themes" --out "$RUNNER_TEMP/visual-watch"
+          test -s "$RUNNER_TEMP/visual-watch/report.md" || { echo "::error::visual-check wrote no report.md"; exit 1; }
           cat "$RUNNER_TEMP/visual-watch/report.md" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload screenshots and report
@@ -125,5 +138,5 @@ jobs:
         with:
           name: visual-watch
           path: ${{ runner.temp }}/visual-watch
-          if-no-files-found: ignore
+          if-no-files-found: error
           retention-days: 14
