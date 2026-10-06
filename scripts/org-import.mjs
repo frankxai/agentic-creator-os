@@ -16,7 +16,7 @@
  * General titles fail the import (fail closed) until mapped in TITLE_TO_ROLE.
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
-import { join, dirname, resolve } from 'node:path'
+import { join, dirname, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -103,7 +103,9 @@ for (const d of org.domains || []) {
 if (errors) process.exit(1)
 if (!CHECK) mkdirSync(outDir, { recursive: true })
 for (const s of specs) {
-  const file = join(outDir, `${s.id}.agent.json`)
+  const file = resolve(outDir, `${s.id}.agent.json`)
+  // Defence in depth behind the id allowlist: a spec is only ever written inside outDir.
+  if (!file.startsWith(resolve(outDir) + sep)) { console.error(`✗ refusing to write outside ${outDir}: ${s.id}`); process.exit(2) }
   const next = JSON.stringify(s, null, 2) + '\n'
   const prev = existsSync(file) ? readFileSync(file, 'utf8').replace(/\r\n/g, '\n') : null
   if (prev === next) continue

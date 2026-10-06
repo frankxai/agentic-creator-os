@@ -21,7 +21,7 @@
  * Exit 0 when dispatched or dry-run, 3 when refused by a guard, 2 on bad input.
  */
 import { writeFileSync, readFileSync, readdirSync, existsSync, mkdirSync, openSync, closeSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+import { join, resolve, sep } from 'node:path'
 import { spawn } from 'node:child_process'
 import { loadMesh, measureZone, probeMember, expand, resolveNoShell } from './lib/mesh-core.mjs'
 
@@ -48,9 +48,16 @@ try { mesh = loadMesh(MESH) } catch (err) { console.error(`✗ cannot read mesh:
 const jobPath = resolve(expand(JOB))
 if (!existsSync(jobPath)) { console.error(`✗ job file not found: ${JOB}`); process.exit(2) }
 
-const receiptsDir = expand(mesh.receiptsDir || join('~', '.acos', 'dispatch'))
+const receiptsDir = resolve(expand(mesh.receiptsDir || join('~', '.acos', 'dispatch')))
 const stamp = new Date().toISOString().replace(/[:.]/g, '-')
 const id = `${stamp}-${MEMBER}`
+// Defence in depth behind the id allowlist: every file this script writes stays inside receiptsDir.
+const inReceipts = (name) => {
+  const p = resolve(receiptsDir, name)
+  if (!p.startsWith(receiptsDir + sep)) { console.error(`✗ refusing to write outside ${receiptsDir}: ${name}`); process.exit(2) }
+  return p
+}
+const receiptPath = inReceipts(`${id}.json`)
 const zone = measureZone(mesh)
 const receipt = { id, ts: new Date().toISOString(), member: MEMBER, job: jobPath, cwd: CWD, repo: REPO || undefined, zone: zone.zone, ramFreeGiB: zone.ramFreeGiB, dryRun: DRY }
 
@@ -58,10 +65,10 @@ function finish(status, extra = {}, code = 0) {
   Object.assign(receipt, { status, ...extra })
   if (!DRY) {
     mkdirSync(receiptsDir, { recursive: true })
-    writeFileSync(join(receiptsDir, `${id}.json`), JSON.stringify(receipt, null, 2) + '\n')
+    writeFileSync(receiptPath, JSON.stringify(receipt, null, 2) + '\n')
   }
   if (JSON_OUT) console.log(JSON.stringify(receipt, null, 2))
-  else console.log(`${status === 'refused' ? '✗' : '✓'} ${MEMBER}: ${status}${extra.reason ? ` — ${extra.reason}` : ''}${extra.out ? `\n  output → ${extra.out}` : ''}${DRY ? '' : `\n  receipt → ${join(receiptsDir, `${id}.json`)}`}`)
+  else console.log(`${status === 'refused' ? '✗' : '✓'} ${MEMBER}: ${status}${extra.reason ? ` — ${extra.reason}` : ''}${extra.out ? `\n  output → ${extra.out}` : ''}${DRY ? '' : `\n  receipt → ${receiptPath}`}`)
   process.exit(code)
 }
 
@@ -131,7 +138,7 @@ if (DRY) finish('dry-run', { resolved: file, stdin: run.stdin === 'job' ? 'job f
 // ---- Launch in the background; output goes next to the receipt ----
 
 mkdirSync(receiptsDir, { recursive: true })
-const out = join(receiptsDir, `${id}.out.txt`)
+const out = inReceipts(`${id}.out.txt`)
 const fd = openSync(out, 'a')
 // Windows cannot spawn .cmd shims directly, and a detached cmd.exe loses the output of the Node
 // program an npm shim starts; resolveNoShell already turned such a shim into Node + its JS entry.

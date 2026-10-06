@@ -176,3 +176,40 @@ test('ids that become path segments are refused before any file is written', () 
   assert.equal(o.status, 2, o.stderr);
   assert.match(o.stderr, /--instance must be a plain id/);
 });
+
+// Every id that names a file must be a plain id; the same hostile set is refused at each entry point.
+const HOSTILE_IDS = ['../x', '..', 'a/b', 'a\\b', '', 'Upper'];
+
+test('mesh-dispatch refuses every hostile --member before a receipt is written', () => {
+  for (const bad of HOSTILE_IDS) {
+    const { dir, meshPath, receipts, job } = fixture();
+    const r = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', bad, '--job', job, '--json']);
+    assert.equal(r.status, 2, `--member ${JSON.stringify(bad)}: ${r.stderr}`);
+    assert.equal(existsSync(receipts), false, `--member ${JSON.stringify(bad)} wrote into receipts`);
+    assert.deepEqual(readdirSync(dir).sort(), ['job.md', 'mesh.json', 'pulse.jsonl'], `--member ${JSON.stringify(bad)} wrote a file`);
+  }
+});
+
+test('org-import refuses every hostile --instance and domain before a spec is written', () => {
+  const org = path.join(root, 'instances', '_template', 'agent-os', 'org', 'domain-queens.example.json');
+  for (const bad of HOSTILE_IDS) {
+    const out = path.join(mkdtempSync(path.join(tmpdir(), 'acos-org-')), 'specs');
+    const r = node([script('org-import.mjs'), '--org', org, '--instance', bad, '--out', out]);
+    assert.equal(r.status, 2, `--instance ${JSON.stringify(bad)}: ${r.stderr}`);
+    assert.equal(existsSync(out), false, `--instance ${JSON.stringify(bad)} wrote specs`);
+  }
+  const base = JSON.parse(readFileSync(org, 'utf8'));
+  for (const bad of HOSTILE_IDS) {
+    const dir = mkdtempSync(path.join(tmpdir(), 'acos-org-'));
+    const hostile = structuredClone(base);
+    hostile.domains[0].domain = bad;
+    const orgPath = path.join(dir, 'org.json');
+    writeFileSync(orgPath, JSON.stringify(hostile));
+    const out = path.join(dir, 'specs');
+    const r = node([script('org-import.mjs'), '--org', orgPath, '--instance', '_template', '--out', out]);
+    assert.equal(r.status, 1, `domain ${JSON.stringify(bad)}: ${r.stderr}`);
+    assert.match(r.stderr, /must be a plain id/);
+    assert.equal(existsSync(out), false, `domain ${JSON.stringify(bad)} wrote specs`);
+    assert.deepEqual(readdirSync(dir), ['org.json'], `domain ${JSON.stringify(bad)} wrote outside specs`);
+  }
+});
