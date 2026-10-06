@@ -32,7 +32,9 @@ try { mesh = loadMesh(MESH) } catch (err) { console.error(`✗ cannot read mesh:
 
 const zone = measureZone(mesh)
 const results = await Promise.all((mesh.members || []).map((m) => probeMember(m, { deep: DEEP })))
-const advice = zone.zone === 'red'
+const advice = zone.zone === 'unknown'
+  ? 'Unknown: free disk could not be read (check zone.diskPath); local dispatch is refused until it can; send work to the mesh.'
+  : zone.zone === 'red'
   ? 'Red: think and decide locally; run at most one small local worker; send parallel or heavy work to the mesh.'
   : zone.zone === 'yellow'
     ? `Yellow: up to ${zone.localParallelCap} local workers; prefer the mesh for long or heavy jobs.`

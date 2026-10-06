@@ -97,6 +97,21 @@ test('the zone cap refuses another local job while one is running, whichever mem
   assert.ok(dir);
 });
 
+test('free disk that cannot be read is never green: the zone is unknown and local dispatch is refused', () => {
+  const { dir, meshPath, receipts, job } = fixture();
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.zone.diskPath = path.join(dir, 'no-such-disk');
+  writeFileSync(meshPath, JSON.stringify(mesh));
+  const doctor = JSON.parse(execFileSync(process.execPath, [script('mesh-doctor.mjs'), '--mesh', meshPath, '--json'], { encoding: 'utf8' }));
+  assert.equal(doctor.zone, 'unknown');
+  assert.equal(doctor.diskFreeGiB, null);
+  assert.equal(doctor.localParallelCap, 0);
+  const r = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'echo', '--job', job, '--json']);
+  assert.equal(r.status, 3, r.stderr);
+  assert.match(JSON.parse(r.stdout).reason, /zone unknown allows 0 local job/);
+  assert.equal(readdirSync(receipts).filter((f) => f.endsWith('.out.txt')).length, 0, 'nothing was launched');
+});
+
 test('registry values never reach a shell: an unsafe CI repo is refused before gh runs', () => {
   const { meshPath } = fixture();
   const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));

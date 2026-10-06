@@ -35,10 +35,11 @@ export function measureZone(mesh, { ramFreeGiB } = {}) {
   const z = mesh.zone || {}
   const green = z.green || { ramGiB: 6, diskGiB: 80 }
   const yellow = z.yellow || { ramGiB: 4, diskGiB: 50 }
-  const meets = (t) => ramFree >= t.ramGiB && (diskFree === null || diskFree >= t.diskGiB)
-  const zone = meets(green) ? 'green' : meets(yellow) ? 'yellow' : 'red'
+  const meets = (t) => ramFree >= t.ramGiB && diskFree >= t.diskGiB
+  // Free disk that cannot be read is not green: the zone is unknown and no local job runs.
+  const zone = diskFree === null ? 'unknown' : meets(green) ? 'green' : meets(yellow) ? 'yellow' : 'red'
   // One number per zone: concurrent local jobs (subagents or local CLIs). Red allows one small job.
-  const caps = { green: 4, yellow: 2, red: 1, ...(z.localParallel || {}) }
+  const caps = { green: 4, yellow: 2, red: 1, ...(z.localParallel || {}), unknown: 0 }
   return {
     zone,
     ramFreeGiB: Number(ramFree.toFixed(2)),
@@ -46,7 +47,7 @@ export function measureZone(mesh, { ramFreeGiB } = {}) {
     diskFreeGiB: diskFree === null ? null : Number(diskFree.toFixed(2)),
     localParallelCap: caps[zone],
     // Red keeps one local worker for small, verified edits; parallel work goes to the mesh.
-    localRungs: zone === 'red' ? ['R0', 'R1', 'R2', 'R5'] : ['R0', 'R1', 'R2', 'R3', 'R4', 'R5'],
+    localRungs: zone === 'red' || zone === 'unknown' ? ['R0', 'R1', 'R2', 'R5'] : ['R0', 'R1', 'R2', 'R3', 'R4', 'R5'],
   }
 }
 
