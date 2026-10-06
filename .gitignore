@@ -47,3 +47,7 @@ temp/
 # Per-project generated Grok harness seeds (install.sh --platform=grok)
 .grok/
 
+
+# estate-guard pack — per-machine files, never tracked
+.claude/settings.local.json
+.claude/ci/estate-guard/last-scan.json
