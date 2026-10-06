@@ -54,3 +54,20 @@ test('rejects input that is not an http(s) or file URL', () => {
   const r = spawnSync(process.execPath, [script, '--url', 'javascript:alert(1)'], { encoding: 'utf8' });
   assert.equal(r.status, 2);
 });
+
+test('rejects width or theme sets with an invalid entry instead of rendering nothing', () => {
+  for (const extra of [['--widths', 'bogus'], ['--widths', '375,bogus'], ['--widths', '50'], ['--themes', 'sepia'], ['--themes', '']]) {
+    const r = spawnSync(process.execPath, [script, '--url', fixture, '--gate', ...extra], { encoding: 'utf8' });
+    assert.equal(r.status, 2, `${extra.join(' ')} must be refused`);
+    assert.match(r.stderr, /must be (integers|light)/);
+  }
+});
+
+test('--gate fails when the main frame cannot be loaded', { skip: cannotRender }, () => {
+  const missing = pathToFileURL(path.join(root, 'test', 'fixtures', 'visual', 'does-not-exist.html')).href;
+  const out = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
+  const r = spawnSync(process.execPath, [script, '--url', missing, '--out', out, '--widths', '375', '--themes', 'light', '--gate'], { encoding: 'utf8', timeout: 120000 });
+  assert.equal(r.status, 1, r.stderr);
+  const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
+  assert.match(report.results[0].blocking.join(' | '), /navigation failed: net::ERR_FILE_NOT_FOUND/);
+});

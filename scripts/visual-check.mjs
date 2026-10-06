@@ -38,8 +38,12 @@ const all = (n) => args.flatMap((a, i) => (a === n ? [args[i + 1]] : []))
 const one = (n, d) => (args.includes(n) ? args[args.indexOf(n) + 1] : d)
 const URLS = all('--url')
 const OUT = resolve(one('--out', join(process.cwd(), 'visual-check')))
-const WIDTHS = one('--widths', '375,768,1440').split(',').map(Number).filter((w) => w >= 200 && w <= 3840)
-const THEMES = one('--themes', 'light,dark').split(',').filter((t) => t === 'light' || t === 'dark')
+const WIDTH_ARGS = one('--widths', '375,768,1440').split(',').map((w) => w.trim())
+const THEMES = one('--themes', 'light,dark').split(',').map((t) => t.trim())
+// An invalid entry is an error, never a silent filter: an empty set would render nothing and pass the gate.
+if (!WIDTH_ARGS.every((w) => /^\d+$/.test(w) && +w >= 200 && +w <= 3840)) { console.error(`✗ --widths must be integers from 200 to 3840, comma-separated; got ${JSON.stringify(one('--widths'))}`); process.exit(2) }
+if (!THEMES.every((t) => t === 'light' || t === 'dark')) { console.error(`✗ --themes must be light and/or dark, comma-separated; got ${JSON.stringify(one('--themes'))}`); process.exit(2) }
+const WIDTHS = WIDTH_ARGS.map(Number)
 const REDUCED = args.includes('--reduced-motion')
 const FULL = args.includes('--full')
 const GATE = args.includes('--gate')
@@ -211,7 +215,7 @@ try {
         ] }, sessionId)
         const started = Date.now()
         const loaded = waitFor('Page.loadEventFired', sessionId, 30000)
-        await send('Page.navigate', { url }, sessionId)
+        const nav = await send('Page.navigate', { url }, sessionId)
         const didLoad = await loaded
         await sleep(1500) // let late layout, fonts, and observers settle
         const probe = (await send('Runtime.evaluate', { expression: PROBE, returnByValue: true }, sessionId)).result.value
@@ -228,6 +232,8 @@ try {
 
         const blocking = []
         const warnings = []
+        // The main frame failed to load (DNS, refused, TLS, ...): what was rendered is an error page.
+        if (nav?.errorText) blocking.push(`navigation failed: ${nav.errorText}`)
         if (!didLoad) warnings.push('load event not fired within 30 s')
         if (errors.length) blocking.push(`${errors.length} console error(s): ${errors[0]}`)
         const pageHttp = http.filter((h) => typeof h.status === 'number')
@@ -280,4 +286,4 @@ writeFileSync(join(OUT, 'report.md'), md.join('\n'))
 if (JSON_OUT) console.log(JSON.stringify(report, null, 2))
 else console.log(md.join('\n'))
 console.error(`visual-check: ${report.verdict} — ${results.length} render(s), ${blockingRuns.length} blocking; screenshots in ${OUT}`)
-process.exit(GATE && blockingRuns.length ? 1 : 0)
+process.exit(GATE && (blockingRuns.length || !results.length) ? 1 : 0)
