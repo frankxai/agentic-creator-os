@@ -42,6 +42,11 @@ const REPO_DIRS = flagAll('--repos')
 const JSON_OUT = flag('--json')
 const MD_OUT = flag('--md')
 const MIN_SCORE = flag('--min-score') ? Number(flag('--min-score')) : undefined
+// A floor that is not a number would compare false and silently disable the gate.
+if (MIN_SCORE !== undefined && !(Number.isFinite(MIN_SCORE) && MIN_SCORE >= 0 && MIN_SCORE <= 100)) {
+  console.error(`✗ --min-score must be a number from 0 to 100; got ${JSON.stringify(flag('--min-score'))}`)
+  process.exit(2)
+}
 
 const PRUNE = new Set([
   'node_modules', '.git', '.next', 'dist', 'build', 'out', 'coverage', '.turbo',

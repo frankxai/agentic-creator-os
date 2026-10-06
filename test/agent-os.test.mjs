@@ -126,3 +126,11 @@ test('every General scores grade A on the estate audit', () => {
     assert.ok(item.score >= 85, `${spec.id} scored ${item.score}: ${item.findings.join('; ')}`);
   }
 });
+
+test('the quality ratchet refuses a --min-score that is not a number from 0 to 100', () => {
+  for (const bad of ['nope', 'NaN', 'Infinity', '-1', '101']) {
+    const r = spawnSync(process.execPath, [path.join(root, 'scripts', 'estate-audit.mjs'), '--home', root, '--min-score', bad], { cwd: root, encoding: 'utf8' });
+    assert.equal(r.status, 2, `--min-score ${bad} must be refused`);
+    assert.match(r.stderr, /--min-score must be a number from 0 to 100/);
+  }
+});
