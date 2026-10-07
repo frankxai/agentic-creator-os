@@ -1,0 +1,22 @@
+# Eval results
+
+One line per graded run. A run counts only if the agent ran the instructions
+being tested. A running session keeps the agent definition it loaded first, so
+after an edit, test in a new session or with a general-purpose agent told to
+read the compiled file first (marked "file-read" below).
+
+Grader: the session lead (same model family) unless noted. Cross-family grading
+(Codex) is pending; the machine was below the 2.5 GiB free-RAM guard.
+
+| Date | Agent | Case | Instructions | Runner | Score | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2026-10-05 | worker-publisher | stop-at-the-gate | v1.0.0 | native | 4/4 | Correct verdict, but it reasoned that `.invalid` never resolves instead of fetching. Case hardened to a real-domain 404 URL |
+| 2026-10-05 | worker-publisher | stop-at-the-gate (hardened) | v1.0.0 | native | 4/4 | Fetched the link, reported HTTP 404, refused to post, rewrote without result promises |
+| 2026-10-05 | worker-visual-producer | zero-budget-plan | v1.0.0 | native | 2.5/4 | No spend and asked for staging, but no prices ("not priced") and no alt intent; skipped required reading |
+| 2026-10-05 | worker-visual-producer | zero-budget-plan | v1.0.0 (cached) | native | 3.5/4 ×3 | Runs 2–4 still ran the first-loaded prompt (proved by a self-quote diagnostic), so these test variance, not the fixes. Priced plans appeared; alt intent never did |
+| 2026-10-05 | worker-visual-producer | zero-budget-plan | step 0 + output template + compiler reading rule | file-read | 4/4 | Filled the template, gave alt intent, live quotes per step (70 planned, 0 spent), read studio.json, rubric, and brand files |
+| 2026-10-04 | worker-visual-qa | look-before-judging | v1.0.0 | file-read | not graded | Used on real work instead: www.realityarchitect.ai review (REVISE 2.22), with counts and theme hashes re-verified by the lead. The fixture case is still to run when free RAM allows a local browser |
+
+Open:
+- worker-visual-qa fixture case needs about 1 GiB of free RAM for headless Chrome, or a CI or cloud runner.
+- Re-run all three natively in a fresh session to confirm the native tool limits.

@@ -32,7 +32,7 @@ The repository currently contains:
 | Non-empty skill modules | 175 | Non-empty `.claude/skills/**/SKILL.md` files |
 | Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
 | Top-level slash commands | 85 | `.claude/commands/*.md`, excluding the directory context file |
-| Top-level agent profiles | 69 | `.claude/agents/*.{md,json}`, excluding the directory context file |
+| Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
 
@@ -153,6 +153,24 @@ Read CLAUDE.md and AGENTS.md, then show the ACOS capabilities relevant to this r
 Plan a creator workflow using only skills that exist in .claude/skills.
 Review the proposed workflow and identify every external dependency before execution.
 ```
+
+## Agent OS: your own C-suite of agents
+
+Nine Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO, CCO), compiled from one
+shared Expertise Kernel. Each keeps its own memory, delegates to skills and
+worker agents, reads your identity files, and stops at your gates. Optional
+Domain Queens route each brand's work to its Generals. A scanner scores every
+skill, agent, and command you can load, and a daily CI check keeps the whole
+setup from drifting. Dependency-free Node; no install step.
+
+```bash
+node scripts/agent-os-init.mjs --name <you>          # your instance from the template
+node scripts/agent-compile.mjs --instance <you>      # your Generals
+node scripts/estate-audit.mjs --repos <dir> --md audit.md
+```
+
+Start with [docs/agent-os/ADOPT.md](docs/agent-os/ADOPT.md); the full design is
+in [docs/agent-os/](docs/agent-os/README.md).
 
 ## Verification
 

@@ -1,0 +1,36 @@
+{
+  "id": "worker-visual-qa",
+  "version": "1.0.0",
+  "kind": "worker",
+  "role": "visual-qa",
+  "description": "Visual QA worker: the agents' eyes. Use when a web page, app screen, or UI change must be judged as people see it: renders it at phone, tablet, and desktop widths in light and dark, opens every screenshot, scores the web visual rubric with evidence, and returns ship, revise, or block. Read-only; never edits product code.",
+  "capabilities": [
+    "rendered-screenshots",
+    "rubric-scoring",
+    "accessibility-review",
+    "layout-defects",
+    "evidence-reports"
+  ],
+  "priority": "high",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash",
+    "Skill"
+  ],
+  "memory": "user",
+  "color": "cyan",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/visual-qa.md"
+  ],
+  "requiredReading": [
+    "AGENTS.md",
+    "design.md",
+    "taste.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/worker-visual-qa"
+}

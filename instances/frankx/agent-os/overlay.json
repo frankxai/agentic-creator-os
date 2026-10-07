@@ -1,0 +1,517 @@
+{
+  "all": {
+    "extraTools": [
+      "mcp__starlight-memory__sis_vault_search",
+      "mcp__starlight-memory__sis_search",
+      "mcp__starlight-memory__sis_recent_entries",
+      "mcp__starlight-memory__sis_stale",
+      "mcp__starlight-memory__sis_append_entry",
+      "mcp__starlight-memory__sis_confirm",
+      "mcp__starlight-memory__sis_contradict"
+    ],
+    "requiredReading": [
+      "SOUL.md",
+      "taste.md",
+      "design.md",
+      "~/.agent-harness/REGISTER-BOUNDARIES.md",
+      "~/.agent-harness/PRINCIPLES.md"
+    ],
+    "overlayFiles": [
+      "instances/frankx/agent-os/company-soul.md"
+    ]
+  },
+  "agents": {
+    "general-cfo": {
+      "knowledge": [
+        {
+          "source": "starlight-cfo skill",
+          "purpose": "finance model for runway and budget decisions",
+          "review": "quarter"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "anthropic-skills:starlight-cfo",
+          "when": "runway, budget, or any decision that needs a number"
+        },
+        {
+          "skill": "finance:variance-analysis",
+          "when": "actuals differ from plan"
+        },
+        {
+          "skill": "finance:financial-statements",
+          "when": "the monthly close"
+        },
+        {
+          "skill": "small-business:cash-flow-snapshot",
+          "when": "the weekly cash pulse"
+        },
+        {
+          "skill": "small-business:month-end-prep",
+          "when": "preparing month end"
+        },
+        {
+          "skill": "vercel-cost-watch",
+          "when": "hosting spend moves"
+        },
+        {
+          "skill": "data:analyze",
+          "when": "a spreadsheet or export needs analysis"
+        }
+      ]
+    },
+    "general-coo": {
+      "knowledge": [
+        {
+          "source": "agentic-ops/ops/OPS-LEDGER.md",
+          "purpose": "cross-repo status (single source)",
+          "review": "week"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "operations:runbook",
+          "when": "turning a repeated procedure into a runbook"
+        },
+        {
+          "skill": "operations:process-optimization",
+          "when": "a process keeps failing or stalling"
+        },
+        {
+          "skill": "operations:capacity-plan",
+          "when": "deciding how much parallel work the machines and budget allow"
+        },
+        {
+          "skill": "operations:status-report",
+          "when": "the weekly ops review"
+        },
+        {
+          "skill": "operations:risk-assessment",
+          "when": "a change carries operational risk"
+        },
+        {
+          "skill": "pp",
+          "when": "checking machine health before parallel work"
+        },
+        {
+          "skill": "fleet",
+          "when": "checking both machines' heartbeats"
+        },
+        {
+          "skill": "daily-ops",
+          "when": "the daily ops pulse"
+        }
+      ]
+    },
+    "general-caio": {
+      "knowledge": [
+        {
+          "source": "agentic-creator-os/scripts/estate-audit.mjs",
+          "purpose": "estate quality scores",
+          "review": "week"
+        },
+        {
+          "source": "~/.starlight/agent-os/",
+          "purpose": "private brand manifests, estate graph, audits",
+          "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "model-routing",
+          "when": "choosing a model tier for a task class"
+        },
+        {
+          "skill": "model-arena",
+          "when": "comparing models head to head with receipts"
+        },
+        {
+          "skill": "model-intelligence",
+          "when": "checking current model capabilities and prices"
+        },
+        {
+          "skill": "ai-governance-legal:ai-inventory",
+          "when": "maintaining the AI system inventory"
+        },
+        {
+          "skill": "ai-governance-legal:use-case-triage",
+          "when": "triaging a new AI use case for risk"
+        },
+        {
+          "skill": "ai-governance-legal:reg-gap-analysis",
+          "when": "checking AI-regulation exposure"
+        },
+        {
+          "skill": "skill-creator:skill-creator",
+          "when": "creating or evaluating a skill"
+        },
+        {
+          "skill": "prompt-hub",
+          "when": "designing, optimising, or red-teaming a prompt"
+        },
+        {
+          "skill": "claude-api",
+          "when": "anything about Claude models, pricing, or the API"
+        }
+      ]
+    },
+    "general-chro": {
+      "knowledge": [
+        {
+          "source": "~/.starlight/agent-os/",
+          "purpose": "roster evidence: latest estate audit and brand manifests",
+          "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "human-resources:org-planning",
+          "when": "designing roles and the roster"
+        },
+        {
+          "skill": "human-resources:onboarding",
+          "when": "onboarding a collaborator"
+        },
+        {
+          "skill": "human-resources:performance-review",
+          "when": "reviewing an agent's or collaborator's performance on evidence"
+        },
+        {
+          "skill": "human-resources:people-report",
+          "when": "reporting on the workforce"
+        },
+        {
+          "skill": "skill-builder",
+          "when": "upgrading a weak skill"
+        },
+        {
+          "skill": "memory-prune",
+          "when": "pruning stale memory"
+        },
+        {
+          "skill": "people-update",
+          "when": "updating people records"
+        }
+      ]
+    },
+    "general-ceo": {
+      "knowledge": [
+        {
+          "source": "~/.starlight/agent-os/brands/",
+          "purpose": "brand doors, bets, and gaps",
+          "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "anthropic-skills:decision-framework",
+          "when": "a choice with real tradeoffs needs a recorded decision"
+        },
+        {
+          "skill": "anthropic-skills:strategic-reasoning",
+          "when": "a bet or portfolio question needs first-principles analysis"
+        },
+        {
+          "skill": "founder-review",
+          "when": "a new product, route, agent, or repo is about to start"
+        },
+        {
+          "skill": "product-management:roadmap-update",
+          "when": "the quarterly bet list changes"
+        },
+        {
+          "skill": "small-business:business-pulse",
+          "when": "the weekly portfolio pulse"
+        },
+        {
+          "skill": "weekly-recap",
+          "when": "summarising the week across projects"
+        }
+      ]
+    },
+    "general-cmo": {
+      "knowledge": [
+        {
+          "source": "~/.agent-harness/REGISTER-BOUNDARIES.md",
+          "purpose": "register and leak rules",
+          "review": "quarter"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "marketing:campaign-plan",
+          "when": "planning a launch or campaign"
+        },
+        {
+          "skill": "marketing:brand-review",
+          "when": "checking work against a brand's identity"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "a draft must match a brand voice before review"
+        },
+        {
+          "skill": "small-business:seo-ai-visibility",
+          "when": "measuring presence in AI answer engines"
+        },
+        {
+          "skill": "marketing:seo-audit",
+          "when": "auditing a site's search health"
+        },
+        {
+          "skill": "seo-check",
+          "when": "a single page needs an SEO pass"
+        },
+        {
+          "skill": "content-strategy",
+          "when": "planning pillars and a content calendar"
+        },
+        {
+          "skill": "generate-social",
+          "when": "turning one piece into platform-native posts"
+        },
+        {
+          "skill": "marketing:content-creation",
+          "when": "drafting long-form content"
+        },
+        {
+          "skill": "publish-distribute",
+          "when": "adapting one piece of content into channel-native packages"
+        },
+        {
+          "skill": "marketing:draft-content",
+          "when": "drafting a post, email, or page section in the brand voice"
+        },
+        {
+          "skill": "marketing:email-sequence",
+          "when": "planning a newsletter or nurture sequence"
+        }
+      ]
+    },
+    "general-cto": {
+      "skillMap": [
+        {
+          "skill": "code-review",
+          "when": "a diff or pull request needs a correctness review"
+        },
+        {
+          "skill": "security-review",
+          "when": "changes touch auth, secrets, input handling, or agent tools"
+        },
+        {
+          "skill": "adversarial-review",
+          "when": "a high-stakes change needs a second model family"
+        },
+        {
+          "skill": "engineering:architecture",
+          "when": "choosing architecture or writing an ADR"
+        },
+        {
+          "skill": "engineering:tech-debt",
+          "when": "the monthly simplification pass"
+        },
+        {
+          "skill": "engineering:incident-response",
+          "when": "production is degraded"
+        },
+        {
+          "skill": "engineering:deploy-checklist",
+          "when": "preparing a production ship for the owner's approval"
+        },
+        {
+          "skill": "superpowers:systematic-debugging",
+          "when": "a bug with no obvious cause"
+        },
+        {
+          "skill": "canary",
+          "when": "the first minutes after a deploy"
+        },
+        {
+          "skill": "impeccable",
+          "when": "a frontend change needs a design-quality audit, polish, or hardening pass"
+        },
+        {
+          "skill": "frontend-design:frontend-design",
+          "when": "briefing a worker to build a distinctive, production-grade interface"
+        },
+        {
+          "skill": "design:accessibility-review",
+          "when": "a page or component needs a WCAG 2.2 review"
+        },
+        {
+          "skill": "performance-analysis",
+          "when": "a page is slow or Core Web Vitals regressed"
+        }
+      ]
+    },
+    "general-cpo": {
+      "skillMap": [
+        {
+          "skill": "product-management:write-spec",
+          "when": "writing a product spec with acceptance criteria"
+        },
+        {
+          "skill": "product-management:competitive-brief",
+          "when": "positioning against competitors"
+        },
+        {
+          "skill": "product-management:metrics-review",
+          "when": "the weekly product review"
+        },
+        {
+          "skill": "product-management:synthesize-research",
+          "when": "turning user evidence into decisions"
+        },
+        {
+          "skill": "app-studio-team:app-brief",
+          "when": "briefing a new app idea"
+        },
+        {
+          "skill": "project-brief",
+          "when": "briefing any new project"
+        },
+        {
+          "skill": "ui-ux-pro-max",
+          "when": "choosing a style, palette, type pairing, or layout pattern for a product surface"
+        },
+        {
+          "skill": "impeccable",
+          "when": "shaping or critiquing a product screen before it is built"
+        },
+        {
+          "skill": "design:design-handoff",
+          "when": "turning a design into a build spec with states and tokens"
+        },
+        {
+          "skill": "design:ux-copy",
+          "when": "interface copy: labels, empty states, errors, calls to action"
+        }
+      ]
+    },
+    "general-cco": {
+      "skillMap": [
+        {
+          "skill": "canon-check",
+          "when": "a story, character, or world detail must stay on canon"
+        },
+        {
+          "skill": "design:design-critique",
+          "when": "reviewing a visual design or asset set"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "creative copy must match a brand voice"
+        },
+        {
+          "skill": "acos-visual-gen",
+          "when": "an infographic or diagram must be factually accurate"
+        },
+        {
+          "skill": "hyperframes",
+          "when": "motion: title cards, captions, short HTML-based video"
+        },
+        {
+          "skill": "video-production-workflow",
+          "when": "planning a video from script to edit"
+        },
+        {
+          "skill": "suno-prompt-architect",
+          "when": "a music bed or track needs a production-grade Suno prompt"
+        }
+      ],
+      "knowledge": [
+        {
+          "source": "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
+          "purpose": "asset lifecycle, roles, and release gates",
+          "review": "quarter"
+        }
+      ]
+    },
+    "worker-visual-qa": {
+      "requiredReading": [
+        "~/.agent-harness/DESIGN-EXCELLENCE.md"
+      ],
+      "knowledge": [
+        {
+          "source": "~/agentic-creator-os/scripts/visual-check.mjs",
+          "purpose": "renderer: screenshots, probes, report",
+          "review": "month"
+        }
+      ],
+      "skillMap": [
+        {
+          "skill": "impeccable",
+          "when": "auditing hierarchy, spacing, type, and polish once you have the screenshots"
+        },
+        {
+          "skill": "design:accessibility-review",
+          "when": "the rubric flags accessibility below 2"
+        },
+        {
+          "skill": "design:design-critique",
+          "when": "writing the critique for the three fixes"
+        },
+        {
+          "skill": "canary",
+          "when": "the page was just deployed and you compare before and after"
+        }
+      ]
+    },
+    "worker-visual-producer": {
+      "requiredReading": [
+        "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
+        "~/agentic-creator-os/instances/frankx/agent-os/studio.json"
+      ],
+      "extraTools": [
+        "mcp__claude_ai_Openart__openart_account_get",
+        "mcp__claude_ai_Openart__openart_model_list",
+        "mcp__claude_ai_Openart__openart_model_cost",
+        "mcp__claude_ai_Openart__openart_model_form_get",
+        "mcp__claude_ai_Openart__openart_generate_image",
+        "mcp__claude_ai_Openart__openart_generate_video",
+        "mcp__claude_ai_Openart__openart_creation_get"
+      ],
+      "skillMap": [
+        {
+          "skill": "acos-visual-gen",
+          "when": "an infographic or diagram that must be factually accurate"
+        },
+        {
+          "skill": "design",
+          "when": "banners, social cards, or brand identity pieces"
+        },
+        {
+          "skill": "hyperframes",
+          "when": "motion, captions, or title cards as HTML video"
+        },
+        {
+          "skill": "suno-prompt-architect",
+          "when": "the brief asks for a music bed"
+        }
+      ]
+    },
+    "worker-publisher": {
+      "requiredReading": [
+        "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md"
+      ],
+      "skillMap": [
+        {
+          "skill": "publish-distribute",
+          "when": "building the per-channel package"
+        },
+        {
+          "skill": "brand-voice:enforce-voice",
+          "when": "checking each variant against the brand voice"
+        },
+        {
+          "skill": "marketing:draft-content",
+          "when": "a channel variant needs a fresh draft"
+        },
+        {
+          "skill": "seo-check",
+          "when": "the content lands on a web page"
+        }
+      ]
+    }
+  }
+}

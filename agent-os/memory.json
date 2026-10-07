@@ -1,0 +1,9 @@
+{
+  "schema": "acos.memory.v1",
+  "note": "Single source for shared-memory conventions. The kernel, MEMORY-SPEC, and the compiler read these; change them here only.",
+  "tags": ["agent:<id>", "role:<role>", "brand:<id>", "domain:<id>"],
+  "header": "source: <url, commit, file, or session> | review: <YYYY-MM-DD> | supersedes: <entry id or none>",
+  "entryTypes": ["decision", "fact", "pattern", "open-question"],
+  "supersede": "contradict the old entry, then write the new one with supersedes: <old id>",
+  "agentMemory": "MEMORY.md is an index, one line per entry; each entry lives in its own file with one type"
+}

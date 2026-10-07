@@ -73,6 +73,15 @@
     "publish": "npm run build:all && npm publish",
     "version:bump": "npm version $npm_config_version && git push && git push --tags",
     "lint": "node scripts/lint.mjs",
+    "agents:compile": "node scripts/agent-compile.mjs && node scripts/agent-compile.mjs --instance frankx",
+    "agents:check": "node scripts/agent-compile.mjs --check && node scripts/agent-compile.mjs --check --instance frankx && node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx --check && node scripts/agent-os-graph.mjs --instance frankx",
+    "agents:org": "node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx && node scripts/agent-compile.mjs --instance frankx",
+    "mesh:doctor": "node scripts/mesh-doctor.mjs --mesh",
+    "mesh:dispatch": "node scripts/mesh-dispatch.mjs",
+    "always-on": "node scripts/always-on-status.mjs --mesh",
+    "agents:init": "node scripts/agent-os-init.mjs --name",
+    "upstreams:watch": "node scripts/upstream-watch.mjs",
+    "estate:audit": "node scripts/estate-audit.mjs",
     "test": "npm run build:all && node --test test/*.test.mjs"
   },
   "devDependencies": {

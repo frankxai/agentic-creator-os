@@ -1,0 +1,16 @@
+{
+  "schema": "acos.visualWatch.v1",
+  "reviewed": "2026-10-04",
+  "purpose": "Weekly report-only render of each public brand front door at phone and desktop width. Findings go to the run summary and the screenshots artifact; the watch never blocks and never changes a site.",
+  "widths": "375,1440",
+  "themes": "light,dark",
+  "sites": [
+    { "brand": "frankx", "url": "https://www.frankx.ai/" },
+    { "brand": "arcanea", "url": "https://www.arcanea.ai/" },
+    { "brand": "realityarchitect", "url": "https://www.realityarchitect.ai/" },
+    { "brand": "gencreator", "url": "https://gencreator.ai/" },
+    { "brand": "starlight", "url": "https://starlightintelligence.ai/" },
+    { "brand": "agenticincome", "url": "https://www.agenticincome.ai/" },
+    { "brand": "agenticpassiveincome", "url": "https://www.agenticpassiveincome.com/" }
+  ]
+}

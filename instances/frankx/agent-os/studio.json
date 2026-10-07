@@ -1,0 +1,134 @@
+{
+  "schema": "acos.studio.v1",
+  "reviewed": "2026-10-04",
+  "authority": [
+    "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
+    "~/brand-assets/character-studio/OPERATING-MODEL.md"
+  ],
+  "provider": {
+    "id": "openart",
+    "connector": "claude.ai Openart MCP",
+    "plan": "Starter",
+    "costRule": "The table below is a planning guide measured on 2026-10-04. Before every generation, call openart_model_cost; the live cost wins. Never submit a mode openart_model_list marks unaffordable.",
+    "quoteRule": "openart_model_cost reads the parameters aspectRatio and resolution; any other parameter name is silently ignored and the default config's price comes back (measured 2026-10-05)."
+  },
+  "routing": [
+    {
+      "task": "draft image (exploring directions)",
+      "model": "Kling 3 Omni image",
+      "credits": 10,
+      "fallback": "Nano Banana 2 Lite (15)",
+      "note": "No 2:1 option (measured 2026-10-04): generate 16:9 at 2k (2720x1536) and centre-crop to 2:1; the crop keeps the full width."
+    },
+    {
+      "task": "draft image with legible layout or text",
+      "model": "Nano Banana 2 Lite",
+      "credits": 15,
+      "fallback": "Seedream 5 Lite (15)"
+    },
+    {
+      "task": "selected direction, final still",
+      "model": "Nano Banana Pro",
+      "credits": 40,
+      "fallback": "GPT Image 2 (40)"
+    },
+    {
+      "task": "photoreal product or scene",
+      "model": "Seedream 5 Pro",
+      "credits": 30,
+      "fallback": "Nano Banana Pro (40)"
+    },
+    {
+      "task": "image edit or one-variable refinement",
+      "model": "Grok Imagine Image 2.0",
+      "credits": 26,
+      "fallback": "Nano Banana 2 (20)",
+      "note": "Text-to-image price. Image-to-image from an existing creation quoted 47 credits at 2K and 33 at 1K on 2026-10-04 (live quote wins); confirm 1K output width before using it for 1280 px placements."
+    },
+    {
+      "task": "draft motion (loop, social clip)",
+      "model": "PixVerse V6",
+      "credits": 50,
+      "fallback": "MiniMax H3 Max Turbo (75)"
+    },
+    {
+      "task": "hero video with camera direction",
+      "model": "Veo 3.1",
+      "credits": 120,
+      "fallback": "Kling 3.0 (175)"
+    },
+    {
+      "task": "shot planning before an expensive video",
+      "model": "Smart Shot preview",
+      "credits": 60,
+      "fallback": "none: write the shot list by hand"
+    },
+    {
+      "task": "infographic or diagram",
+      "model": "none: acos-visual-gen skill or HTML/SVG",
+      "credits": 0,
+      "fallback": "Nano Banana 2 Lite (15) for illustration only"
+    },
+    {
+      "task": "UI capture or page screenshot",
+      "model": "none: scripts/visual-check.mjs",
+      "credits": 0,
+      "fallback": "none"
+    }
+  ],
+  "budget": {
+    "defaultPerBrief": 60,
+    "ownerApprovalAbove": 150,
+    "monthlyEnvelope": "set by the CFO General; until set, the producer may not exceed 300 credits per calendar month across briefs",
+    "rules": [
+      "The brief states the budget. No budget, no spend: return a plan with the credits it would need.",
+      "Drafts on the cheapest tier that can meet the brief; the quality tier only for the selected direction.",
+      "Three first-round directions, one draft each. At most two one-variable refinements on one direction, then stop.",
+      "Video only after a still direction is selected, and only when the brief names motion.",
+      "Report credits spent and the balance from openart_account_get in every hand-off."
+    ]
+  },
+  "staging": {
+    "root": "~/brand-assets/<brand>/candidates/<YYYY-MM-DD>-<slug>/",
+    "record": "asset.json beside the files: job, placement, crop, model, prompt, seed or creation id, credits, rights note, alt intent, rubric scores, lifecycle",
+    "rule": "Download the generated file into staging; never hotlink a generation URL. Staging is the producer's only write area besides its memory."
+  },
+  "lifecycle": [
+    "intake",
+    "briefed",
+    "candidate",
+    "reviewed",
+    "integration-ready",
+    "released",
+    "learned",
+    "archived"
+  ],
+  "roles": {
+    "worker-visual-producer": "intake → candidate (never approves its own work)",
+    "worker-visual-qa": "candidate → reviewed for UI captures and pages; asset review uses agent-os/rubrics/art-asset.md",
+    "general-cco": "reviewed → integration-ready for creative and canon",
+    "owner": "integration-ready → released (publishing, uploads, and spend above the approval line)"
+  },
+  "releaseBar": {
+    "rubric": "agent-os/rubrics/art-asset.md",
+    "ship": "no 0s, average at least 2.2, provenance at least 2, asset record complete",
+    "characterWork": "character-studio stop rules apply: no public release below 88/100, below 7/10 on any dimension, with any hard veto, or without named human approval"
+  },
+  "never": [
+    "Generation on a schedule or cron (spend needs judgment)",
+    "Uploading local files or references to a provider without the owner's approval",
+    "A real person's likeness, a third-party mark, or a copyrighted character",
+    "Publishing, posting, or moving files out of staging into a product repository"
+  ],
+  "openQuestions": [
+    {
+      "question": "Does the OpenArt Starter plan grant commercial use of Kling 3 Omni output (for example a public repository social preview)?",
+      "owner": "owner",
+      "raised": "2026-10-04",
+      "blocks": "release of any OpenArt-generated asset beyond candidate"
+    }
+  ],
+  "learned": [
+    "2026-10-04 ACOS social preview proof: 3 drafts, 30 credits, one direction cleared the art-asset bar (2.44). Cheapest-tier drafts were enough to pick a direction; the 2:1 crop preview is what the reviewer should judge, not the 16:9 original."
+  ]
+}
