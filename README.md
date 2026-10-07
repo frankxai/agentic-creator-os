@@ -2,6 +2,8 @@
 
 # Agentic Creator OS
 
+**The skills, agents and commands behind GenCreator, installable in Claude Code, Codex, Cursor, Grok and Antigravity.**
+
 Reusable skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.
 
 [Quick start](QUICKSTART.md) · [Project instructions](CLAUDE.md) · [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/frankxai/agentic-creator-os/issues)
@@ -27,10 +29,10 @@ The repository currently contains:
 
 | Surface | Count | Definition |
 |---|---:|---|
-| Non-empty skill modules | 174 | Non-empty `.claude/skills/**/SKILL.md` files |
+| Non-empty skill modules | 175 | Non-empty `.claude/skills/**/SKILL.md` files |
 | Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
 | Top-level slash commands | 85 | `.claude/commands/*.md`, excluding the directory context file |
-| Top-level agent profiles | 69 | `.claude/agents/*.{md,json}`, excluding the directory context file |
+| Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
 
@@ -51,7 +53,7 @@ cd agentic-creator-os
 
 The Claude path copies the repository's skill groups, top-level commands, agent profiles, shell hooks, hook configuration, activation rules, and state metadata into `CLAUDE_HOME` (or `~/.claude` by default).
 
-Before installing into an existing profile, inspect the script and back up any files with matching names. The installer copies files into shared directories and can replace same-named files.
+Before installing into an existing profile, inspect the script and back up your profile. The Claude installer checks every file it would copy before writing anything: a differing file or symlinked destination stops the install instead of replacing your work. An unchanged repeat install skips identical files. It still writes ACOS-owned `acos/state.json`; there is no automatic uninstall or rollback yet. `--target` controls project files for other platforms, not the Claude profile path; set `CLAUDE_HOME` to choose an isolated Claude destination.
 
 For an isolated inspection:
 
@@ -151,6 +153,24 @@ Read CLAUDE.md and AGENTS.md, then show the ACOS capabilities relevant to this r
 Plan a creator workflow using only skills that exist in .claude/skills.
 Review the proposed workflow and identify every external dependency before execution.
 ```
+
+## Agent OS: your own C-suite of agents
+
+Nine Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO, CCO), compiled from one
+shared Expertise Kernel. Each keeps its own memory, delegates to skills and
+worker agents, reads your identity files, and stops at your gates. Optional
+Domain Queens route each brand's work to its Generals. A scanner scores every
+skill, agent, and command you can load, and a daily CI check keeps the whole
+setup from drifting. Dependency-free Node; no install step.
+
+```bash
+node scripts/agent-os-init.mjs --name <you>          # your instance from the template
+node scripts/agent-compile.mjs --instance <you>      # your Generals
+node scripts/estate-audit.mjs --repos <dir> --md audit.md
+```
+
+Start with [docs/agent-os/ADOPT.md](docs/agent-os/ADOPT.md); the full design is
+in [docs/agent-os/](docs/agent-os/README.md).
 
 ## Verification
 

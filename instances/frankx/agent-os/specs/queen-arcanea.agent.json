@@ -1,0 +1,64 @@
+{
+  "id": "queen-arcanea",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "Arcanea Queen — owns the arcanea domain and staffs its Generals (creative, world engine). Use when work belongs to the arcanea domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-cco, general-cto, general-ceo, worker-visual-qa)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "arcanea",
+    "sourceId": "ARCANEA-QUEEN",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
+    "generals": [
+      {
+        "title": "Creative General",
+        "sourceId": "ARCANEA-CREATIVE-GENERAL",
+        "role": "cco",
+        "agent": "general-cco",
+        "swarms": [
+          "lore-keeper",
+          "character-forge",
+          "visual-intelligence"
+        ]
+      },
+      {
+        "title": "World Engine General",
+        "sourceId": "ARCANEA-WORLD-GENERAL",
+        "role": "cto",
+        "agent": "general-cto",
+        "swarms": [
+          "game-dev",
+          "media",
+          "nft-forge"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}

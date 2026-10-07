@@ -1,0 +1,150 @@
+name: Agent OS
+
+# Deterministic 24/7 clock for the Agent OS: no model calls, no secrets.
+# Compiled agents stay fresh, the org import and graph obey the ontology, and
+# the repo's own skills/agents/commands may not fall below the quality ratchet.
+# The scorecard lands in the run summary.
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # daily 05:30 UTC
+    - cron: '0 6 * * 1'    # Mondays 06:00 UTC: visual watch of the brand front doors
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'agent-os/**'
+      - 'docs/agent-os/**'
+      - 'evals/agents/**'
+      - 'instances/*/agent-os/**'
+      - 'instances/*/agents/**'
+      - '.claude/agents/**'
+      - '.claude/skills/**'
+      - '.claude/commands/**'
+      - 'scripts/agent-compile.mjs'
+      - 'scripts/agent-os-graph.mjs'
+      - 'scripts/estate-audit.mjs'
+      - 'scripts/org-import.mjs'
+      - 'scripts/mesh-doctor.mjs'
+      - 'scripts/mesh-dispatch.mjs'
+      - 'scripts/always-on-status.mjs'
+      - 'scripts/agent-os-init.mjs'
+      - 'scripts/upstream-watch.mjs'
+      - 'scripts/lib/**'
+      - 'agent-os/upstreams.json'
+      - 'test/agent-os.test.mjs'
+      - 'test/mesh.test.mjs'
+      - 'scripts/visual-check.mjs'
+      - 'test/visual.test.mjs'
+      - 'test/fixtures/visual/**'
+      - '.github/actions/agent-os-visual/**'
+      - '.github/workflows/agent-os.yml'
+
+concurrency:
+  group: agent-os-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  agent-os:
+    if: github.event.schedule != '0 6 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '20'
+
+      - name: Compiled agents are fresh (core and instance)
+        run: |
+          node scripts/agent-compile.mjs --check
+          node scripts/agent-compile.mjs --check --instance frankx
+
+      - name: Domain Queens match the vendored org chart
+        run: node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx --check
+
+      - name: Graph obeys the ontology
+        run: node scripts/agent-os-graph.mjs --instance frankx
+
+      - name: Agent OS and mesh tests
+        run: node --test test/agent-os.test.mjs test/mesh.test.mjs
+
+      - name: Quality ratchet (scorecard in the run summary)
+        # 72 = the 2026-10-04 baseline for this repo's own skills, agents, and commands.
+        # Raise it when the average rises; never lower it to make a red run green.
+        run: node scripts/estate-audit.mjs --home . --md "$GITHUB_STEP_SUMMARY" --min-score 72
+
+      # The token only reaches code from the default branch. On a pull request the script is
+      # PR-controlled, so it runs unauthenticated (public repos, lower rate limit).
+      - name: Upstream watch (which frontier repos moved; review prompt, never blocks)
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"
+
+      - name: Upstream watch, unauthenticated (pull requests and other branches)
+        if: github.event_name == 'pull_request' || github.ref != format('refs/heads/{0}', github.event.repository.default_branch)
+        continue-on-error: true
+        run: node scripts/upstream-watch.mjs --md "$GITHUB_STEP_SUMMARY"
+
+  visual:
+    # The agents' eyes must work: render a page with deliberate defects and catch every one.
+    if: github.event.schedule != '0 6 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'   # built-in WebSocket for the DevTools protocol
+
+      - name: Visual check tests (headless Chrome)
+        run: node --test test/visual.test.mjs
+
+  visual-watch:
+    # Report-only: renders each brand front door weekly. Findings never block and nothing changes a site;
+    # the job fails only when rendering fails or no report is written.
+    if: github.event.schedule == '0 6 * * 1' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      # Findings stay report-only (no --gate); a render failure or a missing report fails the job.
+      - name: Render the brand front doors
+        run: |
+          set -euo pipefail
+          # Every URL must be https with no whitespace or control characters, or the run is rejected.
+          # URLs are written NUL-separated and each becomes exactly one --url argument.
+          node -e "
+            const w = require('./instances/frankx/agent-os/visual-watch.json')
+            const bad = w.sites.map((s) => s.url).filter((u) => typeof u !== 'string' || !/^https:\/\/[^\s\x00-\x1f\x7f]+$/.test(u) || new URL(u).protocol !== 'https:')
+            if (!w.sites.length || bad.length) { console.error('visual-watch.json: every site needs one https URL without whitespace; rejected: ' + JSON.stringify(bad)); process.exit(1) }
+            process.stdout.write(w.sites.map((s) => s.url + '\0').join(''))
+          " > "$RUNNER_TEMP/visual-watch-urls"
+          mapfile -d '' -t urls < "$RUNNER_TEMP/visual-watch-urls"
+          flags=()
+          for u in "${urls[@]}"; do flags+=(--url "$u"); done
+          widths=$(node -p "require('./instances/frankx/agent-os/visual-watch.json').widths")
+          themes=$(node -p "require('./instances/frankx/agent-os/visual-watch.json').themes")
+          node scripts/visual-check.mjs "${flags[@]}" --widths "$widths" --themes "$themes" --out "$RUNNER_TEMP/visual-watch"
+          test -s "$RUNNER_TEMP/visual-watch/report.md" || { echo "::error::visual-check wrote no report.md"; exit 1; }
+          cat "$RUNNER_TEMP/visual-watch/report.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-watch
+          path: ${{ runner.temp }}/visual-watch
+          if-no-files-found: error
+          retention-days: 14

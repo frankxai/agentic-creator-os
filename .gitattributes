@@ -1,0 +1,6 @@
+# Compiled agents and Agent OS sources are compared byte-for-byte by
+# `scripts/agent-compile.mjs --check`; keep them LF on every platform.
+.claude/agents/general-*.md text eol=lf
+instances/*/agents/general-*.md text eol=lf
+agent-os/** text eol=lf
+evals/agents/** text eol=lf

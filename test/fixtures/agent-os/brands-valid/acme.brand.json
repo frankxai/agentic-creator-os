@@ -1,0 +1,17 @@
+{
+  "id": "acme",
+  "name": "Acme",
+  "door": true,
+  "status": "active",
+  "domain": "acme.example",
+  "register": "professional",
+  "soul": "SOUL.md",
+  "repos": ["acme-site"],
+  "authority": ["CREATOR.md", "taste.md"],
+  "generals": { "cmo": "AI-search visibility", "cfo": "unit economics" },
+  "specialists": [{ "id": "voice-guardian", "role": "brand-voice", "repo": "acme-site" }],
+  "loops": [
+    { "id": "acme-weekly-content", "cadence": "weekly", "owner": "general-cmo", "gate": ["publish"], "receipt": "content log" },
+    { "id": "acme-voice-check", "cadence": "per-event", "owner": "voice-guardian", "gate": [], "receipt": "PR comment" }
+  ]
+}

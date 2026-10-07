@@ -11,13 +11,13 @@
     "start": "node build/index.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
-    "nodemailer": "^9.1.1",
+    "@modelcontextprotocol/sdk": "^1.31.0",
+    "nodemailer": "^10.0.13",
     "zod": "^3.22.0"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^26.6.4",
     "esbuild": "^0.28.2",
     "typescript": "^5.0.0"
   }
