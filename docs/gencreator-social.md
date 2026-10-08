@@ -63,6 +63,15 @@ Producer SHA-256:
 788c75c2e5190c9fa5c16f8590d8f29e6d73221009fd718f5335384b914e6928
 ```
 
+Its canonical source is `plugins/gencreator-native/skills/gencreator-produce/scripts/edition.py`
+in `frankxai/gencreator-skills` candidate revision
+`7130ff89587bf008c15c066d343af6bbe45e8c32`, Git blob
+`2875282cdb2df9d94e03377c235fb3218f051d96`. The remote blob's SHA-256 matches
+the installed engine. [Native pack PR8](https://github.com/frankxai/gencreator-skills/pull/8)
+and [operations PR9](https://github.com/frankxai/gencreator-skills/pull/9) remain
+open. This integration reuses those candidates; it does not replace their owner,
+merge them or establish a generally released one-install bundle.
+
 The hash establishes byte integrity against the selected pin; it is not an
 author signature or proof that arbitrary code is safe. Do not pin an unreviewed
 script simply to satisfy the command. This adapter executes that local script.
