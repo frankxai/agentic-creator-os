@@ -1,0 +1,122 @@
+{
+  "schema": "gencreator.local-edition.v1",
+  "creator": "GenCreator community",
+  "audience": "AI builders and independent creators",
+  "source": {
+    "label": "Original engineering note: a draft that survives a restart",
+    "text": "An AI-generated post can read well and still be difficult to maintain. If its source, editable draft and review decision live in separate chats, a restart leaves the creator guessing which version was ready.\n\nThe local GenCreator Producer checks exact source spans and binds supplied confirmations to the complete artifact revision. It performs no inference, network calls or publication. Source-span matching requires a separate review of factual support and voice.\n\nThe ACOS social packet adapter calls an explicitly selected Producer after checking its SHA-256. It saves source.txt, edition.json, review.json, content.md and a receipt. Output directories must be new. The receipt is written last; an interrupted packet stays available and recovery uses a fresh directory.\n\nChanging the source, audience, creator or complete artifact changes the Producer's revision digest. An earlier supplied confirmation then fails review. A confirmation digest alone cannot prove who approved content or authorize publication.\n\nUse an owned workshop note as the source. Draft one useful LinkedIn explanation, a newsletter and a short demonstration script. Inspect each claim against the note, keep confirmations empty during drafting and export the edition locally.\n\nTo test the workflow, close the chat and inspect the saved packet. Check its integrity, edit the edition in a new revision and re-run review. Compare that recovery task with your current host assistant and file export. Record usable copy, repair steps and elapsed time; this note supplies no benchmark result.",
+    "rights": "owned"
+  },
+  "artifacts": [
+    {
+      "id": "builder-post",
+      "channel": "linkedin",
+      "title": "Can you recover the draft after the chat closes?",
+      "content": "Before I call an AI content workflow useful, I want to close the chat.\n\nCan I still find the source? Open the copy? Tell which revision was reviewed?\n\nThe local GenCreator workflow keeps those pieces together:\n- source.txt preserves the source.\n- edition.json holds editable drafts and exact evidence spans.\n- review.json records the mechanical check.\n- content.md gives me readable copy.\n- receipt.json lets me check the exported files.\n\nACOS calls the selected Producer after checking its hash. If export stops halfway through, it preserves that directory. I can repair the input and retry into a fresh one.\n\nThere is still editorial work. A matching quote does not establish that the post's argument follows from it. I need to check the claim and the voice myself.\n\nTry this with one workshop note. Produce a post, a newsletter and a demonstration script. Close the chat, then recover and revise them from the files.\n\nWhich step in your current process depends on remembering what happened in a chat?",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 207,
+          "quote": "An AI-generated post can read well and still be difficult to maintain. If its source, editable draft and review decision live in separate chats, a restart leaves the creator guessing which version was ready."
+        },
+        {
+          "start": 209,
+          "end": 466,
+          "quote": "The local GenCreator Producer checks exact source spans and binds supplied confirmations to the complete artifact revision. It performs no inference, network calls or publication. Source-span matching requires a separate review of factual support and voice."
+        },
+        {
+          "start": 468,
+          "end": 774,
+          "quote": "The ACOS social packet adapter calls an explicitly selected Producer after checking its SHA-256. It saves source.txt, edition.json, review.json, content.md and a receipt. Output directories must be new. The receipt is written last; an interrupted packet stays available and recovery uses a fresh directory."
+        },
+        {
+          "start": 1017,
+          "end": 1254,
+          "quote": "Use an owned workshop note as the source. Draft one useful LinkedIn explanation, a newsletter and a short demonstration script. Inspect each claim against the note, keep confirmations empty during drafting and export the edition locally."
+        },
+        {
+          "start": 1256,
+          "end": 1565,
+          "quote": "To test the workflow, close the chat and inspect the saved packet. Check its integrity, edit the edition in a new revision and re-run review. Compare that recovery task with your current host assistant and file export. Record usable copy, repair steps and elapsed time; this note supplies no benchmark result."
+        }
+      ]
+    },
+    {
+      "id": "builder-newsletter",
+      "channel": "newsletter",
+      "title": "The restart test for an AI content workflow",
+      "content": "Subject: Close the chat. Can you still ship the draft?\n\nA good draft is easy to admire while its conversation is open. The more useful test comes later: the chat has closed, you have changed one sentence, and you need to know what is ready.\n\nFor a small experiment, start with an owned workshop note. Ask your assistant for a LinkedIn explanation, a newsletter and a short demonstration script. Keep the source text beside the work.\n\nThen ask three questions.\n\n1. What supports this claim?\n\nGenCreator Producer can check that an evidence quote matches an exact span in the source. That catches a broken reference. You still need to read the argument: a quote about preserving sources does not support a claim that the workflow increases reach.\n\n2. Which revision was checked?\n\nProducer binds a supplied confirmation to the creator, audience, source and complete artifact. Edit those inputs and the previous confirmation fails. During the first drafting run, confirmations stay empty.\n\nThe digest establishes a content relationship. Identity and publishing permission need their own checks.\n\n3. What survives an interruption?\n\nThe ACOS adapter saves a local edition, readable copy, source, mechanical review and receipt. It requires a fresh output directory and writes the receipt last. If a write stops, keep the partial directory. Correct the input and prepare another directory.\n\nHere is the exercise: close the chat, reopen the files, verify the packet and make a new revision. Keep the original artifact IDs. Re-run review before asking the creator to confirm the changed copy.\n\nRepeat the same task with your current assistant and ordinary file export. Note how much copy you can use, what you repair and how long recovery takes. We have not supplied a benchmark result.\n\nReply with the part you could recover and the part you had to reconstruct. That is useful evidence for the next iteration.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 207,
+          "quote": "An AI-generated post can read well and still be difficult to maintain. If its source, editable draft and review decision live in separate chats, a restart leaves the creator guessing which version was ready."
+        },
+        {
+          "start": 209,
+          "end": 466,
+          "quote": "The local GenCreator Producer checks exact source spans and binds supplied confirmations to the complete artifact revision. It performs no inference, network calls or publication. Source-span matching requires a separate review of factual support and voice."
+        },
+        {
+          "start": 468,
+          "end": 774,
+          "quote": "The ACOS social packet adapter calls an explicitly selected Producer after checking its SHA-256. It saves source.txt, edition.json, review.json, content.md and a receipt. Output directories must be new. The receipt is written last; an interrupted packet stays available and recovery uses a fresh directory."
+        },
+        {
+          "start": 776,
+          "end": 1015,
+          "quote": "Changing the source, audience, creator or complete artifact changes the Producer's revision digest. An earlier supplied confirmation then fails review. A confirmation digest alone cannot prove who approved content or authorize publication."
+        },
+        {
+          "start": 1017,
+          "end": 1254,
+          "quote": "Use an owned workshop note as the source. Draft one useful LinkedIn explanation, a newsletter and a short demonstration script. Inspect each claim against the note, keep confirmations empty during drafting and export the edition locally."
+        },
+        {
+          "start": 1256,
+          "end": 1565,
+          "quote": "To test the workflow, close the chat and inspect the saved packet. Check its integrity, edit the edition in a new revision and re-run review. Compare that recovery task with your current host assistant and file export. Record usable copy, repair steps and elapsed time; this note supplies no benchmark result."
+        }
+      ]
+    },
+    {
+      "id": "builder-video",
+      "channel": "video",
+      "title": "A draft you can recover",
+      "content": "45-60 second demonstration script. Timing is proposed and needs a rehearsal.\n\n[Show the source note]\nI want to test an AI content workflow by closing the chat.\n\n[Show the exported folder]\nThe local packet keeps the source, editable edition, readable copy, review and receipt together.\n\n[Open one artifact beside its source]\nProducer checks exact evidence spans. I still read the claim and decide whether the source supports it.\n\n[Edit the edition in a separate revision]\nWhen the content changes, the old confirmation fails. I need to review the changed version.\n\n[Show a partial folder, then a fresh output directory]\nAn interrupted export stays where it is. Recovery creates a new directory.\n\n[Return to the draft]\nTry it with an owned workshop note. Close your chat and see what you can recover. Record the repair steps before calling the workflow better.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 207,
+          "quote": "An AI-generated post can read well and still be difficult to maintain. If its source, editable draft and review decision live in separate chats, a restart leaves the creator guessing which version was ready."
+        },
+        {
+          "start": 209,
+          "end": 466,
+          "quote": "The local GenCreator Producer checks exact source spans and binds supplied confirmations to the complete artifact revision. It performs no inference, network calls or publication. Source-span matching requires a separate review of factual support and voice."
+        },
+        {
+          "start": 468,
+          "end": 774,
+          "quote": "The ACOS social packet adapter calls an explicitly selected Producer after checking its SHA-256. It saves source.txt, edition.json, review.json, content.md and a receipt. Output directories must be new. The receipt is written last; an interrupted packet stays available and recovery uses a fresh directory."
+        },
+        {
+          "start": 776,
+          "end": 1015,
+          "quote": "Changing the source, audience, creator or complete artifact changes the Producer's revision digest. An earlier supplied confirmation then fails review. A confirmation digest alone cannot prove who approved content or authorize publication."
+        },
+        {
+          "start": 1017,
+          "end": 1254,
+          "quote": "Use an owned workshop note as the source. Draft one useful LinkedIn explanation, a newsletter and a short demonstration script. Inspect each claim against the note, keep confirmations empty during drafting and export the edition locally."
+        },
+        {
+          "start": 1256,
+          "end": 1565,
+          "quote": "To test the workflow, close the chat and inspect the saved packet. Check its integrity, edit the edition in a new revision and re-run review. Compare that recovery task with your current host assistant and file export. Record usable copy, repair steps and elapsed time; this note supplies no benchmark result."
+        }
+      ]
+    }
+  ],
+  "confirmations": []
+}

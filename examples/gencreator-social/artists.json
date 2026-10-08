@@ -1,0 +1,142 @@
+{
+  "schema": "gencreator.local-edition.v1",
+  "creator": "GenCreator community",
+  "audience": "Artists, musicians and storytellers",
+  "source": {
+    "label": "Original standalone fiction: the station piano",
+    "text": "This is original standalone fiction for a social edition. Mara is a fictional station cleaner. The story is not part of an established fictional universe.\n\nAt six each morning, Mara dusted the station piano. Its lowest key stayed down. She cleaned around it because the repair notice had been there longer than she had.\n\nOn a wet Thursday, she found a folded score beneath the lid. Every bar held the same small chord. Above it, someone had written: Play this when you can stay until it stops.\n\nMara had seven minutes before the next platform needed cleaning. She played the chord once. A man beside the departures board lowered his phone. A child stopped dragging her suitcase.\n\nThe broken key held one note after Mara lifted her hands. She waited with the others. When the note finally faded, her seven minutes were gone. She folded the score and left it where she had found it.\n\nThe next morning, the score was still there. Beneath the instruction, another hand had added: I stayed.\n\nAdapt the complete story into six carousel panels, a newsletter with a short writing exercise, and a narrated video script. Preserve the small physical details and the restrained ending. Artwork, narration and music remain production tasks. Use an original or properly licensed score if audio is made.",
+    "rights": "owned"
+  },
+  "artifacts": [
+    {
+      "id": "artist-carousel",
+      "channel": "carousel",
+      "title": "I stayed: six panels",
+      "content": "Panel 1\nAt six each morning, Mara dusted the station piano.\nIts lowest key stayed down.\n\nPanel 2\nThe repair notice had been there longer than she had.\nOn a wet Thursday, she found a folded score beneath the lid.\n\nPanel 3\nEvery bar held the same small chord.\nAbove it: Play this when you can stay until it stops.\n\nPanel 4\nMara had seven minutes.\nShe played once.\nA man lowered his phone. A child stopped dragging her suitcase.\n\nPanel 5\nThe broken key held one note after Mara lifted her hands.\nShe waited.\nWhen it faded, her seven minutes were gone.\n\nPanel 6\nThe next morning, someone had added two words beneath the instruction:\nI stayed.\n\nCaption\nA small story for anyone who has waited for a sound to finish.\nWhat would you leave under the piano lid?\n\nProduction direction\nKeep the station ordinary: damp coats, tired wood, a handwritten repair notice. Let the final panel leave space around the two words. This is finished slide copy; artwork is still required.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 154,
+          "quote": "This is original standalone fiction for a social edition. Mara is a fictional station cleaner. The story is not part of an established fictional universe."
+        },
+        {
+          "start": 156,
+          "end": 319,
+          "quote": "At six each morning, Mara dusted the station piano. Its lowest key stayed down. She cleaned around it because the repair notice had been there longer than she had."
+        },
+        {
+          "start": 321,
+          "end": 493,
+          "quote": "On a wet Thursday, she found a folded score beneath the lid. Every bar held the same small chord. Above it, someone had written: Play this when you can stay until it stops."
+        },
+        {
+          "start": 495,
+          "end": 678,
+          "quote": "Mara had seven minutes before the next platform needed cleaning. She played the chord once. A man beside the departures board lowered his phone. A child stopped dragging her suitcase."
+        },
+        {
+          "start": 680,
+          "end": 880,
+          "quote": "The broken key held one note after Mara lifted her hands. She waited with the others. When the note finally faded, her seven minutes were gone. She folded the score and left it where she had found it."
+        },
+        {
+          "start": 882,
+          "end": 985,
+          "quote": "The next morning, the score was still there. Beneath the instruction, another hand had added: I stayed."
+        },
+        {
+          "start": 987,
+          "end": 1288,
+          "quote": "Adapt the complete story into six carousel panels, a newsletter with a short writing exercise, and a narrated video script. Preserve the small physical details and the restrained ending. Artwork, narration and music remain production tasks. Use an original or properly licensed score if audio is made."
+        }
+      ]
+    },
+    {
+      "id": "artist-newsletter",
+      "channel": "newsletter",
+      "title": "Two words beneath the score",
+      "content": "Subject: I stayed\n\nAt six each morning, Mara dusted the station piano. Its lowest key stayed down. She cleaned around it because the repair notice had been there longer than she had.\n\nOn a wet Thursday, she found a folded score beneath the lid. Every bar held the same small chord. Above it, someone had written: Play this when you can stay until it stops.\n\nMara had seven minutes before the next platform needed cleaning. She played the chord once. A man beside the departures board lowered his phone. A child stopped dragging her suitcase.\n\nThe broken key held one note after Mara lifted her hands. She waited with the others. When the note finally faded, her seven minutes were gone. She folded the score and left it where she had found it.\n\nThe next morning, the score was still there. Beneath the instruction, another hand had added: I stayed.\n\nA writing exercise\n\nChoose an ordinary object that has a small fault: a piano key, a torn pocket, a clock that loses a minute. Give someone a practical reason to handle it.\n\nWrite a scene in which the fault makes that person wait. Let somebody else notice. Finish with two words left behind.\n\nYou can borrow the exercise and choose your own setting. Keep Mara's story as a reading example. If you turn your scene into audio, use your own music or a score you have permission to use.\n\nReply with your two final words if you would like to share them.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 154,
+          "quote": "This is original standalone fiction for a social edition. Mara is a fictional station cleaner. The story is not part of an established fictional universe."
+        },
+        {
+          "start": 156,
+          "end": 319,
+          "quote": "At six each morning, Mara dusted the station piano. Its lowest key stayed down. She cleaned around it because the repair notice had been there longer than she had."
+        },
+        {
+          "start": 321,
+          "end": 493,
+          "quote": "On a wet Thursday, she found a folded score beneath the lid. Every bar held the same small chord. Above it, someone had written: Play this when you can stay until it stops."
+        },
+        {
+          "start": 495,
+          "end": 678,
+          "quote": "Mara had seven minutes before the next platform needed cleaning. She played the chord once. A man beside the departures board lowered his phone. A child stopped dragging her suitcase."
+        },
+        {
+          "start": 680,
+          "end": 880,
+          "quote": "The broken key held one note after Mara lifted her hands. She waited with the others. When the note finally faded, her seven minutes were gone. She folded the score and left it where she had found it."
+        },
+        {
+          "start": 882,
+          "end": 985,
+          "quote": "The next morning, the score was still there. Beneath the instruction, another hand had added: I stayed."
+        },
+        {
+          "start": 987,
+          "end": 1288,
+          "quote": "Adapt the complete story into six carousel panels, a newsletter with a short writing exercise, and a narrated video script. Preserve the small physical details and the restrained ending. Artwork, narration and music remain production tasks. Use an original or properly licensed score if audio is made."
+        }
+      ]
+    },
+    {
+      "id": "artist-video",
+      "channel": "video",
+      "title": "The station piano: narration script",
+      "content": "Narration draft, approximately 45-60 seconds after rehearsal. No recording has been made.\n\nAt six each morning, Mara dusted the station piano.\nIts lowest key stayed down.\n\nOn a wet Thursday, she found a score beneath the lid.\nOne chord, repeated.\nAbove it: Play this when you can stay until it stops.\n\nShe had seven minutes.\nShe played once.\n\nA man lowered his phone.\nA child stopped dragging her suitcase.\n\nThe broken key held a note after Mara lifted her hands.\nThey waited.\n\nWhen the sound faded, her seven minutes were gone.\n\nThe next morning, someone had written beneath the instruction:\nI stayed.\n\nShot direction: piano key, folded paper, hands, suitcase wheel, the final handwritten words. Hold the last frame long enough to read it. Record original narration; choose original or licensed music.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 154,
+          "quote": "This is original standalone fiction for a social edition. Mara is a fictional station cleaner. The story is not part of an established fictional universe."
+        },
+        {
+          "start": 156,
+          "end": 319,
+          "quote": "At six each morning, Mara dusted the station piano. Its lowest key stayed down. She cleaned around it because the repair notice had been there longer than she had."
+        },
+        {
+          "start": 321,
+          "end": 493,
+          "quote": "On a wet Thursday, she found a folded score beneath the lid. Every bar held the same small chord. Above it, someone had written: Play this when you can stay until it stops."
+        },
+        {
+          "start": 495,
+          "end": 678,
+          "quote": "Mara had seven minutes before the next platform needed cleaning. She played the chord once. A man beside the departures board lowered his phone. A child stopped dragging her suitcase."
+        },
+        {
+          "start": 680,
+          "end": 880,
+          "quote": "The broken key held one note after Mara lifted her hands. She waited with the others. When the note finally faded, her seven minutes were gone. She folded the score and left it where she had found it."
+        },
+        {
+          "start": 882,
+          "end": 985,
+          "quote": "The next morning, the score was still there. Beneath the instruction, another hand had added: I stayed."
+        },
+        {
+          "start": 987,
+          "end": 1288,
+          "quote": "Adapt the complete story into six carousel panels, a newsletter with a short writing exercise, and a narrated video script. Preserve the small physical details and the restrained ending. Artwork, narration and music remain production tasks. Use an original or properly licensed score if audio is made."
+        }
+      ]
+    }
+  ],
+  "confirmations": []
+}
