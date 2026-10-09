@@ -72,7 +72,24 @@
     ".claude/skills/gencreator-learn/SKILL.md",
     ".claude/commands/gencreator-learn.md",
     ".claude/skills/gencreator-recover/SKILL.md",
-    ".claude/commands/gencreator-recover.md"
+    ".claude/commands/gencreator-recover.md",
+    ".claude/commands/gencreator.md",
+    ".claude/commands/gc.md",
+    ".claude/commands/gc-strategy.md",
+    ".claude/commands/gc-edition.md",
+    ".claude/commands/gc-review.md",
+    ".claude/commands/gc-deliver.md",
+    ".claude/commands/gc-learn.md",
+    ".claude/commands/gc-recover.md",
+    ".agents/skills/gencreator/SKILL.md",
+    ".agents/skills/gc/SKILL.md",
+    ".agents/skills/gc-strategy/SKILL.md",
+    ".agents/skills/gc-edition/SKILL.md",
+    ".agents/skills/gc-review/SKILL.md",
+    ".agents/skills/gc-deliver/SKILL.md",
+    ".agents/skills/gc-learn/SKILL.md",
+    ".agents/skills/gc-recover/SKILL.md",
+    ".claude/skills/gencreator/SKILL.md"
   ],
   "workspaces": [
     "mcp-servers/*"

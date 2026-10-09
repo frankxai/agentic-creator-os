@@ -7,6 +7,26 @@ their current repositories; it does not rename or consolidate them.
 
 ## Six jobs
 
+Use `/gencreator <goal>` as the main Claude entry, or `/gc <goal>` as its short
+alias. It coordinates the existing mission through only the relevant roles and
+continues authorized work to a finished artifact and handoff. The six stages
+also accept `/gc-strategy`, `/gc-edition`, `/gc-review`, `/gc-deliver`, `/gc-learn`
+and `/gc-recover`. Alias files read the canonical definitions; they do not fork
+the workflow. The hook recognizes the main entry and every stage alias.
+
+Project-native Codex skills include `gencreator`, `gc` and all six `gc-*` aliases.
+After native discovery, use `$gencreator`, `$gc` or `$gc-strategy` (and the other
+stage names), or choose the skill through `/skills`. This follows
+[official OpenAI documentation](https://learn.chatgpt.com/docs/build-skills).
+Claude command files alone do not register Codex slash commands.
+`/acos` remains the existing infrastructure entry and is unchanged by this slice.
+
+The mission entry requests coordinated roles. Actual delegation requires a
+supported host, independent work, owned output lanes and current machine
+admission. Without admission, the lead continues permissible local work and
+keeps independent review pending. Selection does not claim a running team,
+authenticated approval or a background publishing loop.
+
 | Command | Deliverable | Useful trigger |
 | --- | --- | --- |
 | /gencreator-strategy | Source-backed strategy and proposed calendar | A creator has material but no realistic plan |

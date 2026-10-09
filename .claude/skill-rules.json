@@ -694,7 +694,8 @@
           "social content plan"
         ],
         "commands": [
-          "/gencreator-strategy"
+          "/gencreator-strategy",
+          "/gc-strategy"
         ],
         "file_patterns": []
       },
@@ -709,7 +710,8 @@
           "source to social"
         ],
         "commands": [
-          "/gencreator-edition"
+          "/gencreator-edition",
+          "/gc-edition"
         ],
         "file_patterns": []
       },
@@ -724,7 +726,8 @@
           "social quality check"
         ],
         "commands": [
-          "/gencreator-review"
+          "/gencreator-review",
+          "/gc-review"
         ],
         "file_patterns": []
       },
@@ -739,7 +742,8 @@
           "publish reviewed edition"
         ],
         "commands": [
-          "/gencreator-deliver"
+          "/gencreator-deliver",
+          "/gc-deliver"
         ],
         "file_patterns": []
       },
@@ -754,7 +758,8 @@
           "social experiment"
         ],
         "commands": [
-          "/gencreator-learn"
+          "/gencreator-learn",
+          "/gc-learn"
         ],
         "file_patterns": []
       },
@@ -769,7 +774,24 @@
           "social packet drift"
         ],
         "commands": [
-          "/gencreator-recover"
+          "/gencreator-recover",
+          "/gc-recover"
+        ],
+        "file_patterns": []
+      },
+      "priority": "high"
+    },
+    {
+      "skill": "gencreator",
+      "triggers": {
+        "commands": [
+          "/gencreator",
+          "/gc"
+        ],
+        "keywords": [
+          "gencreator team",
+          "gencreator campaign",
+          "gencreator workflow"
         ],
         "file_patterns": []
       },

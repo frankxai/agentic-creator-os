@@ -130,10 +130,10 @@ function verifyVersion(canonical) {
 function verifyClaims(canonical, measured) {
   const metrics = {
     nonEmptySkillModules: {
-      expected: 181,
-      readme: 'Non-empty skill modules | 181',
-      quickstart: '181 non-empty skill modules',
-      claude: '181 Non-empty Skill Modules',
+      expected: 182,
+      readme: 'Non-empty skill modules | 182',
+      quickstart: '182 non-empty skill modules',
+      claude: '182 Non-empty Skill Modules',
     },
     emptySkillPlaceholders: {
       expected: 5,
@@ -142,10 +142,10 @@ function verifyClaims(canonical, measured) {
       claude: '5 tracked empty placeholders',
     },
     topLevelCommands: {
-      expected: 91,
-      readme: 'Top-level slash commands | 91',
-      quickstart: '91 top-level slash-command definitions',
-      claude: '91 Top-level Commands',
+      expected: 99,
+      readme: 'Top-level slash commands | 99',
+      quickstart: '99 top-level slash-command definitions',
+      claude: '99 Top-level Commands',
     },
     topLevelAgents: {
       expected: 81,
@@ -160,10 +160,10 @@ function verifyClaims(canonical, measured) {
       claude: '9 Installable Shell Hooks',
     },
     activationRules: {
-      expected: 38,
-      readme: 'Activation rules | 38',
-      quickstart: '38 activation rules',
-      claude: 'provides 38 activation rules',
+      expected: 39,
+      readme: 'Activation rules | 39',
+      quickstart: '39 activation rules',
+      claude: 'provides 39 activation rules',
     },
   }
 

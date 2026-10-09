@@ -76,12 +76,18 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 
 `npm run verify:public-surface` currently measures:
 
-- 181 non-empty skill modules;
+- 182 non-empty skill modules;
 - 5 empty skill placeholders;
-- 91 top-level slash-command definitions;
+- 99 top-level slash-command definitions;
 - 81 top-level agent profiles;
 - 9 installable shell hooks;
-- 38 activation rules.
+- 39 activation rules.
+
+For creator work, use `/gencreator <goal>` or `/gc <goal>` in Claude Code.
+Use `/gc-strategy` and the other `/gc-*` names for an individual stage. In Codex,
+select the project-native `$gencreator`, `$gc` or `$gc-*` skill after discovery.
+The [activation guide](docs/gencreator-social-activation.md) explains the shared
+definitions, coordinated roles and actual delegation limits.
 
 The definitions for each count are documented in [README.md](README.md).
 

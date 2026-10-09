@@ -66,6 +66,29 @@ test('all six commands resolve their corresponding stage first', () => {
     assert.equal(selectSkills(registry,{prompt:'/gencreator-'+stage}).selected[0].skill,'gencreator-'+stage);
   }
 });
+test('main and short entries resolve GenCreator; stage aliases resolve the existing stages', () => {
+  const registry=JSON.parse(fs.readFileSync('.claude/skill-rules.json','utf8'));
+  for(const entry of ['/gencreator','/gc']) {
+    assert.equal(selectSkills(registry,{prompt:entry+' plan a campaign'}).selected[0].skill,'gencreator');
+  }
+  for(const stage of ['strategy','edition','review','deliver','learn','recover']) {
+    assert.equal(selectSkills(registry,{prompt:'/gc-'+stage}).selected[0].skill,'gencreator-'+stage);
+    assert.match(fs.readFileSync('.claude/commands/gc-'+stage+'.md','utf8'),new RegExp('commands/gencreator-'+stage+'\\.md'));
+    assert.match(fs.readFileSync('.agents/skills/gc-'+stage+'/SKILL.md','utf8'),new RegExp('skills/gencreator-'+stage+'/SKILL\\.md'));
+  }
+  assert.equal(selectSkills(registry,{prompt:'/gc-strategist'}).selected.length,0);
+  assert.equal(selectSkills(registry,{prompt:'/gencreatorium'}).selected.length,0);
+});
+test('actual hook routes both mission entries and every short stage without spawning agents', () => {
+  for(const command of ['/gencreator','/gc',...['strategy','edition','review','deliver','learn','recover'].map(s=>'/gc-'+s)]) {
+    const run=spawnSync(process.execPath,['.claude/hooks/skill-activation-prompt.js'],{input:JSON.stringify({prompt:command}),encoding:'utf8',env:{...process.env,CLAUDE_PROJECT_DIR:resolve('.')}});
+    assert.equal(run.status,0);
+    const content=JSON.parse(run.stdout).hookSpecificOutput.additionalContext;
+    assert.match(content,/\.claude\/skills\/gencreator/);
+    if(command.startsWith('/gc-'))assert.ok(content.includes('gencreator-'+command.slice(4)+'/SKILL.md'));
+    assert.match(content,/no skill has been read or executed/);
+  }
+});
 test('installed wrapper finds reviewed resolver and its own registry when project has none', () => {
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'social-activation-'));
   try {
