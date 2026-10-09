@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "research_id": "replace-me",
+  "article_content_id": "replace-me",
+  "status": "SEED",
+  "authority": "DRAFT",
+  "as_of": null,
+  "brief": {
+    "question": "Replace with the decision-oriented question",
+    "decision": "Replace with the reader decision",
+    "contribution": "Replace with the specific research delta",
+    "strongest_objection": "Replace with the informed objection"
+  },
+  "method": {
+    "mode": "source_review",
+    "limitations": [],
+    "contrary_search": [],
+    "coverage_gaps": []
+  },
+  "sources": [],
+  "claims": [],
+  "experiments": [],
+  "media": [],
+  "publication_record": {
+    "canonical_url": null,
+    "title": null,
+    "description": null,
+    "author": null,
+    "reviewer": null,
+    "reviewed_at": null,
+    "related_urls": [],
+    "render_strategy": "server_or_static"
+  },
+  "blocked": ["Unfilled template; do not promote or claim completed research."]
+}
