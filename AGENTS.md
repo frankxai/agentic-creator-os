@@ -144,3 +144,23 @@ The registry currently lists `pnpm test`, but `package.json` does not define a t
 - Never weaken safety hooks, circuit breakers, audit trails, or self-modify gates without an explicit operator decision.
 - Treat ACOS as a shared substrate. Backward compatibility matters.
 - If changing public package behavior, update docs and versioning intentionally.
+
+## GenCreator content work
+
+For an authorized content task, continue useful reversible work through strategy,
+edition, review, unsent delivery, observation and recovery. Use the current
+CreatorPack and Mission owner; preserve the brand voice and supplied source.
+Read `.agents/skills/gencreator-social/SKILL.md`, then only the relevant stage
+skill. Load at most three initial skill bodies; open references when needed.
+Use `/gencreator` (short `/gc`) for the existing coordinated creator mission.
+The six `/gencreator-*` commands and `/gc-*` aliases select individual stages.
+Read `.claude/skills/gencreator/SKILL.md` for bounded delegation and the complete
+creation/review/handoff workflow. Native Codex entries use the corresponding
+skill names; verify invocation syntax in that host.
+`docs/gencreator-social-activation.md` describes the shared SIS-backed proposal
+loop, resource limits and recovery. Record actual work and counters through the
+existing mission owner. A proposal neither executes an agent nor authenticates
+approval. External posting and premium founder approval stay human-gated.
+Report skill selection, reading, application and verification separately.
+This guidance is loaded policy; the Claude prompt hook is a separately configured
+recommendation mechanism. Neither reloads an existing Codex session or ChatGPT.

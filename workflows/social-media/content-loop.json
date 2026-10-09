@@ -1,0 +1,141 @@
+{
+  "schema": "starlight.loop-graph.v1",
+  "id": "gencreator-content-projection",
+  "projection": {
+    "parent": "brand-content-loop",
+    "parentVersion": "1.0.0",
+    "reviewedParentSha256": "cc1fac205bbd1a81a45f9cbc39f8fe882d6302093fba530224d461cf39f567bf",
+    "nodeMap": {
+      "strategy": ["research", "strategize"],
+      "edition": ["create"],
+      "review": ["qa"],
+      "deliver": ["schedule"],
+      "learn": ["measure"],
+      "recover": ["create", "qa"]
+    },
+    "publication": "existing parent publisher and human gate only"
+  },
+  "shape": "router",
+  "executorRole": "orchestrator",
+  "supervisorRole": "checker",
+  "brakes": {
+    "maxTurns": 24,
+    "maxCostUnits": 12,
+    "emptyRoundsToStop": 2,
+    "allowedActions": [
+      "prepare_local_artifact",
+      "inspect_local_artifact",
+      "prepare_unsent_delivery",
+      "propose_learning",
+      "recover_local_artifact"
+    ],
+    "requireWriteback": true
+  },
+  "nodes": [
+    {
+      "id": "dispatch",
+      "role": "system",
+      "kind": "code",
+      "costUnits": 0,
+      "outputContract": "gencreator.social-proposal.v1"
+    },
+    {
+      "id": "strategy",
+      "role": "maker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-strategy.v1"
+    },
+    {
+      "id": "edition",
+      "role": "maker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-edition.v1"
+    },
+    {
+      "id": "review",
+      "role": "checker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-review.v1"
+    },
+    {
+      "id": "deliver",
+      "role": "maker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-deliver.v1"
+    },
+    {
+      "id": "learn",
+      "role": "maker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-learn.v1"
+    },
+    {
+      "id": "recover",
+      "role": "maker",
+      "kind": "agent",
+      "costUnits": 1,
+      "outputContract": "gencreator.social-recover.v1"
+    }
+  ],
+  "edges": [
+    {
+      "from": "dispatch",
+      "to": "strategy",
+      "contract": "gencreator.social-strategy.v1",
+      "when": {
+        "field": "stage",
+        "equals": "strategy"
+      }
+    },
+    {
+      "from": "dispatch",
+      "to": "edition",
+      "contract": "gencreator.social-edition.v1",
+      "when": {
+        "field": "stage",
+        "equals": "edition"
+      }
+    },
+    {
+      "from": "dispatch",
+      "to": "review",
+      "contract": "gencreator.social-review.v1",
+      "when": {
+        "field": "stage",
+        "equals": "review"
+      }
+    },
+    {
+      "from": "dispatch",
+      "to": "deliver",
+      "contract": "gencreator.social-deliver.v1",
+      "when": {
+        "field": "stage",
+        "equals": "deliver"
+      }
+    },
+    {
+      "from": "dispatch",
+      "to": "learn",
+      "contract": "gencreator.social-learn.v1",
+      "when": {
+        "field": "stage",
+        "equals": "learn"
+      }
+    },
+    {
+      "from": "dispatch",
+      "to": "recover",
+      "contract": "gencreator.social-recover.v1",
+      "when": {
+        "field": "stage",
+        "equals": "recover"
+      }
+    }
+  ]
+}

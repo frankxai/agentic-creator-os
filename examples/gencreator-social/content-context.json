@@ -1,0 +1,32 @@
+{
+  "schema": "gencreator.social-context.v1",
+  "dataKind": "synthetic",
+  "pack": null,
+  "mission": null,
+  "sourceDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "editionDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "reviewedEditionDigest": null,
+  "actorId": "example-maker",
+  "verifierActorId": null,
+  "requestedStage": "auto",
+  "signals": {
+    "sourceAvailable": true,
+    "editionAvailable": true,
+    "sourceRightsKnown": true,
+    "copyReviewed": false,
+    "creatorConfirmed": false,
+    "publisherReady": false,
+    "deliveryRequested": false,
+    "deliveryVerified": false,
+    "metricsAvailable": false,
+    "learningAccepted": false,
+    "packetInterrupted": false
+  },
+  "iteration": {
+    "turnsUsed": 0,
+    "costUnitsUsed": 0,
+    "emptyRounds": 0
+  },
+  "executed": [],
+  "writebacks": []
+}

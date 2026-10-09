@@ -1,0 +1,137 @@
+{
+  "schema": "gencreator.local-edition.v1",
+  "creator": "GenCreator community",
+  "audience": "Small businesses, consultants and client content teams",
+  "source": {
+    "label": "Original operational note: the changed customer quote",
+    "text": "This is a hypothetical client-team workflow example, not a report of customer results. A consultant prepares a social post from a client-approved interview transcript. The transcript includes a customer quote cleared for that specific campaign.\n\nAn editor shortens the quote during revision. The old approval refers to the earlier text. The team must present the changed quote to the appropriate reviewer and record a decision for the exact new revision before scheduling it.\n\nKeep the source transcript, permitted-use scope, draft and review decision together. Give each artifact a stable ID and each complete revision a digest. Rights, identity and destination authorization remain separate checks.\n\nThe local GenCreator Producer checks source spans and supplied content confirmations. The ACOS adapter exports source, edition, review, readable copy and a file-integrity receipt. Neither publishes. A matching quote alone does not establish the client's permission to use it.\n\nFor the next campaign, choose one publishing owner. Prepare an unsent handoff containing the destination account, approved revision, proposed time and timezone, media requirements and unresolved permissions. Missing destination or authorization blocks sending.\n\nAfter an authorized send, keep the publisher response. Verify publication separately. If delivery is uncertain, check that response and destination state before retrying; avoid creating a duplicate post.\n\nMeasure one business-relevant objective with consistent definitions and observation windows. Missing conversions stay unknown. Compare compatible account and audience cohorts before proposing a change. The example supplies no reach or sales figures.",
+    "rights": "owned"
+  },
+  "artifacts": [
+    {
+      "id": "team-post",
+      "channel": "linkedin",
+      "title": "The quote changed. Review the new quote.",
+      "content": "Your client approved the interview quote on Monday. On Tuesday, someone shortened it for a social post.\n\nWhich text is going into the scheduler?\n\nIn this hypothetical handoff, the change needs a new review decision. Keep the source transcript, use permission and exact draft together so the reviewer can see what changed.\n\nOur working rule:\n- Keep the artifact ID stable across edits.\n- Bind the review decision to the complete revision.\n- Record rights and destination authorization separately.\n- Give one person or system ownership of the send.\n\nGenCreator's local checks can catch a broken source span or a stale supplied confirmation. They cannot establish the client's permission or identify the person making the decision.\n\nThe publishing handoff needs the destination account, confirmed revision, proposed time and timezone, media requirements and remaining gaps.\n\nIf a send returns an uncertain result, inspect the response and destination before retrying.\n\nFor your next campaign, pick one post and follow its revision from source to handoff. Where does the approval currently live?",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 244,
+          "quote": "This is a hypothetical client-team workflow example, not a report of customer results. A consultant prepares a social post from a client-approved interview transcript. The transcript includes a customer quote cleared for that specific campaign."
+        },
+        {
+          "start": 246,
+          "end": 475,
+          "quote": "An editor shortens the quote during revision. The old approval refers to the earlier text. The team must present the changed quote to the appropriate reviewer and record a decision for the exact new revision before scheduling it."
+        },
+        {
+          "start": 477,
+          "end": 700,
+          "quote": "Keep the source transcript, permitted-use scope, draft and review decision together. Give each artifact a stable ID and each complete revision a digest. Rights, identity and destination authorization remain separate checks."
+        },
+        {
+          "start": 702,
+          "end": 977,
+          "quote": "The local GenCreator Producer checks source spans and supplied content confirmations. The ACOS adapter exports source, edition, review, readable copy and a file-integrity receipt. Neither publishes. A matching quote alone does not establish the client's permission to use it."
+        },
+        {
+          "start": 979,
+          "end": 1239,
+          "quote": "For the next campaign, choose one publishing owner. Prepare an unsent handoff containing the destination account, approved revision, proposed time and timezone, media requirements and unresolved permissions. Missing destination or authorization blocks sending."
+        },
+        {
+          "start": 1241,
+          "end": 1444,
+          "quote": "After an authorized send, keep the publisher response. Verify publication separately. If delivery is uncertain, check that response and destination state before retrying; avoid creating a duplicate post."
+        }
+      ]
+    },
+    {
+      "id": "team-newsletter",
+      "channel": "newsletter",
+      "title": "A customer quote needs a version",
+      "content": "Subject: Which version of the quote did the client approve?\n\nConsider this hypothetical campaign: a consultant turns a cleared interview transcript into a social post. The client approves it. An editor then shortens the customer quote.\n\nThe team has useful copy and a new review task.\n\nStart by preserving the source transcript and its permitted-use scope. A quote cleared for one campaign may have a narrower permission than the team needs for another. Keep that question visible.\n\nNext, keep the artifact's ID across edits and identify the complete revision being reviewed. Present the changed text to the appropriate reviewer. Record that decision against the new revision before scheduling.\n\nThe local GenCreator Producer checks exact source spans and supplied confirmations. Its checks help catch a stale confirmation after an edit. A matching span cannot establish permission, and a digest cannot identify the person who approved the copy.\n\nThe ACOS adapter saves a source-linked edition, readable copy, mechanical review and integrity receipt. The team can recover those files after a restart. Sending remains a separate operation.\n\nBefore delivery, nominate one publishing owner and prepare a handoff:\n- destination account;\n- exact confirmed revision;\n- proposed time with timezone;\n- media needed;\n- unresolved rights or authorization.\n\nIf an essential item is missing, finish the handoff before sending. After an authorized send, retain the publisher response and check publication separately. When the result is uncertain, inspect the response and destination state before retrying.\n\nFor measurement, choose a business-relevant objective and keep its definition and observation window consistent. A missing conversion count stays unknown. This example provides no reach or sales result.\n\nTake one post in your next campaign and trace its source, edits and review decision. The useful outcome is a handoff another person can inspect without reconstructing the conversation.",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 244,
+          "quote": "This is a hypothetical client-team workflow example, not a report of customer results. A consultant prepares a social post from a client-approved interview transcript. The transcript includes a customer quote cleared for that specific campaign."
+        },
+        {
+          "start": 246,
+          "end": 475,
+          "quote": "An editor shortens the quote during revision. The old approval refers to the earlier text. The team must present the changed quote to the appropriate reviewer and record a decision for the exact new revision before scheduling it."
+        },
+        {
+          "start": 477,
+          "end": 700,
+          "quote": "Keep the source transcript, permitted-use scope, draft and review decision together. Give each artifact a stable ID and each complete revision a digest. Rights, identity and destination authorization remain separate checks."
+        },
+        {
+          "start": 702,
+          "end": 977,
+          "quote": "The local GenCreator Producer checks source spans and supplied content confirmations. The ACOS adapter exports source, edition, review, readable copy and a file-integrity receipt. Neither publishes. A matching quote alone does not establish the client's permission to use it."
+        },
+        {
+          "start": 979,
+          "end": 1239,
+          "quote": "For the next campaign, choose one publishing owner. Prepare an unsent handoff containing the destination account, approved revision, proposed time and timezone, media requirements and unresolved permissions. Missing destination or authorization blocks sending."
+        },
+        {
+          "start": 1241,
+          "end": 1444,
+          "quote": "After an authorized send, keep the publisher response. Verify publication separately. If delivery is uncertain, check that response and destination state before retrying; avoid creating a duplicate post."
+        },
+        {
+          "start": 1446,
+          "end": 1695,
+          "quote": "Measure one business-relevant objective with consistent definitions and observation windows. Missing conversions stay unknown. Compare compatible account and audience cohorts before proposing a change. The example supplies no reach or sales figures."
+        }
+      ]
+    },
+    {
+      "id": "team-video",
+      "channel": "video",
+      "title": "Which quote did we approve?",
+      "content": "45-60 second training script. Use a hypothetical document, not client data.\n\n[Show the original and shortened quote side by side]\nThe client approved this quote. Then we shortened it.\nWe need a decision on the new text.\n\n[Highlight the source and revision]\nKeep the transcript, use permission and exact draft together. Preserve the artifact ID across edits.\n\n[Show the local review]\nGenCreator checks source spans and supplied revision confirmations. Permission and reviewer identity need separate checks.\n\n[Show the unsent handoff]\nChoose one publishing owner. Record the destination, confirmed revision, proposed time and timezone, media needs and gaps.\n\n[Show the delivery response placeholder marked pending]\nAfter an authorized send, retain the response. Verify publication separately. If the result is uncertain, inspect the destination before retrying.\n\n[Return to the document]\nTry this with one post in your next campaign. Can someone else inspect the handoff without reading your chat history?",
+      "evidence": [
+        {
+          "start": 0,
+          "end": 244,
+          "quote": "This is a hypothetical client-team workflow example, not a report of customer results. A consultant prepares a social post from a client-approved interview transcript. The transcript includes a customer quote cleared for that specific campaign."
+        },
+        {
+          "start": 246,
+          "end": 475,
+          "quote": "An editor shortens the quote during revision. The old approval refers to the earlier text. The team must present the changed quote to the appropriate reviewer and record a decision for the exact new revision before scheduling it."
+        },
+        {
+          "start": 477,
+          "end": 700,
+          "quote": "Keep the source transcript, permitted-use scope, draft and review decision together. Give each artifact a stable ID and each complete revision a digest. Rights, identity and destination authorization remain separate checks."
+        },
+        {
+          "start": 702,
+          "end": 977,
+          "quote": "The local GenCreator Producer checks source spans and supplied content confirmations. The ACOS adapter exports source, edition, review, readable copy and a file-integrity receipt. Neither publishes. A matching quote alone does not establish the client's permission to use it."
+        },
+        {
+          "start": 979,
+          "end": 1239,
+          "quote": "For the next campaign, choose one publishing owner. Prepare an unsent handoff containing the destination account, approved revision, proposed time and timezone, media requirements and unresolved permissions. Missing destination or authorization blocks sending."
+        },
+        {
+          "start": 1241,
+          "end": 1444,
+          "quote": "After an authorized send, keep the publisher response. Verify publication separately. If delivery is uncertain, check that response and destination state before retrying; avoid creating a duplicate post."
+        },
+        {
+          "start": 1446,
+          "end": 1695,
+          "quote": "Measure one business-relevant objective with consistent definitions and observation windows. Missing conversions stay unknown. Compare compatible account and audience cohorts before proposing a change. The example supplies no reach or sales figures."
+        }
+      ]
+    }
+  ],
+  "confirmations": []
+}

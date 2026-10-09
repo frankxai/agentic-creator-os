@@ -6,6 +6,13 @@
 
 Reusable skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.
 
+Agentic Creator OS (ACOS), by GenCreator, is the reusable orchestration project.
+[GenCreator Skills](https://github.com/frankxai/gencreator-skills) distributes
+portable creator workflow packs. The GenCreator application owns creator identity,
+source-grounded missions, review and durable customer state. See
+[platform ownership and distribution](docs/gencreator-platform-and-distribution.md)
+for the relationship and current marketplace limits.
+
 [Quick start](QUICKSTART.md) · [Project instructions](CLAUDE.md) · [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/frankxai/agentic-creator-os/issues)
 
 </div>
@@ -29,12 +36,18 @@ The repository currently contains:
 
 | Surface | Count | Definition |
 |---|---:|---|
-| Non-empty skill modules | 175 | Non-empty `.claude/skills/**/SKILL.md` files |
+| Non-empty skill modules | 182 | Non-empty `.claude/skills/**/SKILL.md` files |
 | Empty skill placeholders | 5 | Tracked `SKILL.md` paths with no content; not counted as modules |
-| Top-level slash commands | 85 | `.claude/commands/*.md`, excluding the directory context file |
+| Top-level slash commands | 99 | `.claude/commands/*.md`, excluding the directory context file |
 | Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
-| Activation rules | 32 | Entries in `.claude/skill-rules.json` |
+| Activation rules | 39 | Entries in `.claude/skill-rules.json` |
+
+Creator entry: `/gencreator <goal>` or `/gc <goal>` in Claude Code. Stage
+shortcuts: `/gc-strategy`, `/gc-edition`, `/gc-review`, `/gc-deliver`, `/gc-learn`
+and `/gc-recover`. Native Codex skill entries use `$gencreator`, `$gc` or the
+corresponding `$gc-*` name after discovery. See
+[activation and team execution](docs/gencreator-social-activation.md).
 
 These numbers are generated from the tree. `npm run verify:public-surface` fails if the counts, version metadata, install smoke test, or public license and marketplace statements drift.
 

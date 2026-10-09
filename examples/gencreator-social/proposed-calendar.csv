@@ -1,0 +1,7 @@
+date,timezone,track,work,source,status,dependency,fallback
+2026-10-12,Europe/Amsterdam,all,Verify sources and select first owned edition,builders.json|artists.json|teams.json,proposed,CreatorPack and Mission owner,Keep unknown owner references explicit
+2026-10-13,Europe/Amsterdam,selected track,Revise post or carousel and complete newsletter,selected edition,proposed,Current source and voice review,Preserve drafts for review
+2026-10-14,Europe/Amsterdam,selected track,Produce video from finished script,selected edition,proposed,Original or licensed assets and production access,Retain script and finish text packet
+2026-10-15,Europe/Amsterdam,selected track,Prepare unsent destination packet,selected edition,proposed,Exact destination and current revision review,Export locally without posting
+2026-10-16,Europe/Amsterdam,selected track,Record supplied observations if delivered,delivery receipt,conditional,Verified delivery and compatible native metrics,Record unknown observations
+2026-10-17,Europe/Amsterdam,selected track,Recover and revise from files,verified packet,proposed,Original packet preserved,Identify missing receipt or input
