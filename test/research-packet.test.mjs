@@ -18,6 +18,26 @@ const fixture = () => ({
 const invalid = (packet, pattern) => { const r = validateResearchPacket(packet); assert.equal(r.valid, false); assert.match(r.errors.join('\n'), pattern); };
 
 test('source-review declarations pass without pretending an experiment ran', () => assert.deepEqual(validateResearchPacket(fixture()), { valid: true, errors: [] }));
+test('source retrieval can preserve observed date precision without inventing a clock time', () => {
+  const p = fixture(); p.sources[0].retrieved_at = '2026-10-09'; p.sources[0].retrieval_precision = 'date';
+  assert.equal(validateResearchPacket(p).valid, true);
+  const q = fixture(); q.sources[0].retrieval_precision = 'timestamp';
+  assert.equal(validateResearchPacket(q).valid, true);
+});
+test('retrieval precision must match the observed value and remain a known enum', () => {
+  for (const [value, precision] of [
+    ['2026-10-09', undefined], ['2026-10-09', 'timestamp'],
+    ['2026-10-09T20:00:00Z', 'date'], ['2026-10-09', 'minute'], ['2026-10-09', null],
+  ]) {
+    const p = fixture(); p.sources[0].retrieved_at = value;
+    if (precision !== undefined) p.sources[0].retrieval_precision = precision;
+    invalid(p, /retrieval_precision/);
+  }
+});
+test('date-precision retrieval rejects impossible calendar dates', () => {
+  const p = fixture(); p.sources[0].retrieved_at = '2026-02-30'; p.sources[0].retrieval_precision = 'date';
+  invalid(p, /retrieved_at: expected YYYY-MM-DD/);
+});
 test('unsupported and contextual-only facts cannot promote', () => {
   const p = fixture(); p.claims[0].verdict = 'blocked'; invalid(p, /unsupported claim/);
   p.claims[0].verdict = 'pass'; p.claims[0].references[0].support = 'contextual'; invalid(p, /fact requires direct/);

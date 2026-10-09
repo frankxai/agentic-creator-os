@@ -58,7 +58,9 @@ export function validateResearchPacket(packet) {
     check(['documentation', 'paper', 'repository', 'release', 'dataset', 'official_video', 'observation', 'secondary'].includes(source.kind), `${p}.kind: unknown kind`);
     check(['ga', 'preview', 'beta', 'experimental', 'proposed', 'unknown', 'not_applicable'].includes(source.availability), `${p}.availability: unknown availability`);
     for (const key of ['published_at', 'updated_at']) check(source[key] === null || date(source[key]), `${p}.${key}: expected date or null`);
-    check(timestamp(source.retrieved_at), `${p}.retrieved_at: expected ISO timestamp`);
+    const retrievalPrecision = Object.hasOwn(source, 'retrieval_precision') ? source.retrieval_precision : 'timestamp';
+    check(['date', 'timestamp'].includes(retrievalPrecision), `${p}.retrieval_precision: expected date or timestamp`);
+    check(retrievalPrecision === 'date' ? date(source.retrieved_at) : timestamp(source.retrieved_at), `${p}.retrieved_at: expected ${retrievalPrecision === 'date' ? 'YYYY-MM-DD' : 'ISO timestamp'} matching retrieval_precision`);
     if (promoted) check(source.reviewed === true, `${p}.reviewed: source was not inspected`);
     else check(typeof source.reviewed === 'boolean', `${p}.reviewed: expected boolean`);
     strings(source.limitations, `${p}.limitations`);
