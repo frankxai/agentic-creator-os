@@ -29,12 +29,12 @@
     "higgsfield"
   ],
   "stats": {
-    "nonEmptySkillModules": 175,
+    "nonEmptySkillModules": 181,
     "emptySkillPlaceholders": 5,
-    "topLevelCommands": 85,
+    "topLevelCommands": 91,
     "topLevelAgents": 81,
     "installableShellHooks": 9,
-    "activationRules": 32,
+    "activationRules": 38,
     "verifiedBy": "npm run verify:public-surface"
   }
 }
