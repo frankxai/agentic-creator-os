@@ -6,22 +6,21 @@
     "ChrisWiles/claude-code-showcase — hook lifecycle patterns",
     "decider/claude-hooks — enforcement types"
   ],
-  "_updated": "2026-02-20",
-
+  "_updated": "2026-10-09",
   "hooks": {
     "SessionStart": [
       {
         "name": "acos-context-loader",
-        "description": "Load ACOS v11 with model routing and skill auto-activation",
+        "description": "Point to repository guidance; does not certify loaded capabilities",
         "type": "command",
-        "command": "echo 'ACOS v11 loaded | Model Routing ON | Skill Auto-Activation ON | Safety Hooks ON'",
+        "command": "echo 'ACOS guidance available: read AGENTS.md and CLAUDE.md; verify actual hook adoption in your host.'",
         "once": true
       },
       {
         "name": "skill-rules-loader",
         "description": "Load skill-rules.json activation rules",
         "type": "command",
-        "command": "test -f .claude/skill-rules.json && echo 'Skill rules loaded: activation patterns for auto-loading skills' || echo 'skill-rules.json missing'",
+        "command": "test -f .claude/skill-rules.json && echo 'Skill registry present; skill bodies load only when read.' || echo 'skill-rules.json missing'",
         "once": true
       },
       {
@@ -32,16 +31,14 @@
         "once": true
       }
     ],
-
     "UserPromptSubmit": [
       {
         "name": "skill-activation-prompt",
-        "description": "Analyze prompt and suggest skills with confidence scoring",
+        "description": "Recommend up to three skills from the canonical registry; no prompt persistence or agent spawn",
         "type": "command",
-        "command": "cd .claude/hooks && cat | npx tsx skill-activation-prompt.ts 2>/dev/null || echo 'SKILL SUGGESTIONS:\\n\\nConsider: dev'"
+        "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/hooks/skill-activation-prompt.js\""
       }
     ],
-
     "PreToolUse": [
       {
         "name": "brand-voice-check",
@@ -58,7 +55,6 @@
         "command": "echo 'Model routing: Check task complexity for Haiku/Sonnet/Opus selection'"
       }
     ],
-
     "PostToolUse": [
       {
         "name": "context-budget-tracker",
@@ -68,7 +64,6 @@
         "command": "cd .claude/hooks && TOOL_NAME=$TOOL_NAME npx tsx context-budget-tracker.ts 2>/dev/null || echo 'Context checkpoint: Monitor drift.'"
       }
     ],
-
     "Notification": [
       {
         "name": "skill-suggestion",
@@ -78,7 +73,6 @@
       }
     ]
   },
-
   "enforcement_rules": {
     "banned_phrases": [
       "soul-aligned",
@@ -92,12 +86,21 @@
       "utilize"
     ],
     "required_patterns": {
-      "blog_posts": ["TL;DR in first 100 words", "Question-based H2s", "FAQ section"],
-      "social_posts": ["Hook in first line", "CTA at end"],
-      "code_changes": ["No console.log in production", "Type annotations required"]
+      "blog_posts": [
+        "TL;DR in first 100 words",
+        "Question-based H2s",
+        "FAQ section"
+      ],
+      "social_posts": [
+        "Hook in first line",
+        "CTA at end"
+      ],
+      "code_changes": [
+        "No console.log in production",
+        "Type annotations required"
+      ]
     }
   },
-
   "context_engineering": {
     "quality_curve": {
       "peak": "0-30%",

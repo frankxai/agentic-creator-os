@@ -130,10 +130,10 @@ function verifyVersion(canonical) {
 function verifyClaims(canonical, measured) {
   const metrics = {
     nonEmptySkillModules: {
-      expected: 175,
-      readme: 'Non-empty skill modules | 175',
-      quickstart: '175 non-empty skill modules',
-      claude: '175 Non-empty Skill Modules',
+      expected: 181,
+      readme: 'Non-empty skill modules | 181',
+      quickstart: '181 non-empty skill modules',
+      claude: '181 Non-empty Skill Modules',
     },
     emptySkillPlaceholders: {
       expected: 5,
@@ -142,10 +142,10 @@ function verifyClaims(canonical, measured) {
       claude: '5 tracked empty placeholders',
     },
     topLevelCommands: {
-      expected: 85,
-      readme: 'Top-level slash commands | 85',
-      quickstart: '85 top-level slash-command definitions',
-      claude: '85 Top-level Commands',
+      expected: 91,
+      readme: 'Top-level slash commands | 91',
+      quickstart: '91 top-level slash-command definitions',
+      claude: '91 Top-level Commands',
     },
     topLevelAgents: {
       expected: 81,
@@ -160,10 +160,10 @@ function verifyClaims(canonical, measured) {
       claude: '9 Installable Shell Hooks',
     },
     activationRules: {
-      expected: 32,
-      readme: 'Activation rules | 32',
-      quickstart: '32 activation rules',
-      claude: 'provides 32 activation rules',
+      expected: 38,
+      readme: 'Activation rules | 38',
+      quickstart: '38 activation rules',
+      claude: 'provides 38 activation rules',
     },
   }
 
@@ -409,6 +409,13 @@ function smokeInstall(canonical, measured, symlinkFixtureOnly = false) {
     assert.equal(installedShellHooks, measured.installableShellHooks)
     assert.ok(existsSync(join(claudeHome, 'skill-rules.json')))
     assert.ok(existsSync(join(claudeHome, 'acos', 'hooks.json')))
+    assert.ok(existsSync(join(claudeHome, 'acos', 'hooks', 'activation-core.cjs')))
+    const activation = JSON.parse(execFileSync(process.execPath,
+      [join(claudeHome, 'acos', 'hooks', 'skill-activation-prompt.js')], {
+        cwd: tempRoot, env: { ...process.env, CLAUDE_PROJECT_DIR: tempRoot },
+        input: JSON.stringify({ prompt: '/gencreator-review' }), encoding: 'utf8',
+      }))
+    assert.match(activation.hookSpecificOutput.additionalContext, /gencreator-review/)
 
     const state = readJson(join(claudeHome, 'acos', 'state.json'))
     assert.equal(state.version, canonical.packageJson.version)

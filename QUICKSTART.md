@@ -76,12 +76,12 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 
 `npm run verify:public-surface` currently measures:
 
-- 175 non-empty skill modules;
+- 181 non-empty skill modules;
 - 5 empty skill placeholders;
-- 85 top-level slash-command definitions;
+- 91 top-level slash-command definitions;
 - 81 top-level agent profiles;
 - 9 installable shell hooks;
-- 32 activation rules.
+- 38 activation rules.
 
 The definitions for each count are documented in [README.md](README.md).
 

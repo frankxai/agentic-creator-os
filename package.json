@@ -55,7 +55,24 @@
     "install.sh",
     "CLAUDE.md",
     "CREATOR_NEEDS.md",
-    "README.md"
+    "README.md",
+    ".claude/skill-rules.json",
+    ".agents/skills/gencreator-social/SKILL.md",
+    "AGENTS.md",
+    ".claude/hooks/skill-activation-prompt.js",
+    ".claude/hooks/skill-activation-prompt.sh",
+    ".claude/skills/gencreator-strategy/SKILL.md",
+    ".claude/commands/gencreator-strategy.md",
+    ".claude/skills/gencreator-edition/SKILL.md",
+    ".claude/commands/gencreator-edition.md",
+    ".claude/skills/gencreator-review/SKILL.md",
+    ".claude/commands/gencreator-review.md",
+    ".claude/skills/gencreator-deliver/SKILL.md",
+    ".claude/commands/gencreator-deliver.md",
+    ".claude/skills/gencreator-learn/SKILL.md",
+    ".claude/commands/gencreator-learn.md",
+    ".claude/skills/gencreator-recover/SKILL.md",
+    ".claude/commands/gencreator-recover.md"
   ],
   "workspaces": [
     "mcp-servers/*"
@@ -86,7 +103,10 @@
     "agents:init": "node scripts/agent-os-init.mjs --name",
     "upstreams:watch": "node scripts/upstream-watch.mjs",
     "estate:audit": "node scripts/estate-audit.mjs",
-    "test": "npm run build:all && node --test test/*.test.mjs"
+    "test": "npm run build:all && node --test test/*.test.mjs",
+    "social:activate": "node tools/gencreator-social/activate.mjs",
+    "social:propose": "node tools/gencreator-social/propose.mjs",
+    "test:social-activation": "node --test test/social-activation.test.mjs test/social-proactive.test.mjs"
   },
   "devDependencies": {
     "typescript": "5.6.3"

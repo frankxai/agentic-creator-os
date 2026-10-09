@@ -235,6 +235,12 @@ preflight_claude_code() {
         [ -f "$source" ] || continue
         check_claude_target "$source" "$claude_home/acos/hooks/$(basename "$source")"
     done
+    # Explicit reviewed JavaScript dependencies for the activation shell hook.
+    check_claude_source_path "$PROJECT_DIR/tools/gencreator-social"
+    [ -f "$PROJECT_DIR/.claude/hooks/skill-activation-prompt.js" ] || error "Activation wrapper missing; no files were copied."
+    [ -f "$PROJECT_DIR/tools/gencreator-social/activation-core.cjs" ] || error "Activation resolver missing; no files were copied."
+    check_claude_target "$PROJECT_DIR/.claude/hooks/skill-activation-prompt.js" "$claude_home/acos/hooks/skill-activation-prompt.js"
+    check_claude_target "$PROJECT_DIR/tools/gencreator-social/activation-core.cjs" "$claude_home/acos/hooks/activation-core.cjs"
     if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
         check_claude_target "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
     fi
@@ -273,7 +279,7 @@ install_claude_code() {
     # Skill rules (auto-activation)
     if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
         cp -n "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
-        success "Installed 22 auto-activation rules"
+        success "Installed canonical skill activation registry (recommendations only)"
     fi
 
     # Commands (slash commands — Claude Code only)
@@ -306,6 +312,8 @@ install_claude_code() {
             cp -n "$hook" "$claude_home/acos/hooks/"
             chmod +x "$claude_home/acos/hooks/$(basename "$hook")"
         done
+        cp -n "$PROJECT_DIR/.claude/hooks/skill-activation-prompt.js" "$claude_home/acos/hooks/skill-activation-prompt.js"
+        cp -n "$PROJECT_DIR/tools/gencreator-social/activation-core.cjs" "$claude_home/acos/hooks/activation-core.cjs"
         success "Installed v10 safety hooks (circuit-breaker, audit-trail, self-modify-gate)"
     fi
 
