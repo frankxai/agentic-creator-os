@@ -6,6 +6,13 @@
 
 Reusable skills, commands, agent profiles, and local safety tooling for AI-assisted creative work.
 
+Agentic Creator OS (ACOS), by GenCreator, is the reusable orchestration project.
+[GenCreator Skills](https://github.com/frankxai/gencreator-skills) distributes
+portable creator workflow packs. The GenCreator application owns creator identity,
+source-grounded missions, review and durable customer state. See
+[platform ownership and distribution](docs/gencreator-platform-and-distribution.md)
+for the relationship and current marketplace limits.
+
 [Quick start](QUICKSTART.md) · [Project instructions](CLAUDE.md) · [Contributing](CONTRIBUTING.md) · [Issues](https://github.com/frankxai/agentic-creator-os/issues)
 
 </div>
