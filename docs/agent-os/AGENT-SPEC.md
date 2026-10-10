@@ -69,3 +69,29 @@ Grades: A ≥ 85, B ≥ 70, C ≥ 50, D below.
 - Every tool by default.
 - Two agents with one name in different scopes; the router picks one silently.
 - Hierarchies restated in several files (queen, council, swarm) instead of one source.
+
+## Evals
+
+Cases live in `evals/agents/<agent>/<case>/`: a `prompt.md` (frontmatter
+`max_turns`, `allowed_tools`, then the prompt) and `graders/*.md`, one criterion
+each (`type: llm`, `weight`). `scripts/eval-run.mjs` runs them:
+
+- **Fresh session per case.** `claude -p <prompt> --max-turns N --output-format json`
+  in a temp directory whose `.claude/agents` holds the compiled agents. A running
+  session caches an agent at first load, so only a fresh one tests the current text.
+- **Cross-family grading.** Each criterion goes to `codex exec --sandbox read-only`
+  with a `{pass, evidence}` verdict schema. Without Codex it falls back to Claude and
+  the line is marked `grader: same-family`.
+- **Log.** One JSON line per run appends to `evals/agents/results.jsonl`: agent, case,
+  a source hash of spec + modules + kernel, grader family, per-criterion verdicts,
+  score (weighted, 0..1), transcript path. `--render` regenerates the table in
+  `RESULTS.md`; the hand-written rows stay under "Manual runs".
+- **Regression rule.** `checkRegression(lastPassing, next)` fails when the new score is
+  lower than the latest passing run (score at least 0.75).
+- **Flags.** `--agent`, `--case`, `--dry-run` (prints frontmatter, graders, and exact
+  commands; calls nothing), `--grader codex|claude`, `--out <dir>`, `--render`,
+  `--validate`.
+
+Real runs spend API credits, so they run only by hand or from an enabled routine.
+CI runs `--validate` (every case has a prompt with frontmatter and at least one
+grader) and `test/eval-run.test.mjs`. It makes no model calls.

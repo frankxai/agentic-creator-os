@@ -32,6 +32,8 @@ on:
       - 'scripts/lib/**'
       - 'agent-os/upstreams.json'
       - 'test/agent-os.test.mjs'
+      - 'scripts/eval-run.mjs'
+      - 'test/eval-run.test.mjs'
       - 'test/mesh.test.mjs'
       - 'scripts/visual-check.mjs'
       - 'test/visual.test.mjs'
@@ -71,6 +73,11 @@ jobs:
 
       - name: Agent OS and mesh tests
         run: node --test test/agent-os.test.mjs test/mesh.test.mjs
+
+      - name: Eval cases are structurally valid (prompt, frontmatter, graders; no model calls)
+        run: |
+          node scripts/eval-run.mjs --validate
+          node --test test/eval-run.test.mjs
 
       - name: Quality ratchet (scorecard in the run summary)
         # 72 = the 2026-10-04 baseline for this repo's own skills, agents, and commands.
