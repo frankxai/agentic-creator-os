@@ -17,7 +17,6 @@ Welcome to the Agentic Creator OS documentation. This guide will help you unders
 
 | Document | Description |
 |----------|-------------|
-| [ARCHITECTURE.md](../ARCHITECTURE.md) | Complete 7-pillar system design |
 | [SKILL_ARCHITECTURE.md](./SKILL_ARCHITECTURE.md) | Progressive disclosure skill system |
 | [ENHANCEMENT_SYSTEM.md](./ENHANCEMENT_SYSTEM.md) | Pattern pulling from external repos |
 
@@ -87,9 +86,9 @@ Deploy department configurations and shared workflows for collaborative AI-enhan
 
 ## Version
 
-**Current**: 3.0.0 (January 2026)
+**Current**: 11.0.0
 
-See [CHANGELOG.md](../CHANGELOG.md) for version history.
+See [archived CHANGELOG.md](./archive/CHANGELOG.md) for version history.
 
 ---
 
