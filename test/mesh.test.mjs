@@ -4,11 +4,14 @@
 // network, a secret, or another machine.
 import assert from 'node:assert/strict';
 import { execFileSync, spawn, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, utimesSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
+import test, { after } from 'node:test';
 import { fileURLToPath } from 'node:url';
+
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const script = (name) => path.join(root, 'scripts', name);
@@ -17,6 +20,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function fixture() {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-mesh-'));
+  made.push(dir);
   const receipts = path.join(dir, 'dispatch');
   const pulse = path.join(dir, 'pulse.jsonl');
   writeFileSync(pulse, JSON.stringify({ ts: new Date().toISOString(), status: 'ok', totals: { loadableAverage: 80, deadSkills: 1, shadowedNames: 2 } }) + '\n');
@@ -191,6 +195,7 @@ test('registry values never reach a shell: an unsafe CI repo is refused before g
 test('an npm Windows shim resolves to its JavaScript entry (background output is kept)', async () => {
   const { npmShimEntry } = await import(new URL('../scripts/lib/mesh-core.mjs', import.meta.url));
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-shim-'));
+  made.push(dir);
   const entryDir = path.join(dir, 'node_modules', '@x', 'tool', 'bin');
   execFileSync(process.execPath, ['-e', `require('fs').mkdirSync(${JSON.stringify(entryDir)}, { recursive: true })`]);
   writeFileSync(path.join(entryDir, 'tool.js'), 'console.log(1)\n');
@@ -219,6 +224,7 @@ test('the reusable audit action runs the scanner on the calling repository witho
 
 test('a new adopter instance compiles from the template, out of tree', () => {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-adopt-'));
+  made.push(dir);
   const org = path.join(root, 'instances', '_template', 'agent-os', 'org', 'domain-queens.example.json');
   execFileSync(process.execPath, [script('org-import.mjs'), '--org', org, '--instance', '_template', '--out', path.join(dir, 'specs')], { encoding: 'utf8' });
   execFileSync(process.execPath, [script('agent-compile.mjs'), '--instance', '_template', '--instance-specs', path.join(dir, 'specs'), '--out', path.join(dir, 'agents')], { encoding: 'utf8' });
@@ -242,7 +248,7 @@ test('ids that become path segments are refused before any file is written', () 
 });
 
 // Every id that names a file must be a plain id; the same hostile set is refused at each entry point.
-const HOSTILE_IDS = ['../x', '..', 'a/b', 'a\\b', '', 'Upper'];
+const HOSTILE_IDS = ['../x', '..', 'a/b', 'a\\b', '', 'Upper', 'http://evil.com', 'malicious.com', '<script>'];
 
 test('mesh-dispatch refuses every hostile --member before a receipt is written', () => {
   for (const bad of HOSTILE_IDS) {
@@ -257,7 +263,9 @@ test('mesh-dispatch refuses every hostile --member before a receipt is written',
 test('org-import refuses every hostile --instance and domain before a spec is written', () => {
   const org = path.join(root, 'instances', '_template', 'agent-os', 'org', 'domain-queens.example.json');
   for (const bad of HOSTILE_IDS) {
-    const out = path.join(mkdtempSync(path.join(tmpdir(), 'acos-org-')), 'specs');
+    const tmp = mkdtempSync(path.join(tmpdir(), 'acos-org-'));
+    made.push(tmp);
+    const out = path.join(tmp, 'specs');
     const r = node([script('org-import.mjs'), '--org', org, '--instance', bad, '--out', out]);
     assert.equal(r.status, 2, `--instance ${JSON.stringify(bad)}: ${r.stderr}`);
     assert.equal(existsSync(out), false, `--instance ${JSON.stringify(bad)} wrote specs`);
@@ -265,6 +273,7 @@ test('org-import refuses every hostile --instance and domain before a spec is wr
   const base = JSON.parse(readFileSync(org, 'utf8'));
   for (const bad of HOSTILE_IDS) {
     const dir = mkdtempSync(path.join(tmpdir(), 'acos-org-'));
+    made.push(dir);
     const hostile = structuredClone(base);
     hostile.domains[0].domain = bad;
     const orgPath = path.join(dir, 'org.json');

@@ -4,10 +4,13 @@
 // The quality criteria mirror `mcp-doctor score` (frankxai/mcp-doctor, src/checker/score.ts),
 // plus openWorldHint, which the score does not grade but agents rely on.
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, readdirSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
+import test, { after } from 'node:test';
+
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); });
 import { fileURLToPath } from 'node:url';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
@@ -95,6 +98,7 @@ async function connect(name) {
   assert.ok(existsSync(entry), `${name} has no build/index.js; run npm run build:all`);
   // A scratch cwd keeps servers that create local state (database: acos.db) out of the repo.
   const cwd = mkdtempSync(path.join(tmpdir(), `acos-${name}-`));
+  made.push(cwd);
   const transport = new StdioClientTransport({ command: process.execPath, args: [entry], cwd, stderr: 'pipe' });
   let stderr = '';
   transport.stderr?.on('data', (chunk) => { stderr += chunk; });

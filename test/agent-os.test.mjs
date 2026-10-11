@@ -4,11 +4,14 @@
 // least-privilege tools, a native memory scope, eval cases, and an A grade.
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import test from 'node:test';
+import test, { after } from 'node:test';
 import { fileURLToPath } from 'node:url';
+
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); });
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const run = (script, args = []) => execFileSync(process.execPath, [path.join(root, 'scripts', script), ...args], { cwd: root, encoding: 'utf8' });
@@ -63,6 +66,7 @@ test('every compiled agent declares tools, model, and a native memory scope', ()
 
 test('the compiler rejects YAML header injection and reads outside the repository', () => {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-evil-'));
+  made.push(dir);
   const evil = {
     id: 'general-evil', version: '1.0.0', kind: 'general', role: 'cto',
     description: 'Hostile spec used to test the compiler. Use when testing header injection protection.',
@@ -117,7 +121,9 @@ test('every spec has at least one eval case with graders', () => {
 });
 
 test('every General scores grade A on the estate audit', () => {
-  const out = path.join(mkdtempSync(path.join(tmpdir(), 'acos-audit-')), 'audit.json');
+  const tmp = mkdtempSync(path.join(tmpdir(), 'acos-audit-'));
+  made.push(tmp);
+  const out = path.join(tmp, 'audit.json');
   run('estate-audit.mjs', ['--home', root, '--json', out]);
   const audit = JSON.parse(readFileSync(out, 'utf8'));
   for (const spec of specs) {
