@@ -7,6 +7,7 @@ import * as Instagram from "./social/instagram.js";
 import * as Farcaster from "./social/farcaster.js";
 import * as Analytics from "./social/analytics.js";
 import * as Scheduler from "./social/scheduler.js";
+import * as Producer from "./social/producer.js";
 
 const server = new McpServer({
   name: "creator",
@@ -719,6 +720,37 @@ server.registerTool(
     annotations: LOCAL_OVERWRITE
   },
   async (params) => social(await Scheduler.cancelScheduledContent(params.contentId))
+);
+
+server.registerTool(
+  "creator_generate_social",
+  {
+    title: "Generate social workflow (GenCreator Producer)",
+    description: "Generate social media drafts for a source document using exact revision checks and durable unsent packet output.",
+    inputSchema: Producer.generateSocialWorkflowSchema,
+    outputSchema: {
+      simulated,
+      success: z.boolean(),
+      packet: z.object({}).passthrough().optional().describe("Durable unsent packet")
+    },
+    annotations: LOCAL_CREATE
+  },
+  async (params) => guarded(async () => social(await Producer.generateSocialWorkflow(params)))
+);
+
+server.registerTool(
+  "creator_get_unsent_packet",
+  {
+    title: "Get unsent packet",
+    description: "Fetch a durable unsent social packet by packet ID for draft recovery and workflow inspection.",
+    inputSchema: { packetId: id().describe("Packet ID") },
+    outputSchema: { simulated, success: z.boolean(), packet: z.object({}).passthrough().optional().describe("Durable unsent packet") },
+    annotations: LOCAL_READ
+  },
+  async (params) => {
+    const packet = Producer.getUnsentPacket(params.packetId);
+    return packet ? ok({ simulated: true, success: true, packet }) : fail(`Unsent packet not found: ${params.packetId}`);
+  }
 );
 
 server.registerTool(
