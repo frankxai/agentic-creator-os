@@ -286,3 +286,70 @@ test('org-import refuses every hostile --instance and domain before a spec is wr
     assert.deepEqual(readdirSync(dir), ['org.json'], `domain ${JSON.stringify(bad)} wrote outside specs`);
   }
 });
+
+test('cross-family review selects engine based on free RAM and filters risky paths when files > 300', async () => {
+  const { selectEngine, filterRiskyPaths, buildReviewComment } = await import(new URL('../scripts/cross-family-review.mjs', import.meta.url));
+
+  assert.deepEqual(selectEngine(3.0), { engine: 'codex', mode: 'lean-local' });
+  assert.deepEqual(selectEngine(2.5), { engine: 'codex', mode: 'lean-local' });
+  assert.deepEqual(selectEngine(2.0), { engine: 'grok', mode: 'plan-no-tools' });
+
+  const smallFiles = Array.from({ length: 10 }, (_, i) => `file${i}.txt`);
+  assert.equal(filterRiskyPaths(smallFiles).length, 10);
+
+  const largeFiles = Array.from({ length: 350 }, (_, i) => (i < 5 ? `.github/workflows/w${i}.yml` : `docs/doc${i}.md`));
+  const filtered = filterRiskyPaths(largeFiles);
+  assert.ok(filtered.length < 350, 'filtered list should be smaller than 350');
+  assert.ok(filtered.some((f) => f.startsWith('.github/')), 'should keep risky paths like .github/');
+
+  const comment = buildReviewComment({ verdict: 'PASSED', sha: 'abc1234', engine: { engine: 'codex', mode: 'lean-local' } });
+  assert.equal(comment.header, 'CROSS-FAMILY REVIEW PASSED head=abc1234');
+});
+
+test('cross-family review CLI executes dry run and writes receipt when run', async () => {
+  const dir = mkdtempSync(path.join(tmpdir(), 'acos-review-'));
+  const receiptsDir = path.join(dir, 'dispatch');
+  const job = path.join(dir, 'job.json');
+  writeFileSync(job, JSON.stringify({ repo: 'frankxai/agentic-creator-os', pr: 98, sha: 'd8ca548', verdict: 'PASSED' }));
+
+  const dry = node([script('cross-family-review.mjs'), '--job', job, '--dry-run', '--json']);
+  assert.equal(dry.status, 0, dry.stderr);
+  const dryOut = JSON.parse(dry.stdout);
+  assert.equal(dryOut.member, 'review');
+  assert.equal(dryOut.verdict, 'PASSED');
+  assert.equal(dryOut.sha, 'd8ca548');
+  assert.equal(dryOut.header, 'CROSS-FAMILY REVIEW PASSED head=d8ca548');
+
+  const run = node([script('cross-family-review.mjs'), '--job', job, '--json'], { env: { ...process.env, ACOS_RECEIPTS_DIR: receiptsDir } });
+  assert.equal(run.status, 0, run.stderr);
+  const runOut = JSON.parse(run.stdout);
+  assert.ok(runOut.receiptPath);
+  assert.ok(existsSync(runOut.receiptPath));
+  const receipt = JSON.parse(readFileSync(runOut.receiptPath, 'utf8'));
+  assert.equal(receipt.header, 'CROSS-FAMILY REVIEW PASSED head=d8ca548');
+});
+
+test('dispatching review mesh member runs cross-family review via mesh-dispatch', async () => {
+  const { meshPath, job } = fixture();
+  const mesh = JSON.parse(readFileSync(meshPath, 'utf8'));
+  mesh.members.push({
+    id: 'review',
+    kind: 'model-cli',
+    probe: { bin: 'node' },
+    run: { mode: 'argv', argv: ['node', script('cross-family-review.mjs'), '--job', '{job}', '--repo', '{repo}'], local: true, minRamGiB: 0.01 }
+  });
+  writeFileSync(meshPath, JSON.stringify(mesh));
+
+  const reviewJob = path.join(path.dirname(job), 'review-job.json');
+  writeFileSync(reviewJob, JSON.stringify({ repo: 'frankxai/agentic-creator-os', pr: 98, sha: 'd8ca548', verdict: 'PASSED' }));
+
+  const r = node([script('mesh-dispatch.mjs'), '--mesh', meshPath, '--member', 'review', '--job', reviewJob, '--repo', 'frankxai/agentic-creator-os', '--json']);
+  assert.equal(r.status, 0, r.stderr);
+  const receipt = JSON.parse(r.stdout);
+  assert.equal(receipt.member, 'review');
+  assert.equal(receipt.status, 'started');
+
+  const settledReceipt = await settled(path.join(path.dirname(receipt.job), 'dispatch', `${receipt.id}.json`));
+  assert.equal(settledReceipt.status, 'succeeded');
+  assert.equal(settledReceipt.exitCode, 0);
+});

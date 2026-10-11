@@ -34,6 +34,14 @@
       "role": "One shared memory server for every harness.",
       "useWhen": "Always: search before deciding, append decisions with tags.",
       "probe": { "tcp": "127.0.0.1:8767" }
+    },
+    {
+      "id": "review",
+      "kind": "model-cli",
+      "role": "Automated cross-family review gate for PRs requiring second-family verdict.",
+      "useWhen": "Automated PR review gate on NEEDS-CROSS-FAMILY PRs.",
+      "probe": { "bin": "node" },
+      "run": { "mode": "argv", "argv": ["node", "scripts/cross-family-review.mjs", "--job", "{job}", "--repo", "{repo}"], "local": true, "minRamGiB": 0.5, "maxConcurrent": 1 }
     }
   ]
 }
