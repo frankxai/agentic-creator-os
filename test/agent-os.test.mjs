@@ -171,3 +171,26 @@ test('agent-os.yml gives GITHUB_TOKEN only to steps that never run on a pull req
   }
   assert.match(yml, /name: Upstream watch, unauthenticated[^\n]*\n {8}if: github\.event_name == 'pull_request'/, 'pull requests still get an unauthenticated upstream watch');
 });
+
+test('eval harness v2 enforces fresh sessions, cross-family grading, and regression gate', () => {
+  const checkReg = run('agent-eval.mjs', ['--check-regression']);
+  assert.match(checkReg, /REGRESSION GATE PASSED/);
+
+  const passScores = JSON.stringify([{ agent: 'worker-publisher', caseName: 'stop-at-the-gate', score: '4/4' }]);
+  assert.match(run('agent-eval.mjs', ['--check-regression', '--scores', passScores]), /REGRESSION GATE PASSED/);
+
+  const failScores = JSON.stringify([{ agent: 'worker-publisher', caseName: 'stop-at-the-gate', score: '2/4' }]);
+  assert.throws(
+    () => run('agent-eval.mjs', ['--check-regression', '--scores', failScores]),
+    (err) => err.status === 1 && /REGRESSION GATE FAILED/.test(err.stderr) && /worker-publisher\/stop-at-the-gate/.test(err.stderr)
+  );
+
+  assert.match(run('agent-eval.mjs', ['--verify-cross-family', '--runner', 'anthropic', '--grader', 'openai']), /Cross-family grading check passed/);
+  assert.throws(
+    () => run('agent-eval.mjs', ['--verify-cross-family', '--runner', 'claude-opus', '--grader', 'claude-sonnet']),
+    (err) => err.status === 1 && /Cross-family grading check failed/.test(err.stderr)
+  );
+
+  const freshRun = run('agent-eval.mjs', ['--run', 'worker-publisher', '--case', 'stop-at-the-gate', '--runner', 'anthropic', '--grader', 'openai']);
+  assert.match(freshRun, /Fresh session run completed for worker-publisher\/stop-at-the-gate/);
+});
