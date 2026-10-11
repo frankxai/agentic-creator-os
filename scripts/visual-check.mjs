@@ -24,13 +24,13 @@
  * blocking finding exists, 2 when the browser or input failed.
  */
 import { spawn } from 'node:child_process'
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync, existsSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync, existsSync, readFileSync, statSync } from 'node:fs'
 import { tmpdir, platform } from 'node:os'
 import { join, resolve } from 'node:path'
 import { onPath } from './lib/mesh-core.mjs'
 
 const args = process.argv.slice(2)
-const VALUE_FLAGS = new Set(['--url', '--out', '--widths', '--themes', '--browser'])
+const VALUE_FLAGS = new Set(['--url', '--out', '--widths', '--themes', '--browser', '--prior'])
 for (let i = 0; i < args.length; i++) {
   if (VALUE_FLAGS.has(args[i]) && (args[i + 1] === undefined || args[i + 1].startsWith('--'))) { console.error(`✗ ${args[i]} needs a value`); process.exit(2) }
 }
@@ -48,6 +48,7 @@ const REDUCED = args.includes('--reduced-motion')
 const FULL = args.includes('--full')
 const GATE = args.includes('--gate')
 const JSON_OUT = args.includes('--json')
+const PRIOR = one('--prior', null)
 if (!URLS.length) { console.error('✗ usage: visual-check.mjs --url <url> [--out dir] [--widths 375,768,1440] [--themes light,dark] [--gate]'); process.exit(2) }
 for (const u of URLS) { if (!/^(https?|file):\/\//.test(u)) { console.error(`✗ not an http(s) or file URL: ${u}`); process.exit(2) } }
 
@@ -141,17 +142,119 @@ try{new PerformanceObserver(function(l){const es=l.getEntries();const e=es[es.le
 
 const PROBE = `(() => {
   const d = document.documentElement;
-  const named = (e) => (e.innerText || '').trim() || e.getAttribute('aria-label') || e.getAttribute('aria-labelledby') || e.getAttribute('title') || e.querySelector('img[alt]:not([alt=""]), svg title, [aria-label]');
-  // checkVisibility also rejects content Chrome lays out but does not render, such as a closed <details> menu.
-  const visible = (e) => { if (e.checkVisibility && !e.checkVisibility({ visibilityProperty: true })) return false; const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none' };
+  const named = (e) => {
+    if (e.__ax && typeof e.__ax.name === 'string') return e.__ax.name.trim();
+    return (e.innerText || '').trim() || e.getAttribute('aria-label') || e.getAttribute('aria-labelledby') || e.getAttribute('title') || e.querySelector('img[alt]:not([alt=""]), svg title, [aria-label]') || '';
+  };
+  const visible = (e) => {
+    if (e.__ax && e.__ax.ignored) return false;
+    if (e.checkVisibility && !e.checkVisibility({ visibilityProperty: true })) return false;
+    const r = e.getBoundingClientRect();
+    const s = getComputedStyle(e);
+    return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none';
+  };
   // Visually hidden until focused (sr-only skip links and the like): rendered for screen readers, not on screen.
   const srOnly = (e) => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e); return r.width <= 1 || r.height <= 1 || s.opacity === '0' || /rect\\(0(px)?,? 0(px)?,? 0(px)?,? 0(px)?\\)/.test(s.clip) || s.clipPath === 'inset(50%)' };
   const describe = (e) => { let d = e.tagName.toLowerCase(); const h = e.getAttribute('href'); if (h) d += '[href="' + h.slice(0, 60) + '"]'; const c = (typeof e.className === 'string' ? e.className : '').trim().split(/\\s+/).filter(Boolean).slice(0, 2); if (c.length) d += '.' + c.join('.'); return d };
   const controls = [...document.querySelectorAll('a[href], button, [role="button"], input:not([type="hidden"]), select, textarea')].filter(visible);
   const shown = controls.filter((e) => !srOnly(e));
   const unnamed = controls.filter((e) => !named(e) && e.tagName !== 'INPUT' && e.tagName !== 'SELECT' && e.tagName !== 'TEXTAREA');
-  const small = shown.filter((e) => { const r = e.getBoundingClientRect(); return r.width < 24 || r.height < 24 });
-  const imgs = [...document.images];
+
+  // WCAG 2.2 2.5.8 Target Size (Minimum) with exceptions (inline and spacing)
+  const small = shown.filter((e) => {
+    const r = e.getBoundingClientRect();
+    if (r.width >= 24 && r.height >= 24) return false;
+
+    const style = getComputedStyle(e);
+    const isInline = style.display === 'inline' || (style.display === 'inline-block' && e.parentElement && getComputedStyle(e.parentElement).display === 'inline');
+    if (isInline) return false;
+
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const cLeft = cx - 12, cRight = cx + 12, cTop = cy - 12, cBottom = cy + 12;
+
+    for (const other of shown) {
+      if (other === e) continue;
+      const or = other.getBoundingClientRect();
+      const ocx = or.left + or.width / 2;
+      const ocy = or.top + or.height / 2;
+      const oLeft = Math.min(or.left, ocx - 12);
+      const oRight = Math.max(or.right, ocx + 12);
+      const oTop = Math.min(or.top, ocy - 12);
+      const oBottom = Math.max(or.bottom, ocy + 12);
+
+      if (cRight > oLeft && cLeft < oRight && cBottom > oTop && cTop < oBottom) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  // Text contrast measurement (WCAG AA 4.5:1 / 3.0:1)
+  const contrast = (() => {
+    const parseColor = (str) => {
+      if (!str || str === 'transparent') return null;
+      const m = str.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)(?:,\\s*([\\d.]+))?\\)/);
+      if (!m) return null;
+      return { r: +m[1], g: +m[2], b: +m[3], a: m[4] !== undefined ? +m[4] : 1 };
+    };
+    const relLuminance = (rgb) => {
+      const s = [rgb.r / 255, rgb.g / 255, rgb.b / 255].map((c) =>
+        c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+      );
+      return 0.2126 * s[0] + 0.7152 * s[1] + 0.0722 * s[2];
+    };
+    const getEffectiveBg = (el) => {
+      let cur = el;
+      let bg = { r: 255, g: 255, b: 255, a: 1 };
+      const layers = [];
+      while (cur && cur !== document) {
+        const s = getComputedStyle(cur);
+        const c = parseColor(s.backgroundColor);
+        if (c && c.a > 0) layers.unshift(c);
+        cur = cur.parentElement;
+      }
+      for (const l of layers) {
+        const a = l.a;
+        bg = {
+          r: Math.round(l.r * a + bg.r * (1 - a)),
+          g: Math.round(l.g * a + bg.g * (1 - a)),
+          b: Math.round(l.b * a + bg.b * (1 - a)),
+          a: 1
+        };
+      }
+      return bg;
+    };
+
+    const textNodes = [...document.querySelectorAll('body *')].filter((el) => {
+      if (!visible(el)) return false;
+      return [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim().length > 0);
+    });
+
+    const lowContrast = [];
+    for (const el of textNodes) {
+      const s = getComputedStyle(el);
+      const fg = parseColor(s.color);
+      if (!fg || fg.a === 0) continue;
+      const bg = getEffectiveBg(el);
+      const l1 = relLuminance(fg);
+      const l2 = relLuminance(bg);
+      const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+
+      const size = parseFloat(s.fontSize) || 16;
+      const weight = parseInt(s.fontWeight) || 400;
+      const isLarge = size >= 24 || (size >= 18.66 && weight >= 700);
+      const req = isLarge ? 3.0 : 4.5;
+
+      if (ratio < req) {
+        const text = (el.innerText || el.textContent || '').trim().slice(0, 30);
+        lowContrast.push(\`\${describe(el)} ("\${text}", \${ratio.toFixed(2)}:1 < \${req}:1)\`);
+      }
+    }
+    return { count: lowContrast.length, samples: lowContrast.slice(0, 5) };
+  })();
+
+  const imgs = [...document.images].filter((i) => visible(i));
   return {
     overflowPx: Math.max(0, d.scrollWidth - d.clientWidth),
     images: imgs.length,
@@ -160,6 +263,8 @@ const PROBE = `(() => {
     unnamedSamples: unnamed.slice(0, 5).map(describe),
     smallTargets: small.length,
     smallTargetSamples: small.slice(0, 3).map(describe),
+    lowContrast: contrast.count,
+    lowContrastSamples: contrast.samples,
     // A control in the first viewport partly covered by a fixed or sticky element (floating chips, banners, bars):
     // intersect the two boxes inside the viewport and check which element is actually on top in the overlap.
     occluded: (() => {
@@ -217,7 +322,7 @@ try {
           if (m.method === 'Network.loadingFailed' && !m.params.canceled && !/ERR_ABORTED|ERR_BLOCKED_BY_CLIENT/.test(m.params.errorText)) http.push({ status: m.params.errorText, url: '(request)' })
         }
         listeners.add(onEvent)
-        for (const domain of ['Page', 'Runtime', 'Log', 'Network']) await send(`${domain}.enable`, {}, sessionId)
+        for (const domain of ['Page', 'Runtime', 'Log', 'Network', 'DOM', 'Accessibility']) await send(`${domain}.enable`, {}, sessionId)
         await send('Page.addScriptToEvaluateOnNewDocument', { source: OBSERVERS }, sessionId)
         const height = width < 600 ? 812 : 900
         await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: width < 600 }, sessionId)
@@ -230,6 +335,26 @@ try {
         const nav = await send('Page.navigate', { url }, sessionId)
         const didLoad = await loaded
         await sleep(1500) // let late layout, fonts, and observers settle
+
+        // Accessibility Tree: query CDP Accessibility domain and attach AX info to DOM nodes
+        const ax = await send('Accessibility.getFullAXTree', {}, sessionId).catch(() => null)
+        if (ax?.nodes) {
+          for (const n of ax.nodes) {
+            if (n.backendDOMNodeId) {
+              try {
+                const { object } = await send('DOM.resolveNode', { backendNodeId: n.backendDOMNodeId }, sessionId)
+                if (object?.objectId) {
+                  await send('Runtime.callFunctionOn', {
+                    objectId: object.objectId,
+                    functionDeclaration: 'function(info) { this.__ax = info; }',
+                    arguments: [{ value: { name: n.name?.value ?? '', ignored: !!n.ignored, role: n.role?.value ?? '' } }]
+                  }, sessionId)
+                }
+              } catch (e) {}
+            }
+          }
+        }
+
         const probe = (await send('Runtime.evaluate', { expression: PROBE, returnByValue: true }, sessionId)).result.value
         const clipHeight = FULL ? Math.min(probe.pageHeight, 6000) : height
         const shot = await send('Page.captureScreenshot', {
@@ -255,6 +380,7 @@ try {
         if (probe.imagesWithoutAlt) blocking.push(`${probe.imagesWithoutAlt} image(s) without alt`)
         if (probe.unnamedControls) blocking.push(`${probe.unnamedControls} link(s)/button(s) without an accessible name, e.g. ${probe.unnamedSamples.join(', ')}`)
         if (probe.smallTargets) warnings.push(`${probe.smallTargets} interactive target(s) under 24px, e.g. ${probe.smallTargetSamples.join(', ')}`)
+        if (probe.lowContrast) warnings.push(`${probe.lowContrast} element(s) with low text contrast (< 4.5:1), e.g. ${probe.lowContrastSamples.join(', ')}`)
         if (probe.occluded.length) warnings.push(`${probe.occluded.length} control(s) covered by another element at first view: ${probe.occluded.slice(0, 3).map((t) => `"${t}"`).join(', ')}`)
         if (probe.h1 !== 1) warnings.push(`${probe.h1} h1 element(s) (expected 1)`)
         if (!probe.lang) warnings.push('html lang missing')
@@ -280,20 +406,58 @@ await cleanup()
 
 // ---- Report ----
 
+// Persistent findings matching prior report (if --prior provided)
+let priorReport = null
+if (PRIOR) {
+  const priorPath = existsSync(PRIOR) && statSync(PRIOR).isDirectory() ? join(PRIOR, 'report.json') : PRIOR
+  if (existsSync(priorPath)) {
+    try { priorReport = JSON.parse(readFileSync(priorPath, 'utf8')) } catch {}
+  }
+}
+
+for (const r of results) {
+  if (priorReport) {
+    const pRun = (priorReport.results || []).find((p) => p.url === r.url && p.width === r.width && p.theme === r.theme)
+    if (pRun) {
+      const pSet = new Set([...(pRun.blocking || []), ...(pRun.warnings || [])])
+      const curSet = [...r.blocking, ...r.warnings]
+      r.persistent = curSet.filter((f) => pSet.has(f))
+    } else {
+      r.persistent = []
+    }
+  } else {
+    r.persistent = []
+  }
+}
+
 const blockingRuns = results.filter((r) => r.blocking.length)
+const persistentRuns = results.filter((r) => r.persistent.length)
+const persistentCount = results.reduce((a, r) => a + r.persistent.length, 0)
+
 const report = {
   generated: new Date().toISOString(),
   browser: browserPath,
   verdict: blockingRuns.length ? 'fail' : 'pass',
   runs: results.length,
   blockingRuns: blockingRuns.length,
+  persistentRuns: persistentRuns.length,
+  persistentCount,
   results,
 }
 writeFileSync(join(OUT, 'report.json'), JSON.stringify(report, null, 2) + '\n')
 const md = [`# Visual check — ${report.verdict.toUpperCase()}`, '',
-  `${results.length} render(s); ${blockingRuns.length} with blocking findings. Generated ${report.generated}.`, '',
-  '| Page | Width | Theme | Blocking | Warnings | Screenshot |', '| --- | ---: | --- | --- | --- | --- |',
-  ...results.map((r) => `| ${r.url} | ${r.width} | ${r.theme} | ${r.blocking.join('; ') || '—'} | ${r.warnings.join('; ') || '—'} | ${r.screenshot.split(/[\\/]/).pop()} |`), '']
+  `${results.length} render(s); ${blockingRuns.length} with blocking findings; ${persistentCount} persistent finding(s). Generated ${report.generated}.`, '']
+
+if (persistentCount > 0) {
+  md.push('## Persistent Findings', '',
+    '| Page | Width | Theme | Persistent Findings |',
+    '| --- | ---: | --- | --- |',
+    ...persistentRuns.map((r) => `| ${r.url} | ${r.width} | ${r.theme} | ${r.persistent.join('; ')} |`), '')
+}
+
+md.push('| Page | Width | Theme | Blocking | Warnings | Persistent | Screenshot |', '| --- | ---: | --- | --- | --- | --- | --- |',
+  ...results.map((r) => `| ${r.url} | ${r.width} | ${r.theme} | ${r.blocking.join('; ') || '—'} | ${r.warnings.join('; ') || '—'} | ${r.persistent.join('; ') || '—'} | ${r.screenshot.split(/[\\/]/).pop()} |`), '')
+
 writeFileSync(join(OUT, 'report.md'), md.join('\n'))
 if (JSON_OUT) console.log(JSON.stringify(report, null, 2))
 else console.log(md.join('\n'))

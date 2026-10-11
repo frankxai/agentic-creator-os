@@ -86,6 +86,50 @@ test('--gate fails when the main frame cannot be loaded', { skip: cannotRender }
   assert.match(report.results[0].blocking.join(' | '), /navigation failed: net::ERR_FILE_NOT_FOUND/);
 });
 
+test('--prior tracks persistent findings across runs', { skip: cannotRender }, () => {
+  const { out: out1 } = run(['--widths', '375']);
+  const tmp2 = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
+  made.push(tmp2);
+  const out2 = path.join(tmp2, 'out');
+  const env = { ...process.env, TMP: tmp2, TEMP: tmp2, TMPDIR: tmp2 };
+  const r2 = spawnSync(process.execPath, [script, '--url', fixture, '--out', out2, '--widths', '375', '--themes', 'light', '--prior', out1], { encoding: 'utf8', timeout: 120000, env });
+  assert.equal(r2.status, 0, r2.stderr);
+  const report2 = JSON.parse(readFileSync(path.join(out2, 'report.json'), 'utf8'));
+  assert.ok(report2.persistentCount > 0, 'persistent findings were identified');
+  assert.equal(report2.persistentRuns, 1);
+  assert.ok(report2.results[0].persistent.length > 0);
+  const md2 = readFileSync(path.join(out2, 'report.md'), 'utf8');
+  assert.match(md2, /## Persistent Findings/);
+});
+
+test('measures text contrast and WCAG 2.2 2.5.8 target size exceptions', { skip: cannotRender }, () => {
+  const tmp = mkdtempSync(path.join(tmpdir(), 'acos-visual-test-'));
+  made.push(tmp);
+  const htmlFile = path.join(tmp, 'test-wcag.html');
+  const html = `<!doctype html><html><head><title>WCAG test</title></head><body>
+    <h1>WCAG Test Page</h1>
+    <p style="color:#888;background-color:#fff">Low contrast text</p>
+    <p style="color:#000;background-color:#fff">High contrast text</p>
+    <button style="width:16px;height:16px;margin:100px;">Alone</button>
+    <div style="display:flex;gap:2px;">
+      <button style="width:16px;height:16px;">Btn1</button>
+      <button style="width:16px;height:16px;">Btn2</button>
+    </div>
+    <p>Inline <a href="#" style="display:inline;width:10px;height:10px;">link</a> in text.</p>
+  </body></html>`;
+  writeFileSync(htmlFile, html);
+  const testUrl = pathToFileURL(htmlFile).href;
+  const out = path.join(tmp, 'out');
+  const r = spawnSync(process.execPath, [script, '--url', testUrl, '--out', out, '--widths', '375', '--themes', 'light'], { encoding: 'utf8', timeout: 120000 });
+  assert.equal(r.status, 0, r.stderr);
+  const report = JSON.parse(readFileSync(path.join(out, 'report.json'), 'utf8'));
+  const res = report.results[0];
+  assert.equal(res.probe.lowContrast, 1, 'detects 1 low contrast element');
+  assert.equal(res.probe.smallTargets, 2, 'detects 2 adjacent small buttons failing spacing exception, ignoring standalone and inline');
+  assert.match(res.warnings.join(' | '), /low text contrast/);
+  assert.match(res.warnings.join(' | '), /interactive target\(s\) under 24px/);
+});
+
 // The weekly watch's shell block, run as written in agent-os.yml with visual-check stubbed out:
 // a URL from visual-watch.json must never become more than one argument or a CLI option.
 function watchBlock() {
