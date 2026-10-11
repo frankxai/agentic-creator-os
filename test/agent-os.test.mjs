@@ -4,7 +4,7 @@
 // least-privilege tools, a native memory scope, eval cases, and an A grade.
 import assert from 'node:assert/strict';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test, { after } from 'node:test';
@@ -159,6 +159,55 @@ test('studio v2 defines zero-credit compositing, review lifecycle, and publish p
     assert.match(pub, /acos\.publish-package\.v1/);
     assert.match(pub, /0 credits/);
   }
+});
+
+test('adopter end-to-end path: init -> compile -> audit -> render', () => {
+  const instanceName = 'ci-adopter';
+  const instanceDir = path.join(root, 'instances', instanceName);
+  made.push(instanceDir);
+
+  // 1. Init: create instance from template
+  assert.doesNotThrow(() => run('agent-os-init.mjs', ['--name', instanceName]));
+  assert.ok(existsSync(path.join(instanceDir, 'agent-os', 'company-soul.md')));
+  assert.ok(existsSync(path.join(instanceDir, 'agent-os', 'overlay.json')));
+
+  // 2. Compile Generals and Domain Queens
+  assert.doesNotThrow(() => run('agent-compile.mjs', ['--instance', instanceName]));
+  assert.ok(existsSync(path.join(instanceDir, 'agents', 'general-ceo.md')));
+
+  const orgPath = path.join(instanceDir, 'agent-os', 'org', 'domain-queens.example.json');
+  assert.doesNotThrow(() => run('org-import.mjs', ['--org', orgPath, '--instance', instanceName]));
+  assert.doesNotThrow(() => run('agent-compile.mjs', ['--instance', instanceName]));
+  assert.doesNotThrow(() => run('agent-compile.mjs', ['--check', '--instance', instanceName]));
+
+  const compiledAgents = readdirSync(path.join(instanceDir, 'agents'));
+  assert.ok(compiledAgents.includes('general-ceo.md'));
+  assert.ok(compiledAgents.some((f) => f.startsWith('queen-')));
+
+  // 3. Audit: simulate adopter copying agents to ~/.claude/agents and verify quality
+  const tmpHome = mkdtempSync(path.join(tmpdir(), 'acos-adopt-home-'));
+  made.push(tmpHome);
+  const userAgentsDir = path.join(tmpHome, '.claude', 'agents');
+  mkdirSync(userAgentsDir, { recursive: true });
+  for (const agentFile of compiledAgents.filter((f) => f.endsWith('.md'))) {
+    const src = path.join(instanceDir, 'agents', agentFile);
+    const dest = path.join(userAgentsDir, agentFile);
+    writeFileSync(dest, readFileSync(src, 'utf8'));
+  }
+
+  const auditFile = path.join(tmpHome, 'audit.json');
+  run('estate-audit.mjs', ['--home', tmpHome, '--json', auditFile]);
+  const audit = JSON.parse(readFileSync(auditFile, 'utf8'));
+  for (const agentFile of compiledAgents.filter((f) => f.endsWith('.md'))) {
+    const id = agentFile.slice(0, -3);
+    const item = audit.items.find((i) => i.kind === 'agent' && i.name === id && i.scope === 'claude-user');
+    assert.ok(item, `adopter agent ${id} found by audit`);
+    assert.ok(item.score >= 85, `adopter agent ${id} scored ${item.score}: ${item.findings.join('; ')}`);
+  }
+
+  // 4. Render / Graph: verify the graph builds cleanly for the adopter instance
+  const graphOut = run('agent-os-graph.mjs', ['--instance', instanceName]);
+  assert.match(graphOut, /agent-os-graph: \d+ nodes, \d+ edges/);
 });
 
 test('agent-os.yml gives GITHUB_TOKEN only to steps that never run on a pull request', () => {
