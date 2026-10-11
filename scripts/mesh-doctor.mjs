@@ -18,14 +18,25 @@
  * Exit 0 always unless the registry is invalid (exit 2): a red zone is a
  * routing fact, not an error.
  */
+import { existsSync } from 'node:fs'
 import { loadMesh, measureZone, probeMember } from './lib/mesh-core.mjs'
 
 const args = process.argv.slice(2)
 const flag = (n) => (args.includes(n) ? args[args.indexOf(n) + 1] : undefined)
-const MESH = flag('--mesh')
+let MESH = flag('--mesh')
 const JSON_OUT = args.includes('--json')
 const DEEP = args.includes('--deep')
-if (!MESH || MESH.startsWith('--')) { console.error('✗ --mesh <mesh.json> is required'); process.exit(2) }
+
+if (!MESH || MESH.startsWith('--')) {
+  const candidates = [
+    'instances/frankx/agent-os/mesh.json',
+    'agent-os/mesh.json',
+    'instances/_template/agent-os/mesh.example.json'
+  ]
+  MESH = candidates.find((c) => existsSync(c))
+}
+
+if (!MESH) { console.error('✗ --mesh <mesh.json> is required and no default mesh found'); process.exit(2) }
 
 let mesh
 try { mesh = loadMesh(MESH) } catch (err) { console.error(`✗ cannot read mesh: ${err.message}`); process.exit(2) }
