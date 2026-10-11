@@ -1,6 +1,6 @@
 {
-  "schema": "acos.studio.v1",
-  "reviewed": "2026-10-04",
+  "schema": "acos.studio.v2",
+  "reviewed": "2026-10-06",
   "authority": [
     "~/.agent-harness/BRAND-MEDIA-OPERATING-SYSTEM.md",
     "~/brand-assets/character-studio/OPERATING-MODEL.md"
@@ -74,6 +74,13 @@
       "model": "none: scripts/visual-check.mjs",
       "credits": 0,
       "fallback": "none"
+    },
+    {
+      "task": "social card or OG card compositing",
+      "model": "none: HTML text overlay + scripts/visual-check.mjs",
+      "credits": 0,
+      "fallback": "none",
+      "note": "Text belongs in HTML, never in pixels. Composite approved image + HTML text and render with visual-check."
     }
   ],
   "budget": {
@@ -91,7 +98,28 @@
   "staging": {
     "root": "~/brand-assets/<brand>/candidates/<YYYY-MM-DD>-<slug>/",
     "record": "asset.json beside the files: job, placement, crop, model, prompt, seed or creation id, credits, rights note, alt intent, rubric scores, lifecycle",
+    "lifecycleTransitions": {
+      "candidate": "Initial staged generation from worker-visual-producer",
+      "reviewed": "Scored against agent-os/rubrics/art-asset.md; asset.json updated with scores, verdict, reviewedBy, reviewedAt",
+      "integration-ready": "Approved by CCO/General for canon and placement; social cards composited with HTML text",
+      "released": "Published by owner following publisher package verification"
+    },
     "rule": "Download the generated file into staging; never hotlink a generation URL. Staging is the producer's only write area besides its memory."
+  },
+  "publishPackageSchema": {
+    "schema": "acos.publish-package.v1",
+    "description": "Machine-checkable package schema returned by worker-publisher",
+    "type": "object",
+    "required": ["schema", "piece", "channels", "checks", "visualQA", "scores", "actionForOwner"],
+    "properties": {
+      "schema": { "type": "string", "enum": ["acos.publish-package.v1"] },
+      "piece": { "type": "object", "required": ["title", "slug"], "properties": { "title": { "type": "string" }, "slug": { "type": "string" }, "source": { "type": "string" } } },
+      "channels": { "type": "object" },
+      "checks": { "type": "object", "required": ["claimsSourced", "altTextVerified", "linksResolved", "disclosuresPresent"] },
+      "visualQA": { "type": "object", "required": ["widths", "themes", "verdict"] },
+      "scores": { "type": "object" },
+      "actionForOwner": { "type": "string" }
+    }
   },
   "lifecycle": [
     "intake",

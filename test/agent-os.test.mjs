@@ -135,6 +135,26 @@ test('the quality ratchet refuses a --min-score that is not a number from 0 to 1
   }
 });
 
+test('studio v2 defines zero-credit compositing, review lifecycle, and publish package schema', () => {
+  const studio = JSON.parse(readFileSync(path.join(root, 'instances', 'frankx', 'agent-os', 'studio.json'), 'utf8'));
+  assert.equal(studio.schema, 'acos.studio.v2');
+  const zeroCreditRoute = studio.routing.find((r) => r.credits === 0 && r.task.includes('social card'));
+  assert.ok(zeroCreditRoute, 'studio routing must include zero-credit social card compositing');
+  assert.match(zeroCreditRoute.model, /visual-check\.mjs/);
+  assert.ok(studio.staging.lifecycleTransitions, 'studio staging must define lifecycle transitions');
+  assert.equal(studio.publishPackageSchema.schema, 'acos.publish-package.v1');
+
+  const role = readFileSync(path.join(root, 'agent-os', 'roles', 'publisher.md'), 'utf8');
+  assert.match(role, /acos\.publish-package\.v1/);
+  assert.match(role, /0 credits/);
+
+  for (const dir of ['.claude/agents', 'instances/frankx/agents']) {
+    const pub = readFileSync(path.join(root, dir, 'worker-publisher.md'), 'utf8');
+    assert.match(pub, /acos\.publish-package\.v1/);
+    assert.match(pub, /0 credits/);
+  }
+});
+
 test('agent-os.yml gives GITHUB_TOKEN only to steps that never run on a pull request', () => {
   const yml = readFileSync(path.join(root, '.github', 'workflows', 'agent-os.yml'), 'utf8').replace(/\r\n/g, '\n');
   const steps = yml.split(/\n(?= {6}- )/).filter((s) => s.startsWith('      - '));
