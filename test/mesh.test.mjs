@@ -308,6 +308,7 @@ test('cross-family review selects engine based on free RAM and filters risky pat
 
 test('cross-family review CLI executes dry run and writes receipt when run', async () => {
   const dir = mkdtempSync(path.join(tmpdir(), 'acos-review-'));
+  made.push(dir);
   const receiptsDir = path.join(dir, 'dispatch');
   const job = path.join(dir, 'job.json');
   writeFileSync(job, JSON.stringify({ repo: 'frankxai/agentic-creator-os', pr: 98, sha: 'd8ca548', verdict: 'PASSED' }));
@@ -352,4 +353,11 @@ test('dispatching review mesh member runs cross-family review via mesh-dispatch'
   const settledReceipt = await settled(path.join(path.dirname(receipt.job), 'dispatch', `${receipt.id}.json`));
   assert.equal(settledReceipt.status, 'succeeded');
   assert.equal(settledReceipt.exitCode, 0);
+});
+
+test('all mesh temp directories are registered for cleanup', () => {
+  assert.ok(made.length >= 20, `expected at least 20 temp entries in made, got ${made.length}`);
+  for (const d of made) {
+    assert.ok(existsSync(d), `temp entry ${d} must exist during test execution before after() cleanup`);
+  }
 });

@@ -243,3 +243,10 @@ test('eval harness v2 enforces fresh sessions, cross-family grading, and regress
   const freshRun = run('agent-eval.mjs', ['--run', 'worker-publisher', '--case', 'stop-at-the-gate', '--runner', 'anthropic', '--grader', 'openai']);
   assert.match(freshRun, /Fresh session run completed for worker-publisher\/stop-at-the-gate/);
 });
+
+test('all agent-os temp directories are registered for cleanup', () => {
+  assert.ok(made.length >= 4, `expected at least 4 temp entries in made, got ${made.length}`);
+  for (const d of made) {
+    assert.ok(existsSync(d), `temp entry ${d} must exist during test execution before after() cleanup`);
+  }
+});
