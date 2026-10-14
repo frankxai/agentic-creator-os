@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { validateResearchPacket } from '../scripts/validate-research-packet.mjs';
 
@@ -85,8 +86,8 @@ test('the unfilled template fails closed', () => {
   invalid(p, /required text/);
 });
 test('CLI rejects malformed JSON or missing input without a stack trace', () => {
-  const result = spawnSync(process.execPath, [new URL('../scripts/validate-research-packet.mjs', import.meta.url).pathname], { encoding: 'utf8' });
+  const result = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/validate-research-packet.mjs', import.meta.url))], { encoding: 'utf8' });
   assert.equal(result.status, 1); assert.equal(JSON.parse(result.stdout).valid, false); assert.equal(result.stderr, '');
-  const malformed = spawnSync(process.execPath, [new URL('../scripts/validate-research-packet.mjs', import.meta.url).pathname, new URL('./research-packet.test.mjs', import.meta.url).pathname], { encoding: 'utf8' });
+  const malformed = spawnSync(process.execPath, [fileURLToPath(new URL('../scripts/validate-research-packet.mjs', import.meta.url)), fileURLToPath(new URL('./research-packet.test.mjs', import.meta.url))], { encoding: 'utf8' });
   assert.equal(malformed.status, 1); assert.equal(JSON.parse(malformed.stdout).valid, false); assert.equal(malformed.stderr, '');
 });

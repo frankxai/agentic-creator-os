@@ -19,6 +19,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { freemem } from 'node:os'
 import { join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import { expand, onPath, resolveNoShell } from './lib/mesh-core.mjs'
 
@@ -160,7 +161,7 @@ async function main() {
 }
 
 // Execute main only when run directly as CLI
-if (process.argv[1] && resolve(process.argv[1]) === resolve(import.meta.url.replace(/^file:\/\//, ''))) {
+if (process.argv[1] && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url))) {
   main().catch((err) => {
     console.error(`✗ cross-family-review failed: ${err.message}`)
     process.exit(1)
