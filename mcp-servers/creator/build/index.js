@@ -1,7 +1,7 @@
 // src/index.ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z as z7 } from "zod";
+import { z as z8 } from "zod";
 
 // src/social/twitter.ts
 import { z } from "zod";
@@ -985,6 +985,70 @@ var getUpcomingContentSchema = {
   hours: z6.number().int().min(1).max(720).default(24).describe("Hours ahead to look, 1-720")
 };
 
+// src/social/producer.ts
+import { z as z7 } from "zod";
+var unsentPackets = /* @__PURE__ */ new Map();
+function getUnsentPacket(packetId) {
+  return unsentPackets.get(packetId);
+}
+async function generateSocialWorkflow(params) {
+  const { sourceId, content, revisionSha, expectedRevisionSha, platforms: platforms2 = ["twitter", "linkedin"], targetPath, baseScheduledDate } = params;
+  if (expectedRevisionSha && revisionSha !== expectedRevisionSha) {
+    return {
+      success: false,
+      error: `Revision mismatch: source revision ${revisionSha} does not match expected revision ${expectedRevisionSha}`
+    };
+  }
+  if (!content || content.trim().length === 0) {
+    return { success: false, error: "Content body cannot be empty" };
+  }
+  const packetId = crypto.randomUUID();
+  const now = /* @__PURE__ */ new Date();
+  const baseTime = baseScheduledDate ? new Date(baseScheduledDate) : new Date(now.getTime() + 3600 * 1e3);
+  const drafts = {};
+  const cleanSourceId = sourceId.replace(/[^a-zA-Z0-9_-]/g, "_");
+  platforms2.forEach((platform2, idx) => {
+    const scheduledTime = new Date(baseTime.getTime() + idx * 1800 * 1e3).toISOString();
+    const relativePath = targetPath ? `${targetPath}/${platform2}_draft.json` : `drafts/social/${cleanSourceId}/${platform2}.json`;
+    let draftText = content.slice(0, 280);
+    if (platform2 === "twitter") {
+      draftText = content.length > 280 ? `${content.slice(0, 277)}...` : content;
+    } else if (platform2 === "linkedin") {
+      draftText = content.length > 3e3 ? `${content.slice(0, 2997)}...` : content;
+    }
+    drafts[platform2] = {
+      platform: platform2,
+      content: draftText,
+      scheduledFor: scheduledTime,
+      targetPath: relativePath
+    };
+  });
+  const packet = {
+    packetId,
+    sourceLink: {
+      sourceId,
+      revisionSha
+    },
+    status: "unsent",
+    drafts,
+    createdAt: now.toISOString(),
+    updatedAt: now.toISOString()
+  };
+  unsentPackets.set(packetId, packet);
+  return {
+    success: true,
+    packet
+  };
+}
+var generateSocialWorkflowSchema = {
+  sourceId: z7.string().min(1).max(100).describe("Source article or document ID"),
+  content: z7.string().min(1).max(5e5).describe("Source text to generate social drafts from"),
+  revisionSha: z7.string().min(1).max(100).describe("Current revision SHA of the source document"),
+  expectedRevisionSha: z7.string().max(100).optional().describe("Expected revision SHA for exact-revision check"),
+  platforms: z7.array(z7.enum(["twitter", "linkedin", "instagram", "farcaster"])).max(10).optional().describe("Platforms to generate drafts for"),
+  targetPath: z7.string().max(250).optional().describe("Optional relative directory path for draft output")
+};
+
 // src/index.ts
 var server = new McpServer({
   name: "creator",
@@ -1000,42 +1064,42 @@ var SIMULATED_METRICS = "Simulated: the numbers are randomly generated sample da
 var LOCAL_CREATE = { readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: false };
 var LOCAL_OVERWRITE = { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false };
 var LOCAL_READ = { readOnlyHint: true, openWorldHint: false };
-var id5 = () => z7.string().min(1).max(100);
-var record = (shape) => z7.object(shape).passthrough();
+var id5 = () => z8.string().min(1).max(100);
+var record = (shape) => z8.object(shape).passthrough();
 var articleShape = record({
-  id: z7.string(),
-  title: z7.string(),
-  content: z7.string(),
-  status: z7.enum(ARTICLE_STATUSES),
-  tags: z7.array(z7.string()),
-  createdAt: z7.string(),
-  updatedAt: z7.string()
+  id: z8.string(),
+  title: z8.string(),
+  content: z8.string(),
+  status: z8.enum(ARTICLE_STATUSES),
+  tags: z8.array(z8.string()),
+  createdAt: z8.string(),
+  updatedAt: z8.string()
 });
 var clientShape = record({
-  id: z7.string(),
-  name: z7.string(),
-  email: z7.string(),
-  status: z7.enum(["active", "inactive"]),
-  projects: z7.array(z7.string()),
-  createdAt: z7.string()
+  id: z8.string(),
+  name: z8.string(),
+  email: z8.string(),
+  status: z8.enum(["active", "inactive"]),
+  projects: z8.array(z8.string()),
+  createdAt: z8.string()
 });
 var projectShape = record({
-  id: z7.string(),
-  name: z7.string(),
-  clientId: z7.string(),
-  status: z7.enum(PROJECT_STATUSES),
-  createdAt: z7.string()
+  id: z8.string(),
+  name: z8.string(),
+  clientId: z8.string(),
+  status: z8.enum(PROJECT_STATUSES),
+  createdAt: z8.string()
 });
-var postShape = record({ id: z7.string(), status: z7.string(), createdAt: z7.string() });
+var postShape = record({ id: z8.string(), status: z8.string(), createdAt: z8.string() });
 var scheduledShape = record({
-  id: z7.string(),
-  platform: z7.string(),
-  type: z7.string(),
-  content: z7.unknown(),
-  scheduledFor: z7.string(),
-  status: z7.string()
+  id: z8.string(),
+  platform: z8.string(),
+  type: z8.string(),
+  content: z8.unknown(),
+  scheduledFor: z8.string(),
+  status: z8.string()
 });
-var simulated = z7.literal(true).describe("Always true: this is an in-memory simulation, not a live platform call");
+var simulated = z8.literal(true).describe("Always true: this is an in-memory simulation, not a live platform call");
 function ok(data) {
   const plain = JSON.parse(JSON.stringify(data));
   return { content: [{ type: "text", text: JSON.stringify(plain, null, 2) }], structuredContent: plain };
@@ -1067,9 +1131,9 @@ server.registerTool(
     title: "Create article",
     description: "Start a new article draft in the creator workspace (in-memory, lost on restart; use database_create_article to persist). Each call creates a new draft with a fresh ID. Returns the full article record including its ID and timestamps.",
     inputSchema: {
-      title: z7.string().min(1).max(500).describe("Article title"),
-      content: z7.string().max(5e5).describe("Article body, usually Markdown"),
-      tags: z7.array(z7.string().max(100)).max(50).default([]).describe("Tags for filtering and SEO")
+      title: z8.string().min(1).max(500).describe("Article title"),
+      content: z8.string().max(5e5).describe("Article body, usually Markdown"),
+      tags: z8.array(z8.string().max(100)).max(50).default([]).describe("Tags for filtering and SEO")
     },
     outputSchema: { article: articleShape.describe("The new draft") },
     annotations: LOCAL_CREATE
@@ -1088,12 +1152,12 @@ server.registerTool(
     description: "Overwrite fields of an in-memory article: title, body, status, tags or SEO title and description. Omitted fields are kept; previous values are not versioned. Returns the updated article, or an error when the ID is unknown.",
     inputSchema: {
       id: id5().describe("Article ID from creator_create_article or creator_list_articles"),
-      title: z7.string().min(1).max(500).optional().describe("New title"),
-      content: z7.string().max(5e5).optional().describe("New body, replacing the old one"),
-      status: z7.enum(ARTICLE_STATUSES).optional().describe("New status"),
-      tags: z7.array(z7.string().max(100)).max(50).optional().describe("New tags, replacing the old list"),
-      seoTitle: z7.string().max(70).optional().describe("SEO title (max 70 characters)"),
-      seoDescription: z7.string().max(160).optional().describe("SEO meta description (max 160 characters)")
+      title: z8.string().min(1).max(500).optional().describe("New title"),
+      content: z8.string().max(5e5).optional().describe("New body, replacing the old one"),
+      status: z8.enum(ARTICLE_STATUSES).optional().describe("New status"),
+      tags: z8.array(z8.string().max(100)).max(50).optional().describe("New tags, replacing the old list"),
+      seoTitle: z8.string().max(70).optional().describe("SEO title (max 70 characters)"),
+      seoDescription: z8.string().max(160).optional().describe("SEO meta description (max 160 characters)")
     },
     outputSchema: { article: articleShape.describe("The updated article") },
     annotations: LOCAL_OVERWRITE
@@ -1134,12 +1198,12 @@ server.registerTool(
     title: "List articles",
     description: "List in-memory articles in creation order, optionally only one status (draft, published, archived). Use it to find an article ID. Returns up to limit articles (default 50, max 100) including full bodies, plus the total matching.",
     inputSchema: {
-      status: z7.enum(ARTICLE_STATUSES).optional().describe("Only articles with this status"),
-      limit: z7.number().int().min(1).max(100).default(50).describe("Maximum number of articles")
+      status: z8.enum(ARTICLE_STATUSES).optional().describe("Only articles with this status"),
+      limit: z8.number().int().min(1).max(100).default(50).describe("Maximum number of articles")
     },
     outputSchema: {
-      articles: z7.array(articleShape).describe("Articles in this page"),
-      total: z7.number().describe("Articles matching the filter")
+      articles: z8.array(articleShape).describe("Articles in this page"),
+      total: z8.number().describe("Articles matching the filter")
     },
     annotations: LOCAL_READ
   },
@@ -1154,9 +1218,9 @@ server.registerTool(
     title: "Create client",
     description: "Add a client record (name, email, optional company) to the in-memory creator CRM for tracking projects. Each call creates a new client, even for a repeated email. Returns the client record with its ID for creator_create_project.",
     inputSchema: {
-      name: z7.string().min(1).max(200).describe("Client name"),
-      email: z7.string().email().max(254).describe("Client email"),
-      company: z7.string().max(200).optional().describe("Company name")
+      name: z8.string().min(1).max(200).describe("Client name"),
+      email: z8.string().email().max(254).describe("Client email"),
+      company: z8.string().max(200).optional().describe("Company name")
     },
     outputSchema: { client: clientShape.describe("The new client") },
     annotations: LOCAL_CREATE
@@ -1190,12 +1254,12 @@ server.registerTool(
     title: "List clients",
     description: "List client records in the in-memory creator CRM, in creation order, optionally only active or inactive ones. Use it to find a client ID before creator_get_client or creator_create_project. Returns up to limit clients and the total.",
     inputSchema: {
-      status: z7.enum(["active", "inactive"]).optional().describe("Only clients with this status"),
-      limit: z7.number().int().min(1).max(500).default(100).describe("Maximum clients to return")
+      status: z8.enum(["active", "inactive"]).optional().describe("Only clients with this status"),
+      limit: z8.number().int().min(1).max(500).default(100).describe("Maximum clients to return")
     },
     outputSchema: {
-      clients: z7.array(clientShape).describe("Clients in this page"),
-      total: z7.number().describe("Clients matching the filter")
+      clients: z8.array(clientShape).describe("Clients in this page"),
+      total: z8.number().describe("Clients matching the filter")
     },
     annotations: LOCAL_READ
   },
@@ -1210,10 +1274,10 @@ server.registerTool(
     title: "Create project",
     description: "Create a project for an existing client in the in-memory creator CRM, starting in planning status, with optional budget and deadline. Each call creates a new project. Returns the project record, or an error when the client ID is unknown.",
     inputSchema: {
-      name: z7.string().min(1).max(200).describe("Project name"),
+      name: z8.string().min(1).max(200).describe("Project name"),
       clientId: id5().describe("Client ID from creator_create_client"),
-      budget: z7.number().min(0).max(1e12).optional().describe("Budget in your currency"),
-      deadline: z7.string().max(40).optional().describe("Deadline, ISO 8601 date")
+      budget: z8.number().min(0).max(1e12).optional().describe("Budget in your currency"),
+      deadline: z8.string().max(40).optional().describe("Deadline, ISO 8601 date")
     },
     outputSchema: { project: projectShape.describe("The new project") },
     annotations: LOCAL_CREATE
@@ -1245,7 +1309,7 @@ server.registerTool(
     },
     outputSchema: {
       project: projectShape.describe("The project"),
-      client: record({ id: z7.string(), name: z7.string() }).nullable().describe("Owning client, or null if it was removed")
+      client: record({ id: z8.string(), name: z8.string() }).nullable().describe("Owning client, or null if it was removed")
     },
     annotations: LOCAL_READ
   },
@@ -1262,13 +1326,13 @@ server.registerTool(
     title: "List projects",
     description: "List projects in the in-memory creator CRM, in creation order, optionally filtered by status and/or client. Use it for a pipeline overview or to find a project ID. Returns up to limit projects (default 100, max 500) and the total matching.",
     inputSchema: {
-      status: z7.enum(PROJECT_STATUSES).optional().describe("Only projects with this status"),
+      status: z8.enum(PROJECT_STATUSES).optional().describe("Only projects with this status"),
       clientId: id5().optional().describe("Only projects for this client"),
-      limit: z7.number().int().min(1).max(500).default(100).describe("Maximum projects to return")
+      limit: z8.number().int().min(1).max(500).default(100).describe("Maximum projects to return")
     },
     outputSchema: {
-      projects: z7.array(projectShape).describe("Projects in this page"),
-      total: z7.number().describe("Projects matching the filters")
+      projects: z8.array(projectShape).describe("Projects in this page"),
+      total: z8.number().describe("Projects matching the filters")
     },
     annotations: LOCAL_READ
   },
@@ -1284,7 +1348,7 @@ server.registerTool(
     description: "Set a project's status to planning, active, completed or on_hold in the in-memory creator CRM, replacing the previous status. Repeating the same call changes nothing further. Returns the updated project, or an error for an unknown ID.",
     inputSchema: {
       id: id5().describe("Project ID"),
-      status: z7.enum(PROJECT_STATUSES).describe("New status")
+      status: z8.enum(PROJECT_STATUSES).describe("New status")
     },
     outputSchema: { project: projectShape.describe("The updated project") },
     annotations: LOCAL_OVERWRITE
@@ -1305,14 +1369,14 @@ server.registerTool(
       articleId: id5().describe("Article ID")
     },
     outputSchema: {
-      title: z7.string().describe("Article title"),
-      status: z7.enum(ARTICLE_STATUSES).describe("Article status"),
-      tags: z7.array(z7.string()).describe("Article tags"),
-      wordCount: z7.number().describe("Words in the body"),
-      sentenceCount: z7.number().describe("Sentences in the body"),
-      avgSentenceLength: z7.number().describe("Average words per sentence, one decimal"),
-      createdAt: z7.string().describe("Creation time"),
-      updatedAt: z7.string().describe("Last update time")
+      title: z8.string().describe("Article title"),
+      status: z8.enum(ARTICLE_STATUSES).describe("Article status"),
+      tags: z8.array(z8.string()).describe("Article tags"),
+      wordCount: z8.number().describe("Words in the body"),
+      sentenceCount: z8.number().describe("Sentences in the body"),
+      avgSentenceLength: z8.number().describe("Average words per sentence, one decimal"),
+      createdAt: z8.string().describe("Creation time"),
+      updatedAt: z8.string().describe("Last update time")
     },
     annotations: LOCAL_READ
   },
@@ -1340,7 +1404,7 @@ server.registerTool(
     title: "Draft tweet (simulated)",
     description: `Record a tweet (max 280 characters), optionally scheduled or as a reply, to rehearse an X/Twitter posting flow. ${SIMULATED} Returns the stored tweet with its local ID and status.`,
     inputSchema: postTweetSchema,
-    outputSchema: { simulated, success: z7.boolean(), tweet: postShape.describe("The stored tweet") },
+    outputSchema: { simulated, success: z8.boolean(), tweet: postShape.describe("The stored tweet") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await postTweet({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
@@ -1353,8 +1417,8 @@ server.registerTool(
     inputSchema: createThreadSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      thread: record({ id: z7.string(), tweets: z7.array(postShape), status: z7.string() }).describe("The stored thread")
+      success: z8.boolean(),
+      thread: record({ id: z8.string(), tweets: z8.array(postShape), status: z8.string() }).describe("The stored thread")
     },
     annotations: LOCAL_CREATE
   },
@@ -1368,8 +1432,8 @@ server.registerTool(
     inputSchema: getTweetAnalyticsSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      analytics: record({ impressions: z7.number(), likes: z7.number(), retweets: z7.number(), replies: z7.number(), engagementRate: z7.number() }).describe("Tweet metrics")
+      success: z8.boolean(),
+      analytics: record({ impressions: z8.number(), likes: z8.number(), retweets: z8.number(), replies: z8.number(), engagementRate: z8.number() }).describe("Tweet metrics")
     },
     annotations: LOCAL_READ
   },
@@ -1381,7 +1445,7 @@ server.registerTool(
     title: "Draft LinkedIn post (simulated)",
     description: `Record a LinkedIn post (max 3000 characters) with optional media, visibility and schedule, to rehearse a LinkedIn flow. ${SIMULATED} Returns the stored post with its local ID and status.`,
     inputSchema: createPostSchema,
-    outputSchema: { simulated, success: z7.boolean(), post: postShape.describe("The stored post") },
+    outputSchema: { simulated, success: z8.boolean(), post: postShape.describe("The stored post") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await createPost({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
@@ -1392,7 +1456,7 @@ server.registerTool(
     title: "Draft LinkedIn article (simulated)",
     description: `Record a long-form LinkedIn article (title max 150, body max 125,000 characters) as a draft or published. ${SIMULATED} Returns the stored article with its local ID and status.`,
     inputSchema: createArticleSchema,
-    outputSchema: { simulated, success: z7.boolean(), article: postShape.describe("The stored article") },
+    outputSchema: { simulated, success: z8.boolean(), article: postShape.describe("The stored article") },
     annotations: LOCAL_CREATE
   },
   async (params) => social(await createArticle(params))
@@ -1405,8 +1469,8 @@ server.registerTool(
     inputSchema: getPostAnalyticsSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      analytics: record({ impressions: z7.number(), likes: z7.number(), comments: z7.number(), shares: z7.number(), clickThroughRate: z7.number() }).describe("Post metrics")
+      success: z8.boolean(),
+      analytics: record({ impressions: z8.number(), likes: z8.number(), comments: z8.number(), shares: z8.number(), clickThroughRate: z8.number() }).describe("Post metrics")
     },
     annotations: LOCAL_READ
   },
@@ -1418,7 +1482,7 @@ server.registerTool(
     title: "Draft Instagram post (simulated)",
     description: `Record an Instagram feed post, carousel or reel with caption (max 2200 characters), 1-10 media URLs, tags and optional schedule. ${SIMULATED} Returns the stored post with its local ID.`,
     inputSchema: createPostSchema2,
-    outputSchema: { simulated, success: z7.boolean(), post: postShape.describe("The stored post") },
+    outputSchema: { simulated, success: z8.boolean(), post: postShape.describe("The stored post") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await createPost2({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
@@ -1429,7 +1493,7 @@ server.registerTool(
     title: "Draft Instagram story (simulated)",
     description: `Record an Instagram story from one image or video URL, with an optional link and up to 10 stickers; stories expire after 24 hours. ${SIMULATED} Returns the stored story with its local ID.`,
     inputSchema: createStorySchema,
-    outputSchema: { simulated, success: z7.boolean(), story: record({ id: z7.string(), mediaUrl: z7.string(), expiresAt: z7.string() }).describe("The stored story") },
+    outputSchema: { simulated, success: z8.boolean(), story: record({ id: z8.string(), mediaUrl: z8.string(), expiresAt: z8.string() }).describe("The stored story") },
     annotations: LOCAL_CREATE
   },
   async (params) => social(await createStory(params))
@@ -1440,7 +1504,7 @@ server.registerTool(
     title: "Get Instagram post analytics (simulated)",
     description: `Read impressions, reach, likes, comments, saves, shares and engagement rate for a post recorded by creator_instagram_post. ${SIMULATED_METRICS} Returns the metrics object.`,
     inputSchema: getPostAnalyticsSchema2,
-    outputSchema: { simulated, success: z7.boolean(), analytics: record({ reach: z7.number(), engagementRate: z7.number() }).describe("Post metrics") },
+    outputSchema: { simulated, success: z8.boolean(), analytics: record({ reach: z8.number(), engagementRate: z8.number() }).describe("Post metrics") },
     annotations: LOCAL_READ
   },
   async (params) => social(await getPostAnalytics2(params.postId))
@@ -1451,7 +1515,7 @@ server.registerTool(
     title: "Draft Farcaster cast (simulated)",
     description: `Record a Farcaster cast (max 320 characters) with optional channel, reply target, embeds, mentions and schedule. ${SIMULATED} Returns the stored cast with its local ID and status.`,
     inputSchema: createCastSchema,
-    outputSchema: { simulated, success: z7.boolean(), cast: postShape.describe("The stored cast") },
+    outputSchema: { simulated, success: z8.boolean(), cast: postShape.describe("The stored cast") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await createCast({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
@@ -1462,7 +1526,7 @@ server.registerTool(
     title: "Draft Farcaster thread (simulated)",
     description: `Record a thread of up to 25 Farcaster casts (max 320 characters each), linked as replies, optionally in a channel or scheduled. ${SIMULATED} Returns the stored casts in order.`,
     inputSchema: createThreadSchema2,
-    outputSchema: { simulated, success: z7.boolean(), thread: z7.array(postShape).describe("The stored casts in order") },
+    outputSchema: { simulated, success: z8.boolean(), thread: z8.array(postShape).describe("The stored casts in order") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await createThread2({ ...params, scheduledFor: optionalDate(params.scheduledFor, "scheduledFor") })))
@@ -1473,7 +1537,7 @@ server.registerTool(
     title: "Draft Farcaster frame (simulated)",
     description: `Record an interactive frame (image plus 1-4 buttons, optional input and post URL) attached to a cast from creator_farcaster_cast. ${SIMULATED} Returns the stored frame with its local ID.`,
     inputSchema: createFrameSchema,
-    outputSchema: { simulated, success: z7.boolean(), frame: record({ id: z7.string(), castId: z7.string(), imageUrl: z7.string() }).describe("The stored frame") },
+    outputSchema: { simulated, success: z8.boolean(), frame: record({ id: z8.string(), castId: z8.string(), imageUrl: z8.string() }).describe("The stored frame") },
     annotations: LOCAL_CREATE
   },
   async (params) => social(await createFrame(params))
@@ -1484,7 +1548,7 @@ server.registerTool(
     title: "Get Farcaster cast analytics (simulated)",
     description: `Read reactions, recasts, replies and watches for a cast recorded by creator_farcaster_cast. ${SIMULATED_METRICS} Returns the metrics object, or an error for an unknown cast ID.`,
     inputSchema: getCastAnalyticsSchema,
-    outputSchema: { simulated, success: z7.boolean(), analytics: z7.object({}).passthrough().describe("Cast metrics") },
+    outputSchema: { simulated, success: z8.boolean(), analytics: z8.object({}).passthrough().describe("Cast metrics") },
     annotations: LOCAL_READ
   },
   async (params) => social(await getCastAnalytics(params.castId))
@@ -1497,12 +1561,12 @@ server.registerTool(
     inputSchema: getAggregatedAnalyticsSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
+      success: z8.boolean(),
       analytics: record({
-        platforms: z7.array(z7.object({}).passthrough()),
-        totals: z7.object({}).passthrough(),
-        bestPerformingPlatform: z7.string(),
-        recommendations: z7.array(z7.string())
+        platforms: z8.array(z8.object({}).passthrough()),
+        totals: z8.object({}).passthrough(),
+        bestPerformingPlatform: z8.string(),
+        recommendations: z8.array(z8.string())
       }).describe("Aggregated metrics")
     },
     annotations: LOCAL_READ
@@ -1521,8 +1585,8 @@ server.registerTool(
     inputSchema: getBestPostingTimesSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      times: z7.array(z7.object({ dayOfWeek: z7.string(), hour: z7.number(), score: z7.number() })).describe("Suggested slots")
+      success: z8.boolean(),
+      times: z8.array(z8.object({ dayOfWeek: z8.string(), hour: z8.number(), score: z8.number() })).describe("Suggested slots")
     },
     annotations: LOCAL_READ
   },
@@ -1536,8 +1600,8 @@ server.registerTool(
     inputSchema: getEngagementTrendsSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      trends: z7.array(z7.object({ date: z7.string(), impressions: z7.number(), engagements: z7.number(), rate: z7.number() })).describe("Daily rows, oldest first")
+      success: z8.boolean(),
+      trends: z8.array(z8.object({ date: z8.string(), impressions: z8.number(), engagements: z8.number(), rate: z8.number() })).describe("Daily rows, oldest first")
     },
     annotations: LOCAL_READ
   },
@@ -1549,7 +1613,7 @@ server.registerTool(
     title: "Schedule content (simulated)",
     description: `Queue one piece of content for a platform at a future time, optionally refusing when another item is queued within 15 minutes. ${SIMULATED} Nothing is ever posted when the time arrives. Returns the queued item.`,
     inputSchema: scheduleContentSchema,
-    outputSchema: { simulated, success: z7.boolean(), scheduled: scheduledShape.describe("The queued item") },
+    outputSchema: { simulated, success: z8.boolean(), scheduled: scheduledShape.describe("The queued item") },
     annotations: LOCAL_CREATE
   },
   async (params) => guarded(async () => social(await scheduleContent({ ...params, scheduledFor: parseDate(params.scheduledFor, "scheduledFor") })))
@@ -1562,9 +1626,9 @@ server.registerTool(
     inputSchema: bulkScheduleSchema,
     outputSchema: {
       simulated,
-      success: z7.boolean(),
-      scheduled: z7.array(scheduledShape).describe("Items queued"),
-      failed: z7.array(z7.object({ index: z7.number(), error: z7.string() })).optional().describe("Items that could not be queued")
+      success: z8.boolean(),
+      scheduled: z8.array(scheduledShape).describe("Items queued"),
+      failed: z8.array(z8.object({ index: z8.number(), error: z8.string() })).optional().describe("Items that could not be queued")
     },
     annotations: LOCAL_CREATE
   },
@@ -1583,8 +1647,8 @@ server.registerTool(
     description: "List queued content sorted by scheduled time, filtered by platform, status (pending, published, failed, cancelled) and/or a date range. Use it to review the calendar or find an item ID. Returns up to limit items (default 50, max 500) and the total.",
     inputSchema: getScheduledContentSchema,
     outputSchema: {
-      content: z7.array(scheduledShape).describe("Items in this page, earliest first"),
-      total: z7.number().describe("Items matching the filters")
+      content: z8.array(scheduledShape).describe("Items in this page, earliest first"),
+      total: z8.number().describe("Items matching the filters")
     },
     annotations: LOCAL_READ
   },
@@ -1604,8 +1668,8 @@ server.registerTool(
     description: "Return pending queued content due within the next N hours (default 24, max 720), earliest first. Use it for a daily or weekly publishing check. Returns the items and their count; reads the in-memory queue only, instant.",
     inputSchema: getUpcomingContentSchema,
     outputSchema: {
-      content: z7.array(scheduledShape).describe("Pending items due in the window, earliest first"),
-      count: z7.number().describe("Number of items")
+      content: z8.array(scheduledShape).describe("Pending items due in the window, earliest first"),
+      count: z8.number().describe("Number of items")
     },
     annotations: LOCAL_READ
   },
@@ -1620,10 +1684,39 @@ server.registerTool(
     title: "Cancel scheduled content",
     description: "Mark a pending queued item as cancelled so it will not be treated as due. Only pending items can be cancelled, and it cannot be undone (re-schedule instead). Returns success, or an error for an unknown or non-pending ID.",
     inputSchema: cancelScheduledContentSchema,
-    outputSchema: { simulated, success: z7.boolean() },
+    outputSchema: { simulated, success: z8.boolean() },
     annotations: LOCAL_OVERWRITE
   },
   async (params) => social(await cancelScheduledContent(params.contentId))
+);
+server.registerTool(
+  "creator_generate_social",
+  {
+    title: "Generate social workflow (GenCreator Producer)",
+    description: "Generate social media drafts for a source document using exact revision checks and durable unsent packet output.",
+    inputSchema: generateSocialWorkflowSchema,
+    outputSchema: {
+      simulated,
+      success: z8.boolean(),
+      packet: z8.object({}).passthrough().optional().describe("Durable unsent packet")
+    },
+    annotations: LOCAL_CREATE
+  },
+  async (params) => guarded(async () => social(await generateSocialWorkflow(params)))
+);
+server.registerTool(
+  "creator_get_unsent_packet",
+  {
+    title: "Get unsent packet",
+    description: "Fetch a durable unsent social packet by packet ID for draft recovery and workflow inspection.",
+    inputSchema: { packetId: id5().describe("Packet ID") },
+    outputSchema: { simulated, success: z8.boolean(), packet: z8.object({}).passthrough().optional().describe("Durable unsent packet") },
+    annotations: LOCAL_READ
+  },
+  async (params) => {
+    const packet = getUnsentPacket(params.packetId);
+    return packet ? ok({ simulated: true, success: true, packet }) : fail(`Unsent packet not found: ${params.packetId}`);
+  }
 );
 server.registerTool(
   "creator_schedule_reschedule",
@@ -1631,7 +1724,7 @@ server.registerTool(
     title: "Reschedule content",
     description: "Move a pending queued item to a new future time, replacing its previous time. Only pending items can be moved. Returns the updated item, or an error when the ID is unknown, the item is not pending or the time is in the past.",
     inputSchema: rescheduleContentSchema,
-    outputSchema: { simulated, success: z7.boolean(), scheduled: scheduledShape.describe("The updated item") },
+    outputSchema: { simulated, success: z8.boolean(), scheduled: scheduledShape.describe("The updated item") },
     annotations: LOCAL_OVERWRITE
   },
   async (params) => guarded(async () => social(await rescheduleContent({

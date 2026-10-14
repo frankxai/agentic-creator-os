@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   generateSocialWorkflow,
   getUnsentPacket
-} from "../mcp-servers/creator/src/social/producer.ts";
+} from "../mcp-servers/creator/build/social/producer.js";
 
 test("generateSocialWorkflow creates source-linked complete drafts in a durable unsent packet", async () => {
   const result = await generateSocialWorkflow({
