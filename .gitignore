@@ -51,3 +51,6 @@ temp/
 # estate-guard pack — per-machine files, never tracked
 .claude/settings.local.json
 .claude/ci/estate-guard/last-scan.json
+
+# agent-hygiene pack — diverged copies set aside by install.sh
+.claude/skills/.replaced/
