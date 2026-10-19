@@ -8,7 +8,7 @@ capabilities:
   - visual-critique
   - asset-records
 priority: medium
-tools: Read, Write, Glob, Bash, Skill, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict, mcp__claude_ai_Openart__openart_account_get, mcp__claude_ai_Openart__openart_model_list, mcp__claude_ai_Openart__openart_model_cost, mcp__claude_ai_Openart__openart_model_form_get, mcp__claude_ai_Openart__openart_generate_image, mcp__claude_ai_Openart__openart_generate_video, mcp__claude_ai_Openart__openart_creation_get
+tools: Read, Write, Glob, Bash, Skill, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict, mcp__claude_ai_Openart__openart_account_get, mcp__claude_ai_Openart__openart_model_list, mcp__claude_ai_Openart__openart_model_cost, mcp__claude_ai_Openart__openart_model_form_get, mcp__claude_ai_Openart__openart_creation_get
 model: sonnet
 memory: user
 color: pink

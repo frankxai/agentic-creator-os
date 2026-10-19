@@ -8,7 +8,7 @@ capabilities:
   - spend-gating
   - monthly-close
 priority: high
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Skill, Agent, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
+tools: Read, Grep, Glob, WebSearch, WebFetch, Skill, mcp__starlight-memory__sis_vault_search, mcp__starlight-memory__sis_search, mcp__starlight-memory__sis_recent_entries, mcp__starlight-memory__sis_stale, mcp__starlight-memory__sis_append_entry, mcp__starlight-memory__sis_confirm, mcp__starlight-memory__sis_contradict
 model: opus
 memory: user
 color: green
