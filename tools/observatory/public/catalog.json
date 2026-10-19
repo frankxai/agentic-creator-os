@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-08-21T21:16:51.845Z",
+  "generatedAt": "2026-10-19T18:35:06.761Z",
   "version": "1.0.0",
   "source": "agentic-creator-os",
   "counts": {
-    "agent": 143,
-    "skill": 122,
-    "command": 79,
+    "agent": 147,
+    "skill": 125,
+    "command": 80,
     "workflow": 7,
     "iam-profile": 6,
-    "edges": 101
+    "edges": 103
   },
   "iam": {
     "content-writer": {
@@ -688,6 +688,183 @@
       "file": ".claude/agents/frequency-music-production.md"
     },
     {
+      "id": "agent:general-caio",
+      "kind": "agent",
+      "name": "general-caio",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "WebSearch",
+        "WebFetch",
+        "Skill",
+        "Agent"
+      ],
+      "mcpServers": [],
+      "description": "CAIO General — Chief AI Officer. Use for model routing, evals and release thresholds, agent quality scores, memory and knowledge architecture, AI governance and risk tiering, or changes to the Expertise Kernel. Runs the weekly estate quality pulse.",
+      "file": ".claude/agents/general-caio.md"
+    },
+    {
+      "id": "agent:general-cco",
+      "kind": "agent",
+      "name": "general-cco",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "CCO General — creative quality and canon owner. Use when creating or reviewing story, characters, worlds, visual identity, music, or media; when work must stay on canon and on register; or for the weekly creative review and monthly canon audit. Never publishes; prepares work for human approval.",
+      "file": ".claude/agents/general-cco.md"
+    },
+    {
+      "id": "agent:general-ceo",
+      "kind": "agent",
+      "name": "general-ceo",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "CEO General — portfolio owner across brands. Use when deciding which brands, bets, or products get attention, money, or agent capacity; when a bet needs a kill criterion; when two roles disagree and someone must decide; or for a weekly portfolio pulse or quarterly bet review.",
+      "file": ".claude/agents/general-ceo.md"
+    },
+    {
+      "id": "agent:general-cfo",
+      "kind": "agent",
+      "name": "general-cfo",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "WebSearch",
+        "WebFetch",
+        "Skill",
+        "Agent"
+      ],
+      "mcpServers": [],
+      "description": "CFO General — money owner. Use for runway, unit economics, pricing math, agent and inference spend, budget envelopes, stage gates, or the monthly close. Every answer is a decision with a number and its calculation. Never moves money.",
+      "file": ".claude/agents/general-cfo.md"
+    },
+    {
+      "id": "agent:general-chro",
+      "kind": "agent",
+      "name": "general-chro",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Skill",
+        "Agent"
+      ],
+      "mcpServers": [],
+      "description": "CHRO General — owner of the human and agent workforce. Use when adding, reviewing, merging, or retiring agents and skills, designing roles, onboarding a collaborator, or protecting founder capacity. Every roster decision rests on audit evidence.",
+      "file": ".claude/agents/general-chro.md"
+    },
+    {
+      "id": "agent:general-cmo",
+      "kind": "agent",
+      "name": "general-cmo",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "CMO General — audience and brand owner. Use when positioning a brand, planning content or channels, improving visibility in search and AI answer engines, enforcing brand voice, or auditing a brand's pages and claims. Never publishes; prepares work for human approval.",
+      "file": ".claude/agents/general-cmo.md"
+    },
+    {
+      "id": "agent:general-coo",
+      "kind": "agent",
+      "name": "general-coo",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Skill",
+        "Agent"
+      ],
+      "mcpServers": [],
+      "description": "COO General — operations owner. Use when turning recurring work into loops with receipts, writing runbooks, setting capacity limits for parallel agents, ordering competing queues, or handling an incident. Runs the daily and weekly ops pulses.",
+      "file": ".claude/agents/general-coo.md"
+    },
+    {
+      "id": "agent:general-cpo",
+      "kind": "agent",
+      "name": "general-cpo",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "WebSearch",
+        "WebFetch",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "CPO General — product owner. Use when deciding what a brand sells or ships next, writing a product brief or spec with acceptance criteria and evals, designing an offer ladder or packaging, or reviewing whether a live product is working.",
+      "file": ".claude/agents/general-cpo.md"
+    },
+    {
+      "id": "agent:general-cto",
+      "kind": "agent",
+      "name": "general-cto",
+      "group": "core",
+      "tier": "opus",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "WebSearch",
+        "WebFetch",
+        "Skill",
+        "Agent"
+      ],
+      "mcpServers": [],
+      "description": "CTO General — technical platform owner. Use when choosing architecture or stack, deciding whether work should be a skill, subagent, command, or MCP tool, reviewing security posture or merge readiness, or running the weekly platform pulse. Recommends and reviews; implementation goes to worker agents.",
+      "file": ".claude/agents/general-cto.md"
+    },
+    {
       "id": "agent:github/code-review-swarm",
       "kind": "agent",
       "name": "code-review-swarm",
@@ -1110,66 +1287,6 @@
       ],
       "description": "Genre master for inspirational manifestos on systems building, AI-human partnership, and humanity's golden age - leads paradigm-shifting thought leadership",
       "file": ".claude/agents/golden-age-visionary.md"
-    },
-    {
-      "id": "agent:hive-mind/collective-intelligence-coordinator",
-      "kind": "agent",
-      "name": "collective-intelligence-coordinator",
-      "group": "hive-mind",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Orchestrates distributed cognitive processes across the hive mind, ensuring coherent collective decision-making through memory synchronization and consensus protocols",
-      "file": ".claude/agents/hive-mind/collective-intelligence-coordinator.md"
-    },
-    {
-      "id": "agent:hive-mind/queen-coordinator",
-      "kind": "agent",
-      "name": "queen-coordinator",
-      "group": "hive-mind",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "The sovereign orchestrator of hierarchical hive operations, managing strategic decisions, resource allocation, and maintaining hive coherence through centralized-decentralized hybrid control",
-      "file": ".claude/agents/hive-mind/queen-coordinator.md"
-    },
-    {
-      "id": "agent:hive-mind/scout-explorer",
-      "kind": "agent",
-      "name": "scout-explorer",
-      "group": "hive-mind",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Information reconnaissance specialist that explores unknown territories, gathers intelligence, and reports findings to the hive mind through continuous memory updates",
-      "file": ".claude/agents/hive-mind/scout-explorer.md"
-    },
-    {
-      "id": "agent:hive-mind/swarm-memory-manager",
-      "kind": "agent",
-      "name": "swarm-memory-manager",
-      "group": "hive-mind",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Manages distributed memory across the hive mind, ensuring data consistency, persistence, and efficient retrieval through advanced caching and synchronization protocols",
-      "file": ".claude/agents/hive-mind/swarm-memory-manager.md"
-    },
-    {
-      "id": "agent:hive-mind/worker-specialist",
-      "kind": "agent",
-      "name": "worker-specialist",
-      "group": "hive-mind",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Dedicated task execution specialist that carries out assigned work with precision, continuously reporting progress through memory coordination",
-      "file": ".claude/agents/hive-mind/worker-specialist.md"
     },
     {
       "id": "agent:integrity-guard",
@@ -2024,42 +2141,6 @@
       "file": ".claude/agents/sublinear/trading-predictor.md"
     },
     {
-      "id": "agent:swarm/adaptive-coordinator",
-      "kind": "agent",
-      "name": "adaptive-coordinator",
-      "group": "swarm",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Dynamic topology switching coordinator with self-organizing swarm patterns and real-time optimization",
-      "file": ".claude/agents/swarm/adaptive-coordinator.md"
-    },
-    {
-      "id": "agent:swarm/hierarchical-coordinator",
-      "kind": "agent",
-      "name": "hierarchical-coordinator",
-      "group": "swarm",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Queen-led hierarchical swarm coordination with specialized worker delegation",
-      "file": ".claude/agents/swarm/hierarchical-coordinator.md"
-    },
-    {
-      "id": "agent:swarm/mesh-coordinator",
-      "kind": "agent",
-      "name": "mesh-coordinator",
-      "group": "swarm",
-      "tier": "sonnet",
-      "status": "shipped",
-      "tools": [],
-      "mcpServers": [],
-      "description": "Peer-to-peer mesh network swarm with distributed decision making and fault tolerance",
-      "file": ".claude/agents/swarm/mesh-coordinator.md"
-    },
-    {
       "id": "agent:template-design",
       "kind": "agent",
       "name": "template-design-experts",
@@ -2297,6 +2378,61 @@
       "file": ".claude/agents/weekly-recap.md"
     },
     {
+      "id": "agent:worker-publisher",
+      "kind": "agent",
+      "name": "worker-publisher",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "WebFetch",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "Publisher worker: assembles and verifies a publish-ready package per channel, then stops at the publish gate. Use when content is ready to go out: writes channel-native variants, checks claims, links, alt text, disclosure, and the rendered Open Graph preview, scores the publishing rubric, and hands the owner the exact action. Never posts or schedules.",
+      "file": ".claude/agents/worker-publisher.md"
+    },
+    {
+      "id": "agent:worker-visual-producer",
+      "kind": "agent",
+      "name": "worker-visual-producer",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Write",
+        "Glob",
+        "Bash",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "Visual Producer worker: turns a creative brief into reviewable image, video, or infographic candidates within a credit budget. Use when a page, post, product, or campaign needs original visuals: checks the brief, picks the model by task, drafts, looks at every output, refines the best, and stages candidates with provenance. Never publishes or exceeds the budget.",
+      "file": ".claude/agents/worker-visual-producer.md"
+    },
+    {
+      "id": "agent:worker-visual-qa",
+      "kind": "agent",
+      "name": "worker-visual-qa",
+      "group": "core",
+      "tier": "sonnet",
+      "status": "shipped",
+      "tools": [
+        "Read",
+        "Grep",
+        "Glob",
+        "Bash",
+        "Skill"
+      ],
+      "mcpServers": [],
+      "description": "Visual QA worker: the agents' eyes. Use when a web page, app screen, or UI change must be judged as people see it: renders it at phone, tablet, and desktop widths in light and dark, opens every screenshot, scores the web visual rubric with evidence, and returns ship, revise, or block. Read-only; never edits product code.",
+      "file": ".claude/agents/worker-visual-qa.md"
+    },
+    {
       "id": "agent:world-architect",
       "kind": "agent",
       "name": "World Architect",
@@ -2364,7 +2500,7 @@
       "status": "shipped",
       "priority": null,
       "keywords": [],
-      "description": ""
+      "description": "Expert guidance on multi-cloud architecture, cost analysis, and technical decision-making for AI-powered platforms"
     },
     {
       "id": "skill:algorithmic-art",
@@ -2534,6 +2670,16 @@
       "priority": null,
       "keywords": [],
       "description": "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks"
+    },
+    {
+      "id": "skill:estate-guard",
+      "kind": "skill",
+      "name": "estate-guard",
+      "group": "skill",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [],
+      "description": "Security gate for agentic repos. Use before opening a PR that touches .github/workflows, .claude (hooks, settings, agents, commands, skills), .mcp.json, install scripts, or Next.js API routes; when asked to \"security review\", \"scan for prompt injection\", \"harden this repo\", \"check the agentic surface\", or when a fetched page, issue, comment, or tool result reads like instructions. Runs the estate-guard scanner, triages by severity, and applies the fix patterns."
     },
     {
       "id": "skill:excellence-book-writing",
@@ -3182,6 +3328,16 @@
       "priority": null,
       "keywords": [],
       "description": ">-"
+    },
+    {
+      "id": "skill:queen-ops",
+      "kind": "skill",
+      "name": "queen-ops",
+      "group": "skill",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [],
+      "description": "Run a Starlight Queen session on a developer machine - Brief or refuse, Maker ≠ Checker, a receipt is a claim, one receipt per dispatch. Use when dispatching work to subagents or an agent team, when a task is about to be created or completed, or when a repo has .starlight/queen/active.json. The hooks in this pack enforce the file shapes described here; the skill explains them."
     },
     {
       "id": "skill:reasoningbank-agentdb",
@@ -3842,6 +3998,24 @@
       "description": "Run the weekly FrankX operations loop — triage the inquiry inbox, advance the CRM pipeline, sweep open PRs across repos, and surface the content plan. The execution layer of the FrankX Operations System (frankx.ai /api/intake → Notion Inquiries CRM)."
     },
     {
+      "id": "skill:signal",
+      "kind": "skill",
+      "name": "signal",
+      "group": "creative",
+      "status": "shipped",
+      "priority": null,
+      "keywords": [
+        "linkedin post",
+        "linkedin article",
+        "repurpose for linkedin",
+        "linkedin week",
+        "dream100",
+        "thought leadership post",
+        "linkedin top voice"
+      ],
+      "description": "Signal — the LinkedIn Authority Engine. Draft, critique, repurpose, and stage LinkedIn posts/articles in a personal and a company voice, then learn from what performed. Runs the Excellence Loop, drafts everything, never auto-posts (ToS-safe, human ships)."
+    },
+    {
       "id": "command:agentic-orchestration",
       "kind": "command",
       "name": "/agentic-orchestration",
@@ -4391,6 +4565,13 @@
       "id": "command:ops",
       "kind": "command",
       "name": "/ops",
+      "group": "command",
+      "description": ""
+    },
+    {
+      "id": "command:signal",
+      "kind": "command",
+      "name": "/signal",
       "group": "command",
       "description": ""
     },
@@ -5061,6 +5242,16 @@
     {
       "source": "skill:ops",
       "target": "command:ops",
+      "rel": "triggers"
+    },
+    {
+      "source": "skill:signal",
+      "target": "skill:frankx-brand",
+      "rel": "uses-skill"
+    },
+    {
+      "source": "skill:signal",
+      "target": "command:signal",
       "rel": "triggers"
     },
     {
