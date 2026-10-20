@@ -510,6 +510,50 @@
           "when": "the content lands on a web page"
         }
       ]
+    },
+    "worker-web-builder": {
+      "skillMap": [
+        {
+          "skill": "web-release-gate",
+          "when": "always first: the phase order and what done requires"
+        },
+        {
+          "skill": "gpu-surface",
+          "when": "the change adds or touches a shader, canvas, or 3D element"
+        },
+        {
+          "skill": "ui-ux-pro-max",
+          "when": "choosing between directions within the repo's tokens"
+        },
+        {
+          "skill": "emil-design-eng",
+          "when": "anything moves: timing, easing, interruption"
+        },
+        {
+          "skill": "web-steward",
+          "when": "the change needs a new dependency: peer check first"
+        }
+      ]
+    },
+    "worker-web-steward": {
+      "skillMap": [
+        {
+          "skill": "web-steward",
+          "when": "always: inventory, triage, branch, proof, report"
+        },
+        {
+          "skill": "visual-proof",
+          "when": "before/after shots on routes that import a changed package"
+        },
+        {
+          "skill": "review-animations",
+          "when": "an animation library changed and code had to move"
+        },
+        {
+          "skill": "core-web-vitals",
+          "when": "a bump changes the route's first-load JS"
+        }
+      ]
     }
   }
 }

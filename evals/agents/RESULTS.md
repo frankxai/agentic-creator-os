@@ -32,3 +32,4 @@ Grader: the session lead (same model family) unless noted. Cross-family grading
 Open:
 - worker-visual-qa fixture case needs about 1 GiB of free RAM for headless Chrome, or a CI or cloud runner.
 - Re-run all three natively in a fresh session to confirm the native tool limits.
+- worker-web-builder `restraint-before-effect` and worker-web-steward `peer-mismatch` (added 2026-10-20) have not run yet. Both need a fresh session so the compiled agents load; peer-mismatch also needs registry.npmjs.org for a live peer check.
