@@ -1,6 +1,6 @@
 {
   "id": "worker-visual-qa",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "kind": "worker",
   "role": "visual-qa",
   "description": "Visual QA worker: the agents' eyes. Use when a web page, app screen, or UI change must be judged as people see it: renders it at phone, tablet, and desktop widths in light and dark, opens every screenshot, scores the web visual rubric with evidence, and returns ship, revise, or block. Read-only; never edits product code.",
@@ -24,7 +24,8 @@
   "color": "cyan",
   "kernel": "agent-os/kernel/expertise-kernel.md",
   "modules": [
-    "agent-os/roles/visual-qa.md"
+    "agent-os/roles/visual-qa.md",
+    "agent-os/rubrics/web-visual.md"
   ],
   "requiredReading": [
     "AGENTS.md",
