@@ -130,10 +130,10 @@ function verifyVersion(canonical) {
 function verifyClaims(canonical, measured) {
   const metrics = {
     nonEmptySkillModules: {
-      expected: 175,
-      readme: 'Non-empty skill modules | 175',
-      quickstart: '175 non-empty skill modules',
-      claude: '175 Non-empty Skill Modules',
+      expected: 176,
+      readme: 'Non-empty skill modules | 176',
+      quickstart: '176 non-empty skill modules',
+      claude: '176 Non-empty Skill Modules',
     },
     emptySkillPlaceholders: {
       expected: 5,

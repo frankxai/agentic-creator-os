@@ -8,7 +8,7 @@ capabilities:
   - spend-gating
   - monthly-close
 priority: high
-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch, Skill, Agent
+tools: Read, Grep, Glob, WebSearch, WebFetch, Skill
 model: opus
 memory: user
 color: green

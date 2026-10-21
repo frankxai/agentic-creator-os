@@ -467,8 +467,6 @@
         "mcp__claude_ai_Openart__openart_model_list",
         "mcp__claude_ai_Openart__openart_model_cost",
         "mcp__claude_ai_Openart__openart_model_form_get",
-        "mcp__claude_ai_Openart__openart_generate_image",
-        "mcp__claude_ai_Openart__openart_generate_video",
         "mcp__claude_ai_Openart__openart_creation_get"
       ],
       "skillMap": [

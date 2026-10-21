@@ -17,8 +17,8 @@ three workers, three rubrics, one renderer, and gates that stay where they are.
 | `general-cmo` | Owns channels and claims; returns briefs for the publisher | What goes out, where, when | Press the button |
 | `queen-<domain>` | Accepts results for a domain; runs visual QA on anything visible before accepting | Acceptance | Accept on a General's word alone |
 
-Workers are leaves: they never spawn other agents. Decide-only Generals (CEO, CMO,
-CPO, CCO) return a brief for their caller to dispatch.
+Workers are leaves: they never spawn other agents. Decide-only Generals (CEO, CFO,
+CMO, CPO, CCO) return a brief for their caller to dispatch.
 
 ## The renderer
 

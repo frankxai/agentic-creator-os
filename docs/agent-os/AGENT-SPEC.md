@@ -32,8 +32,11 @@ evals check it.
 **A tool list is not a permission boundary.** It limits only that agent. An
 `Agent(a, b)` allowlist states intent; agents an agent spawns get their own
 tools, and the session's permissions and the human gates are the real ceiling.
-Give `Agent` only to roles that execute through workers (CTO, COO, CFO, CAIO,
+Give `Agent` only to roles that execute through workers (CTO, COO, CAIO,
 CHRO, Domain Queens); decide-only roles return a delegation brief instead.
+The CFO is decide-only and holds neither `Agent` nor `Bash`: a money-domain agent
+may not hold write-capable tools, directly or through agents it spawns (estate
+money-write-authority rule).
 Workers (`kind: worker`) never hold `Agent`: they are the leaf that executes,
 and a worker that spawns workers is swarm theater. A Domain Queen's allowlist
 includes `worker-visual-qa` so it can check a visible result before accepting it.

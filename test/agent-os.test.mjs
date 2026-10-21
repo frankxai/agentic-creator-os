@@ -56,7 +56,9 @@ test('every compiled agent declares tools, model, and a native memory scope', ()
       assert.match(fm[1], /^tools: .*\bSkill\b/m);
       // Decide-only roles return a delegation brief; only executing roles hold Agent (AGENT-SPEC).
       // Workers are leaf executors: they never spawn agents.
-      const decideOnly = ['ceo', 'cmo', 'cpo', 'cco'].includes(spec.role);
+      const decideOnly = ['ceo', 'cfo', 'cmo', 'cpo', 'cco'].includes(spec.role);
+      // Money roles hold no write-capable tool (estate money-write-authority rule).
+      if (spec.role === 'cfo') assert.doesNotMatch(fm[1], /^tools: .*\bBash\b/m, `${spec.id} is a money role and must not hold Bash`);
       if (spec.kind === 'worker') assert.doesNotMatch(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} is a worker and must not hold Agent`);
       else if (decideOnly) assert.doesNotMatch(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} is decide-only and must not hold Agent`);
       else assert.match(fm[1], /^tools: .*\bAgent\b/m, `${spec.id} delegates and needs Agent`);

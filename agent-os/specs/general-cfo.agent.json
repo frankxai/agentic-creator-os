@@ -17,11 +17,9 @@
     "Read",
     "Grep",
     "Glob",
-    "Bash",
     "WebSearch",
     "WebFetch",
-    "Skill",
-    "Agent"
+    "Skill"
   ],
   "memory": "user",
   "color": "green",
