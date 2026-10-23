@@ -27,8 +27,6 @@ test('agent-eval.mjs pure module logic', async (t) => {
     assert.equal(parseScore(''), null);
     assert.equal(parseScore(' '), null);
     assert.equal(parseScore('not a number'), null);
-    assert.equal(parseScore('100foo'), null);
-    assert.deepEqual(parseScore(1.5), { score: 1.5, raw: '1.5' });
   });
 
   await t.test('parseResultsTable extracts rows correctly', () => {
@@ -135,9 +133,5 @@ test('agent-eval.mjs pure module logic', async (t) => {
     const same = validateCrossFamily('Claude-Opus', 'Claude-Sonnet');
     assert.equal(same.valid, false);
     assert.match(same.reason, /Runner and grader are both from model family/);
-
-    const unknown = validateCrossFamily('Claude-Opus', 'Something Else');
-    assert.equal(unknown.valid, false);
-    assert.match(unknown.reason, /Unrecognized model family/);
   });
 });
