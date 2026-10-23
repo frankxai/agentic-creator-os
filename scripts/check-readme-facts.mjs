@@ -8,10 +8,7 @@ import { execFileSync } from 'node:child_process'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
-// We will use the verify-public-surface script directly by checking its output
-// since we can't easily parse JSON from its stdout (it prints test results).
-// We'll write a simple regex approach or call the exported methods directly if they were exported,
-// but they aren't. Let's just run verify-public-surface and get the last chunk which is JSON.
+// Run verify-public-surface to get measured counts
 const measuredString = execFileSync('node', [join(ROOT, 'scripts/verify-public-surface.mjs')]).toString()
 const jsonMatch = measuredString.match(/\{\n[\s\S]*\n\}/)
 if (!jsonMatch) {
@@ -24,8 +21,16 @@ const readme = readFileSync(join(ROOT, 'README.md'), 'utf8')
 // 1. Literal promise
 assert.match(readme, /ACOS is a public source repository of AI workflows that you can install locally/i, "Requires a literally true one-sentence promise")
 
-// 2. Quickstart code block
-assert.match(readme, /git clone https:\/\/github.com\/frankxai\/agentic-creator-os.git/, "Requires quickstart code block")
+// 2. Quickstart code block (Updated based on review)
+const marketplace = JSON.parse(readFileSync(join(ROOT, '.claude-plugin/marketplace.json'), 'utf8'))
+const marketplaceName = marketplace.name
+const pluginName = marketplace.plugins[0].name
+
+const addMarketplaceCommand = `claude plugin marketplace add frankxai/agentic-creator-os`
+const installPluginCommand = `claude plugin install ${pluginName}@${marketplaceName}`
+
+assert.ok(readme.includes(addMarketplaceCommand), "Missing claude plugin marketplace add command")
+assert.ok(readme.includes(installPluginCommand), "Missing claude plugin install command with correct exact names")
 
 // 3. Counts match files on disk
 const expectedList = [
@@ -48,7 +53,7 @@ assert.match(readme, new RegExp(`\\| Top-level agent profiles \\| ${measured.top
 assert.match(readme, new RegExp(`\\| Installable shell hooks \\| ${measured.installableShellHooks} \\|`))
 assert.match(readme, new RegExp(`\\| Activation rules \\| ${measured.activationRules} \\|`))
 
-// 4. Verify every path on disk in README.md
+// 4. Verify every path on disk in README.md (Reviewer requested this dynamically)
 const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
 let match;
 while ((match = markdownLinkRegex.exec(readme)) !== null) {
