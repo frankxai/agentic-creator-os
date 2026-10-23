@@ -8,6 +8,27 @@ import { execFileSync } from 'node:child_process'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 
+// Fixture tests (instead of polluting README.md)
+const fixtureLinkFragment = "[Test Fragment](CONTRIBUTING.md#test-fragment)"
+const fixtureLinkEncoded = "[Test Encoded](QUICKSTART%2Emd)"
+
+const verifyLink = (linkPath) => {
+  if (!linkPath.startsWith('http') && !linkPath.startsWith('#')) {
+    const pathWithoutFragment = linkPath.split('#')[0]
+    const decodedPath = decodeURIComponent(pathWithoutFragment)
+    assert.ok(existsSync(join(ROOT, decodedPath)), `Path in README does not exist: ${decodedPath}`);
+  }
+}
+
+// Check fixture 1
+const m1 = /\[([^\]]+)\]\(([^)]+)\)/.exec(fixtureLinkFragment)
+if (m1) verifyLink(m1[2])
+
+// Check fixture 2
+const m2 = /\[([^\]]+)\]\(([^)]+)\)/.exec(fixtureLinkEncoded)
+if (m2) verifyLink(m2[2])
+
+
 // Run verify-public-surface to get measured counts
 const measuredString = execFileSync('node', [join(ROOT, 'scripts/verify-public-surface.mjs')]).toString()
 const jsonMatch = measuredString.match(/\{\n[\s\S]*\n\}/)
@@ -57,10 +78,7 @@ assert.match(readme, new RegExp(`\\| Activation rules \\| ${measured.activationR
 const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
 let match;
 while ((match = markdownLinkRegex.exec(readme)) !== null) {
-  let linkPath = match[2];
-  if (!linkPath.startsWith('http') && !linkPath.startsWith('#')) {
-    assert.ok(existsSync(join(ROOT, linkPath)), `Path in README does not exist: ${linkPath}`);
-  }
+  verifyLink(match[2])
 }
 
 console.log("README facts checked successfully.")

@@ -19,6 +19,7 @@ cd agentic-creator-os
 
 # Or install from marketplace:
 # claude plugin marketplace add frankxai/agentic-creator-os
+# claude plugin install creator-os-core@frankx-creator
 # grok plugin install creator-os-core --trust
 ```
 
