@@ -42,7 +42,7 @@ export interface InstagramStory {
   link?: string;
   stickers?: Array<{
     type: "mention" | "hashtag" | "location" | "poll" | "question";
-    data: any;
+    data: unknown;
   }>;
   metrics?: {
     impressions: number;
@@ -155,7 +155,7 @@ export async function createStory(params: {
   link?: string;
   stickers?: Array<{
     type: "mention" | "hashtag" | "location" | "poll" | "question";
-    data: any;
+    data: unknown;
   }>;
 }): Promise<{ success: boolean; story?: InstagramStory; error?: string }> {
   const rateCheck = checkRateLimit("stories");
