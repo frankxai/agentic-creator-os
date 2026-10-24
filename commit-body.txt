@@ -1,0 +1,18 @@
+Class: test
+
+Added `scripts/smoke-test.mjs` to assert that every file path referenced in the main catalog (`tools/observatory/public/catalog.json`) exists on disk, and that any command shown in `README.md` quickstart blocks matching `npm run` or `pnpm` maps to a real script in `package.json`. Added `test/smoke.test.mjs` to prove it exits 1 when a referenced catalog file is missing. Added `smoke` script to `package.json`.
+
+Verification:
+```bash
+npm run smoke
+```
+(Exits cleanly with status 0)
+
+Not done:
+Did not inspect actual shell command lines like `./install.sh` in the quickstart, as they do not map to `package.json` scripts. Only mapped commands matching `npm run` or `pnpm` were checked against `package.json` scripts.
+
+Risks:
+If `tools/observatory/public/catalog.json` structure changes significantly, the script might stop reading the correct field names.
+
+Pre-existing failures:
+None observed.
