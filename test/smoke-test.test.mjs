@@ -115,3 +115,31 @@ test('root plugin skills directory without SKILL.md exits 1', () => {
   assert.equal(r.status, 1);
   assert.match(r.stderr, /skills\/example: skill directory has no SKILL\.md/);
 });
+
+test('group folder with a valid nested skill passes', () => {
+  const root = fixture();
+  write(root, 'skills/grouped/inner/SKILL.md', '# inner\n');
+  write(root, 'skills/flat/SKILL.md', '# flat\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('group folder with a nested skill lacking SKILL.md exits 1 naming the nested path only', () => {
+  const root = fixture();
+  write(root, 'skills/grouped/good/SKILL.md', '# good\n');
+  write(root, 'skills/grouped/bad/skill.yaml', 'name: bad\n');
+  write(root, 'skills/grouped/bad/CLAUDE.md', '# bad\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /skills\/grouped\/bad: skill directory has no SKILL\.md/);
+  assert.doesNotMatch(r.stderr, /skills\/grouped: /);
+  assert.match(r.stderr, /1 problem\(s\)/);
+});
+
+test('flat skill with only skill.yaml still fails', () => {
+  const root = fixture();
+  write(root, 'skills/flat/skill.yaml', 'name: flat\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /skills\/flat: skill directory has no SKILL\.md/);
+});

@@ -49,9 +49,30 @@ function checkExplicitPaths(manifest, baseDir, root, label, problems) {
 function checkConventionalDirs(pluginDir, root, problems) {
   const skillsDir = path.join(pluginDir, 'skills');
   if (!existsSync(skillsDir)) return;
-  for (const entry of readdirSync(skillsDir)) {
-    const full = path.join(skillsDir, entry);
-    if (statSync(full).isDirectory() && !existsSync(path.join(full, 'SKILL.md'))) {
+  checkSkillEntries(skillsDir, root, problems, true);
+}
+
+// Group-vs-skill is decided by structure. A directory holding SKILL.md, CLAUDE.md or
+// skill.yaml is a skill and must have SKILL.md. A directory with none of those whose
+// children include directories is a group (e.g. skills/technical/) and is searched one
+// level down. Groups cannot nest: below a group, every directory is treated as a skill.
+const SKILL_MARKERS = ['SKILL.md', 'CLAUDE.md', 'skill.yaml'];
+
+function checkSkillEntries(dir, root, problems, allowGroups) {
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (!statSync(full).isDirectory()) continue;
+    const isSkill = SKILL_MARKERS.some((m) => existsSync(path.join(full, m)));
+    if (isSkill) {
+      if (!existsSync(path.join(full, 'SKILL.md'))) {
+        problems.push(`${posix(root, full)}: skill directory has no SKILL.md`);
+      }
+      continue;
+    }
+    const hasSubdirs = readdirSync(full).some((c) => statSync(path.join(full, c)).isDirectory());
+    if (allowGroups && hasSubdirs) {
+      checkSkillEntries(full, root, problems, false);
+    } else {
       problems.push(`${posix(root, full)}: skill directory has no SKILL.md`);
     }
   }
