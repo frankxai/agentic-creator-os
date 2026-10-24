@@ -12,13 +12,17 @@ function run(cmd, options = {}) {
 
 const tempDir = mkdtempSync(join(tmpdir(), 'acos-smoke-'));
 console.log(`Created temp directory: ${tempDir}`);
+const cleanupDirs = [tempDir];
 
 try {
-  console.log('Copying repository...');
-  cpSync(process.cwd(), tempDir, {
-    recursive: true,
-    filter: (source) => !source.match(/[\\/](\.git)([\\/]|$)/),
-  });
+  console.log('Exporting clean checkout...');
+  execSync(`git archive HEAD | tar -x -C "${tempDir}"`);
+
+  // node_modules is needed offline, and we know we're in a working project environment.
+  if (existsSync(join(process.cwd(), 'node_modules'))) {
+    console.log('Copying node_modules for offline support...');
+    cpSync(join(process.cwd(), 'node_modules'), join(tempDir, 'node_modules'), { recursive: true });
+  }
 
   // Ensure install.sh is executable
   chmodSync(join(tempDir, 'install.sh'), 0o755);
@@ -28,11 +32,13 @@ try {
 
   {
     const claudeHome = mkdtempSync(join(tmpdir(), 'claude-home-'));
+    cleanupDirs.push(claudeHome);
     run('bash ./install.sh --platform=claude --minimal', { cwd: tempDir, env: { ...process.env, CLAUDE_HOME: claudeHome } });
   }
   run('bash ./install.sh --dry-run --platform=claude', { cwd: tempDir });
   {
     const claudeHome = mkdtempSync(join(tmpdir(), 'claude-home-'));
+    cleanupDirs.push(claudeHome);
     run('bash ./install.sh --platform=claude', { cwd: tempDir, env: { ...process.env, CLAUDE_HOME: claudeHome } });
   }
 
@@ -91,6 +97,12 @@ try {
   console.error(err.message);
   process.exitCode = 1;
 } finally {
-  console.log(`Cleaning up ${tempDir}...`);
-  rmSync(tempDir, { recursive: true, force: true });
+  for (const dir of cleanupDirs) {
+    console.log(`Cleaning up ${dir}...`);
+    try {
+      rmSync(dir, { recursive: true, force: true });
+    } catch (e) {
+      console.error(`Failed to clean up ${dir}: ${e.message}`);
+    }
+  }
 }
