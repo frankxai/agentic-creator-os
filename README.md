@@ -25,13 +25,9 @@ cd agentic-creator-os
 
 ## Verified public surface
 
-The repository currently contains:
+**Status:** Wave 0 (Experimental/Development)
 
-- 176 non-empty skill modules
-- 85 top-level slash commands
-- 81 top-level agent profiles
-- 9 installable shell hooks
-- 32 activation rules
+The repository currently contains:
 
 | Surface | Count | Definition |
 |---|---:|---|
@@ -41,6 +37,12 @@ The repository currently contains:
 | Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
+
+### What this is not
+
+- This is not a managed SaaS or cloud service.
+- This is not a replacement for domain expertise or human accountability.
+- This is not an autonomous background worker; it requires an operator and a harness.
 
 ## Documentation
 
