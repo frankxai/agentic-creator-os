@@ -238,3 +238,33 @@ test('a dangling skills symlink is reported and the README check still runs', (t
   assert.match(r.stderr, /cannot read plugins\/core\/skills: ENOENT/);
   assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
 });
+
+test('a declared skills path that is a file is reported', () => {
+  const root = fixture();
+  write(root, 'plugins/core/.claude-plugin/plugin.json', JSON.stringify({ name: 'core', skills: './notes.md' }));
+  write(root, 'plugins/core/notes.md', 'a file, not a directory\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /declared skills path is not a directory \("\.\/notes\.md", plugins\/core\/notes\.md\)/);
+});
+
+test('npm value-taking flags are skipped but pnpm -w stays boolean', () => {
+  const bad = runSmoke(fixture('npm --workspace app run ghost\nnpm -w app run nope\nnpm run -w app phantom'));
+  assert.equal(bad.status, 1);
+  assert.match(bad.stderr, /script "ghost" which is not in package\.json scripts/);
+  assert.match(bad.stderr, /script "nope" which is not in package\.json scripts/);
+  assert.match(bad.stderr, /script "phantom" which is not in package\.json scripts/);
+  assert.equal(runSmoke(fixture('npm --workspace app run build\npnpm -w build')).status, 0);
+});
+
+test('an unreadable README is reported and earlier manifest problems still print', () => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/commands/go.md'));
+  rmSync(path.join(root, 'README.md'));
+  mkdirSync(path.join(root, 'README.md')); // a directory where the file should be: readFileSync throws EISDIR
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /cannot read README\.md: EISDIR/);
+  assert.match(r.stderr, /commands path "\.\/commands\/go\.md" does not exist/);
+  assert.match(r.stderr, /2 problem\(s\)/);
+});

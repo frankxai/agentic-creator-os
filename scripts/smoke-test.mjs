@@ -12,7 +12,11 @@ const BUILTINS = new Set([
   'audit', 'outdated', 'list', 'ls', 'why', 'store', 'config', 'env', 'create', 'import', 'prune',
   'rebuild', 'fetch', 'patch', 'setup', 'self-update', 'help', 'version', 'cache', 'dedupe',
 ]);
-const FLAGS_WITH_VALUE = new Set(['--filter', '-F', '--dir', '-C', '--prefix']);
+// Flags that consume the next token, per tool. pnpm's -w is boolean (workspace root); npm's -w takes a value.
+const FLAGS_WITH_VALUE = {
+  npm: new Set(['-w', '--workspace', '--prefix', '-C']),
+  pnpm: new Set(['--filter', '-F', '--dir', '-C', '--prefix']),
+};
 const COMPONENT_FIELDS = ['skills', 'agents', 'commands'];
 const FENCE_OPEN = /^ {0,3}(`{3,}|~{3,})(.*)$/;
 
@@ -77,8 +81,11 @@ function checkExplicitPaths(manifest, baseDir, root, label, problems) {
       const target = path.resolve(baseDir, ref);
       if (!existsSync(target)) {
         problems.push(`${label}: ${field} path "${ref}" does not exist (${posix(root, target) || '.'})`);
-      } else if (field === 'skills' && isDirectory(target, root, problems)) {
-        checkDeclaredSkillsDir(target, root, problems);
+      } else if (field === 'skills') {
+        const st = guarded(statSync, target, root, problems);
+        if (st === null) continue;
+        if (st.isDirectory()) checkDeclaredSkillsDir(target, root, problems);
+        else problems.push(`${label}: declared skills path is not a directory ("${ref}", ${posix(root, target)})`);
       }
     }
   }
@@ -299,12 +306,13 @@ function scriptNameOf(segment) {
   const tool = tokens[0];
   if (tool !== 'npm' && tool !== 'pnpm') return null;
   let i = 1;
-  while (i < tokens.length && tokens[i].startsWith('-')) i += FLAGS_WITH_VALUE.has(tokens[i]) ? 2 : 1;
+  const takesValue = FLAGS_WITH_VALUE[tool];
+  while (i < tokens.length && tokens[i].startsWith('-')) i += takesValue.has(tokens[i]) ? 2 : 1;
   const verb = tokens[i];
   if (!verb) return null;
   if (verb === 'run' || verb === 'run-script') {
     i++;
-    while (i < tokens.length && tokens[i].startsWith('-')) i++;
+    while (i < tokens.length && tokens[i].startsWith('-')) i += takesValue.has(tokens[i]) ? 2 : 1;
     return tokens[i] ?? null;
   }
   // npm needs "run"; pnpm built-ins are not scripts.
@@ -315,7 +323,9 @@ function scriptNameOf(segment) {
 function checkReadme(root, problems) {
   const readmePath = path.join(root, 'README.md');
   if (!existsSync(readmePath)) { problems.push('README.md: file is missing'); return; }
-  const section = quickstartSection(readFileSync(readmePath, 'utf8'));
+  const readme = guarded((p) => readFileSync(p, 'utf8'), readmePath, root, problems);
+  if (readme === null) return;
+  const section = quickstartSection(readme);
   if (!section) { problems.push('README.md: no "Quick start" section found'); return; }
   const pkgPath = path.join(root, 'package.json');
   if (!existsSync(pkgPath)) { problems.push('package.json: file is missing'); return; }
