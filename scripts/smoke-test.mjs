@@ -14,13 +14,34 @@ const BUILTINS = new Set([
 ]);
 const FLAGS_WITH_VALUE = new Set(['--filter', '-F', '--dir', '-C', '--prefix']);
 const COMPONENT_FIELDS = ['skills', 'agents', 'commands'];
-const FENCE = /^\s*(`{3}|~{3})/;
+const FENCE_OPEN = /^ {0,3}(`{3,}|~{3,})(.*)$/;
+
+// CommonMark-style fence tracking. `state` is null outside a fence, else { char, len }.
+// A closing fence uses the same character, is at least as long, and has no info string.
+// Returns { state, isFenceLine }.
+function fenceStep(state, line) {
+  const m = FENCE_OPEN.exec(line);
+  if (!m) return { state, isFenceLine: false };
+  const char = m[1][0];
+  const len = m[1].length;
+  if (!state) {
+    if (char === '`' && m[2].includes('`')) return { state, isFenceLine: false };
+    return { state: { char, len }, isFenceLine: true };
+  }
+  if (char === state.char && len >= state.len && m[2].trim() === '') return { state: null, isFenceLine: true };
+  return { state, isFenceLine: false };
+}
 
 const posix = (root, p) => path.relative(root, p).split(path.sep).join('/');
 
 function readJson(file, problems, label) {
   try {
-    return JSON.parse(readFileSync(file, 'utf8'));
+    const parsed = JSON.parse(readFileSync(file, 'utf8'));
+    if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      problems.push(`${label}: manifest is not a JSON object`);
+      return null;
+    }
+    return parsed;
   } catch (err) {
     problems.push(`${label}: cannot read manifest (${err.message})`);
     return null;
@@ -41,9 +62,22 @@ function checkExplicitPaths(manifest, baseDir, root, label, problems) {
       const target = path.resolve(baseDir, ref);
       if (!existsSync(target)) {
         problems.push(`${label}: ${field} path "${ref}" does not exist (${posix(root, target) || '.'})`);
+      } else if (field === 'skills' && statSync(target).isDirectory()) {
+        checkDeclaredSkillsDir(target, root, problems);
       }
     }
   }
+}
+
+// A manifest-declared skills path is either a single skill directory or a directory of skills.
+function checkDeclaredSkillsDir(target, root, problems) {
+  if (SKILL_MARKERS.some((m) => existsSync(path.join(target, m)))) {
+    if (!existsSync(path.join(target, 'SKILL.md'))) {
+      problems.push(`${posix(root, target)}: skill directory has no SKILL.md`);
+    }
+    return;
+  }
+  checkSkillEntries(target, root, problems, true);
 }
 
 function checkConventionalDirs(pluginDir, root, problems) {
@@ -130,10 +164,11 @@ function quickstartSection(readme) {
   if (start === -1) return null;
   const level = lines[start].match(/^#+/)[0].length;
   const out = [];
-  let inFence = false;
+  let fence = null;
   for (let i = start + 1; i < lines.length; i++) {
-    if (FENCE.test(lines[i])) inFence = !inFence;
-    const h = inFence ? null : lines[i].match(/^(#{1,6})\s/);
+    const step = fenceStep(fence, lines[i]);
+    fence = step.state;
+    const h = fence || step.isFenceLine ? null : lines[i].match(/^(#{1,6})\s/);
     if (h && h[1].length <= level) break;
     out.push(lines[i]);
   }
@@ -142,11 +177,13 @@ function quickstartSection(readme) {
 
 function fencedCommandLines(sectionLines) {
   const commands = [];
-  let inFence = false;
+  let fence = null;
   let pending = '';
   for (const raw of sectionLines) {
-    if (FENCE.test(raw)) { inFence = !inFence; pending = ''; continue; }
-    if (!inFence) continue;
+    const step = fenceStep(fence, raw);
+    fence = step.state;
+    if (step.isFenceLine) { pending = ''; continue; }
+    if (!fence) continue;
     const line = pending + raw.trim();
     pending = '';
     if (line.endsWith('\\')) { pending = `${line.slice(0, -1)} `; continue; }
@@ -199,7 +236,7 @@ export function smoke(root) {
   const problems = [];
   checkManifests(root, problems);
   checkReadme(root, problems);
-  return problems;
+  return [...new Set(problems)];
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

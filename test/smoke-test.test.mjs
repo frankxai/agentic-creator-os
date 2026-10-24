@@ -143,3 +143,40 @@ test('flat skill with only skill.yaml still fails', () => {
   assert.equal(r.status, 1);
   assert.match(r.stderr, /skills\/flat: skill directory has no SKILL\.md/);
 });
+
+test('manifest-declared custom skills directory is checked for SKILL.md', () => {
+  const root = fixture();
+  write(root, 'plugins/core/.claude-plugin/plugin.json', JSON.stringify({ name: 'core', skills: './custom' }));
+  write(root, 'plugins/core/custom/ok/SKILL.md', '# ok\n');
+  write(root, 'plugins/core/custom/bad/skill.yaml', 'name: bad\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /plugins\/core\/custom\/bad: skill directory has no SKILL\.md/);
+  assert.doesNotMatch(r.stderr, /custom\/ok/);
+});
+
+test('null or non-object manifests are reported, not skipped', () => {
+  for (const rel of ['.claude-plugin/plugin.json', '.claude-plugin/marketplace.json']) {
+    for (const body of ['null', '[]', '"text"']) {
+      const root = fixture();
+      write(root, rel, body);
+      const r = runSmoke(root);
+      assert.equal(r.status, 1, `${rel} = ${body}`);
+      assert.match(r.stderr, new RegExp(`${rel.replace(/[.\/]/g, '\$&')}: manifest is not a JSON object`));
+    }
+  }
+});
+
+test('fence tracking honours delimiter type and length', () => {
+  const cases = {
+    'shorter backtick fence does not close a longer one': ['````bash', '```', '# comment', 'pnpm run ghost', '````'],
+    'tilde fence does not close a backtick fence': ['```bash', '~~~', '# comment', 'pnpm run ghost', '```'],
+  };
+  for (const [name, body] of Object.entries(cases)) {
+    const root = fixture();
+    write(root, 'README.md', ['# Fx', '', '## Quick start', '', ...body, '', '## Later', ''].join(String.fromCharCode(10)));
+    const r = runSmoke(root);
+    assert.equal(r.status, 1, name);
+    assert.match(r.stderr, /script "ghost" which is not in package.json scripts/, name);
+  }
+});
