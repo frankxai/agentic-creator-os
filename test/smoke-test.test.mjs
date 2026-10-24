@@ -94,3 +94,24 @@ test('built-in commands and comments are ignored', () => {
   const r = runSmoke(fixture('pnpm install\nnpm ci\nnpm test\nnpm start\n# npm run commented-out\nnpm install && npm run lint'));
   assert.equal(r.status, 0, r.stderr);
 });
+
+test('shell comment inside a code fence does not end the Quick start section', () => {
+  const r = runSmoke(fixture('# Install dependencies\npnpm run ghost'));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
+});
+
+test('pnpm -w is a boolean flag, so the script after it is still checked', () => {
+  const r = runSmoke(fixture('pnpm -w phantom'));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /script "phantom" which is not in package\.json scripts/);
+  assert.equal(runSmoke(fixture('pnpm -w build')).status, 0);
+});
+
+test('root plugin skills directory without SKILL.md exits 1', () => {
+  const root = fixture();
+  write(root, 'skills/example/notes.md', 'no skill file\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /skills\/example: skill directory has no SKILL\.md/);
+});

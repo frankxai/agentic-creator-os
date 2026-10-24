@@ -12,7 +12,7 @@ const BUILTINS = new Set([
   'audit', 'outdated', 'list', 'ls', 'why', 'store', 'config', 'env', 'create', 'import', 'prune',
   'rebuild', 'fetch', 'patch', 'setup', 'self-update', 'help', 'version', 'cache', 'dedupe',
 ]);
-const FLAGS_WITH_VALUE = new Set(['--filter', '-F', '--dir', '-C', '--prefix', '-w']);
+const FLAGS_WITH_VALUE = new Set(['--filter', '-F', '--dir', '-C', '--prefix']);
 const COMPONENT_FIELDS = ['skills', 'agents', 'commands'];
 const FENCE = /^\s*(`{3}|~{3})/;
 
@@ -86,6 +86,7 @@ function checkManifests(root, problems) {
   if (existsSync(rootPlugin)) {
     const manifest = readJson(rootPlugin, problems, '.claude-plugin/plugin.json');
     if (manifest) checkExplicitPaths(manifest, root, root, '.claude-plugin/plugin.json', problems);
+    checkConventionalDirs(root, root, problems);
   } else {
     problems.push('.claude-plugin/plugin.json: file is missing');
   }
@@ -108,8 +109,10 @@ function quickstartSection(readme) {
   if (start === -1) return null;
   const level = lines[start].match(/^#+/)[0].length;
   const out = [];
+  let inFence = false;
   for (let i = start + 1; i < lines.length; i++) {
-    const h = lines[i].match(/^(#{1,6})\s/);
+    if (FENCE.test(lines[i])) inFence = !inFence;
+    const h = inFence ? null : lines[i].match(/^(#{1,6})\s/);
     if (h && h[1].length <= level) break;
     out.push(lines[i]);
   }
