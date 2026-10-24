@@ -65,6 +65,7 @@
     "observatory:install-hooks": "node tools/observatory/install-hooks.mjs",
     "observatory:test": "node --test scripts/build-catalog.test.mjs",
     "verify:public-surface": "node scripts/verify-public-surface.mjs",
+    "smoke": "node scripts/smoke-test.mjs",
     "test:receipt": "node --test tools/receipt-check/check-receipt.test.mjs",
     "research:validate": "node scripts/validate-research-packet.mjs",
     "research:test": "node --test test/research-packet.test.mjs",

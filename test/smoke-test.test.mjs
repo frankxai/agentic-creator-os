@@ -1,0 +1,96 @@
+// The smoke test is only worth having if it fails for the right reason.
+// Each case builds a minimal fixture tree in os.tmpdir() and checks the exact exit code and diagnostic.
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import test, { after } from 'node:test';
+import { fileURLToPath } from 'node:url';
+
+const script = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'scripts', 'smoke-test.mjs');
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }); });
+
+const write = (root, rel, text) => {
+  const file = path.join(root, rel);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, text);
+};
+
+function fixture(readmeCommands = 'npm run build\npnpm lint\nnpm install') {
+  const root = mkdtempSync(path.join(tmpdir(), 'acos-smoke-'));
+  made.push(root);
+  write(root, '.claude-plugin/plugin.json', JSON.stringify({ name: 'fx', version: '1.0.0' }));
+  write(root, '.claude-plugin/marketplace.json', JSON.stringify({
+    name: 'fx-market',
+    plugins: [{ name: 'core', source: './plugins/core', commands: ['./commands/go.md'] }],
+  }));
+  write(root, 'plugins/core/.claude-plugin/plugin.json', JSON.stringify({
+    name: 'core', skills: './skills', agents: ['./agents/helper.md'],
+  }));
+  write(root, 'plugins/core/skills/alpha/SKILL.md', '# alpha\n');
+  write(root, 'plugins/core/agents/helper.md', '# helper\n');
+  write(root, 'plugins/core/commands/go.md', '# go\n');
+  write(root, 'package.json', JSON.stringify({ scripts: { build: 'x', lint: 'y' } }));
+  write(root, 'README.md', `# Fx\n\n## Quick start\n\n\`\`\`bash\n${readmeCommands}\n\`\`\`\n\n## Later\n\n\`\`\`bash\nnpm run not-in-quickstart\n\`\`\`\n`);
+  return root;
+}
+
+// Returns { status, stdout, stderr }; only a numeric exit status is ever accepted by the assertions.
+function runSmoke(root) {
+  try {
+    const stdout = execFileSync(process.execPath, [script, root], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+    return { status: 0, stdout, stderr: '' };
+  } catch (err) {
+    if (typeof err.status !== 'number') throw err;
+    return { status: err.status, stdout: String(err.stdout), stderr: String(err.stderr) };
+  }
+}
+
+test('clean fixture exits 0', () => {
+  const r = runSmoke(fixture());
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /smoke: ok/);
+});
+
+test('missing command file exits exactly 1 and names the path', () => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/commands/go.md'));
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /commands path "\.\/commands\/go\.md" does not exist \(plugins\/core\/commands\/go\.md\)/);
+});
+
+test('missing agent and skills directory are both reported in one run', () => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/agents/helper.md'));
+  rmSync(path.join(root, 'plugins/core/skills'), { recursive: true });
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /agents path "\.\/agents\/helper\.md" does not exist/);
+  assert.match(r.stderr, /skills path "\.\/skills" does not exist/);
+  assert.match(r.stderr, /2 problem\(s\)/);
+});
+
+test('skill directory without SKILL.md exits 1', () => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/skills/alpha/SKILL.md'));
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /plugins\/core\/skills\/alpha: skill directory has no SKILL\.md/);
+});
+
+test('README quickstart script missing from package.json exits 1 with the script name', () => {
+  const r = runSmoke(fixture('npm run build\npnpm run ghost\npnpm phantom'));
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
+  assert.match(r.stderr, /script "phantom" which is not in package\.json scripts/);
+  assert.doesNotMatch(r.stderr, /not-in-quickstart/);
+  assert.doesNotMatch(r.stderr, /script "build"/);
+});
+
+test('built-in commands and comments are ignored', () => {
+  const r = runSmoke(fixture('pnpm install\nnpm ci\nnpm test\nnpm start\n# npm run commented-out\nnpm install && npm run lint'));
+  assert.equal(r.status, 0, r.stderr);
+});
