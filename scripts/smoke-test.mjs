@@ -17,18 +17,24 @@ try {
   console.log('Copying repository...');
   cpSync(process.cwd(), tempDir, {
     recursive: true,
-    filter: (source) => !source.match(/[\\/](node_modules|\.git)([\\/]|$)/),
+    filter: (source) => !source.match(/[\\/](\.git)([\\/]|$)/),
   });
 
   // Ensure install.sh is executable
   chmodSync(join(tempDir, 'install.sh'), 0o755);
 
   console.log('\n--- Running Quickstart Commands ---\n');
-  run('npm install', { cwd: tempDir });
+  // npm install skipped because node_modules is copied from parent to ensure offline support
 
-  run('export CLAUDE_HOME="$(mktemp -d)" && ./install.sh --platform=claude --minimal', { cwd: tempDir, shell: '/bin/bash' });
-  run('./install.sh --dry-run --platform=claude', { cwd: tempDir });
-  run('export CLAUDE_HOME="$(mktemp -d)" && ./install.sh --platform=claude', { cwd: tempDir, shell: '/bin/bash' });
+  {
+    const claudeHome = mkdtempSync(join(tmpdir(), 'claude-home-'));
+    run('bash ./install.sh --platform=claude --minimal', { cwd: tempDir, env: { ...process.env, CLAUDE_HOME: claudeHome } });
+  }
+  run('bash ./install.sh --dry-run --platform=claude', { cwd: tempDir });
+  {
+    const claudeHome = mkdtempSync(join(tmpdir(), 'claude-home-'));
+    run('bash ./install.sh --platform=claude', { cwd: tempDir, env: { ...process.env, CLAUDE_HOME: claudeHome } });
+  }
 
   run('node scripts/agent-os-init.mjs --name my-brand', { cwd: tempDir });
   run('node scripts/agent-compile.mjs --instance my-brand', { cwd: tempDir });
@@ -57,14 +63,20 @@ try {
     throw new Error('Catalog is missing nodes array');
   }
 
+  let checkedFilesCount = 0;
   for (const node of catalog.nodes) {
     if (node.file) {
+      checkedFilesCount++;
       const fullPath = join(tempDir, node.file);
       if (!existsSync(fullPath)) {
         console.error(`❌ Referenced file missing: ${node.file} (Kind: ${node.kind})`);
         missingFiles++;
       }
     }
+  }
+
+  if (checkedFilesCount === 0) {
+    throw new Error('Manifest contains zero file references. This implies parsing failed.');
   }
 
   if (missingFiles > 0) {
