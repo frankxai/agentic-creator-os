@@ -2,7 +2,7 @@
 // Each case builds a minimal fixture tree in os.tmpdir() and checks the exact exit code and diagnostic.
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import test, { after } from 'node:test';
@@ -202,4 +202,39 @@ test('non-object marketplace plugin entry is reported and the run continues', ()
   assert.match(r.stderr, /plugin "gone": source "\.\/plugins\/gone" does not exist/);
   assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
   assert.match(r.stderr, /3 problem\(s\)/);
+});
+
+test('operators inside quotes do not split commands and quoted script names are unquoted', () => {
+  const clean = runSmoke(fixture('echo "x && pnpm ghost"\nnpm run "build"\nnpm run \'lint\' && echo \'a;b\''));
+  assert.equal(clean.status, 0, clean.stderr);
+  const bad = runSmoke(fixture('npm run "ghost"'));
+  assert.equal(bad.status, 1);
+  assert.match(bad.stderr, /script "ghost" which is not in package\.json scripts/);
+});
+
+test('a skills path that is a file is reported and the README check still runs', () => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/skills'), { recursive: true });
+  write(root, 'plugins/core/skills', 'not a directory\n');
+  write(root, 'README.md', '## Quick start\n\n```bash\npnpm ghost\n```\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /cannot read plugins\/core\/skills: not a directory/);
+  assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
+});
+
+test('a dangling skills symlink is reported and the README check still runs', (t) => {
+  const root = fixture();
+  rmSync(path.join(root, 'plugins/core/skills'), { recursive: true });
+  try {
+    symlinkSync(path.join(root, 'nowhere'), path.join(root, 'plugins/core/skills'), 'junction');
+  } catch (err) {
+    if (err.code === 'EPERM' || err.code === 'EACCES') { t.skip(`cannot create symlinks here: ${err.code}`); return; }
+    throw err;
+  }
+  write(root, 'README.md', '## Quick start\n\n```bash\npnpm ghost\n```\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /cannot read plugins\/core\/skills: ENOENT/);
+  assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
 });

@@ -2,7 +2,7 @@
 // ACOS smoke test: manifests point at real files, README quickstart names real scripts.
 // No dependencies, no network. Usage: node scripts/smoke-test.mjs [repoRoot]
 // Exit 0 when clean, exit 1 listing every problem found.
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, lstatSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -34,6 +34,21 @@ function fenceStep(state, line) {
 
 const posix = (root, p) => path.relative(root, p).split(path.sep).join('/');
 
+// Run a filesystem call; on failure record "cannot read <path>: <reason>" and return null.
+function guarded(fn, target, root, problems) {
+  try {
+    return fn(target);
+  } catch (err) {
+    problems.push(`cannot read ${posix(root, target) || '.'}: ${err.code ?? err.message}`);
+    return null;
+  }
+}
+
+function isDirectory(target, root, problems) {
+  const st = guarded(statSync, target, root, problems);
+  return st !== null && st.isDirectory();
+}
+
 function readJson(file, problems, label) {
   try {
     const parsed = JSON.parse(readFileSync(file, 'utf8'));
@@ -62,7 +77,7 @@ function checkExplicitPaths(manifest, baseDir, root, label, problems) {
       const target = path.resolve(baseDir, ref);
       if (!existsSync(target)) {
         problems.push(`${label}: ${field} path "${ref}" does not exist (${posix(root, target) || '.'})`);
-      } else if (field === 'skills' && statSync(target).isDirectory()) {
+      } else if (field === 'skills' && isDirectory(target, root, problems)) {
         checkDeclaredSkillsDir(target, root, problems);
       }
     }
@@ -82,7 +97,19 @@ function checkDeclaredSkillsDir(target, root, problems) {
 
 function checkConventionalDirs(pluginDir, root, problems) {
   const skillsDir = path.join(pluginDir, 'skills');
-  if (!existsSync(skillsDir)) return;
+  try {
+    lstatSync(skillsDir);
+  } catch (err) {
+    if (err.code === 'ENOENT') return; // no skills directory at all is fine
+    problems.push(`cannot read ${posix(root, skillsDir)}: ${err.code ?? err.message}`);
+    return;
+  }
+  const st = guarded(statSync, skillsDir, root, problems); // a dangling symlink fails here
+  if (st === null) return;
+  if (!st.isDirectory()) {
+    problems.push(`cannot read ${posix(root, skillsDir)}: not a directory`);
+    return;
+  }
   checkSkillEntries(skillsDir, root, problems, true);
 }
 
@@ -93,9 +120,11 @@ function checkConventionalDirs(pluginDir, root, problems) {
 const SKILL_MARKERS = ['SKILL.md', 'CLAUDE.md', 'skill.yaml'];
 
 function checkSkillEntries(dir, root, problems, allowGroups) {
-  for (const entry of readdirSync(dir)) {
+  const entries = guarded(readdirSync, dir, root, problems);
+  if (entries === null) return;
+  for (const entry of entries) {
     const full = path.join(dir, entry);
-    if (!statSync(full).isDirectory()) continue;
+    if (!isDirectory(full, root, problems)) continue;
     const isSkill = SKILL_MARKERS.some((m) => existsSync(path.join(full, m)));
     if (isSkill) {
       if (!existsSync(path.join(full, 'SKILL.md'))) {
@@ -103,7 +132,8 @@ function checkSkillEntries(dir, root, problems, allowGroups) {
       }
       continue;
     }
-    const hasSubdirs = readdirSync(full).some((c) => statSync(path.join(full, c)).isDirectory());
+    const children = guarded(readdirSync, full, root, problems) ?? [];
+    const hasSubdirs = children.some((c) => isDirectory(path.join(full, c), root, problems));
     if (allowGroups && hasSubdirs) {
       checkSkillEntries(full, root, problems, false);
     } else {
@@ -216,8 +246,56 @@ function stripInlineComment(command) {
   return command;
 }
 
+// Split on &&, ||, ; and | only outside single or double quotes.
+function splitOperators(command) {
+  const segments = [];
+  let current = '';
+  let quote = null;
+  for (let i = 0; i < command.length; i++) {
+    const c = command[i];
+    if (quote) {
+      if (c === quote) quote = null;
+    } else if (c === '"' || c === "'") {
+      quote = c;
+    } else if (c === ';' || c === '|' || (c === '&' && command[i + 1] === '&')) {
+      if (c !== ';' && command[i + 1] === c) i++; // && or ||
+      segments.push(current);
+      current = '';
+      continue;
+    }
+    current += c;
+  }
+  segments.push(current);
+  return segments;
+}
+
+// Whitespace-split outside quotes; quote characters are removed from tokens, as a shell would.
+function tokenize(segment) {
+  const tokens = [];
+  let current = '';
+  let started = false;
+  let quote = null;
+  for (const c of segment) {
+    if (quote) {
+      if (c === quote) quote = null; else current += c;
+    } else if (c === '"' || c === "'") {
+      quote = c;
+      started = true;
+    } else if (/\s/.test(c)) {
+      if (started) tokens.push(current);
+      current = '';
+      started = false;
+    } else {
+      current += c;
+      started = true;
+    }
+  }
+  if (started) tokens.push(current);
+  return tokens;
+}
+
 function scriptNameOf(segment) {
-  const tokens = segment.trim().split(/\s+/);
+  const tokens = tokenize(segment);
   const tool = tokens[0];
   if (tool !== 'npm' && tool !== 'pnpm') return null;
   let i = 1;
@@ -245,7 +323,7 @@ function checkReadme(root, problems) {
   if (!pkg) return;
   const scripts = pkg.scripts ?? {};
   for (const command of fencedCommandLines(section)) {
-    for (const segment of stripInlineComment(command).split(/&&|\|\||;|\|/)) {
+    for (const segment of splitOperators(stripInlineComment(command))) {
       const name = scriptNameOf(segment);
       if (name && !Object.hasOwn(scripts, name)) {
         problems.push(`README.md quickstart: "${segment.trim()}" names script "${name}" which is not in package.json scripts`);
