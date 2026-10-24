@@ -123,7 +123,7 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 `tools/receipt-check/check-receipt.mjs` answers yes or no for one practice receipt. Yes means the five fields match the public rules. The checker sets `signed` to false. A yes is not a human signature and not a lab attestation.
 
 ```bash
-node --test tools/receipt-check/check-receipt.test.mjs
+npm run test:receipt
 node tools/receipt-check/serve.mjs
 ```
 
@@ -178,9 +178,9 @@ skill, agent, and command you can load, and a daily CI check keeps the whole
 setup from drifting. Dependency-free Node; no install step.
 
 ```bash
-node scripts/agent-os-init.mjs --name <you>          # your instance from the template
+npm run agents:init <you>                            # your instance from the template
 node scripts/agent-compile.mjs --instance <you>      # your Generals
-node scripts/estate-audit.mjs --repos <dir> --md audit.md
+npm run estate:audit -- --repos <dir> --md audit.md
 ```
 
 Start with [docs/agent-os/ADOPT.md](docs/agent-os/ADOPT.md); the full design is
