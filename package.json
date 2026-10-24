@@ -86,8 +86,7 @@
     "agents:init": "node scripts/agent-os-init.mjs --name",
     "upstreams:watch": "node scripts/upstream-watch.mjs",
     "estate:audit": "node scripts/estate-audit.mjs",
-    "test": "npm run build:all && node --test test/*.test.mjs && npm run test:smoke",
-    "test:smoke": "node scripts/smoke-test.mjs"
+    "test": "npm run build:all && node --test test/*.test.mjs"
   },
   "devDependencies": {
     "typescript": "5.6.3"

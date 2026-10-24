@@ -162,9 +162,9 @@ skill, agent, and command you can load, and a daily CI check keeps the whole
 setup from drifting. Dependency-free Node; no install step.
 
 ```bash
-node scripts/agent-os-init.mjs --name my-brand          # your instance from the template
-node scripts/agent-compile.mjs --instance my-brand      # your Generals
-node scripts/estate-audit.mjs --repos . --md audit.md
+node scripts/agent-os-init.mjs --name <you>          # your instance from the template
+node scripts/agent-compile.mjs --instance <you>      # your Generals
+node scripts/estate-audit.mjs --repos <dir> --md audit.md
 ```
 
 Start with [docs/agent-os/ADOPT.md](docs/agent-os/ADOPT.md); the full design is
