@@ -8,22 +8,30 @@ Reusable skills, commands, agent profiles, and local safety tooling for AI-assis
 
 </div>
 
-## What this repository is
+ACOS is a public source repository of AI workflows that you can install locally.
 
-Agentic Creator OS (ACOS) is a public source repository for creator workflows that can be loaded into Claude Code or rendered as context for other coding agents. It contains:
+## Quick start
 
-- domain skills written as `SKILL.md` modules;
-- top-level slash-command definitions for Claude Code;
-- specialist agent profiles;
-- local hook source and configuration;
-- generators for Cursor, Windsurf, Gemini, Grok, Antigravity, and generic context files;
-- MCP server workspaces and an observatory catalog.
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=claude
 
-ACOS is a source distribution, not a hosted service. The current version metadata is `11.0.0`.
+# Or install from marketplace:
+# claude plugin marketplace add frankxai/agentic-creator-os
+# claude plugin install creator-os-core@frankx-creator
+# grok plugin install creator-os-core --trust
+```
 
 ## Verified public surface
 
 The repository currently contains:
+
+- 176 non-empty skill modules
+- 85 top-level slash commands
+- 81 top-level agent profiles
+- 9 installable shell hooks
+- 32 activation rules
 
 | Surface | Count | Definition |
 |---|---:|---|
@@ -33,6 +41,14 @@ The repository currently contains:
 | Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
+
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| [QUICKSTART.md](QUICKSTART.md) | Detailed installation and first-run guide |
+| [CLAUDE.md](CLAUDE.md) | Project behavior, DNA, and capabilities |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines and review process |
 
 These numbers are generated from the tree. `npm run verify:public-surface` fails if the counts, version metadata, install smoke test, or public license and marketplace statements drift.
 
