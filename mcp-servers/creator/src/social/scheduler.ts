@@ -4,7 +4,7 @@ export interface ScheduledContent {
   id: string;
   platform: "twitter" | "linkedin" | "instagram" | "farcaster";
   type: "post" | "thread" | "article" | "story" | "cast";
-  content: any;
+  content: unknown;
   scheduledFor: Date;
   status: "pending" | "published" | "failed" | "cancelled";
   createdAt: Date;
@@ -24,7 +24,7 @@ const scheduledContent = new Map<string, ScheduledContent>();
 export async function scheduleContent(params: {
   platform: "twitter" | "linkedin" | "instagram" | "farcaster";
   type: "post" | "thread" | "article" | "story" | "cast";
-  content: any;
+  content: unknown;
   scheduledFor: Date;
   checkConflicts?: boolean;
 }): Promise<{ 
@@ -101,7 +101,7 @@ export async function bulkSchedule(params: {
   posts: Array<{
     platform: "twitter" | "linkedin" | "instagram" | "farcaster";
     type: "post" | "thread" | "article" | "story" | "cast";
-    content: any;
+    content: unknown;
     scheduledFor: Date;
   }>;
   autoResolveConflicts?: boolean;

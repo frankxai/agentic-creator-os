@@ -7,6 +7,43 @@
 
 import { z } from "zod";
 
+interface NotionRichText {
+  type?: string;
+  text?: { content?: string };
+  plain_text?: string;
+  annotations?: { bold?: boolean };
+}
+
+interface NotionBlock {
+  type?: string;
+  heading_1?: { rich_text?: NotionRichText[] };
+  heading_2?: { rich_text?: NotionRichText[] };
+  heading_3?: { rich_text?: NotionRichText[] };
+  paragraph?: { rich_text?: NotionRichText[] };
+  bulleted_list_item?: { rich_text?: NotionRichText[] };
+  numbered_list_item?: { rich_text?: NotionRichText[] };
+  to_do?: { rich_text?: NotionRichText[]; checked?: boolean };
+  code?: { rich_text?: NotionRichText[]; language?: string };
+  quote?: { rich_text?: NotionRichText[] };
+  [key: string]: unknown;
+}
+
+interface NotionPage {
+  id: string;
+  url: string;
+  object?: string;
+  created_time?: string;
+  last_edited_time?: string;
+  properties?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+interface NotionSearchResponse {
+  results: NotionPage[];
+  has_more?: boolean;
+}
+
+
 // Notion API configuration
 interface NotionConfig {
   apiKey: string;
@@ -27,7 +64,7 @@ async function notionRequest(
   endpoint: string,
   method: "GET" | "POST" | "PATCH" | "DELETE" = "GET",
   body?: object
-): Promise<any> {
+): Promise<unknown> {
   const config = getConfig();
 
   if (!config.apiKey) {
@@ -59,8 +96,8 @@ export async function createNotionPage(args: {
   parentId: string;
   title: string;
   content: string;
-  properties?: Record<string, any>;
-}): Promise<any> {
+  properties?: Record<string, unknown>;
+}): Promise<unknown> {
   const { parentId, title, content, properties = {} } = args;
 
   const page = await notionRequest("/pages", "POST", {
@@ -77,8 +114,8 @@ export async function createNotionPage(args: {
 
   return {
     success: true,
-    pageId: page.id,
-    url: page.url,
+    pageId: (page as NotionPage).id,
+    url: (page as NotionPage).url,
     message: `Created Notion page: ${title}`
   };
 }
@@ -89,8 +126,8 @@ export async function createNotionPage(args: {
 export async function createNotionDatabase(args: {
   parentId: string;
   title: string;
-  properties: Record<string, any>;
-}): Promise<any> {
+  properties: Record<string, unknown>;
+}): Promise<unknown> {
   const { parentId, title, properties } = args;
 
   const database = await notionRequest("/databases", "POST", {
@@ -104,8 +141,8 @@ export async function createNotionDatabase(args: {
 
   return {
     success: true,
-    databaseId: database.id,
-    url: database.url,
+    databaseId: (database as NotionPage).id,
+    url: (database as NotionPage).url,
     message: `Created Notion database: ${title}`
   };
 }
@@ -117,7 +154,7 @@ export async function queryNotionDatabase(args: {
   databaseId: string;
   filter?: object;
   sorts?: object[];
-}): Promise<any> {
+}): Promise<unknown> {
   const { databaseId, filter, sorts } = args;
 
   const result = await notionRequest(`/databases/${databaseId}/query`, "POST", {
@@ -127,9 +164,9 @@ export async function queryNotionDatabase(args: {
 
   return {
     success: true,
-    results: result.results,
-    hasMore: result.has_more,
-    message: `Found ${result.results.length} items in database`
+    results: (result as NotionSearchResponse).results,
+    hasMore: (result as NotionSearchResponse).has_more,
+    message: `Found ${(result as NotionSearchResponse).results.length} items in database`
   };
 }
 
@@ -140,8 +177,8 @@ export async function addToNotionDatabase(args: {
   databaseId: string;
   title: string;
   content?: string;
-  properties?: Record<string, any>;
-}): Promise<any> {
+  properties?: Record<string, unknown>;
+}): Promise<unknown> {
   const { databaseId, title, content = "", properties = {} } = args;
 
   const page = await notionRequest("/pages", "POST", {
@@ -158,8 +195,8 @@ export async function addToNotionDatabase(args: {
 
   return {
     success: true,
-    pageId: page.id,
-    url: page.url,
+    pageId: (page as NotionPage).id,
+    url: (page as NotionPage).url,
     message: `Added page "${title}" to database`
   };
 }
@@ -167,21 +204,21 @@ export async function addToNotionDatabase(args: {
 /**
  * Get page content from Notion
  */
-export async function getNotionPage(pageId: string): Promise<any> {
+export async function getNotionPage(pageId: string): Promise<unknown> {
   const page = await notionRequest(`/pages/${pageId}`);
   const blocks = await notionRequest(`/blocks/${pageId}/children`);
 
   return {
     success: true,
     page: {
-      id: page.id,
+      id: (page as NotionPage).id,
       title: getPageTitle(page),
-      url: page.url,
-      createdAt: page.created_time,
-      lastEdited: page.last_edited_time
+      url: (page as NotionPage).url,
+      createdAt: (page as NotionPage).created_time,
+      lastEdited: (page as NotionPage).last_edited_time
     },
-    blocks: blocks.results,
-    content: notionBlocksToMarkdown(blocks.results),
+    blocks: (blocks as NotionSearchResponse).results,
+    content: notionBlocksToMarkdown((blocks as NotionSearchResponse).results as NotionBlock[]),
     message: `Retrieved page: ${getPageTitle(page)}`
   };
 }
@@ -192,8 +229,8 @@ export async function getNotionPage(pageId: string): Promise<any> {
 export async function updateNotionPage(args: {
   pageId: string;
   content?: string;
-  properties?: Record<string, any>;
-}): Promise<any> {
+  properties?: Record<string, unknown>;
+}): Promise<unknown> {
   const { pageId, content, properties } = args;
 
   // Update properties if provided
@@ -217,7 +254,7 @@ export async function updateNotionPage(args: {
 /**
  * Search Notion pages
  */
-export async function searchNotionPages(query: string): Promise<any> {
+export async function searchNotionPages(query: string): Promise<unknown> {
   const result = await notionRequest("/search", "POST", {
     query,
     sort: { direction: "descending", timestamp: "last_edited_time" }
@@ -225,21 +262,21 @@ export async function searchNotionPages(query: string): Promise<any> {
 
   return {
     success: true,
-    results: result.results.map((page: any) => ({
-      id: page.id,
+    results: (result as NotionSearchResponse).results.map((page: NotionPage) => ({
+      id: (page as NotionPage).id,
       title: getPageTitle(page),
-      url: page.url,
-      type: page.object
+      url: (page as NotionPage).url,
+      type: (page as NotionPage).object
     })),
-    message: `Found ${result.results.length} results for "${query}"`
+    message: `Found ${(result as NotionSearchResponse).results.length} results for "${query}"`
   };
 }
 
 /**
  * Convert markdown content to Notion blocks
  */
-function contentToNotionBlocks(content: string): any[] {
-  const blocks: any[] = [];
+function contentToNotionBlocks(content: string): NotionBlock[] {
+  const blocks: NotionBlock[] = [];
   const paragraphs = content.split("\n\n");
 
   for (const paragraph of paragraphs) {
@@ -312,7 +349,7 @@ function contentToNotionBlocks(content: string): any[] {
 /**
  * Convert Notion blocks to markdown
  */
-function notionBlocksToMarkdown(blocks: any[]): string {
+function notionBlocksToMarkdown(blocks: NotionBlock[]): string {
   let markdown = "";
 
   for (const block of blocks) {
@@ -357,15 +394,17 @@ function notionBlocksToMarkdown(blocks: any[]): string {
 /**
  * Get text content from rich_text array
  */
-function getBlockText(richText: any[]): string {
-  return richText?.map((t: any) => t.plain_text || t.text?.content || "").join("") || "";
+function getBlockText(richText: NotionRichText[] | undefined): string {
+  return richText?.map((t: NotionRichText) => t.plain_text || t.text?.content || "").join("") || "";
 }
 
 /**
  * Get page title from Notion page
  */
-function getPageTitle(page: any): string {
-  const titleProp = page.properties?.title || page.properties?.Name;
+function getPageTitle(page: unknown): string {
+  if (!page || typeof page !== 'object') return "Untitled";
+  const p = page as NotionPage;
+  const titleProp = (p.properties?.title || p.properties?.Name) as { title?: { plain_text?: string }[] } | undefined;
   if (titleProp?.title?.[0]?.plain_text) {
     return titleProp.title[0].plain_text;
   }
