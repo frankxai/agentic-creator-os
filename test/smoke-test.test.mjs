@@ -180,3 +180,26 @@ test('fence tracking honours delimiter type and length', () => {
     assert.match(r.stderr, /script "ghost" which is not in package.json scripts/, name);
   }
 });
+
+test('inline shell comments are stripped before splitting operators', () => {
+  const r = runSmoke(fixture('npm run build # example && pnpm ghost'));
+  assert.equal(r.status, 0, r.stderr);
+  const quoted = runSmoke(fixture('echo "a # b" && pnpm phantom'));
+  assert.equal(quoted.status, 1);
+  assert.match(quoted.stderr, /script "phantom" which is not in package\.json scripts/);
+});
+
+test('non-object marketplace plugin entry is reported and the run continues', () => {
+  const root = fixture();
+  write(root, '.claude-plugin/marketplace.json', JSON.stringify({
+    name: 'fx-market',
+    plugins: [null, { name: 'gone', source: './plugins/gone' }],
+  }));
+  write(root, 'README.md', '## Quick start\n\n```bash\npnpm ghost\n```\n');
+  const r = runSmoke(root);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /plugins\[0\] is not an object/);
+  assert.match(r.stderr, /plugin "gone": source "\.\/plugins\/gone" does not exist/);
+  assert.match(r.stderr, /script "ghost" which is not in package\.json scripts/);
+  assert.match(r.stderr, /3 problem\(s\)/);
+});

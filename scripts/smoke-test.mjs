@@ -155,7 +155,13 @@ function checkManifests(root, problems) {
     problems.push('.claude-plugin/marketplace.json: "plugins" is missing or empty');
     return;
   }
-  for (const entry of catalog.plugins) checkPluginEntry(entry, root, problems);
+  catalog.plugins.forEach((entry, i) => {
+    if (entry === null || typeof entry !== 'object' || Array.isArray(entry)) {
+      problems.push(`.claude-plugin/marketplace.json: plugins[${i}] is not an object`);
+      return;
+    }
+    checkPluginEntry(entry, root, problems);
+  });
 }
 
 function quickstartSection(readme) {
@@ -194,6 +200,22 @@ function fencedCommandLines(sectionLines) {
   return commands;
 }
 
+// The shell ignores everything from a `#` that starts a word, unless it is quoted.
+function stripInlineComment(command) {
+  let quote = null;
+  for (let i = 0; i < command.length; i++) {
+    const c = command[i];
+    if (quote) {
+      if (c === quote) quote = null;
+    } else if (c === '"' || c === "'") {
+      quote = c;
+    } else if (c === '#' && (i === 0 || /\s/.test(command[i - 1]))) {
+      return command.slice(0, i);
+    }
+  }
+  return command;
+}
+
 function scriptNameOf(segment) {
   const tokens = segment.trim().split(/\s+/);
   const tool = tokens[0];
@@ -223,7 +245,7 @@ function checkReadme(root, problems) {
   if (!pkg) return;
   const scripts = pkg.scripts ?? {};
   for (const command of fencedCommandLines(section)) {
-    for (const segment of command.split(/&&|\|\||;|\|/)) {
+    for (const segment of stripInlineComment(command).split(/&&|\|\||;|\|/)) {
       const name = scriptNameOf(segment);
       if (name && !Object.hasOwn(scripts, name)) {
         problems.push(`README.md quickstart: "${segment.trim()}" names script "${name}" which is not in package.json scripts`);
