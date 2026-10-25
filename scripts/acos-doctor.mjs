@@ -53,4 +53,8 @@ if (counts) {
 
 console.log(`\n--- Hook Status ---`);
 console.log(`Configured hook events: ${hookStatus.totalEvents}`);
-console.log(`Total active hooks: ${hookStatus.totalHooks}`);
+console.log(`Total configured hooks: ${hookStatus.totalHooks}`);
+
+if (!counts) {
+  process.exit(1);
+}
