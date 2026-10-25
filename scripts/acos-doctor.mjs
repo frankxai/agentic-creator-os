@@ -34,7 +34,17 @@ if (existsSync(hooksPath)) {
   const hooksData = JSON.parse(readFileSync(hooksPath, 'utf8'));
   if (hooksData.hooks) {
     hookStatus.totalEvents = Object.keys(hooksData.hooks).length;
-    hookStatus.totalHooks = Object.values(hooksData.hooks).reduce((acc, hooks) => acc + hooks.length, 0);
+    let hookCount = 0;
+    for (const hookGroups of Object.values(hooksData.hooks)) {
+      for (const group of hookGroups) {
+        if (group.hooks && Array.isArray(group.hooks)) {
+          hookCount += group.hooks.length;
+        } else {
+          hookCount += 1;
+        }
+      }
+    }
+    hookStatus.totalHooks = hookCount;
   }
 }
 
