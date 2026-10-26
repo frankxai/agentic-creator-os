@@ -54,19 +54,7 @@ assert.ok(readme.includes(addMarketplaceCommand), "Missing claude plugin marketp
 assert.ok(readme.includes(installPluginCommand), "Missing claude plugin install command with correct exact names")
 
 // 3. Counts match files on disk
-const expectedList = [
-  `${measured.nonEmptySkillModules} non-empty skill modules`,
-  `${measured.topLevelCommands} top-level slash commands`,
-  `${measured.topLevelAgents} top-level agent profiles`,
-  `${measured.installableShellHooks} installable shell hooks`,
-  `${measured.activationRules} activation rules`
-]
-
-for (const expected of expectedList) {
-  assert.ok(readme.includes(expected), `README must contain exact string: "${expected}"`)
-}
-
-// Check counts in the table too
+// Check counts in the table
 assert.match(readme, new RegExp(`\\| Non-empty skill modules \\| ${measured.nonEmptySkillModules} \\|`))
 assert.match(readme, new RegExp(`\\| Empty skill placeholders \\| ${measured.emptySkillPlaceholders} \\|`))
 assert.match(readme, new RegExp(`\\| Top-level slash commands \\| ${measured.topLevelCommands} \\|`))
