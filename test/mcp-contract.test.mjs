@@ -144,6 +144,29 @@ for (const name of servers) {
         assert.ok(text, `${call.name} returned no text block`);
         assert.deepEqual(JSON.parse(text.text), result.structuredContent);
       });
+
+      if (name === 'database') {
+        await t.test('query output preserves arbitrary column names, numbers and nulls', async () => {
+          const result = await client.callTool({ name: 'database_query', arguments: {
+            sql: 'SELECT \'sample\' AS "release.channel", 7 AS total, NULL AS absent', limit: 5,
+          } });
+          assert.notEqual(result.isError, true, JSON.stringify(result.content));
+          assert.deepEqual(result.structuredContent.columns, ['release.channel', 'total', 'absent']);
+          assert.deepEqual(result.structuredContent.rows, [{ 'release.channel': 'sample', total: 7, absent: null }]);
+        });
+      }
+
+      if (name === 'evaluator') {
+        await t.test('metrics dictionaries validate through the MCP output contract', async () => {
+          const result = await client.callTool({ name: 'evaluator_get_metrics', arguments: { timeRange: 'all' } });
+          assert.notEqual(result.isError, true, JSON.stringify(result.content));
+          for (const key of ['metricsByPlatform', 'metricsByType']) {
+            assert.equal(typeof result.structuredContent[key], 'object');
+            assert.notEqual(result.structuredContent[key], null);
+            assert.equal(Array.isArray(result.structuredContent[key]), false);
+          }
+        });
+      }
     } finally {
       await client.close().catch(() => undefined);
     }
