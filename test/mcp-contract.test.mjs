@@ -145,6 +145,24 @@ for (const name of servers) {
         assert.deepEqual(JSON.parse(text.text), result.structuredContent);
       });
 
+      if (name === 'creator') {
+        await t.test('undeclared nested sticker fields are rejected before a simulated post', async () => {
+          let result;
+          try {
+            result = await client.callTool({ name: 'creator_instagram_story', arguments: {
+              mediaUrl: 'https://example.com/story.png', type: 'image',
+              stickers: [{ type: 'mention', data: 'operator', extraPayload: 'undeclared' }],
+            } });
+          } catch (error) {
+            assert.equal(error.code, -32602);
+            assert.match(error.message, /extraPayload/);
+            return;
+          }
+          assert.equal(result.isError, true);
+          assert.match(JSON.stringify(result.content), /extraPayload/);
+        });
+      }
+
       if (name === 'database') {
         await t.test('query output preserves arbitrary column names, numbers and nulls', async () => {
           const result = await client.callTool({ name: 'database_query', arguments: {
