@@ -32,7 +32,7 @@
     "nonEmptySkillModules": 176,
     "emptySkillPlaceholders": 5,
     "topLevelCommands": 85,
-    "topLevelAgents": 81,
+    "topLevelAgents": 83,
     "installableShellHooks": 9,
     "activationRules": 32,
     "verifiedBy": "npm run verify:public-surface"

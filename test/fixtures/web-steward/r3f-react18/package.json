@@ -1,0 +1,12 @@
+{
+  "name": "r3f-react18-fixture",
+  "private": true,
+  "dependencies": {
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "next": "^16.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.186.1"
+  }
+}
