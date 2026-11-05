@@ -8,6 +8,10 @@ Reusable skills, commands, agent profiles, and local safety tooling for AI-assis
 
 </div>
 
+<p align="center">
+  <img src="docs/infographics/acos-hero.png" width="880" alt="Isometric illustration of a central orchestration hub connected by glowing paths to surrounding modules">
+</p>
+
 ACOS is a public source repository of AI workflows that you can install locally.
 
 ## Quick start
@@ -16,12 +20,15 @@ ACOS is a public source repository of AI workflows that you can install locally.
 git clone https://github.com/frankxai/agentic-creator-os.git
 cd agentic-creator-os
 ./install.sh --platform=claude
-
-# Or install from marketplace:
-# claude plugin marketplace add frankxai/agentic-creator-os
-# claude plugin install creator-os-core@frankx-creator
-# grok plugin install creator-os-core --trust
 ```
+
+## Pick one install path
+
+| Path | Choose it when |
+|---|---|
+| Repository installer (`./install.sh`) | You want the full system: every skill group, command, agent profile, and hook in this repository. |
+| Claude plugin marketplace (`creator-os-core`) | You want a small first install: five skills and the `/acos` command. See [One plugin, five practices](#one-plugin-five-practices). |
+| [claude-skills-library](https://github.com/frankxai/claude-skills-library) | You want individual skills without the rest of ACOS. Its README has the install steps. |
 
 ## Verified public surface
 
@@ -132,6 +139,10 @@ node tools/receipt-check/serve.mjs
 `POST /check` takes the receipt JSON. `POST /mcp` accepts `initialize`, `tools/list`, and `tools/call` for `check_practice_receipt`. The server listens on `127.0.0.1` and `RECEIPT_PORT` (default 8787). It is a local check, not a public registry.
 
 ## How the pieces fit
+
+<p align="center">
+  <img src="docs/infographics/acos-how-it-works.svg" width="880" alt="Flow diagram: the operator uses a harness, which reaches the /acos router, then commands, skills, agent profiles, and safety hooks, ending in files the operator reviews">
+</p>
 
 ```mermaid
 flowchart LR
