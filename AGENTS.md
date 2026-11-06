@@ -41,7 +41,7 @@ Generals (CEO, CTO, CMO, CFO, COO, CPO, CAIO, CHRO, CCO) and instance Domain Que
 module, or kernel, then run `npm run agents:compile`; never hand-edit
 `.claude/agents/general-*.md`. Standards (ontology, agent, skill, soul, memory,
 loop, commands, mesh, always-on) live in `docs/agent-os/`. Domain Queens come from
-`node scripts/org-import.mjs --org instances/frankx/agent-os/org/domain-queens.json --instance frankx`.
+`npm run agents:org`.
 
 `npm test` builds the MCP workspaces and runs `node --test test/*.test.mjs`. CI also runs `npm run lint`, `npm run typecheck:all`, `npm run observatory:test`, `npm run test:receipt`, and `npm run verify:public-surface`.
 

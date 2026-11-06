@@ -8,20 +8,24 @@ Reusable skills, commands, agent profiles, and local safety tooling for AI-assis
 
 </div>
 
-## What this repository is
+ACOS is a public source repository of AI workflows that you can install locally.
 
-Agentic Creator OS (ACOS) is a public source repository for creator workflows that can be loaded into Claude Code or rendered as context for other coding agents. It contains:
+## Quick start
 
-- domain skills written as `SKILL.md` modules;
-- top-level slash-command definitions for Claude Code;
-- specialist agent profiles;
-- local hook source and configuration;
-- generators for Cursor, Windsurf, Gemini, Grok, Antigravity, and generic context files;
-- MCP server workspaces and an observatory catalog.
+```bash
+git clone https://github.com/frankxai/agentic-creator-os.git
+cd agentic-creator-os
+./install.sh --platform=claude
 
-ACOS is a source distribution, not a hosted service. The current version metadata is `11.0.0`.
+# Or install from marketplace:
+# claude plugin marketplace add frankxai/agentic-creator-os
+# claude plugin install creator-os-core@frankx-creator
+# grok plugin install creator-os-core --trust
+```
 
 ## Verified public surface
+
+**Status:** Wave 0 (Experimental/Development)
 
 The repository currently contains:
 
@@ -33,6 +37,20 @@ The repository currently contains:
 | Top-level agent profiles | 81 | `.claude/agents/*.{md,json}`, excluding the directory context file |
 | Installable shell hooks | 9 | Top-level `.claude/hooks/*.sh` files copied by the Claude installer |
 | Activation rules | 32 | Entries in `.claude/skill-rules.json` |
+
+### What this is not
+
+- This is not a managed SaaS or cloud service.
+- This is not a replacement for domain expertise or human accountability.
+- This is not an autonomous background worker; it requires an operator and a harness.
+
+## Documentation
+
+| Document | Purpose |
+|---|---|
+| [QUICKSTART.md](QUICKSTART.md) | Detailed installation and first-run guide |
+| [CLAUDE.md](CLAUDE.md) | Project behavior, DNA, and capabilities |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines and review process |
 
 These numbers are generated from the tree. `npm run verify:public-surface` fails if the counts, version metadata, install smoke test, or public license and marketplace statements drift.
 
@@ -107,7 +125,7 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 `tools/receipt-check/check-receipt.mjs` answers yes or no for one practice receipt. Yes means the five fields match the public rules. The checker sets `signed` to false. A yes is not a human signature and not a lab attestation.
 
 ```bash
-node --test tools/receipt-check/check-receipt.test.mjs
+npm run test:receipt
 node tools/receipt-check/serve.mjs
 ```
 
@@ -162,9 +180,9 @@ skill, agent, and command you can load, and a daily CI check keeps the whole
 setup from drifting. Dependency-free Node; no install step.
 
 ```bash
-node scripts/agent-os-init.mjs --name <you>          # your instance from the template
+npm run agents:init <you>                            # your instance from the template
 node scripts/agent-compile.mjs --instance <you>      # your Generals
-node scripts/estate-audit.mjs --repos <dir> --md audit.md
+npm run estate:audit -- --repos <dir> --md audit.md
 ```
 
 Start with [docs/agent-os/ADOPT.md](docs/agent-os/ADOPT.md); the full design is

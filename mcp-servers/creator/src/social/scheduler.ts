@@ -4,7 +4,7 @@ export interface ScheduledContent {
   id: string;
   platform: "twitter" | "linkedin" | "instagram" | "farcaster";
   type: "post" | "thread" | "article" | "story" | "cast";
-  content: any;
+  content: unknown;
   scheduledFor: Date;
   status: "pending" | "published" | "failed" | "cancelled";
   createdAt: Date;
@@ -24,7 +24,7 @@ const scheduledContent = new Map<string, ScheduledContent>();
 export async function scheduleContent(params: {
   platform: "twitter" | "linkedin" | "instagram" | "farcaster";
   type: "post" | "thread" | "article" | "story" | "cast";
-  content: any;
+  content: unknown;
   scheduledFor: Date;
   checkConflicts?: boolean;
 }): Promise<{ 
@@ -101,7 +101,7 @@ export async function bulkSchedule(params: {
   posts: Array<{
     platform: "twitter" | "linkedin" | "instagram" | "farcaster";
     type: "post" | "thread" | "article" | "story" | "cast";
-    content: any;
+    content: unknown;
     scheduledFor: Date;
   }>;
   autoResolveConflicts?: boolean;
@@ -308,7 +308,7 @@ export const bulkScheduleSchema = {
     type: contentType().describe("Content type"),
     content: contentBody().describe("The post text, or a JSON-encoded platform payload"),
     scheduledFor: isoDate().describe("ISO 8601 date-time in the future")
-  })).min(1).max(100).describe("Items to schedule (1-100)"),
+  }).strict()).min(1).max(100).describe("Items to schedule (1-100)"),
   autoResolveConflicts: z.boolean().optional().describe("Shift items that collide with queued content instead of failing them"),
   conflictGapMinutes: z.number().int().min(1).max(1440).optional().describe("Minimum minutes between items on one platform; default 15")
 };
