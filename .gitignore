@@ -54,3 +54,7 @@ temp/
 
 # agent-hygiene pack — diverged copies set aside by install.sh
 .claude/skills/.replaced/
+
+# queen-ops pack — local briefs and receipts, not repo artifacts
+.starlight/queen/
+.claude/hooks/__pycache__/

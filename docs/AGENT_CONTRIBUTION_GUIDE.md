@@ -90,7 +90,6 @@ Agents are specialized cognitive patterns with defined capabilities and tool acc
 |----------|---------|----------|
 | `core/` | Fundamental agents (planner, coder, reviewer) | `.claude/agents/core/` |
 | `github/` | GitHub integration agents | `.claude/agents/github/` |
-| `hive-mind/` | Swarm coordination agents | `.claude/agents/hive-mind/` |
 | `consensus/` | Distributed consensus agents | `.claude/agents/consensus/` |
 | `optimization/` | Performance agents | `.claude/agents/optimization/` |
 | `goal/` | Goal-oriented planning | `.claude/agents/goal/` |

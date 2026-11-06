@@ -21,7 +21,7 @@ Quick reference for all agents in Agentic Creator OS. Use this to find the right
 | Write a book | `master-story-architect`, genre-specific writers |
 | Manage PRs | `pr-manager`, `swarm-pr` |
 | Track issues | `issue-tracker`, `swarm-issue` |
-| Coordinate swarms | `queen-coordinator`, `collective-intelligence-coordinator` |
+| Coordinate swarms | the `queen-ops` skill (Brief → independent verify receipt → taste receipt); no coordinator agent |
 | Optimize performance | `performance-optimizer`, `benchmark-suite` |
 | Design UI/UX | `ux-design-development`, `performance-guardian` |
 | Deploy to Vercel | `nextjs-vercel-deployment` |
@@ -108,13 +108,7 @@ Agents for distributed coordination.
 
 | Agent | Purpose |
 |-------|---------|
-| `queen-coordinator` | Hierarchical hive orchestration |
-| `collective-intelligence-coordinator` | Distributed cognitive processes |
-| `swarm-memory-manager` | Distributed memory management |
-| `scout-explorer` | Information reconnaissance |
-| `worker-specialist` | Task execution |
-
-**Location:** `.claude/agents/hive-mind/`
+The vendored hive-mind coordinator agents were retired on 2026-10-19. Dispatch discipline now comes from the `queen-ops` skill and hooks (`.claude/skills/queen-ops/`): a task needs a complete Brief, an independent verifier's re-run receipt and a taste receipt; the Queen identity lives in starlight-agent-config and the kernel in `@starlight-intelligence/queen`.
 
 ---
 
