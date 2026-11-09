@@ -1,0 +1,38 @@
+{
+  "id": "worker-web-builder",
+  "version": "1.0.0",
+  "kind": "worker",
+  "role": "web-builder",
+  "description": "Web builder worker: the maker for web surfaces. Use when a page, hero, section, component, or visual effect must be built or redesigned in a site repo: reads the repo's design and taste files, captures the route, commits to a direction, builds through web-release-gate (gpu-surface for any shader or 3D), proves it with audits and screenshots, and hands it to worker-visual-qa before a draft PR. Never merges or deploys.",
+  "capabilities": [
+    "direction-choice",
+    "ui-build",
+    "gpu-surfaces",
+    "audit-and-proof",
+    "draft-prs"
+  ],
+  "priority": "high",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Grep",
+    "Glob",
+    "Bash",
+    "Skill"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/web-builder.md"
+  ],
+  "requiredReading": [
+    "AGENTS.md",
+    "design.md",
+    "taste.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/worker-web-builder"
+}

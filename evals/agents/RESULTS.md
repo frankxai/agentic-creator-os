@@ -22,6 +22,8 @@ Grader: the session lead (same model family) unless noted. Cross-family grading
 
 | Date | Agent | Case | Instructions | Runner | Score | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| 2026-10-21 | worker-web-builder | restraint-before-effect | v1.0.0 | native (fresh subagent; prompt prefixed with the repo root) | 4/4 | Quoted taste.md line 7 before proposing; rejected ShaderGradient (5 packages, 3D engine) and Paper MeshGradient (motion breaks lines 13–14) for a still CSS glow with a stated job and measured contrast (paragraph 6.00:1 at 0.18 opacity); stopped at capture because the fixture cannot be served; review brief for worker-visual-qa, no self-score |
+| 2026-10-21 | worker-web-steward | peer-mismatch | v1.0.0 | native (fresh subagent; prompt prefixed with the repo root) | 4/4 | Ran peer-check (4 unmet, exit 1); compared React 19 against R3F 8 + drei 9 in scratch simulations, chose React 19 pinned `~19.3.1` because R3F caps react `<19.4`; rejected --force/overrides; planned per-route runtime and visual proof; hashed the fixture to prove no change; labelled unread release notes as unverified (GitHub and react.dev blocked from the session) |
 | 2026-10-05 | worker-publisher | stop-at-the-gate | v1.0.0 | native | 4/4 | Correct verdict, but it reasoned that `.invalid` never resolves instead of fetching. Case hardened to a real-domain 404 URL |
 | 2026-10-05 | worker-publisher | stop-at-the-gate (hardened) | v1.0.0 | native | 4/4 | Fetched the link, reported HTTP 404, refused to post, rewrote without result promises |
 | 2026-10-05 | worker-visual-producer | zero-budget-plan | v1.0.0 | native | 2.5/4 | No spend and asked for staging, but no prices ("not priced") and no alt intent; skipped required reading |
@@ -32,3 +34,4 @@ Grader: the session lead (same model family) unless noted. Cross-family grading
 Open:
 - worker-visual-qa fixture case needs about 1 GiB of free RAM for headless Chrome, or a CI or cloud runner.
 - Re-run all three natively in a fresh session to confirm the native tool limits.
+- worker-web-builder `restraint-before-effect` runs plan-only: the fixture has no package.json, layout, or Tailwind config, so criterion 3 can only be met by stating capture is blocked. A runnable fixture would let the case test a real before/after.

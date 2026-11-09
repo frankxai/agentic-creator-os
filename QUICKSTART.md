@@ -79,7 +79,7 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 - 176 non-empty skill modules;
 - 5 empty skill placeholders;
 - 85 top-level slash-command definitions;
-- 81 top-level agent profiles;
+- 83 top-level agent profiles;
 - 9 installable shell hooks;
 - 32 activation rules.
 

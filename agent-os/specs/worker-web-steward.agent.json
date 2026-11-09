@@ -1,0 +1,37 @@
+{
+  "id": "worker-web-steward",
+  "version": "1.0.0",
+  "kind": "worker",
+  "role": "web-steward",
+  "description": "Web steward worker: upkeep for site dependencies and design skills. Use when a web repo needs dependencies upgraded or audited, when an install or build warns about unmet peers, before a new front-end dependency lands, or on a scheduled upkeep run: runs the web-steward peer check against the lockfile and registry, triages drift, prepares one upgrade branch per repo with gates and before/after proof, and stops at a draft PR. Never merges.",
+  "capabilities": [
+    "peer-checks",
+    "drift-triage",
+    "changelog-review",
+    "upgrade-branches",
+    "evidence-reports"
+  ],
+  "priority": "medium",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Grep",
+    "Glob",
+    "Bash",
+    "Skill"
+  ],
+  "memory": "user",
+  "color": "yellow",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/web-steward.md"
+  ],
+  "requiredReading": [
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/worker-web-steward"
+}
