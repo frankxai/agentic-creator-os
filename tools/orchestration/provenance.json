@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "sourceRepository": "https://github.com/frankxai/starlight-swarm",
+  "sourceCommit": "c974fac44073caa4c072ad50101384bc9e0bf3ae",
+  "license": "MIT (retained in LICENSE)",
+  "files": [
+    {
+      "path": "router.mjs",
+      "sourcePath": "src/swarm/orchestration/router.mjs",
+      "sha256": "fceb0875445f105e86eaffd3975fd86568c337a27e476b87640fac184d97e32d"
+    },
+    {
+      "path": "runtime.mjs",
+      "sourcePath": "src/swarm/orchestration/runtime.mjs",
+      "sha256": "ddd3fbe6295b352f59ba7c6b9f1352d26d8e09597cd4bc5b8e30edd466904320"
+    },
+    {
+      "path": "orchestration.test.mjs",
+      "sourcePath": "src/swarm/orchestration/orchestration.test.mjs",
+      "sha256": "d41df63fdbe89edb336f346d1e83244e3349a71b24a818ad1ca91df9e8a06fcc"
+    },
+    {
+      "path": "presets.json",
+      "sourcePath": "src/swarm/orchestration/presets.json",
+      "sha256": "6ff862bb0844a51dc2e69077710c3de37bce16c0b6ebf2f5dded0416f620d99c"
+    },
+    {
+      "path": "sources.json",
+      "sourcePath": "src/swarm/orchestration/sources.json",
+      "sha256": "0b35412d4e78a632f96580dab9ac5d6726214aa943bdb532c1e992d456ea1b09"
+    },
+    {
+      "path": "demo.mjs",
+      "sourcePath": "src/swarm/orchestration/demo.mjs",
+      "sha256": "52b3292401fbccaae3efe2513f8db06691a8937720f216e472bca069d481fb57"
+    },
+    {
+      "path": "LICENSE",
+      "sourcePath": "LICENSE",
+      "sha256": "fa67d4783e083ed4a530ea98c21db36ffacfc4a5f16c85b1d6b2e8d6ae666d57"
+    }
+  ]
+}

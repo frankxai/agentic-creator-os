@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0-candidate",
+  "evidenceStatus": "provisional-unranked",
+  "objective": "maximum-quality",
+  "routes": {
+    "extraction": { "model": "gpt-6-luna", "effort": "medium" },
+    "debugging": { "model": "gpt-6-sol", "effort": "high" },
+    "feature": { "model": "gpt-6-sol", "effort": "high" },
+    "architecture": { "model": "gpt-6-astra", "effort": "xhigh" },
+    "security": { "model": "gpt-6-astra", "effort": "xhigh" },
+    "research": { "model": "gpt-6-astra", "effort": "high" }
+  }
+}

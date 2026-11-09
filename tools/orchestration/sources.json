@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "implementation": "original, repository MIT license",
+  "sources": [
+    {
+      "id": "openai-sol",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-sol",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Complex coding candidate; availability must be probed."
+    },
+    {
+      "id": "openai-luna",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Focused high-volume candidate; no automatic quality ranking."
+    },
+    {
+      "id": "openai-multi-agent",
+      "url": "https://developers.openai.com/api/docs/guides/responses-multi-agent",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Delegate independent bounded work; verify exact model and runtime compatibility."
+    },
+    {
+      "id": "openai-evals",
+      "url": "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Compare single-agent and multi-agent behavior on task-specific evidence."
+    },
+    {
+      "id": "anthropic-research",
+      "url": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Explicit worker objectives, output formats, boundaries and verification."
+    },
+    {
+      "id": "google-workflows",
+      "url": "https://adk.dev/workflows/",
+      "retrievedAt": "2026-09-24",
+      "version": "living documentation; recheck at integration",
+      "license": "External documentation; linked and summarized only, no source code imported",
+      "adoptedLesson": "Keep deterministic ordering distinct from dynamic delegation."
+    }
+  ]
+}

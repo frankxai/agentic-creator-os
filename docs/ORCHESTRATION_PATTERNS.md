@@ -1,3 +1,11 @@
+# Executable orchestration candidate
+
+Start with the [runnable reference kit](../tools/orchestration/README.md). It provides capability-checked GPT-6 presets, five bounded patterns and tests without an API key. Presets remain unranked until live evaluations pass.
+
+The historical patterns below remain conceptual guidance. Illustrative percentages and role counts are not measured quality or permission to spawn agents.
+
+---
+
 # Skill Orchestration Patterns
 **How Skills, Agents, and Workflows Work Together**
 **Version**: 1.0.0
