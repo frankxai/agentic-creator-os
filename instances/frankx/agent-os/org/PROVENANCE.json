@@ -1,0 +1,7 @@
+{
+  "file": "domain-queens.json",
+  "source": "https://github.com/frankxai/starlight-swarm/blob/main/config/domain-queens.json",
+  "sourceCommit": "16439d0086d739813ad68e038001ecc170c4547a",
+  "vendoredAt": "2026-10-04",
+  "note": "Public org chart from starlight-swarm (MIT). Re-vendor when it changes, then run org-import and agent-compile."
+}

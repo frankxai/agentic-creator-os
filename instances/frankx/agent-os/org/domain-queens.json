@@ -1,0 +1,128 @@
+{
+  "schema": "starlight.domainQueens.v1",
+  "updatedAt": "2026-08-07",
+  "chiefQueen": {
+    "id": "EMPIRE-CHIEF-QUEEN",
+    "title": "Chief Queen / Empire Orchestrator",
+    "role": "Sets empire thesis, cross-domain allocation, ultimate escalation to human. Does not execute per-domain work.",
+    "primaryModels": ["claude-opus-4-8", "gpt-5.6-terra"],
+    "fallbacks": ["gemini-3.6-pro", "grok-4.5"]
+  },
+  "domains": [
+    {
+      "domain": "frankx",
+      "queen": {
+        "id": "FRANKX-QUEEN",
+        "title": "FrankX Queen",
+        "generals": [
+          {
+            "id": "FRANKX-REVENUE-GENERAL",
+            "title": "Revenue General",
+            "swarms": ["revenue-systems", "checkout-integrity", "funnel-economics"]
+          },
+          {
+            "id": "FRANKX-PRODUCT-GENERAL",
+            "title": "Product General",
+            "swarms": ["product-architect", "packaging", "pricing"]
+          },
+          {
+            "id": "FRANKX-GROWTH-GENERAL",
+            "title": "Growth General",
+            "swarms": ["content-hooks", "distribution", "creator-kit"]
+          }
+        ]
+      }
+    },
+    {
+      "domain": "arcanea",
+      "queen": {
+        "id": "ARCANEA-QUEEN",
+        "title": "Arcanea Queen",
+        "generals": [
+          {
+            "id": "ARCANEA-CREATIVE-GENERAL",
+            "title": "Creative General",
+            "swarms": ["lore-keeper", "character-forge", "visual-intelligence"]
+          },
+          {
+            "id": "ARCANEA-WORLD-GENERAL",
+            "title": "World Engine General",
+            "swarms": ["game-dev", "media", "nft-forge"]
+          }
+        ]
+      }
+    },
+    {
+      "domain": "gencreator",
+      "queen": {
+        "id": "GENCREATOR-QUEEN",
+        "title": "GenCreator / ACOS Queen",
+        "generals": [
+          {
+            "id": "GENCREATOR-OS-GENERAL",
+            "title": "Product OS General",
+            "swarms": ["6-pillar-guardian", "skill-builder", "studio"]
+          },
+          {
+            "id": "GENCREATOR-IDEA-GENERAL",
+            "title": "Idea & Content General",
+            "swarms": ["idea-forge", "content-repurposing"]
+          }
+        ]
+      }
+    },
+    {
+      "domain": "sis",
+      "queen": {
+        "id": "SIS-QUEEN",
+        "title": "SIS / Intelligence Queen",
+        "generals": [
+          {
+            "id": "SIS-RESEARCH-GENERAL",
+            "title": "Research General",
+            "swarms": ["research-synthesis", "per-domain-pipeline"]
+          },
+          {
+            "id": "SIS-KNOWLEDGE-GENERAL",
+            "title": "Knowledge General",
+            "swarms": ["second-brain", "vertical-intelligence", "evidence"]
+          }
+        ]
+      }
+    },
+    {
+      "domain": "control",
+      "queen": {
+        "id": "CONTROL-OPS-QUEEN",
+        "title": "Control / Ops Queen",
+        "generals": [
+          {
+            "id": "CONTROL-PLANE-GENERAL",
+            "title": "Control Plane General",
+            "swarms": ["control-plane-sentinel", "gitops-hygiene", "swarm-comms"]
+          },
+          {
+            "id": "SAFETY-GENERAL",
+            "title": "Safety & Integrity General",
+            "swarms": ["safety-auditor", "storage-intelligence", "runtime-health"]
+          }
+        ]
+      }
+    },
+    {
+      "domain": "wealth",
+      "queen": {
+        "id": "WEALTH-PASSIVE-QUEEN",
+        "title": "Wealth / Passive Queen",
+        "generals": [
+          {
+            "id": "INCOME-STREAMS-GENERAL",
+            "title": "Revenue Streams General",
+            "swarms": ["income-optimizer", "token-tracker", "funnel"]
+          }
+        ]
+      }
+    }
+  ],
+  "notes": "This is the canonical org declaration. Generals and swarms are specialized teams that use the God Mode router and declared primitives/topologies. Cross-domain work routes through Chief Queen."
+}

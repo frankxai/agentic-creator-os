@@ -1,0 +1,20 @@
+{
+  "all": {
+    "extraTools": [],
+    "requiredReading": ["SOUL.md", "taste.md", "design.md"],
+    "overlayFiles": ["instances/_template/agent-os/company-soul.md"]
+  },
+  "agents": {
+    "general-cmo": {
+      "skillMap": [
+        { "skill": "content-strategy", "when": "planning pillars and a content calendar" },
+        { "skill": "seo-optimization", "when": "a page or post needs a search pass" }
+      ]
+    },
+    "general-caio": {
+      "knowledge": [
+        { "source": "scripts/estate-audit.mjs", "purpose": "weekly quality scores for every skill, agent, and command", "review": "week" }
+      ]
+    }
+  }
+}

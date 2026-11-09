@@ -46,6 +46,15 @@ jobs:
               continue
             fi
 
+            # Inside a skill folder only SKILL.md carries frontmatter; files under
+            # references/, reference/, scripts/ and assets/ are loaded on demand
+            # and have none (Agent Skills spec). mcp-builder/reference/*.md on main
+            # already has this shape.
+            if [[ "$file" == .claude/skills/* ]] && [[ "$(basename "$file")" != "SKILL.md" ]]; then
+              echo "  ⏭️  Skipping (skill resource, not a definition)"
+              continue
+            fi
+
             # Check if file has YAML frontmatter
             if ! head -1 "$file" | grep -q "^---$"; then
               echo "  ❌ Missing YAML frontmatter"

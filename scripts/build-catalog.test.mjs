@@ -5,10 +5,10 @@
  * non-empty node kinds, valid edge references, unique ids, IAM present.
  */
 
-import { test } from 'node:test'
+import { test, after } from 'node:test'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync, mkdtempSync, readdirSync, existsSync } from 'node:fs'
+import { readFileSync, mkdtempSync, readdirSync, existsSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,8 +16,13 @@ import { fileURLToPath } from 'node:url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const GENERATOR = join(__dirname, 'build-catalog.mjs')
 
+const made = []
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }) })
+
 function generate() {
-  const out = join(mkdtempSync(join(tmpdir(), 'acos-catalog-')), 'catalog.json')
+  const tmp = mkdtempSync(join(tmpdir(), 'acos-catalog-'))
+  made.push(tmp)
+  const out = join(tmp, 'catalog.json')
   execFileSync('node', [GENERATOR, '--out', out], { stdio: 'pipe' })
   return JSON.parse(readFileSync(out, 'utf8'))
 }

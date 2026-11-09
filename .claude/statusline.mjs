@@ -14,6 +14,9 @@ const CACHE_TTL = 5000; // 5 seconds
  * Get swarm status (cached)
  */
 function getSwarmStatus() {
+  // Each statusline refresh is a fresh process, so this cache never hits and the check below would
+  // start `npx` every refresh. Opt in only where agentic-flow is installed: ACOS_STATUSLINE_SWARM=1.
+  if (process.env.ACOS_STATUSLINE_SWARM !== '1') return '⚡';
   const now = Date.now();
   if (cachedSwarmStatus && (now - lastSwarmCheck) < CACHE_TTL) {
     return cachedSwarmStatus;

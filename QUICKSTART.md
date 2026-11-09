@@ -68,7 +68,7 @@ These flags generate files for the selected target. Verify the generated output 
 
 ## Plugin installation
 
-This repository is not currently presented as a Claude marketplace installation because `.claude-plugin/marketplace.json` is absent. Use the source installer.
+The full catalog still installs with `./install.sh`. The small marketplace plugin is `creator-os-core`, listed in `.claude-plugin/marketplace.json`.
 
 The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creator-skills) repository is the companion plugin catalog.
 
@@ -76,10 +76,10 @@ The separate [agentic-creator-skills](https://github.com/frankxai/agentic-creato
 
 `npm run verify:public-surface` currently measures:
 
-- 174 non-empty skill modules;
+- 176 non-empty skill modules;
 - 5 empty skill placeholders;
 - 85 top-level slash-command definitions;
-- 69 top-level agent profiles;
+- 83 top-level agent profiles;
 - 9 installable shell hooks;
 - 32 activation rules.
 

@@ -1,6 +1,6 @@
 name: Content Intelligence Article Pipeline
 slug: research-to-article
-version: "7.0.0"
+version: "7.1.0"
 description: |
   Evidence-bound path from commission and current research through authored article,
   governed media, independent review, preview, conditional publication,
@@ -14,6 +14,8 @@ triggers:
 
 contract: docs/content-intelligence.md
 state_template: templates/content/article-packet.json
+research_template: templates/content/research-packet.json
+research_validator: node scripts/validate-research-packet.mjs
 default_authority: DRAFT
 
 agents:
@@ -32,6 +34,7 @@ phases:
   - name: Task Envelope
     steps:
       - Resolve deliverables, creator/property, canonical repository or CMS, audience, authority, permissions, rights, timing, and success condition
+      - Carry forward task-granted authority; ask only for unresolved blocking decisions, not routine reconfirmation
       - Inspect existing instructions, content model, related URLs, active editorial ledger, live deployment, and available performance evidence
       - Preserve unknown or unavailable state as explicit blockers; never invent IDs, URLs, credentials, or publication state
     output: article-packet.json
@@ -43,8 +46,11 @@ phases:
       - Map existing canonical URLs, cannibalization, internal-link role, offer and affiliate fit
     steps:
       - Build a source ledger with publication/update and retrieval dates
+      - Read primary artifacts and record source availability, evidence family, limitations, and claim-specific section/page/code/time locators in the research attachment
       - Build atomic claim candidates typed as fact, first_party, inference, opinion, forecast, or community_signal
-      - State information gap, strongest objection, maintenance burden, and confidence
+      - Investigate contrary evidence and failure mechanisms; record search coverage and uncertainty when no contradiction is found
+      - Distinguish source-reviewed synthesis, externally reported demos, proposed experiments, and executed original experiments with reproducible artifacts
+      - State information gap, strongest objection, maintenance burden, and support quality without source-count confidence formulas
     output: research-and-opportunity packet
 
   - name: Commission Gate
@@ -62,6 +68,8 @@ phases:
       - Keep facts adjacent to their sources and label inference or forecast
       - Create deliberate metadata and social/representative image treatment
       - Preserve article, asset, version, rendition, and placement identities
+      - Preserve documentary screenshots/graphics/video provenance, publisher, locator/timecode, capture date, transformations, and applicable license/permission/embed basis
+      - Use official embeds only after verifying owner and embedding availability; provide source links, captions, accessible titles, and responsive fallbacks
     output: article draft and media packet
 
   - name: Independent Review
@@ -73,6 +81,7 @@ phases:
       - Production verifier when files or remote state exist
     steps:
       - Require categorical verdicts with reasons
+      - Validate the research attachment; independently inspect whether source passages support public claims and rights declarations apply to the exact media use
       - Allow one substantive editorial rewrite
       - Continue deterministic correctness fixes until pass or exact blocker
     output: READY_FOR_OPERATOR, COMMISSION, HOLD, or KILL
@@ -82,6 +91,7 @@ phases:
     steps:
       - Create a content branch and smallest coherent repository change
       - Run repository-native format, lint, type, content/schema, link, and build checks
+      - Render essential research and source links in server/static HTML; derive visible content, hub cards, metadata, schema, sitemap, and related links from the same canonical record
       - Create a pull request with evidence receipt, rollback, and unresolved risk
       - Inspect the rendered preview on mobile and desktop, including metadata, canonical, robots, JSON-LD, images, links, and runtime errors
     output: PREVIEW_LIVE with confirmed pull request and preview URL

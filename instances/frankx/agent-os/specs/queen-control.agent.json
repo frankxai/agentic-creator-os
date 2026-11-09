@@ -1,0 +1,64 @@
+{
+  "id": "queen-control",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "Control / Ops Queen — owns the control domain and staffs its Generals (control plane, safety & integrity). Use when work belongs to the control domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-coo, general-cto, general-ceo, worker-visual-qa)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "control",
+    "sourceId": "CONTROL-OPS-QUEEN",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
+    "generals": [
+      {
+        "title": "Control Plane General",
+        "sourceId": "CONTROL-PLANE-GENERAL",
+        "role": "coo",
+        "agent": "general-coo",
+        "swarms": [
+          "control-plane-sentinel",
+          "gitops-hygiene",
+          "swarm-comms"
+        ]
+      },
+      {
+        "title": "Safety & Integrity General",
+        "sourceId": "SAFETY-GENERAL",
+        "role": "cto",
+        "agent": "general-cto",
+        "swarms": [
+          "safety-auditor",
+          "storage-intelligence",
+          "runtime-health"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}

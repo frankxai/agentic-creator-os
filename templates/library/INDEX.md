@@ -2,25 +2,12 @@
 
 ## Complete Template Index
 
-### SOCIAL MEDIA TEMPLATES
-- [Twitter Thread - Expert](./social-media/twitter-thread-expert.md)
-- [Twitter Thread - Storytelling](./social-media/twitter-thread-storytelling.md)  
-- [Twitter Thread - How-To](./social-media/twitter-thread-howto.md)
-- [Twitter Thread - Listicle](./social-media/twitter-thread-listicle.md)
-- [Twitter Thread - Debate](./social-media/twitter-thread-debate.md)
-- [Twitter Thread - Announcement](./social-media/twitter-thread-announcement.md)
-- [LinkedIn Thought Leadership](./social-media/linkedin-thought-leadership.md)
-- [LinkedIn Career Lesson](./social-media/linkedin-career-lesson.md)
-- [Instagram Carousel - Educational](./social-media/instagram-carousel-educational.md)
-- [FarCaster Cast Template](./social-media/farcaster-cast-template.md)
-- [Cross-Platform Distribution Workflow](./social-media/cross-platform-distribution.md)
-
 ### BLOG TEMPLATES
-- [Evergreen Authority Post](./blog/evergreen-authority.md)
+- [Evergreen Authority Post](./blog/evergreen-authority-post.md)
 - [How-To Guide](./blog/how-to-guide.md)
-- [Listicle Post](./blog/listicle.md)
+- [Listicle Post](./blog/listicle-post.md)
 - [Case Study](./blog/case-study.md)
-- [Comparison Post](./blog/comparison.md)
+- [Comparison Post](./blog/comparison-post.md)
 - [News Commentary](./blog/news-commentary.md)
 - [Personal Story](./blog/personal-story.md)
 - [Expert Interview](./blog/expert-interview.md)
@@ -41,12 +28,12 @@
 - [Instagram Reel](./video/instagram-reel.md)
 - [LinkedIn Video](./video/linkedin-video.md)
 
-### WEB3 TEMPLATES
-- [NFT Collection Announcement](./web3/nft-collection-announce.md)
-- [DAO Proposal](./web3/dao-proposal.md)
-- [DeFi Tutorial](./web3/defi-tutorial.md)
-- [Crypto News Commentary](./web3/crypto-news-commentary.md)
-- [Token Utility Explainer](./web3/token-utility-explainer.md)
+### PRODUCT TEMPLATES
+- [Product Launch](./product/product-launch.md)
+- [Feature Announcement](./product/feature-announcement.md)
+- [Comparison Sheet](./product/comparison-sheet.md)
+- [Case Study](./product/case-study.md)
+- [Pricing Page](./product/pricing-page.md)
 
 ---
 

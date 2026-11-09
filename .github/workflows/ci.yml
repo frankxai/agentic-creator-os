@@ -17,6 +17,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -24,12 +25,14 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         id: install
         run: |
           set -o pipefail
-          npm install --no-audit --no-fund 2>&1 | tee /tmp/install.log
+          npm ci --no-audit --no-fund 2>&1 | tee /tmp/install.log
 
       - name: Verify public surface
         run: npm run verify:public-surface
@@ -50,6 +53,19 @@ jobs:
 
       - name: Typecheck
         run: npm run typecheck:all
+
+      # Offline tests only: the MCP contract test starts every server over stdio.
+      # The browser server's sample call (browser_close) never launches Chromium,
+      # so no Playwright browser download is needed.
+      - name: Test
+        id: test
+        run: |
+          set -o pipefail
+          {
+            node --test test/*.test.mjs
+            npm run observatory:test
+            npm run test:receipt
+          } 2>&1 | tee /tmp/test.log
 
       # Diagnostic: on any failure above, post the captured logs as a PR
       # comment so they are visible without log-fetching tooling. Safe to
@@ -81,6 +97,11 @@ jobs:
             echo '```'
             tail -30 /tmp/lint.log 2>/dev/null || echo "(no log)"
             echo '```'
+            echo ""
+            echo "### test (tail 60)"
+            echo '```'
+            tail -60 /tmp/test.log 2>/dev/null || echo "(no log)"
+            echo '```'
           } > /tmp/comment.md
           gh pr comment "$PR_NUMBER" --body-file /tmp/comment.md --repo "${{ github.repository }}"
 
@@ -88,6 +109,7 @@ jobs:
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v7
 
@@ -96,9 +118,11 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+          cache: npm
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Build
         run: npm run build:all

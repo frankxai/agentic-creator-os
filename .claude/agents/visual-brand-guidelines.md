@@ -1,6 +1,13 @@
 ---
 name: visual-brand-guidelines
-description: Brand-gate for every FrankX visual asset. Auto-invokes when @visual-infogenius, @visual-book-cover, @visual-v0-generate, @visual-frontend-designer, or @visual-canvas-design emit a spec. Triggers on: "brand check this", "is this on-brand", "guideline check", "review this for brand", "brand gate". Runs 4 checks (color palette, typography, voice/AI-slop, Arcanean-mythology-leak) and returns pass | warn | fail with specific corrections per violation. P3.7 — the gate before any visual ships.
+description: 'Brand-gate for every FrankX visual asset. Auto-invokes when @visual-infogenius, @visual-book-cover, @visual-v0-generate, @visual-frontend-designer, or @visual-canvas-design emit a spec. Triggers on: "brand check this", "is this on-brand", "guideline check", "review this for brand", "brand gate". Runs 4 checks (color palette, typography, voice/AI-slop, Arcanean-mythology-leak) and returns pass | warn | fail with specific corrections per violation. P3.7 — the gate before any visual ships.'
+capabilities:
+  - color_palette_check
+  - typography_check
+  - voice_and_ai_slop_check
+  - arcanean_mythology_leak_check
+  - violation_correction_reporting
+priority: high
 tools: Read, Bash, Write
 model: sonnet
 ---

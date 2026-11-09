@@ -1,0 +1,17 @@
+{
+  "schema": "acos.upstreams.v1",
+  "reviewed": "2026-10-04T20:00:00Z",
+  "note": "Frontier repositories the Agent OS builds on or tracks. `uses` says what we take; `watch` says what change should trigger a review. scripts/upstream-watch.mjs reports which moved since `reviewed`.",
+  "upstreams": [
+    { "repo": "anthropics/skills", "uses": "Agent Skills format, reference skills, and skill evaluation practice", "watch": "SKILL.md spec or eval format changes", "feeds": ["docs/agent-os/SKILL-SPEC.md"] },
+    { "repo": "anthropics/claude-code", "uses": "Subagent, skill, plugin, and memory frontmatter; release notes for new fields", "watch": "new agent or skill frontmatter fields, memory or eval features", "feeds": ["docs/agent-os/AGENT-SPEC.md", "scripts/agent-compile.mjs"] },
+    { "repo": "anthropics/claude-code-action", "uses": "GitHub Actions runner for scheduled and mention-triggered agentic jobs (clock 3 in CI)", "watch": "auth options, prompt inputs, permissions", "feeds": ["docs/agent-os/ALWAYS-ON.md"] },
+    { "repo": "modelcontextprotocol/modelcontextprotocol", "uses": "MCP specification: tools, discovery, stateless transport, deprecations", "watch": "new revision or deprecation window", "feeds": ["docs/agent-os/MESH.md"] },
+    { "repo": "agentsmd/agents.md", "uses": "AGENTS.md open format for cross-tool repository instructions", "watch": "format changes or new fields", "feeds": ["AGENTS.md"] },
+    { "repo": "github/spec-kit", "uses": "Spec-driven development flow for briefs and acceptance criteria (CPO, CTO)", "watch": "template or command changes", "feeds": ["agent-os/roles/cpo.md"] },
+    { "repo": "openai/codex", "uses": "Different-family reviewer and worker in the mesh (codex exec, read-only sandbox)", "watch": "exec flags, sandbox modes", "feeds": ["docs/agent-os/MESH.md"] },
+    { "repo": "google-gemini/gemini-cli", "uses": "Long-context, different-family reviewer in the mesh (plan approval mode)", "watch": "approval modes, headless flags", "feeds": ["docs/agent-os/MESH.md"] },
+    { "repo": "frankxai/starlight-swarm", "uses": "Domain org chart (starlight.domainQueens.v1) and Queen charter that Domain Queens compile from", "watch": "config/domain-queens.json or Queen charter changes", "feeds": ["scripts/org-import.mjs"] },
+    { "repo": "frankxai/Starlight-Intelligence-System", "uses": "Shared memory server the instance overlay maps to ~~memory", "watch": "memory tool names, vault or scope changes", "feeds": ["docs/agent-os/MEMORY-SPEC.md"] }
+  ]
+}

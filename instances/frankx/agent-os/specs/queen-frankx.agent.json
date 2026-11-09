@@ -1,0 +1,75 @@
+{
+  "id": "queen-frankx",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "FrankX Queen — owns the frankx domain and staffs its Generals (revenue, product, growth). Use when work belongs to the frankx domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-cfo, general-cpo, general-cmo, general-ceo, worker-visual-qa)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "frankx",
+    "sourceId": "FRANKX-QUEEN",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
+    "generals": [
+      {
+        "title": "Revenue General",
+        "sourceId": "FRANKX-REVENUE-GENERAL",
+        "role": "cfo",
+        "agent": "general-cfo",
+        "swarms": [
+          "revenue-systems",
+          "checkout-integrity",
+          "funnel-economics"
+        ]
+      },
+      {
+        "title": "Product General",
+        "sourceId": "FRANKX-PRODUCT-GENERAL",
+        "role": "cpo",
+        "agent": "general-cpo",
+        "swarms": [
+          "product-architect",
+          "packaging",
+          "pricing"
+        ]
+      },
+      {
+        "title": "Growth General",
+        "sourceId": "FRANKX-GROWTH-GENERAL",
+        "role": "cmo",
+        "agent": "general-cmo",
+        "swarms": [
+          "content-hooks",
+          "distribution",
+          "creator-kit"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}

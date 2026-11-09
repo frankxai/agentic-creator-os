@@ -47,33 +47,40 @@ mcp-servers/
 
 ## Creator MCP Tools
 
-### Social Media Tools
+Every tool name carries its server prefix (`creator_`, `evaluator_`, ...) so agents with many servers loaded pick the right one. Tools return `structuredContent` matching a declared `outputSchema`, plus the same JSON as text.
+
+### Social Media Tools (simulated)
+The social tools record posts in the server's memory only; no platform API is called and nothing is published. Analytics tools return randomly generated sample numbers, flagged `simulated: true`.
+
 | Tool | Purpose | Parameters |
 |------|---------|------------|
-| `twitter_post` | Create a single tweet | content, hashtags |
-| `twitter_thread` | Create a thread | tweets[], media |
-| `linkedin_post` | Create LinkedIn post | content, hashtags |
-| `linkedin_article` | Create LinkedIn article | title, content, tags |
-| `instagram_post` | Create Instagram post | caption, media, hashtags |
-| `instagram_story` | Create Instagram story | content, stickers |
-| `farcaster_cast` | Create FarCaster cast | content, channels |
-| `farcaster_thread` | Create FarCaster thread | casts[], channels |
+| `creator_twitter_post` | Record a single tweet | text, mediaUrls, replyToId, scheduledFor |
+| `creator_twitter_thread` | Record a thread | tweets[], scheduledFor |
+| `creator_linkedin_post` | Record a LinkedIn post | text, mediaUrls, visibility, scheduledFor |
+| `creator_linkedin_article` | Record a LinkedIn article | title, content, tags, publishNow |
+| `creator_instagram_post` | Record an Instagram post | caption, mediaUrls, type, tags |
+| `creator_instagram_story` | Record an Instagram story | mediaUrl, type, link, stickers |
+| `creator_farcaster_cast` | Record a Farcaster cast | text, channelId, embeds, mentions |
+| `creator_farcaster_thread` | Record a Farcaster thread | casts[], channelId |
 
 ### Scheduling & Analytics
 | Tool | Purpose | Parameters |
 |------|---------|------------|
-| `schedule_content` | Schedule posts | content, platforms, datetime |
-| `get_analytics` | Get platform analytics | platform, date_range |
+| `creator_schedule_content` | Queue one item | platform, type, content, scheduledFor |
+| `creator_schedule_list` | List the queue | platform, status, startDate, endDate, limit |
+| `creator_analytics_aggregated` | Cross-platform summary (sample data) | startDate, endDate, platforms |
 
 ## Evaluator MCP Tools
 
 | Tool | Purpose | Output |
 |------|---------|--------|
-| `evaluate_content` | Score content quality | 0-100 score, grades |
-| `evaluate_hook` | Analyze hook effectiveness | Hook score, suggestions |
-| `track_performance` | Track metrics | Performance data |
-| `get_metrics` | View performance | Metrics dashboard |
-| `get_audit_trail` | View creation history | Audit log |
+| `evaluator_evaluate_content` | Score content quality | 0-100 scores, grade, evaluationId |
+| `evaluator_evaluate_hook` | Analyze hook effectiveness | Hook scores, suggestions |
+| `evaluator_track_performance` | Record real metrics for an evaluationId | Accuracy percentage |
+| `evaluator_get_metrics` | View performance | Aggregated metrics |
+| `evaluator_get_audit_trail` | View evaluation history | Audit entries |
+| `evaluator_compare_content` | Compare two versions | Per-metric winner |
+| `evaluator_generate_improvements` | Suggest edits | Ranked suggestions |
 
 ## Using MCP Tools
 
@@ -84,10 +91,10 @@ skill:evaluator, evaluate this content
 
 # Or use the tool directly
 <tool_call>
-  tool: evaluate_content
+  tool: evaluator_evaluate_content
   args: {
     content: "Your content here",
-    dimensions: ["readability", "engagement"]
+    contentType: "linkedin"
   }
 </tool_call>
 ```
@@ -112,8 +119,8 @@ When using MCP tools:
 
 1. **Use skill triggers first** - Let the system route to tools
 2. **Understand available tools** - Know what each MCP provides
-3. **Evaluate quality** - Use `evaluate_content` on drafts
-4. **Track performance** - Use `get_analytics` after publishing
+3. **Evaluate quality** - Use `evaluator_evaluate_content` on drafts
+4. **Track performance** - Use `evaluator_track_performance` with real numbers after publishing
 5. **Follow guidelines** - Each tool has specific parameters
 
 ## Configuration

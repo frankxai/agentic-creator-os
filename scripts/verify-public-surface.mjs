@@ -3,11 +3,15 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import {
+  copyFileSync,
   existsSync,
+  mkdirSync,
   mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
+  symlinkSync,
+  writeFileSync,
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, isAbsolute, join, win32 } from 'node:path'
@@ -126,10 +130,10 @@ function verifyVersion(canonical) {
 function verifyClaims(canonical, measured) {
   const metrics = {
     nonEmptySkillModules: {
-      expected: 174,
-      readme: 'Non-empty skill modules | 174',
-      quickstart: '174 non-empty skill modules',
-      claude: '174 Non-empty Skill Modules',
+      expected: 176,
+      readme: 'Non-empty skill modules | 176',
+      quickstart: '176 non-empty skill modules',
+      claude: '176 Non-empty Skill Modules',
     },
     emptySkillPlaceholders: {
       expected: 5,
@@ -144,10 +148,10 @@ function verifyClaims(canonical, measured) {
       claude: '85 Top-level Commands',
     },
     topLevelAgents: {
-      expected: 69,
-      readme: 'Top-level agent profiles | 69',
-      quickstart: '69 top-level agent profiles',
-      claude: '69 Top-level Agent Profiles',
+      expected: 83,
+      readme: 'Top-level agent profiles | 83',
+      quickstart: '83 top-level agent profiles',
+      claude: '83 Top-level Agent Profiles',
     },
     installableShellHooks: {
       expected: 9,
@@ -232,16 +236,34 @@ function verifyLicenseTruth(canonical) {
 
 function verifyMarketplaceTruth(canonical) {
   const marketplacePath = join(ROOT, '.claude-plugin', 'marketplace.json')
-  assert.equal(
-    existsSync(marketplacePath),
-    false,
-    'marketplace gate must be updated when a marketplace manifest is added'
-  )
-  assert.match(canonical.readme, /not currently presented as a Claude marketplace installation/)
-  assert.doesNotMatch(
-    canonical.readme,
-    /claude plugin marketplace add frankxai\/agentic-creator-os/
-  )
+  const marketplace = readJson(marketplacePath)
+  assert.equal(marketplace.name, 'frankx-creator')
+  assert.equal(marketplace.plugins.length, 1)
+  assert.equal(marketplace.plugins[0].name, 'creator-os-core')
+  assert.equal(marketplace.plugins[0].source, './plugins/creator-os-core')
+
+  const pluginRoot = join(ROOT, 'plugins', 'creator-os-core')
+  const skillDirs = readdirSync(join(pluginRoot, 'skills'), { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+  assert.deepEqual(skillDirs, [
+    'handoff-clean',
+    'review-a-diff',
+    'run-the-checks',
+    'start-safely',
+    'stated-voice',
+  ])
+  for (const skill of skillDirs) {
+    const body = readFileSync(join(pluginRoot, 'skills', skill, 'SKILL.md'), 'utf8')
+    assert.match(body, /^---\nname: /)
+    assert.doesNotMatch(body, /C:\\Users\\|\/Users\/frank|starlight\/repos/)
+  }
+  assert.equal(existsSync(join(pluginRoot, 'commands', 'acos.md')), true)
+  assert.match(canonical.readme, /claude plugin marketplace add frankxai\/agentic-creator-os/)
+  assert.match(canonical.readme, /grok plugin install creator-os-core --trust/)
+  assert.doesNotMatch(canonical.readme, /npx @frankx\/acos/)
+  assert.doesNotMatch(canonical.readme, /not currently presented as a Claude marketplace installation/)
 }
 
 function verifyPortablePublicConfig(canonical) {
@@ -259,20 +281,109 @@ function verifyPortablePublicConfig(canonical) {
   }
 }
 
-function smokeInstall(canonical, measured) {
+function smokeInstall(canonical, measured, symlinkFixtureOnly = false) {
   const tempRoot = mkdtempSync(join(tmpdir(), 'acos-public-surface-'))
   const claudeHome = join(tempRoot, 'claude-home')
+  const collisionHome = join(tempRoot, 'collision-home')
+  const parentCollisionHome = join(tempRoot, 'parent-collision-home')
+  const stateCollisionHome = join(tempRoot, 'state-collision-home')
+  const linkedSourceHome = join(tempRoot, 'linked-source-home')
+  const linkedSourceRoot = join(tempRoot, 'linked-source-repo')
+  const linkedParentHome = join(tempRoot, 'linked-parent-home')
+  const linkedParentRoot = join(tempRoot, 'linked-parent-repo')
+  const linkedRepoHome = join(tempRoot, 'linked-repo-home')
+  const linkedRepoRoot = join(tempRoot, 'linked-repo')
+  const linkedRepoAlias = join(tempRoot, 'linked-repo-alias')
+  const outsideSkill = join(tempRoot, 'outside-skill')
+  const outsideSkillsRoot = join(tempRoot, 'outside-skills-root')
+  const firstAgent = readdirSync(join(ROOT, '.claude', 'agents'))
+    .find((name) => name.endsWith('.md'))
+  assert.ok(firstAgent, 'the installer needs a real agent collision fixture')
+
+  const install = (home) => execFileSync('bash', [join(ROOT, 'install.sh'), '--platform=claude', '--minimal'], {
+    cwd: ROOT,
+    env: {
+      ...process.env,
+      HOME: tempRoot,
+      CLAUDE_HOME: home,
+    },
+    stdio: 'pipe',
+  })
 
   try {
-    execFileSync('bash', [join(ROOT, 'install.sh'), '--platform=claude', '--minimal'], {
-      cwd: ROOT,
-      env: {
-        ...process.env,
-        HOME: tempRoot,
-        CLAUDE_HOME: claudeHome,
-      },
+    mkdirSync(join(linkedSourceRoot, '.claude', 'skills'), { recursive: true })
+    mkdirSync(outsideSkill)
+    writeFileSync(join(outsideSkill, 'SKILL.md'), 'foreign source must not install\n')
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedSourceRoot, 'install.sh'))
+    symlinkSync(
+      outsideSkill,
+      join(linkedSourceRoot, '.claude', 'skills', 'linked-skill'),
+      process.platform === 'win32' ? 'junction' : 'dir',
+    )
+    assert.throws(() => execFileSync('bash', [join(linkedSourceRoot, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedSourceRoot,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedSourceHome },
       stdio: 'pipe',
-    })
+    }), /Command failed/, 'a linked skill source must stop before any profile write')
+    assert.equal(existsSync(linkedSourceHome), false,
+      'linked skill source must not create the destination profile')
+
+    mkdirSync(join(outsideSkillsRoot, 'ordinary-skill'), { recursive: true })
+    writeFileSync(join(outsideSkillsRoot, 'ordinary-skill', 'SKILL.md'), 'parent link must not install\n')
+    mkdirSync(join(linkedParentRoot, '.claude'), { recursive: true })
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedParentRoot, 'install.sh'))
+    symlinkSync(
+      outsideSkillsRoot,
+      join(linkedParentRoot, '.claude', 'skills'),
+      process.platform === 'win32' ? 'junction' : 'dir',
+    )
+    assert.throws(() => execFileSync('bash', [join(linkedParentRoot, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedParentRoot,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedParentHome },
+      stdio: 'pipe',
+    }), /Command failed/, 'a linked skills parent must stop before any profile write')
+    assert.equal(existsSync(linkedParentHome), false,
+      'linked skills parent must not create the destination profile')
+
+    mkdirSync(join(linkedRepoRoot, '.claude', 'skills', 'ordinary-skill'), { recursive: true })
+    writeFileSync(join(linkedRepoRoot, '.claude', 'skills', 'ordinary-skill', 'SKILL.md'),
+      'root alias must not install\n')
+    copyFileSync(join(ROOT, 'install.sh'), join(linkedRepoRoot, 'install.sh'))
+    symlinkSync(linkedRepoRoot, linkedRepoAlias, process.platform === 'win32' ? 'junction' : 'dir')
+    assert.throws(() => execFileSync('bash', [join(linkedRepoAlias, 'install.sh'), '--platform=claude', '--minimal'], {
+      cwd: linkedRepoAlias,
+      env: { ...process.env, HOME: tempRoot, CLAUDE_HOME: linkedRepoHome },
+      stdio: 'pipe',
+    }), /Command failed/, 'a linked repository root must stop before any profile write')
+    assert.equal(existsSync(linkedRepoHome), false,
+      'linked repository root must not create the destination profile')
+
+    if (symlinkFixtureOnly) return
+
+    mkdirSync(parentCollisionHome)
+    const blockedParent = join(parentCollisionHome, 'skills')
+    writeFileSync(blockedParent, 'preexisting user file\n')
+    assert.throws(() => install(parentCollisionHome), /Command failed/)
+    assert.equal(readFileSync(blockedParent, 'utf8'), 'preexisting user file\n')
+    assert.deepEqual(readdirSync(parentCollisionHome), ['skills'],
+      'non-directory ancestor must stop installation before any profile writes')
+
+    const blockedState = join(stateCollisionHome, 'acos', 'state.json')
+    mkdirSync(blockedState, { recursive: true })
+    assert.throws(() => install(stateCollisionHome), /Command failed/)
+    assert.deepEqual(readdirSync(stateCollisionHome), ['acos'],
+      'a state-file type collision must stop before any profile writes')
+    assert.deepEqual(readdirSync(join(stateCollisionHome, 'acos')), ['state.json'])
+
+    const collisionPath = join(collisionHome, 'agents', firstAgent)
+    mkdirSync(dirname(collisionPath), { recursive: true })
+    writeFileSync(collisionPath, 'preexisting user agent\n')
+    assert.throws(() => install(collisionHome), /Command failed/)
+    assert.equal(readFileSync(collisionPath, 'utf8'), 'preexisting user agent\n')
+    assert.equal(existsSync(join(collisionHome, 'skills')), false,
+      'collision preflight must stop before the first directory is written')
+
+    install(claudeHome)
 
     const installedSkillGroups = countTopLevel(
       join(claudeHome, 'skills'),
@@ -301,6 +412,12 @@ function smokeInstall(canonical, measured) {
 
     const state = readJson(join(claudeHome, 'acos', 'state.json'))
     assert.equal(state.version, canonical.packageJson.version)
+
+    install(claudeHome)
+    const installedAgentPath = join(claudeHome, 'agents', firstAgent)
+    writeFileSync(installedAgentPath, 'locally edited agent\n')
+    assert.throws(() => install(claudeHome), /Command failed/)
+    assert.equal(readFileSync(installedAgentPath, 'utf8'), 'locally edited agent\n')
   } finally {
     rmSync(tempRoot, { recursive: true, force: true })
   }
@@ -314,16 +431,19 @@ verifyClaims(canonical, measured)
 verifyLicenseTruth(canonical)
 verifyMarketplaceTruth(canonical)
 verifyPortablePublicConfig(canonical)
-smokeInstall(canonical, measured)
+const symlinkFixtureOnly = process.argv.includes('--symlink-fixture-only')
+smokeInstall(canonical, measured, symlinkFixtureOnly)
 
-console.log(
+if (symlinkFixtureOnly) {
+  console.log('Claude source-symlink fixtures passed without profile writes')
+} else console.log(
   JSON.stringify(
     {
       version: canonical.packageJson.version,
       ...measured,
       licenseFile: 'LICENSE',
       license: canonical.packageJson.license,
-      marketplaceManifest: false,
+      marketplaceManifest: existsSync(join(ROOT, '.claude-plugin', 'marketplace.json')),
       claudeInstallSmoke: 'passed',
     },
     null,

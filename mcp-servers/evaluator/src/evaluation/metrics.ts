@@ -126,8 +126,6 @@ export async function getMetrics(args: {
   projectId?: string;
   metricType: 'quality' | 'engagement' | 'improvement' | 'all';
 }): Promise<AggregatedMetrics> {
-  await ensureMetricsDir();
-  
   const { timeRange, contentType, platform, projectId, metricType } = args;
   
   // Calculate time filter
@@ -190,6 +188,15 @@ export async function getMetrics(args: {
     }
   }
   
+  // trackPerformance keeps this session's entries in memory only; count them too.
+  if (!projectId) {
+    for (const entry of Array.from(metricsCache.values()).flat() as PerformanceMetrics[]) {
+      if (new Date(entry.trackedAt).getTime() > cutoffTime && (!contentType || entry.contentType === contentType) && (!platform || entry.platform === platform)) {
+        allMetrics.push(entry);
+      }
+    }
+  }
+
   // Calculate aggregated metrics
   const totalEvaluations = allMetrics.length;
   const averageScore = totalEvaluations > 0 

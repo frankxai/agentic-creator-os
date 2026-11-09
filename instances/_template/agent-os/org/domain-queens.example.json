@@ -1,0 +1,33 @@
+{
+  "schema": "starlight.domainQueens.v1",
+  "updatedAt": "2026-10-04",
+  "chiefQueen": {
+    "id": "CHIEF-QUEEN",
+    "title": "Chief Queen",
+    "role": "Sets the thesis and cross-domain allocation; maps to the CEO General."
+  },
+  "domains": [
+    {
+      "domain": "studio",
+      "queen": {
+        "id": "STUDIO-QUEEN",
+        "title": "Studio Queen",
+        "generals": [
+          { "id": "STUDIO-PRODUCT-GENERAL", "title": "Product General", "swarms": ["product-architect", "pricing"] },
+          { "id": "STUDIO-GROWTH-GENERAL", "title": "Growth General", "swarms": ["content-hooks", "distribution"] }
+        ]
+      }
+    },
+    {
+      "domain": "ops",
+      "queen": {
+        "id": "OPS-QUEEN",
+        "title": "Ops Queen",
+        "generals": [
+          { "id": "OPS-CONTROL-GENERAL", "title": "Control Plane General", "swarms": ["gitops-hygiene", "runtime-health"] }
+        ]
+      }
+    }
+  ],
+  "notes": "Example org chart. Each Domain General title must map to a functional General in scripts/org-import.mjs (TITLE_TO_ROLE)."
+}

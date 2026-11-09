@@ -1,0 +1,14 @@
+{
+  "name": "creator-os-core",
+  "version": "1.0.0",
+  "description": "Five practices for starting work safely, reviewing a diff, writing in a stated voice, running the project's checks, and handing off without secrets.",
+  "author": {
+    "name": "Frank Riemer",
+    "email": "frank@frankx.ai",
+    "url": "https://frankx.ai"
+  },
+  "homepage": "https://github.com/frankxai/agentic-creator-os",
+  "repository": "https://github.com/frankxai/agentic-creator-os",
+  "license": "Apache-2.0",
+  "keywords": ["creator-os", "skills", "review", "handoff"]
+}

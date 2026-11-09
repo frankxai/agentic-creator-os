@@ -229,8 +229,9 @@ export async function getPostAnalytics(postId: string): Promise<{
     clickThroughRate: 0
   };
   
-  analytics.clickThroughRate = 
-    ((analytics.likes + analytics.comments + analytics.shares) / analytics.impressions) * 100;
+  analytics.clickThroughRate = analytics.impressions > 0
+    ? ((analytics.likes + analytics.comments + analytics.shares) / analytics.impressions) * 100
+    : 0;
   
   post.metrics = analytics;
   posts.set(postId, post);
@@ -343,44 +344,48 @@ export function getRateLimitStatus() {
   };
 }
 
+const id = () => z.string().min(1).max(100);
+const isoDate = () => z.string().max(40);
+const url = () => z.string().url().max(2048);
+
 export const createPostSchema = {
   text: z.string().min(1).max(3000).describe("Post text (max 3000 characters)"),
-  mediaUrls: z.array(z.string().url()).optional().describe("Media URLs to attach"),
-  visibility: z.enum(["public", "connections", "private"]).optional().describe("Post visibility"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  mediaUrls: z.array(url()).max(9).optional().describe("Media URLs to attach (max 9)"),
+  visibility: z.enum(["public", "connections", "private"]).optional().describe("Who can see the post; default public"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule for; omit to record it as published now")
 };
 
 export const createArticleSchema = {
   title: z.string().min(1).max(150).describe("Article title (max 150 characters)"),
-  content: z.string().min(1).max(125000).describe("Article content (max 125,000 characters)"),
-  coverImageUrl: z.string().url().optional().describe("Cover image URL"),
-  tags: z.array(z.string()).optional().describe("Article tags"),
-  publishNow: z.boolean().optional().describe("Publish immediately")
+  content: z.string().min(1).max(125000).describe("Article body (max 125,000 characters)"),
+  coverImageUrl: url().optional().describe("Cover image URL"),
+  tags: z.array(z.string().max(50)).max(20).optional().describe("Article tags (max 20)"),
+  publishNow: z.boolean().optional().describe("Record as published instead of draft")
 };
 
 export const publishArticleSchema = {
-  articleId: z.string().describe("Article ID to publish")
+  articleId: id().describe("Local article ID to publish")
 };
 
 export const getPostAnalyticsSchema = {
-  postId: z.string().describe("Post ID")
+  postId: id().describe("Local post ID returned by creator_linkedin_post")
 };
 
 export const getArticleAnalyticsSchema = {
-  articleId: z.string().describe("Article ID")
+  articleId: id().describe("Local article ID")
 };
 
 export const schedulePostSchema = {
   text: z.string().min(1).max(3000).describe("Post text"),
-  scheduledFor: z.string().describe("ISO date string for scheduling"),
-  mediaUrls: z.array(z.string().url()).optional().describe("Media URLs"),
+  scheduledFor: isoDate().describe("ISO 8601 date-time to schedule for"),
+  mediaUrls: z.array(url()).max(9).optional().describe("Media URLs (max 9)"),
   visibility: z.enum(["public", "connections", "private"]).optional().describe("Post visibility")
 };
 
 export const deletePostSchema = {
-  postId: z.string().describe("Post ID to delete")
+  postId: id().describe("Local post ID to delete")
 };
 
 export const deleteArticleSchema = {
-  articleId: z.string().describe("Article ID to delete")
+  articleId: id().describe("Local article ID to delete")
 };

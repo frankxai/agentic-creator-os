@@ -67,6 +67,8 @@ show_help() {
     echo "  --platform=all        Install for all detected platforms"
     echo ""
     echo "Install Modes:"
+    echo "  (default)             Writes the selected platform."
+    echo "  --dry-run             Print what would change and write nothing."
     echo "  --full                Full installation (all skills + MCP servers)"
     echo "  --minimal             Core skills only"
     echo "  --skills-only         Skills without commands/agents"
@@ -79,7 +81,8 @@ show_help() {
     echo "  --help                Show this help"
     echo ""
     echo "Examples:"
-    echo "  ./install.sh                           # Auto-detect platform"
+    echo "  ./install.sh --dry-run                 # Preview the detected platform"
+    echo "  ./install.sh --platform=claude        # Write the Claude profile"
     echo "  ./install.sh --platform=cursor         # Cursor-specific install"
     echo "  ./install.sh --platform=grok           # Grok Build full harness (GROK.md + .grok/ seeds from adapter)"
     echo "  ./install.sh --platform=antigravity    # AGY scaffold (5-fleet parity + grok-personal; creates .antigravity/ + harnesses/antigravity/ minimal, reversible; see ACOS adapters parity 2026-06-02)"
@@ -115,6 +118,12 @@ detect_platforms() {
         platforms="${platforms}gemini"
     fi
 
+    # Codex CLI
+    if command -v codex &>/dev/null || [ -d "$HOME/.codex" ]; then
+        [ -n "$platforms" ] && platforms="$platforms,"
+        platforms="${platforms}codex"
+    fi
+
     # Grok CLI (xAI) — full harness support via .grok/ + AGENTS.md compat + Claude bridge
     if command -v grok &>/dev/null || [ -d "$HOME/.grok" ]; then
         [ -n "$platforms" ] && platforms="$platforms,"
@@ -147,11 +156,103 @@ check_prerequisites() {
 }
 
 # ── Claude Code Install ──────────────────────────────────────────────────────
+check_claude_source_path() {
+    local source_path="${1%/}"
+
+    # A source directory reached through a symlink can copy files from outside
+    # the checked-out installer, even when its individual files are regular.
+    while [ "$source_path" != "$PROJECT_DIR" ] && [ "$source_path" != "." ] && [ "$source_path" != "/" ]; do
+        [ ! -L "$source_path" ] || error "Refusing a symlinked installer source: $source_path"
+        case "$source_path" in
+            */*) source_path="${source_path%/*}"; [ -n "$source_path" ] || source_path="/" ;;
+            *) break ;;
+        esac
+    done
+    [ ! -L "$PROJECT_DIR" ] || error "Refusing a symlinked installer root: $PROJECT_DIR"
+}
+
+check_claude_target() {
+    local source="$1"
+    local target="$2"
+    local path="$target"
+
+    [ ! -L "$source" ] || error "Refusing a symlinked installer source: $source"
+
+    # A symlink at any destination ancestor could redirect a profile copy
+    # outside the path the user inspected.
+    while [ "$path" != "." ] && [ "$path" != "/" ]; do
+        [ ! -L "$path" ] || error "Refusing a symlinked Claude destination: $path"
+        if [ "$path" != "$target" ] && [ -e "$path" ] && [ ! -d "$path" ]; then
+            error "Refusing a non-directory Claude destination ancestor: $path. No files were copied."
+        fi
+        case "$path" in
+            */*) path="${path%/*}"; [ -n "$path" ] || path="/" ;;
+            *) break ;;
+        esac
+    done
+
+    if [ -e "$target" ]; then
+        [ -f "$target" ] && cmp -s "$source" "$target" ||
+            error "Existing Claude file differs: $target. Back it up or use an isolated CLAUDE_HOME; no files were copied."
+    fi
+}
+
+preflight_claude_code() {
+    local claude_home="$1"
+    local skill_dir source relative name
+
+    # Check every destination before creating even the first directory. A
+    # successful repeat install may skip identical files, but user edits stop
+    # the entire install rather than being replaced midway through it.
+    check_claude_source_path "$PROJECT_DIR/.claude/skills"
+    for skill_dir in "$PROJECT_DIR/.claude/skills"/*/; do
+        skill_dir="${skill_dir%/}"
+        [ -d "$skill_dir" ] || continue
+        check_claude_source_path "$skill_dir"
+        name=$(basename "$skill_dir")
+        [ "$name" = "CLAUDE.md" ] && continue
+        while IFS= read -r -d '' source; do
+            relative="${source#"$skill_dir"}"
+            check_claude_target "$source" "$claude_home/skills/$name/$relative"
+        done < <(find "$skill_dir" \( -type f -o -type l \) -print0)
+    done
+
+    if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
+    fi
+    check_claude_source_path "$PROJECT_DIR/.claude/commands"
+    for source in "$PROJECT_DIR/.claude/commands"/*.md; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/commands/$(basename "$source")"
+    done
+    check_claude_source_path "$PROJECT_DIR/.claude/agents"
+    for source in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/agents/$(basename "$source")"
+    done
+    check_claude_source_path "$PROJECT_DIR/.claude/hooks"
+    for source in "$PROJECT_DIR/.claude/hooks"/*.sh; do
+        [ -f "$source" ] || continue
+        check_claude_target "$source" "$claude_home/acos/hooks/$(basename "$source")"
+    done
+    if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
+    fi
+    if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
+        check_claude_target "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
+    fi
+    [ ! -L "$claude_home/acos/state.json" ] || error "Refusing a symlinked ACOS state file"
+    if [ -e "$claude_home/acos/state.json" ] && [ ! -f "$claude_home/acos/state.json" ]; then
+        error "Refusing a non-file ACOS state destination. No files were copied."
+    fi
+}
+
 install_claude_code() {
     local mode="${1:-standard}"
     local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
 
     log "Installing for Claude Code..."
+    preflight_claude_code "$claude_home"
 
     mkdir -p "$claude_home/skills" "$claude_home/commands" "$claude_home/agents" "$claude_home/acos"
 
@@ -163,7 +264,7 @@ install_claude_code() {
             local name=$(basename "$skill_dir")
             [ "$name" = "CLAUDE.md" ] && continue
             mkdir -p "$claude_home/skills/$name"
-            cp -r "$skill_dir"* "$claude_home/skills/$name/" 2>/dev/null || true
+            cp -rn "$skill_dir". "$claude_home/skills/$name/"
             skill_count=$((skill_count + 1))
         done
         success "Installed $skill_count skills"
@@ -171,7 +272,7 @@ install_claude_code() {
 
     # Skill rules (auto-activation)
     if [ -f "$PROJECT_DIR/.claude/skill-rules.json" ]; then
-        cp "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
+        cp -n "$PROJECT_DIR/.claude/skill-rules.json" "$claude_home/skill-rules.json"
         success "Installed 22 auto-activation rules"
     fi
 
@@ -180,7 +281,7 @@ install_claude_code() {
         local cmd_count=0
         for cmd in "$PROJECT_DIR/.claude/commands"/*.md; do
             [ -f "$cmd" ] || continue
-            cp "$cmd" "$claude_home/commands/"
+            cp -n "$cmd" "$claude_home/commands/"
             cmd_count=$((cmd_count + 1))
         done
         success "Installed $cmd_count slash commands"
@@ -191,7 +292,7 @@ install_claude_code() {
         local agent_count=0
         for agent in "$PROJECT_DIR/.claude/agents"/*.md "$PROJECT_DIR/.claude/agents"/*.json; do
             [ -f "$agent" ] || continue
-            cp "$agent" "$claude_home/agents/"
+            cp -n "$agent" "$claude_home/agents/"
             agent_count=$((agent_count + 1))
         done
         success "Installed $agent_count agents"
@@ -202,7 +303,7 @@ install_claude_code() {
         mkdir -p "$claude_home/acos/hooks"
         for hook in "$PROJECT_DIR/.claude/hooks"/*.sh; do
             [ -f "$hook" ] || continue
-            cp "$hook" "$claude_home/acos/hooks/"
+            cp -n "$hook" "$claude_home/acos/hooks/"
             chmod +x "$claude_home/acos/hooks/$(basename "$hook")"
         done
         success "Installed v10 safety hooks (circuit-breaker, audit-trail, self-modify-gate)"
@@ -210,13 +311,13 @@ install_claude_code() {
 
     # Hooks config
     if [ -f "$PROJECT_DIR/.claude/hooks.json" ]; then
-        cp "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
+        cp -n "$PROJECT_DIR/.claude/hooks.json" "$claude_home/acos/hooks.json"
         success "Installed hook lifecycle config"
     fi
 
     # Agent IAM
     if [ -f "$PROJECT_DIR/.claude/agent-iam.json" ]; then
-        cp "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
+        cp -n "$PROJECT_DIR/.claude/agent-iam.json" "$claude_home/acos/agent-iam.json"
         success "Installed Agent IAM (6 profiles)"
     fi
 
@@ -607,6 +708,48 @@ generate_context_file() {
     success "Generated: $output_file ($(wc -l < "$output_file") lines)"
 }
 
+# ── Dry run ───────────────────────────────────────────────────────────────────
+note_path() {
+    local path="$1"
+    if [ -e "$path" ]; then
+        echo "REPLACE $path"
+    else
+        echo "CREATE  $path"
+    fi
+}
+
+preview_platform() {
+    local platform="$1"
+    local target="$2"
+    local claude_home="${CLAUDE_HOME:-$HOME/.claude}"
+
+    case "$platform" in
+        claude|claude-code)
+            echo "Claude Code writes into the profile, not the project."
+            note_path "$claude_home"
+            echo "Same-named skills, commands, agents, and hooks in that profile would be replaced."
+            ;;
+        cursor) note_path "$target/.cursorrules" ;;
+        windsurf) note_path "$target/.windsurfrules" ;;
+        gemini) note_path "$target/GEMINI.md" ;;
+        grok)
+            note_path "$target/GROK.md"
+            note_path "$target/.grok"
+            note_path "$target/AGENTS.md"
+            ;;
+        antigravity|agy)
+            note_path "$target/.antigravity"
+            note_path "$target/harnesses/antigravity"
+            ;;
+        codex)
+            echo "Codex is present. This installer does not write Codex files."
+            ;;
+        generic|*)
+            note_path "$target/CONTEXT.md"
+            ;;
+    esac
+}
+
 # ── Install for specific platform ─────────────────────────────────────────────
 install_platform() {
     local platform="$1"
@@ -631,6 +774,9 @@ install_platform() {
             ;;
         grok)
             install_grok "$mode" "$target"
+            ;;
+        codex)
+            warn "Codex has no writer in this installer. No files were changed."
             ;;
         antigravity|agy)
             install_antigravity_propose "$mode" "$target"
@@ -728,11 +874,14 @@ main() {
     local platform=""
     local mode="standard"
     local target_dir="."
+    local apply=1
 
     while [[ $# -gt 0 ]]; do
         case $1 in
             --platform=*)  platform="${1#*=}"; shift ;;
             --target=*)    target_dir="${1#*=}"; shift ;;
+            --apply)       apply=1; shift ;;
+            --dry-run)     apply=0; shift ;;
             --full)        mode="full"; shift ;;
             --minimal)     mode="minimal"; shift ;;
             --skills-only) mode="skills"; shift ;;
@@ -751,6 +900,23 @@ main() {
     if [ -z "$platform" ]; then
         platform=$(detect_platforms)
         log "Detected platform(s): $platform"
+    fi
+
+    if [ "$apply" -eq 1 ] && [ "$platform" = "codex" ]; then
+        warn "Codex has no writer in this installer. No files were changed."
+        exit 2
+    fi
+
+    if [ "$apply" -ne 1 ]; then
+        echo "Dry run. Nothing will be written."
+        echo "When the list looks right, run the same command without --dry-run."
+        IFS=',' read -ra PREVIEW <<< "$platform"
+        for p in "${PREVIEW[@]}"; do
+            p=$(echo "$p" | xargs)
+            [ -z "$p" ] && continue
+            preview_platform "$p" "$target_dir"
+        done
+        exit 0
     fi
 
     # Handle special modes

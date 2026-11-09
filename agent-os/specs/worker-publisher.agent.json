@@ -1,0 +1,37 @@
+{
+  "id": "worker-publisher",
+  "version": "1.0.0",
+  "kind": "worker",
+  "role": "publisher",
+  "description": "Publisher worker: assembles and verifies a publish-ready package per channel, then stops at the publish gate. Use when content is ready to go out: writes channel-native variants, checks claims, links, alt text, disclosure, and the rendered Open Graph preview, scores the publishing rubric, and hands the owner the exact action. Never posts or schedules.",
+  "capabilities": [
+    "channel-variants",
+    "claim-checks",
+    "link-checks",
+    "alt-and-og",
+    "publish-packages"
+  ],
+  "priority": "medium",
+  "model": "sonnet",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash",
+    "WebFetch",
+    "Skill"
+  ],
+  "memory": "user",
+  "color": "green",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/publisher.md"
+  ],
+  "requiredReading": [
+    "AGENTS.md",
+    "design.md",
+    "taste.md"
+  ],
+  "knowledge": [],
+  "evals": "evals/agents/worker-publisher"
+}

@@ -1,6 +1,12 @@
 ---
 name: template-design-experts
-description: Use this agent when you need to create, design, or optimize any type of template for commercial sale. This includes when you want to develop new template concepts, improve existing templates, choose the right tools and formats, or get strategic advice on template marketability. Examples: <example>Context: User wants to create a new template product line. user: 'I want to create some resume templates that will sell well on Etsy' assistant: 'I'll use the template-design-experts agent to help you create marketable resume templates with the right design approach and tools.' <commentary>The user needs template creation expertise, so use the template-design-experts agent to provide comprehensive guidance on resume template design, market analysis, and production tools.</commentary></example> <example>Context: User has an existing template that isn't selling well. user: 'My Notion productivity template isn't getting many sales. Can you help me improve it?' assistant: 'Let me engage the template-design-experts agent to analyze your Notion template and provide optimization strategies.' <commentary>This requires template optimization expertise, so use the template-design-experts agent to evaluate and improve the existing template.</commentary></example>
+description: "Use this agent when you need to create, design, or optimize any type of template for commercial sale. This includes when you want to develop new template concepts, improve existing templates, choose the right tools and formats, or get strategic advice on template marketability. Examples: <example>Context: User wants to create a new template product line. user: 'I want to create some resume templates that will sell well on Etsy' assistant: 'I'll use the template-design-experts agent to help you create marketable resume templates with the right design approach and tools.' <commentary>The user needs template creation expertise, so use the template-design-experts agent to provide comprehensive guidance on resume template design, market analysis, and production tools.</commentary></example> <example>Context: User has an existing template that isn't selling well. user: 'My Notion productivity template isn't getting many sales. Can you help me improve it?' assistant: 'Let me engage the template-design-experts agent to analyze your Notion template and provide optimization strategies.' <commentary>This requires template optimization expertise, so use the template-design-experts agent to evaluate and improve the existing template.</commentary></example>"
+capabilities:
+  - template_concept_development
+  - template_optimization
+  - tool_and_format_selection
+  - marketability_advice
+priority: medium
 model: sonnet
 ---
 

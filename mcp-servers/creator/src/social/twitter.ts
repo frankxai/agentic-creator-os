@@ -212,8 +212,9 @@ export async function getTweetAnalytics(tweetId: string): Promise<{
     engagementRate: 0
   };
   
-  analytics.engagementRate = 
-    ((analytics.likes + analytics.retweets + analytics.replies) / analytics.impressions) * 100;
+  analytics.engagementRate = analytics.impressions > 0
+    ? ((analytics.likes + analytics.retweets + analytics.replies) / analytics.impressions) * 100
+    : 0;
   
   tweet.metrics = analytics;
   tweets.set(tweetId, tweet);
@@ -341,32 +342,36 @@ export function getRateLimitStatus() {
 }
 
 // Zod schemas for validation
+const id = () => z.string().min(1).max(100);
+const isoDate = () => z.string().max(40);
+const url = () => z.string().url().max(2048);
+
 export const postTweetSchema = {
   text: z.string().min(1).max(280).describe("Tweet text (max 280 characters)"),
-  mediaUrls: z.array(z.string().url()).optional().describe("Media URLs to attach"),
-  replyToId: z.string().optional().describe("Tweet ID to reply to"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  mediaUrls: z.array(url()).max(4).optional().describe("Media URLs to attach (max 4)"),
+  replyToId: id().optional().describe("Local tweet ID this replies to"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule for; omit to record it as published now")
 };
 
 export const createThreadSchema = {
-  tweets: z.array(z.string().min(1).max(280)).min(1).describe("Array of tweet texts"),
-  scheduledFor: z.string().optional().describe("ISO date string for scheduling")
+  tweets: z.array(z.string().min(1).max(280)).min(1).max(25).describe("Tweet texts in thread order (1-25, max 280 characters each)"),
+  scheduledFor: isoDate().optional().describe("ISO 8601 date-time to schedule the thread for")
 };
 
 export const getTweetAnalyticsSchema = {
-  tweetId: z.string().describe("Tweet ID")
+  tweetId: id().describe("Local tweet ID returned by creator_twitter_post or creator_twitter_thread")
 };
 
 export const getThreadAnalyticsSchema = {
-  threadId: z.string().describe("Thread ID")
+  threadId: id().describe("Local thread ID")
 };
 
 export const scheduleTweetSchema = {
   text: z.string().min(1).max(280).describe("Tweet text"),
-  scheduledFor: z.string().describe("ISO date string for scheduling"),
-  mediaUrls: z.array(z.string().url()).optional().describe("Media URLs")
+  scheduledFor: isoDate().describe("ISO 8601 date-time to schedule for"),
+  mediaUrls: z.array(url()).max(4).optional().describe("Media URLs (max 4)")
 };
 
 export const deleteTweetSchema = {
-  tweetId: z.string().describe("Tweet ID to delete")
+  tweetId: id().describe("Local tweet ID to delete")
 };

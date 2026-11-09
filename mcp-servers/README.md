@@ -13,12 +13,14 @@ These servers are **optional add-ons**, not required for ACOS to work. Skills, c
 | Server | Purpose | Dependencies |
 |--------|---------|-------------|
 | `browser/` | Playwright-based browser automation | playwright |
-| `creator/` | Content creation tools (social posts) | MCP SDK |
+| `creator/` | Creator CRM plus simulated social drafts and scheduling (no platform APIs) | MCP SDK |
 | `database/` | LibSQL database backend | libsql |
 | `email/` | Email delivery | MCP SDK |
 | `evaluator/` | Quality evaluation & audit logging | MCP SDK |
-| `filesystem/` | File operations | MCP SDK |
-| `website/` | Web scraping & content extraction | MCP SDK |
+| `filesystem/` | File operations inside FILESYSTEM_ALLOWED_DIRS | MCP SDK |
+| `website/` | Next.js project scaffolding (pages, API routes) | MCP SDK |
+
+Tool names carry the server prefix (`browser_navigate`, `database_query`, ...). Every tool declares annotations and an output schema, and `test/mcp-contract.test.mjs` holds each server to the `mcp-doctor score` criteria.
 
 ## Installation
 

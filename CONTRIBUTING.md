@@ -37,7 +37,7 @@ git checkout -b feature/your-feature-name
 # ...
 
 # 6. Run validation
-npm run build
+npm run build:all
 npm run lint
 
 # 7. Commit with clear message

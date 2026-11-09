@@ -1,0 +1,63 @@
+{
+  "id": "queen-gencreator",
+  "version": "1.0.0",
+  "kind": "queen",
+  "role": "queen",
+  "description": "GenCreator / ACOS Queen — owns the gencreator domain and staffs its Generals (product os, idea & content). Use when work belongs to the gencreator domain and needs routing to the right General, a domain pulse, or acceptance of a General's result. Escalates cross-domain work to the CEO General.",
+  "capabilities": [
+    "domain-routing",
+    "general-delegation",
+    "acceptance-review",
+    "domain-pulse",
+    "cross-domain-escalation"
+  ],
+  "priority": "high",
+  "model": "opus",
+  "tools": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Skill",
+    "Agent(general-cpo, general-cmo, general-ceo, worker-visual-qa)"
+  ],
+  "memory": "user",
+  "color": "orange",
+  "kernel": "agent-os/kernel/expertise-kernel.md",
+  "modules": [
+    "agent-os/roles/queen.md"
+  ],
+  "requiredReading": [
+    "CREATOR.md",
+    "AGENTS.md"
+  ],
+  "knowledge": [],
+  "org": {
+    "domain": "gencreator",
+    "sourceId": "GENCREATOR-QUEEN",
+    "source": "instances/frankx/agent-os/org/domain-queens.json",
+    "generals": [
+      {
+        "title": "Product OS General",
+        "sourceId": "GENCREATOR-OS-GENERAL",
+        "role": "cpo",
+        "agent": "general-cpo",
+        "swarms": [
+          "6-pillar-guardian",
+          "skill-builder",
+          "studio"
+        ]
+      },
+      {
+        "title": "Idea & Content General",
+        "sourceId": "GENCREATOR-IDEA-GENERAL",
+        "role": "cmo",
+        "agent": "general-cmo",
+        "swarms": [
+          "idea-forge",
+          "content-repurposing"
+        ]
+      }
+    ]
+  },
+  "evals": "evals/agents/queen-domain"
+}
