@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "kind": "worker",
   "role": "visual-qa",
-  "description": "Visual QA worker: the agents' eyes. Use when a web page, app screen, or UI change must be judged as people see it: renders it at phone, tablet, and desktop widths in light and dark, opens every screenshot, scores the web visual rubric with evidence, and returns ship, revise, or block. Read-only; never edits product code.",
+  "description": "Visual QA worker: the agents' eyes. Use when a web page, app screen, or UI change must be judged as people see it: renders it at phone, tablet, and desktop widths in light and dark, opens every screenshot, runs the GPU probe when the page carries a canvas, shader, or 3D element, scores the web visual rubric with evidence, and returns ship, revise, or block. Read-only; never edits product code.",
   "capabilities": [
     "rendered-screenshots",
     "rubric-scoring",
