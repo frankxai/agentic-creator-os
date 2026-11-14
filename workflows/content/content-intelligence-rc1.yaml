@@ -1,0 +1,32 @@
+name: content-intelligence-rc1
+version: 0.1.0
+status: draft-only
+issue: https://github.com/frankxai/agentic-creator-os/issues/151
+reuse:
+  - workflows/social-media/cross-platform-distribution.yaml
+  - skills/blog-writing/SKILL.md
+stages:
+  - discover
+  - verify_primary_sources_and_claims
+  - commission_original_thesis
+  - draft_channel_derivatives
+  - render_pdf_and_png
+  - independent_human_review
+  - export_approved_assets
+policy:
+  autonomous_publishing: false
+  deployment: false
+  auto_approval: false
+  approval_bound_to: [content_hash, asset_hash, channel, reviewer, expiry]
+  missing_evidence: HOLD
+  missing_rights: HOLD
+  changed_asset: HOLD
+telemetry:
+  - provider
+  - model
+  - input_tokens
+  - output_tokens
+  - estimated_cost
+  - billed_cost
+  - retries
+  - duration_ms
