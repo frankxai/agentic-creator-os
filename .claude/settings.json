@@ -120,7 +120,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/estate-guard-session.py",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/estate-guard-session.py",
             "timeout": 10
           }
         ]
@@ -132,7 +132,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/estate-guard-gate.py",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/estate-guard-gate.py",
             "timeout": 10
           }
         ]
@@ -144,7 +144,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 .claude/hooks/estate-guard-taint.py",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/estate-guard-taint.py",
             "timeout": 15
           }
         ]
