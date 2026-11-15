@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "kind": "worker",
   "role": "web-builder",
-  "description": "Web builder worker: the maker for web surfaces. Use when a page, hero, section, component, or visual effect must be built or redesigned in a site repo: reads the repo's design and taste files, captures the route, commits to a direction, builds through web-release-gate (gpu-surface for any shader or 3D), proves it with audits and screenshots, and hands it to worker-visual-qa before a draft PR. Never merges or deploys.",
+  "description": "Web builder worker: the maker for web surfaces. Use when a page, hero, section, component, or visual effect must be built or redesigned in a site repo: reads the repo's design and taste files, captures the route, commits to a direction, builds through web-release-gate (gpu-surface and its recipes for any shader, liquid-metal mark, glass panel, or 3D), proves it with audits and screenshots, and hands it to worker-visual-qa before a draft PR. Never merges or deploys.",
   "capabilities": [
     "direction-choice",
     "ui-build",
