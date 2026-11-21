@@ -16,6 +16,9 @@ export function validate(p){
 }
 export function approved(p,asset,a,now=Date.now()){
  if(!validate(p).ok||!asset||!a||a.decision!=='approved'||!a.reviewer_id)return false;
+ const bound=v=>typeof v==='string'&&v.length>0;
+ // Both sides must name the asset and channel: undefined===undefined would otherwise bind nothing.
+ if(!bound(asset.hash)||!bound(asset.channel)||!bound(a.asset_hash)||!bound(a.channel))return false;
  if(a.content_hash!==digest(p)||a.asset_hash!==asset.hash||a.channel!==asset.channel)return false;
  const start=Date.parse(a.approved_at),end=Date.parse(a.expires_at);
  return Number.isFinite(start)&&Number.isFinite(end)&&start<=now&&end>now;
@@ -25,4 +28,4 @@ export function usage({provider,model,input_tokens,output_tokens,input_rate,outp
  const estimated_usd=(input_tokens*input_rate+output_tokens*output_rate)/1e6;
  return {provider,model,input_tokens,output_tokens,estimated_usd,billed_usd:null,budget_exceeded:estimated_usd>budget};
 }
-export const exportDecision=(p,asset,a)=>({export_allowed:approved(p,asset,a),publish_allowed:false});
+export const exportDecision=(p,asset,a,now)=>({export_allowed:approved(p,asset,a,now),publish_allowed:false});
