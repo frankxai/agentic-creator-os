@@ -3,6 +3,7 @@ const xml=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'
 const wrap=(text,max=31)=>{const lines=[''];for(const word of text.split(/\s+/)){const last=lines.length-1;if((lines[last]+' '+word).trim().length>max)lines.push(word);else lines[last]=(lines[last]+' '+word).trim()}return lines};
 export function renderSlide({headline,body='',index=1,total=1,brand='FrankX',channel='instagram'}){
  if(!['instagram','linkedin'].includes(channel))throw Error('unsupported_channel');
+ if(!Number.isInteger(index)||!Number.isInteger(total)||index<1||total<index||total>10)throw Error('invalid_slide_number');
  if(!headline||headline.length>180||body.length>450)throw Error('copy_out_of_bounds');
  const w=1080,h=1350;const lines=wrap(headline,26);if(lines.length>5)throw Error('headline_overflow');
  const title=lines.map((line,i)=>'<text x="88" y="'+(345+i*89)+'" font-size="72" font-weight="700" fill="#F4F0E8">'+xml(line)+'</text>').join('');
