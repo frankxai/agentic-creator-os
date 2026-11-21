@@ -6,3 +6,10 @@ test('valid source-backed package',()=>assert.equal(renderPackage(p,[{headline:'
 test('invalid evidence denied',()=>assert.throws(()=>renderPackage({...p,sources:[]},[{headline:'One'},{headline:'Two'}],'instagram')));
 test('unsupported channel denied',()=>assert.throws(()=>renderSlide({headline:'One',channel:'tiktok'})));
 test('overflow denied',()=>assert.throws(()=>renderSlide({headline:'word '.repeat(60)})));
+test('slide numbering must be integers, so markup cannot be injected through it',()=>{
+ const slide={headline:'Real headline',body:'Real body'};
+ assert.throws(()=>renderSlide({...slide,index:'</text><script>alert(1)</script>',total:2}),/invalid_slide_number/);
+ assert.throws(()=>renderSlide({...slide,index:1,total:'2 <b>'}),/invalid_slide_number/);
+ assert.throws(()=>renderSlide({...slide,index:3,total:2}),/invalid_slide_number/);
+ assert.match(renderSlide({...slide,index:1,total:2}),/1 \/ 2/);
+});
