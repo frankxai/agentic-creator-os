@@ -13,3 +13,9 @@ test('slide numbering must be integers, so markup cannot be injected through it'
  assert.throws(()=>renderSlide({...slide,index:3,total:2}),/invalid_slide_number/);
  assert.match(renderSlide({...slide,index:1,total:2}),/1 \/ 2/);
 });
+test('copy that cannot be shown in full is rejected, not silently cut',()=>{
+ assert.throws(()=>renderSlide({headline:'Real headline',body:'word '.repeat(90).trim()}),/body_overflow/);
+ assert.throws(()=>renderSlide({headline:'W'.repeat(100),body:'ok'}),/word_too_long/);
+ assert.throws(()=>renderSlide({headline:'Real headline',body:'x'.repeat(60)}),/word_too_long/);
+ assert.match(renderSlide({headline:'Real headline',body:'Short and complete.'}),/Short and complete\./);
+});
