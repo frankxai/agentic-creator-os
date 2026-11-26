@@ -10,11 +10,11 @@ These are design references, not authorization to overwrite or claims of exact t
 ## Editorial queue
 | ID | Brand | Hook | Primary evidence | CTA | State |
 |---|---|---|---|---|---|
-| CI-01 | FrankX | Your AI agent needs boundaries, not better prompts | https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ | AGENT | REVIEW_REQUIRED |
-| CI-02 | Starlight | The four receipts every serious agent should leave | https://genai.owasp.org/initiative/owasp-top-10-for-llm-and-genai/ | AGENT | REVIEW_REQUIRED |
-| CI-03 | FrankX | Your GitHub automation has a permission model. Audit it. | https://docs.github.com/en/code-security/tutorials/secure-your-organization/protect-against-threats | AGENT | REVIEW_REQUIRED |
-| CI-04 | Starlight | Prompt injection is an architecture problem | https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ | AGENT | REVIEW_REQUIRED |
-| CI-05 | FrankX | The agent security checklist before production | https://genai.owasp.org/initiative/owasp-top-10-for-llm-and-genai/ | AGENT | REVIEW_REQUIRED |
+| CI-01 | FrankX | Before an agent sends its first email, decide who can approve the send. | https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ | AGENT | REVIEW_REQUIRED |
+| CI-02 | Starlight | The approval log should show who could act, what they approved and what happened. | https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ | AGENT | REVIEW_REQUIRED |
+| CI-03 | FrankX | A workflow that reads issues can run with a read-only GitHub token. | https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication | AGENT | REVIEW_REQUIRED |
+| CI-04 | Starlight | An agent reading a document needs a boundary between its source and its instructions. | https://genai.owasp.org/llmrisk/llm01-prompt-injection/ | AGENT | REVIEW_REQUIRED |
+| CI-05 | FrankX | Before the first release, list every action the agent can take without you. | https://genai.owasp.org/llmrisk/llm062025-excessive-agency/ | AGENT | REVIEW_REQUIRED |
 
 These sources support the themes, not any claim that the Starlight implementation has been security certified.
 

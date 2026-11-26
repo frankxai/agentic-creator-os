@@ -20,3 +20,25 @@ test('evidence must be a real https URL and slides must be filled in',()=>{
  assert.throws(()=>prepareEdition({id:'CI-05',brand:'FrankX',source:'https://example.org',slides:Array(2)}),/incomplete_slide/);
  assert.doesNotThrow(()=>prepareEdition({id:'CI-06',brand:'FrankX',source:'https://example.org',slides:ok}));
 });
+
+test('changes to approved content invalidate export, including after a JSON round trip', () => {
+  const now = Date.parse('2026-11-16T00:00:00Z');
+  const receipt = {
+    decision: 'APPROVE', reviewer: 'editor', revision: e.revision, asset_hash: 'hash', channel: 'instagram',
+    approved_at: '2026-11-15T00:00:00Z', expires_at: '2026-11-18T00:00:00Z',
+  };
+  const copy = () => JSON.parse(JSON.stringify(e));
+  assert.equal(canExport(copy(), receipt, 'hash', 'instagram', now), true);
+  for (const change of [
+    edition => { edition.brand = 'Starlight'; },
+    edition => { edition.source = 'https://example.org'; },
+    edition => { edition.slides[0].body = 'Changed'; },
+    edition => { edition.channels = ['instagram']; },
+    edition => { delete edition.slides; },
+  ]) {
+    const edited = copy();
+    change(edited);
+    assert.equal(canExport(edited, receipt, 'hash', 'instagram', now), false);
+  }
+  assert.equal(canExport(e, { ...receipt, asset_hash: ' ' }, ' ', 'instagram', now), false);
+});
