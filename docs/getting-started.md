@@ -10,7 +10,7 @@ This guide walks you through setting up and using Agentic Creator OS with Claude
 
 ## Installation Methods
 
-`@frankx/agentic-creator-os` is not published on npm. Use the repository installer.
+The npm package is `@frankxai/agentic-creator-os`. The 15.0.0 tarball on npm was packed from a pre-release checkpoint, not from `main`, so use the repository installer until the next release is published from `main`.
 
 ### Method 1: Claude Code, Codex, or Grok
 

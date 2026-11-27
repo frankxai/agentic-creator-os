@@ -1,6 +1,6 @@
 {
   "name": "agentic-creator-os",
-  "version": "11.0.0",
+  "version": "15.0.0",
   "description": "Reusable skills, commands, agent profiles, hooks, and platform adapters for AI-assisted creative work.",
   "author": {
     "name": "Frank Riemer",

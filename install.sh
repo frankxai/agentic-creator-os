@@ -19,7 +19,7 @@ BOLD='\033[1m'
 NC='\033[0m'
 
 # Configuration
-VERSION="11.0.0"
+VERSION="15.0.0"
 GITHUB_REPO="frankxai/agentic-creator-os"
 
 # Detect installation paths
