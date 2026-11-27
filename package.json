@@ -67,6 +67,7 @@
     "observatory:test": "node --test scripts/build-catalog.test.mjs",
     "verify:public-surface": "node scripts/verify-public-surface.mjs",
     "test:receipt": "node --test tools/receipt-check/check-receipt.test.mjs",
+    "test:pack": "node --test test/package-pack.test.mjs",
     "research:validate": "node scripts/validate-research-packet.mjs",
     "research:test": "node --test test/research-packet.test.mjs",
     "install:all": "npm install --workspaces",
