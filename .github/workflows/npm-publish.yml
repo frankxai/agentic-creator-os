@@ -1,0 +1,108 @@
+name: Publish npm package
+
+# Trusted publishing (npm OIDC): no NPM_TOKEN. The verify job packs the
+# tarball once; the publish job submits those exact bytes after the
+# npm-production environment approves. Bump package.json version on main
+# before running stage or publish: a version already on npm is skipped.
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Verify only, stage for npm approval, or publish after environment approval
+        required: true
+        default: verify
+        type: choice
+        options: [verify, stage, publish]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agentic-creator-os-npm-production
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.repository == 'frankxai/agentic-creator-os' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24.21.0'
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run verify:public-surface
+      # npm test builds the MCP workspaces, then runs test/*.test.mjs,
+      # including test/package-pack.test.mjs (name, bin, forbidden paths).
+      - run: npm test
+      - name: Pack the exact bytes that publication will use
+        run: |
+          mkdir -p artifacts/release
+          npm pack --ignore-scripts --pack-destination artifacts/release --json > artifacts/release/pack.json
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync("artifacts/release/pack.json"))[0];
+            if (r.name !== "@frankxai/agentic-creator-os") { console.error(`unexpected name ${r.name}`); process.exit(1); }
+            console.log(`${r.name}@${r.version} ${r.filename} ${r.entryCount} files ${r.size} bytes ${r.integrity}`);
+          '
+          ls -l artifacts/release
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: acos-release-${{ github.run_id }}-${{ github.sha }}
+          path: artifacts/release/
+          if-no-files-found: error
+          retention-days: 7
+
+  publish:
+    if: inputs.operation == 'stage' || inputs.operation == 'publish'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: npm-production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24.21.0'
+      - run: npm install --global npm@12.2.0 --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: acos-release-${{ github.run_id }}-${{ github.sha }}
+          path: artifacts/release/
+          digest-mismatch: error
+      - name: Submit verified bytes through npm OIDC (no token)
+        shell: bash
+        env:
+          OPERATION: ${{ inputs.operation }}
+        run: |
+          set -euo pipefail
+          receipt=artifacts/release/pack.json
+          name=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1]))[0].name)' "$receipt")
+          version=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1]))[0].version)' "$receipt")
+          file=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1]))[0].filename)' "$receipt")
+          if [ "$name" != "@frankxai/agentic-creator-os" ]; then
+            echo "refusing to publish unexpected package name: $name" >&2
+            exit 1
+          fi
+          # Refuse a tarball whose bytes differ from what npm pack recorded in the verify job.
+          node -e '
+            const fs = require("fs"), crypto = require("crypto");
+            const [packJson, tgz] = process.argv.slice(1);
+            const want = JSON.parse(fs.readFileSync(packJson))[0].integrity;
+            const got = "sha512-" + crypto.createHash("sha512").update(fs.readFileSync(tgz)).digest("base64");
+            if (got !== want) { console.error(`integrity mismatch for ${tgz}`); process.exit(1); }
+          ' "$receipt" "artifacts/release/$file"
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "skip $name@$version: already on the registry"
+            exit 0
+          fi
+          if [ "$OPERATION" = stage ]; then
+            npm stage publish "artifacts/release/$file" --provenance --access public --ignore-scripts
+          else
+            npm publish "artifacts/release/$file" --provenance --access public --ignore-scripts
+          fi
