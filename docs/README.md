@@ -24,7 +24,7 @@ Welcome to the Agentic Creator OS documentation. This guide will help you unders
 
 ### Installation
 
-`@frankx/agentic-creator-os` is not published on npm. For a first install, add the marketplace and install five skills:
+The npm package is `@frankxai/agentic-creator-os`. The 15.0.0 tarball on npm was packed from a pre-release checkpoint, not from `main`, so use the repository installer until the next release is published from `main`. For a first install, add the marketplace and install five skills:
 
 ```bash
 claude plugin marketplace add frankxai/agentic-creator-os
@@ -86,7 +86,7 @@ Deploy department configurations and shared workflows for collaborative AI-enhan
 
 ## Version
 
-**Current**: 11.0.0
+**Current**: 15.0.0
 
 See [archived CHANGELOG.md](./archive/CHANGELOG.md) for version history.
 

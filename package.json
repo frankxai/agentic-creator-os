@@ -1,12 +1,12 @@
 {
-  "name": "@frankx/agentic-creator-os",
-  "version": "11.0.0",
+  "name": "@frankxai/agentic-creator-os",
+  "version": "15.0.0",
   "description": "Reusable skills, commands, agent profiles, hooks, and platform adapters for AI-assisted creative work.",
   "author": "Frank Riemer <frank@frankx.ai>",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/frankxai/agentic-creator-os"
+    "url": "git+https://github.com/frankxai/agentic-creator-os.git"
   },
   "homepage": "https://frankx.ai/products/agentic-creator-os",
   "bugs": {
@@ -67,6 +67,7 @@
     "observatory:test": "node --test scripts/build-catalog.test.mjs",
     "verify:public-surface": "node scripts/verify-public-surface.mjs",
     "test:receipt": "node --test tools/receipt-check/check-receipt.test.mjs",
+    "test:pack": "node --test test/package-pack.test.mjs",
     "research:validate": "node scripts/validate-research-packet.mjs",
     "research:test": "node --test test/research-packet.test.mjs",
     "install:all": "npm install --workspaces",

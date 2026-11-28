@@ -186,8 +186,8 @@ exports:
 # Quick install (recommended)
 curl -fsSL https://raw.githubusercontent.com/frankxai/agentic-creator-os/main/install.sh | bash
 
-# Or via npm
-npm install -g @frankx/agentic-creator-os
+# Or via npm (package scope: @frankxai)
+npm install -g @frankxai/agentic-creator-os
 ```
 
 ### Commands
